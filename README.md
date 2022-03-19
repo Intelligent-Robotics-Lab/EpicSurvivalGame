@@ -54,3 +54,8 @@ The final section in the series focuses on bug fixing and a bit of polish to the
 **Looking for a step-by-step C++ Course?** Check out the **[Professional Game Development in C++ and Unreal Engine](https://courses.tomlooman.com/p/unrealengine-cpp?coupon_code=COMMUNITY15&src=github)** to learn all about C++ Game Programming with Unreal Engine!
 
 The C++ Course features include building of a C++ game framework including an "action system" and event-driven code for flexible and re-usable game code the "unreal way". Multiplayer features, AI bots, SaveGame system, async loading of content, UMG menus and UI and so much more!
+
+
+Common Issues/Bugs:
+
+Do not move files via the file explorer. However, if you do make sure to retdirect/retarget those files in the UE4 editor.
