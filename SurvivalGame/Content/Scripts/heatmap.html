@@ -5,7 +5,7 @@
 </head>
 <style>
   div.background {
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(255, 255, 255, 1);
   }
 </style>
 <body style="height: 100%; margin: 0">
@@ -41,8 +41,9 @@
     data[69] = [1,18,0];
 
     option = {
+    backgroundColor: 'rgba(255,255,255,.5)',
     tooltip: {
-      show: false
+      show: true
     },
     xAxis: {
         type: 'category',
@@ -60,7 +61,7 @@
         itemWidth: 10,
         calculable: true,
         realtime: true,
-        hoverLink: false,
+        hoverLink: true,
         inRange: {
         color: [
             '#313695',
@@ -82,7 +83,6 @@
         name: 'Gaussian',
         type: 'heatmap',
         data: data,
-        hoverLink: false,
         emphasis: {
             disabled: false,
             itemStyle: {
