@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<style>
+  div.background {
+    background-color: rgba(0,0,0,0);
+  }
+</style>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="C:\Users\Motaz\AppData\Roaming\npm\node_modules\echarts\dist\echarts.js"></script>
+  <script type="text/javascript" src="C:\Users\Motaz\AppData\Roaming\npm\node_modules\echarts\dist\extension\dataTool.js"></script>
+  <script type="text/javascript" src="C:\Users\Motaz\AppData\Roaming\npm\node_modules\echarts-gl\dist\echarts-gl.js"></script>
+  <script type="text/javascript" src="C:\Users\Motaz\AppData\Roaming\npm\node_modules\echarts-stat\dist\ecStat.js"></script>
+  <script type="text/javascript" src=".\aliases.js"></script>
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    let size = 50;
+    let xData = [];
+    let yData = [];
+    let data = [];
+    for (let i = 0; i <= size; i++) {
+      for (let j = 0; j <= size; j++) {
+        data.push([i, j, 1]);
+      }
+      xData.push(i);
+    }
+    for (let j = 0; j < size; j++) {
+      yData.push(j);
+    }
+    data[69] = [1,18,0];
+
+    option = {
+    tooltip: {
+      show: false
+    },
+    xAxis: {
+        type: 'category',
+        title: 'test',
+        data: xData
+    },
+    yAxis: {
+        type: 'category',
+        title:'test2',
+        data: yData
+    },
+    visualMap: {
+        min: 0,
+        max: 1,
+        itemWidth: 10,
+        calculable: true,
+        realtime: true,
+        hoverLink: false,
+        inRange: {
+        color: [
+            '#313695',
+            '#4575b4',
+            '#74add1',
+            '#abd9e9',
+            '#e0f3f8',
+            '#ffffbf',
+            '#fee090',
+            '#fdae61',
+            '#f46d43',
+            '#d73027',
+            '#a50026'
+        ]
+        }
+    },
+    series: [
+        {
+        name: 'Gaussian',
+        type: 'heatmap',
+        data: data,
+        hoverLink: false,
+        emphasis: {
+            disabled: false,
+            itemStyle: {
+            borderColor: '#333',
+            borderWidth: 0
+            }
+        },
+        progressive: 1000,
+        animation: true
+        }
+    ]
+    };
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
