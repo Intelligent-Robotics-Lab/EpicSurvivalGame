@@ -2601,10 +2601,6 @@ try { SimpleTimeSeriesPlot.prototype.AddSeries = SimpleTimeSeriesPlot.prototype.
 try { SimpleTimeSeriesPlot.prototype.AddDatapointNow = SimpleTimeSeriesPlot.prototype.BP_AddDatapointNow; } catch (e) {};
 try { SimpleTimeSeriesPlot.prototype.AddDatapoint = SimpleTimeSeriesPlot.prototype.BP_AddDatapoint; } catch (e) {};
 try { let fnprepatch_812 = ImgMediaSource.prototype.AddTargetObject;ImgMediaSource.prototype.AddTargetObject = function (InActor, Width = -1) { return fnprepatch_812.call(this, InActor, Width) }; } catch (e) {};
-try { AndroidPermissionFunctionLibrary.prototype.CheckAndroidPermission = AndroidPermissionFunctionLibrary.prototype.CheckPermission; } catch (e) {};
-try { AndroidPermissionFunctionLibrary.CheckAndroidPermission = AndroidPermissionFunctionLibrary.CheckPermission; } catch (e) {};
-try { AndroidPermissionFunctionLibrary.prototype.RequestAndroidPermissions = AndroidPermissionFunctionLibrary.prototype.AcquirePermissions; } catch (e) {};
-try { AndroidPermissionFunctionLibrary.RequestAndroidPermissions = AndroidPermissionFunctionLibrary.AcquirePermissions; } catch (e) {};
 try { let fnprepatch_813 = AppleImageUtilsBaseAsyncTaskBlueprintProxy.prototype.CreateProxyObjectForConvertToTIFF;AppleImageUtilsBaseAsyncTaskBlueprintProxy.prototype.CreateProxyObjectForConvertToTIFF = function (SourceImage, bWantColor = true, bUseGpu = true, Scale = 1, Rotate = "None") { return fnprepatch_813.call(this, SourceImage, bWantColor, bUseGpu, Scale, Rotate) }; } catch (e) {};
 try { let fnprepatch_814 = AppleImageUtilsBaseAsyncTaskBlueprintProxy.prototype.CreateProxyObjectForConvertToPNG;AppleImageUtilsBaseAsyncTaskBlueprintProxy.prototype.CreateProxyObjectForConvertToPNG = function (SourceImage, bWantColor = true, bUseGpu = true, Scale = 1, Rotate = "None") { return fnprepatch_814.call(this, SourceImage, bWantColor, bUseGpu, Scale, Rotate) }; } catch (e) {};
 try { let fnprepatch_815 = AppleImageUtilsBaseAsyncTaskBlueprintProxy.prototype.CreateProxyObjectForConvertToJPEG;AppleImageUtilsBaseAsyncTaskBlueprintProxy.prototype.CreateProxyObjectForConvertToJPEG = function (SourceImage, Quality = 85, bWantColor = true, bUseGpu = true, Scale = 1, Rotate = "None") { return fnprepatch_815.call(this, SourceImage, Quality, bWantColor, bUseGpu, Scale, Rotate) }; } catch (e) {};
@@ -2617,6 +2613,10 @@ try { AppleImageUtilsBaseAsyncTaskBlueprintProxy.prototype.ConvertToJPEG = Apple
 try { AppleImageUtilsBaseAsyncTaskBlueprintProxy.ConvertToJPEG = AppleImageUtilsBaseAsyncTaskBlueprintProxy.CreateProxyObjectForConvertToJPEG; } catch (e) {};
 try { AppleImageUtilsBaseAsyncTaskBlueprintProxy.prototype.ConvertToHEIF = AppleImageUtilsBaseAsyncTaskBlueprintProxy.prototype.CreateProxyObjectForConvertToHEIF; } catch (e) {};
 try { AppleImageUtilsBaseAsyncTaskBlueprintProxy.ConvertToHEIF = AppleImageUtilsBaseAsyncTaskBlueprintProxy.CreateProxyObjectForConvertToHEIF; } catch (e) {};
+try { AndroidPermissionFunctionLibrary.prototype.CheckAndroidPermission = AndroidPermissionFunctionLibrary.prototype.CheckPermission; } catch (e) {};
+try { AndroidPermissionFunctionLibrary.CheckAndroidPermission = AndroidPermissionFunctionLibrary.CheckPermission; } catch (e) {};
+try { AndroidPermissionFunctionLibrary.prototype.RequestAndroidPermissions = AndroidPermissionFunctionLibrary.prototype.AcquirePermissions; } catch (e) {};
+try { AndroidPermissionFunctionLibrary.RequestAndroidPermissions = AndroidPermissionFunctionLibrary.AcquirePermissions; } catch (e) {};
 try { let fnprepatch_817 = CableComponent.prototype.SetAttachEndToComponent;CableComponent.prototype.SetAttachEndToComponent = function (Component, SocketName = "None") { return fnprepatch_817.call(this, Component, SocketName) }; } catch (e) {};
 try { let fnprepatch_818 = CableComponent.prototype.SetAttachEndTo;CableComponent.prototype.SetAttachEndTo = function (Actor, ComponentProperty, SocketName = "None") { return fnprepatch_818.call(this, Actor, ComponentProperty, SocketName) }; } catch (e) {};
 try { let fnprepatch_819 = EditableMesh.prototype.EndModification;EditableMesh.prototype.EndModification = function (bFromUndo = false) { return fnprepatch_819.call(this, bFromUndo) }; } catch (e) {};
