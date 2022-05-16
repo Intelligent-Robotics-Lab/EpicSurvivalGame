@@ -18,7 +18,10 @@ public class SurvivalGame : ModuleRules
             "GameplayTasks",
             "NavigationSystem",
             "OnlineSubsystem", // For Steam
-            "PhysicsCore" // PhysicalMaterials
+            "PhysicsCore", // PhysicalMaterials
+            "WebSockets",
+            "Json",
+            "JsonUtilities"
         });
 
         PrivateDependencyModuleNames.AddRange(new string[] { "KantanChartsSlate", "KantanChartsDatasource", "KantanChartsUMG", "Slate", "SlateCore" });

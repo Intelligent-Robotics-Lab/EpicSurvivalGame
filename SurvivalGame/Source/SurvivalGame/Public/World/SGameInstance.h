@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
+#include "IWebSocket.h"
 #include "SGameInstance.generated.h"
 
 class APlayerState;
@@ -33,5 +34,9 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Game|Events")
 	FPlayerArrayChanged OnPlayerStateRemoved;
 
+	virtual void Init() override;
+	virtual void Shutdown() override;
+	
+	TSharedPtr<IWebSocket> WebSocket;
 
 };

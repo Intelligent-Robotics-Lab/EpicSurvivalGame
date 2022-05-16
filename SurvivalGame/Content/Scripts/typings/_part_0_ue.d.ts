@@ -16325,6 +16325,7 @@ declare class World extends UObject {
 	InvalidateModelGeometry(InLevel: Level): void;
 	RemoveLevelInstance(): void;
 	GetActors(ActorLayer: ActorLayer): Actor[];
+	NotifyServer(Data: number[]): void;
 	GetWorldURL(): VaRestURL;
 	BeginPlay(): void;
 	DestroyWorld(): void;
@@ -16600,6 +16601,7 @@ declare class World extends UObject {
 	static InvalidateModelGeometry(World: World,InLevel: Level): void;
 	static RemoveLevelInstance(World: World): void;
 	static GetActors(WorldContextObject: UObject,ActorLayer: ActorLayer): Actor[];
+	static NotifyServer(WorldContextObject: UObject,Data: number[]): void;
 	static GetWorldURL(WorldContextObject: UObject): VaRestURL;
 	static BeginPlay(World: World): void;
 	static DestroyWorld(World: World): void;
