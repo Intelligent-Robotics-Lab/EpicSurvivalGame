@@ -12533,19 +12533,6 @@ declare class ActorLayer {
 	static C(Other: UObject | any): ActorLayer;
 }
 
-declare class VaRestURL { 
-	Protocol: string;
-	Host: string;
-	Port: number;
-	Valid: number;
-	Map: string;
-	RedirectURL: string;
-	Op: string[];
-	Portal: string;
-	clone() : VaRestURL;
-	static C(Other: UObject | any): VaRestURL;
-}
-
 declare class URL { 
 	Protocol: string;
 	Host: string;
@@ -12691,6 +12678,19 @@ declare class RecastNavMesh extends NavigationData {
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): RecastNavMesh;
 	K2_ReplaceAreaInTileBounds(Bounds: Box,OldArea: UnrealEngineClass,NewArea: UnrealEngineClass,ReplaceLinks: boolean): boolean;
 	static C(Other: UObject | any): RecastNavMesh;
+}
+
+declare class VaRestURL { 
+	Protocol: string;
+	Host: string;
+	Port: number;
+	Valid: number;
+	Map: string;
+	RedirectURL: string;
+	Op: string[];
+	Portal: string;
+	clone() : VaRestURL;
+	static C(Other: UObject | any): VaRestURL;
 }
 
 declare type EARWorldAlignment = 'Gravity' | 'GravityAndHeading' | 'Camera' | 'EARWorldAlignment_MAX';
@@ -16326,7 +16326,6 @@ declare class World extends UObject {
 	RemoveLevelInstance(): void;
 	GetActors(ActorLayer: ActorLayer): Actor[];
 	NotifyServer(Data: number[]): void;
-	GetWorldURL(): VaRestURL;
 	BeginPlay(): void;
 	DestroyWorld(): void;
 	InitializeActorsForPlay(URL: URL): void;
@@ -16339,6 +16338,7 @@ declare class World extends UObject {
 	IsGameWorld(): boolean;
 	IsPlayInEditor(): boolean;
 	IsPlayInPreview(): boolean;
+	GetWorldURL(): VaRestURL;
 	LuminARLineTrace(ScreenPosition: Vector2D,TraceChannels: any,OutHitResults?: ARTraceResult[]): {OutHitResults: ARTraceResult[], $: boolean};
 	StartLuminARSession(LatentInfo: LatentActionInfo,Configuration: LuminARSessionConfig): void;
 	GetNiagaraParameterCollection(Collection: NiagaraParameterCollection): NiagaraParameterCollectionInstance;
@@ -16602,7 +16602,6 @@ declare class World extends UObject {
 	static RemoveLevelInstance(World: World): void;
 	static GetActors(WorldContextObject: UObject,ActorLayer: ActorLayer): Actor[];
 	static NotifyServer(WorldContextObject: UObject,Data: number[]): void;
-	static GetWorldURL(WorldContextObject: UObject): VaRestURL;
 	static BeginPlay(World: World): void;
 	static DestroyWorld(World: World): void;
 	static InitializeActorsForPlay(World: World,URL: URL): void;
@@ -16615,6 +16614,7 @@ declare class World extends UObject {
 	static IsGameWorld(World: World): boolean;
 	static IsPlayInEditor(World: World): boolean;
 	static IsPlayInPreview(World: World): boolean;
+	static GetWorldURL(WorldContextObject: UObject): VaRestURL;
 	static LuminARLineTrace(WorldContextObject: UObject,ScreenPosition: Vector2D,TraceChannels: any,OutHitResults?: ARTraceResult[]): {OutHitResults: ARTraceResult[], $: boolean};
 	static StartLuminARSession(WorldContextObject: UObject,LatentInfo: LatentActionInfo,Configuration: LuminARSessionConfig): void;
 	static GetNiagaraParameterCollection(WorldContextObject: UObject,Collection: NiagaraParameterCollection): NiagaraParameterCollectionInstance;
