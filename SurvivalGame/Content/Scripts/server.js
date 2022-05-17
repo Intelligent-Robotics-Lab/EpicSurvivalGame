@@ -19,14 +19,9 @@ wss.on('connection', (ws) => {
     ws.on('message', (UEdata) => {
         wss.clients.forEach( (client) => {
             if (client != ws) {
-                console.log("ForEach")
                 client.send(`${UEdata}`);
             }
         });
-        // console.log(clients.get(ws));
-        // wss.clients.keys()
-        // ws.send(`${UEdata}`)
-        // serverBroadcast(`${UEdata}`);
     });
 
     // stop tracking the client upon that client closing the connection

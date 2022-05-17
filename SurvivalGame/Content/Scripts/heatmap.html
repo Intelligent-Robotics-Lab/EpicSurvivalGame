@@ -26,76 +26,75 @@
     });
     var option;
     var app = {};
-    let size = 100;
+    let resolution = 100;
     let data = [];
     let xData = [];
     let yData = [];
-    for (let i = 0; i <= size; i++) {
-      for (let j = 0; j <= size; j++) {
+    for (let i = 0; i <= resolution; i++) {
+      for (let j = 0; j <= resolution; j++) {
         data.push([i, j, 1]);
       }
       xData.push(i);
     }
-    for (let j = 0; j < size; j++) {
+    for (let j = 0; j < resolution; j++) {
       yData.push(j);
     }
-    data[69] = [1,18,0];
 
     option = {
-    backgroundColor: 'rgba(255,255,255,.5)',
-    tooltip: {
-      show: true
-    },
-    xAxis: {
-        type: 'category',
-        title: 'test',
-        data: xData
-    },
-    yAxis: {
-        type: 'category',
-        title:'test2',
-        data: yData
-    },
-    visualMap: {
-        min: 0,
-        max: 1,
-        itemWidth: 10,
-        calculable: true,
-        realtime: true,
-        hoverLink: true,
-        inRange: {
-        color: [
-            '#313695',
-            '#4575b4',
-            '#74add1',
-            '#abd9e9',
-            '#e0f3f8',
-            '#ffffbf',
-            '#fee090',
-            '#fdae61',
-            '#f46d43',
-            '#d73027',
-            '#a50026'
-        ]
-        }
-    },
-    series: [
-        {
-        name: 'Gaussian',
-        type: 'heatmap',
-        data: data,
-        emphasis: {
-            disabled: false,
-            itemStyle: {
-            borderColor: '#333',
-            borderWidth: 0
-            }
+        backgroundColor: 'rgba(255,255,255,.5)',
+        tooltip: {
+          show: true
         },
-        progressive: 1000,
-        animation: true
-        }
-    ]
-    };
+        xAxis: {
+          type: 'category',
+          title: 'test',
+          data: xData
+        },
+        yAxis: {
+          type: 'category',
+          title:'test2',
+          data: yData
+        },
+        visualMap: {
+          min: 0,
+          max: 1,
+          itemWidth: 10,
+          calculable: true,
+          realtime: true,
+          hoverLink: true,
+          inRange: {
+            color: [
+              '#313695',
+              '#4575b4',
+              '#74add1',
+              '#abd9e9',
+              '#e0f3f8',
+              '#ffffbf',
+              '#fee090',
+              '#fdae61',
+              '#f46d43',
+              '#d73027',
+              '#a50026'
+            ]
+          }
+        },
+        series: [
+          {
+            name: 'Gaussian',
+            type: 'heatmap',
+            data: data,
+            emphasis: {
+              disabled: false,
+              itemStyle: {
+                borderColor: '#333',
+                borderWidth: 0
+              }
+            },
+            progressive: 0,
+            animation: true
+          }
+        ]
+      };
     console.log("EVENT")
 
     if (option && typeof option === 'object') {
@@ -108,13 +107,26 @@
   <script type="text/javascript">
     const webSocket = new WebSocket('ws://localhost:8080');
     webSocket.onmessage = function (event) {
-      let newData = [];
       let JData = JSON.parse(event.data)
-      console.log(JData);
-      for (let i = 0; i <= size; i++) {
-        for (let j = 0; j <= size; j++) {
-          newData.push([i, j, JData.data[(size*i)+j]]);
+      if(JData.resolution) {
+        resolution = JData.resolution;
+      }
+      if(JData.data) {
+        let newData = [];
+        let newxData = [];
+        let newyData = [];
+        for (let i = 0; i <= resolution; i++) {
+          for (let j = 0; j <= resolution; j++) {
+            newData.push([i, j, JData.data[(resolution*i)+j]]);
+          }
+          newxData.push(i);
         }
+        for (let j = 0; j < resolution; j++) {
+          newyData.push(j);
+        }
+        data = newData;
+        xData = newxData;
+        yData = newyData;
       }
       option = {
         backgroundColor: 'rgba(255,255,255,.5)',
@@ -158,7 +170,7 @@
           {
             name: 'Gaussian',
             type: 'heatmap',
-            data: newData,
+            data: data,
             emphasis: {
               disabled: false,
               itemStyle: {
@@ -166,7 +178,7 @@
                 borderWidth: 0
               }
             },
-            progressive: 1000,
+            progressive: 0,
             animation: true
           }
         ]

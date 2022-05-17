@@ -16,6 +16,7 @@ class SURVIVALGAME_API UGraphFunctionLibrary : public UBlueprintFunctionLibrary
 public:
 
 	UFUNCTION(BlueprintCallable, Category = "Charts", meta = (WorldContext = "WorldContextObject"))
-		static void NotifyServer(const UObject* WorldContextObject, TArray<float> Data);
-	//void NotifyServer();
+		static void UpdateHeatmapData(const UObject* WorldContextObject, TArray<float> Data);
+	UFUNCTION(BlueprintCallable, Category = "Charts", meta = (WorldContext = "WorldContextObject"))
+		static void UpdateHeatmapResolution(const UObject* WorldContextObject, int Resolution);
 };
