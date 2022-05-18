@@ -45,6 +45,15 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "Graphs")
 		TMap<FName, float> CategoryValues;
 
+
+	/************************************************************************/
+	/* Camera Interest Function                                             */
+	/************************************************************************/
+
+	UPROPERTY(BlueprintReadWrite, Category = "CameraInterestFunction")
+		FCameraInterestType FCameraInterestType;
+
+
 	//UPROPERTY(BlueprintReadWrite, Category = "Graphs")
 		//FCartesianDatasource CartesianDatasource;
 
