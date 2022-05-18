@@ -1405,158 +1405,6 @@ declare class WaveOscillatorCameraShakePattern extends SimpleCameraShakePattern 
 	static C(Other: UObject | any): WaveOscillatorCameraShakePattern;
 }
 
-declare class SignificanceManager extends UObject { 
-	SignificanceManagerClassName: SoftClassPath;
-	static Load(ResourceName: string): SignificanceManager;
-	static Find(Outer: UObject, ResourceName: string): SignificanceManager;
-	static GetDefaultObject(): SignificanceManager;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SignificanceManager;
-	static C(Other: UObject | any): SignificanceManager;
-}
-
-declare class AnimationSharingStateProcessor extends UObject { 
-	AnimationStateEnum: Enum;
-	static Load(ResourceName: string): AnimationSharingStateProcessor;
-	static Find(Outer: UObject, ResourceName: string): AnimationSharingStateProcessor;
-	static GetDefaultObject(): AnimationSharingStateProcessor;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimationSharingStateProcessor;
-	ProcessActorState(OutState?: number,InActor?: Actor,CurrentState?: number,OnDemandState?: number,bShouldProcess?: boolean): {OutState: number, bShouldProcess: boolean};
-	GetAnimationStateEnum(): Enum;
-	static C(Other: UObject | any): AnimationSharingStateProcessor;
-}
-
-declare class AnimSharingInstance extends UObject { 
-	RegisteredActors: Actor[];
-	StateProcessor: AnimationSharingStateProcessor;
-	UsedAnimationSequences: AnimSequence[];
-	StateEnum: Enum;
-	SharingActor: Actor;
-	static Load(ResourceName: string): AnimSharingInstance;
-	static Find(Outer: UObject, ResourceName: string): AnimSharingInstance;
-	static GetDefaultObject(): AnimSharingInstance;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimSharingInstance;
-	static C(Other: UObject | any): AnimSharingInstance;
-}
-
-declare class AnimSharingStateInstance extends AnimInstance { 
-	AnimationToPlay: AnimSequence;
-	PermutationTimeOffset: number;
-	PlayRate: number;
-	bStateBool: boolean;
-	Instance: AnimSharingInstance;
-	static Load(ResourceName: string): AnimSharingStateInstance;
-	static Find(Outer: UObject, ResourceName: string): AnimSharingStateInstance;
-	static GetDefaultObject(): AnimSharingStateInstance;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimSharingStateInstance;
-	GetInstancedActors(Actors?: Actor[]): {Actors: Actor[]};
-	static C(Other: UObject | any): AnimSharingStateInstance;
-}
-
-declare class AnimSharingTransitionInstance extends AnimInstance { 
-	FromComponent: any;
-	ToComponent: any;
-	BlendTime: number;
-	bBlendBool: boolean;
-	static Load(ResourceName: string): AnimSharingTransitionInstance;
-	static Find(Outer: UObject, ResourceName: string): AnimSharingTransitionInstance;
-	static GetDefaultObject(): AnimSharingTransitionInstance;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimSharingTransitionInstance;
-	static C(Other: UObject | any): AnimSharingTransitionInstance;
-}
-
-declare class AnimSharingAdditiveInstance extends AnimInstance { 
-	BaseComponent: any;
-	AdditiveAnimation: any;
-	Alpha: number;
-	bStateBool: boolean;
-	static Load(ResourceName: string): AnimSharingAdditiveInstance;
-	static Find(Outer: UObject, ResourceName: string): AnimSharingAdditiveInstance;
-	static GetDefaultObject(): AnimSharingAdditiveInstance;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimSharingAdditiveInstance;
-	static C(Other: UObject | any): AnimSharingAdditiveInstance;
-}
-
-declare class AnimationSetup { 
-	AnimSequence: AnimSequence;
-	AnimBlueprint: UnrealEngineClass;
-	NumRandomizedInstances: PerPlatformInt;
-	Enabled: PerPlatformBool;
-	clone() : AnimationSetup;
-	static C(Other: UObject | any): AnimationSetup;
-}
-
-declare class AnimationStateEntry { 
-	State: number;
-	AnimationSetups: AnimationSetup[];
-	bOnDemand: boolean;
-	bAdditive: boolean;
-	BlendTime: number;
-	bReturnToPreviousState: boolean;
-	bSetNextState: boolean;
-	NextState: number;
-	MaximumNumberOfConcurrentInstances: PerPlatformInt;
-	WiggleTimePercentage: number;
-	bRequiresCurves: boolean;
-	clone() : AnimationStateEntry;
-	static C(Other: UObject | any): AnimationStateEntry;
-}
-
-declare class PerSkeletonAnimationSharingSetup { 
-	Skeleton: Skeleton;
-	SkeletalMesh: SkeletalMesh;
-	BlendAnimBlueprint: UnrealEngineClass;
-	AdditiveAnimBlueprint: UnrealEngineClass;
-	StateProcessorClass: UnrealEngineClass;
-	AnimationStates: AnimationStateEntry[];
-	clone() : PerSkeletonAnimationSharingSetup;
-	static C(Other: UObject | any): PerSkeletonAnimationSharingSetup;
-}
-
-declare class AnimationSharingScalability { 
-	UseBlendTransitions: PerPlatformBool;
-	BlendSignificanceValue: PerPlatformFloat;
-	MaximumNumberConcurrentBlends: PerPlatformInt;
-	TickSignificanceValue: PerPlatformFloat;
-	clone() : AnimationSharingScalability;
-	static C(Other: UObject | any): AnimationSharingScalability;
-}
-
-declare class AnimationSharingSetup extends UObject { 
-	SkeletonSetups: PerSkeletonAnimationSharingSetup[];
-	ScalabilitySettings: AnimationSharingScalability;
-	static Load(ResourceName: string): AnimationSharingSetup;
-	static Find(Outer: UObject, ResourceName: string): AnimationSharingSetup;
-	static GetDefaultObject(): AnimationSharingSetup;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimationSharingSetup;
-	static C(Other: UObject | any): AnimationSharingSetup;
-}
-
-declare class AnimationSharingManager extends UObject { 
-	Skeletons: Skeleton[];
-	PerSkeletonData: AnimSharingInstance[];
-	static Load(ResourceName: string): AnimationSharingManager;
-	static Find(Outer: UObject, ResourceName: string): AnimationSharingManager;
-	static GetDefaultObject(): AnimationSharingManager;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimationSharingManager;
-	RegisterActorWithSkeletonBP(InActor: Actor,SharingSkeleton: Skeleton): void;
-	static GetAnimationSharingManager(WorldContextObject: UObject): AnimationSharingManager;
-	static CreateAnimationSharingManager(WorldContextObject: UObject,Setup: AnimationSharingSetup): boolean;
-	static AnimationSharingEnabled(): boolean;
-	static C(Other: UObject | any): AnimationSharingManager;
-}
-
-declare class K2Node_PropertyAccess extends K2Node { 
-	Path: string[];
-	TextPath: string;
-	ResolvedPinType: EdGraphPinType;
-	GeneratedPropertyName: string;
-	static Load(ResourceName: string): K2Node_PropertyAccess;
-	static Find(Outer: UObject, ResourceName: string): K2Node_PropertyAccess;
-	static GetDefaultObject(): K2Node_PropertyAccess;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): K2Node_PropertyAccess;
-	static C(Other: UObject | any): K2Node_PropertyAccess;
-}
-
 declare class EdGraph_ReferenceViewer extends EdGraph { 
 	static Load(ResourceName: string): EdGraph_ReferenceViewer;
 	static Find(Outer: UObject, ResourceName: string): EdGraph_ReferenceViewer;
@@ -1997,27 +1845,6 @@ declare class EditorValidatorSubsystem extends EditorSubsystem {
 	static C(Other: UObject | any): EditorValidatorSubsystem;
 }
 
-declare class AudioCurveSourceComponent extends AudioComponent { 
-	CurveSourceBindingName: string;
-	CurveSyncOffset: number;
-	static Load(ResourceName: string): AudioCurveSourceComponent;
-	static Find(Outer: UObject, ResourceName: string): AudioCurveSourceComponent;
-	static GetDefaultObject(): AudioCurveSourceComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AudioCurveSourceComponent;
-	static C(Other: UObject | any): AudioCurveSourceComponent;
-}
-
-declare class FacialAnimationBulkImporterSettings extends UObject { 
-	SourceImportPath: DirectoryPath;
-	TargetImportPath: DirectoryPath;
-	CurveNodeName: string;
-	static Load(ResourceName: string): FacialAnimationBulkImporterSettings;
-	static Find(Outer: UObject, ResourceName: string): FacialAnimationBulkImporterSettings;
-	static GetDefaultObject(): FacialAnimationBulkImporterSettings;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FacialAnimationBulkImporterSettings;
-	static C(Other: UObject | any): FacialAnimationBulkImporterSettings;
-}
-
 declare class GameplayTagSearchFilter extends ContentBrowserFrontEndFilterExtension { 
 	static Load(ResourceName: string): GameplayTagSearchFilter;
 	static Find(Outer: UObject, ResourceName: string): GameplayTagSearchFilter;
@@ -2094,6 +1921,179 @@ declare class GameplayTagsK2Node_SwitchGameplayTagContainer extends K2Node_Switc
 	static GetDefaultObject(): GameplayTagsK2Node_SwitchGameplayTagContainer;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GameplayTagsK2Node_SwitchGameplayTagContainer;
 	static C(Other: UObject | any): GameplayTagsK2Node_SwitchGameplayTagContainer;
+}
+
+declare class AudioCurveSourceComponent extends AudioComponent { 
+	CurveSourceBindingName: string;
+	CurveSyncOffset: number;
+	static Load(ResourceName: string): AudioCurveSourceComponent;
+	static Find(Outer: UObject, ResourceName: string): AudioCurveSourceComponent;
+	static GetDefaultObject(): AudioCurveSourceComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AudioCurveSourceComponent;
+	static C(Other: UObject | any): AudioCurveSourceComponent;
+}
+
+declare class FacialAnimationBulkImporterSettings extends UObject { 
+	SourceImportPath: DirectoryPath;
+	TargetImportPath: DirectoryPath;
+	CurveNodeName: string;
+	static Load(ResourceName: string): FacialAnimationBulkImporterSettings;
+	static Find(Outer: UObject, ResourceName: string): FacialAnimationBulkImporterSettings;
+	static GetDefaultObject(): FacialAnimationBulkImporterSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FacialAnimationBulkImporterSettings;
+	static C(Other: UObject | any): FacialAnimationBulkImporterSettings;
+}
+
+declare class SignificanceManager extends UObject { 
+	SignificanceManagerClassName: SoftClassPath;
+	static Load(ResourceName: string): SignificanceManager;
+	static Find(Outer: UObject, ResourceName: string): SignificanceManager;
+	static GetDefaultObject(): SignificanceManager;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SignificanceManager;
+	static C(Other: UObject | any): SignificanceManager;
+}
+
+declare class AnimationSharingStateProcessor extends UObject { 
+	AnimationStateEnum: Enum;
+	static Load(ResourceName: string): AnimationSharingStateProcessor;
+	static Find(Outer: UObject, ResourceName: string): AnimationSharingStateProcessor;
+	static GetDefaultObject(): AnimationSharingStateProcessor;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimationSharingStateProcessor;
+	ProcessActorState(OutState?: number,InActor?: Actor,CurrentState?: number,OnDemandState?: number,bShouldProcess?: boolean): {OutState: number, bShouldProcess: boolean};
+	GetAnimationStateEnum(): Enum;
+	static C(Other: UObject | any): AnimationSharingStateProcessor;
+}
+
+declare class AnimSharingInstance extends UObject { 
+	RegisteredActors: Actor[];
+	StateProcessor: AnimationSharingStateProcessor;
+	UsedAnimationSequences: AnimSequence[];
+	StateEnum: Enum;
+	SharingActor: Actor;
+	static Load(ResourceName: string): AnimSharingInstance;
+	static Find(Outer: UObject, ResourceName: string): AnimSharingInstance;
+	static GetDefaultObject(): AnimSharingInstance;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimSharingInstance;
+	static C(Other: UObject | any): AnimSharingInstance;
+}
+
+declare class AnimSharingStateInstance extends AnimInstance { 
+	AnimationToPlay: AnimSequence;
+	PermutationTimeOffset: number;
+	PlayRate: number;
+	bStateBool: boolean;
+	Instance: AnimSharingInstance;
+	static Load(ResourceName: string): AnimSharingStateInstance;
+	static Find(Outer: UObject, ResourceName: string): AnimSharingStateInstance;
+	static GetDefaultObject(): AnimSharingStateInstance;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimSharingStateInstance;
+	GetInstancedActors(Actors?: Actor[]): {Actors: Actor[]};
+	static C(Other: UObject | any): AnimSharingStateInstance;
+}
+
+declare class AnimSharingTransitionInstance extends AnimInstance { 
+	FromComponent: any;
+	ToComponent: any;
+	BlendTime: number;
+	bBlendBool: boolean;
+	static Load(ResourceName: string): AnimSharingTransitionInstance;
+	static Find(Outer: UObject, ResourceName: string): AnimSharingTransitionInstance;
+	static GetDefaultObject(): AnimSharingTransitionInstance;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimSharingTransitionInstance;
+	static C(Other: UObject | any): AnimSharingTransitionInstance;
+}
+
+declare class AnimSharingAdditiveInstance extends AnimInstance { 
+	BaseComponent: any;
+	AdditiveAnimation: any;
+	Alpha: number;
+	bStateBool: boolean;
+	static Load(ResourceName: string): AnimSharingAdditiveInstance;
+	static Find(Outer: UObject, ResourceName: string): AnimSharingAdditiveInstance;
+	static GetDefaultObject(): AnimSharingAdditiveInstance;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimSharingAdditiveInstance;
+	static C(Other: UObject | any): AnimSharingAdditiveInstance;
+}
+
+declare class AnimationSetup { 
+	AnimSequence: AnimSequence;
+	AnimBlueprint: UnrealEngineClass;
+	NumRandomizedInstances: PerPlatformInt;
+	Enabled: PerPlatformBool;
+	clone() : AnimationSetup;
+	static C(Other: UObject | any): AnimationSetup;
+}
+
+declare class AnimationStateEntry { 
+	State: number;
+	AnimationSetups: AnimationSetup[];
+	bOnDemand: boolean;
+	bAdditive: boolean;
+	BlendTime: number;
+	bReturnToPreviousState: boolean;
+	bSetNextState: boolean;
+	NextState: number;
+	MaximumNumberOfConcurrentInstances: PerPlatformInt;
+	WiggleTimePercentage: number;
+	bRequiresCurves: boolean;
+	clone() : AnimationStateEntry;
+	static C(Other: UObject | any): AnimationStateEntry;
+}
+
+declare class PerSkeletonAnimationSharingSetup { 
+	Skeleton: Skeleton;
+	SkeletalMesh: SkeletalMesh;
+	BlendAnimBlueprint: UnrealEngineClass;
+	AdditiveAnimBlueprint: UnrealEngineClass;
+	StateProcessorClass: UnrealEngineClass;
+	AnimationStates: AnimationStateEntry[];
+	clone() : PerSkeletonAnimationSharingSetup;
+	static C(Other: UObject | any): PerSkeletonAnimationSharingSetup;
+}
+
+declare class AnimationSharingScalability { 
+	UseBlendTransitions: PerPlatformBool;
+	BlendSignificanceValue: PerPlatformFloat;
+	MaximumNumberConcurrentBlends: PerPlatformInt;
+	TickSignificanceValue: PerPlatformFloat;
+	clone() : AnimationSharingScalability;
+	static C(Other: UObject | any): AnimationSharingScalability;
+}
+
+declare class AnimationSharingSetup extends UObject { 
+	SkeletonSetups: PerSkeletonAnimationSharingSetup[];
+	ScalabilitySettings: AnimationSharingScalability;
+	static Load(ResourceName: string): AnimationSharingSetup;
+	static Find(Outer: UObject, ResourceName: string): AnimationSharingSetup;
+	static GetDefaultObject(): AnimationSharingSetup;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimationSharingSetup;
+	static C(Other: UObject | any): AnimationSharingSetup;
+}
+
+declare class AnimationSharingManager extends UObject { 
+	Skeletons: Skeleton[];
+	PerSkeletonData: AnimSharingInstance[];
+	static Load(ResourceName: string): AnimationSharingManager;
+	static Find(Outer: UObject, ResourceName: string): AnimationSharingManager;
+	static GetDefaultObject(): AnimationSharingManager;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimationSharingManager;
+	RegisterActorWithSkeletonBP(InActor: Actor,SharingSkeleton: Skeleton): void;
+	static GetAnimationSharingManager(WorldContextObject: UObject): AnimationSharingManager;
+	static CreateAnimationSharingManager(WorldContextObject: UObject,Setup: AnimationSharingSetup): boolean;
+	static AnimationSharingEnabled(): boolean;
+	static C(Other: UObject | any): AnimationSharingManager;
+}
+
+declare class K2Node_PropertyAccess extends K2Node { 
+	Path: string[];
+	TextPath: string;
+	ResolvedPinType: EdGraphPinType;
+	GeneratedPropertyName: string;
+	static Load(ResourceName: string): K2Node_PropertyAccess;
+	static Find(Outer: UObject, ResourceName: string): K2Node_PropertyAccess;
+	static GetDefaultObject(): K2Node_PropertyAccess;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): K2Node_PropertyAccess;
+	static C(Other: UObject | any): K2Node_PropertyAccess;
 }
 
 declare class MovieSceneNiagaraTrack extends MovieSceneNameableTrack { 
@@ -4925,178 +4925,6 @@ declare class AnimNotifyState_TimedNiagaraEffectAdvanced extends AnimNotifyState
 	static C(Other: UObject | any): AnimNotifyState_TimedNiagaraEffectAdvanced;
 }
 
-declare type EVaJson = 'None' | 'Null' | 'String' | 'Number' | 'Boolean' | 'Array' | 'Object' | 'EVaJson_MAX';
-declare var EVaJson : { None:'None',Null:'Null',String:'String',Number:'Number',Boolean:'Boolean',Array:'Array',Object:'Object',EVaJson_MAX:'EVaJson_MAX', };
-declare class VaRestJsonValue extends UObject { 
-	static Load(ResourceName: string): VaRestJsonValue;
-	static Find(Outer: UObject, ResourceName: string): VaRestJsonValue;
-	static GetDefaultObject(): VaRestJsonValue;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRestJsonValue;
-	Reset(): void;
-	IsNull(): boolean;
-	GetTypeString(): string;
-	GetType(): EVaJson;
-	AsString(): string;
-	AsObject(): VaRestJsonObject;
-	AsNumber(): number;
-	AsInt64(): any;
-	AsInt32(): number;
-	AsBool(): boolean;
-	AsArray(): VaRestJsonValue[];
-	static C(Other: UObject | any): VaRestJsonValue;
-}
-
-declare class VaRestJsonObject extends UObject { 
-	static Load(ResourceName: string): VaRestJsonObject;
-	static Find(Outer: UObject, ResourceName: string): VaRestJsonObject;
-	static GetDefaultObject(): VaRestJsonObject;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRestJsonObject;
-	WriteToFilePath(Path: string,bIsRelativeToProjectDir: boolean): boolean;
-	SetStringField(FieldName: string,StringValue: string): void;
-	SetStringArrayField(FieldName: string,StringArray: string[]): void;
-	SetObjectField(FieldName: string,JsonObject: VaRestJsonObject): void;
-	SetObjectArrayField(FieldName: string,ObjectArray: VaRestJsonObject[]): void;
-	SetNumberField(FieldName: string,Number: number): void;
-	SetNumberArrayField(FieldName: string,NumberArray: number[]): void;
-	SetMapFields_uint8(Fields: any): void;
-	SetMapFields_string(Fields: any): void;
-	SetMapFields_int64(Fields: any): void;
-	SetMapFields_int32(Fields: any): void;
-	SetMapFields_bool(Fields: any): void;
-	SetIntegerField(FieldName: string,Number: number): void;
-	SetInt64Field(FieldName: string,Number: any): void;
-	SetField(FieldName: string,JsonValue: VaRestJsonValue): void;
-	SetBoolField(FieldName: string,InValue: boolean): void;
-	SetBoolArrayField(FieldName: string,BoolArray: boolean[]): void;
-	SetArrayField(FieldName: string,inArray: VaRestJsonValue[]): void;
-	Reset(): void;
-	RemoveField(FieldName: string): void;
-	MergeJsonObject(InJsonObject: VaRestJsonObject,Overwrite: boolean): void;
-	HasField(FieldName: string): boolean;
-	GetStringField(FieldName: string): string;
-	GetStringArrayField(FieldName: string): string[];
-	GetObjectField(FieldName: string): VaRestJsonObject;
-	GetObjectArrayField(FieldName: string): VaRestJsonObject[];
-	GetNumberField(FieldName: string): number;
-	GetNumberArrayField(FieldName: string): number[];
-	GetIntegerField(FieldName: string): number;
-	GetIntegerArrayField(FieldName: string): number[];
-	GetInt64Field(FieldName: string): any;
-	GetFieldNames(): string[];
-	GetField(FieldName: string): VaRestJsonValue;
-	GetBoolField(FieldName: string): boolean;
-	GetBoolArrayField(FieldName: string): boolean[];
-	GetArrayField(FieldName: string): VaRestJsonValue[];
-	EncodeJsonToSingleString(): string;
-	EncodeJson(): string;
-	DecodeJson(JsonString: string,bUseIncrementalParser: boolean): boolean;
-	static C(Other: UObject | any): VaRestJsonObject;
-}
-
-declare type EVaRestHttpStatusCode = 'Unknown' | 'Continue' | 'SwitchProtocol' | 'Ok' | 'Created' | 'Accepted' | 'Partial' | 'NoContent' | 'ResetContent' | 'PartialContent' | 'Ambiguous' | 'Moved' | 'Redirect' | 'RedirectMethod' | 'NotModified' | 'UseProxy' | 'RedirectKeepVerb' | 'BadRequest' | 'Denied' | 'PaymentReq' | 'Forbidden' | 'NotFound' | 'BadMethod' | 'NoneAcceptable' | 'ProxyAuthReq' | 'RequestTimeout' | 'Conflict' | 'Gone' | 'LengthRequired' | 'PrecondFailed' | 'RequestTooLarge' | 'UriTooLong' | 'UnsupportedMedia' | 'TooManyRequests' | 'RetryWith' | 'ServerError' | 'NotSupported' | 'BadGateway' | 'ServiceUnavail' | 'GatewayTimeout' | 'VersionNotSup' | 'EVaRestHttpStatusCode_MAX';
-declare var EVaRestHttpStatusCode : { Unknown:'Unknown',Continue:'Continue',SwitchProtocol:'SwitchProtocol',Ok:'Ok',Created:'Created',Accepted:'Accepted',Partial:'Partial',NoContent:'NoContent',ResetContent:'ResetContent',PartialContent:'PartialContent',Ambiguous:'Ambiguous',Moved:'Moved',Redirect:'Redirect',RedirectMethod:'RedirectMethod',NotModified:'NotModified',UseProxy:'UseProxy',RedirectKeepVerb:'RedirectKeepVerb',BadRequest:'BadRequest',Denied:'Denied',PaymentReq:'PaymentReq',Forbidden:'Forbidden',NotFound:'NotFound',BadMethod:'BadMethod',NoneAcceptable:'NoneAcceptable',ProxyAuthReq:'ProxyAuthReq',RequestTimeout:'RequestTimeout',Conflict:'Conflict',Gone:'Gone',LengthRequired:'LengthRequired',PrecondFailed:'PrecondFailed',RequestTooLarge:'RequestTooLarge',UriTooLong:'UriTooLong',UnsupportedMedia:'UnsupportedMedia',TooManyRequests:'TooManyRequests',RetryWith:'RetryWith',ServerError:'ServerError',NotSupported:'NotSupported',BadGateway:'BadGateway',ServiceUnavail:'ServiceUnavail',GatewayTimeout:'GatewayTimeout',VersionNotSup:'VersionNotSup',EVaRestHttpStatusCode_MAX:'EVaRestHttpStatusCode_MAX', };
-declare class VaRestSettings extends UObject { 
-	bExtendedLog: boolean;
-	bUseChunkedParser: boolean;
-	static Load(ResourceName: string): VaRestSettings;
-	static Find(Outer: UObject, ResourceName: string): VaRestSettings;
-	static GetDefaultObject(): VaRestSettings;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRestSettings;
-	static C(Other: UObject | any): VaRestSettings;
-}
-
-declare class VaRestLibrary extends BlueprintFunctionLibrary { 
-	static Load(ResourceName: string): VaRestLibrary;
-	static Find(Outer: UObject, ResourceName: string): VaRestLibrary;
-	static GetDefaultObject(): VaRestLibrary;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRestLibrary;
-	static StringToSha1(StringToHash: string): string;
-	static StringToMd5(StringToHash: string): string;
-	static PercentEncode(Source: string): string;
-	static HTTPStatusIntToEnum(StatusCode: number): EVaRestHttpStatusCode;
-	static GetWorldURL(WorldContextObject: UObject): VaRestURL;
-	static GetVaRestVersion(): string;
-	static GetVaRestSettings(): VaRestSettings;
-	static Base64EncodeData(Data: number[],Dest?: string): {Dest: string, $: boolean};
-	static Base64Encode(Source: string): string;
-	static Base64DecodeData(Source: string,Dest?: number[]): {Dest: number[], $: boolean};
-	static Base64Decode(Source: string,Dest?: string): {Dest: string, $: boolean};
-	static C(Other: UObject | any): VaRestLibrary;
-}
-
-declare type EVaRestRequestVerb = 'GET' | 'POST' | 'PUT' | 'DEL' | 'CUSTOM' | 'EVaRestRequestVerb_MAX';
-declare var EVaRestRequestVerb : { GET:'GET',POST:'POST',PUT:'PUT',DEL:'DEL',CUSTOM:'CUSTOM',EVaRestRequestVerb_MAX:'EVaRestRequestVerb_MAX', };
-declare type EVaRestRequestContentType = 'x_www_form_urlencoded_url' | 'x_www_form_urlencoded_body' | 'json' | 'binary' | 'EVaRestRequestContentType_MAX';
-declare var EVaRestRequestContentType : { x_www_form_urlencoded_url:'x_www_form_urlencoded_url',x_www_form_urlencoded_body:'x_www_form_urlencoded_body',json:'json',binary:'binary',EVaRestRequestContentType_MAX:'EVaRestRequestContentType_MAX', };
-declare type EVaRestRequestStatus = 'NotStarted' | 'Processing' | 'Failed' | 'Failed_ConnectionError' | 'Succeeded' | 'EVaRestRequestStatus_MAX';
-declare var EVaRestRequestStatus : { NotStarted:'NotStarted',Processing:'Processing',Failed:'Failed',Failed_ConnectionError:'Failed_ConnectionError',Succeeded:'Succeeded',EVaRestRequestStatus_MAX:'EVaRestRequestStatus_MAX', };
-declare class VaRestRequestJSON extends UObject { 
-	OnRequestComplete: UnrealEngineMulticastDelegate<(Request: VaRestRequestJSON) => void>;
-	OnRequestFail: UnrealEngineMulticastDelegate<(Request: VaRestRequestJSON) => void>;
-	ResponseSize: number;
-	ResponseContent: string;
-	bIsValidJsonResponse: boolean;
-	RequestJsonObj: VaRestJsonObject;
-	ResponseJsonObj: VaRestJsonObject;
-	ResponseJsonValue: VaRestJsonValue;
-	static Load(ResourceName: string): VaRestRequestJSON;
-	static Find(Outer: UObject, ResourceName: string): VaRestRequestJSON;
-	static GetDefaultObject(): VaRestRequestJSON;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRestRequestJSON;
-	SetVerb(Verb: EVaRestRequestVerb): void;
-	SetURL(URL: string): void;
-	SetStringRequestContent(Content: string): void;
-	SetResponseObject(JsonObject: VaRestJsonObject): void;
-	SetRequestObject(JsonObject: VaRestJsonObject): void;
-	SetHeader(HeaderName: string,HeaderValue: string): void;
-	SetCustomVerb(Verb: string): void;
-	SetContentType(ContentType: EVaRestRequestContentType): void;
-	SetBinaryRequestContent(Content: number[]): void;
-	SetBinaryContentType(ContentType: string): void;
-	ResetResponseData(): void;
-	ResetRequestData(): void;
-	ResetData(): void;
-	RemoveTag(Tag: string): number;
-	ProcessURL(URL: string): void;
-	HasTag(Tag: string): boolean;
-	GetVerb(): EVaRestRequestVerb;
-	GetURL(): string;
-	GetStatus(): EVaRestRequestStatus;
-	GetResponseValue(): VaRestJsonValue;
-	GetResponseObject(): VaRestJsonObject;
-	GetResponseHeader(HeaderName: string): string;
-	GetResponseContentAsString(bCacheResponseContent: boolean): string;
-	GetResponseCode(): number;
-	GetRequestObject(): VaRestJsonObject;
-	GetAllResponseHeaders(): string[];
-	ExecuteProcessRequest(): void;
-	Cancel(): void;
-	ApplyURL(URL: string,Result?: VaRestJsonObject,WorldContextObject?: UObject,LatentInfo?: LatentActionInfo): {Result: VaRestJsonObject};
-	AddTag(Tag: string): void;
-	static C(Other: UObject | any): VaRestRequestJSON;
-}
-
-declare class VaRestSubsystem extends EngineSubsystem { 
-	RequestMap: any;
-	static Load(ResourceName: string): VaRestSubsystem;
-	static Find(Outer: UObject, ResourceName: string): VaRestSubsystem;
-	static GetDefaultObject(): VaRestSubsystem;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRestSubsystem;
-	static StaticConstructVaRestJsonObject(): VaRestJsonObject;
-	LoadJsonFromFile(Path: string,bIsRelativeToContentDir: boolean): VaRestJsonObject;
-	DecodeJsonValue(JsonString: string): VaRestJsonValue;
-	DecodeJsonObject(JsonString: string): VaRestJsonObject;
-	ConstructVaRestRequestExt(Verb: EVaRestRequestVerb,ContentType: EVaRestRequestContentType): VaRestRequestJSON;
-	ConstructVaRestRequest(): VaRestRequestJSON;
-	ConstructVaRestJsonObject(): VaRestJsonObject;
-	ConstructJsonValueString(StringValue: string): VaRestJsonValue;
-	ConstructJsonValueObject(JsonObject: VaRestJsonObject): VaRestJsonValue;
-	ConstructJsonValueNumber(Number: number): VaRestJsonValue;
-	ConstructJsonValueBool(InValue: boolean): VaRestJsonValue;
-	ConstructJsonValueArray(inArray: VaRestJsonValue[]): VaRestJsonValue;
-	static C(Other: UObject | any): VaRestSubsystem;
-}
-
 declare class V8Config extends UObject { 
 	bGenAltPropAccessorForAllProp: boolean;
 	bGenGetStructRefArrayFunction: boolean;
@@ -6338,6 +6166,178 @@ declare class JavascriptWebSocketServer extends UObject {
 	Dispose(): void;
 	static Create(Port: number): JavascriptWebSocketServer;
 	static C(Other: UObject | any): JavascriptWebSocketServer;
+}
+
+declare type EVaJson = 'None' | 'Null' | 'String' | 'Number' | 'Boolean' | 'Array' | 'Object' | 'EVaJson_MAX';
+declare var EVaJson : { None:'None',Null:'Null',String:'String',Number:'Number',Boolean:'Boolean',Array:'Array',Object:'Object',EVaJson_MAX:'EVaJson_MAX', };
+declare class VaRestJsonValue extends UObject { 
+	static Load(ResourceName: string): VaRestJsonValue;
+	static Find(Outer: UObject, ResourceName: string): VaRestJsonValue;
+	static GetDefaultObject(): VaRestJsonValue;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRestJsonValue;
+	Reset(): void;
+	IsNull(): boolean;
+	GetTypeString(): string;
+	GetType(): EVaJson;
+	AsString(): string;
+	AsObject(): VaRestJsonObject;
+	AsNumber(): number;
+	AsInt64(): any;
+	AsInt32(): number;
+	AsBool(): boolean;
+	AsArray(): VaRestJsonValue[];
+	static C(Other: UObject | any): VaRestJsonValue;
+}
+
+declare class VaRestJsonObject extends UObject { 
+	static Load(ResourceName: string): VaRestJsonObject;
+	static Find(Outer: UObject, ResourceName: string): VaRestJsonObject;
+	static GetDefaultObject(): VaRestJsonObject;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRestJsonObject;
+	WriteToFilePath(Path: string,bIsRelativeToProjectDir: boolean): boolean;
+	SetStringField(FieldName: string,StringValue: string): void;
+	SetStringArrayField(FieldName: string,StringArray: string[]): void;
+	SetObjectField(FieldName: string,JsonObject: VaRestJsonObject): void;
+	SetObjectArrayField(FieldName: string,ObjectArray: VaRestJsonObject[]): void;
+	SetNumberField(FieldName: string,Number: number): void;
+	SetNumberArrayField(FieldName: string,NumberArray: number[]): void;
+	SetMapFields_uint8(Fields: any): void;
+	SetMapFields_string(Fields: any): void;
+	SetMapFields_int64(Fields: any): void;
+	SetMapFields_int32(Fields: any): void;
+	SetMapFields_bool(Fields: any): void;
+	SetIntegerField(FieldName: string,Number: number): void;
+	SetInt64Field(FieldName: string,Number: any): void;
+	SetField(FieldName: string,JsonValue: VaRestJsonValue): void;
+	SetBoolField(FieldName: string,InValue: boolean): void;
+	SetBoolArrayField(FieldName: string,BoolArray: boolean[]): void;
+	SetArrayField(FieldName: string,inArray: VaRestJsonValue[]): void;
+	Reset(): void;
+	RemoveField(FieldName: string): void;
+	MergeJsonObject(InJsonObject: VaRestJsonObject,Overwrite: boolean): void;
+	HasField(FieldName: string): boolean;
+	GetStringField(FieldName: string): string;
+	GetStringArrayField(FieldName: string): string[];
+	GetObjectField(FieldName: string): VaRestJsonObject;
+	GetObjectArrayField(FieldName: string): VaRestJsonObject[];
+	GetNumberField(FieldName: string): number;
+	GetNumberArrayField(FieldName: string): number[];
+	GetIntegerField(FieldName: string): number;
+	GetIntegerArrayField(FieldName: string): number[];
+	GetInt64Field(FieldName: string): any;
+	GetFieldNames(): string[];
+	GetField(FieldName: string): VaRestJsonValue;
+	GetBoolField(FieldName: string): boolean;
+	GetBoolArrayField(FieldName: string): boolean[];
+	GetArrayField(FieldName: string): VaRestJsonValue[];
+	EncodeJsonToSingleString(): string;
+	EncodeJson(): string;
+	DecodeJson(JsonString: string,bUseIncrementalParser: boolean): boolean;
+	static C(Other: UObject | any): VaRestJsonObject;
+}
+
+declare type EVaRestHttpStatusCode = 'Unknown' | 'Continue' | 'SwitchProtocol' | 'Ok' | 'Created' | 'Accepted' | 'Partial' | 'NoContent' | 'ResetContent' | 'PartialContent' | 'Ambiguous' | 'Moved' | 'Redirect' | 'RedirectMethod' | 'NotModified' | 'UseProxy' | 'RedirectKeepVerb' | 'BadRequest' | 'Denied' | 'PaymentReq' | 'Forbidden' | 'NotFound' | 'BadMethod' | 'NoneAcceptable' | 'ProxyAuthReq' | 'RequestTimeout' | 'Conflict' | 'Gone' | 'LengthRequired' | 'PrecondFailed' | 'RequestTooLarge' | 'UriTooLong' | 'UnsupportedMedia' | 'TooManyRequests' | 'RetryWith' | 'ServerError' | 'NotSupported' | 'BadGateway' | 'ServiceUnavail' | 'GatewayTimeout' | 'VersionNotSup' | 'EVaRestHttpStatusCode_MAX';
+declare var EVaRestHttpStatusCode : { Unknown:'Unknown',Continue:'Continue',SwitchProtocol:'SwitchProtocol',Ok:'Ok',Created:'Created',Accepted:'Accepted',Partial:'Partial',NoContent:'NoContent',ResetContent:'ResetContent',PartialContent:'PartialContent',Ambiguous:'Ambiguous',Moved:'Moved',Redirect:'Redirect',RedirectMethod:'RedirectMethod',NotModified:'NotModified',UseProxy:'UseProxy',RedirectKeepVerb:'RedirectKeepVerb',BadRequest:'BadRequest',Denied:'Denied',PaymentReq:'PaymentReq',Forbidden:'Forbidden',NotFound:'NotFound',BadMethod:'BadMethod',NoneAcceptable:'NoneAcceptable',ProxyAuthReq:'ProxyAuthReq',RequestTimeout:'RequestTimeout',Conflict:'Conflict',Gone:'Gone',LengthRequired:'LengthRequired',PrecondFailed:'PrecondFailed',RequestTooLarge:'RequestTooLarge',UriTooLong:'UriTooLong',UnsupportedMedia:'UnsupportedMedia',TooManyRequests:'TooManyRequests',RetryWith:'RetryWith',ServerError:'ServerError',NotSupported:'NotSupported',BadGateway:'BadGateway',ServiceUnavail:'ServiceUnavail',GatewayTimeout:'GatewayTimeout',VersionNotSup:'VersionNotSup',EVaRestHttpStatusCode_MAX:'EVaRestHttpStatusCode_MAX', };
+declare class VaRestSettings extends UObject { 
+	bExtendedLog: boolean;
+	bUseChunkedParser: boolean;
+	static Load(ResourceName: string): VaRestSettings;
+	static Find(Outer: UObject, ResourceName: string): VaRestSettings;
+	static GetDefaultObject(): VaRestSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRestSettings;
+	static C(Other: UObject | any): VaRestSettings;
+}
+
+declare class VaRestLibrary extends BlueprintFunctionLibrary { 
+	static Load(ResourceName: string): VaRestLibrary;
+	static Find(Outer: UObject, ResourceName: string): VaRestLibrary;
+	static GetDefaultObject(): VaRestLibrary;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRestLibrary;
+	static StringToSha1(StringToHash: string): string;
+	static StringToMd5(StringToHash: string): string;
+	static PercentEncode(Source: string): string;
+	static HTTPStatusIntToEnum(StatusCode: number): EVaRestHttpStatusCode;
+	static GetWorldURL(WorldContextObject: UObject): VaRestURL;
+	static GetVaRestVersion(): string;
+	static GetVaRestSettings(): VaRestSettings;
+	static Base64EncodeData(Data: number[],Dest?: string): {Dest: string, $: boolean};
+	static Base64Encode(Source: string): string;
+	static Base64DecodeData(Source: string,Dest?: number[]): {Dest: number[], $: boolean};
+	static Base64Decode(Source: string,Dest?: string): {Dest: string, $: boolean};
+	static C(Other: UObject | any): VaRestLibrary;
+}
+
+declare type EVaRestRequestVerb = 'GET' | 'POST' | 'PUT' | 'DEL' | 'CUSTOM' | 'EVaRestRequestVerb_MAX';
+declare var EVaRestRequestVerb : { GET:'GET',POST:'POST',PUT:'PUT',DEL:'DEL',CUSTOM:'CUSTOM',EVaRestRequestVerb_MAX:'EVaRestRequestVerb_MAX', };
+declare type EVaRestRequestContentType = 'x_www_form_urlencoded_url' | 'x_www_form_urlencoded_body' | 'json' | 'binary' | 'EVaRestRequestContentType_MAX';
+declare var EVaRestRequestContentType : { x_www_form_urlencoded_url:'x_www_form_urlencoded_url',x_www_form_urlencoded_body:'x_www_form_urlencoded_body',json:'json',binary:'binary',EVaRestRequestContentType_MAX:'EVaRestRequestContentType_MAX', };
+declare type EVaRestRequestStatus = 'NotStarted' | 'Processing' | 'Failed' | 'Failed_ConnectionError' | 'Succeeded' | 'EVaRestRequestStatus_MAX';
+declare var EVaRestRequestStatus : { NotStarted:'NotStarted',Processing:'Processing',Failed:'Failed',Failed_ConnectionError:'Failed_ConnectionError',Succeeded:'Succeeded',EVaRestRequestStatus_MAX:'EVaRestRequestStatus_MAX', };
+declare class VaRestRequestJSON extends UObject { 
+	OnRequestComplete: UnrealEngineMulticastDelegate<(Request: VaRestRequestJSON) => void>;
+	OnRequestFail: UnrealEngineMulticastDelegate<(Request: VaRestRequestJSON) => void>;
+	ResponseSize: number;
+	ResponseContent: string;
+	bIsValidJsonResponse: boolean;
+	RequestJsonObj: VaRestJsonObject;
+	ResponseJsonObj: VaRestJsonObject;
+	ResponseJsonValue: VaRestJsonValue;
+	static Load(ResourceName: string): VaRestRequestJSON;
+	static Find(Outer: UObject, ResourceName: string): VaRestRequestJSON;
+	static GetDefaultObject(): VaRestRequestJSON;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRestRequestJSON;
+	SetVerb(Verb: EVaRestRequestVerb): void;
+	SetURL(URL: string): void;
+	SetStringRequestContent(Content: string): void;
+	SetResponseObject(JsonObject: VaRestJsonObject): void;
+	SetRequestObject(JsonObject: VaRestJsonObject): void;
+	SetHeader(HeaderName: string,HeaderValue: string): void;
+	SetCustomVerb(Verb: string): void;
+	SetContentType(ContentType: EVaRestRequestContentType): void;
+	SetBinaryRequestContent(Content: number[]): void;
+	SetBinaryContentType(ContentType: string): void;
+	ResetResponseData(): void;
+	ResetRequestData(): void;
+	ResetData(): void;
+	RemoveTag(Tag: string): number;
+	ProcessURL(URL: string): void;
+	HasTag(Tag: string): boolean;
+	GetVerb(): EVaRestRequestVerb;
+	GetURL(): string;
+	GetStatus(): EVaRestRequestStatus;
+	GetResponseValue(): VaRestJsonValue;
+	GetResponseObject(): VaRestJsonObject;
+	GetResponseHeader(HeaderName: string): string;
+	GetResponseContentAsString(bCacheResponseContent: boolean): string;
+	GetResponseCode(): number;
+	GetRequestObject(): VaRestJsonObject;
+	GetAllResponseHeaders(): string[];
+	ExecuteProcessRequest(): void;
+	Cancel(): void;
+	ApplyURL(URL: string,Result?: VaRestJsonObject,WorldContextObject?: UObject,LatentInfo?: LatentActionInfo): {Result: VaRestJsonObject};
+	AddTag(Tag: string): void;
+	static C(Other: UObject | any): VaRestRequestJSON;
+}
+
+declare class VaRestSubsystem extends EngineSubsystem { 
+	RequestMap: any;
+	static Load(ResourceName: string): VaRestSubsystem;
+	static Find(Outer: UObject, ResourceName: string): VaRestSubsystem;
+	static GetDefaultObject(): VaRestSubsystem;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRestSubsystem;
+	static StaticConstructVaRestJsonObject(): VaRestJsonObject;
+	LoadJsonFromFile(Path: string,bIsRelativeToContentDir: boolean): VaRestJsonObject;
+	DecodeJsonValue(JsonString: string): VaRestJsonValue;
+	DecodeJsonObject(JsonString: string): VaRestJsonObject;
+	ConstructVaRestRequestExt(Verb: EVaRestRequestVerb,ContentType: EVaRestRequestContentType): VaRestRequestJSON;
+	ConstructVaRestRequest(): VaRestRequestJSON;
+	ConstructVaRestJsonObject(): VaRestJsonObject;
+	ConstructJsonValueString(StringValue: string): VaRestJsonValue;
+	ConstructJsonValueObject(JsonObject: VaRestJsonObject): VaRestJsonValue;
+	ConstructJsonValueNumber(Number: number): VaRestJsonValue;
+	ConstructJsonValueBool(InValue: boolean): VaRestJsonValue;
+	ConstructJsonValueArray(inArray: VaRestJsonValue[]): VaRestJsonValue;
+	static C(Other: UObject | any): VaRestSubsystem;
 }
 
 declare class MagicLeapPlanesComponent extends SceneComponent { 
@@ -9105,30 +9105,6 @@ declare class OnPastedFunctionCallNode__PythonCallable extends PythonCallableFor
 	static C(Other: UObject | any): OnPastedFunctionCallNode__PythonCallable;
 }
 
-declare class OnRequestComplete__PythonCallable extends PythonCallableForDelegate { 
-	static Load(ResourceName: string): OnRequestComplete__PythonCallable;
-	static Find(Outer: UObject, ResourceName: string): OnRequestComplete__PythonCallable;
-	static GetDefaultObject(): OnRequestComplete__PythonCallable;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): OnRequestComplete__PythonCallable;
-	static C(Other: UObject | any): OnRequestComplete__PythonCallable;
-}
-
-declare class OnRequestFail__PythonCallable extends PythonCallableForDelegate { 
-	static Load(ResourceName: string): OnRequestFail__PythonCallable;
-	static Find(Outer: UObject, ResourceName: string): OnRequestFail__PythonCallable;
-	static GetDefaultObject(): OnRequestFail__PythonCallable;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): OnRequestFail__PythonCallable;
-	static C(Other: UObject | any): OnRequestFail__PythonCallable;
-}
-
-declare class VaRestCallDelegate__PythonCallable extends PythonCallableForDelegate { 
-	static Load(ResourceName: string): VaRestCallDelegate__PythonCallable;
-	static Find(Outer: UObject, ResourceName: string): VaRestCallDelegate__PythonCallable;
-	static GetDefaultObject(): VaRestCallDelegate__PythonCallable;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRestCallDelegate__PythonCallable;
-	static C(Other: UObject | any): VaRestCallDelegate__PythonCallable;
-}
-
 declare class DirectoryWatcherCallback__PythonCallable extends PythonCallableForDelegate { 
 	static Load(ResourceName: string): DirectoryWatcherCallback__PythonCallable;
 	static Find(Outer: UObject, ResourceName: string): DirectoryWatcherCallback__PythonCallable;
@@ -9391,6 +9367,30 @@ declare class OnWebSocketServerDelegate__PythonCallable extends PythonCallableFo
 	static GetDefaultObject(): OnWebSocketServerDelegate__PythonCallable;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): OnWebSocketServerDelegate__PythonCallable;
 	static C(Other: UObject | any): OnWebSocketServerDelegate__PythonCallable;
+}
+
+declare class OnRequestComplete__PythonCallable extends PythonCallableForDelegate { 
+	static Load(ResourceName: string): OnRequestComplete__PythonCallable;
+	static Find(Outer: UObject, ResourceName: string): OnRequestComplete__PythonCallable;
+	static GetDefaultObject(): OnRequestComplete__PythonCallable;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): OnRequestComplete__PythonCallable;
+	static C(Other: UObject | any): OnRequestComplete__PythonCallable;
+}
+
+declare class OnRequestFail__PythonCallable extends PythonCallableForDelegate { 
+	static Load(ResourceName: string): OnRequestFail__PythonCallable;
+	static Find(Outer: UObject, ResourceName: string): OnRequestFail__PythonCallable;
+	static GetDefaultObject(): OnRequestFail__PythonCallable;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): OnRequestFail__PythonCallable;
+	static C(Other: UObject | any): OnRequestFail__PythonCallable;
+}
+
+declare class VaRestCallDelegate__PythonCallable extends PythonCallableForDelegate { 
+	static Load(ResourceName: string): VaRestCallDelegate__PythonCallable;
+	static Find(Outer: UObject, ResourceName: string): VaRestCallDelegate__PythonCallable;
+	static GetDefaultObject(): VaRestCallDelegate__PythonCallable;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRestCallDelegate__PythonCallable;
+	static C(Other: UObject | any): VaRestCallDelegate__PythonCallable;
 }
 
 declare class MagicLeapPlanesResultDelegate__PythonCallable extends PythonCallableForDelegate { 
@@ -9897,44 +9897,6 @@ declare class ComponentEndTouchOverSignature__PythonCallable extends PythonCalla
 	static C(Other: UObject | any): ComponentEndTouchOverSignature__PythonCallable;
 }
 
-declare class TcpMessagingSettings extends UObject { 
-	EnableTransport: boolean;
-	ListenEndpoint: string;
-	ConnectToEndpoints: string[];
-	ConnectionRetryDelay: number;
-	bStopServiceWhenAppDeactivates: boolean;
-	static Load(ResourceName: string): TcpMessagingSettings;
-	static Find(Outer: UObject, ResourceName: string): TcpMessagingSettings;
-	static GetDefaultObject(): TcpMessagingSettings;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TcpMessagingSettings;
-	static C(Other: UObject | any): TcpMessagingSettings;
-}
-
-declare type EUdpMessageFormat = 'None' | 'Json' | 'TaggedProperty' | 'CborPlatformEndianness' | 'CborStandardEndianness' | 'EUdpMessageFormat_MAX';
-declare var EUdpMessageFormat : { None:'None',Json:'Json',TaggedProperty:'TaggedProperty',CborPlatformEndianness:'CborPlatformEndianness',CborStandardEndianness:'CborStandardEndianness',EUdpMessageFormat_MAX:'EUdpMessageFormat_MAX', };
-declare class UdpMessagingSettings extends UObject { 
-	EnabledByDefault: boolean;
-	EnableTransport: boolean;
-	bAutoRepair: boolean;
-	MaxSendRate: number;
-	AutoRepairAttemptLimit: any;
-	bStopServiceWhenAppDeactivates: boolean;
-	UnicastEndpoint: string;
-	MulticastEndpoint: string;
-	MessageFormat: EUdpMessageFormat;
-	MulticastTimeToLive: number;
-	StaticEndpoints: string[];
-	EnableTunnel: boolean;
-	TunnelUnicastEndpoint: string;
-	TunnelMulticastEndpoint: string;
-	RemoteTunnelEndpoints: string[];
-	static Load(ResourceName: string): UdpMessagingSettings;
-	static Find(Outer: UObject, ResourceName: string): UdpMessagingSettings;
-	static GetDefaultObject(): UdpMessagingSettings;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): UdpMessagingSettings;
-	static C(Other: UObject | any): UdpMessagingSettings;
-}
-
 declare type EActorSequenceObjectReferenceType = 'ContextActor' | 'ExternalActor' | 'Component' | 'EActorSequenceObjectReferenceType_MAX';
 declare var EActorSequenceObjectReferenceType : { ContextActor:'ContextActor',ExternalActor:'ExternalActor',Component:'Component',EActorSequenceObjectReferenceType_MAX:'EActorSequenceObjectReferenceType_MAX', };
 declare class ActorSequenceObjectReference { 
@@ -9986,6 +9948,54 @@ declare class ActorSequenceComponent extends ActorComponent {
 	static GetDefaultObject(): ActorSequenceComponent;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ActorSequenceComponent;
 	static C(Other: UObject | any): ActorSequenceComponent;
+}
+
+declare class ImgMediaPlaybackComponent extends ActorComponent { 
+	Width: number;
+	LODBias: number;
+	static Load(ResourceName: string): ImgMediaPlaybackComponent;
+	static Find(Outer: UObject, ResourceName: string): ImgMediaPlaybackComponent;
+	static GetDefaultObject(): ImgMediaPlaybackComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ImgMediaPlaybackComponent;
+	static C(Other: UObject | any): ImgMediaPlaybackComponent;
+}
+
+declare class TcpMessagingSettings extends UObject { 
+	EnableTransport: boolean;
+	ListenEndpoint: string;
+	ConnectToEndpoints: string[];
+	ConnectionRetryDelay: number;
+	bStopServiceWhenAppDeactivates: boolean;
+	static Load(ResourceName: string): TcpMessagingSettings;
+	static Find(Outer: UObject, ResourceName: string): TcpMessagingSettings;
+	static GetDefaultObject(): TcpMessagingSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TcpMessagingSettings;
+	static C(Other: UObject | any): TcpMessagingSettings;
+}
+
+declare type EUdpMessageFormat = 'None' | 'Json' | 'TaggedProperty' | 'CborPlatformEndianness' | 'CborStandardEndianness' | 'EUdpMessageFormat_MAX';
+declare var EUdpMessageFormat : { None:'None',Json:'Json',TaggedProperty:'TaggedProperty',CborPlatformEndianness:'CborPlatformEndianness',CborStandardEndianness:'CborStandardEndianness',EUdpMessageFormat_MAX:'EUdpMessageFormat_MAX', };
+declare class UdpMessagingSettings extends UObject { 
+	EnabledByDefault: boolean;
+	EnableTransport: boolean;
+	bAutoRepair: boolean;
+	MaxSendRate: number;
+	AutoRepairAttemptLimit: any;
+	bStopServiceWhenAppDeactivates: boolean;
+	UnicastEndpoint: string;
+	MulticastEndpoint: string;
+	MessageFormat: EUdpMessageFormat;
+	MulticastTimeToLive: number;
+	StaticEndpoints: string[];
+	EnableTunnel: boolean;
+	TunnelUnicastEndpoint: string;
+	TunnelMulticastEndpoint: string;
+	RemoteTunnelEndpoints: string[];
+	static Load(ResourceName: string): UdpMessagingSettings;
+	static Find(Outer: UObject, ResourceName: string): UdpMessagingSettings;
+	static GetDefaultObject(): UdpMessagingSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): UdpMessagingSettings;
+	static C(Other: UObject | any): UdpMessagingSettings;
 }
 
 declare class AudioAnalyzerAsset extends UObject { 
@@ -10161,16 +10171,6 @@ declare class LocationServicesData_OnLocationChanged__PythonCallable extends Pyt
 	static GetDefaultObject(): LocationServicesData_OnLocationChanged__PythonCallable;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LocationServicesData_OnLocationChanged__PythonCallable;
 	static C(Other: UObject | any): LocationServicesData_OnLocationChanged__PythonCallable;
-}
-
-declare class ImgMediaPlaybackComponent extends ActorComponent { 
-	Width: number;
-	LODBias: number;
-	static Load(ResourceName: string): ImgMediaPlaybackComponent;
-	static Find(Outer: UObject, ResourceName: string): ImgMediaPlaybackComponent;
-	static GetDefaultObject(): ImgMediaPlaybackComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ImgMediaPlaybackComponent;
-	static C(Other: UObject | any): ImgMediaPlaybackComponent;
 }
 
 declare class TireConfigMaterialFriction { 
@@ -12581,27 +12581,38 @@ declare class LightPropagationVolumeBlendableFactory extends Factory {
 	static C(Other: UObject | any): LightPropagationVolumeBlendableFactory;
 }
 
-declare class AnimationSharingSetupFactory extends Factory { 
-	static Load(ResourceName: string): AnimationSharingSetupFactory;
-	static Find(Outer: UObject, ResourceName: string): AnimationSharingSetupFactory;
-	static GetDefaultObject(): AnimationSharingSetupFactory;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimationSharingSetupFactory;
-	static C(Other: UObject | any): AnimationSharingSetupFactory;
+declare class CryptoKeysCommandlet extends Commandlet { 
+	static Load(ResourceName: string): CryptoKeysCommandlet;
+	static Find(Outer: UObject, ResourceName: string): CryptoKeysCommandlet;
+	static GetDefaultObject(): CryptoKeysCommandlet;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CryptoKeysCommandlet;
+	static C(Other: UObject | any): CryptoKeysCommandlet;
 }
 
-declare class MyPluginStruct { 
-	TestString: string;
-	clone() : MyPluginStruct;
-	static C(Other: UObject | any): MyPluginStruct;
+declare class CryptoEncryptionKey { 
+	Guid: Guid;
+	Name: string;
+	Key: string;
+	clone() : CryptoEncryptionKey;
+	static C(Other: UObject | any): CryptoEncryptionKey;
 }
 
-declare class MyPluginObject extends UObject { 
-	MyStruct: MyPluginStruct;
-	static Load(ResourceName: string): MyPluginObject;
-	static Find(Outer: UObject, ResourceName: string): MyPluginObject;
-	static GetDefaultObject(): MyPluginObject;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MyPluginObject;
-	static C(Other: UObject | any): MyPluginObject;
+declare class CryptoKeysSettings extends UObject { 
+	EncryptionKey: string;
+	SecondaryEncryptionKeys: CryptoEncryptionKey[];
+	bEncryptPakIniFiles: boolean;
+	bEncryptPakIndex: boolean;
+	bEncryptUAssetFiles: boolean;
+	bEncryptAllAssetFiles: boolean;
+	SigningPublicExponent: string;
+	SigningModulus: string;
+	SigningPrivateExponent: string;
+	bEnablePakSigning: boolean;
+	static Load(ResourceName: string): CryptoKeysSettings;
+	static Find(Outer: UObject, ResourceName: string): CryptoKeysSettings;
+	static GetDefaultObject(): CryptoKeysSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CryptoKeysSettings;
+	static C(Other: UObject | any): CryptoKeysSettings;
 }
 
 declare type ECurveEditorFFTFilterType = 'Lowpass' | 'Highpass' | 'ECurveEditorFFTFilterType_MAX';
@@ -12936,38 +12947,27 @@ declare class SpeedTreeImportData extends AssetImportData {
 	static C(Other: UObject | any): SpeedTreeImportData;
 }
 
-declare class CryptoKeysCommandlet extends Commandlet { 
-	static Load(ResourceName: string): CryptoKeysCommandlet;
-	static Find(Outer: UObject, ResourceName: string): CryptoKeysCommandlet;
-	static GetDefaultObject(): CryptoKeysCommandlet;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CryptoKeysCommandlet;
-	static C(Other: UObject | any): CryptoKeysCommandlet;
+declare class AnimationSharingSetupFactory extends Factory { 
+	static Load(ResourceName: string): AnimationSharingSetupFactory;
+	static Find(Outer: UObject, ResourceName: string): AnimationSharingSetupFactory;
+	static GetDefaultObject(): AnimationSharingSetupFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimationSharingSetupFactory;
+	static C(Other: UObject | any): AnimationSharingSetupFactory;
 }
 
-declare class CryptoEncryptionKey { 
-	Guid: Guid;
-	Name: string;
-	Key: string;
-	clone() : CryptoEncryptionKey;
-	static C(Other: UObject | any): CryptoEncryptionKey;
+declare class MyPluginStruct { 
+	TestString: string;
+	clone() : MyPluginStruct;
+	static C(Other: UObject | any): MyPluginStruct;
 }
 
-declare class CryptoKeysSettings extends UObject { 
-	EncryptionKey: string;
-	SecondaryEncryptionKeys: CryptoEncryptionKey[];
-	bEncryptPakIniFiles: boolean;
-	bEncryptPakIndex: boolean;
-	bEncryptUAssetFiles: boolean;
-	bEncryptAllAssetFiles: boolean;
-	SigningPublicExponent: string;
-	SigningModulus: string;
-	SigningPrivateExponent: string;
-	bEnablePakSigning: boolean;
-	static Load(ResourceName: string): CryptoKeysSettings;
-	static Find(Outer: UObject, ResourceName: string): CryptoKeysSettings;
-	static GetDefaultObject(): CryptoKeysSettings;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CryptoKeysSettings;
-	static C(Other: UObject | any): CryptoKeysSettings;
+declare class MyPluginObject extends UObject { 
+	MyStruct: MyPluginStruct;
+	static Load(ResourceName: string): MyPluginObject;
+	static Find(Outer: UObject, ResourceName: string): MyPluginObject;
+	static GetDefaultObject(): MyPluginObject;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MyPluginObject;
+	static C(Other: UObject | any): MyPluginObject;
 }
 
 declare class OodleNetworkTrainerCommandlet extends Commandlet { 
@@ -12985,206 +12985,304 @@ declare class OodleNetworkTrainerCommandlet extends Commandlet {
 	static C(Other: UObject | any): OodleNetworkTrainerCommandlet;
 }
 
-declare class LevelVariantSetsActorFactory extends ActorFactory { 
-	static Load(ResourceName: string): LevelVariantSetsActorFactory;
-	static Find(Outer: UObject, ResourceName: string): LevelVariantSetsActorFactory;
-	static GetDefaultObject(): LevelVariantSetsActorFactory;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LevelVariantSetsActorFactory;
-	static C(Other: UObject | any): LevelVariantSetsActorFactory;
+declare class GeometryCacheTrack extends UObject { 
+	Duration: number;
+	static Load(ResourceName: string): GeometryCacheTrack;
+	static Find(Outer: UObject, ResourceName: string): GeometryCacheTrack;
+	static GetDefaultObject(): GeometryCacheTrack;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheTrack;
+	static C(Other: UObject | any): GeometryCacheTrack;
 }
 
-declare class SwitchActorFactory extends ActorFactory { 
-	static Load(ResourceName: string): SwitchActorFactory;
-	static Find(Outer: UObject, ResourceName: string): SwitchActorFactory;
-	static GetDefaultObject(): SwitchActorFactory;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SwitchActorFactory;
-	static C(Other: UObject | any): SwitchActorFactory;
+declare class GeometryCache extends UObject { 
+	AssetImportData: AssetImportData;
+	ThumbnailInfo: ThumbnailInfo;
+	Materials: MaterialInterface[];
+	Tracks: GeometryCacheTrack[];
+	StartFrame: number;
+	EndFrame: number;
+	Hash: any;
+	static Load(ResourceName: string): GeometryCache;
+	static Find(Outer: UObject, ResourceName: string): GeometryCache;
+	static GetDefaultObject(): GeometryCache;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCache;
+	static C(Other: UObject | any): GeometryCache;
 }
 
-declare class VariantManagerFactoryNew extends Factory { 
-	static Load(ResourceName: string): VariantManagerFactoryNew;
-	static Find(Outer: UObject, ResourceName: string): VariantManagerFactoryNew;
-	static GetDefaultObject(): VariantManagerFactoryNew;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VariantManagerFactoryNew;
-	static C(Other: UObject | any): VariantManagerFactoryNew;
+declare class GeometryCacheComponent extends MeshComponent { 
+	GeometryCache: GeometryCache;
+	bRunning: boolean;
+	bLooping: boolean;
+	bExtrapolateFrames: boolean;
+	StartTimeOffset: number;
+	PlaybackSpeed: number;
+	MotionVectorScale: number;
+	NumTracks: number;
+	ElapsedTime: number;
+	Duration: number;
+	bManualTick: boolean;
+	static Load(ResourceName: string): GeometryCacheComponent;
+	static Find(Outer: UObject, ResourceName: string): GeometryCacheComponent;
+	static GetDefaultObject(): GeometryCacheComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheComponent;
+	TickAtThisTime(Time: number,bInIsRunning: boolean,bInBackwards: boolean,bInIsLooping: boolean): void;
+	Stop(): void;
+	SetStartTimeOffset(NewStartTimeOffset: number): void;
+	SetPlaybackSpeed(NewPlaybackSpeed: number): void;
+	SetMotionVectorScale(NewMotionVectorScale: number): void;
+	SetLooping(bNewLooping: boolean): void;
+	SetGeometryCache(NewGeomCache: GeometryCache): boolean;
+	SetExtrapolateFrames(bNewExtrapolating: boolean): void;
+	PlayReversedFromEnd(): void;
+	PlayReversed(): void;
+	PlayFromStart(): void;
+	Play(): void;
+	Pause(): void;
+	IsPlayingReversed(): boolean;
+	IsPlaying(): boolean;
+	IsLooping(): boolean;
+	IsExtrapolatingFrames(): boolean;
+	GetStartTimeOffset(): number;
+	GetPlaybackSpeed(): number;
+	GetPlaybackDirection(): number;
+	GetNumberOfFrames(): number;
+	GetMotionVectorScale(): number;
+	GetDuration(): number;
+	GetAnimationTime(): number;
+	static C(Other: UObject | any): GeometryCacheComponent;
 }
 
-declare type EVariantManagerTestEnum = 'None' | 'FirstOption' | 'SecondOption' | 'ThirdOption' | 'EVariantManagerTestEnum_MAX';
-declare var EVariantManagerTestEnum : { None:'None',FirstOption:'FirstOption',SecondOption:'SecondOption',ThirdOption:'ThirdOption',EVariantManagerTestEnum_MAX:'EVariantManagerTestEnum_MAX', };
-declare class VariantManagerTestActor extends Actor { 
-	EnumWithNoDefault: EVariantManagerTestEnum;
-	EnumWithSecondDefault: EVariantManagerTestEnum;
-	CapturedByteProperty: number;
-	CapturedIntProperty: number;
-	CapturedFloatProperty: number;
-	bCapturedBoolProperty: boolean;
-	CapturedObjectProperty: UObject;
-	CapturedInterfaceProperty: any;
-	CapturedNameProperty: string;
-	CapturedStrProperty: string;
-	CapturedTextProperty: string;
-	CapturedRotatorProperty: Rotator;
-	CapturedColorProperty: Color;
-	CapturedLinearColorProperty: LinearColor;
-	CapturedVectorProperty: Vector;
-	CapturedQuatProperty: Quat;
-	CapturedVector4Property: Vector4;
-	CapturedVector2DProperty: Vector2D;
-	CapturedIntPointProperty: IntPoint;
-	CapturedUObjectArrayProperty: UObject[];
-	CapturedVectorArrayProperty: Vector[];
-	static GetDefaultObject(): VariantManagerTestActor;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VariantManagerTestActor;
-	static C(Other: UObject | any): VariantManagerTestActor;
+declare class GeometryCacheActor extends Actor { 
+	GeometryCacheComponent: GeometryCacheComponent;
+	static GetDefaultObject(): GeometryCacheActor;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheActor;
+	GetGeometryCacheComponent(): GeometryCacheComponent;
+	static C(Other: UObject | any): GeometryCacheActor;
 }
 
-declare type EVaRest_JsonType = 'JSON_Bool' | 'JSON_Number' | 'JSON_String' | 'JSON_Object' | 'JSON_MAX';
-declare var EVaRest_JsonType : { JSON_Bool:'JSON_Bool',JSON_Number:'JSON_Number',JSON_String:'JSON_String',JSON_Object:'JSON_Object',JSON_MAX:'JSON_MAX', };
-declare class VaRest_NamedType { 
-	Name: string;
-	Type: EVaRest_JsonType;
-	bIsArray: boolean;
-	clone() : VaRest_NamedType;
-	static C(Other: UObject | any): VaRest_NamedType;
+declare class GeometryCacheCodecBase extends UObject { 
+	TopologyRanges: number[];
+	static Load(ResourceName: string): GeometryCacheCodecBase;
+	static Find(Outer: UObject, ResourceName: string): GeometryCacheCodecBase;
+	static GetDefaultObject(): GeometryCacheCodecBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheCodecBase;
+	static C(Other: UObject | any): GeometryCacheCodecBase;
 }
 
-declare class VaRest_MakeJson extends K2Node { 
-	Inputs: VaRest_NamedType[];
-	static Load(ResourceName: string): VaRest_MakeJson;
-	static Find(Outer: UObject, ResourceName: string): VaRest_MakeJson;
-	static GetDefaultObject(): VaRest_MakeJson;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRest_MakeJson;
-	static C(Other: UObject | any): VaRest_MakeJson;
+declare class GeometryCacheCodecRaw extends GeometryCacheCodecBase { 
+	DummyProperty: number;
+	static Load(ResourceName: string): GeometryCacheCodecRaw;
+	static Find(Outer: UObject, ResourceName: string): GeometryCacheCodecRaw;
+	static GetDefaultObject(): GeometryCacheCodecRaw;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheCodecRaw;
+	static C(Other: UObject | any): GeometryCacheCodecRaw;
 }
 
-declare class VaRest_BreakJson extends K2Node { 
-	Outputs: VaRest_NamedType[];
-	static Load(ResourceName: string): VaRest_BreakJson;
-	static Find(Outer: UObject, ResourceName: string): VaRest_BreakJson;
-	static GetDefaultObject(): VaRest_BreakJson;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRest_BreakJson;
-	static C(Other: UObject | any): VaRest_BreakJson;
+declare class GeometryCacheCodecV1 extends GeometryCacheCodecBase { 
+	static Load(ResourceName: string): GeometryCacheCodecV1;
+	static Find(Outer: UObject, ResourceName: string): GeometryCacheCodecV1;
+	static GetDefaultObject(): GeometryCacheCodecV1;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheCodecV1;
+	static C(Other: UObject | any): GeometryCacheCodecV1;
 }
 
-declare class MagicLeapAudioFunctionLibrary extends BlueprintFunctionLibrary { 
-	static Load(ResourceName: string): MagicLeapAudioFunctionLibrary;
-	static Find(Outer: UObject, ResourceName: string): MagicLeapAudioFunctionLibrary;
-	static GetDefaultObject(): MagicLeapAudioFunctionLibrary;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapAudioFunctionLibrary;
-	static SetMicMute(IsMuted: boolean): boolean;
-	static IsMicMuted(): boolean;
-	static C(Other: UObject | any): MagicLeapAudioFunctionLibrary;
+declare class GeometryCacheMeshData { 
+	clone() : GeometryCacheMeshData;
+	static C(Other: UObject | any): GeometryCacheMeshData;
 }
 
-declare class MagicLeapAudioJackPluggedDelegate__PythonCallable extends PythonCallableForDelegate { 
-	static Load(ResourceName: string): MagicLeapAudioJackPluggedDelegate__PythonCallable;
-	static Find(Outer: UObject, ResourceName: string): MagicLeapAudioJackPluggedDelegate__PythonCallable;
-	static GetDefaultObject(): MagicLeapAudioJackPluggedDelegate__PythonCallable;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapAudioJackPluggedDelegate__PythonCallable;
-	static C(Other: UObject | any): MagicLeapAudioJackPluggedDelegate__PythonCallable;
+declare class GeometryCacheTrack_FlipbookAnimation extends GeometryCacheTrack { 
+	NumMeshSamples: any;
+	static Load(ResourceName: string): GeometryCacheTrack_FlipbookAnimation;
+	static Find(Outer: UObject, ResourceName: string): GeometryCacheTrack_FlipbookAnimation;
+	static GetDefaultObject(): GeometryCacheTrack_FlipbookAnimation;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheTrack_FlipbookAnimation;
+	AddMeshSample(MeshData: GeometryCacheMeshData,SampleTime: number): void;
+	static C(Other: UObject | any): GeometryCacheTrack_FlipbookAnimation;
 }
 
-declare class MagicLeapAudioJackPluggedDelegateMulti__PythonCallable extends PythonCallableForDelegate { 
-	static Load(ResourceName: string): MagicLeapAudioJackPluggedDelegateMulti__PythonCallable;
-	static Find(Outer: UObject, ResourceName: string): MagicLeapAudioJackPluggedDelegateMulti__PythonCallable;
-	static GetDefaultObject(): MagicLeapAudioJackPluggedDelegateMulti__PythonCallable;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapAudioJackPluggedDelegateMulti__PythonCallable;
-	static C(Other: UObject | any): MagicLeapAudioJackPluggedDelegateMulti__PythonCallable;
+declare class GeometryCacheTrackStreamable extends GeometryCacheTrack { 
+	Codec: GeometryCacheCodecBase;
+	StartSampleTime: number;
+	static Load(ResourceName: string): GeometryCacheTrackStreamable;
+	static Find(Outer: UObject, ResourceName: string): GeometryCacheTrackStreamable;
+	static GetDefaultObject(): GeometryCacheTrackStreamable;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheTrackStreamable;
+	static C(Other: UObject | any): GeometryCacheTrackStreamable;
 }
 
-declare class MagicLeapAudioJackUnpluggedDelegate__PythonCallable extends PythonCallableForDelegate { 
-	static Load(ResourceName: string): MagicLeapAudioJackUnpluggedDelegate__PythonCallable;
-	static Find(Outer: UObject, ResourceName: string): MagicLeapAudioJackUnpluggedDelegate__PythonCallable;
-	static GetDefaultObject(): MagicLeapAudioJackUnpluggedDelegate__PythonCallable;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapAudioJackUnpluggedDelegate__PythonCallable;
-	static C(Other: UObject | any): MagicLeapAudioJackUnpluggedDelegate__PythonCallable;
+declare class GeometryCacheTrack_TransformAnimation extends GeometryCacheTrack { 
+	static Load(ResourceName: string): GeometryCacheTrack_TransformAnimation;
+	static Find(Outer: UObject, ResourceName: string): GeometryCacheTrack_TransformAnimation;
+	static GetDefaultObject(): GeometryCacheTrack_TransformAnimation;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheTrack_TransformAnimation;
+	SetMesh(NewMeshData: GeometryCacheMeshData): void;
+	static C(Other: UObject | any): GeometryCacheTrack_TransformAnimation;
 }
 
-declare class MagicLeapAudioJackUnpluggedDelegateMulti__PythonCallable extends PythonCallableForDelegate { 
-	static Load(ResourceName: string): MagicLeapAudioJackUnpluggedDelegateMulti__PythonCallable;
-	static Find(Outer: UObject, ResourceName: string): MagicLeapAudioJackUnpluggedDelegateMulti__PythonCallable;
-	static GetDefaultObject(): MagicLeapAudioJackUnpluggedDelegateMulti__PythonCallable;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapAudioJackUnpluggedDelegateMulti__PythonCallable;
-	static C(Other: UObject | any): MagicLeapAudioJackUnpluggedDelegateMulti__PythonCallable;
+declare class GeometryCacheTrack_TransformGroupAnimation extends GeometryCacheTrack { 
+	static Load(ResourceName: string): GeometryCacheTrack_TransformGroupAnimation;
+	static Find(Outer: UObject, ResourceName: string): GeometryCacheTrack_TransformGroupAnimation;
+	static GetDefaultObject(): GeometryCacheTrack_TransformGroupAnimation;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheTrack_TransformGroupAnimation;
+	SetMesh(NewMeshData: GeometryCacheMeshData): void;
+	static C(Other: UObject | any): GeometryCacheTrack_TransformGroupAnimation;
 }
 
-declare class MagicLeapSharedWorldSharedData { 
-	PinIDs: Guid[];
-	clone() : MagicLeapSharedWorldSharedData;
-	static C(Other: UObject | any): MagicLeapSharedWorldSharedData;
+declare type EAlembicSamplingType = 'PerFrame' | 'PerXFrames' | 'PerTimeStep' | 'EAlembicSamplingType_MAX';
+declare var EAlembicSamplingType : { PerFrame:'PerFrame',PerXFrames:'PerXFrames',PerTimeStep:'PerTimeStep',EAlembicSamplingType_MAX:'EAlembicSamplingType_MAX', };
+declare class AbcSamplingSettings { 
+	SamplingType: EAlembicSamplingType;
+	FrameSteps: number;
+	TimeSteps: number;
+	FrameStart: number;
+	FrameEnd: number;
+	bSkipEmpty: boolean;
+	clone() : AbcSamplingSettings;
+	static C(Other: UObject | any): AbcSamplingSettings;
 }
 
-declare class MagicLeapSharedWorldPinData { 
-	PinId: Guid;
-	PinState: MagicLeapARPinState;
-	clone() : MagicLeapSharedWorldPinData;
-	static C(Other: UObject | any): MagicLeapSharedWorldPinData;
+declare class AbcAssetImportData extends AssetImportData { 
+	TrackNames: string[];
+	SamplingSettings: AbcSamplingSettings;
+	static Load(ResourceName: string): AbcAssetImportData;
+	static Find(Outer: UObject, ResourceName: string): AbcAssetImportData;
+	static GetDefaultObject(): AbcAssetImportData;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AbcAssetImportData;
+	static C(Other: UObject | any): AbcAssetImportData;
 }
 
-declare class MagicLeapSharedWorldLocalData { 
-	LocalPins: MagicLeapSharedWorldPinData[];
-	clone() : MagicLeapSharedWorldLocalData;
-	static C(Other: UObject | any): MagicLeapSharedWorldLocalData;
+declare type EAlembicImportType = 'StaticMesh' | 'GeometryCache' | 'Skeletal' | 'EAlembicImportType_MAX';
+declare var EAlembicImportType : { StaticMesh:'StaticMesh',GeometryCache:'GeometryCache',Skeletal:'Skeletal',EAlembicImportType_MAX:'EAlembicImportType_MAX', };
+declare class AbcNormalGenerationSettings { 
+	bForceOneSmoothingGroupPerObject: boolean;
+	HardEdgeAngleThreshold: number;
+	bRecomputeNormals: boolean;
+	bIgnoreDegenerateTriangles: boolean;
+	bSkipComputingTangents: boolean;
+	clone() : AbcNormalGenerationSettings;
+	static C(Other: UObject | any): AbcNormalGenerationSettings;
 }
 
-declare class MagicLeapSharedWorldAlignmentTransforms { 
-	AlignmentTransforms: Transform[];
-	clone() : MagicLeapSharedWorldAlignmentTransforms;
-	static C(Other: UObject | any): MagicLeapSharedWorldAlignmentTransforms;
+declare class AbcMaterialSettings { 
+	bCreateMaterials: boolean;
+	bFindMaterials: boolean;
+	clone() : AbcMaterialSettings;
+	static C(Other: UObject | any): AbcMaterialSettings;
 }
 
-declare class MagicLeapSharedWorldPlayerController extends PlayerController { 
-	static GetDefaultObject(): MagicLeapSharedWorldPlayerController;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapSharedWorldPlayerController;
-	ServerSetLocalWorldData(LocalWorldReplicationData: MagicLeapSharedWorldLocalData): void;
-	ServerSetAlignmentTransforms(InAlignmentTransforms: MagicLeapSharedWorldAlignmentTransforms): void;
-	IsChosenOne(): boolean;
-	ClientSetChosenOne(bChosenOne: boolean): void;
-	ClientMarkReadyForSendingLocalData(): void;
-	CanSendLocalDataToServer(): boolean;
-	static C(Other: UObject | any): MagicLeapSharedWorldPlayerController;
+declare type EBaseCalculationType = 'None' | 'PercentageBased' | 'FixedNumber' | 'NoCompression' | 'EBaseCalculationType_MAX';
+declare var EBaseCalculationType : { None:'None',PercentageBased:'PercentageBased',FixedNumber:'FixedNumber',NoCompression:'NoCompression',EBaseCalculationType_MAX:'EBaseCalculationType_MAX', };
+declare class AbcCompressionSettings { 
+	bMergeMeshes: boolean;
+	bBakeMatrixAnimation: boolean;
+	BaseCalculationType: EBaseCalculationType;
+	PercentageOfTotalBases: number;
+	MaxNumberOfBases: number;
+	MinimumNumberOfVertexInfluencePercentage: number;
+	clone() : AbcCompressionSettings;
+	static C(Other: UObject | any): AbcCompressionSettings;
 }
 
-declare class MagicLeapSharedWorldGameMode extends GameMode { 
-	SharedWorldData: MagicLeapSharedWorldSharedData;
-	OnNewLocalDataFromClients: UnrealEngineMulticastDelegate<() => void>;
-	PinSelectionConfidenceThreshold: number;
-	ChosenOne: MagicLeapSharedWorldPlayerController;
-	static GetDefaultObject(): MagicLeapSharedWorldGameMode;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapSharedWorldGameMode;
-	SendSharedWorldDataToClients(): boolean;
-	SelectChosenOne(): void;
-	DetermineSharedWorldData(NewSharedWorldData?: MagicLeapSharedWorldSharedData): {NewSharedWorldData: MagicLeapSharedWorldSharedData};
-	static C(Other: UObject | any): MagicLeapSharedWorldGameMode;
+declare class AbcStaticMeshSettings { 
+	bMergeMeshes: boolean;
+	bPropagateMatrixTransformations: boolean;
+	bGenerateLightmapUVs: boolean;
+	clone() : AbcStaticMeshSettings;
+	static C(Other: UObject | any): AbcStaticMeshSettings;
 }
 
-declare class MagicLeapSharedWorldGameState extends GameState { 
-	SharedWorldData: MagicLeapSharedWorldSharedData;
-	AlignmentTransforms: MagicLeapSharedWorldAlignmentTransforms;
-	OnSharedWorldDataUpdated: UnrealEngineMulticastDelegate<() => void>;
-	OnAlignmentTransformsUpdated: UnrealEngineMulticastDelegate<() => void>;
-	static GetDefaultObject(): MagicLeapSharedWorldGameState;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapSharedWorldGameState;
-	OnReplicate_SharedWorldData(): void;
-	OnReplicate_AlignmentTransforms(): void;
-	CalculateXRCameraRootTransform(): Transform;
-	static C(Other: UObject | any): MagicLeapSharedWorldGameState;
+declare type EAbcGeometryCacheMotionVectorsImport = 'NoMotionVectors' | 'ImportAbcVelocitiesAsMotionVectors' | 'CalculateMotionVectorsDuringImport' | 'EAbcGeometryCacheMotionVectorsImport_MAX';
+declare var EAbcGeometryCacheMotionVectorsImport : { NoMotionVectors:'NoMotionVectors',ImportAbcVelocitiesAsMotionVectors:'ImportAbcVelocitiesAsMotionVectors',CalculateMotionVectorsDuringImport:'CalculateMotionVectorsDuringImport',EAbcGeometryCacheMotionVectorsImport_MAX:'EAbcGeometryCacheMotionVectorsImport_MAX', };
+declare class AbcGeometryCacheSettings { 
+	bFlattenTracks: boolean;
+	bApplyConstantTopologyOptimizations: boolean;
+	bCalculateMotionVectorsDuringImport: boolean;
+	MotionVectors: EAbcGeometryCacheMotionVectorsImport;
+	bOptimizeIndexBuffers: boolean;
+	CompressedPositionPrecision: number;
+	CompressedTextureCoordinatesNumberOfBits: number;
+	clone() : AbcGeometryCacheSettings;
+	static C(Other: UObject | any): AbcGeometryCacheSettings;
 }
 
-declare class MagicLeapSharedWorldEvent__PythonCallable extends PythonCallableForDelegate { 
-	static Load(ResourceName: string): MagicLeapSharedWorldEvent__PythonCallable;
-	static Find(Outer: UObject, ResourceName: string): MagicLeapSharedWorldEvent__PythonCallable;
-	static GetDefaultObject(): MagicLeapSharedWorldEvent__PythonCallable;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapSharedWorldEvent__PythonCallable;
-	static C(Other: UObject | any): MagicLeapSharedWorldEvent__PythonCallable;
+declare type EAbcConversionPreset = 'Maya' | 'Max' | 'Custom' | 'EAbcConversionPreset_MAX';
+declare var EAbcConversionPreset : { Maya:'Maya',Max:'Max',Custom:'Custom',EAbcConversionPreset_MAX:'EAbcConversionPreset_MAX', };
+declare class AbcConversionSettings { 
+	Preset: EAbcConversionPreset;
+	bFlipU: boolean;
+	bFlipV: boolean;
+	Scale: Vector;
+	Rotation: Vector;
+	clone() : AbcConversionSettings;
+	static C(Other: UObject | any): AbcConversionSettings;
 }
 
-declare class MagicLeapOnNewLocalDataFromClients__PythonCallable extends PythonCallableForDelegate { 
-	static Load(ResourceName: string): MagicLeapOnNewLocalDataFromClients__PythonCallable;
-	static Find(Outer: UObject, ResourceName: string): MagicLeapOnNewLocalDataFromClients__PythonCallable;
-	static GetDefaultObject(): MagicLeapOnNewLocalDataFromClients__PythonCallable;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapOnNewLocalDataFromClients__PythonCallable;
-	static C(Other: UObject | any): MagicLeapOnNewLocalDataFromClients__PythonCallable;
+declare class AbcImportSettings extends UObject { 
+	ImportType: EAlembicImportType;
+	SamplingSettings: AbcSamplingSettings;
+	NormalGenerationSettings: AbcNormalGenerationSettings;
+	MaterialSettings: AbcMaterialSettings;
+	CompressionSettings: AbcCompressionSettings;
+	StaticMeshSettings: AbcStaticMeshSettings;
+	GeometryCacheSettings: AbcGeometryCacheSettings;
+	ConversionSettings: AbcConversionSettings;
+	static Load(ResourceName: string): AbcImportSettings;
+	static Find(Outer: UObject, ResourceName: string): AbcImportSettings;
+	static GetDefaultObject(): AbcImportSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AbcImportSettings;
+	static C(Other: UObject | any): AbcImportSettings;
+}
+
+declare class AlembicTestCommandlet extends Commandlet { 
+	static Load(ResourceName: string): AlembicTestCommandlet;
+	static Find(Outer: UObject, ResourceName: string): AlembicTestCommandlet;
+	static GetDefaultObject(): AlembicTestCommandlet;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AlembicTestCommandlet;
+	static C(Other: UObject | any): AlembicTestCommandlet;
+}
+
+declare class AlembicImportFactory extends Factory { 
+	ImportSettings: AbcImportSettings;
+	bShowOption: boolean;
+	static Load(ResourceName: string): AlembicImportFactory;
+	static Find(Outer: UObject, ResourceName: string): AlembicImportFactory;
+	static GetDefaultObject(): AlembicImportFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AlembicImportFactory;
+	static C(Other: UObject | any): AlembicImportFactory;
+}
+
+declare class ActorFactoryGeometryCache extends ActorFactory { 
+	static Load(ResourceName: string): ActorFactoryGeometryCache;
+	static Find(Outer: UObject, ResourceName: string): ActorFactoryGeometryCache;
+	static GetDefaultObject(): ActorFactoryGeometryCache;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ActorFactoryGeometryCache;
+	static C(Other: UObject | any): ActorFactoryGeometryCache;
+}
+
+declare class GeometryCacheThumbnailRenderer extends DefaultSizedThumbnailRenderer { 
+	static Load(ResourceName: string): GeometryCacheThumbnailRenderer;
+	static Find(Outer: UObject, ResourceName: string): GeometryCacheThumbnailRenderer;
+	static GetDefaultObject(): GeometryCacheThumbnailRenderer;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheThumbnailRenderer;
+	static C(Other: UObject | any): GeometryCacheThumbnailRenderer;
+}
+
+declare class AutomationUtilsBlueprintLibrary extends BlueprintFunctionLibrary { 
+	static Load(ResourceName: string): AutomationUtilsBlueprintLibrary;
+	static Find(Outer: UObject, ResourceName: string): AutomationUtilsBlueprintLibrary;
+	static GetDefaultObject(): AutomationUtilsBlueprintLibrary;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AutomationUtilsBlueprintLibrary;
+	static TakeGameplayAutomationScreenshot(ScreenShotName: string,MaxGlobalError: number,MaxLocalError: number,MapNameOverride: string): void;
+	static C(Other: UObject | any): AutomationUtilsBlueprintLibrary;
+}
+
+declare class ScreenshotComparisonCommandlet extends Commandlet { 
+	static Load(ResourceName: string): ScreenshotComparisonCommandlet;
+	static Find(Outer: UObject, ResourceName: string): ScreenshotComparisonCommandlet;
+	static GetDefaultObject(): ScreenshotComparisonCommandlet;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ScreenshotComparisonCommandlet;
+	static C(Other: UObject | any): ScreenshotComparisonCommandlet;
 }
 
 declare class KantanChartStyle extends SlateWidgetStyle { 
@@ -13578,304 +13676,74 @@ declare class KCKantanDocsAsset extends KCKantanInfoAssetBase {
 	static C(Other: UObject | any): KCKantanDocsAsset;
 }
 
-declare class GeometryCacheTrack extends UObject { 
-	Duration: number;
-	static Load(ResourceName: string): GeometryCacheTrack;
-	static Find(Outer: UObject, ResourceName: string): GeometryCacheTrack;
-	static GetDefaultObject(): GeometryCacheTrack;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheTrack;
-	static C(Other: UObject | any): GeometryCacheTrack;
+declare type EVaRest_JsonType = 'JSON_Bool' | 'JSON_Number' | 'JSON_String' | 'JSON_Object' | 'JSON_MAX';
+declare var EVaRest_JsonType : { JSON_Bool:'JSON_Bool',JSON_Number:'JSON_Number',JSON_String:'JSON_String',JSON_Object:'JSON_Object',JSON_MAX:'JSON_MAX', };
+declare class VaRest_NamedType { 
+	Name: string;
+	Type: EVaRest_JsonType;
+	bIsArray: boolean;
+	clone() : VaRest_NamedType;
+	static C(Other: UObject | any): VaRest_NamedType;
 }
 
-declare class GeometryCache extends UObject { 
-	AssetImportData: AssetImportData;
-	ThumbnailInfo: ThumbnailInfo;
-	Materials: MaterialInterface[];
-	Tracks: GeometryCacheTrack[];
-	StartFrame: number;
-	EndFrame: number;
-	Hash: any;
-	static Load(ResourceName: string): GeometryCache;
-	static Find(Outer: UObject, ResourceName: string): GeometryCache;
-	static GetDefaultObject(): GeometryCache;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCache;
-	static C(Other: UObject | any): GeometryCache;
+declare class VaRest_MakeJson extends K2Node { 
+	Inputs: VaRest_NamedType[];
+	static Load(ResourceName: string): VaRest_MakeJson;
+	static Find(Outer: UObject, ResourceName: string): VaRest_MakeJson;
+	static GetDefaultObject(): VaRest_MakeJson;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRest_MakeJson;
+	static C(Other: UObject | any): VaRest_MakeJson;
 }
 
-declare class GeometryCacheComponent extends MeshComponent { 
-	GeometryCache: GeometryCache;
-	bRunning: boolean;
-	bLooping: boolean;
-	bExtrapolateFrames: boolean;
-	StartTimeOffset: number;
-	PlaybackSpeed: number;
-	MotionVectorScale: number;
-	NumTracks: number;
-	ElapsedTime: number;
-	Duration: number;
-	bManualTick: boolean;
-	static Load(ResourceName: string): GeometryCacheComponent;
-	static Find(Outer: UObject, ResourceName: string): GeometryCacheComponent;
-	static GetDefaultObject(): GeometryCacheComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheComponent;
-	TickAtThisTime(Time: number,bInIsRunning: boolean,bInBackwards: boolean,bInIsLooping: boolean): void;
-	Stop(): void;
-	SetStartTimeOffset(NewStartTimeOffset: number): void;
-	SetPlaybackSpeed(NewPlaybackSpeed: number): void;
-	SetMotionVectorScale(NewMotionVectorScale: number): void;
-	SetLooping(bNewLooping: boolean): void;
-	SetGeometryCache(NewGeomCache: GeometryCache): boolean;
-	SetExtrapolateFrames(bNewExtrapolating: boolean): void;
-	PlayReversedFromEnd(): void;
-	PlayReversed(): void;
-	PlayFromStart(): void;
-	Play(): void;
-	Pause(): void;
-	IsPlayingReversed(): boolean;
-	IsPlaying(): boolean;
-	IsLooping(): boolean;
-	IsExtrapolatingFrames(): boolean;
-	GetStartTimeOffset(): number;
-	GetPlaybackSpeed(): number;
-	GetPlaybackDirection(): number;
-	GetNumberOfFrames(): number;
-	GetMotionVectorScale(): number;
-	GetDuration(): number;
-	GetAnimationTime(): number;
-	static C(Other: UObject | any): GeometryCacheComponent;
+declare class VaRest_BreakJson extends K2Node { 
+	Outputs: VaRest_NamedType[];
+	static Load(ResourceName: string): VaRest_BreakJson;
+	static Find(Outer: UObject, ResourceName: string): VaRest_BreakJson;
+	static GetDefaultObject(): VaRest_BreakJson;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VaRest_BreakJson;
+	static C(Other: UObject | any): VaRest_BreakJson;
 }
 
-declare class GeometryCacheActor extends Actor { 
-	GeometryCacheComponent: GeometryCacheComponent;
-	static GetDefaultObject(): GeometryCacheActor;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheActor;
-	GetGeometryCacheComponent(): GeometryCacheComponent;
-	static C(Other: UObject | any): GeometryCacheActor;
+declare class MagicLeapAudioFunctionLibrary extends BlueprintFunctionLibrary { 
+	static Load(ResourceName: string): MagicLeapAudioFunctionLibrary;
+	static Find(Outer: UObject, ResourceName: string): MagicLeapAudioFunctionLibrary;
+	static GetDefaultObject(): MagicLeapAudioFunctionLibrary;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapAudioFunctionLibrary;
+	static SetMicMute(IsMuted: boolean): boolean;
+	static IsMicMuted(): boolean;
+	static C(Other: UObject | any): MagicLeapAudioFunctionLibrary;
 }
 
-declare class GeometryCacheCodecBase extends UObject { 
-	TopologyRanges: number[];
-	static Load(ResourceName: string): GeometryCacheCodecBase;
-	static Find(Outer: UObject, ResourceName: string): GeometryCacheCodecBase;
-	static GetDefaultObject(): GeometryCacheCodecBase;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheCodecBase;
-	static C(Other: UObject | any): GeometryCacheCodecBase;
+declare class MagicLeapAudioJackPluggedDelegate__PythonCallable extends PythonCallableForDelegate { 
+	static Load(ResourceName: string): MagicLeapAudioJackPluggedDelegate__PythonCallable;
+	static Find(Outer: UObject, ResourceName: string): MagicLeapAudioJackPluggedDelegate__PythonCallable;
+	static GetDefaultObject(): MagicLeapAudioJackPluggedDelegate__PythonCallable;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapAudioJackPluggedDelegate__PythonCallable;
+	static C(Other: UObject | any): MagicLeapAudioJackPluggedDelegate__PythonCallable;
 }
 
-declare class GeometryCacheCodecRaw extends GeometryCacheCodecBase { 
-	DummyProperty: number;
-	static Load(ResourceName: string): GeometryCacheCodecRaw;
-	static Find(Outer: UObject, ResourceName: string): GeometryCacheCodecRaw;
-	static GetDefaultObject(): GeometryCacheCodecRaw;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheCodecRaw;
-	static C(Other: UObject | any): GeometryCacheCodecRaw;
+declare class MagicLeapAudioJackPluggedDelegateMulti__PythonCallable extends PythonCallableForDelegate { 
+	static Load(ResourceName: string): MagicLeapAudioJackPluggedDelegateMulti__PythonCallable;
+	static Find(Outer: UObject, ResourceName: string): MagicLeapAudioJackPluggedDelegateMulti__PythonCallable;
+	static GetDefaultObject(): MagicLeapAudioJackPluggedDelegateMulti__PythonCallable;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapAudioJackPluggedDelegateMulti__PythonCallable;
+	static C(Other: UObject | any): MagicLeapAudioJackPluggedDelegateMulti__PythonCallable;
 }
 
-declare class GeometryCacheCodecV1 extends GeometryCacheCodecBase { 
-	static Load(ResourceName: string): GeometryCacheCodecV1;
-	static Find(Outer: UObject, ResourceName: string): GeometryCacheCodecV1;
-	static GetDefaultObject(): GeometryCacheCodecV1;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheCodecV1;
-	static C(Other: UObject | any): GeometryCacheCodecV1;
+declare class MagicLeapAudioJackUnpluggedDelegate__PythonCallable extends PythonCallableForDelegate { 
+	static Load(ResourceName: string): MagicLeapAudioJackUnpluggedDelegate__PythonCallable;
+	static Find(Outer: UObject, ResourceName: string): MagicLeapAudioJackUnpluggedDelegate__PythonCallable;
+	static GetDefaultObject(): MagicLeapAudioJackUnpluggedDelegate__PythonCallable;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapAudioJackUnpluggedDelegate__PythonCallable;
+	static C(Other: UObject | any): MagicLeapAudioJackUnpluggedDelegate__PythonCallable;
 }
 
-declare class GeometryCacheMeshData { 
-	clone() : GeometryCacheMeshData;
-	static C(Other: UObject | any): GeometryCacheMeshData;
-}
-
-declare class GeometryCacheTrack_FlipbookAnimation extends GeometryCacheTrack { 
-	NumMeshSamples: any;
-	static Load(ResourceName: string): GeometryCacheTrack_FlipbookAnimation;
-	static Find(Outer: UObject, ResourceName: string): GeometryCacheTrack_FlipbookAnimation;
-	static GetDefaultObject(): GeometryCacheTrack_FlipbookAnimation;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheTrack_FlipbookAnimation;
-	AddMeshSample(MeshData: GeometryCacheMeshData,SampleTime: number): void;
-	static C(Other: UObject | any): GeometryCacheTrack_FlipbookAnimation;
-}
-
-declare class GeometryCacheTrackStreamable extends GeometryCacheTrack { 
-	Codec: GeometryCacheCodecBase;
-	StartSampleTime: number;
-	static Load(ResourceName: string): GeometryCacheTrackStreamable;
-	static Find(Outer: UObject, ResourceName: string): GeometryCacheTrackStreamable;
-	static GetDefaultObject(): GeometryCacheTrackStreamable;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheTrackStreamable;
-	static C(Other: UObject | any): GeometryCacheTrackStreamable;
-}
-
-declare class GeometryCacheTrack_TransformAnimation extends GeometryCacheTrack { 
-	static Load(ResourceName: string): GeometryCacheTrack_TransformAnimation;
-	static Find(Outer: UObject, ResourceName: string): GeometryCacheTrack_TransformAnimation;
-	static GetDefaultObject(): GeometryCacheTrack_TransformAnimation;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheTrack_TransformAnimation;
-	SetMesh(NewMeshData: GeometryCacheMeshData): void;
-	static C(Other: UObject | any): GeometryCacheTrack_TransformAnimation;
-}
-
-declare class GeometryCacheTrack_TransformGroupAnimation extends GeometryCacheTrack { 
-	static Load(ResourceName: string): GeometryCacheTrack_TransformGroupAnimation;
-	static Find(Outer: UObject, ResourceName: string): GeometryCacheTrack_TransformGroupAnimation;
-	static GetDefaultObject(): GeometryCacheTrack_TransformGroupAnimation;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheTrack_TransformGroupAnimation;
-	SetMesh(NewMeshData: GeometryCacheMeshData): void;
-	static C(Other: UObject | any): GeometryCacheTrack_TransformGroupAnimation;
-}
-
-declare type EAlembicSamplingType = 'PerFrame' | 'PerXFrames' | 'PerTimeStep' | 'EAlembicSamplingType_MAX';
-declare var EAlembicSamplingType : { PerFrame:'PerFrame',PerXFrames:'PerXFrames',PerTimeStep:'PerTimeStep',EAlembicSamplingType_MAX:'EAlembicSamplingType_MAX', };
-declare class AbcSamplingSettings { 
-	SamplingType: EAlembicSamplingType;
-	FrameSteps: number;
-	TimeSteps: number;
-	FrameStart: number;
-	FrameEnd: number;
-	bSkipEmpty: boolean;
-	clone() : AbcSamplingSettings;
-	static C(Other: UObject | any): AbcSamplingSettings;
-}
-
-declare class AbcAssetImportData extends AssetImportData { 
-	TrackNames: string[];
-	SamplingSettings: AbcSamplingSettings;
-	static Load(ResourceName: string): AbcAssetImportData;
-	static Find(Outer: UObject, ResourceName: string): AbcAssetImportData;
-	static GetDefaultObject(): AbcAssetImportData;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AbcAssetImportData;
-	static C(Other: UObject | any): AbcAssetImportData;
-}
-
-declare type EAlembicImportType = 'StaticMesh' | 'GeometryCache' | 'Skeletal' | 'EAlembicImportType_MAX';
-declare var EAlembicImportType : { StaticMesh:'StaticMesh',GeometryCache:'GeometryCache',Skeletal:'Skeletal',EAlembicImportType_MAX:'EAlembicImportType_MAX', };
-declare class AbcNormalGenerationSettings { 
-	bForceOneSmoothingGroupPerObject: boolean;
-	HardEdgeAngleThreshold: number;
-	bRecomputeNormals: boolean;
-	bIgnoreDegenerateTriangles: boolean;
-	bSkipComputingTangents: boolean;
-	clone() : AbcNormalGenerationSettings;
-	static C(Other: UObject | any): AbcNormalGenerationSettings;
-}
-
-declare class AbcMaterialSettings { 
-	bCreateMaterials: boolean;
-	bFindMaterials: boolean;
-	clone() : AbcMaterialSettings;
-	static C(Other: UObject | any): AbcMaterialSettings;
-}
-
-declare type EBaseCalculationType = 'None' | 'PercentageBased' | 'FixedNumber' | 'NoCompression' | 'EBaseCalculationType_MAX';
-declare var EBaseCalculationType : { None:'None',PercentageBased:'PercentageBased',FixedNumber:'FixedNumber',NoCompression:'NoCompression',EBaseCalculationType_MAX:'EBaseCalculationType_MAX', };
-declare class AbcCompressionSettings { 
-	bMergeMeshes: boolean;
-	bBakeMatrixAnimation: boolean;
-	BaseCalculationType: EBaseCalculationType;
-	PercentageOfTotalBases: number;
-	MaxNumberOfBases: number;
-	MinimumNumberOfVertexInfluencePercentage: number;
-	clone() : AbcCompressionSettings;
-	static C(Other: UObject | any): AbcCompressionSettings;
-}
-
-declare class AbcStaticMeshSettings { 
-	bMergeMeshes: boolean;
-	bPropagateMatrixTransformations: boolean;
-	bGenerateLightmapUVs: boolean;
-	clone() : AbcStaticMeshSettings;
-	static C(Other: UObject | any): AbcStaticMeshSettings;
-}
-
-declare type EAbcGeometryCacheMotionVectorsImport = 'NoMotionVectors' | 'ImportAbcVelocitiesAsMotionVectors' | 'CalculateMotionVectorsDuringImport' | 'EAbcGeometryCacheMotionVectorsImport_MAX';
-declare var EAbcGeometryCacheMotionVectorsImport : { NoMotionVectors:'NoMotionVectors',ImportAbcVelocitiesAsMotionVectors:'ImportAbcVelocitiesAsMotionVectors',CalculateMotionVectorsDuringImport:'CalculateMotionVectorsDuringImport',EAbcGeometryCacheMotionVectorsImport_MAX:'EAbcGeometryCacheMotionVectorsImport_MAX', };
-declare class AbcGeometryCacheSettings { 
-	bFlattenTracks: boolean;
-	bApplyConstantTopologyOptimizations: boolean;
-	bCalculateMotionVectorsDuringImport: boolean;
-	MotionVectors: EAbcGeometryCacheMotionVectorsImport;
-	bOptimizeIndexBuffers: boolean;
-	CompressedPositionPrecision: number;
-	CompressedTextureCoordinatesNumberOfBits: number;
-	clone() : AbcGeometryCacheSettings;
-	static C(Other: UObject | any): AbcGeometryCacheSettings;
-}
-
-declare type EAbcConversionPreset = 'Maya' | 'Max' | 'Custom' | 'EAbcConversionPreset_MAX';
-declare var EAbcConversionPreset : { Maya:'Maya',Max:'Max',Custom:'Custom',EAbcConversionPreset_MAX:'EAbcConversionPreset_MAX', };
-declare class AbcConversionSettings { 
-	Preset: EAbcConversionPreset;
-	bFlipU: boolean;
-	bFlipV: boolean;
-	Scale: Vector;
-	Rotation: Vector;
-	clone() : AbcConversionSettings;
-	static C(Other: UObject | any): AbcConversionSettings;
-}
-
-declare class AbcImportSettings extends UObject { 
-	ImportType: EAlembicImportType;
-	SamplingSettings: AbcSamplingSettings;
-	NormalGenerationSettings: AbcNormalGenerationSettings;
-	MaterialSettings: AbcMaterialSettings;
-	CompressionSettings: AbcCompressionSettings;
-	StaticMeshSettings: AbcStaticMeshSettings;
-	GeometryCacheSettings: AbcGeometryCacheSettings;
-	ConversionSettings: AbcConversionSettings;
-	static Load(ResourceName: string): AbcImportSettings;
-	static Find(Outer: UObject, ResourceName: string): AbcImportSettings;
-	static GetDefaultObject(): AbcImportSettings;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AbcImportSettings;
-	static C(Other: UObject | any): AbcImportSettings;
-}
-
-declare class AlembicTestCommandlet extends Commandlet { 
-	static Load(ResourceName: string): AlembicTestCommandlet;
-	static Find(Outer: UObject, ResourceName: string): AlembicTestCommandlet;
-	static GetDefaultObject(): AlembicTestCommandlet;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AlembicTestCommandlet;
-	static C(Other: UObject | any): AlembicTestCommandlet;
-}
-
-declare class AlembicImportFactory extends Factory { 
-	ImportSettings: AbcImportSettings;
-	bShowOption: boolean;
-	static Load(ResourceName: string): AlembicImportFactory;
-	static Find(Outer: UObject, ResourceName: string): AlembicImportFactory;
-	static GetDefaultObject(): AlembicImportFactory;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AlembicImportFactory;
-	static C(Other: UObject | any): AlembicImportFactory;
-}
-
-declare class ActorFactoryGeometryCache extends ActorFactory { 
-	static Load(ResourceName: string): ActorFactoryGeometryCache;
-	static Find(Outer: UObject, ResourceName: string): ActorFactoryGeometryCache;
-	static GetDefaultObject(): ActorFactoryGeometryCache;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ActorFactoryGeometryCache;
-	static C(Other: UObject | any): ActorFactoryGeometryCache;
-}
-
-declare class GeometryCacheThumbnailRenderer extends DefaultSizedThumbnailRenderer { 
-	static Load(ResourceName: string): GeometryCacheThumbnailRenderer;
-	static Find(Outer: UObject, ResourceName: string): GeometryCacheThumbnailRenderer;
-	static GetDefaultObject(): GeometryCacheThumbnailRenderer;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GeometryCacheThumbnailRenderer;
-	static C(Other: UObject | any): GeometryCacheThumbnailRenderer;
-}
-
-declare class AutomationUtilsBlueprintLibrary extends BlueprintFunctionLibrary { 
-	static Load(ResourceName: string): AutomationUtilsBlueprintLibrary;
-	static Find(Outer: UObject, ResourceName: string): AutomationUtilsBlueprintLibrary;
-	static GetDefaultObject(): AutomationUtilsBlueprintLibrary;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AutomationUtilsBlueprintLibrary;
-	static TakeGameplayAutomationScreenshot(ScreenShotName: string,MaxGlobalError: number,MaxLocalError: number,MapNameOverride: string): void;
-	static C(Other: UObject | any): AutomationUtilsBlueprintLibrary;
-}
-
-declare class ScreenshotComparisonCommandlet extends Commandlet { 
-	static Load(ResourceName: string): ScreenshotComparisonCommandlet;
-	static Find(Outer: UObject, ResourceName: string): ScreenshotComparisonCommandlet;
-	static GetDefaultObject(): ScreenshotComparisonCommandlet;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ScreenshotComparisonCommandlet;
-	static C(Other: UObject | any): ScreenshotComparisonCommandlet;
+declare class MagicLeapAudioJackUnpluggedDelegateMulti__PythonCallable extends PythonCallableForDelegate { 
+	static Load(ResourceName: string): MagicLeapAudioJackUnpluggedDelegateMulti__PythonCallable;
+	static Find(Outer: UObject, ResourceName: string): MagicLeapAudioJackUnpluggedDelegateMulti__PythonCallable;
+	static GetDefaultObject(): MagicLeapAudioJackUnpluggedDelegateMulti__PythonCallable;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapAudioJackUnpluggedDelegateMulti__PythonCallable;
+	static C(Other: UObject | any): MagicLeapAudioJackUnpluggedDelegateMulti__PythonCallable;
 }
 
 declare class ChaosDebugDrawComponent extends ActorComponent { 
@@ -15292,6 +15160,75 @@ declare class OutlinerSettings extends UObject {
 	static C(Other: UObject | any): OutlinerSettings;
 }
 
+declare class ActorFactoryChaosSolver extends ActorFactory { 
+	static Load(ResourceName: string): ActorFactoryChaosSolver;
+	static Find(Outer: UObject, ResourceName: string): ActorFactoryChaosSolver;
+	static GetDefaultObject(): ActorFactoryChaosSolver;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ActorFactoryChaosSolver;
+	static C(Other: UObject | any): ActorFactoryChaosSolver;
+}
+
+declare class ChaosSolverFactory extends Factory { 
+	static Load(ResourceName: string): ChaosSolverFactory;
+	static Find(Outer: UObject, ResourceName: string): ChaosSolverFactory;
+	static GetDefaultObject(): ChaosSolverFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosSolverFactory;
+	static C(Other: UObject | any): ChaosSolverFactory;
+}
+
+declare class LevelVariantSetsActorFactory extends ActorFactory { 
+	static Load(ResourceName: string): LevelVariantSetsActorFactory;
+	static Find(Outer: UObject, ResourceName: string): LevelVariantSetsActorFactory;
+	static GetDefaultObject(): LevelVariantSetsActorFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LevelVariantSetsActorFactory;
+	static C(Other: UObject | any): LevelVariantSetsActorFactory;
+}
+
+declare class SwitchActorFactory extends ActorFactory { 
+	static Load(ResourceName: string): SwitchActorFactory;
+	static Find(Outer: UObject, ResourceName: string): SwitchActorFactory;
+	static GetDefaultObject(): SwitchActorFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SwitchActorFactory;
+	static C(Other: UObject | any): SwitchActorFactory;
+}
+
+declare class VariantManagerFactoryNew extends Factory { 
+	static Load(ResourceName: string): VariantManagerFactoryNew;
+	static Find(Outer: UObject, ResourceName: string): VariantManagerFactoryNew;
+	static GetDefaultObject(): VariantManagerFactoryNew;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VariantManagerFactoryNew;
+	static C(Other: UObject | any): VariantManagerFactoryNew;
+}
+
+declare type EVariantManagerTestEnum = 'None' | 'FirstOption' | 'SecondOption' | 'ThirdOption' | 'EVariantManagerTestEnum_MAX';
+declare var EVariantManagerTestEnum : { None:'None',FirstOption:'FirstOption',SecondOption:'SecondOption',ThirdOption:'ThirdOption',EVariantManagerTestEnum_MAX:'EVariantManagerTestEnum_MAX', };
+declare class VariantManagerTestActor extends Actor { 
+	EnumWithNoDefault: EVariantManagerTestEnum;
+	EnumWithSecondDefault: EVariantManagerTestEnum;
+	CapturedByteProperty: number;
+	CapturedIntProperty: number;
+	CapturedFloatProperty: number;
+	bCapturedBoolProperty: boolean;
+	CapturedObjectProperty: UObject;
+	CapturedInterfaceProperty: any;
+	CapturedNameProperty: string;
+	CapturedStrProperty: string;
+	CapturedTextProperty: string;
+	CapturedRotatorProperty: Rotator;
+	CapturedColorProperty: Color;
+	CapturedLinearColorProperty: LinearColor;
+	CapturedVectorProperty: Vector;
+	CapturedQuatProperty: Quat;
+	CapturedVector4Property: Vector4;
+	CapturedVector2DProperty: Vector2D;
+	CapturedIntPointProperty: IntPoint;
+	CapturedUObjectArrayProperty: UObject[];
+	CapturedVectorArrayProperty: Vector[];
+	static GetDefaultObject(): VariantManagerTestActor;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VariantManagerTestActor;
+	static C(Other: UObject | any): VariantManagerTestActor;
+}
+
 declare type EDataSourceTypeEnum = 'ChaosNiagara_DataSourceType_Collision' | 'ChaosNiagara_DataSourceType_Breaking' | 'ChaosNiagara_DataSourceType_Trailing' | 'ChaosNiagara_Max';
 declare var EDataSourceTypeEnum : { ChaosNiagara_DataSourceType_Collision:'ChaosNiagara_DataSourceType_Collision',ChaosNiagara_DataSourceType_Breaking:'ChaosNiagara_DataSourceType_Breaking',ChaosNiagara_DataSourceType_Trailing:'ChaosNiagara_DataSourceType_Trailing',ChaosNiagara_Max:'ChaosNiagara_Max', };
 declare type ELocationFilteringModeEnum = 'ChaosNiagara_LocationFilteringMode_Inclusive' | 'ChaosNiagara_LocationFilteringMode_Exclusive' | 'ChaosNiagara_Max';
@@ -15371,49 +15308,6 @@ declare class NiagaraDataInterfacePhysicsField extends NiagaraDataInterface {
 	static C(Other: UObject | any): NiagaraDataInterfacePhysicsField;
 }
 
-declare class ActorFactoryChaosSolver extends ActorFactory { 
-	static Load(ResourceName: string): ActorFactoryChaosSolver;
-	static Find(Outer: UObject, ResourceName: string): ActorFactoryChaosSolver;
-	static GetDefaultObject(): ActorFactoryChaosSolver;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ActorFactoryChaosSolver;
-	static C(Other: UObject | any): ActorFactoryChaosSolver;
-}
-
-declare class ChaosSolverFactory extends Factory { 
-	static Load(ResourceName: string): ChaosSolverFactory;
-	static Find(Outer: UObject, ResourceName: string): ChaosSolverFactory;
-	static GetDefaultObject(): ChaosSolverFactory;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosSolverFactory;
-	static C(Other: UObject | any): ChaosSolverFactory;
-}
-
-declare class MovieSceneGeometryCollectionParams { 
-	GeometryCollectionCache: SoftObjectPath;
-	StartFrameOffset: FrameNumber;
-	EndFrameOffset: FrameNumber;
-	PlayRate: number;
-	clone() : MovieSceneGeometryCollectionParams;
-	static C(Other: UObject | any): MovieSceneGeometryCollectionParams;
-}
-
-declare class MovieSceneGeometryCollectionSection extends MovieSceneSection { 
-	Params: MovieSceneGeometryCollectionParams;
-	static Load(ResourceName: string): MovieSceneGeometryCollectionSection;
-	static Find(Outer: UObject, ResourceName: string): MovieSceneGeometryCollectionSection;
-	static GetDefaultObject(): MovieSceneGeometryCollectionSection;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneGeometryCollectionSection;
-	static C(Other: UObject | any): MovieSceneGeometryCollectionSection;
-}
-
-declare class MovieSceneGeometryCollectionTrack extends MovieSceneNameableTrack { 
-	AnimationSections: MovieSceneSection[];
-	static Load(ResourceName: string): MovieSceneGeometryCollectionTrack;
-	static Find(Outer: UObject, ResourceName: string): MovieSceneGeometryCollectionTrack;
-	static GetDefaultObject(): MovieSceneGeometryCollectionTrack;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneGeometryCollectionTrack;
-	static C(Other: UObject | any): MovieSceneGeometryCollectionTrack;
-}
-
 declare class MovieSceneGeometryCacheParams { 
 	GeometryCacheAsset: GeometryCache;
 	FirstLoopStartFrameOffset: FrameNumber;
@@ -15444,6 +15338,309 @@ declare class MovieSceneGeometryCacheTrack extends MovieSceneNameableTrack {
 	static GetDefaultObject(): MovieSceneGeometryCacheTrack;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneGeometryCacheTrack;
 	static C(Other: UObject | any): MovieSceneGeometryCacheTrack;
+}
+
+declare class MovieSceneGeometryCollectionParams { 
+	GeometryCollectionCache: SoftObjectPath;
+	StartFrameOffset: FrameNumber;
+	EndFrameOffset: FrameNumber;
+	PlayRate: number;
+	clone() : MovieSceneGeometryCollectionParams;
+	static C(Other: UObject | any): MovieSceneGeometryCollectionParams;
+}
+
+declare class MovieSceneGeometryCollectionSection extends MovieSceneSection { 
+	Params: MovieSceneGeometryCollectionParams;
+	static Load(ResourceName: string): MovieSceneGeometryCollectionSection;
+	static Find(Outer: UObject, ResourceName: string): MovieSceneGeometryCollectionSection;
+	static GetDefaultObject(): MovieSceneGeometryCollectionSection;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneGeometryCollectionSection;
+	static C(Other: UObject | any): MovieSceneGeometryCollectionSection;
+}
+
+declare class MovieSceneGeometryCollectionTrack extends MovieSceneNameableTrack { 
+	AnimationSections: MovieSceneSection[];
+	static Load(ResourceName: string): MovieSceneGeometryCollectionTrack;
+	static Find(Outer: UObject, ResourceName: string): MovieSceneGeometryCollectionTrack;
+	static GetDefaultObject(): MovieSceneGeometryCollectionTrack;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneGeometryCollectionTrack;
+	static C(Other: UObject | any): MovieSceneGeometryCollectionTrack;
+}
+
+declare class MagicLeapSharedWorldSharedData { 
+	PinIDs: Guid[];
+	clone() : MagicLeapSharedWorldSharedData;
+	static C(Other: UObject | any): MagicLeapSharedWorldSharedData;
+}
+
+declare class MagicLeapSharedWorldPinData { 
+	PinId: Guid;
+	PinState: MagicLeapARPinState;
+	clone() : MagicLeapSharedWorldPinData;
+	static C(Other: UObject | any): MagicLeapSharedWorldPinData;
+}
+
+declare class MagicLeapSharedWorldLocalData { 
+	LocalPins: MagicLeapSharedWorldPinData[];
+	clone() : MagicLeapSharedWorldLocalData;
+	static C(Other: UObject | any): MagicLeapSharedWorldLocalData;
+}
+
+declare class MagicLeapSharedWorldAlignmentTransforms { 
+	AlignmentTransforms: Transform[];
+	clone() : MagicLeapSharedWorldAlignmentTransforms;
+	static C(Other: UObject | any): MagicLeapSharedWorldAlignmentTransforms;
+}
+
+declare class MagicLeapSharedWorldPlayerController extends PlayerController { 
+	static GetDefaultObject(): MagicLeapSharedWorldPlayerController;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapSharedWorldPlayerController;
+	ServerSetLocalWorldData(LocalWorldReplicationData: MagicLeapSharedWorldLocalData): void;
+	ServerSetAlignmentTransforms(InAlignmentTransforms: MagicLeapSharedWorldAlignmentTransforms): void;
+	IsChosenOne(): boolean;
+	ClientSetChosenOne(bChosenOne: boolean): void;
+	ClientMarkReadyForSendingLocalData(): void;
+	CanSendLocalDataToServer(): boolean;
+	static C(Other: UObject | any): MagicLeapSharedWorldPlayerController;
+}
+
+declare class MagicLeapSharedWorldGameMode extends GameMode { 
+	SharedWorldData: MagicLeapSharedWorldSharedData;
+	OnNewLocalDataFromClients: UnrealEngineMulticastDelegate<() => void>;
+	PinSelectionConfidenceThreshold: number;
+	ChosenOne: MagicLeapSharedWorldPlayerController;
+	static GetDefaultObject(): MagicLeapSharedWorldGameMode;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapSharedWorldGameMode;
+	SendSharedWorldDataToClients(): boolean;
+	SelectChosenOne(): void;
+	DetermineSharedWorldData(NewSharedWorldData?: MagicLeapSharedWorldSharedData): {NewSharedWorldData: MagicLeapSharedWorldSharedData};
+	static C(Other: UObject | any): MagicLeapSharedWorldGameMode;
+}
+
+declare class MagicLeapSharedWorldGameState extends GameState { 
+	SharedWorldData: MagicLeapSharedWorldSharedData;
+	AlignmentTransforms: MagicLeapSharedWorldAlignmentTransforms;
+	OnSharedWorldDataUpdated: UnrealEngineMulticastDelegate<() => void>;
+	OnAlignmentTransformsUpdated: UnrealEngineMulticastDelegate<() => void>;
+	static GetDefaultObject(): MagicLeapSharedWorldGameState;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapSharedWorldGameState;
+	OnReplicate_SharedWorldData(): void;
+	OnReplicate_AlignmentTransforms(): void;
+	CalculateXRCameraRootTransform(): Transform;
+	static C(Other: UObject | any): MagicLeapSharedWorldGameState;
+}
+
+declare class MagicLeapSharedWorldEvent__PythonCallable extends PythonCallableForDelegate { 
+	static Load(ResourceName: string): MagicLeapSharedWorldEvent__PythonCallable;
+	static Find(Outer: UObject, ResourceName: string): MagicLeapSharedWorldEvent__PythonCallable;
+	static GetDefaultObject(): MagicLeapSharedWorldEvent__PythonCallable;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapSharedWorldEvent__PythonCallable;
+	static C(Other: UObject | any): MagicLeapSharedWorldEvent__PythonCallable;
+}
+
+declare class MagicLeapOnNewLocalDataFromClients__PythonCallable extends PythonCallableForDelegate { 
+	static Load(ResourceName: string): MagicLeapOnNewLocalDataFromClients__PythonCallable;
+	static Find(Outer: UObject, ResourceName: string): MagicLeapOnNewLocalDataFromClients__PythonCallable;
+	static GetDefaultObject(): MagicLeapOnNewLocalDataFromClients__PythonCallable;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapOnNewLocalDataFromClients__PythonCallable;
+	static C(Other: UObject | any): MagicLeapOnNewLocalDataFromClients__PythonCallable;
+}
+
+declare class GrainTableEntry { 
+	SampleIndex: number;
+	RPM: number;
+	AnalysisSampleIndex: number;
+	clone() : GrainTableEntry;
+	static C(Other: UObject | any): GrainTableEntry;
+}
+
+declare class MotoSynthSource extends UObject { 
+	SoundWaveSource: SoundWave;
+	bConvertTo8Bit: boolean;
+	DownSampleFactor: number;
+	RPMCurve: RuntimeFloatCurve;
+	RPMSynthVolume: number;
+	bEnableFilteringForAnalysis: boolean;
+	LowPassFilterFrequency: number;
+	HighPassFilterFrequency: number;
+	bEnableDynamicsProcessorForAnalysis: boolean;
+	DynamicsProcessorLookahead: number;
+	DynamicsProcessorInputGainDb: number;
+	DynamicsProcessorRatio: number;
+	DynamicsKneeBandwidth: number;
+	DynamicsProcessorThreshold: number;
+	DynamicsProcessorAttackTimeMsec: number;
+	DynamicsProcessorReleaseTimeMsec: number;
+	bEnableNormalizationForAnalysis: boolean;
+	SampleShiftOffset: number;
+	RPMCycleCalibrationSample: number;
+	RPMFirstCycleSampleEnd: number;
+	RPMEstimationOctaveOffset: number;
+	bWriteAnalysisInputToFile: boolean;
+	AnalysisInputFilePath: string;
+	SourceData: number[];
+	SourceDataPCM: any[];
+	SourceSampleRate: number;
+	GrainTable: GrainTableEntry[];
+	static Load(ResourceName: string): MotoSynthSource;
+	static Find(Outer: UObject, ResourceName: string): MotoSynthSource;
+	static GetDefaultObject(): MotoSynthSource;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MotoSynthSource;
+	StopToneMatch(): void;
+	PlayToneMatch(): void;
+	PerformGrainTableAnalysis(): void;
+	static C(Other: UObject | any): MotoSynthSource;
+}
+
+declare class MotoSynthRuntimeSettings { 
+	bSynthToneEnabled: boolean;
+	SynthToneVolume: number;
+	SynthToneFilterFrequency: number;
+	SynthOctaveShift: number;
+	bGranularEngineEnabled: boolean;
+	GranularEngineVolume: number;
+	GranularEnginePitchScale: number;
+	NumSamplesToCrossfadeBetweenGrains: number;
+	NumGrainTableEntriesPerGrain: number;
+	GrainTableRandomOffsetForConstantRPMs: number;
+	GrainCrossfadeSamplesForConstantRPMs: number;
+	AccelerationSource: MotoSynthSource;
+	DecelerationSource: MotoSynthSource;
+	bStereoWidenerEnabled: boolean;
+	StereoDelayMsec: number;
+	StereoFeedback: number;
+	StereoWidenerWetlevel: number;
+	StereoWidenerDryLevel: number;
+	StereoWidenerDelayRatio: number;
+	bStereoWidenerFilterEnabled: boolean;
+	StereoWidenerFilterFrequency: number;
+	StereoWidenerFilterQ: number;
+	clone() : MotoSynthRuntimeSettings;
+	static C(Other: UObject | any): MotoSynthRuntimeSettings;
+}
+
+declare class MotoSynthPreset extends UObject { 
+	EnginePreviewRPMCurve: RuntimeFloatCurve;
+	Settings: MotoSynthRuntimeSettings;
+	static Load(ResourceName: string): MotoSynthPreset;
+	static Find(Outer: UObject, ResourceName: string): MotoSynthPreset;
+	static GetDefaultObject(): MotoSynthPreset;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MotoSynthPreset;
+	StopEnginePreview(): void;
+	StartEnginePreview(): void;
+	DumpRuntimeMemoryUsage(): void;
+	static C(Other: UObject | any): MotoSynthPreset;
+}
+
+declare class SynthComponentMoto extends SynthComponent { 
+	MotoSynthPreset: MotoSynthPreset;
+	RPM: number;
+	static Load(ResourceName: string): SynthComponentMoto;
+	static Find(Outer: UObject, ResourceName: string): SynthComponentMoto;
+	static GetDefaultObject(): SynthComponentMoto;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SynthComponentMoto;
+	SetSettings(InSettings: MotoSynthRuntimeSettings): void;
+	SetRPM(InRPM: number,InTimeSec: number): void;
+	IsEnabled(): boolean;
+	GetRPMRange(OutMinRPM?: number,OutMaxRPM?: number): {OutMinRPM: number, OutMaxRPM: number};
+	static C(Other: UObject | any): SynthComponentMoto;
+}
+
+declare class MotoSynthPresetFactory extends Factory { 
+	static Load(ResourceName: string): MotoSynthPresetFactory;
+	static Find(Outer: UObject, ResourceName: string): MotoSynthPresetFactory;
+	static GetDefaultObject(): MotoSynthPresetFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MotoSynthPresetFactory;
+	static C(Other: UObject | any): MotoSynthPresetFactory;
+}
+
+declare class MotoSynthSourceFactory extends Factory { 
+	static Load(ResourceName: string): MotoSynthSourceFactory;
+	static Find(Outer: UObject, ResourceName: string): MotoSynthSourceFactory;
+	static GetDefaultObject(): MotoSynthSourceFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MotoSynthSourceFactory;
+	static C(Other: UObject | any): MotoSynthSourceFactory;
+}
+
+declare class ImgMediaSettings extends UObject { 
+	DefaultFrameRate: FrameRate;
+	CacheBehindPercentage: number;
+	CacheSizeGB: number;
+	CacheThreads: number;
+	CacheThreadStackSizeKB: number;
+	GlobalCacheSizeGB: number;
+	UseGlobalCache: boolean;
+	ExrDecoderThreads: any;
+	DefaultProxy: string;
+	UseDefaultProxy: boolean;
+	static Load(ResourceName: string): ImgMediaSettings;
+	static Find(Outer: UObject, ResourceName: string): ImgMediaSettings;
+	static GetDefaultObject(): ImgMediaSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ImgMediaSettings;
+	static C(Other: UObject | any): ImgMediaSettings;
+}
+
+declare class ImgMediaSource extends BaseMediaSource { 
+	IsPathRelativeToProjectRoot: boolean;
+	FrameRateOverride: FrameRate;
+	ProxyOverride: string;
+	SequencePath: DirectoryPath;
+	static Load(ResourceName: string): ImgMediaSource;
+	static Find(Outer: UObject, ResourceName: string): ImgMediaSource;
+	static GetDefaultObject(): ImgMediaSource;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ImgMediaSource;
+	SetSequencePath(Path: string): void;
+	SetMipLevelDistance(Distance: number): void;
+	RemoveTargetObject(InActor: Actor): void;
+	RemoveGlobalCamera(InActor: Actor): void;
+	GetSequencePath(): string;
+	GetProxies(OutProxies?: string[]): {OutProxies: string[]};
+	AddTargetObject(InActor: Actor,Width: number): void;
+	AddGlobalCamera(InActor: Actor): void;
+	static C(Other: UObject | any): ImgMediaSource;
+}
+
+declare class MovieSceneMediaPlayerPropertySection extends MovieSceneSection { 
+	MediaSource: MediaSource;
+	bLoop: boolean;
+	static Load(ResourceName: string): MovieSceneMediaPlayerPropertySection;
+	static Find(Outer: UObject, ResourceName: string): MovieSceneMediaPlayerPropertySection;
+	static GetDefaultObject(): MovieSceneMediaPlayerPropertySection;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneMediaPlayerPropertySection;
+	static C(Other: UObject | any): MovieSceneMediaPlayerPropertySection;
+}
+
+declare class MovieSceneMediaPlayerPropertyTrack extends MovieScenePropertyTrack { 
+	static Load(ResourceName: string): MovieSceneMediaPlayerPropertyTrack;
+	static Find(Outer: UObject, ResourceName: string): MovieSceneMediaPlayerPropertyTrack;
+	static GetDefaultObject(): MovieSceneMediaPlayerPropertyTrack;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneMediaPlayerPropertyTrack;
+	static C(Other: UObject | any): MovieSceneMediaPlayerPropertyTrack;
+}
+
+declare class MovieSceneMediaSection extends MovieSceneSection { 
+	MediaSource: MediaSource;
+	bLooping: boolean;
+	StartFrameOffset: FrameNumber;
+	MediaTexture: MediaTexture;
+	MediaSoundComponent: MediaSoundComponent;
+	bUseExternalMediaPlayer: boolean;
+	ExternalMediaPlayer: MediaPlayer;
+	ThumbnailReferenceOffset: number;
+	static Load(ResourceName: string): MovieSceneMediaSection;
+	static Find(Outer: UObject, ResourceName: string): MovieSceneMediaSection;
+	static GetDefaultObject(): MovieSceneMediaSection;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneMediaSection;
+	static C(Other: UObject | any): MovieSceneMediaSection;
+}
+
+declare class MovieSceneMediaTrack extends MovieSceneNameableTrack { 
+	MediaSections: MovieSceneSection[];
+	static Load(ResourceName: string): MovieSceneMediaTrack;
+	static Find(Outer: UObject, ResourceName: string): MovieSceneMediaTrack;
+	static GetDefaultObject(): MovieSceneMediaTrack;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneMediaTrack;
+	static C(Other: UObject | any): MovieSceneMediaTrack;
 }
 
 declare class LayersBlueprintLibrary extends BlueprintFunctionLibrary { 
@@ -16099,118 +16296,6 @@ declare class EditableStaticMeshAdapter extends EditableMeshAdapter {
 	static C(Other: UObject | any): EditableStaticMeshAdapter;
 }
 
-declare type EGooglePADErrorCode = 'AssetPack_NO_ERROR' | 'AssetPack_APP_UNAVAILABLE' | 'AssetPack_UNAVAILABLE' | 'AssetPack_INVALID_REQUEST' | 'AssetPack_DOWNLOAD_NOT_FOUND' | 'AssetPack_API_NOT_AVAILABLE' | 'AssetPack_NETWORK_ERROR' | 'AssetPack_ACCESS_DENIED' | 'AssetPack_INSUFFICIENT_STORAGE' | 'AssetPack_PLAY_STORE_NOT_FOUND' | 'AssetPack_NETWORK_UNRESTRICTED' | 'AssetPack_INTERNAL_ERROR' | 'AssetPack_INITIALIZATION_NEEDED' | 'AssetPack_INITIALIZATION_FAILED' | 'AssetPack_MAX';
-declare var EGooglePADErrorCode : { AssetPack_NO_ERROR:'AssetPack_NO_ERROR',AssetPack_APP_UNAVAILABLE:'AssetPack_APP_UNAVAILABLE',AssetPack_UNAVAILABLE:'AssetPack_UNAVAILABLE',AssetPack_INVALID_REQUEST:'AssetPack_INVALID_REQUEST',AssetPack_DOWNLOAD_NOT_FOUND:'AssetPack_DOWNLOAD_NOT_FOUND',AssetPack_API_NOT_AVAILABLE:'AssetPack_API_NOT_AVAILABLE',AssetPack_NETWORK_ERROR:'AssetPack_NETWORK_ERROR',AssetPack_ACCESS_DENIED:'AssetPack_ACCESS_DENIED',AssetPack_INSUFFICIENT_STORAGE:'AssetPack_INSUFFICIENT_STORAGE',AssetPack_PLAY_STORE_NOT_FOUND:'AssetPack_PLAY_STORE_NOT_FOUND',AssetPack_NETWORK_UNRESTRICTED:'AssetPack_NETWORK_UNRESTRICTED',AssetPack_INTERNAL_ERROR:'AssetPack_INTERNAL_ERROR',AssetPack_INITIALIZATION_NEEDED:'AssetPack_INITIALIZATION_NEEDED',AssetPack_INITIALIZATION_FAILED:'AssetPack_INITIALIZATION_FAILED',AssetPack_MAX:'AssetPack_MAX', };
-declare type EGooglePADStorageMethod = 'AssetPack_STORAGE_FILES' | 'AssetPack_STORAGE_APK' | 'AssetPack_STORAGE_UNKNOWN' | 'AssetPack_STORAGE_NOT_INSTALLED' | 'AssetPack_STORAGE_MAX';
-declare var EGooglePADStorageMethod : { AssetPack_STORAGE_FILES:'AssetPack_STORAGE_FILES',AssetPack_STORAGE_APK:'AssetPack_STORAGE_APK',AssetPack_STORAGE_UNKNOWN:'AssetPack_STORAGE_UNKNOWN',AssetPack_STORAGE_NOT_INSTALLED:'AssetPack_STORAGE_NOT_INSTALLED',AssetPack_STORAGE_MAX:'AssetPack_STORAGE_MAX', };
-declare type EGooglePADCellularDataConfirmStatus = 'AssetPack_CONFIRM_UNKNOWN' | 'AssetPack_CONFIRM_PENDING' | 'AssetPack_CONFIRM_USER_APPROVED' | 'AssetPack_CONFIRM_USER_CANCELED' | 'AssetPack_CONFIRM_MAX';
-declare var EGooglePADCellularDataConfirmStatus : { AssetPack_CONFIRM_UNKNOWN:'AssetPack_CONFIRM_UNKNOWN',AssetPack_CONFIRM_PENDING:'AssetPack_CONFIRM_PENDING',AssetPack_CONFIRM_USER_APPROVED:'AssetPack_CONFIRM_USER_APPROVED',AssetPack_CONFIRM_USER_CANCELED:'AssetPack_CONFIRM_USER_CANCELED',AssetPack_CONFIRM_MAX:'AssetPack_CONFIRM_MAX', };
-declare type EGooglePADDownloadStatus = 'AssetPack_UNKNOWN' | 'AssetPack_DOWNLOAD_PENDING' | 'AssetPack_DOWNLOADING' | 'AssetPack_TRANSFERRING' | 'AssetPack_DOWNLOAD_COMPLETED' | 'AssetPack_DOWNLOAD_FAILED' | 'AssetPack_DOWNLOAD_CANCELED' | 'AssetPack_WAITING_FOR_WIFI' | 'AssetPack_NOT_INSTALLED' | 'AssetPack_INFO_PENDING' | 'AssetPack_INFO_FAILED' | 'AssetPack_REMOVAL_PENDING' | 'AssetPack_REMOVAL_FAILED' | 'AssetPack_MAX';
-declare var EGooglePADDownloadStatus : { AssetPack_UNKNOWN:'AssetPack_UNKNOWN',AssetPack_DOWNLOAD_PENDING:'AssetPack_DOWNLOAD_PENDING',AssetPack_DOWNLOADING:'AssetPack_DOWNLOADING',AssetPack_TRANSFERRING:'AssetPack_TRANSFERRING',AssetPack_DOWNLOAD_COMPLETED:'AssetPack_DOWNLOAD_COMPLETED',AssetPack_DOWNLOAD_FAILED:'AssetPack_DOWNLOAD_FAILED',AssetPack_DOWNLOAD_CANCELED:'AssetPack_DOWNLOAD_CANCELED',AssetPack_WAITING_FOR_WIFI:'AssetPack_WAITING_FOR_WIFI',AssetPack_NOT_INSTALLED:'AssetPack_NOT_INSTALLED',AssetPack_INFO_PENDING:'AssetPack_INFO_PENDING',AssetPack_INFO_FAILED:'AssetPack_INFO_FAILED',AssetPack_REMOVAL_PENDING:'AssetPack_REMOVAL_PENDING',AssetPack_REMOVAL_FAILED:'AssetPack_REMOVAL_FAILED',AssetPack_MAX:'AssetPack_MAX', };
-declare class GooglePADFunctionLibrary extends BlueprintFunctionLibrary { 
-	static Load(ResourceName: string): GooglePADFunctionLibrary;
-	static Find(Outer: UObject, ResourceName: string): GooglePADFunctionLibrary;
-	static GetDefaultObject(): GooglePADFunctionLibrary;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GooglePADFunctionLibrary;
-	static ShowCellularDataConfirmation(): EGooglePADErrorCode;
-	static RequestRemoval(Name: string): EGooglePADErrorCode;
-	static RequestInfo(AssetPacks: string[]): EGooglePADErrorCode;
-	static RequestDownload(AssetPacks: string[]): EGooglePADErrorCode;
-	static ReleaseDownloadState(State: number): void;
-	static ReleaseAssetPackLocation(Location: number): void;
-	static GetTotalBytesToDownload(State: number): number;
-	static GetStorageMethod(Location: number): EGooglePADStorageMethod;
-	static GetShowCellularDataConfirmationStatus(Status?: EGooglePADCellularDataConfirmStatus): {Status: EGooglePADCellularDataConfirmStatus, $: EGooglePADErrorCode};
-	static GetDownloadStatus(State: number): EGooglePADDownloadStatus;
-	static GetDownloadState(Name: string,State?: number): {State: number, $: EGooglePADErrorCode};
-	static GetBytesDownloaded(State: number): number;
-	static GetAssetsPath(Location: number): string;
-	static GetAssetPackLocation(Name: string,Location?: number): {Location: number, $: EGooglePADErrorCode};
-	static CancelDownload(AssetPacks: string[]): EGooglePADErrorCode;
-	static C(Other: UObject | any): GooglePADFunctionLibrary;
-}
-
-declare class ImgMediaSettings extends UObject { 
-	DefaultFrameRate: FrameRate;
-	CacheBehindPercentage: number;
-	CacheSizeGB: number;
-	CacheThreads: number;
-	CacheThreadStackSizeKB: number;
-	GlobalCacheSizeGB: number;
-	UseGlobalCache: boolean;
-	ExrDecoderThreads: any;
-	DefaultProxy: string;
-	UseDefaultProxy: boolean;
-	static Load(ResourceName: string): ImgMediaSettings;
-	static Find(Outer: UObject, ResourceName: string): ImgMediaSettings;
-	static GetDefaultObject(): ImgMediaSettings;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ImgMediaSettings;
-	static C(Other: UObject | any): ImgMediaSettings;
-}
-
-declare class ImgMediaSource extends BaseMediaSource { 
-	IsPathRelativeToProjectRoot: boolean;
-	FrameRateOverride: FrameRate;
-	ProxyOverride: string;
-	SequencePath: DirectoryPath;
-	static Load(ResourceName: string): ImgMediaSource;
-	static Find(Outer: UObject, ResourceName: string): ImgMediaSource;
-	static GetDefaultObject(): ImgMediaSource;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ImgMediaSource;
-	SetSequencePath(Path: string): void;
-	SetMipLevelDistance(Distance: number): void;
-	RemoveTargetObject(InActor: Actor): void;
-	RemoveGlobalCamera(InActor: Actor): void;
-	GetSequencePath(): string;
-	GetProxies(OutProxies?: string[]): {OutProxies: string[]};
-	AddTargetObject(InActor: Actor,Width: number): void;
-	AddGlobalCamera(InActor: Actor): void;
-	static C(Other: UObject | any): ImgMediaSource;
-}
-
-declare class MovieSceneMediaPlayerPropertySection extends MovieSceneSection { 
-	MediaSource: MediaSource;
-	bLoop: boolean;
-	static Load(ResourceName: string): MovieSceneMediaPlayerPropertySection;
-	static Find(Outer: UObject, ResourceName: string): MovieSceneMediaPlayerPropertySection;
-	static GetDefaultObject(): MovieSceneMediaPlayerPropertySection;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneMediaPlayerPropertySection;
-	static C(Other: UObject | any): MovieSceneMediaPlayerPropertySection;
-}
-
-declare class MovieSceneMediaPlayerPropertyTrack extends MovieScenePropertyTrack { 
-	static Load(ResourceName: string): MovieSceneMediaPlayerPropertyTrack;
-	static Find(Outer: UObject, ResourceName: string): MovieSceneMediaPlayerPropertyTrack;
-	static GetDefaultObject(): MovieSceneMediaPlayerPropertyTrack;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneMediaPlayerPropertyTrack;
-	static C(Other: UObject | any): MovieSceneMediaPlayerPropertyTrack;
-}
-
-declare class MovieSceneMediaSection extends MovieSceneSection { 
-	MediaSource: MediaSource;
-	bLooping: boolean;
-	StartFrameOffset: FrameNumber;
-	MediaTexture: MediaTexture;
-	MediaSoundComponent: MediaSoundComponent;
-	bUseExternalMediaPlayer: boolean;
-	ExternalMediaPlayer: MediaPlayer;
-	ThumbnailReferenceOffset: number;
-	static Load(ResourceName: string): MovieSceneMediaSection;
-	static Find(Outer: UObject, ResourceName: string): MovieSceneMediaSection;
-	static GetDefaultObject(): MovieSceneMediaSection;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneMediaSection;
-	static C(Other: UObject | any): MovieSceneMediaSection;
-}
-
-declare class MovieSceneMediaTrack extends MovieSceneNameableTrack { 
-	MediaSections: MovieSceneSection[];
-	static Load(ResourceName: string): MovieSceneMediaTrack;
-	static Find(Outer: UObject, ResourceName: string): MovieSceneMediaTrack;
-	static GetDefaultObject(): MovieSceneMediaTrack;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MovieSceneMediaTrack;
-	static C(Other: UObject | any): MovieSceneMediaTrack;
-}
-
 declare class MobileInstalledContent extends UObject { 
 	static Load(ResourceName: string): MobileInstalledContent;
 	static Find(Outer: UObject, ResourceName: string): MobileInstalledContent;
@@ -16278,6 +16363,37 @@ declare class OnRequestContentFailed__PythonCallable extends PythonCallableForDe
 	static GetDefaultObject(): OnRequestContentFailed__PythonCallable;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): OnRequestContentFailed__PythonCallable;
 	static C(Other: UObject | any): OnRequestContentFailed__PythonCallable;
+}
+
+declare type EGooglePADErrorCode = 'AssetPack_NO_ERROR' | 'AssetPack_APP_UNAVAILABLE' | 'AssetPack_UNAVAILABLE' | 'AssetPack_INVALID_REQUEST' | 'AssetPack_DOWNLOAD_NOT_FOUND' | 'AssetPack_API_NOT_AVAILABLE' | 'AssetPack_NETWORK_ERROR' | 'AssetPack_ACCESS_DENIED' | 'AssetPack_INSUFFICIENT_STORAGE' | 'AssetPack_PLAY_STORE_NOT_FOUND' | 'AssetPack_NETWORK_UNRESTRICTED' | 'AssetPack_INTERNAL_ERROR' | 'AssetPack_INITIALIZATION_NEEDED' | 'AssetPack_INITIALIZATION_FAILED' | 'AssetPack_MAX';
+declare var EGooglePADErrorCode : { AssetPack_NO_ERROR:'AssetPack_NO_ERROR',AssetPack_APP_UNAVAILABLE:'AssetPack_APP_UNAVAILABLE',AssetPack_UNAVAILABLE:'AssetPack_UNAVAILABLE',AssetPack_INVALID_REQUEST:'AssetPack_INVALID_REQUEST',AssetPack_DOWNLOAD_NOT_FOUND:'AssetPack_DOWNLOAD_NOT_FOUND',AssetPack_API_NOT_AVAILABLE:'AssetPack_API_NOT_AVAILABLE',AssetPack_NETWORK_ERROR:'AssetPack_NETWORK_ERROR',AssetPack_ACCESS_DENIED:'AssetPack_ACCESS_DENIED',AssetPack_INSUFFICIENT_STORAGE:'AssetPack_INSUFFICIENT_STORAGE',AssetPack_PLAY_STORE_NOT_FOUND:'AssetPack_PLAY_STORE_NOT_FOUND',AssetPack_NETWORK_UNRESTRICTED:'AssetPack_NETWORK_UNRESTRICTED',AssetPack_INTERNAL_ERROR:'AssetPack_INTERNAL_ERROR',AssetPack_INITIALIZATION_NEEDED:'AssetPack_INITIALIZATION_NEEDED',AssetPack_INITIALIZATION_FAILED:'AssetPack_INITIALIZATION_FAILED',AssetPack_MAX:'AssetPack_MAX', };
+declare type EGooglePADStorageMethod = 'AssetPack_STORAGE_FILES' | 'AssetPack_STORAGE_APK' | 'AssetPack_STORAGE_UNKNOWN' | 'AssetPack_STORAGE_NOT_INSTALLED' | 'AssetPack_STORAGE_MAX';
+declare var EGooglePADStorageMethod : { AssetPack_STORAGE_FILES:'AssetPack_STORAGE_FILES',AssetPack_STORAGE_APK:'AssetPack_STORAGE_APK',AssetPack_STORAGE_UNKNOWN:'AssetPack_STORAGE_UNKNOWN',AssetPack_STORAGE_NOT_INSTALLED:'AssetPack_STORAGE_NOT_INSTALLED',AssetPack_STORAGE_MAX:'AssetPack_STORAGE_MAX', };
+declare type EGooglePADCellularDataConfirmStatus = 'AssetPack_CONFIRM_UNKNOWN' | 'AssetPack_CONFIRM_PENDING' | 'AssetPack_CONFIRM_USER_APPROVED' | 'AssetPack_CONFIRM_USER_CANCELED' | 'AssetPack_CONFIRM_MAX';
+declare var EGooglePADCellularDataConfirmStatus : { AssetPack_CONFIRM_UNKNOWN:'AssetPack_CONFIRM_UNKNOWN',AssetPack_CONFIRM_PENDING:'AssetPack_CONFIRM_PENDING',AssetPack_CONFIRM_USER_APPROVED:'AssetPack_CONFIRM_USER_APPROVED',AssetPack_CONFIRM_USER_CANCELED:'AssetPack_CONFIRM_USER_CANCELED',AssetPack_CONFIRM_MAX:'AssetPack_CONFIRM_MAX', };
+declare type EGooglePADDownloadStatus = 'AssetPack_UNKNOWN' | 'AssetPack_DOWNLOAD_PENDING' | 'AssetPack_DOWNLOADING' | 'AssetPack_TRANSFERRING' | 'AssetPack_DOWNLOAD_COMPLETED' | 'AssetPack_DOWNLOAD_FAILED' | 'AssetPack_DOWNLOAD_CANCELED' | 'AssetPack_WAITING_FOR_WIFI' | 'AssetPack_NOT_INSTALLED' | 'AssetPack_INFO_PENDING' | 'AssetPack_INFO_FAILED' | 'AssetPack_REMOVAL_PENDING' | 'AssetPack_REMOVAL_FAILED' | 'AssetPack_MAX';
+declare var EGooglePADDownloadStatus : { AssetPack_UNKNOWN:'AssetPack_UNKNOWN',AssetPack_DOWNLOAD_PENDING:'AssetPack_DOWNLOAD_PENDING',AssetPack_DOWNLOADING:'AssetPack_DOWNLOADING',AssetPack_TRANSFERRING:'AssetPack_TRANSFERRING',AssetPack_DOWNLOAD_COMPLETED:'AssetPack_DOWNLOAD_COMPLETED',AssetPack_DOWNLOAD_FAILED:'AssetPack_DOWNLOAD_FAILED',AssetPack_DOWNLOAD_CANCELED:'AssetPack_DOWNLOAD_CANCELED',AssetPack_WAITING_FOR_WIFI:'AssetPack_WAITING_FOR_WIFI',AssetPack_NOT_INSTALLED:'AssetPack_NOT_INSTALLED',AssetPack_INFO_PENDING:'AssetPack_INFO_PENDING',AssetPack_INFO_FAILED:'AssetPack_INFO_FAILED',AssetPack_REMOVAL_PENDING:'AssetPack_REMOVAL_PENDING',AssetPack_REMOVAL_FAILED:'AssetPack_REMOVAL_FAILED',AssetPack_MAX:'AssetPack_MAX', };
+declare class GooglePADFunctionLibrary extends BlueprintFunctionLibrary { 
+	static Load(ResourceName: string): GooglePADFunctionLibrary;
+	static Find(Outer: UObject, ResourceName: string): GooglePADFunctionLibrary;
+	static GetDefaultObject(): GooglePADFunctionLibrary;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GooglePADFunctionLibrary;
+	static ShowCellularDataConfirmation(): EGooglePADErrorCode;
+	static RequestRemoval(Name: string): EGooglePADErrorCode;
+	static RequestInfo(AssetPacks: string[]): EGooglePADErrorCode;
+	static RequestDownload(AssetPacks: string[]): EGooglePADErrorCode;
+	static ReleaseDownloadState(State: number): void;
+	static ReleaseAssetPackLocation(Location: number): void;
+	static GetTotalBytesToDownload(State: number): number;
+	static GetStorageMethod(Location: number): EGooglePADStorageMethod;
+	static GetShowCellularDataConfirmationStatus(Status?: EGooglePADCellularDataConfirmStatus): {Status: EGooglePADCellularDataConfirmStatus, $: EGooglePADErrorCode};
+	static GetDownloadStatus(State: number): EGooglePADDownloadStatus;
+	static GetDownloadState(Name: string,State?: number): {State: number, $: EGooglePADErrorCode};
+	static GetBytesDownloaded(State: number): number;
+	static GetAssetsPath(Location: number): string;
+	static GetAssetPackLocation(Name: string,Location?: number): {Location: number, $: EGooglePADErrorCode};
+	static CancelDownload(AssetPacks: string[]): EGooglePADErrorCode;
+	static C(Other: UObject | any): GooglePADFunctionLibrary;
 }
 
 declare type ESynth1OscType = 'Sine' | 'Saw' | 'Triangle' | 'Square' | 'Noise' | 'Count' | 'ESynth1OscType_MAX';
@@ -17433,122 +17549,6 @@ declare class SynthesisEditorSettings extends DeveloperSettings {
 	static GetDefaultObject(): SynthesisEditorSettings;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SynthesisEditorSettings;
 	static C(Other: UObject | any): SynthesisEditorSettings;
-}
-
-declare class GrainTableEntry { 
-	SampleIndex: number;
-	RPM: number;
-	AnalysisSampleIndex: number;
-	clone() : GrainTableEntry;
-	static C(Other: UObject | any): GrainTableEntry;
-}
-
-declare class MotoSynthSource extends UObject { 
-	SoundWaveSource: SoundWave;
-	bConvertTo8Bit: boolean;
-	DownSampleFactor: number;
-	RPMCurve: RuntimeFloatCurve;
-	RPMSynthVolume: number;
-	bEnableFilteringForAnalysis: boolean;
-	LowPassFilterFrequency: number;
-	HighPassFilterFrequency: number;
-	bEnableDynamicsProcessorForAnalysis: boolean;
-	DynamicsProcessorLookahead: number;
-	DynamicsProcessorInputGainDb: number;
-	DynamicsProcessorRatio: number;
-	DynamicsKneeBandwidth: number;
-	DynamicsProcessorThreshold: number;
-	DynamicsProcessorAttackTimeMsec: number;
-	DynamicsProcessorReleaseTimeMsec: number;
-	bEnableNormalizationForAnalysis: boolean;
-	SampleShiftOffset: number;
-	RPMCycleCalibrationSample: number;
-	RPMFirstCycleSampleEnd: number;
-	RPMEstimationOctaveOffset: number;
-	bWriteAnalysisInputToFile: boolean;
-	AnalysisInputFilePath: string;
-	SourceData: number[];
-	SourceDataPCM: any[];
-	SourceSampleRate: number;
-	GrainTable: GrainTableEntry[];
-	static Load(ResourceName: string): MotoSynthSource;
-	static Find(Outer: UObject, ResourceName: string): MotoSynthSource;
-	static GetDefaultObject(): MotoSynthSource;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MotoSynthSource;
-	StopToneMatch(): void;
-	PlayToneMatch(): void;
-	PerformGrainTableAnalysis(): void;
-	static C(Other: UObject | any): MotoSynthSource;
-}
-
-declare class MotoSynthRuntimeSettings { 
-	bSynthToneEnabled: boolean;
-	SynthToneVolume: number;
-	SynthToneFilterFrequency: number;
-	SynthOctaveShift: number;
-	bGranularEngineEnabled: boolean;
-	GranularEngineVolume: number;
-	GranularEnginePitchScale: number;
-	NumSamplesToCrossfadeBetweenGrains: number;
-	NumGrainTableEntriesPerGrain: number;
-	GrainTableRandomOffsetForConstantRPMs: number;
-	GrainCrossfadeSamplesForConstantRPMs: number;
-	AccelerationSource: MotoSynthSource;
-	DecelerationSource: MotoSynthSource;
-	bStereoWidenerEnabled: boolean;
-	StereoDelayMsec: number;
-	StereoFeedback: number;
-	StereoWidenerWetlevel: number;
-	StereoWidenerDryLevel: number;
-	StereoWidenerDelayRatio: number;
-	bStereoWidenerFilterEnabled: boolean;
-	StereoWidenerFilterFrequency: number;
-	StereoWidenerFilterQ: number;
-	clone() : MotoSynthRuntimeSettings;
-	static C(Other: UObject | any): MotoSynthRuntimeSettings;
-}
-
-declare class MotoSynthPreset extends UObject { 
-	EnginePreviewRPMCurve: RuntimeFloatCurve;
-	Settings: MotoSynthRuntimeSettings;
-	static Load(ResourceName: string): MotoSynthPreset;
-	static Find(Outer: UObject, ResourceName: string): MotoSynthPreset;
-	static GetDefaultObject(): MotoSynthPreset;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MotoSynthPreset;
-	StopEnginePreview(): void;
-	StartEnginePreview(): void;
-	DumpRuntimeMemoryUsage(): void;
-	static C(Other: UObject | any): MotoSynthPreset;
-}
-
-declare class SynthComponentMoto extends SynthComponent { 
-	MotoSynthPreset: MotoSynthPreset;
-	RPM: number;
-	static Load(ResourceName: string): SynthComponentMoto;
-	static Find(Outer: UObject, ResourceName: string): SynthComponentMoto;
-	static GetDefaultObject(): SynthComponentMoto;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SynthComponentMoto;
-	SetSettings(InSettings: MotoSynthRuntimeSettings): void;
-	SetRPM(InRPM: number,InTimeSec: number): void;
-	IsEnabled(): boolean;
-	GetRPMRange(OutMinRPM?: number,OutMaxRPM?: number): {OutMinRPM: number, OutMaxRPM: number};
-	static C(Other: UObject | any): SynthComponentMoto;
-}
-
-declare class MotoSynthPresetFactory extends Factory { 
-	static Load(ResourceName: string): MotoSynthPresetFactory;
-	static Find(Outer: UObject, ResourceName: string): MotoSynthPresetFactory;
-	static GetDefaultObject(): MotoSynthPresetFactory;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MotoSynthPresetFactory;
-	static C(Other: UObject | any): MotoSynthPresetFactory;
-}
-
-declare class MotoSynthSourceFactory extends Factory { 
-	static Load(ResourceName: string): MotoSynthSourceFactory;
-	static Find(Outer: UObject, ResourceName: string): MotoSynthSourceFactory;
-	static GetDefaultObject(): MotoSynthSourceFactory;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MotoSynthSourceFactory;
-	static C(Other: UObject | any): MotoSynthSourceFactory;
 }
 
 declare class ContentBrowserAssetDataSource extends ContentBrowserDataSource { 

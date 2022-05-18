@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="height: 100%">
+<html lang="en" style="height: 100%; margin: 0; padding: 0;">
 <head>
   <meta charset="utf-8">
 </head>
@@ -8,8 +8,8 @@
     background-color: rgba(255, 255, 255, 1);
   }
 </style>
-<body style="height: 100%; margin: 0">
-  <div id="container" style="height: 100%"></div>
+<body style="height: 100%; margin: 0; padding: 0;overflow-x: hidden;overflow-y: hidden;">
+  <div id="container" style="height: 100%; margin: 0; padding: 0; overflow-x: hidden; overflow-y: hidden;"></div>
 
   
   <script type="text/javascript" src=".\node_modules\echarts\dist\echarts.js"></script>
@@ -18,13 +18,15 @@
   <script type="text/javascript" src=".\node_modules\echarts-stat\dist\ecStat.js"></script>
   <script type="text/javascript" src=".\aliases.js"></script>
 
-<script type="text/javascript">
+  <script type="text/javascript">
     var dom = document.getElementById('container');
     var myChart = echarts.init(dom, null, {
       renderer: 'canvas',
-      useDirtyRect: false
+      height: 'auto',
+      width: 'auto',
+      useDirtyRect: false,
     });
-    var option;
+    let option;
     var app = {};
     let resolution = 100;
     let data = [];
@@ -41,24 +43,54 @@
     }
 
     option = {
-        backgroundColor: 'rgba(255,255,255,.5)',
+        backgroundColor: 'rgba(255,255,255,0)',
         tooltip: {
           show: true
         },
         xAxis: {
+          minInterval: 1,
+          maxInterval: 1,
+          show: false,
           type: 'category',
           title: 'test',
-          data: xData
+          data: xData,
+          axisLine: {
+            show: false
+          },
+          axisTick: {
+            show: false,
+            interval: 0,
+          },
+          minorTick: {
+            show: false,
+            splitNumber: 1
+          }
         },
         yAxis: {
+          minInterval: 1,
+          maxInterval: 1,
+          show: false,
           type: 'category',
           title:'test2',
-          data: yData
+          data: yData,
+          axisLine: {
+            show: false
+          },
+          axisTick: {
+            show: false,
+            interval: 0,
+          },
+          minorTick: {
+            show: false,
+            splitNumber: 1
+          }
         },
         visualMap: {
+          show: false,
           min: 0,
           max: 1,
-          itemWidth: 10,
+          itemWidth: 0,
+          itemHeight: 0,
           calculable: true,
           realtime: true,
           hoverLink: true,
@@ -91,17 +123,19 @@
               }
             },
             progressive: 0,
-            animation: true
+            animation: false
           }
         ]
       };
-    console.log("EVENT")
 
     if (option && typeof option === 'object') {
       myChart.setOption(option);
     }
 
-    window.addEventListener('resize', myChart.resize);
+    window.onresize = function() {
+      myChart.resize();
+    };
+    // window.addEventListener('resize', myChart.resize);
   </script>
 
   <script type="text/javascript">
@@ -113,79 +147,26 @@
       }
       if(JData.data) {
         let newData = [];
-        let newxData = [];
-        let newyData = [];
+        // let newxData = [];
+        // let newyData = [];
         for (let i = 0; i <= resolution; i++) {
           for (let j = 0; j <= resolution; j++) {
             newData.push([i, j, JData.data[(resolution*i)+j]]);
           }
-          newxData.push(i);
+          // newxData.push(i);
         }
-        for (let j = 0; j < resolution; j++) {
-          newyData.push(j);
-        }
+        // for (let j = 0; j < resolution; j++) {
+        //   newyData.push(j);
+        // }
         data = newData;
-        xData = newxData;
-        yData = newyData;
+        // xData = newxData;
+        // yData = newyData;
       }
-      option = {
-        backgroundColor: 'rgba(255,255,255,.5)',
-        tooltip: {
-          show: true
-        },
-        xAxis: {
-          type: 'category',
-          title: 'test',
-          data: xData
-        },
-        yAxis: {
-          type: 'category',
-          title:'test2',
-          data: yData
-        },
-        visualMap: {
-          min: 0,
-          max: 1,
-          itemWidth: 10,
-          calculable: true,
-          realtime: true,
-          hoverLink: true,
-          inRange: {
-            color: [
-              '#313695',
-              '#4575b4',
-              '#74add1',
-              '#abd9e9',
-              '#e0f3f8',
-              '#ffffbf',
-              '#fee090',
-              '#fdae61',
-              '#f46d43',
-              '#d73027',
-              '#a50026'
-            ]
-          }
-        },
-        series: [
-          {
-            name: 'Gaussian',
-            type: 'heatmap',
-            data: data,
-            emphasis: {
-              disabled: false,
-              itemStyle: {
-                borderColor: '#333',
-                borderWidth: 0
-              }
-            },
-            progressive: 0,
-            animation: true
-          }
-        ]
-      };
+      option.series[0].data = data;
+      // option.xAxis.xData = xData;
+      // option.yAxis.yData = yData;
 
       if (option && typeof option === 'object') {
-        console.log("options")
         myChart.setOption(option);
       }
     }

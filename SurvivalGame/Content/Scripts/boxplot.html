@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%; margin: 0; padding: 0;">
+<head>
+  <meta charset="utf-8">
+</head>
+<style>
+  div.background {
+    background-color: rgba(255, 255, 255, 1);
+  }
+</style>
+<body style="height: 100%; margin: 0; padding: 0;overflow-x: hidden;overflow-y: hidden;">
+  <div id="container" style="height: 100%; margin: 0; padding: 0; overflow-x: hidden; overflow-y: hidden;"></div>
+
+  
+  <script type="text/javascript" src=".\node_modules\echarts\dist\echarts.js"></script>
+  <script type="text/javascript" src=".\node_modules\echarts\dist\extension\dataTool.js"></script>
+  <script type="text/javascript" src=".\node_modules\echarts-gl\dist\echarts-gl.js"></script>
+  <script type="text/javascript" src=".\node_modules\echarts-stat\dist\ecStat.js"></script>
+  <script type="text/javascript" src=".\aliases.js"></script>
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      height: 'auto',
+      width: 'auto',
+      useDirtyRect: false,
+    });
+    let option;
+    let boxData = [];
+    let scatterData = [];
+
+    option = {
+      backgroundColor: 'rgba(255,255,255,0)',
+      tooltip: {
+        trigger: 'item',
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
+      grid: {
+        left: '10%',
+        right: '10%',
+        bottom: '15%'
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: true,
+        nameGap: 30,
+        splitArea: {
+          show: false
+        },
+        splitLine: {
+          show: false
+        }
+      },
+      yAxis: {
+        type: 'value',
+        name: 'km/s minus 299,000',
+        splitArea: {
+          show: true
+        }
+      },
+      series: [
+        {
+          name: 'boxplot',
+          type: 'boxplot',
+          data: boxData
+        },
+        {
+          name: 'outlier',
+          type: 'scatter',
+          data: scatterData
+        }
+      ]
+    };
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+    window.onresize = function() {
+      myChart.resize();
+    };
+    // window.addEventListener('resize', myChart.resize);
+  </script>
+
+  <script type="text/javascript">
+    const webSocket = new WebSocket('ws://localhost:8080');
+    webSocket.onmessage = function (event) {
+      let JData = JSON.parse(event.data)
+      if(JData.data) {
+        let newData = [];
+
+        for (let i = 0; i <= resolution; i++) {
+          for (let j = 0; j <= resolution; j++) {
+            newData.push([i, j, JData.data[(resolution*i)+j]]);
+          }
+        }
+        data = newData;
+      }
+      option.series[0].data = data;
+
+      if (option && typeof option === 'object') {
+        myChart.setOption(option);
+      }
+    }
+  </script>
+
+</body>
+</html>
