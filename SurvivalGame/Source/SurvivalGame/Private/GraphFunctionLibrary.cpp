@@ -38,6 +38,20 @@ void UGraphFunctionLibrary::UpdateBoxplotData(const UObject* WorldContextObject,
     }
 }
 
+void UGraphFunctionLibrary::UpdatePieData(const UObject* WorldContextObject, FVector2D Data)
+{
+    const USGameInstance* GameInstance = Cast<USGameInstance>(WorldContextObject->GetWorld()->GetGameInstance());
+
+    if (GameInstance)
+    {
+        if (GameInstance->WebSocket->IsConnected())
+        {
+            FString newString = "{ \"pie\": [" + FString::SanitizeFloat(Data[0]) + "," + FString::SanitizeFloat(Data[1]) + "] }";
+            GameInstance->WebSocket->Send(newString);
+        }
+    }
+}
+
 void UGraphFunctionLibrary::UpdateHeatmapResolution(const UObject* WorldContextObject, int Resolution)
 {
     const USGameInstance* GameInstance = Cast<USGameInstance>(WorldContextObject->GetWorld()->GetGameInstance());

@@ -15635,6 +15635,117 @@ declare class VisualLoggerExtension extends UObject {
 	static C(Other: UObject | any): VisualLoggerExtension;
 }
 
+declare type EClothMassMode = 'UniformMass' | 'TotalMass' | 'Density' | 'MaxClothMassMode' | 'EClothMassMode_MAX';
+declare var EClothMassMode : { UniformMass:'UniformMass',TotalMass:'TotalMass',Density:'Density',MaxClothMassMode:'MaxClothMassMode',EClothMassMode_MAX:'EClothMassMode_MAX', };
+declare class ChaosClothWeightedValue { 
+	Low: number;
+	High: number;
+	clone() : ChaosClothWeightedValue;
+	static C(Other: UObject | any): ChaosClothWeightedValue;
+}
+
+declare type EChaosClothTetherMode = 'FastTetherFastLength' | 'AccurateTetherFastLength' | 'AccurateTetherAccurateLength' | 'MaxChaosClothTetherMode' | 'EChaosClothTetherMode_MAX';
+declare var EChaosClothTetherMode : { FastTetherFastLength:'FastTetherFastLength',AccurateTetherFastLength:'AccurateTetherFastLength',AccurateTetherAccurateLength:'AccurateTetherAccurateLength',MaxChaosClothTetherMode:'MaxChaosClothTetherMode',EChaosClothTetherMode_MAX:'EChaosClothTetherMode_MAX', };
+declare class ChaosClothConfig extends ClothConfigCommon { 
+	MassMode: EClothMassMode;
+	UniformMass: number;
+	TotalMass: number;
+	Density: number;
+	MinPerParticleMass: number;
+	EdgeStiffness: number;
+	BendingStiffness: number;
+	bUseBendingElements: boolean;
+	AreaStiffness: number;
+	VolumeStiffness: number;
+	TetherStiffness: ChaosClothWeightedValue;
+	LimitScale: number;
+	bUseGeodesicDistance: boolean;
+	ShapeTargetStiffness: number;
+	CollisionThickness: number;
+	FrictionCoefficient: number;
+	bUseCCD: boolean;
+	bUseSelfCollisions: boolean;
+	SelfCollisionThickness: number;
+	bUseLegacyBackstop: boolean;
+	DampingCoefficient: number;
+	bUsePointBasedWindModel: boolean;
+	DragCoefficient: number;
+	LiftCoefficient: number;
+	bUseGravityOverride: boolean;
+	GravityScale: number;
+	Gravity: Vector;
+	AnimDriveStiffness: ChaosClothWeightedValue;
+	AnimDriveDamping: ChaosClothWeightedValue;
+	LinearVelocityScale: Vector;
+	AngularVelocityScale: number;
+	FictitiousAngularScale: number;
+	bUseTetrahedralConstraints: boolean;
+	bUseThinShellVolumeConstraints: boolean;
+	bUseContinuousCollisionDetection: boolean;
+	TetherMode: EChaosClothTetherMode;
+	AnimDriveSpringStiffness: number;
+	StrainLimitingStiffness: number;
+	static Load(ResourceName: string): ChaosClothConfig;
+	static Find(Outer: UObject, ResourceName: string): ChaosClothConfig;
+	static GetDefaultObject(): ChaosClothConfig;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothConfig;
+	static C(Other: UObject | any): ChaosClothConfig;
+}
+
+declare class ChaosClothSharedSimConfig extends ClothSharedConfigCommon { 
+	IterationCount: number;
+	SubdivisionCount: number;
+	SelfCollisionThickness: number;
+	CollisionThickness: number;
+	bUseDampingOverride: boolean;
+	Damping: number;
+	bUseGravityOverride: boolean;
+	GravityScale: number;
+	Gravity: Vector;
+	bUseLocalSpaceSimulation: boolean;
+	bUseXPBDConstraints: boolean;
+	static Load(ResourceName: string): ChaosClothSharedSimConfig;
+	static Find(Outer: UObject, ResourceName: string): ChaosClothSharedSimConfig;
+	static GetDefaultObject(): ChaosClothSharedSimConfig;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothSharedSimConfig;
+	static C(Other: UObject | any): ChaosClothSharedSimConfig;
+}
+
+declare class ChaosClothingSimulationFactory extends ClothingSimulationFactory { 
+	static Load(ResourceName: string): ChaosClothingSimulationFactory;
+	static Find(Outer: UObject, ResourceName: string): ChaosClothingSimulationFactory;
+	static GetDefaultObject(): ChaosClothingSimulationFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothingSimulationFactory;
+	static C(Other: UObject | any): ChaosClothingSimulationFactory;
+}
+
+declare class ChaosClothingInteractor extends ClothingInteractor { 
+	static Load(ResourceName: string): ChaosClothingInteractor;
+	static Find(Outer: UObject, ResourceName: string): ChaosClothingInteractor;
+	static GetDefaultObject(): ChaosClothingInteractor;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothingInteractor;
+	SetVelocityScale(LinearVelocityScale: Vector,AngularVelocityScale: number,FictitiousAngularScale: number): void;
+	SetMaterialLinear(EdgeStiffness: number,BendingStiffness: number,AreaStiffness: number): void;
+	SetLongRangeAttachmentLinear(TetherStiffness: number): void;
+	SetLongRangeAttachment(TetherStiffness: Vector2D): void;
+	SetGravity(GravityScale: number,bIsGravityOverridden: boolean,GravityOverride: Vector): void;
+	SetDamping(DampingCoefficient: number): void;
+	SetCollision(CollisionThickness: number,FrictionCoefficient: number,bUseCCD: boolean,SelfCollisionThickness: number): void;
+	SetAnimDriveLinear(AnimDriveStiffness: number): void;
+	SetAnimDrive(AnimDriveStiffness: Vector2D,AnimDriveDamping: Vector2D): void;
+	SetAerodynamics(DragCoefficient: number,LiftCoefficient: number,WindVelocity: Vector): void;
+	ResetAndTeleport(bReset: boolean,bTeleport: boolean): void;
+	static C(Other: UObject | any): ChaosClothingInteractor;
+}
+
+declare class ChaosClothingSimulationInteractor extends ClothingSimulationInteractor { 
+	static Load(ResourceName: string): ChaosClothingSimulationInteractor;
+	static Find(Outer: UObject, ResourceName: string): ChaosClothingSimulationInteractor;
+	static GetDefaultObject(): ChaosClothingSimulationInteractor;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothingSimulationInteractor;
+	static C(Other: UObject | any): ChaosClothingSimulationInteractor;
+}
+
 declare class VariantDependency { 
 	VariantSet: VariantSet;
 	Variant: Variant;
@@ -16705,115 +16816,16 @@ declare class MagicLeapRaycastFunctionLibrary extends BlueprintFunctionLibrary {
 	static C(Other: UObject | any): MagicLeapRaycastFunctionLibrary;
 }
 
-declare type EClothMassMode = 'UniformMass' | 'TotalMass' | 'Density' | 'MaxClothMassMode' | 'EClothMassMode_MAX';
-declare var EClothMassMode : { UniformMass:'UniformMass',TotalMass:'TotalMass',Density:'Density',MaxClothMassMode:'MaxClothMassMode',EClothMassMode_MAX:'EClothMassMode_MAX', };
-declare class ChaosClothWeightedValue { 
-	Low: number;
-	High: number;
-	clone() : ChaosClothWeightedValue;
-	static C(Other: UObject | any): ChaosClothWeightedValue;
-}
-
-declare type EChaosClothTetherMode = 'FastTetherFastLength' | 'AccurateTetherFastLength' | 'AccurateTetherAccurateLength' | 'MaxChaosClothTetherMode' | 'EChaosClothTetherMode_MAX';
-declare var EChaosClothTetherMode : { FastTetherFastLength:'FastTetherFastLength',AccurateTetherFastLength:'AccurateTetherFastLength',AccurateTetherAccurateLength:'AccurateTetherAccurateLength',MaxChaosClothTetherMode:'MaxChaosClothTetherMode',EChaosClothTetherMode_MAX:'EChaosClothTetherMode_MAX', };
-declare class ChaosClothConfig extends ClothConfigCommon { 
-	MassMode: EClothMassMode;
-	UniformMass: number;
-	TotalMass: number;
-	Density: number;
-	MinPerParticleMass: number;
-	EdgeStiffness: number;
-	BendingStiffness: number;
-	bUseBendingElements: boolean;
-	AreaStiffness: number;
-	VolumeStiffness: number;
-	TetherStiffness: ChaosClothWeightedValue;
-	LimitScale: number;
-	bUseGeodesicDistance: boolean;
-	ShapeTargetStiffness: number;
-	CollisionThickness: number;
-	FrictionCoefficient: number;
-	bUseCCD: boolean;
-	bUseSelfCollisions: boolean;
-	SelfCollisionThickness: number;
-	bUseLegacyBackstop: boolean;
-	DampingCoefficient: number;
-	bUsePointBasedWindModel: boolean;
-	DragCoefficient: number;
-	LiftCoefficient: number;
-	bUseGravityOverride: boolean;
-	GravityScale: number;
-	Gravity: Vector;
-	AnimDriveStiffness: ChaosClothWeightedValue;
-	AnimDriveDamping: ChaosClothWeightedValue;
-	LinearVelocityScale: Vector;
-	AngularVelocityScale: number;
-	FictitiousAngularScale: number;
-	bUseTetrahedralConstraints: boolean;
-	bUseThinShellVolumeConstraints: boolean;
-	bUseContinuousCollisionDetection: boolean;
-	TetherMode: EChaosClothTetherMode;
-	AnimDriveSpringStiffness: number;
-	StrainLimitingStiffness: number;
-	static Load(ResourceName: string): ChaosClothConfig;
-	static Find(Outer: UObject, ResourceName: string): ChaosClothConfig;
-	static GetDefaultObject(): ChaosClothConfig;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothConfig;
-	static C(Other: UObject | any): ChaosClothConfig;
-}
-
-declare class ChaosClothSharedSimConfig extends ClothSharedConfigCommon { 
-	IterationCount: number;
-	SubdivisionCount: number;
-	SelfCollisionThickness: number;
-	CollisionThickness: number;
-	bUseDampingOverride: boolean;
-	Damping: number;
-	bUseGravityOverride: boolean;
-	GravityScale: number;
-	Gravity: Vector;
-	bUseLocalSpaceSimulation: boolean;
-	bUseXPBDConstraints: boolean;
-	static Load(ResourceName: string): ChaosClothSharedSimConfig;
-	static Find(Outer: UObject, ResourceName: string): ChaosClothSharedSimConfig;
-	static GetDefaultObject(): ChaosClothSharedSimConfig;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothSharedSimConfig;
-	static C(Other: UObject | any): ChaosClothSharedSimConfig;
-}
-
-declare class ChaosClothingSimulationFactory extends ClothingSimulationFactory { 
-	static Load(ResourceName: string): ChaosClothingSimulationFactory;
-	static Find(Outer: UObject, ResourceName: string): ChaosClothingSimulationFactory;
-	static GetDefaultObject(): ChaosClothingSimulationFactory;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothingSimulationFactory;
-	static C(Other: UObject | any): ChaosClothingSimulationFactory;
-}
-
-declare class ChaosClothingInteractor extends ClothingInteractor { 
-	static Load(ResourceName: string): ChaosClothingInteractor;
-	static Find(Outer: UObject, ResourceName: string): ChaosClothingInteractor;
-	static GetDefaultObject(): ChaosClothingInteractor;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothingInteractor;
-	SetVelocityScale(LinearVelocityScale: Vector,AngularVelocityScale: number,FictitiousAngularScale: number): void;
-	SetMaterialLinear(EdgeStiffness: number,BendingStiffness: number,AreaStiffness: number): void;
-	SetLongRangeAttachmentLinear(TetherStiffness: number): void;
-	SetLongRangeAttachment(TetherStiffness: Vector2D): void;
-	SetGravity(GravityScale: number,bIsGravityOverridden: boolean,GravityOverride: Vector): void;
-	SetDamping(DampingCoefficient: number): void;
-	SetCollision(CollisionThickness: number,FrictionCoefficient: number,bUseCCD: boolean,SelfCollisionThickness: number): void;
-	SetAnimDriveLinear(AnimDriveStiffness: number): void;
-	SetAnimDrive(AnimDriveStiffness: Vector2D,AnimDriveDamping: Vector2D): void;
-	SetAerodynamics(DragCoefficient: number,LiftCoefficient: number,WindVelocity: Vector): void;
-	ResetAndTeleport(bReset: boolean,bTeleport: boolean): void;
-	static C(Other: UObject | any): ChaosClothingInteractor;
-}
-
-declare class ChaosClothingSimulationInteractor extends ClothingSimulationInteractor { 
-	static Load(ResourceName: string): ChaosClothingSimulationInteractor;
-	static Find(Outer: UObject, ResourceName: string): ChaosClothingSimulationInteractor;
-	static GetDefaultObject(): ChaosClothingSimulationInteractor;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothingSimulationInteractor;
-	static C(Other: UObject | any): ChaosClothingSimulationInteractor;
+declare class WmfMediaSettings extends UObject { 
+	AllowNonStandardCodecs: boolean;
+	LowLatency: boolean;
+	NativeAudioOut: boolean;
+	HardwareAcceleratedVideoDecoding: boolean;
+	static Load(ResourceName: string): WmfMediaSettings;
+	static Find(Outer: UObject, ResourceName: string): WmfMediaSettings;
+	static GetDefaultObject(): WmfMediaSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WmfMediaSettings;
+	static C(Other: UObject | any): WmfMediaSettings;
 }
 
 declare class NamedInterface { 
@@ -17486,18 +17498,6 @@ declare class SteamNetDriver extends IpNetDriver {
 	static C(Other: UObject | any): SteamNetDriver;
 }
 
-declare class WmfMediaSettings extends UObject { 
-	AllowNonStandardCodecs: boolean;
-	LowLatency: boolean;
-	NativeAudioOut: boolean;
-	HardwareAcceleratedVideoDecoding: boolean;
-	static Load(ResourceName: string): WmfMediaSettings;
-	static Find(Outer: UObject, ResourceName: string): WmfMediaSettings;
-	static GetDefaultObject(): WmfMediaSettings;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WmfMediaSettings;
-	static C(Other: UObject | any): WmfMediaSettings;
-}
-
 declare class K2Node_InAppPurchase extends K2Node_BaseAsyncTask { 
 	static Load(ResourceName: string): K2Node_InAppPurchase;
 	static Find(Outer: UObject, ResourceName: string): K2Node_InAppPurchase;
@@ -17576,6 +17576,43 @@ declare class K2Node_LeaderboardQuery extends K2Node_BaseAsyncTask {
 	static GetDefaultObject(): K2Node_LeaderboardQuery;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): K2Node_LeaderboardQuery;
 	static C(Other: UObject | any): K2Node_LeaderboardQuery;
+}
+
+declare class EyeTrackerStereoGazeData { 
+	LeftEyeOrigin: Vector;
+	LeftEyeDirection: Vector;
+	RightEyeOrigin: Vector;
+	RightEyeDirection: Vector;
+	FixationPoint: Vector;
+	ConfidenceValue: number;
+	clone() : EyeTrackerStereoGazeData;
+	static C(Other: UObject | any): EyeTrackerStereoGazeData;
+	GetStereoGazeData(): {OutGazeData: EyeTrackerStereoGazeData, $: boolean};
+	static GetStereoGazeData(OutGazeData?: EyeTrackerStereoGazeData): {OutGazeData: EyeTrackerStereoGazeData, $: boolean};
+}
+
+declare class EyeTrackerGazeData { 
+	GazeOrigin: Vector;
+	GazeDirection: Vector;
+	FixationPoint: Vector;
+	ConfidenceValue: number;
+	clone() : EyeTrackerGazeData;
+	static C(Other: UObject | any): EyeTrackerGazeData;
+	GetGazeData(): {OutGazeData: EyeTrackerGazeData, $: boolean};
+	static GetGazeData(OutGazeData?: EyeTrackerGazeData): {OutGazeData: EyeTrackerGazeData, $: boolean};
+}
+
+declare class EyeTrackerFunctionLibrary extends BlueprintFunctionLibrary { 
+	static Load(ResourceName: string): EyeTrackerFunctionLibrary;
+	static Find(Outer: UObject, ResourceName: string): EyeTrackerFunctionLibrary;
+	static GetDefaultObject(): EyeTrackerFunctionLibrary;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EyeTrackerFunctionLibrary;
+	static SetEyeTrackedPlayer(PlayerController: PlayerController): void;
+	static IsStereoGazeDataAvailable(): boolean;
+	static IsEyeTrackerConnected(): boolean;
+	static GetStereoGazeData(OutGazeData?: EyeTrackerStereoGazeData): {OutGazeData: EyeTrackerStereoGazeData, $: boolean};
+	static GetGazeData(OutGazeData?: EyeTrackerGazeData): {OutGazeData: EyeTrackerGazeData, $: boolean};
+	static C(Other: UObject | any): EyeTrackerFunctionLibrary;
 }
 
 declare class LiveLinkBasicFrameInterpolationProcessor extends LiveLinkFrameInterpolationProcessor { 
@@ -18048,43 +18085,6 @@ declare class OpenXRHandTrackingLiveLinkRemapAsset extends LiveLinkRetargetAsset
 	static GetDefaultObject(): OpenXRHandTrackingLiveLinkRemapAsset;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): OpenXRHandTrackingLiveLinkRemapAsset;
 	static C(Other: UObject | any): OpenXRHandTrackingLiveLinkRemapAsset;
-}
-
-declare class EyeTrackerStereoGazeData { 
-	LeftEyeOrigin: Vector;
-	LeftEyeDirection: Vector;
-	RightEyeOrigin: Vector;
-	RightEyeDirection: Vector;
-	FixationPoint: Vector;
-	ConfidenceValue: number;
-	clone() : EyeTrackerStereoGazeData;
-	static C(Other: UObject | any): EyeTrackerStereoGazeData;
-	GetStereoGazeData(): {OutGazeData: EyeTrackerStereoGazeData, $: boolean};
-	static GetStereoGazeData(OutGazeData?: EyeTrackerStereoGazeData): {OutGazeData: EyeTrackerStereoGazeData, $: boolean};
-}
-
-declare class EyeTrackerGazeData { 
-	GazeOrigin: Vector;
-	GazeDirection: Vector;
-	FixationPoint: Vector;
-	ConfidenceValue: number;
-	clone() : EyeTrackerGazeData;
-	static C(Other: UObject | any): EyeTrackerGazeData;
-	GetGazeData(): {OutGazeData: EyeTrackerGazeData, $: boolean};
-	static GetGazeData(OutGazeData?: EyeTrackerGazeData): {OutGazeData: EyeTrackerGazeData, $: boolean};
-}
-
-declare class EyeTrackerFunctionLibrary extends BlueprintFunctionLibrary { 
-	static Load(ResourceName: string): EyeTrackerFunctionLibrary;
-	static Find(Outer: UObject, ResourceName: string): EyeTrackerFunctionLibrary;
-	static GetDefaultObject(): EyeTrackerFunctionLibrary;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EyeTrackerFunctionLibrary;
-	static SetEyeTrackedPlayer(PlayerController: PlayerController): void;
-	static IsStereoGazeDataAvailable(): boolean;
-	static IsEyeTrackerConnected(): boolean;
-	static GetStereoGazeData(OutGazeData?: EyeTrackerStereoGazeData): {OutGazeData: EyeTrackerStereoGazeData, $: boolean};
-	static GetGazeData(OutGazeData?: EyeTrackerGazeData): {OutGazeData: EyeTrackerGazeData, $: boolean};
-	static C(Other: UObject | any): EyeTrackerFunctionLibrary;
 }
 
 declare type EFixedFoveatedRenderingLevel = 'FFR_Off' | 'FFR_Low' | 'FFR_Medium' | 'FFR_High' | 'FFR_HighTop' | 'FFR_MAX';
