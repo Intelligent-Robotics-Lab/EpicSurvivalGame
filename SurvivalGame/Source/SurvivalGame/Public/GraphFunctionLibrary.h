@@ -23,4 +23,6 @@ public:
 		static void UpdatePieData(const UObject* WorldContextObject, FVector2D Data);
 	UFUNCTION(BlueprintCallable, Category = "Charts", meta = (WorldContext = "WorldContextObject"))
 		static void UpdateHeatmapResolution(const UObject* WorldContextObject, int Resolution);
+	UFUNCTION(BlueprintCallable, Category = "Charts", meta = (WorldContext = "WorldContextObject"))
+		static FVector2D ClampToSquare(const UObject* WorldContextObject, float Length, float Angle, float WidgetSize, bool Static);
 };

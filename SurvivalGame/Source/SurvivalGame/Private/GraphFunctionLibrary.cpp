@@ -65,3 +65,18 @@ void UGraphFunctionLibrary::UpdateHeatmapResolution(const UObject* WorldContextO
         }
     }
 }
+
+FVector2D UGraphFunctionLibrary::ClampToSquare(const UObject* WorldContextObject, float Length, float Angle, float WidgetSize, bool Static)
+{
+    float x = Length * cos(Angle * PI / 180);
+    float y = Length * sin(Angle * PI / 180);
+
+    if (Static)
+    {
+        float absX = abs(x);
+        float absY = abs(y);
+        float absMin = std::min(std::min(WidgetSize / absY, WidgetSize / absX), 1.f);
+        return FVector2D(absMin * x, -absMin * y);
+    }
+    return FVector2D(x, -y);
+}

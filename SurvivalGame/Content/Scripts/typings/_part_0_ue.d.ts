@@ -417,8 +417,8 @@ declare class Rotator {
 	GetPose(DevicePosition?: Vector,NeckPosition?: Vector,bUseOrienationForPlayerCamera?: boolean,bUsePositionForPlayerCamera?: boolean,PositionScale?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector, NeckPosition: Vector};
 	SetBaseRotationAndBaseOffsetInMeters(BaseOffsetInMeters: Vector,Options: EOrientPositionSelector): void;
 	SetBaseRotationAndPositionOffset(PosOffset: Vector,Options: EOrientPositionSelector): void;
-	IsValidAIRotation(): boolean;
 	SetBaseRotation(): void;
+	IsValidAIRotation(): boolean;
 	Conv_RotatorToText(): string;
 	Conv_RotatorToString(): string;
 	BreakRotator(Roll?: number,Pitch?: number,Yaw?: number): {Roll: number, Pitch: number, Yaw: number};
@@ -449,8 +449,8 @@ declare class Rotator {
 	static GetPose(DeviceRotation?: Rotator,DevicePosition?: Vector,NeckPosition?: Vector,bUseOrienationForPlayerCamera?: boolean,bUsePositionForPlayerCamera?: boolean,PositionScale?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector, NeckPosition: Vector};
 	static SetBaseRotationAndBaseOffsetInMeters(Rotation: Rotator,BaseOffsetInMeters: Vector,Options: EOrientPositionSelector): void;
 	static SetBaseRotationAndPositionOffset(BaseRot: Rotator,PosOffset: Vector,Options: EOrientPositionSelector): void;
-	static IsValidAIRotation(Rotation: Rotator): boolean;
 	static SetBaseRotation(InBaseRotation: Rotator): void;
+	static IsValidAIRotation(Rotation: Rotator): boolean;
 	static Conv_RotatorToText(InRot: Rotator): string;
 	static Conv_RotatorToString(InRot: Rotator): string;
 	static BreakRotator(InRot: Rotator,Roll?: number,Pitch?: number,Yaw?: number): {Roll: number, Pitch: number, Yaw: number};
@@ -528,21 +528,6 @@ declare class Guid {
 	static NotEqual_GuidGuid(A: Guid,B: Guid): boolean;
 	static AddPersistentQuery(PersistentQueryType: EMagicLeapPlaneQueryType): Guid;
 	static NewGuid(): Guid;
-}
-
-declare type EBoundaryType = 'Boundary_Outer' | 'Boundary_PlayArea' | 'Boundary_MAX';
-declare var EBoundaryType : { Boundary_Outer:'Boundary_Outer',Boundary_PlayArea:'Boundary_PlayArea',Boundary_MAX:'Boundary_MAX', };
-declare type ETrackedDeviceType = 'None' | 'HMD' | 'LTouch' | 'RTouch' | 'Touch' | 'DeviceObjectZero' | 'All' | 'ETrackedDeviceType_MAX';
-declare var ETrackedDeviceType : { None:'None',HMD:'HMD',LTouch:'LTouch',RTouch:'RTouch',Touch:'Touch',DeviceObjectZero:'DeviceObjectZero',All:'All',ETrackedDeviceType_MAX:'ETrackedDeviceType_MAX', };
-declare class GuardianTestResult { 
-	IsTriggering: boolean;
-	DeviceType: ETrackedDeviceType;
-	ClosestDistance: number;
-	ClosestPoint: Vector;
-	ClosestPointNormal: Vector;
-	clone() : GuardianTestResult;
-	static C(Other: UObject | any): GuardianTestResult;
-	static GetNodeGuardianIntersection(DeviceType: ETrackedDeviceType,BoundaryType: EBoundaryType): GuardianTestResult;
 }
 
 declare type ESteamVRHand = 'VR_Left' | 'VR_Right' | 'VR_MAX';
@@ -12548,6 +12533,19 @@ declare class ActorLayer {
 	static C(Other: UObject | any): ActorLayer;
 }
 
+declare class VaRestURL { 
+	Protocol: string;
+	Host: string;
+	Port: number;
+	Valid: number;
+	Map: string;
+	RedirectURL: string;
+	Op: string[];
+	Portal: string;
+	clone() : VaRestURL;
+	static C(Other: UObject | any): VaRestURL;
+}
+
 declare class URL { 
 	Protocol: string;
 	Host: string;
@@ -12693,19 +12691,6 @@ declare class RecastNavMesh extends NavigationData {
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): RecastNavMesh;
 	K2_ReplaceAreaInTileBounds(Bounds: Box,OldArea: UnrealEngineClass,NewArea: UnrealEngineClass,ReplaceLinks: boolean): boolean;
 	static C(Other: UObject | any): RecastNavMesh;
-}
-
-declare class VaRestURL { 
-	Protocol: string;
-	Host: string;
-	Port: number;
-	Valid: number;
-	Map: string;
-	RedirectURL: string;
-	Op: string[];
-	Portal: string;
-	clone() : VaRestURL;
-	static C(Other: UObject | any): VaRestURL;
 }
 
 declare type EARWorldAlignment = 'Gravity' | 'GravityAndHeading' | 'Camera' | 'EARWorldAlignment_MAX';
@@ -16340,10 +16325,12 @@ declare class World extends UObject {
 	InvalidateModelGeometry(InLevel: Level): void;
 	RemoveLevelInstance(): void;
 	GetActors(ActorLayer: ActorLayer): Actor[];
+	ClampToSquare(Length: number,Angle: number,WidgetSize: number,Static: boolean): Vector2D;
 	UpdateBoxplotData(Data: Vector2D): void;
 	UpdateHeatmapData(Data: number[]): void;
 	UpdateHeatmapResolution(Resolution: number): void;
 	UpdatePieData(Data: Vector2D): void;
+	GetWorldURL(): VaRestURL;
 	BeginPlay(): void;
 	DestroyWorld(): void;
 	InitializeActorsForPlay(URL: URL): void;
@@ -16356,7 +16343,6 @@ declare class World extends UObject {
 	IsGameWorld(): boolean;
 	IsPlayInEditor(): boolean;
 	IsPlayInPreview(): boolean;
-	GetWorldURL(): VaRestURL;
 	LuminARLineTrace(ScreenPosition: Vector2D,TraceChannels: any,OutHitResults?: ARTraceResult[]): {OutHitResults: ARTraceResult[], $: boolean};
 	StartLuminARSession(LatentInfo: LatentActionInfo,Configuration: LuminARSessionConfig): void;
 	GetNiagaraParameterCollection(Collection: NiagaraParameterCollection): NiagaraParameterCollectionInstance;
@@ -16372,14 +16358,14 @@ declare class World extends UObject {
 	TakeAutomationScreenshot(LatentInfo: LatentActionInfo,Name: string,Notes: string,Options: AutomationScreenshotOptions): void;
 	TakeAutomationScreenshotAtCamera(LatentInfo: LatentActionInfo,Camera: CameraActor,NameOverride: string,Notes: string,Options: AutomationScreenshotOptions): void;
 	TakeAutomationScreenshotOfUI(LatentInfo: LatentActionInfo,Name: string,Options: AutomationScreenshotOptions): void;
-	CreateMoveToProxyObject(Pawn: Pawn,Destination: Vector,TargetActor: Actor,AcceptanceRadius: number,bStopOnOverlap: boolean): AIAsyncTaskBlueprintProxy;
-	SpawnAIFromClass(PawnClass: UnrealEngineClass,BehaviorTree: BehaviorTree,Location: Vector,Rotation: Rotator,bNoCollisionFail: boolean,Owner: Actor): Pawn;
 	GetIsMyTurn(PlayerController: PlayerController,MatchID: string,bIsMyTurn?: boolean): {bIsMyTurn: boolean};
 	GetMyPlayerIndex(PlayerController: PlayerController,MatchID: string,PlayerIndex?: number): {PlayerIndex: number};
 	GetPlayerDisplayName(PlayerController: PlayerController,MatchID: string,PlayerIndex: number,PlayerDisplayName?: string): {PlayerDisplayName: string};
 	RegisterTurnBasedMatchInterfaceObject(PlayerController: PlayerController,UObject: UObject): void;
 	GetCachedAchievementDescription(PlayerController: PlayerController,AchievementID: string,bFoundID?: boolean,Title?: string,LockedDescription?: string,UnlockedDescription?: string,bHidden?: boolean): {bFoundID: boolean, Title: string, LockedDescription: string, UnlockedDescription: string, bHidden: boolean};
 	GetCachedAchievementProgress(PlayerController: PlayerController,AchievementID: string,bFoundID?: boolean,Progress?: number): {bFoundID: boolean, Progress: number};
+	CreateMoveToProxyObject(Pawn: Pawn,Destination: Vector,TargetActor: Actor,AcceptanceRadius: number,bStopOnOverlap: boolean): AIAsyncTaskBlueprintProxy;
+	SpawnAIFromClass(PawnClass: UnrealEngineClass,BehaviorTree: BehaviorTree,Location: Vector,Rotation: Rotator,bNoCollisionFail: boolean,Owner: Actor): Pawn;
 	LogBox(BoxShape: Box,text: string,ObjectColor: LinearColor,LogCategory: string,bAddToMessageLog: boolean): void;
 	LogLocation(Location: Vector,text: string,ObjectColor: LinearColor,Radius: number,LogCategory: string,bAddToMessageLog: boolean): void;
 	LogSegment(SegmentStart: Vector,SegmentEnd: Vector,text: string,ObjectColor: LinearColor,Thickness: number,CategoryName: string,bAddToMessageLog: boolean): void;
@@ -16619,10 +16605,12 @@ declare class World extends UObject {
 	static InvalidateModelGeometry(World: World,InLevel: Level): void;
 	static RemoveLevelInstance(World: World): void;
 	static GetActors(WorldContextObject: UObject,ActorLayer: ActorLayer): Actor[];
+	static ClampToSquare(WorldContextObject: UObject,Length: number,Angle: number,WidgetSize: number,Static: boolean): Vector2D;
 	static UpdateBoxplotData(WorldContextObject: UObject,Data: Vector2D): void;
 	static UpdateHeatmapData(WorldContextObject: UObject,Data: number[]): void;
 	static UpdateHeatmapResolution(WorldContextObject: UObject,Resolution: number): void;
 	static UpdatePieData(WorldContextObject: UObject,Data: Vector2D): void;
+	static GetWorldURL(WorldContextObject: UObject): VaRestURL;
 	static BeginPlay(World: World): void;
 	static DestroyWorld(World: World): void;
 	static InitializeActorsForPlay(World: World,URL: URL): void;
@@ -16635,7 +16623,6 @@ declare class World extends UObject {
 	static IsGameWorld(World: World): boolean;
 	static IsPlayInEditor(World: World): boolean;
 	static IsPlayInPreview(World: World): boolean;
-	static GetWorldURL(WorldContextObject: UObject): VaRestURL;
 	static LuminARLineTrace(WorldContextObject: UObject,ScreenPosition: Vector2D,TraceChannels: any,OutHitResults?: ARTraceResult[]): {OutHitResults: ARTraceResult[], $: boolean};
 	static StartLuminARSession(WorldContextObject: UObject,LatentInfo: LatentActionInfo,Configuration: LuminARSessionConfig): void;
 	static GetNiagaraParameterCollection(WorldContextObject: UObject,Collection: NiagaraParameterCollection): NiagaraParameterCollectionInstance;
@@ -16651,14 +16638,14 @@ declare class World extends UObject {
 	static TakeAutomationScreenshot(WorldContextObject: UObject,LatentInfo: LatentActionInfo,Name: string,Notes: string,Options: AutomationScreenshotOptions): void;
 	static TakeAutomationScreenshotAtCamera(WorldContextObject: UObject,LatentInfo: LatentActionInfo,Camera: CameraActor,NameOverride: string,Notes: string,Options: AutomationScreenshotOptions): void;
 	static TakeAutomationScreenshotOfUI(WorldContextObject: UObject,LatentInfo: LatentActionInfo,Name: string,Options: AutomationScreenshotOptions): void;
-	static CreateMoveToProxyObject(WorldContextObject: UObject,Pawn: Pawn,Destination: Vector,TargetActor: Actor,AcceptanceRadius: number,bStopOnOverlap: boolean): AIAsyncTaskBlueprintProxy;
-	static SpawnAIFromClass(WorldContextObject: UObject,PawnClass: UnrealEngineClass,BehaviorTree: BehaviorTree,Location: Vector,Rotation: Rotator,bNoCollisionFail: boolean,Owner: Actor): Pawn;
 	static GetIsMyTurn(WorldContextObject: UObject,PlayerController: PlayerController,MatchID: string,bIsMyTurn?: boolean): {bIsMyTurn: boolean};
 	static GetMyPlayerIndex(WorldContextObject: UObject,PlayerController: PlayerController,MatchID: string,PlayerIndex?: number): {PlayerIndex: number};
 	static GetPlayerDisplayName(WorldContextObject: UObject,PlayerController: PlayerController,MatchID: string,PlayerIndex: number,PlayerDisplayName?: string): {PlayerDisplayName: string};
 	static RegisterTurnBasedMatchInterfaceObject(WorldContextObject: UObject,PlayerController: PlayerController,UObject: UObject): void;
 	static GetCachedAchievementDescription(WorldContextObject: UObject,PlayerController: PlayerController,AchievementID: string,bFoundID?: boolean,Title?: string,LockedDescription?: string,UnlockedDescription?: string,bHidden?: boolean): {bFoundID: boolean, Title: string, LockedDescription: string, UnlockedDescription: string, bHidden: boolean};
 	static GetCachedAchievementProgress(WorldContextObject: UObject,PlayerController: PlayerController,AchievementID: string,bFoundID?: boolean,Progress?: number): {bFoundID: boolean, Progress: number};
+	static CreateMoveToProxyObject(WorldContextObject: UObject,Pawn: Pawn,Destination: Vector,TargetActor: Actor,AcceptanceRadius: number,bStopOnOverlap: boolean): AIAsyncTaskBlueprintProxy;
+	static SpawnAIFromClass(WorldContextObject: UObject,PawnClass: UnrealEngineClass,BehaviorTree: BehaviorTree,Location: Vector,Rotation: Rotator,bNoCollisionFail: boolean,Owner: Actor): Pawn;
 	static LogBox(WorldContextObject: UObject,BoxShape: Box,text: string,ObjectColor: LinearColor,LogCategory: string,bAddToMessageLog: boolean): void;
 	static LogLocation(WorldContextObject: UObject,Location: Vector,text: string,ObjectColor: LinearColor,Radius: number,LogCategory: string,bAddToMessageLog: boolean): void;
 	static LogSegment(WorldContextObject: UObject,SegmentStart: Vector,SegmentEnd: Vector,text: string,ObjectColor: LinearColor,Thickness: number,CategoryName: string,bAddToMessageLog: boolean): void;
@@ -17442,10 +17429,10 @@ declare class Actor extends UObject {
 	SetActorFlags(Flags: number): void;
 	SetRootComponent(Component: SceneComponent): void;
 	GetContentScale(PlaneResult: MagicLeapPlaneResult): Transform;
-	GetAIController(): AIController;
-	GetBlackboard(): BlackboardComponent;
 	SetFocusActor(bSetStabilizationActor: boolean): void;
 	SetStabilizationDepthActor(bSetFocusActor: boolean): void;
+	GetAIController(): AIController;
+	GetBlackboard(): BlackboardComponent;
 	GetActorBounds(Origin?: Vector,BoxExtent?: Vector): {Origin: Vector, BoxExtent: Vector};
 	ApplyDamage(BaseDamage: number,EventInstigator: Controller,DamageCauser: Actor,DamageTypeClass: UnrealEngineClass): number;
 	ApplyPointDamage(BaseDamage: number,HitFromDirection: Vector,HitInfo: HitResult,EventInstigator: Controller,DamageCauser: Actor,DamageTypeClass: UnrealEngineClass): number;
@@ -17478,10 +17465,10 @@ declare class Actor extends UObject {
 	static SetActorFlags(Actor: Actor,Flags: number): void;
 	static SetRootComponent(Actor: Actor,Component: SceneComponent): void;
 	static GetContentScale(ContentActor: Actor,PlaneResult: MagicLeapPlaneResult): Transform;
-	static GetAIController(ControlledActor: Actor): AIController;
-	static GetBlackboard(Target: Actor): BlackboardComponent;
 	static SetFocusActor(InFocusActor: Actor,bSetStabilizationActor: boolean): void;
 	static SetStabilizationDepthActor(InStabilizationDepthActor: Actor,bSetFocusActor: boolean): void;
+	static GetAIController(ControlledActor: Actor): AIController;
+	static GetBlackboard(Target: Actor): BlackboardComponent;
 	static GetActorBounds(Actor: Actor,Origin?: Vector,BoxExtent?: Vector): {Origin: Vector, BoxExtent: Vector};
 	static ApplyDamage(DamagedActor: Actor,BaseDamage: number,EventInstigator: Controller,DamageCauser: Actor,DamageTypeClass: UnrealEngineClass): number;
 	static ApplyPointDamage(DamagedActor: Actor,BaseDamage: number,HitFromDirection: Vector,HitInfo: HitResult,EventInstigator: Controller,DamageCauser: Actor,DamageTypeClass: UnrealEngineClass): number;
@@ -18144,6 +18131,21 @@ declare class Vector2D {
 	static GetPlayAreaBounds(Origin: EHMDTrackingOrigin): Vector2D;
 }
 
+declare type EBoundaryType = 'Boundary_Outer' | 'Boundary_PlayArea' | 'Boundary_MAX';
+declare var EBoundaryType : { Boundary_Outer:'Boundary_Outer',Boundary_PlayArea:'Boundary_PlayArea',Boundary_MAX:'Boundary_MAX', };
+declare type ETrackedDeviceType = 'None' | 'HMD' | 'LTouch' | 'RTouch' | 'Touch' | 'DeviceObjectZero' | 'All' | 'ETrackedDeviceType_MAX';
+declare var ETrackedDeviceType : { None:'None',HMD:'HMD',LTouch:'LTouch',RTouch:'RTouch',Touch:'Touch',DeviceObjectZero:'DeviceObjectZero',All:'All',ETrackedDeviceType_MAX:'ETrackedDeviceType_MAX', };
+declare class GuardianTestResult { 
+	IsTriggering: boolean;
+	DeviceType: ETrackedDeviceType;
+	ClosestDistance: number;
+	ClosestPoint: Vector;
+	ClosestPointNormal: Vector;
+	clone() : GuardianTestResult;
+	static C(Other: UObject | any): GuardianTestResult;
+	static GetNodeGuardianIntersection(DeviceType: ETrackedDeviceType,BoundaryType: EBoundaryType): GuardianTestResult;
+}
+
 declare class MagicLeapRaycastQueryParams { 
 	Position: Vector;
 	Direction: Vector;
@@ -18175,17 +18177,17 @@ declare class Vector {
 	SegmentIntersection2D(SegmentEndA: Vector,SegmentStartB: Vector,SegmentEndB: Vector,IntersectionPoint?: Vector): {IntersectionPoint: Vector, $: boolean};
 	GetClosestARPin(PinId?: Guid): {PinId: Guid, $: EMagicLeapPassableWorldError};
 	GetSelectionBounds(BoxExtent?: Vector,SphereRadius?: number): {Origin: Vector, BoxExtent: Vector, SphereRadius: number};
-	GetPointGuardianIntersection(BoundaryType: EBoundaryType): GuardianTestResult;
-	GetRawSensorData(LinearAcceleration?: Vector,AngularVelocity?: Vector,LinearVelocity?: Vector,TimeInSeconds?: number,DeviceType?: ETrackedDeviceType): {AngularAcceleration: Vector, LinearAcceleration: Vector, AngularVelocity: Vector, LinearVelocity: Vector, TimeInSeconds: number};
-	SetPositionScale3D(): void;
 	GetLeftHandPoseData(Orientation?: Rotator,AngularVelocity?: Vector,Velocity?: Vector): {Position: Vector, Orientation: Rotator, AngularVelocity: Vector, Velocity: Vector};
 	GetRightHandPoseData(Orientation?: Rotator,AngularVelocity?: Vector,Velocity?: Vector): {Position: Vector, Orientation: Rotator, AngularVelocity: Vector, Velocity: Vector};
 	GetSteamVR_HandPoseRelativeToNow(Orientation?: Rotator,hand?: ESteamVRHand,PredictedSecondsFromNow?: number): {Position: Vector, Orientation: Rotator, $: boolean};
 	GenerateBoxMesh(Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
-	IsValidAIDirection(): boolean;
-	IsValidAILocation(): boolean;
+	GetPointGuardianIntersection(BoundaryType: EBoundaryType): GuardianTestResult;
+	GetRawSensorData(LinearAcceleration?: Vector,AngularVelocity?: Vector,LinearVelocity?: Vector,TimeInSeconds?: number,DeviceType?: ETrackedDeviceType): {AngularAcceleration: Vector, LinearAcceleration: Vector, AngularVelocity: Vector, LinearVelocity: Vector, TimeInSeconds: number};
+	SetPositionScale3D(): void;
 	MakeRaycastQueryParams(Direction: Vector,UpVector: Vector,Width: number,Height: number,HorizontalFovDegrees: number,CollideWithUnobserved: boolean,UserData: number): MagicLeapRaycastQueryParams;
 	SetBasePosition(): void;
+	IsValidAIDirection(): boolean;
+	IsValidAILocation(): boolean;
 	Conv_VectorToText(): string;
 	Conv_VectorToString(): string;
 	Add_VectorFloat(B: number): Vector;
@@ -18327,17 +18329,17 @@ declare class Vector {
 	static SegmentIntersection2D(SegmentStartA: Vector,SegmentEndA: Vector,SegmentStartB: Vector,SegmentEndB: Vector,IntersectionPoint?: Vector): {IntersectionPoint: Vector, $: boolean};
 	static GetClosestARPin(SearchPoint: Vector,PinId?: Guid): {PinId: Guid, $: EMagicLeapPassableWorldError};
 	static GetSelectionBounds(Origin?: Vector,BoxExtent?: Vector,SphereRadius?: number): {Origin: Vector, BoxExtent: Vector, SphereRadius: number};
-	static GetPointGuardianIntersection(Point: Vector,BoundaryType: EBoundaryType): GuardianTestResult;
-	static GetRawSensorData(AngularAcceleration?: Vector,LinearAcceleration?: Vector,AngularVelocity?: Vector,LinearVelocity?: Vector,TimeInSeconds?: number,DeviceType?: ETrackedDeviceType): {AngularAcceleration: Vector, LinearAcceleration: Vector, AngularVelocity: Vector, LinearVelocity: Vector, TimeInSeconds: number};
-	static SetPositionScale3D(PosScale3D: Vector): void;
 	static GetLeftHandPoseData(Position?: Vector,Orientation?: Rotator,AngularVelocity?: Vector,Velocity?: Vector): {Position: Vector, Orientation: Rotator, AngularVelocity: Vector, Velocity: Vector};
 	static GetRightHandPoseData(Position?: Vector,Orientation?: Rotator,AngularVelocity?: Vector,Velocity?: Vector): {Position: Vector, Orientation: Rotator, AngularVelocity: Vector, Velocity: Vector};
 	static GetSteamVR_HandPoseRelativeToNow(Position?: Vector,Orientation?: Rotator,hand?: ESteamVRHand,PredictedSecondsFromNow?: number): {Position: Vector, Orientation: Rotator, $: boolean};
 	static GenerateBoxMesh(BoxRadius: Vector,Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
-	static IsValidAIDirection(DirectionVector: Vector): boolean;
-	static IsValidAILocation(Location: Vector): boolean;
+	static GetPointGuardianIntersection(Point: Vector,BoundaryType: EBoundaryType): GuardianTestResult;
+	static GetRawSensorData(AngularAcceleration?: Vector,LinearAcceleration?: Vector,AngularVelocity?: Vector,LinearVelocity?: Vector,TimeInSeconds?: number,DeviceType?: ETrackedDeviceType): {AngularAcceleration: Vector, LinearAcceleration: Vector, AngularVelocity: Vector, LinearVelocity: Vector, TimeInSeconds: number};
+	static SetPositionScale3D(PosScale3D: Vector): void;
 	static MakeRaycastQueryParams(Position: Vector,Direction: Vector,UpVector: Vector,Width: number,Height: number,HorizontalFovDegrees: number,CollideWithUnobserved: boolean,UserData: number): MagicLeapRaycastQueryParams;
 	static SetBasePosition(InBasePosition: Vector): void;
+	static IsValidAIDirection(DirectionVector: Vector): boolean;
+	static IsValidAILocation(Location: Vector): boolean;
 	static Conv_VectorToText(InVec: Vector): string;
 	static Conv_VectorToString(InVec: Vector): string;
 	static Add_VectorFloat(A: Vector,B: number): Vector;
@@ -19516,52 +19518,3 @@ declare type ELogTimes = 'None' | 'UTC' | 'SinceGStartTime' | 'Local' | 'ELogTim
 declare var ELogTimes : { None:'None',UTC:'UTC',SinceGStartTime:'SinceGStartTime',Local:'Local',ELogTimes_MAX:'ELogTimes_MAX', };
 declare type EAssetEditorOpenLocation = 'Default' | 'NewWindow' | 'MainWindow' | 'ContentBrowser' | 'LastDockedWindowOrNewWindow' | 'LastDockedWindowOrMainWindow' | 'LastDockedWindowOrContentBrowser' | 'EAssetEditorOpenLocation_MAX';
 declare var EAssetEditorOpenLocation : { Default:'Default',NewWindow:'NewWindow',MainWindow:'MainWindow',ContentBrowser:'ContentBrowser',LastDockedWindowOrNewWindow:'LastDockedWindowOrNewWindow',LastDockedWindowOrMainWindow:'LastDockedWindowOrMainWindow',LastDockedWindowOrContentBrowser:'LastDockedWindowOrContentBrowser',EAssetEditorOpenLocation_MAX:'EAssetEditorOpenLocation_MAX', };
-declare class EditorStyleSettings extends UObject { 
-	bEnableHighDPIAwareness: boolean;
-	bEnableUserEditorLayoutManagement: boolean;
-	ColorVisionDeficiencyPreviewType: EColorVisionDeficiency;
-	ColorVisionDeficiencySeverity: number;
-	bColorVisionDeficiencyCorrection: boolean;
-	bColorVisionDeficiencyCorrectionPreviewWithDeficiency: boolean;
-	SelectionColor: LinearColor;
-	PressedSelectionColor: LinearColor;
-	InactiveSelectionColor: LinearColor;
-	KeyboardFocusColor: LinearColor;
-	EditorWindowBackgroundColor: LinearColor;
-	EditorMainWindowBackgroundOverride: SlateBrush;
-	EditorChildWindowBackgroundOverride: SlateBrush;
-	bResetEditorWindowBackgroundSettings: boolean;
-	bUseSmallToolBarIcons: boolean;
-	bUseGrid: boolean;
-	RegularColor: LinearColor;
-	RuleColor: LinearColor;
-	CenterColor: LinearColor;
-	GridSnapSize: any;
-	GraphBackgroundBrush: SlateBrush;
-	bEnableWindowAnimations: boolean;
-	bShowFriendlyNames: boolean;
-	bShowNativeComponentNames: boolean;
-	bExpandConfigurationMenus: boolean;
-	bShowProjectMenus: boolean;
-	bShowLaunchMenus: boolean;
-	LogBackgroundColor: LinearColor;
-	LogSelectionBackgroundColor: LinearColor;
-	LogNormalColor: LinearColor;
-	LogCommandColor: LinearColor;
-	LogWarningColor: LinearColor;
-	LogErrorColor: LinearColor;
-	bShowAllAdvancedDetails: boolean;
-	bShowHiddenPropertiesWhilePlaying: boolean;
-	LogFontSize: number;
-	LogTimestampMode: ELogTimes;
-	bPromoteOutputLogWarningsDuringPIE: boolean;
-	AssetEditorOpenLocation: EAssetEditorOpenLocation;
-	bEnableColorizedEditorTabs: boolean;
-	bEnableLegacyEditorModeUI: boolean;
-	static Load(ResourceName: string): EditorStyleSettings;
-	static Find(Outer: UObject, ResourceName: string): EditorStyleSettings;
-	static GetDefaultObject(): EditorStyleSettings;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EditorStyleSettings;
-	static C(Other: UObject | any): EditorStyleSettings;
-}
-

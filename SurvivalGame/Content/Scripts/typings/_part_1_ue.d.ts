@@ -1,3 +1,52 @@
+declare class EditorStyleSettings extends UObject { 
+	bEnableHighDPIAwareness: boolean;
+	bEnableUserEditorLayoutManagement: boolean;
+	ColorVisionDeficiencyPreviewType: EColorVisionDeficiency;
+	ColorVisionDeficiencySeverity: number;
+	bColorVisionDeficiencyCorrection: boolean;
+	bColorVisionDeficiencyCorrectionPreviewWithDeficiency: boolean;
+	SelectionColor: LinearColor;
+	PressedSelectionColor: LinearColor;
+	InactiveSelectionColor: LinearColor;
+	KeyboardFocusColor: LinearColor;
+	EditorWindowBackgroundColor: LinearColor;
+	EditorMainWindowBackgroundOverride: SlateBrush;
+	EditorChildWindowBackgroundOverride: SlateBrush;
+	bResetEditorWindowBackgroundSettings: boolean;
+	bUseSmallToolBarIcons: boolean;
+	bUseGrid: boolean;
+	RegularColor: LinearColor;
+	RuleColor: LinearColor;
+	CenterColor: LinearColor;
+	GridSnapSize: any;
+	GraphBackgroundBrush: SlateBrush;
+	bEnableWindowAnimations: boolean;
+	bShowFriendlyNames: boolean;
+	bShowNativeComponentNames: boolean;
+	bExpandConfigurationMenus: boolean;
+	bShowProjectMenus: boolean;
+	bShowLaunchMenus: boolean;
+	LogBackgroundColor: LinearColor;
+	LogSelectionBackgroundColor: LinearColor;
+	LogNormalColor: LinearColor;
+	LogCommandColor: LinearColor;
+	LogWarningColor: LinearColor;
+	LogErrorColor: LinearColor;
+	bShowAllAdvancedDetails: boolean;
+	bShowHiddenPropertiesWhilePlaying: boolean;
+	LogFontSize: number;
+	LogTimestampMode: ELogTimes;
+	bPromoteOutputLogWarningsDuringPIE: boolean;
+	AssetEditorOpenLocation: EAssetEditorOpenLocation;
+	bEnableColorizedEditorTabs: boolean;
+	bEnableLegacyEditorModeUI: boolean;
+	static Load(ResourceName: string): EditorStyleSettings;
+	static Find(Outer: UObject, ResourceName: string): EditorStyleSettings;
+	static GetDefaultObject(): EditorStyleSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EditorStyleSettings;
+	static C(Other: UObject | any): EditorStyleSettings;
+}
+
 declare class MaterialShaderQualitySettings extends UObject { 
 	ForwardSettingMap: any;
 	static Load(ResourceName: string): MaterialShaderQualitySettings;
@@ -20589,40 +20638,5 @@ declare class PropertyEditorTestObject extends UObject {
 	static GetDefaultObject(): PropertyEditorTestObject;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PropertyEditorTestObject;
 	static C(Other: UObject | any): PropertyEditorTestObject;
-}
-
-declare class BlueprintPropertyTestObject extends UObject { 
-	ShouldBeHidden: number;
-	ShouldBeVisible: number;
-	static Load(ResourceName: string): BlueprintPropertyTestObject;
-	static Find(Outer: UObject, ResourceName: string): BlueprintPropertyTestObject;
-	static GetDefaultObject(): BlueprintPropertyTestObject;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlueprintPropertyTestObject;
-	static C(Other: UObject | any): BlueprintPropertyTestObject;
-}
-
-declare class BlueprintPropertyContainerTestObject extends UObject { 
-	Array: BlueprintPropertyTestObject[];
-	static Load(ResourceName: string): BlueprintPropertyContainerTestObject;
-	static Find(Outer: UObject, ResourceName: string): BlueprintPropertyContainerTestObject;
-	static GetDefaultObject(): BlueprintPropertyContainerTestObject;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlueprintPropertyContainerTestObject;
-	static C(Other: UObject | any): BlueprintPropertyContainerTestObject;
-}
-
-declare class TestSparseClassDataBase extends UObject { 
-	static Load(ResourceName: string): TestSparseClassDataBase;
-	static Find(Outer: UObject, ResourceName: string): TestSparseClassDataBase;
-	static GetDefaultObject(): TestSparseClassDataBase;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TestSparseClassDataBase;
-	static C(Other: UObject | any): TestSparseClassDataBase;
-}
-
-declare class TestSparseClassData extends TestSparseClassDataBase { 
-	static Load(ResourceName: string): TestSparseClassData;
-	static Find(Outer: UObject, ResourceName: string): TestSparseClassData;
-	static GetDefaultObject(): TestSparseClassData;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TestSparseClassData;
-	static C(Other: UObject | any): TestSparseClassData;
 }
 
