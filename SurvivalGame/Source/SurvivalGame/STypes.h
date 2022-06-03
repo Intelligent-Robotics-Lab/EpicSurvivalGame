@@ -30,6 +30,33 @@ enum class EBotBehaviorType : uint8
 	Patrolling,
 };
 
+USTRUCT(BlueprintType)
+struct FCurrentObjective
+{
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(BlueprintReadWrite, Category = "CameraInterestFunction")
+		FName Objective;
+
+	UPROPERTY(BlueprintReadWrite, Category = "CameraInterestFunction")
+		float DistanceToObjective;
+};
+
+USTRUCT(BlueprintType)
+struct FCameraInterestType
+{
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(BlueprintReadWrite, Category = "CameraInterestFunction")
+		FVector2D Location;
+
+	UPROPERTY(BlueprintReadWrite, Category = "CameraInterestFunction")
+		FName Affiliation;
+
+	UPROPERTY(BlueprintReadWrite, Category = "CameraInterestFunction")
+		FCurrentObjective CObjective;
+
+};
 
 USTRUCT(BlueprintType)
 struct FCartesianSeriesData
