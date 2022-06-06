@@ -12533,6 +12533,19 @@ declare class ActorLayer {
 	static C(Other: UObject | any): ActorLayer;
 }
 
+declare class VaRestURL { 
+	Protocol: string;
+	Host: string;
+	Port: number;
+	Valid: number;
+	Map: string;
+	RedirectURL: string;
+	Op: string[];
+	Portal: string;
+	clone() : VaRestURL;
+	static C(Other: UObject | any): VaRestURL;
+}
+
 declare type EARWorldAlignment = 'Gravity' | 'GravityAndHeading' | 'Camera' | 'EARWorldAlignment_MAX';
 declare var EARWorldAlignment : { Gravity:'Gravity',GravityAndHeading:'GravityAndHeading',Camera:'Camera',EARWorldAlignment_MAX:'EARWorldAlignment_MAX', };
 declare type EARSessionType = 'None' | 'Orientation' | 'World' | 'Face' | 'Image' | 'ObjectScanning' | 'PoseTracking' | 'GeoTracking' | 'EARSessionType_MAX';
@@ -13048,19 +13061,6 @@ declare class LuminARSessionConfig extends ARSessionConfig {
 	static GetDefaultObject(): LuminARSessionConfig;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LuminARSessionConfig;
 	static C(Other: UObject | any): LuminARSessionConfig;
-}
-
-declare class VaRestURL { 
-	Protocol: string;
-	Host: string;
-	Port: number;
-	Valid: number;
-	Map: string;
-	RedirectURL: string;
-	Op: string[];
-	Portal: string;
-	clone() : VaRestURL;
-	static C(Other: UObject | any): VaRestURL;
 }
 
 declare class URL { 
@@ -16330,9 +16330,9 @@ declare class World extends UObject {
 	UpdateHeatmapData(Data: number[]): void;
 	UpdateHeatmapResolution(Resolution: number): void;
 	UpdatePieData(Data: Vector2D): void;
+	GetWorldURL(): VaRestURL;
 	LuminARLineTrace(ScreenPosition: Vector2D,TraceChannels: any,OutHitResults?: ARTraceResult[]): {OutHitResults: ARTraceResult[], $: boolean};
 	StartLuminARSession(LatentInfo: LatentActionInfo,Configuration: LuminARSessionConfig): void;
-	GetWorldURL(): VaRestURL;
 	BeginPlay(): void;
 	DestroyWorld(): void;
 	InitializeActorsForPlay(URL: URL): void;
@@ -16610,9 +16610,9 @@ declare class World extends UObject {
 	static UpdateHeatmapData(WorldContextObject: UObject,Data: number[]): void;
 	static UpdateHeatmapResolution(WorldContextObject: UObject,Resolution: number): void;
 	static UpdatePieData(WorldContextObject: UObject,Data: Vector2D): void;
+	static GetWorldURL(WorldContextObject: UObject): VaRestURL;
 	static LuminARLineTrace(WorldContextObject: UObject,ScreenPosition: Vector2D,TraceChannels: any,OutHitResults?: ARTraceResult[]): {OutHitResults: ARTraceResult[], $: boolean};
 	static StartLuminARSession(WorldContextObject: UObject,LatentInfo: LatentActionInfo,Configuration: LuminARSessionConfig): void;
-	static GetWorldURL(WorldContextObject: UObject): VaRestURL;
 	static BeginPlay(World: World): void;
 	static DestroyWorld(World: World): void;
 	static InitializeActorsForPlay(World: World,URL: URL): void;
