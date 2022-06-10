@@ -24,6 +24,25 @@ void UGraphFunctionLibrary::UpdateHeatmapData(const UObject* WorldContextObject,
     }
 }
 
+void UGraphFunctionLibrary::UpdateCIFmapData(const UObject* WorldContextObject, TArray<float> Data)
+{
+    const USGameInstance* GameInstance = Cast<USGameInstance>(WorldContextObject->GetWorld()->GetGameInstance());
+
+    if (GameInstance)
+    {
+        if (GameInstance->WebSocket->IsConnected())
+        {
+            FString newString = "{ \"interest\": [" + FString::SanitizeFloat(Data[0]) + ",";
+            for (int i = 1; i < (Data.GetAllocatedSize() / Data.GetTypeSize()) - 1; ++i)
+            {
+                newString += FString::SanitizeFloat(Data[i]) + ',';
+            }
+            newString += FString::SanitizeFloat(Data.Last()) + "] }";
+            GameInstance->WebSocket->Send(newString);
+        }
+    }
+}
+
 void UGraphFunctionLibrary::UpdateBoxplotData(const UObject* WorldContextObject, FVector2D Data)
 {
     const USGameInstance* GameInstance = Cast<USGameInstance>(WorldContextObject->GetWorld()->GetGameInstance());

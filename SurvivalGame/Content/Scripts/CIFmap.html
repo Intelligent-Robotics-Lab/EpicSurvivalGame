@@ -151,13 +151,13 @@
         if(JData.resolution) {
           resolution = JData.resolution;
         }
-        if(JData.data) {
+        if(JData.interest) {
           let newData = [];
           // let newxData = [];
           // let newyData = [];
           for (let i = 0; i <= resolution; i++) {
             for (let j = 0; j <= resolution; j++) {
-              newData.push([i, j, JData.data[(resolution*i)+j]]);
+              newData.push([i, j, JData.interest[(resolution*i)+j]]);
             }
             // newxData.push(i);
           }

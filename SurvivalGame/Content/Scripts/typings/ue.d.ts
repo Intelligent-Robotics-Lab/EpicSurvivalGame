@@ -2,29 +2,6 @@
 /// <reference path="_part_1_ue.d.ts">/>
 /// <reference path="_part_2_ue.d.ts">/>
 /// <reference path="_part_3_ue.d.ts">/>
-declare class JavascriptEditorPopupWindow extends UObject { 
-	Widget: Widget;
-	static Load(ResourceName: string): JavascriptEditorPopupWindow;
-	static Find(Outer: UObject, ResourceName: string): JavascriptEditorPopupWindow;
-	static GetDefaultObject(): JavascriptEditorPopupWindow;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): JavascriptEditorPopupWindow;
-	Open(Heading: string,DesiredSize: Vector2D): boolean;
-	OnDismissed(): void;
-	static C(Other: UObject | any): JavascriptEditorPopupWindow;
-}
-
-declare class JavascriptEditorTabManager extends Widget { 
-	Layout: string;
-	Tabs: JavascriptEditorTab[];
-	static Load(ResourceName: string): JavascriptEditorTabManager;
-	static Find(Outer: UObject, ResourceName: string): JavascriptEditorTabManager;
-	static GetDefaultObject(): JavascriptEditorTabManager;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): JavascriptEditorTabManager;
-	InvokeTab(SearchForTabId: string): void;
-	InsertNewTab(PlaceholderId: string,SearchForTabId: string,NewTab: JavascriptEditorTab): void;
-	static C(Other: UObject | any): JavascriptEditorTabManager;
-}
-
 declare class JavascriptEditorTick extends UObject { 
 	OnTick: UnrealEngineDelegate<(DeltaSeconds: number) => void>;
 	static Load(ResourceName: string): JavascriptEditorTick;
