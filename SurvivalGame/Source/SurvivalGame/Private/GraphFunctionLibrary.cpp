@@ -14,7 +14,7 @@ void UGraphFunctionLibrary::UpdateHeatmapData(const UObject* WorldContextObject,
         if (GameInstance->WebSocket->IsConnected())
         {
             FString newString = "{ \"data\": [" + FString::SanitizeFloat(Data[0]) + ",";
-            for (int i = 1; i < (Data.GetAllocatedSize()/Data.GetTypeSize()) - 1; ++i)
+            for (int i = 1; i < Data.Num() - 1; ++i)
             {
                 newString += FString::SanitizeFloat(Data[i]) + ',';
             }
@@ -38,7 +38,7 @@ void UGraphFunctionLibrary::UpdateBoxplotData(const UObject* WorldContextObject,
     }
 }
 
-void UGraphFunctionLibrary::UpdatePieData(const UObject* WorldContextObject, FVector2D Data)
+void UGraphFunctionLibrary::UpdateBarChartData(const UObject* WorldContextObject, float Data)
 {
     const USGameInstance* GameInstance = Cast<USGameInstance>(WorldContextObject->GetWorld()->GetGameInstance());
 
@@ -46,7 +46,89 @@ void UGraphFunctionLibrary::UpdatePieData(const UObject* WorldContextObject, FVe
     {
         if (GameInstance->WebSocket->IsConnected())
         {
-            FString newString = "{ \"pie\": [" + FString::SanitizeFloat(Data[0]) + "," + FString::SanitizeFloat(Data[1]) + "] }";
+            FString newString = "{ \"barPoint\": " + FString::SanitizeFloat(Data) + " }";
+            //GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, newString);
+            GameInstance->WebSocket->Send(newString);
+        }
+    }
+}
+
+void UGraphFunctionLibrary::SwitchBarChartData(const UObject* WorldContextObject, TArray<float> Data)
+{
+    const USGameInstance* GameInstance = Cast<USGameInstance>(WorldContextObject->GetWorld()->GetGameInstance());
+
+    if (GameInstance)
+    {
+        if (GameInstance->WebSocket->IsConnected())
+        {
+            if (Data.Num())
+            {
+                FString newString = "{ \"switchBar\": [" + FString::SanitizeFloat(Data[0]) + ",";
+                for (int i = 1; i < Data.Num() - 1; ++i)
+                {
+                    newString += FString::SanitizeFloat(Data[i]) + ',';
+                }
+                newString += FString::SanitizeFloat(Data.Last()) + "] }";
+                //GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, newString);
+                GameInstance->WebSocket->Send(newString);
+            }
+        }
+    }
+}
+
+void UGraphFunctionLibrary::ZeroBarChartData(const UObject* WorldContextObject)
+{
+    const USGameInstance* GameInstance = Cast<USGameInstance>(WorldContextObject->GetWorld()->GetGameInstance());
+
+    if (GameInstance)
+    {
+        if (GameInstance->WebSocket->IsConnected())
+        {
+            FString newString = "{ \"zeroBar\": 1 }";
+            //GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, newString);
+            GameInstance->WebSocket->Send(newString);
+        }
+    }
+}
+
+void UGraphFunctionLibrary::UpdateScatterData(const UObject* WorldContextObject, FString Name, FVector2D Data)
+{
+    const USGameInstance* GameInstance = Cast<USGameInstance>(WorldContextObject->GetWorld()->GetGameInstance());
+
+    if (GameInstance)
+    {
+        if (GameInstance->WebSocket->IsConnected())
+        {
+            FString newString = "{ \"scatter\": { \"name\": \"" + Name + "\", \"data\": [ " + FString::SanitizeFloat(Data.X) + "," + FString::SanitizeFloat(Data.Y) + " ] } }";
+            //GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, newString);
+            GameInstance->WebSocket->Send(newString);
+        }
+    }
+}
+
+void UGraphFunctionLibrary::UpdatePieData(const UObject* WorldContextObject, float Value, FString Name)
+{
+    const USGameInstance* GameInstance = Cast<USGameInstance>(WorldContextObject->GetWorld()->GetGameInstance());
+
+    if (GameInstance)
+    {
+        if (GameInstance->WebSocket->IsConnected())
+        {
+            FString newString = "{ \"pieData\": [ { \"value\": " + FString::SanitizeFloat(Value) + ", \"name\": \"" + Name + "\" } ] }";
+            GameInstance->WebSocket->Send(newString);
+        }
+    }
+}
+
+void UGraphFunctionLibrary::ChangePieVariables(const UObject* WorldContextObject, float Value, FString Name)
+{
+    const USGameInstance* GameInstance = Cast<USGameInstance>(WorldContextObject->GetWorld()->GetGameInstance());
+
+    if (GameInstance)
+    {
+        if (GameInstance->WebSocket->IsConnected())
+        {
+            FString newString = "{ \"pieVariable\": [ { \"value\": " + FString::SanitizeFloat(Value) + ", \"name\": \"" + Name + "\" } ] }";
             GameInstance->WebSocket->Send(newString);
         }
     }

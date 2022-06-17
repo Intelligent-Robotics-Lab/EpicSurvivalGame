@@ -19,6 +19,7 @@ wss.on('connection', (ws) => {
     ws.on('message', (UEdata) => {
         wss.clients.forEach( (client) => {
             if (client != ws) {
+                // let JUEdata = JSON.parse(UEdata);
                 client.send(`${UEdata}`);
             }
         });

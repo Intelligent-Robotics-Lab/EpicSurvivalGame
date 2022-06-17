@@ -22,13 +22,12 @@
 
       let option;
       let boxData = [];
-      let scatterData = [];
       let rawData = [Array(0), Array(0), Array(0), Array(0), Array(0)];
       let xData = [];
       let buckets = 5;
-      let bucketSize = 300;
+      let bucketSize = 3;
       for (var i = 0; i < (buckets-1); ++i) {
-        xData.push(`${i*bucketSize}-${((i+1)*bucketSize)-1}`);
+        xData.push(`${i*bucketSize}-${((i+1)*bucketSize)}`);
       }
       xData.push(`${(buckets-1)*bucketSize}+`);
 
@@ -38,9 +37,9 @@
           trigger: 'item',
         },
         grid: {
-          left: '15%',
-          right: '5%',
-          top: '5%',
+          left: '14%',
+          right: 0,
+          top: 0,
           bottom: '10%',
           containLabel: false
         },
@@ -111,15 +110,6 @@
             type: 'boxplot',
             data: boxData,
             boxWidth: [20,30],
-            itemStyle: {
-              
-            }
-          },
-          {
-            name: 'datapoint',
-            type: 'scatter',
-            color: 'red',
-            data: scatterData
           }
         ]
       };
@@ -138,16 +128,13 @@
         let JData = JSON.parse(event.data)
         if(JData.point) {
           let newBoxData = [];
-          let newScatterData = [];
           if((buckets-1)*bucketSize < JData.point[0]) {
             rawData[buckets-1].push(JData.point[1]);
-            scatterData.push([buckets-1, JData.point[1]]);
           }
           else{
             for(var i = 0; i < buckets; ++i) {
               if((i*bucketSize) < JData.point[0] && JData.point[0] < ((i+1)*bucketSize)) {
                 rawData[i].push(JData.point[1]);
-                scatterData.push([i, JData.point[1]]);
                 break;
               }
             }
@@ -159,13 +146,10 @@
             else {
               newBoxData.push([0, 0, 0, 0, 0]);
             }
-            // scatterData.push([i, rawData[i]]);
           }
           boxData = newBoxData;
-          // scatterData = newScatterData;
         }
         option.series[0].data = boxData;
-        option.series[1].data = scatterData;
 
         if (option && typeof option === 'object') {
           myChart.setOption(option);

@@ -26,15 +26,27 @@
       let data = [
               { value: 500, name: 'Attackers' },
               { value: 500, name: 'Defenders' },
+              { value: 500, name: 'BridgeBot' }
             ];
       option = {
         backgroundColor: 'rgba(255,255,255,0.5)',
         title: {
-          text: 'Total Health Pool',
+          text: 'Health Pool',
           textStyle: {
-            color: '#000000'
+            color: '#000000',
+            fontSize: '24'
           },
-          left: 'center'
+          left: 'center',
+          top: '5%'
+        },
+        grid: {
+          bottom: 0,
+          right: 0,
+          top: 0,
+          left: 0
+        },
+        legend: { 
+          data: [ 'Attackers', 'Defenders' ]
         },
         series: [
           {
@@ -42,6 +54,8 @@
             type: 'pie',
             radius: '50%',
             label: {
+              fontSize: '14',
+              fontWeight: 'bold',
               color: '#000000',
               borderColor: '#000000'
             },
@@ -67,9 +81,29 @@
       const webSocket = new WebSocket('ws://localhost:8080');
       webSocket.onmessage = function (event) {
         let JData = JSON.parse(event.data)
-        if(JData.pie) {
-          data[0].value = JData.pie[0];
-          data[1].value = JData.pie[1];
+        if(JData.pieData) {
+          for(var i = 0; i < data.length; ++i) {
+            if(data[i].name == JData.pieData[0].name) {
+              data[i].value = JData.pieData[0].value;
+              break;
+            }
+          }
+        }
+        if(JData.pieVariable) {
+          console.log(JData.pieVariable);
+          let removed = false;
+          for(var i = 0; i< data.length; ++i) {
+            if(data[i].name == JData.pieVariable[0].name) {
+              console.log("removed " + JData.pieVariable[0].name )
+              data.splice(i,1)
+              removed = true;
+              break;
+            }
+          }
+          if(!removed) {
+            console.log("added " + JData.pieVariable[0].name )
+            data.push(JData.pieVariable[0]);
+          }
         }
         if (option && typeof option === 'object') {
           myChart.setOption(option);

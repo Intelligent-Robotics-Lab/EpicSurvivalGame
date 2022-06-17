@@ -20,7 +20,17 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Charts", meta = (WorldContext = "WorldContextObject"))
 		static void UpdateBoxplotData(const UObject* WorldContextObject, FVector2D Data);
 	UFUNCTION(BlueprintCallable, Category = "Charts", meta = (WorldContext = "WorldContextObject"))
-		static void UpdatePieData(const UObject* WorldContextObject, FVector2D Data);
+		static void UpdateBarChartData(const UObject* WorldContextObject, float Data);
+	UFUNCTION(BlueprintCallable, Category = "Charts", meta = (WorldContext = "WorldContextObject"))
+		static void SwitchBarChartData(const UObject* WorldContextObject, TArray<float> Data);
+	UFUNCTION(BlueprintCallable, Category = "Charts", meta = (WorldContext = "WorldContextObject"))
+		static void ZeroBarChartData(const UObject* WorldContextObject);
+	UFUNCTION(BlueprintCallable, Category = "Charts", meta = (WorldContext = "WorldContextObject"))
+		static void UpdateScatterData(const UObject* WorldContextObject, FString Name, FVector2D Data);
+	UFUNCTION(BlueprintCallable, Category = "Charts", meta = (WorldContext = "WorldContextObject"))
+		static void UpdatePieData(const UObject* WorldContextObject, float Value, FString Name);
+	UFUNCTION(BlueprintCallable, Category = "Charts", meta = (WorldContext = "WorldContextObject"))
+		static void ChangePieVariables(const UObject* WorldContextObject, float Value, FString Name);
 	UFUNCTION(BlueprintCallable, Category = "Charts", meta = (WorldContext = "WorldContextObject"))
 		static void UpdateHeatmapResolution(const UObject* WorldContextObject, int Resolution);
 	UFUNCTION(BlueprintCallable, Category = "Charts", meta = (WorldContext = "WorldContextObject"))

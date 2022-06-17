@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%; margin: 0; padding: 0;">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body style="height: 100%; margin: 0; padding: 0;overflow-x: hidden;overflow-y: hidden;">
+    <div id="container" style="height: 100%; margin: 0; padding: 0; overflow-x: hidden; overflow-y: hidden;"></div>
+
+    <script type="text/javascript" src=".\node_modules\echarts\dist\echarts.js"></script>
+    <script type="text/javascript" src=".\node_modules\echarts\dist\extension\dataTool.js"></script>
+    <script type="text/javascript" src=".\node_modules\echarts-gl\dist\echarts-gl.js"></script>
+    <script type="text/javascript" src=".\node_modules\echarts-stat\dist\ecStat.js"></script>
+    <script type="text/javascript" src=".\aliases.js"></script>
+    <script type="text/javascript" src=".\node_modules\mathjs\lib\browser\math.js"></script>
+
+    <script type="text/javascript">
+      var dom = document.getElementById('container');
+      var myChart = echarts.init(dom, null, {
+        renderer: 'canvas',
+        useDirtyRect: false,
+      });
+
+      let option;
+      let attackersData = [];
+      let defendersData = [];
+
+      option = {
+        backgroundColor: 'rgba(255,255,255,0.5)',
+        tooltip: {
+          trigger: 'item',
+        },
+        grid: {
+          left: '14%',
+          right: 0,
+          top: '5%',
+          bottom: '10%',
+          containLabel: false
+        },
+        xAxis: {
+          type: 'value',
+          name: 'Distance to Nearest Ally',
+          nameLocation: 'middle',
+          nameGap: 20,
+          splitArea: {
+            show: false
+          },
+          splitLine: {
+            show: false
+          },
+          nameTextStyle: {
+            padding: 10
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#00000'
+            }
+          },
+          axisTick: {
+            alignWithLabel: true
+          },
+          axisLable: {
+            interval: 0,
+            hideOverlap: false,
+            padding: 50
+          }
+        },
+        yAxis: {
+          show: true,
+          type: 'value',
+          name: 'Number of Taken Hits',
+          nameLocation: 'middle',
+          nameGap: 40,
+          splitArea: {
+            show: false
+          },
+          splitLine: {
+            show: false
+          },
+          nameTextStyle: {
+            padding: 10
+          },
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: '#00000'
+            }
+          },
+          axisTick: {
+            show: true,
+            alignWithLabel: true
+          },
+          axisLable: {
+            interval: 0,
+            hideOverlap: false,
+            padding: 50
+          },
+        },
+        legend: {
+          data: ['Attackers', 'Defenders']
+        },
+        series: [
+          {
+            name: 'Attackers',
+            type: 'scatter',
+            color: 'blue',
+            data: attackersData
+          },
+          {
+            name: 'Defenders',
+            type: 'scatter',
+            color: 'red',
+            data: defendersData
+          }
+        ]
+      };
+
+      if (option && typeof option === 'object') {
+        myChart.setOption(option);
+      }
+      window.onresize = function() {
+        myChart.resize();
+      };
+    </script>
+
+    <script type="text/javascript">
+      const webSocket = new WebSocket('ws://localhost:8080');
+      webSocket.onmessage = function (event) {
+        let JData = JSON.parse(event.data)
+        if(JData.scatter) {
+          switch(JData.scatter.name) {
+            case 'attackers':
+              attackersData.push(JData.scatter.data);
+              break;
+            case 'defenders':
+              defendersData.push(JData.scatter.data);
+              break;
+            default:
+          }
+        }
+        option.series[0].data = attackersData;
+        option.series[1].data = defendersData;
+
+        if (option && typeof option === 'object') {
+          myChart.setOption(option);
+        }
+      }
+    </script>
+  </body>
+</html>
