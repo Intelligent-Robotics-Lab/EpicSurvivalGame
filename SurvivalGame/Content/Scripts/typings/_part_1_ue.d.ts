@@ -1,3 +1,5 @@
+declare type ELogTimes = 'None' | 'UTC' | 'SinceGStartTime' | 'Local' | 'ELogTimes_MAX';
+declare var ELogTimes : { None:'None',UTC:'UTC',SinceGStartTime:'SinceGStartTime',Local:'Local',ELogTimes_MAX:'ELogTimes_MAX', };
 declare type EAssetEditorOpenLocation = 'Default' | 'NewWindow' | 'MainWindow' | 'ContentBrowser' | 'LastDockedWindowOrNewWindow' | 'LastDockedWindowOrMainWindow' | 'LastDockedWindowOrContentBrowser' | 'EAssetEditorOpenLocation_MAX';
 declare var EAssetEditorOpenLocation : { Default:'Default',NewWindow:'NewWindow',MainWindow:'MainWindow',ContentBrowser:'ContentBrowser',LastDockedWindowOrNewWindow:'LastDockedWindowOrNewWindow',LastDockedWindowOrMainWindow:'LastDockedWindowOrMainWindow',LastDockedWindowOrContentBrowser:'LastDockedWindowOrContentBrowser',EAssetEditorOpenLocation_MAX:'EAssetEditorOpenLocation_MAX', };
 declare class EditorStyleSettings extends UObject { 

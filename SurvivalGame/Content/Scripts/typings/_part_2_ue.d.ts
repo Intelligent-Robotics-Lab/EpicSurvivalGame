@@ -15877,232 +15877,6 @@ declare class SwitchActor extends Actor {
 	static C(Other: UObject | any): SwitchActor;
 }
 
-declare type EMagicLeapPrivilege = 'Invalid' | 'BatteryInfo' | 'CameraCapture' | 'ComputerVision' | 'WorldReconstruction' | 'InAppPurchase' | 'AudioCaptureMic' | 'DrmCertificates' | 'Occlusion' | 'LowLatencyLightwear' | 'Internet' | 'IdentityRead' | 'BackgroundDownload' | 'BackgroundUpload' | 'MediaDrm' | 'Media' | 'MediaMetadata' | 'PowerInfo' | 'LocalAreaNetwork' | 'VoiceInput' | 'Documents' | 'ConnectBackgroundMusicService' | 'RegisterBackgroundMusicService' | 'PcfRead' | 'PwFoundObjRead' | 'NormalNotificationsUsage' | 'MusicService' | 'ControllerPose' | 'GesturesSubscribe' | 'GesturesConfig' | 'AddressBookRead' | 'AddressBookWrite' | 'AddressBookBasicAccess' | 'CoarseLocation' | 'FineLocation' | 'HandMesh' | 'WifiStatusRead' | 'SocialConnectionsInvitesAccess' | 'SecureBrowserWindow' | 'EMagicLeapPrivilege_MAX';
-declare var EMagicLeapPrivilege : { Invalid:'Invalid',BatteryInfo:'BatteryInfo',CameraCapture:'CameraCapture',ComputerVision:'ComputerVision',WorldReconstruction:'WorldReconstruction',InAppPurchase:'InAppPurchase',AudioCaptureMic:'AudioCaptureMic',DrmCertificates:'DrmCertificates',Occlusion:'Occlusion',LowLatencyLightwear:'LowLatencyLightwear',Internet:'Internet',IdentityRead:'IdentityRead',BackgroundDownload:'BackgroundDownload',BackgroundUpload:'BackgroundUpload',MediaDrm:'MediaDrm',Media:'Media',MediaMetadata:'MediaMetadata',PowerInfo:'PowerInfo',LocalAreaNetwork:'LocalAreaNetwork',VoiceInput:'VoiceInput',Documents:'Documents',ConnectBackgroundMusicService:'ConnectBackgroundMusicService',RegisterBackgroundMusicService:'RegisterBackgroundMusicService',PcfRead:'PcfRead',PwFoundObjRead:'PwFoundObjRead',NormalNotificationsUsage:'NormalNotificationsUsage',MusicService:'MusicService',ControllerPose:'ControllerPose',GesturesSubscribe:'GesturesSubscribe',GesturesConfig:'GesturesConfig',AddressBookRead:'AddressBookRead',AddressBookWrite:'AddressBookWrite',AddressBookBasicAccess:'AddressBookBasicAccess',CoarseLocation:'CoarseLocation',FineLocation:'FineLocation',HandMesh:'HandMesh',WifiStatusRead:'WifiStatusRead',SocialConnectionsInvitesAccess:'SocialConnectionsInvitesAccess',SecureBrowserWindow:'SecureBrowserWindow',EMagicLeapPrivilege_MAX:'EMagicLeapPrivilege_MAX', };
-declare class MagicLeapPrivilegesFunctionLibrary extends BlueprintFunctionLibrary { 
-	static Load(ResourceName: string): MagicLeapPrivilegesFunctionLibrary;
-	static Find(Outer: UObject, ResourceName: string): MagicLeapPrivilegesFunctionLibrary;
-	static GetDefaultObject(): MagicLeapPrivilegesFunctionLibrary;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapPrivilegesFunctionLibrary;
-	static RequestPrivilege(Privilege: EMagicLeapPrivilege): boolean;
-	static CheckPrivilege(Privilege: EMagicLeapPrivilege): boolean;
-	static C(Other: UObject | any): MagicLeapPrivilegesFunctionLibrary;
-}
-
-declare type PurchaseType = 'Consumable' | 'Nonconsumable' | 'Undefined' | 'PurchaseType_MAX';
-declare var PurchaseType : { Consumable:'Consumable',Nonconsumable:'Nonconsumable',Undefined:'Undefined',PurchaseType_MAX:'PurchaseType_MAX', };
-declare class PurchaseItemDetails { 
-	Price: string;
-	Name: string;
-	Type: PurchaseType;
-	clone() : PurchaseItemDetails;
-	static C(Other: UObject | any): PurchaseItemDetails;
-}
-
-declare class PurchaseConfirmation { 
-	PackageName: string;
-	Type: PurchaseType;
-	clone() : PurchaseConfirmation;
-	static C(Other: UObject | any): PurchaseConfirmation;
-}
-
-declare class InAppPurchaseComponent extends ActorComponent { 
-	InAppPurchaseLogMessage: UnrealEngineMulticastDelegate<(LogMessage: string) => void>;
-	GetItemsDetailsSuccess: UnrealEngineMulticastDelegate<(ItemsDetails: PurchaseItemDetails[]) => void>;
-	GetItemsDetailsFailure: UnrealEngineMulticastDelegate<() => void>;
-	PurchaseConfirmationSuccess: UnrealEngineMulticastDelegate<(PurchaseConfirmations: PurchaseConfirmation) => void>;
-	PurchaseConfirmationFailure: UnrealEngineMulticastDelegate<() => void>;
-	GetPurchaseHistorySuccess: UnrealEngineMulticastDelegate<(PurchaseHistory: PurchaseConfirmation[]) => void>;
-	GetPurchaseHistoryFailure: UnrealEngineMulticastDelegate<() => void>;
-	static Load(ResourceName: string): InAppPurchaseComponent;
-	static Find(Outer: UObject, ResourceName: string): InAppPurchaseComponent;
-	static GetDefaultObject(): InAppPurchaseComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InAppPurchaseComponent;
-	TryPurchaseItemAsync(ItemDetails: PurchaseItemDetails): boolean;
-	TryGetPurchaseHistoryAsync(InNumPages: number): boolean;
-	TryGetItemsDetailsAsync(ItemIDs: string[]): boolean;
-	static C(Other: UObject | any): InAppPurchaseComponent;
-}
-
-declare type EFocusLostReason = 'EFocusLostReason_Invalid' | 'EFocusLostReason_System' | 'EFocusLostReason_MAX';
-declare var EFocusLostReason : { EFocusLostReason_Invalid:'EFocusLostReason_Invalid',EFocusLostReason_System:'EFocusLostReason_System',EFocusLostReason_MAX:'EFocusLostReason_MAX', };
-declare class LuminApplicationLifecycleComponent extends ApplicationLifecycleComponent { 
-	DeviceHasReactivatedDelegate: UnrealEngineMulticastDelegate<() => void>;
-	DeviceWillEnterRealityModeDelegate: UnrealEngineMulticastDelegate<() => void>;
-	DeviceWillGoInStandbyDelegate: UnrealEngineMulticastDelegate<() => void>;
-	FocusLostDelegate: UnrealEngineMulticastDelegate<(reason: EFocusLostReason) => void>;
-	FocusGainedDelegate: UnrealEngineMulticastDelegate<() => void>;
-	static Load(ResourceName: string): LuminApplicationLifecycleComponent;
-	static Find(Outer: UObject, ResourceName: string): LuminApplicationLifecycleComponent;
-	static GetDefaultObject(): LuminApplicationLifecycleComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LuminApplicationLifecycleComponent;
-	static C(Other: UObject | any): LuminApplicationLifecycleComponent;
-}
-
-declare class MagicLeapHeadTrackingNotificationsComponent extends VRNotificationsComponent { 
-	OnHeadTrackingLost: UnrealEngineMulticastDelegate<() => void>;
-	OnHeadTrackingRecovered: UnrealEngineMulticastDelegate<() => void>;
-	OnHeadTrackingRecoveryFailed: UnrealEngineMulticastDelegate<() => void>;
-	OnHeadTrackingNewSessionStarted: UnrealEngineMulticastDelegate<() => void>;
-	static Load(ResourceName: string): MagicLeapHeadTrackingNotificationsComponent;
-	static Find(Outer: UObject, ResourceName: string): MagicLeapHeadTrackingNotificationsComponent;
-	static GetDefaultObject(): MagicLeapHeadTrackingNotificationsComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapHeadTrackingNotificationsComponent;
-	static C(Other: UObject | any): MagicLeapHeadTrackingNotificationsComponent;
-}
-
-declare type EMagicLeapHeadTrackingMode = 'PositionAndOrientation' | 'Unavailable' | 'Unknown' | 'EMagicLeapHeadTrackingMode_MAX';
-declare var EMagicLeapHeadTrackingMode : { PositionAndOrientation:'PositionAndOrientation',Unavailable:'Unavailable',Unknown:'Unknown',EMagicLeapHeadTrackingMode_MAX:'EMagicLeapHeadTrackingMode_MAX', };
-declare type EMagicLeapHeadTrackingError = 'None' | 'NotEnoughFeatures' | 'LowLight' | 'Unknown' | 'EMagicLeapHeadTrackingError_MAX';
-declare var EMagicLeapHeadTrackingError : { None:'None',NotEnoughFeatures:'NotEnoughFeatures',LowLight:'LowLight',Unknown:'Unknown',EMagicLeapHeadTrackingError_MAX:'EMagicLeapHeadTrackingError_MAX', };
-declare class MagicLeapHeadTrackingState { 
-	Mode: EMagicLeapHeadTrackingMode;
-	Error: EMagicLeapHeadTrackingError;
-	Confidence: number;
-	clone() : MagicLeapHeadTrackingState;
-	static C(Other: UObject | any): MagicLeapHeadTrackingState;
-	GetHeadTrackingState(): {State: MagicLeapHeadTrackingState, $: boolean};
-	static GetHeadTrackingState(State?: MagicLeapHeadTrackingState): {State: MagicLeapHeadTrackingState, $: boolean};
-}
-
-declare class MagicLeapGraphicsClientPerformanceInfo { 
-	FrameStartCPUCompAcquireCPUTimeMs: number;
-	FrameStartCPUFrameEndGPUTimeMs: number;
-	FrameStartCPUFrameStartCPUTimeMs: number;
-	FrameDurationCPUTimeMs: number;
-	FrameDurationGPUTimeMs: number;
-	FrameInternalDurationCPUTimeMs: number;
-	FrameInternalDurationGPUTimeMs: number;
-	clone() : MagicLeapGraphicsClientPerformanceInfo;
-	static C(Other: UObject | any): MagicLeapGraphicsClientPerformanceInfo;
-	GetGraphicsClientPerformanceInfo(): {PerformanceInfo: MagicLeapGraphicsClientPerformanceInfo, $: boolean};
-	static GetGraphicsClientPerformanceInfo(PerformanceInfo?: MagicLeapGraphicsClientPerformanceInfo): {PerformanceInfo: MagicLeapGraphicsClientPerformanceInfo, $: boolean};
-}
-
-declare class MagicLeapHMDFunctionLibrary extends BlueprintFunctionLibrary { 
-	static Load(ResourceName: string): MagicLeapHMDFunctionLibrary;
-	static Find(Outer: UObject, ResourceName: string): MagicLeapHMDFunctionLibrary;
-	static GetDefaultObject(): MagicLeapHMDFunctionLibrary;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapHMDFunctionLibrary;
-	static SetStabilizationDepthActor(InStabilizationDepthActor: Actor,bSetFocusActor: boolean): void;
-	static SetFocusActor(InFocusActor: Actor,bSetStabilizationActor: boolean): void;
-	static SetBaseRotation(InBaseRotation: Rotator): void;
-	static SetBasePosition(InBasePosition: Vector): void;
-	static SetBaseOrientation(InBaseOrientation: Quat): void;
-	static SetAppReady(): boolean;
-	static IsRunningOnMagicLeapHMD(): boolean;
-	static GetPlatformAPILevel(): number;
-	static GetMLSDKVersionRevision(): number;
-	static GetMLSDKVersionMinor(): number;
-	static GetMLSDKVersionMajor(): number;
-	static GetMLSDKVersion(): string;
-	static GetMinimumAPILevel(): number;
-	static GetHeadTrackingState(State?: MagicLeapHeadTrackingState): {State: MagicLeapHeadTrackingState, $: boolean};
-	static GetHeadTrackingMapEvents(MapEvents?: any): {MapEvents: any, $: boolean};
-	static GetGraphicsClientPerformanceInfo(PerformanceInfo?: MagicLeapGraphicsClientPerformanceInfo): {PerformanceInfo: MagicLeapGraphicsClientPerformanceInfo, $: boolean};
-	static C(Other: UObject | any): MagicLeapHMDFunctionLibrary;
-}
-
-declare type EMagicLeapMeshType = 'Triangles' | 'PointCloud' | 'EMagicLeapMeshType_MAX';
-declare var EMagicLeapMeshType : { Triangles:'Triangles',PointCloud:'PointCloud',EMagicLeapMeshType_MAX:'EMagicLeapMeshType_MAX', };
-declare type EMagicLeapMeshLOD = 'Minimum' | 'Medium' | 'Maximum' | 'EMagicLeapMeshLOD_MAX';
-declare var EMagicLeapMeshLOD : { Minimum:'Minimum',Medium:'Medium',Maximum:'Maximum',EMagicLeapMeshLOD_MAX:'EMagicLeapMeshLOD_MAX', };
-declare type EMagicLeapMeshVertexColorMode = 'None' | 'Confidence' | 'Block' | 'LOD' | 'EMagicLeapMeshVertexColorMode_MAX';
-declare var EMagicLeapMeshVertexColorMode : { None:'None',Confidence:'Confidence',Block:'Block',LOD:'LOD',EMagicLeapMeshVertexColorMode_MAX:'EMagicLeapMeshVertexColorMode_MAX', };
-declare type EMagicLeapMeshState = 'New' | 'Updated' | 'Deleted' | 'Unchanged' | 'EMagicLeapMeshState_MAX';
-declare var EMagicLeapMeshState : { New:'New',Updated:'Updated',Deleted:'Deleted',Unchanged:'Unchanged',EMagicLeapMeshState_MAX:'EMagicLeapMeshState_MAX', };
-declare class MagicLeapMeshBlockInfo { 
-	BlockID: Guid;
-	BlockPosition: Vector;
-	BlockOrientation: Rotator;
-	BlockDimensions: Vector;
-	Timestamp: Timespan;
-	BlockState: EMagicLeapMeshState;
-	clone() : MagicLeapMeshBlockInfo;
-	static C(Other: UObject | any): MagicLeapMeshBlockInfo;
-}
-
-declare class MagicLeapTrackingMeshInfo { 
-	Timestamp: Timespan;
-	BlockData: MagicLeapMeshBlockInfo[];
-	clone() : MagicLeapTrackingMeshInfo;
-	static C(Other: UObject | any): MagicLeapTrackingMeshInfo;
-}
-
-declare class MagicLeapMeshBlockRequest { 
-	BlockID: Guid;
-	LevelOfDetail: EMagicLeapMeshLOD;
-	clone() : MagicLeapMeshBlockRequest;
-	static C(Other: UObject | any): MagicLeapMeshBlockRequest;
-}
-
-declare class MagicLeapMeshTrackerComponent extends SceneComponent { 
-	OnMeshTrackerUpdated: UnrealEngineMulticastDelegate<(ID: Guid, Vertices: Vector[], Triangles: number[], Normals: Vector[], Confidence: number[]) => void>;
-	ScanWorld: boolean;
-	MeshType: EMagicLeapMeshType;
-	BoundingVolume: BoxComponent;
-	LevelOfDetail: EMagicLeapMeshLOD;
-	PerimeterOfGapsToFill: number;
-	Planarize: boolean;
-	DisconnectedSectionArea: number;
-	RequestNormals: boolean;
-	RequestVertexConfidence: boolean;
-	VertexColorMode: EMagicLeapMeshVertexColorMode;
-	BlockVertexColors: Color[];
-	VertexColorFromConfidenceZero: LinearColor;
-	VertexColorFromConfidenceOne: LinearColor;
-	RemoveOverlappingTriangles: boolean;
-	MRMesh: MRMeshComponent;
-	BricksPerFrame: number;
-	static Load(ResourceName: string): MagicLeapMeshTrackerComponent;
-	static Find(Outer: UObject, ResourceName: string): MagicLeapMeshTrackerComponent;
-	static GetDefaultObject(): MagicLeapMeshTrackerComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapMeshTrackerComponent;
-	SelectMeshBlocks(NewMeshInfo: MagicLeapTrackingMeshInfo,RequestedMesh?: MagicLeapMeshBlockRequest[]): {RequestedMesh: MagicLeapMeshBlockRequest[]};
-	GetNumQueuedBlockUpdates(): number;
-	DisconnectMRMesh(InMRMeshPtr: MRMeshComponent): void;
-	DisconnectBlockSelector(): void;
-	ConnectMRMesh(InMRMeshPtr: MRMeshComponent): void;
-	static C(Other: UObject | any): MagicLeapMeshTrackerComponent;
-}
-
-declare class MagicLeapSettings extends UObject { 
-	bEnableZI: boolean;
-	bUseVulkanForZI: boolean;
-	bUseMLAudioForZI: boolean;
-	static Load(ResourceName: string): MagicLeapSettings;
-	static Find(Outer: UObject, ResourceName: string): MagicLeapSettings;
-	static GetDefaultObject(): MagicLeapSettings;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapSettings;
-	static C(Other: UObject | any): MagicLeapSettings;
-}
-
-declare class MagicLeapMeshBlockSelectorInterface extends Interface { 
-	static Load(ResourceName: string): MagicLeapMeshBlockSelectorInterface;
-	static Find(Outer: UObject, ResourceName: string): MagicLeapMeshBlockSelectorInterface;
-	static GetDefaultObject(): MagicLeapMeshBlockSelectorInterface;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapMeshBlockSelectorInterface;
-	SelectMeshBlocks(NewMeshInfo: MagicLeapTrackingMeshInfo,RequestedMesh?: MagicLeapMeshBlockRequest[]): {RequestedMesh: MagicLeapMeshBlockRequest[]};
-	static C(Other: UObject | any): MagicLeapMeshBlockSelectorInterface;
-}
-
-declare class MagicLeapRaycastComponent extends ActorComponent { 
-	static Load(ResourceName: string): MagicLeapRaycastComponent;
-	static Find(Outer: UObject, ResourceName: string): MagicLeapRaycastComponent;
-	static GetDefaultObject(): MagicLeapRaycastComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapRaycastComponent;
-	static C(Other: UObject | any): MagicLeapRaycastComponent;
-}
-
-declare class MagicLeapRaycastFunctionLibrary extends BlueprintFunctionLibrary { 
-	static Load(ResourceName: string): MagicLeapRaycastFunctionLibrary;
-	static Find(Outer: UObject, ResourceName: string): MagicLeapRaycastFunctionLibrary;
-	static GetDefaultObject(): MagicLeapRaycastFunctionLibrary;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapRaycastFunctionLibrary;
-	static MakeRaycastQueryParams(Position: Vector,Direction: Vector,UpVector: Vector,Width: number,Height: number,HorizontalFovDegrees: number,CollideWithUnobserved: boolean,UserData: number): MagicLeapRaycastQueryParams;
-	static C(Other: UObject | any): MagicLeapRaycastFunctionLibrary;
-}
-
 declare class DatasmithObjectTemplate extends UObject { 
 	static Load(ResourceName: string): DatasmithObjectTemplate;
 	static Find(Outer: UObject, ResourceName: string): DatasmithObjectTemplate;
@@ -16851,6 +16625,232 @@ declare class ChaosClothingSimulationInteractor extends ClothingSimulationIntera
 	static C(Other: UObject | any): ChaosClothingSimulationInteractor;
 }
 
+declare type EMagicLeapPrivilege = 'Invalid' | 'BatteryInfo' | 'CameraCapture' | 'ComputerVision' | 'WorldReconstruction' | 'InAppPurchase' | 'AudioCaptureMic' | 'DrmCertificates' | 'Occlusion' | 'LowLatencyLightwear' | 'Internet' | 'IdentityRead' | 'BackgroundDownload' | 'BackgroundUpload' | 'MediaDrm' | 'Media' | 'MediaMetadata' | 'PowerInfo' | 'LocalAreaNetwork' | 'VoiceInput' | 'Documents' | 'ConnectBackgroundMusicService' | 'RegisterBackgroundMusicService' | 'PcfRead' | 'PwFoundObjRead' | 'NormalNotificationsUsage' | 'MusicService' | 'ControllerPose' | 'GesturesSubscribe' | 'GesturesConfig' | 'AddressBookRead' | 'AddressBookWrite' | 'AddressBookBasicAccess' | 'CoarseLocation' | 'FineLocation' | 'HandMesh' | 'WifiStatusRead' | 'SocialConnectionsInvitesAccess' | 'SecureBrowserWindow' | 'EMagicLeapPrivilege_MAX';
+declare var EMagicLeapPrivilege : { Invalid:'Invalid',BatteryInfo:'BatteryInfo',CameraCapture:'CameraCapture',ComputerVision:'ComputerVision',WorldReconstruction:'WorldReconstruction',InAppPurchase:'InAppPurchase',AudioCaptureMic:'AudioCaptureMic',DrmCertificates:'DrmCertificates',Occlusion:'Occlusion',LowLatencyLightwear:'LowLatencyLightwear',Internet:'Internet',IdentityRead:'IdentityRead',BackgroundDownload:'BackgroundDownload',BackgroundUpload:'BackgroundUpload',MediaDrm:'MediaDrm',Media:'Media',MediaMetadata:'MediaMetadata',PowerInfo:'PowerInfo',LocalAreaNetwork:'LocalAreaNetwork',VoiceInput:'VoiceInput',Documents:'Documents',ConnectBackgroundMusicService:'ConnectBackgroundMusicService',RegisterBackgroundMusicService:'RegisterBackgroundMusicService',PcfRead:'PcfRead',PwFoundObjRead:'PwFoundObjRead',NormalNotificationsUsage:'NormalNotificationsUsage',MusicService:'MusicService',ControllerPose:'ControllerPose',GesturesSubscribe:'GesturesSubscribe',GesturesConfig:'GesturesConfig',AddressBookRead:'AddressBookRead',AddressBookWrite:'AddressBookWrite',AddressBookBasicAccess:'AddressBookBasicAccess',CoarseLocation:'CoarseLocation',FineLocation:'FineLocation',HandMesh:'HandMesh',WifiStatusRead:'WifiStatusRead',SocialConnectionsInvitesAccess:'SocialConnectionsInvitesAccess',SecureBrowserWindow:'SecureBrowserWindow',EMagicLeapPrivilege_MAX:'EMagicLeapPrivilege_MAX', };
+declare class MagicLeapPrivilegesFunctionLibrary extends BlueprintFunctionLibrary { 
+	static Load(ResourceName: string): MagicLeapPrivilegesFunctionLibrary;
+	static Find(Outer: UObject, ResourceName: string): MagicLeapPrivilegesFunctionLibrary;
+	static GetDefaultObject(): MagicLeapPrivilegesFunctionLibrary;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapPrivilegesFunctionLibrary;
+	static RequestPrivilege(Privilege: EMagicLeapPrivilege): boolean;
+	static CheckPrivilege(Privilege: EMagicLeapPrivilege): boolean;
+	static C(Other: UObject | any): MagicLeapPrivilegesFunctionLibrary;
+}
+
+declare type PurchaseType = 'Consumable' | 'Nonconsumable' | 'Undefined' | 'PurchaseType_MAX';
+declare var PurchaseType : { Consumable:'Consumable',Nonconsumable:'Nonconsumable',Undefined:'Undefined',PurchaseType_MAX:'PurchaseType_MAX', };
+declare class PurchaseItemDetails { 
+	Price: string;
+	Name: string;
+	Type: PurchaseType;
+	clone() : PurchaseItemDetails;
+	static C(Other: UObject | any): PurchaseItemDetails;
+}
+
+declare class PurchaseConfirmation { 
+	PackageName: string;
+	Type: PurchaseType;
+	clone() : PurchaseConfirmation;
+	static C(Other: UObject | any): PurchaseConfirmation;
+}
+
+declare class InAppPurchaseComponent extends ActorComponent { 
+	InAppPurchaseLogMessage: UnrealEngineMulticastDelegate<(LogMessage: string) => void>;
+	GetItemsDetailsSuccess: UnrealEngineMulticastDelegate<(ItemsDetails: PurchaseItemDetails[]) => void>;
+	GetItemsDetailsFailure: UnrealEngineMulticastDelegate<() => void>;
+	PurchaseConfirmationSuccess: UnrealEngineMulticastDelegate<(PurchaseConfirmations: PurchaseConfirmation) => void>;
+	PurchaseConfirmationFailure: UnrealEngineMulticastDelegate<() => void>;
+	GetPurchaseHistorySuccess: UnrealEngineMulticastDelegate<(PurchaseHistory: PurchaseConfirmation[]) => void>;
+	GetPurchaseHistoryFailure: UnrealEngineMulticastDelegate<() => void>;
+	static Load(ResourceName: string): InAppPurchaseComponent;
+	static Find(Outer: UObject, ResourceName: string): InAppPurchaseComponent;
+	static GetDefaultObject(): InAppPurchaseComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InAppPurchaseComponent;
+	TryPurchaseItemAsync(ItemDetails: PurchaseItemDetails): boolean;
+	TryGetPurchaseHistoryAsync(InNumPages: number): boolean;
+	TryGetItemsDetailsAsync(ItemIDs: string[]): boolean;
+	static C(Other: UObject | any): InAppPurchaseComponent;
+}
+
+declare type EFocusLostReason = 'EFocusLostReason_Invalid' | 'EFocusLostReason_System' | 'EFocusLostReason_MAX';
+declare var EFocusLostReason : { EFocusLostReason_Invalid:'EFocusLostReason_Invalid',EFocusLostReason_System:'EFocusLostReason_System',EFocusLostReason_MAX:'EFocusLostReason_MAX', };
+declare class LuminApplicationLifecycleComponent extends ApplicationLifecycleComponent { 
+	DeviceHasReactivatedDelegate: UnrealEngineMulticastDelegate<() => void>;
+	DeviceWillEnterRealityModeDelegate: UnrealEngineMulticastDelegate<() => void>;
+	DeviceWillGoInStandbyDelegate: UnrealEngineMulticastDelegate<() => void>;
+	FocusLostDelegate: UnrealEngineMulticastDelegate<(reason: EFocusLostReason) => void>;
+	FocusGainedDelegate: UnrealEngineMulticastDelegate<() => void>;
+	static Load(ResourceName: string): LuminApplicationLifecycleComponent;
+	static Find(Outer: UObject, ResourceName: string): LuminApplicationLifecycleComponent;
+	static GetDefaultObject(): LuminApplicationLifecycleComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LuminApplicationLifecycleComponent;
+	static C(Other: UObject | any): LuminApplicationLifecycleComponent;
+}
+
+declare class MagicLeapHeadTrackingNotificationsComponent extends VRNotificationsComponent { 
+	OnHeadTrackingLost: UnrealEngineMulticastDelegate<() => void>;
+	OnHeadTrackingRecovered: UnrealEngineMulticastDelegate<() => void>;
+	OnHeadTrackingRecoveryFailed: UnrealEngineMulticastDelegate<() => void>;
+	OnHeadTrackingNewSessionStarted: UnrealEngineMulticastDelegate<() => void>;
+	static Load(ResourceName: string): MagicLeapHeadTrackingNotificationsComponent;
+	static Find(Outer: UObject, ResourceName: string): MagicLeapHeadTrackingNotificationsComponent;
+	static GetDefaultObject(): MagicLeapHeadTrackingNotificationsComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapHeadTrackingNotificationsComponent;
+	static C(Other: UObject | any): MagicLeapHeadTrackingNotificationsComponent;
+}
+
+declare type EMagicLeapHeadTrackingMode = 'PositionAndOrientation' | 'Unavailable' | 'Unknown' | 'EMagicLeapHeadTrackingMode_MAX';
+declare var EMagicLeapHeadTrackingMode : { PositionAndOrientation:'PositionAndOrientation',Unavailable:'Unavailable',Unknown:'Unknown',EMagicLeapHeadTrackingMode_MAX:'EMagicLeapHeadTrackingMode_MAX', };
+declare type EMagicLeapHeadTrackingError = 'None' | 'NotEnoughFeatures' | 'LowLight' | 'Unknown' | 'EMagicLeapHeadTrackingError_MAX';
+declare var EMagicLeapHeadTrackingError : { None:'None',NotEnoughFeatures:'NotEnoughFeatures',LowLight:'LowLight',Unknown:'Unknown',EMagicLeapHeadTrackingError_MAX:'EMagicLeapHeadTrackingError_MAX', };
+declare class MagicLeapHeadTrackingState { 
+	Mode: EMagicLeapHeadTrackingMode;
+	Error: EMagicLeapHeadTrackingError;
+	Confidence: number;
+	clone() : MagicLeapHeadTrackingState;
+	static C(Other: UObject | any): MagicLeapHeadTrackingState;
+	GetHeadTrackingState(): {State: MagicLeapHeadTrackingState, $: boolean};
+	static GetHeadTrackingState(State?: MagicLeapHeadTrackingState): {State: MagicLeapHeadTrackingState, $: boolean};
+}
+
+declare class MagicLeapGraphicsClientPerformanceInfo { 
+	FrameStartCPUCompAcquireCPUTimeMs: number;
+	FrameStartCPUFrameEndGPUTimeMs: number;
+	FrameStartCPUFrameStartCPUTimeMs: number;
+	FrameDurationCPUTimeMs: number;
+	FrameDurationGPUTimeMs: number;
+	FrameInternalDurationCPUTimeMs: number;
+	FrameInternalDurationGPUTimeMs: number;
+	clone() : MagicLeapGraphicsClientPerformanceInfo;
+	static C(Other: UObject | any): MagicLeapGraphicsClientPerformanceInfo;
+	GetGraphicsClientPerformanceInfo(): {PerformanceInfo: MagicLeapGraphicsClientPerformanceInfo, $: boolean};
+	static GetGraphicsClientPerformanceInfo(PerformanceInfo?: MagicLeapGraphicsClientPerformanceInfo): {PerformanceInfo: MagicLeapGraphicsClientPerformanceInfo, $: boolean};
+}
+
+declare class MagicLeapHMDFunctionLibrary extends BlueprintFunctionLibrary { 
+	static Load(ResourceName: string): MagicLeapHMDFunctionLibrary;
+	static Find(Outer: UObject, ResourceName: string): MagicLeapHMDFunctionLibrary;
+	static GetDefaultObject(): MagicLeapHMDFunctionLibrary;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapHMDFunctionLibrary;
+	static SetStabilizationDepthActor(InStabilizationDepthActor: Actor,bSetFocusActor: boolean): void;
+	static SetFocusActor(InFocusActor: Actor,bSetStabilizationActor: boolean): void;
+	static SetBaseRotation(InBaseRotation: Rotator): void;
+	static SetBasePosition(InBasePosition: Vector): void;
+	static SetBaseOrientation(InBaseOrientation: Quat): void;
+	static SetAppReady(): boolean;
+	static IsRunningOnMagicLeapHMD(): boolean;
+	static GetPlatformAPILevel(): number;
+	static GetMLSDKVersionRevision(): number;
+	static GetMLSDKVersionMinor(): number;
+	static GetMLSDKVersionMajor(): number;
+	static GetMLSDKVersion(): string;
+	static GetMinimumAPILevel(): number;
+	static GetHeadTrackingState(State?: MagicLeapHeadTrackingState): {State: MagicLeapHeadTrackingState, $: boolean};
+	static GetHeadTrackingMapEvents(MapEvents?: any): {MapEvents: any, $: boolean};
+	static GetGraphicsClientPerformanceInfo(PerformanceInfo?: MagicLeapGraphicsClientPerformanceInfo): {PerformanceInfo: MagicLeapGraphicsClientPerformanceInfo, $: boolean};
+	static C(Other: UObject | any): MagicLeapHMDFunctionLibrary;
+}
+
+declare type EMagicLeapMeshType = 'Triangles' | 'PointCloud' | 'EMagicLeapMeshType_MAX';
+declare var EMagicLeapMeshType : { Triangles:'Triangles',PointCloud:'PointCloud',EMagicLeapMeshType_MAX:'EMagicLeapMeshType_MAX', };
+declare type EMagicLeapMeshLOD = 'Minimum' | 'Medium' | 'Maximum' | 'EMagicLeapMeshLOD_MAX';
+declare var EMagicLeapMeshLOD : { Minimum:'Minimum',Medium:'Medium',Maximum:'Maximum',EMagicLeapMeshLOD_MAX:'EMagicLeapMeshLOD_MAX', };
+declare type EMagicLeapMeshVertexColorMode = 'None' | 'Confidence' | 'Block' | 'LOD' | 'EMagicLeapMeshVertexColorMode_MAX';
+declare var EMagicLeapMeshVertexColorMode : { None:'None',Confidence:'Confidence',Block:'Block',LOD:'LOD',EMagicLeapMeshVertexColorMode_MAX:'EMagicLeapMeshVertexColorMode_MAX', };
+declare type EMagicLeapMeshState = 'New' | 'Updated' | 'Deleted' | 'Unchanged' | 'EMagicLeapMeshState_MAX';
+declare var EMagicLeapMeshState : { New:'New',Updated:'Updated',Deleted:'Deleted',Unchanged:'Unchanged',EMagicLeapMeshState_MAX:'EMagicLeapMeshState_MAX', };
+declare class MagicLeapMeshBlockInfo { 
+	BlockID: Guid;
+	BlockPosition: Vector;
+	BlockOrientation: Rotator;
+	BlockDimensions: Vector;
+	Timestamp: Timespan;
+	BlockState: EMagicLeapMeshState;
+	clone() : MagicLeapMeshBlockInfo;
+	static C(Other: UObject | any): MagicLeapMeshBlockInfo;
+}
+
+declare class MagicLeapTrackingMeshInfo { 
+	Timestamp: Timespan;
+	BlockData: MagicLeapMeshBlockInfo[];
+	clone() : MagicLeapTrackingMeshInfo;
+	static C(Other: UObject | any): MagicLeapTrackingMeshInfo;
+}
+
+declare class MagicLeapMeshBlockRequest { 
+	BlockID: Guid;
+	LevelOfDetail: EMagicLeapMeshLOD;
+	clone() : MagicLeapMeshBlockRequest;
+	static C(Other: UObject | any): MagicLeapMeshBlockRequest;
+}
+
+declare class MagicLeapMeshTrackerComponent extends SceneComponent { 
+	OnMeshTrackerUpdated: UnrealEngineMulticastDelegate<(ID: Guid, Vertices: Vector[], Triangles: number[], Normals: Vector[], Confidence: number[]) => void>;
+	ScanWorld: boolean;
+	MeshType: EMagicLeapMeshType;
+	BoundingVolume: BoxComponent;
+	LevelOfDetail: EMagicLeapMeshLOD;
+	PerimeterOfGapsToFill: number;
+	Planarize: boolean;
+	DisconnectedSectionArea: number;
+	RequestNormals: boolean;
+	RequestVertexConfidence: boolean;
+	VertexColorMode: EMagicLeapMeshVertexColorMode;
+	BlockVertexColors: Color[];
+	VertexColorFromConfidenceZero: LinearColor;
+	VertexColorFromConfidenceOne: LinearColor;
+	RemoveOverlappingTriangles: boolean;
+	MRMesh: MRMeshComponent;
+	BricksPerFrame: number;
+	static Load(ResourceName: string): MagicLeapMeshTrackerComponent;
+	static Find(Outer: UObject, ResourceName: string): MagicLeapMeshTrackerComponent;
+	static GetDefaultObject(): MagicLeapMeshTrackerComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapMeshTrackerComponent;
+	SelectMeshBlocks(NewMeshInfo: MagicLeapTrackingMeshInfo,RequestedMesh?: MagicLeapMeshBlockRequest[]): {RequestedMesh: MagicLeapMeshBlockRequest[]};
+	GetNumQueuedBlockUpdates(): number;
+	DisconnectMRMesh(InMRMeshPtr: MRMeshComponent): void;
+	DisconnectBlockSelector(): void;
+	ConnectMRMesh(InMRMeshPtr: MRMeshComponent): void;
+	static C(Other: UObject | any): MagicLeapMeshTrackerComponent;
+}
+
+declare class MagicLeapSettings extends UObject { 
+	bEnableZI: boolean;
+	bUseVulkanForZI: boolean;
+	bUseMLAudioForZI: boolean;
+	static Load(ResourceName: string): MagicLeapSettings;
+	static Find(Outer: UObject, ResourceName: string): MagicLeapSettings;
+	static GetDefaultObject(): MagicLeapSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapSettings;
+	static C(Other: UObject | any): MagicLeapSettings;
+}
+
+declare class MagicLeapMeshBlockSelectorInterface extends Interface { 
+	static Load(ResourceName: string): MagicLeapMeshBlockSelectorInterface;
+	static Find(Outer: UObject, ResourceName: string): MagicLeapMeshBlockSelectorInterface;
+	static GetDefaultObject(): MagicLeapMeshBlockSelectorInterface;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapMeshBlockSelectorInterface;
+	SelectMeshBlocks(NewMeshInfo: MagicLeapTrackingMeshInfo,RequestedMesh?: MagicLeapMeshBlockRequest[]): {RequestedMesh: MagicLeapMeshBlockRequest[]};
+	static C(Other: UObject | any): MagicLeapMeshBlockSelectorInterface;
+}
+
+declare class MagicLeapRaycastComponent extends ActorComponent { 
+	static Load(ResourceName: string): MagicLeapRaycastComponent;
+	static Find(Outer: UObject, ResourceName: string): MagicLeapRaycastComponent;
+	static GetDefaultObject(): MagicLeapRaycastComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapRaycastComponent;
+	static C(Other: UObject | any): MagicLeapRaycastComponent;
+}
+
+declare class MagicLeapRaycastFunctionLibrary extends BlueprintFunctionLibrary { 
+	static Load(ResourceName: string): MagicLeapRaycastFunctionLibrary;
+	static Find(Outer: UObject, ResourceName: string): MagicLeapRaycastFunctionLibrary;
+	static GetDefaultObject(): MagicLeapRaycastFunctionLibrary;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapRaycastFunctionLibrary;
+	static MakeRaycastQueryParams(Position: Vector,Direction: Vector,UpVector: Vector,Width: number,Height: number,HorizontalFovDegrees: number,CollideWithUnobserved: boolean,UserData: number): MagicLeapRaycastQueryParams;
+	static C(Other: UObject | any): MagicLeapRaycastFunctionLibrary;
+}
+
 declare class WmfMediaSettings extends UObject { 
 	AllowNonStandardCodecs: boolean;
 	LowLatency: boolean;
@@ -17508,6 +17508,31 @@ declare class VoipListenerSynthComponent extends SynthComponent {
 	static C(Other: UObject | any): VoipListenerSynthComponent;
 }
 
+declare class SteamAuthComponentModuleInterface extends HandlerComponentFactory { 
+	static Load(ResourceName: string): SteamAuthComponentModuleInterface;
+	static Find(Outer: UObject, ResourceName: string): SteamAuthComponentModuleInterface;
+	static GetDefaultObject(): SteamAuthComponentModuleInterface;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SteamAuthComponentModuleInterface;
+	static C(Other: UObject | any): SteamAuthComponentModuleInterface;
+}
+
+declare class SteamNetConnection extends IpConnection { 
+	bIsPassthrough: boolean;
+	static Load(ResourceName: string): SteamNetConnection;
+	static Find(Outer: UObject, ResourceName: string): SteamNetConnection;
+	static GetDefaultObject(): SteamNetConnection;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SteamNetConnection;
+	static C(Other: UObject | any): SteamNetConnection;
+}
+
+declare class SteamNetDriver extends IpNetDriver { 
+	static Load(ResourceName: string): SteamNetDriver;
+	static Find(Outer: UObject, ResourceName: string): SteamNetDriver;
+	static GetDefaultObject(): SteamNetDriver;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SteamNetDriver;
+	static C(Other: UObject | any): SteamNetDriver;
+}
+
 declare class K2Node_InAppPurchase extends K2Node_BaseAsyncTask { 
 	static Load(ResourceName: string): K2Node_InAppPurchase;
 	static Find(Outer: UObject, ResourceName: string): K2Node_InAppPurchase;
@@ -17586,31 +17611,6 @@ declare class K2Node_LeaderboardQuery extends K2Node_BaseAsyncTask {
 	static GetDefaultObject(): K2Node_LeaderboardQuery;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): K2Node_LeaderboardQuery;
 	static C(Other: UObject | any): K2Node_LeaderboardQuery;
-}
-
-declare class SteamAuthComponentModuleInterface extends HandlerComponentFactory { 
-	static Load(ResourceName: string): SteamAuthComponentModuleInterface;
-	static Find(Outer: UObject, ResourceName: string): SteamAuthComponentModuleInterface;
-	static GetDefaultObject(): SteamAuthComponentModuleInterface;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SteamAuthComponentModuleInterface;
-	static C(Other: UObject | any): SteamAuthComponentModuleInterface;
-}
-
-declare class SteamNetConnection extends IpConnection { 
-	bIsPassthrough: boolean;
-	static Load(ResourceName: string): SteamNetConnection;
-	static Find(Outer: UObject, ResourceName: string): SteamNetConnection;
-	static GetDefaultObject(): SteamNetConnection;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SteamNetConnection;
-	static C(Other: UObject | any): SteamNetConnection;
-}
-
-declare class SteamNetDriver extends IpNetDriver { 
-	static Load(ResourceName: string): SteamNetDriver;
-	static Find(Outer: UObject, ResourceName: string): SteamNetDriver;
-	static GetDefaultObject(): SteamNetDriver;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SteamNetDriver;
-	static C(Other: UObject | any): SteamNetDriver;
 }
 
 declare class EyeTrackerStereoGazeData { 

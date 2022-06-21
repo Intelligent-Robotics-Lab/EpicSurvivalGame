@@ -59,6 +59,25 @@ struct FCameraInterestType
 };
 
 USTRUCT(BlueprintType)
+struct FACDActorData
+{
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(BlueprintReadWrite, Category = "ACDData")
+		FVector Position;
+
+	UPROPERTY(BlueprintReadWrite, Category = "ACDData")
+		float InterestLevel;
+
+	UPROPERTY(BlueprintReadWrite, Category = "ACDData")
+		AActor* Actor;
+
+	UPROPERTY()
+		UObject* SafeObjectPointer;
+};
+
+
+USTRUCT(BlueprintType)
 struct FCartesianSeriesData
 {
 	GENERATED_USTRUCT_BODY()

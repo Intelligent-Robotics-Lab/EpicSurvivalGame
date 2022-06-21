@@ -18,6 +18,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Charts", meta = (WorldContext = "WorldContextObject"))
 		static void UpdateHeatmapData(const UObject* WorldContextObject, TArray<float> Data);
 	UFUNCTION(BlueprintCallable, Category = "Charts", meta = (WorldContext = "WorldContextObject"))
+		static void UpdateCIFmapData(const UObject* WorldContextObject, TArray<float> Data);
+	UFUNCTION(BlueprintCallable, Category = "Charts", meta = (WorldContext = "WorldContextObject"))
 		static void UpdateBoxplotData(const UObject* WorldContextObject, FVector2D Data);
 	UFUNCTION(BlueprintCallable, Category = "Charts", meta = (WorldContext = "WorldContextObject"))
 		static void UpdateBarChartData(const UObject* WorldContextObject, float Data);
