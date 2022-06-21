@@ -13050,19 +13050,6 @@ declare class LuminARSessionConfig extends ARSessionConfig {
 	static C(Other: UObject | any): LuminARSessionConfig;
 }
 
-declare class VaRestURL { 
-	Protocol: string;
-	Host: string;
-	Port: number;
-	Valid: number;
-	Map: string;
-	RedirectURL: string;
-	Op: string[];
-	Portal: string;
-	clone() : VaRestURL;
-	static C(Other: UObject | any): VaRestURL;
-}
-
 declare class URL { 
 	Protocol: string;
 	Host: string;
@@ -13208,6 +13195,19 @@ declare class RecastNavMesh extends NavigationData {
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): RecastNavMesh;
 	K2_ReplaceAreaInTileBounds(Bounds: Box,OldArea: UnrealEngineClass,NewArea: UnrealEngineClass,ReplaceLinks: boolean): boolean;
 	static C(Other: UObject | any): RecastNavMesh;
+}
+
+declare class VaRestURL { 
+	Protocol: string;
+	Host: string;
+	Port: number;
+	Valid: number;
+	Map: string;
+	RedirectURL: string;
+	Op: string[];
+	Portal: string;
+	clone() : VaRestURL;
+	static C(Other: UObject | any): VaRestURL;
 }
 
 declare class NiagaraTypeDefinitionHandle { 
@@ -16338,7 +16338,6 @@ declare class World extends UObject {
 	ZeroBarChartData(): void;
 	LuminARLineTrace(ScreenPosition: Vector2D,TraceChannels: any,OutHitResults?: ARTraceResult[]): {OutHitResults: ARTraceResult[], $: boolean};
 	StartLuminARSession(LatentInfo: LatentActionInfo,Configuration: LuminARSessionConfig): void;
-	GetWorldURL(): VaRestURL;
 	BeginPlay(): void;
 	DestroyWorld(): void;
 	InitializeActorsForPlay(URL: URL): void;
@@ -16351,6 +16350,7 @@ declare class World extends UObject {
 	IsGameWorld(): boolean;
 	IsPlayInEditor(): boolean;
 	IsPlayInPreview(): boolean;
+	GetWorldURL(): VaRestURL;
 	GetNiagaraParameterCollection(Collection: NiagaraParameterCollection): NiagaraParameterCollectionInstance;
 	SpawnSystemAtLocation(SystemTemplate: NiagaraSystem,Location: Vector,Rotation: Rotator,Scale: Vector,bAutoDestroy: boolean,bAutoActivate: boolean,PoolingMethod: ENCPoolMethod,bPreCullCheck: boolean): NiagaraComponent;
 	TraceChannelTestUtil(BatchOptions: TraceChannelTestBatchOptions,Start: Vector,End: Vector,SphereCapsuleRadius: number,CapsuleHalfHeight: number,BoxHalfSize: Vector,Orientation: Rotator,TraceChannel: ETraceTypeQuery,ObjectTypes: EObjectTypeQuery[],ProfileName: string,bTraceComplex: boolean,ActorsToIgnore: Actor[],bIgnoreSelf: boolean,DrawDebugType: EDrawDebugTrace,TraceColor: LinearColor,TraceHitColor: LinearColor,DrawTime: number): TraceQueryTestResults;
@@ -16624,7 +16624,6 @@ declare class World extends UObject {
 	static ZeroBarChartData(WorldContextObject: UObject): void;
 	static LuminARLineTrace(WorldContextObject: UObject,ScreenPosition: Vector2D,TraceChannels: any,OutHitResults?: ARTraceResult[]): {OutHitResults: ARTraceResult[], $: boolean};
 	static StartLuminARSession(WorldContextObject: UObject,LatentInfo: LatentActionInfo,Configuration: LuminARSessionConfig): void;
-	static GetWorldURL(WorldContextObject: UObject): VaRestURL;
 	static BeginPlay(World: World): void;
 	static DestroyWorld(World: World): void;
 	static InitializeActorsForPlay(World: World,URL: URL): void;
@@ -16637,6 +16636,7 @@ declare class World extends UObject {
 	static IsGameWorld(World: World): boolean;
 	static IsPlayInEditor(World: World): boolean;
 	static IsPlayInPreview(World: World): boolean;
+	static GetWorldURL(WorldContextObject: UObject): VaRestURL;
 	static GetNiagaraParameterCollection(WorldContextObject: UObject,Collection: NiagaraParameterCollection): NiagaraParameterCollectionInstance;
 	static SpawnSystemAtLocation(WorldContextObject: UObject,SystemTemplate: NiagaraSystem,Location: Vector,Rotation: Rotator,Scale: Vector,bAutoDestroy: boolean,bAutoActivate: boolean,PoolingMethod: ENCPoolMethod,bPreCullCheck: boolean): NiagaraComponent;
 	static TraceChannelTestUtil(WorldContextObject: UObject,BatchOptions: TraceChannelTestBatchOptions,Start: Vector,End: Vector,SphereCapsuleRadius: number,CapsuleHalfHeight: number,BoxHalfSize: Vector,Orientation: Rotator,TraceChannel: ETraceTypeQuery,ObjectTypes: EObjectTypeQuery[],ProfileName: string,bTraceComplex: boolean,ActorsToIgnore: Actor[],bIgnoreSelf: boolean,DrawDebugType: EDrawDebugTrace,TraceColor: LinearColor,TraceHitColor: LinearColor,DrawTime: number): TraceQueryTestResults;

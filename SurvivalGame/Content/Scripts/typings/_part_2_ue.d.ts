@@ -16625,6 +16625,18 @@ declare class ChaosClothingSimulationInteractor extends ClothingSimulationIntera
 	static C(Other: UObject | any): ChaosClothingSimulationInteractor;
 }
 
+declare class WmfMediaSettings extends UObject { 
+	AllowNonStandardCodecs: boolean;
+	LowLatency: boolean;
+	NativeAudioOut: boolean;
+	HardwareAcceleratedVideoDecoding: boolean;
+	static Load(ResourceName: string): WmfMediaSettings;
+	static Find(Outer: UObject, ResourceName: string): WmfMediaSettings;
+	static GetDefaultObject(): WmfMediaSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WmfMediaSettings;
+	static C(Other: UObject | any): WmfMediaSettings;
+}
+
 declare type EMagicLeapPrivilege = 'Invalid' | 'BatteryInfo' | 'CameraCapture' | 'ComputerVision' | 'WorldReconstruction' | 'InAppPurchase' | 'AudioCaptureMic' | 'DrmCertificates' | 'Occlusion' | 'LowLatencyLightwear' | 'Internet' | 'IdentityRead' | 'BackgroundDownload' | 'BackgroundUpload' | 'MediaDrm' | 'Media' | 'MediaMetadata' | 'PowerInfo' | 'LocalAreaNetwork' | 'VoiceInput' | 'Documents' | 'ConnectBackgroundMusicService' | 'RegisterBackgroundMusicService' | 'PcfRead' | 'PwFoundObjRead' | 'NormalNotificationsUsage' | 'MusicService' | 'ControllerPose' | 'GesturesSubscribe' | 'GesturesConfig' | 'AddressBookRead' | 'AddressBookWrite' | 'AddressBookBasicAccess' | 'CoarseLocation' | 'FineLocation' | 'HandMesh' | 'WifiStatusRead' | 'SocialConnectionsInvitesAccess' | 'SecureBrowserWindow' | 'EMagicLeapPrivilege_MAX';
 declare var EMagicLeapPrivilege : { Invalid:'Invalid',BatteryInfo:'BatteryInfo',CameraCapture:'CameraCapture',ComputerVision:'ComputerVision',WorldReconstruction:'WorldReconstruction',InAppPurchase:'InAppPurchase',AudioCaptureMic:'AudioCaptureMic',DrmCertificates:'DrmCertificates',Occlusion:'Occlusion',LowLatencyLightwear:'LowLatencyLightwear',Internet:'Internet',IdentityRead:'IdentityRead',BackgroundDownload:'BackgroundDownload',BackgroundUpload:'BackgroundUpload',MediaDrm:'MediaDrm',Media:'Media',MediaMetadata:'MediaMetadata',PowerInfo:'PowerInfo',LocalAreaNetwork:'LocalAreaNetwork',VoiceInput:'VoiceInput',Documents:'Documents',ConnectBackgroundMusicService:'ConnectBackgroundMusicService',RegisterBackgroundMusicService:'RegisterBackgroundMusicService',PcfRead:'PcfRead',PwFoundObjRead:'PwFoundObjRead',NormalNotificationsUsage:'NormalNotificationsUsage',MusicService:'MusicService',ControllerPose:'ControllerPose',GesturesSubscribe:'GesturesSubscribe',GesturesConfig:'GesturesConfig',AddressBookRead:'AddressBookRead',AddressBookWrite:'AddressBookWrite',AddressBookBasicAccess:'AddressBookBasicAccess',CoarseLocation:'CoarseLocation',FineLocation:'FineLocation',HandMesh:'HandMesh',WifiStatusRead:'WifiStatusRead',SocialConnectionsInvitesAccess:'SocialConnectionsInvitesAccess',SecureBrowserWindow:'SecureBrowserWindow',EMagicLeapPrivilege_MAX:'EMagicLeapPrivilege_MAX', };
 declare class MagicLeapPrivilegesFunctionLibrary extends BlueprintFunctionLibrary { 
@@ -16849,18 +16861,6 @@ declare class MagicLeapRaycastFunctionLibrary extends BlueprintFunctionLibrary {
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MagicLeapRaycastFunctionLibrary;
 	static MakeRaycastQueryParams(Position: Vector,Direction: Vector,UpVector: Vector,Width: number,Height: number,HorizontalFovDegrees: number,CollideWithUnobserved: boolean,UserData: number): MagicLeapRaycastQueryParams;
 	static C(Other: UObject | any): MagicLeapRaycastFunctionLibrary;
-}
-
-declare class WmfMediaSettings extends UObject { 
-	AllowNonStandardCodecs: boolean;
-	LowLatency: boolean;
-	NativeAudioOut: boolean;
-	HardwareAcceleratedVideoDecoding: boolean;
-	static Load(ResourceName: string): WmfMediaSettings;
-	static Find(Outer: UObject, ResourceName: string): WmfMediaSettings;
-	static GetDefaultObject(): WmfMediaSettings;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WmfMediaSettings;
-	static C(Other: UObject | any): WmfMediaSettings;
 }
 
 declare class NamedInterface { 
