@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameMode.h"
-#include "Mutators/SMutator.h"
+//#include "Mutators/SMutator.h"
 #include "SGameMode.generated.h"
 
 class ASPlayerState;
@@ -147,14 +147,14 @@ public:
 
 protected:
 
-	/* Mutators to create when game starts */
- 	UPROPERTY(EditAnywhere, Category = "Mutators")
- 	TArray<TSubclassOf<class ASMutator>> MutatorClasses;
+	///* Mutators to create when game starts */
+ //	UPROPERTY(EditAnywhere, Category = "Mutators")
+ //	TArray<TSubclassOf<class ASMutator>> MutatorClasses;
 
-	/* First mutator in the execution chain */
-	ASMutator* BaseMutator;
+	///* First mutator in the execution chain */
+	//ASMutator* BaseMutator;
 
-	void AddMutator(TSubclassOf<ASMutator> MutClass);
+	//void AddMutator(TSubclassOf<ASMutator> MutClass);
 
 	virtual void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage) override;
 
@@ -162,9 +162,9 @@ protected:
 	* note that certain critical Actors such as PlayerControllers can't be destroyed, but we'll still call this code path to allow mutators
 	* to change properties on them
 	*/
-	UFUNCTION(BlueprintNativeEvent)
-	bool CheckRelevance(AActor* Other);
+	//UFUNCTION(BlueprintNativeEvent)
+	//bool CheckRelevance(AActor* Other);
 
-	/* Note: Functions flagged with BlueprintNativeEvent like above require _Implementation for a C++ implementation */
-	virtual bool CheckRelevance_Implementation(AActor* Other);
+	///* Note: Functions flagged with BlueprintNativeEvent like above require _Implementation for a C++ implementation */
+	//virtual bool CheckRelevance_Implementation(AActor* Other);
 };

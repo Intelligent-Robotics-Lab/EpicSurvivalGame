@@ -12,7 +12,7 @@
 #include "AI/SZombieAIController.h"
 #include "AI/SZombieCharacter.h"
 #include "World/SPlayerStart.h"
-#include "Mutators/SMutator.h"
+//#include "Mutators/SMutator.h"
 #include "Items/SWeapon.h"
 #include "TimerManager.h"
 #include "Engine/Engine.h"
@@ -426,69 +426,69 @@ void ASGameMode::SpawnDefaultInventory(APawn* PlayerPawn)
 
 void ASGameMode::InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage)
 {
-	/* Spawn all mutators. */
-	for (int32 i = 0; i < MutatorClasses.Num(); i++)
-	{
-		AddMutator(MutatorClasses[i]);
-	}
+	///* Spawn all mutators. */
+	//for (int32 i = 0; i < MutatorClasses.Num(); i++)
+	//{
+	//	AddMutator(MutatorClasses[i]);
+	//}
 
-	if (BaseMutator)
-	{
-		BaseMutator->InitGame(MapName, Options, ErrorMessage);
-	}
+	//if (BaseMutator)
+	//{
+	//	BaseMutator->InitGame(MapName, Options, ErrorMessage);
+	//}
 
 
-	for (TActorIterator<AActor> It(GetWorld(), AActor::StaticClass()); It; ++It)
-	{
-		AActor* Actor = *It;
-		if (!Actor->IsPendingKill())
-		{
-			// Some classes can't be removed via mutators
-			bool bIsValidClass = !Actor->IsA(ALevelScriptActor::StaticClass()) && !Actor->IsA(ASMutator::StaticClass());
-			// Static actors can't be removed.
-			bool bIsRemovable = Actor->GetRootComponent() && Actor->GetRootComponent()->Mobility != EComponentMobility::Static;
+	//for (TActorIterator<AActor> It(GetWorld(), AActor::StaticClass()); It; ++It)
+	//{
+	//	AActor* Actor = *It;
+	//	if (!Actor->IsPendingKill())
+	//	{
+	//		// Some classes can't be removed via mutators
+	//		bool bIsValidClass = !Actor->IsA(ALevelScriptActor::StaticClass()) && !Actor->IsA(ASMutator::StaticClass());
+	//		// Static actors can't be removed.
+	//		bool bIsRemovable = Actor->GetRootComponent() && Actor->GetRootComponent()->Mobility != EComponentMobility::Static;
 
-			if (bIsValidClass && bIsRemovable)
-			{
-				// a few type checks being AFTER the CheckRelevance() call is intentional; want mutators to be able to modify, but not outright destroy
-				if (!CheckRelevance(Actor) && !Actor->IsA(APlayerController::StaticClass()))
-				{
-					/* Actors are destroyed if they fail the relevance checks */
-					Actor->Destroy();
-				}
-			}
-		}
-	}
+	//		if (bIsValidClass && bIsRemovable)
+	//		{
+	//			// a few type checks being AFTER the CheckRelevance() call is intentional; want mutators to be able to modify, but not outright destroy
+	//			if (!CheckRelevance(Actor) && !Actor->IsA(APlayerController::StaticClass()))
+	//			{
+	//				/* Actors are destroyed if they fail the relevance checks */
+	//				Actor->Destroy();
+	//			}
+	//		}
+	//	}
+	//}
 
 	Super::InitGame(MapName, Options, ErrorMessage);
 }
 
 
-bool ASGameMode::CheckRelevance_Implementation(AActor* Other)
-{
-	/* Execute the first in the mutator chain */
-	if (BaseMutator)
-	{
-		return BaseMutator->CheckRelevance(Other);
-	}
-
-	return true;
-}
-
-
-void ASGameMode::AddMutator(TSubclassOf<ASMutator> MutClass)
-{
-	ASMutator* NewMut = GetWorld()->SpawnActor<ASMutator>(MutClass);
-	if (NewMut)
-	{
-		if (BaseMutator == nullptr)
-		{
-			BaseMutator = NewMut;
-		}
-		else
-		{
-			// Add as child in chain
-			BaseMutator->NextMutator = NewMut;
-		}
-	}
-}
+//bool ASGameMode::CheckRelevance_Implementation(AActor* Other)
+//{
+//	/* Execute the first in the mutator chain */
+//	if (BaseMutator)
+//	{
+//		return BaseMutator->CheckRelevance(Other);
+//	}
+//
+//	return true;
+//}
+//
+//
+//void ASGameMode::AddMutator(TSubclassOf<ASMutator> MutClass)
+//{
+//	ASMutator* NewMut = GetWorld()->SpawnActor<ASMutator>(MutClass);
+//	if (NewMut)
+//	{
+//		if (BaseMutator == nullptr)
+//		{
+//			BaseMutator = NewMut;
+//		}
+//		else
+//		{
+//			// Add as child in chain
+//			BaseMutator->NextMutator = NewMut;
+//		}
+//	}
+//}
