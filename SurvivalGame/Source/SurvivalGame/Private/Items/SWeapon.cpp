@@ -53,7 +53,7 @@ void ASWeapon::PostInitializeComponents()
 	CurrentAmmoInClip = FMath::Min(MaxAmmoPerClip, StartAmmo);
 }
 
-
+// called when removed from a level
 void ASWeapon::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
@@ -131,9 +131,9 @@ void ASWeapon::OnEquip(bool bPlayAnimation)
 	bPendingEquip = true;
 	DetermineWeaponState();
 
-	if (bPlayAnimation)
+	if (bPlayAnimation) // just checks here if there is a previous weapon, if there is then play an equip animation
 	{
-		float Duration = PlayWeaponAnimation(EquipAnim);
+		float Duration = PlayWeaponAnimation(EquipAnim);//this EquipAnim is not defined anywhere in cpp, it's specified in Blueprints when a weapon actor is made (it's private to cpp but public for bp, very interesting implemnetation)
 		if (Duration <= 0.0f)
 		{
 			// Failsafe in case animation is missing
@@ -555,7 +555,9 @@ void ASWeapon::OnBurstFinished()
 	bRefiring = false;
 }
 
-
+/*
+Idle, Reloading, Firing, Equipping
+*/
 void ASWeapon::DetermineWeaponState()
 {
 	EWeaponState NewState = EWeaponState::Idle;
@@ -598,7 +600,7 @@ float ASWeapon::GetEquipDuration() const
 	return EquipDuration;
 }
 
-
+//returns a duration for how long the animation is
 float ASWeapon::PlayWeaponAnimation(UAnimMontage* Animation, float InPlayRate, FName StartSectionName)
 {
 	float Duration = 0.0f;
