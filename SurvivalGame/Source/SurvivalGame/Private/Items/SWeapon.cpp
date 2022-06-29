@@ -10,6 +10,7 @@
 #include "TimerManager.h"
 
 
+
 ASWeapon::ASWeapon()
 {
 	Mesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh3P"));
