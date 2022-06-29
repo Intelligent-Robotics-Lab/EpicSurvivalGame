@@ -1,13 +1,3 @@
-declare class ShaderPipelineCacheToolsCommandlet extends Commandlet { 
-	static Load(ResourceName: string): ShaderPipelineCacheToolsCommandlet;
-	static Find(Outer: UObject, ResourceName: string): ShaderPipelineCacheToolsCommandlet;
-	static GetDefaultObject(): ShaderPipelineCacheToolsCommandlet;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ShaderPipelineCacheToolsCommandlet;
-	static C(Other: UObject | any): ShaderPipelineCacheToolsCommandlet;
-}
-
-declare type ESheetAxis = 'AX_Horizontal' | 'AX_XAxis' | 'AX_YAxis' | 'AX_MAX';
-declare var ESheetAxis : { AX_Horizontal:'AX_Horizontal',AX_XAxis:'AX_XAxis',AX_YAxis:'AX_YAxis',AX_MAX:'AX_MAX', };
 declare class SheetBuilder extends EditorBrushBuilder { 
 	X: number;
 	Y: number;
@@ -18024,217 +18014,6 @@ declare class OculusSceneCaptureCubemap extends UObject {
 	static C(Other: UObject | any): OculusSceneCaptureCubemap;
 }
 
-declare class KismetProceduralMeshLibrary extends BlueprintFunctionLibrary { 
-	static Load(ResourceName: string): KismetProceduralMeshLibrary;
-	static Find(Outer: UObject, ResourceName: string): KismetProceduralMeshLibrary;
-	static GetDefaultObject(): KismetProceduralMeshLibrary;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): KismetProceduralMeshLibrary;
-	static SliceProceduralMesh(InProcMesh: ProceduralMeshComponent,PlanePosition: Vector,PlaneNormal: Vector,bCreateOtherHalf: boolean,OutOtherHalfProcMesh?: ProceduralMeshComponent,CapOption?: EProcMeshSliceCapOption,CapMaterial?: MaterialInterface): {OutOtherHalfProcMesh: ProceduralMeshComponent};
-	static GetSectionFromStaticMesh(InMesh: StaticMesh,LODIndex: number,SectionIndex: number,Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
-	static GetSectionFromProceduralMesh(InProcMesh: ProceduralMeshComponent,SectionIndex: number,Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
-	static GenerateBoxMesh(BoxRadius: Vector,Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
-	static CreateGridMeshWelded(NumX: number,NumY: number,Triangles?: number[],Vertices?: Vector[],UVs?: Vector2D[],GridSpacing?: number): {Triangles: number[], Vertices: Vector[], UVs: Vector2D[]};
-	static CreateGridMeshTriangles(NumX: number,NumY: number,bWinding: boolean,Triangles?: number[]): {Triangles: number[]};
-	static CreateGridMeshSplit(NumX: number,NumY: number,Triangles?: number[],Vertices?: Vector[],UVs?: Vector2D[],UV1s?: Vector2D[],GridSpacing?: number): {Triangles: number[], Vertices: Vector[], UVs: Vector2D[], UV1s: Vector2D[]};
-	static CopyProceduralMeshFromStaticMeshComponent(StaticMeshComponent: StaticMeshComponent,LODIndex: number,ProcMeshComponent: ProceduralMeshComponent,bCreateCollision: boolean): void;
-	static ConvertQuadToTriangles(Triangles?: number[],Vert0?: number,Vert1?: number,Vert2?: number,Vert3?: number): {Triangles: number[]};
-	static CalculateTangentsForMesh(Vertices: Vector[],Triangles: number[],UVs: Vector2D[],Normals?: Vector[],Tangents?: ProcMeshTangent[]): {Normals: Vector[], Tangents: ProcMeshTangent[]};
-	static C(Other: UObject | any): KismetProceduralMeshLibrary;
-}
-
-declare class SteamVRChaperoneComponent extends ActorComponent { 
-	OnLeaveBounds: UnrealEngineMulticastDelegate<() => void>;
-	OnReturnToBounds: UnrealEngineMulticastDelegate<() => void>;
-	static Load(ResourceName: string): SteamVRChaperoneComponent;
-	static Find(Outer: UObject, ResourceName: string): SteamVRChaperoneComponent;
-	static GetDefaultObject(): SteamVRChaperoneComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SteamVRChaperoneComponent;
-	GetBounds(): Vector[];
-	static C(Other: UObject | any): SteamVRChaperoneComponent;
-}
-
-declare type ESteamVRTrackedDeviceType = 'Controller' | 'TrackingReference' | 'Other' | 'Invalid' | 'ESteamVRTrackedDeviceType_MAX';
-declare var ESteamVRTrackedDeviceType : { Controller:'Controller',TrackingReference:'TrackingReference',Other:'Other',Invalid:'Invalid',ESteamVRTrackedDeviceType_MAX:'ESteamVRTrackedDeviceType_MAX', };
-declare class SteamVRFunctionLibrary extends BlueprintFunctionLibrary { 
-	static Load(ResourceName: string): SteamVRFunctionLibrary;
-	static Find(Outer: UObject, ResourceName: string): SteamVRFunctionLibrary;
-	static GetDefaultObject(): SteamVRFunctionLibrary;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SteamVRFunctionLibrary;
-	static GetValidTrackedDeviceIds(DeviceType: ESteamVRTrackedDeviceType,OutTrackedDeviceIds?: number[]): {OutTrackedDeviceIds: number[]};
-	static GetTrackedDevicePositionAndOrientation(DeviceID: number,OutPosition?: Vector,OutOrientation?: Rotator): {OutPosition: Vector, OutOrientation: Rotator, $: boolean};
-	static GetHandPositionAndOrientation(ControllerIndex: number,hand: EControllerHand,OutPosition?: Vector,OutOrientation?: Rotator): {OutPosition: Vector, OutOrientation: Rotator, $: boolean};
-	static C(Other: UObject | any): SteamVRFunctionLibrary;
-}
-
-declare class SteamVRHQStereoLayerShape extends StereoLayerShapeQuad { 
-	bCurved: boolean;
-	bAntiAlias: boolean;
-	AutoCurveMinDistance: number;
-	AutoCurveMaxDistance: number;
-	static Load(ResourceName: string): SteamVRHQStereoLayerShape;
-	static Find(Outer: UObject, ResourceName: string): SteamVRHQStereoLayerShape;
-	static GetDefaultObject(): SteamVRHQStereoLayerShape;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SteamVRHQStereoLayerShape;
-	SetCurved(InCurved: boolean): void;
-	SetAutoCurveMinDistance(InDistance: number): void;
-	SetAutoCurveMaxDistance(InDistance: number): void;
-	SetAntiAlias(InAntiAlias: boolean): void;
-	static C(Other: UObject | any): SteamVRHQStereoLayerShape;
-}
-
-declare class SteamVRInputBindingInfo { 
-	DevicePathName: string;
-	InputPathName: string;
-	ModeName: string;
-	SlotName: string;
-	clone() : SteamVRInputBindingInfo;
-	static C(Other: UObject | any): SteamVRInputBindingInfo;
-}
-
-declare type ESteamVRInputStringBits = 'VR_InputString_Hand' | 'VR_InputString_ControllerType' | 'VR_InputString_InputSource' | 'VR_InputString_All' | 'VR_InputString_MAX';
-declare var ESteamVRInputStringBits : { VR_InputString_Hand:'VR_InputString_Hand',VR_InputString_ControllerType:'VR_InputString_ControllerType',VR_InputString_InputSource:'VR_InputString_InputSource',VR_InputString_All:'VR_InputString_All',VR_InputString_MAX:'VR_InputString_MAX', };
-declare class SteamVRInputOriginInfo { 
-	TrackedDeviceIndex: number;
-	RenderModelComponentName: string;
-	TrackedDeviceModel: string;
-	clone() : SteamVRInputOriginInfo;
-	static C(Other: UObject | any): SteamVRInputOriginInfo;
-}
-
-declare class SteamVRActionSet { 
-	Path: string;
-	clone() : SteamVRActionSet;
-	static C(Other: UObject | any): SteamVRActionSet;
-}
-
-declare class SteamVRAction { 
-	Name: string;
-	Path: string;
-	clone() : SteamVRAction;
-	static C(Other: UObject | any): SteamVRAction;
-	GetSteamVR_InputBindingInfo(): SteamVRInputBindingInfo[];
-	GetSteamVR_OriginLocalizedName(LocalizedParts: ESteamVRInputStringBits[],OriginLocalizedName?: string): {OriginLocalizedName: string};
-	GetSteamVR_OriginTrackedDeviceInfo(InputOriginInfo?: SteamVRInputOriginInfo): {InputOriginInfo: SteamVRInputOriginInfo, $: boolean};
-	ShowSteamVR_ActionOrigin(SteamVRActionSet: SteamVRActionSet): void;
-	static GetSteamVR_InputBindingInfo(SteamVRActionHandle: SteamVRAction): SteamVRInputBindingInfo[];
-	static GetSteamVR_OriginLocalizedName(SteamVRAction: SteamVRAction,LocalizedParts: ESteamVRInputStringBits[],OriginLocalizedName?: string): {OriginLocalizedName: string};
-	static GetSteamVR_OriginTrackedDeviceInfo(SteamVRAction: SteamVRAction,InputOriginInfo?: SteamVRInputOriginInfo): {InputOriginInfo: SteamVRInputOriginInfo, $: boolean};
-	static ShowSteamVR_ActionOrigin(SteamVRAction: SteamVRAction,SteamVRActionSet: SteamVRActionSet): void;
-}
-
-declare class SteamVRSkeletonTransform { 
-	Root: Transform;
-	wrist: Transform;
-	Thumb_0: Transform;
-	Thumb_1: Transform;
-	Thumb_2: Transform;
-	Thumb_3: Transform;
-	index_0: Transform;
-	index_1: Transform;
-	index_2: Transform;
-	index_3: Transform;
-	index_4: Transform;
-	Middle_0: Transform;
-	Middle_1: Transform;
-	Middle_2: Transform;
-	Middle_3: Transform;
-	Middle_4: Transform;
-	Ring_0: Transform;
-	Ring_1: Transform;
-	Ring_2: Transform;
-	Ring_3: Transform;
-	Ring_4: Transform;
-	Pinky_0: Transform;
-	Pinky_1: Transform;
-	Pinky_2: Transform;
-	Pinky_3: Transform;
-	Pinky_4: Transform;
-	Aux_Thumb: Transform;
-	Aux_Index: Transform;
-	Aux_Middle: Transform;
-	Aux_Ring: Transform;
-	Aux_Pinky: Transform;
-	clone() : SteamVRSkeletonTransform;
-	static C(Other: UObject | any): SteamVRSkeletonTransform;
-	GetSkeletalTransform(RightHand?: SteamVRSkeletonTransform,bWithController?: boolean): {LeftHand: SteamVRSkeletonTransform, RightHand: SteamVRSkeletonTransform};
-	static GetSkeletalTransform(LeftHand?: SteamVRSkeletonTransform,RightHand?: SteamVRSkeletonTransform,bWithController?: boolean): {LeftHand: SteamVRSkeletonTransform, RightHand: SteamVRSkeletonTransform};
-}
-
-declare type EHand = 'VR_LeftHand' | 'VR_RightHand' | 'VR_MAX';
-declare var EHand : { VR_LeftHand:'VR_LeftHand',VR_RightHand:'VR_RightHand',VR_MAX:'VR_MAX', };
-declare class SteamVRFingerCurls { 
-	Thumb: number;
-	index: number;
-	Middle: number;
-	Ring: number;
-	Pinky: number;
-	clone() : SteamVRFingerCurls;
-	static C(Other: UObject | any): SteamVRFingerCurls;
-}
-
-declare class SteamVRFingerSplays { 
-	Thumb_Index: number;
-	Index_Middle: number;
-	Middle_Ring: number;
-	Ring_Pinky: number;
-	clone() : SteamVRFingerSplays;
-	static C(Other: UObject | any): SteamVRFingerSplays;
-}
-
-declare type ESkeletalSummaryDataType = 'VR_SummaryType_FromAnimation' | 'VR_SummaryType_FromDevice' | 'VR_SummaryType_MAX';
-declare var ESkeletalSummaryDataType : { VR_SummaryType_FromAnimation:'VR_SummaryType_FromAnimation',VR_SummaryType_FromDevice:'VR_SummaryType_FromDevice',VR_SummaryType_MAX:'VR_SummaryType_MAX', };
-declare type EControllerFidelity = 'VR_ControllerFidelity_Estimated' | 'VR_ControllerFidelity_Full' | 'VR_ControllerFidelity_Partial' | 'VR_ControllerFidelity_MAX';
-declare var EControllerFidelity : { VR_ControllerFidelity_Estimated:'VR_ControllerFidelity_Estimated',VR_ControllerFidelity_Full:'VR_ControllerFidelity_Full',VR_ControllerFidelity_Partial:'VR_ControllerFidelity_Partial',VR_ControllerFidelity_MAX:'VR_ControllerFidelity_MAX', };
-declare class SteamVRInputDeviceFunctionLibrary extends BlueprintFunctionLibrary { 
-	static Load(ResourceName: string): SteamVRInputDeviceFunctionLibrary;
-	static Find(Outer: UObject, ResourceName: string): SteamVRInputDeviceFunctionLibrary;
-	static GetDefaultObject(): SteamVRInputDeviceFunctionLibrary;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SteamVRInputDeviceFunctionLibrary;
-	static ShowSteamVR_ActionOrigin(SteamVRAction: SteamVRAction,SteamVRActionSet: SteamVRActionSet): void;
-	static ShowAllSteamVR_ActionOrigins(): void;
-	static SetSteamVR_GlobalPredictedSecondsFromNow(NewValue: number): number;
-	static SetPoseSource(bUseSkeletonPose: boolean): void;
-	static SetCurlsAndSplaysState(NewLeftHandState: boolean,NewRightHandState: boolean): void;
-	static ResetSeatedPosition(): boolean;
-	static PlaySteamVR_HapticFeedback(hand: ESteamVRHand,StartSecondsFromNow: number,DurationSeconds: number,Frequency: number,Amplitude: number): void;
-	static GetUserIPD(): number;
-	static GetSteamVR_OriginTrackedDeviceInfo(SteamVRAction: SteamVRAction,InputOriginInfo?: SteamVRInputOriginInfo): {InputOriginInfo: SteamVRInputOriginInfo, $: boolean};
-	static GetSteamVR_OriginLocalizedName(SteamVRAction: SteamVRAction,LocalizedParts: ESteamVRInputStringBits[],OriginLocalizedName?: string): {OriginLocalizedName: string};
-	static GetSteamVR_InputBindingInfo(SteamVRActionHandle: SteamVRAction): SteamVRInputBindingInfo[];
-	static GetSteamVR_HandPoseRelativeToNow(Position?: Vector,Orientation?: Rotator,hand?: ESteamVRHand,PredictedSecondsFromNow?: number): {Position: Vector, Orientation: Rotator, $: boolean};
-	static GetSteamVR_GlobalPredictedSecondsFromNow(): number;
-	static GetSteamVR_ActionSetArray(SteamVRActionSets?: SteamVRActionSet[]): {SteamVRActionSets: SteamVRActionSet[]};
-	static GetSteamVR_ActionArray(SteamVRActions?: SteamVRAction[]): {SteamVRActions: SteamVRAction[]};
-	static GetSkeletalTransform(LeftHand?: SteamVRSkeletonTransform,RightHand?: SteamVRSkeletonTransform,bWithController?: boolean): {LeftHand: SteamVRSkeletonTransform, RightHand: SteamVRSkeletonTransform};
-	static GetSkeletalState(LeftHandState?: boolean,RightHandState?: boolean): {LeftHandState: boolean, RightHandState: boolean};
-	static GetRightHandPoseData(Position?: Vector,Orientation?: Rotator,AngularVelocity?: Vector,Velocity?: Vector): {Position: Vector, Orientation: Rotator, AngularVelocity: Vector, Velocity: Vector};
-	static GetPoseSource(bUsingSkeletonPose?: boolean): {bUsingSkeletonPose: boolean};
-	static GetLeftHandPoseData(Position?: Vector,Orientation?: Rotator,AngularVelocity?: Vector,Velocity?: Vector): {Position: Vector, Orientation: Rotator, AngularVelocity: Vector, Velocity: Vector};
-	static GetFingerCurlsAndSplays(hand: EHand,FingerCurls?: SteamVRFingerCurls,FingerSplays?: SteamVRFingerSplays,SummaryDataType?: ESkeletalSummaryDataType): {FingerCurls: SteamVRFingerCurls, FingerSplays: SteamVRFingerSplays};
-	static GetCurlsAndSplaysState(LeftHandState?: boolean,RightHandState?: boolean): {LeftHandState: boolean, RightHandState: boolean};
-	static GetControllerFidelity(LeftControllerFidelity?: EControllerFidelity,RightControllerFidelity?: EControllerFidelity): {LeftControllerFidelity: EControllerFidelity, RightControllerFidelity: EControllerFidelity};
-	static FindSteamVR_OriginTrackedDeviceInfo(ActionName: string,bResult?: boolean,InputOriginInfo?: SteamVRInputOriginInfo,ActionSet?: string): {bResult: boolean, InputOriginInfo: SteamVRInputOriginInfo};
-	static FindSteamVR_InputBindingInfo(ActionName: string,ActionSet: string): SteamVRInputBindingInfo[];
-	static FindSteamVR_ActionOrigin(ActionName: string,ActionSet: string): boolean;
-	static FindSteamVR_Action(ActionName: string,bResult?: boolean,FoundAction?: SteamVRAction,FoundActionSet?: SteamVRActionSet,ActionSet?: string): {bResult: boolean, FoundAction: SteamVRAction, FoundActionSet: SteamVRActionSet};
-	static C(Other: UObject | any): SteamVRInputDeviceFunctionLibrary;
-}
-
-declare class SteamVRTrackingReferences extends ActorComponent { 
-	OnTrackedDeviceActivated: UnrealEngineMulticastDelegate<(DeviceID: number, DeviceClass: string, DeviceModel: string) => void>;
-	OnTrackedDeviceDeactivated: UnrealEngineMulticastDelegate<(DeviceID: number, DeviceClass: string, DeviceModel: string) => void>;
-	ActiveDevicePollFrequency: number;
-	TrackingReferenceScale: Vector;
-	TrackingReferences: StaticMeshComponent[];
-	static Load(ResourceName: string): SteamVRTrackingReferences;
-	static Find(Outer: UObject, ResourceName: string): SteamVRTrackingReferences;
-	static GetDefaultObject(): SteamVRTrackingReferences;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SteamVRTrackingReferences;
-	ShowTrackingReferences(TrackingReferenceMesh: StaticMesh): boolean;
-	HideTrackingReferences(): void;
-	static C(Other: UObject | any): SteamVRTrackingReferences;
-}
-
 declare type ECompilerVersion = 'Default' | 'VisualStudio2015' | 'VisualStudio2017' | 'VisualStudio2019' | 'VisualStudio2022' | 'ECompilerVersion_MAX';
 declare var ECompilerVersion : { Default:'Default',VisualStudio2015:'VisualStudio2015',VisualStudio2017:'VisualStudio2017',VisualStudio2019:'VisualStudio2019',VisualStudio2022:'VisualStudio2022',ECompilerVersion_MAX:'ECompilerVersion_MAX', };
 declare type EDefaultGraphicsRHI = 'DefaultGraphicsRHI_Default' | 'DefaultGraphicsRHI_DX11' | 'DefaultGraphicsRHI_DX12' | 'DefaultGraphicsRHI_Vulkan' | 'DefaultGraphicsRHI_MAX';
@@ -18977,5 +18756,280 @@ declare class FunctionalTestingManager extends BlueprintFunctionLibrary {
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FunctionalTestingManager;
 	static RunAllFunctionalTests(WorldContextObject: UObject,bNewLog: boolean,bRunLooped: boolean,FailedTestsReproString: string): boolean;
 	static C(Other: UObject | any): FunctionalTestingManager;
+}
+
+declare class PhasedAutomationActorBase extends Actor { 
+	static GetDefaultObject(): PhasedAutomationActorBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PhasedAutomationActorBase;
+	OnFunctionalTestingComplete(): void;
+	OnFunctionalTestingBegin(): void;
+	static C(Other: UObject | any): PhasedAutomationActorBase;
+}
+
+declare class FunctionalTestLevelScript extends LevelScriptActor { 
+	static GetDefaultObject(): FunctionalTestLevelScript;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FunctionalTestLevelScript;
+	static C(Other: UObject | any): FunctionalTestLevelScript;
+}
+
+declare class FunctionalTestUtilityLibrary extends BlueprintFunctionLibrary { 
+	static Load(ResourceName: string): FunctionalTestUtilityLibrary;
+	static Find(Outer: UObject, ResourceName: string): FunctionalTestUtilityLibrary;
+	static GetDefaultObject(): FunctionalTestUtilityLibrary;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FunctionalTestUtilityLibrary;
+	static TraceChannelTestUtil(WorldContextObject: UObject,BatchOptions: TraceChannelTestBatchOptions,Start: Vector,End: Vector,SphereCapsuleRadius: number,CapsuleHalfHeight: number,BoxHalfSize: Vector,Orientation: Rotator,TraceChannel: ETraceTypeQuery,ObjectTypes: EObjectTypeQuery[],ProfileName: string,bTraceComplex: boolean,ActorsToIgnore: Actor[],bIgnoreSelf: boolean,DrawDebugType: EDrawDebugTrace,TraceColor: LinearColor,TraceHitColor: LinearColor,DrawTime: number): TraceQueryTestResults;
+	static C(Other: UObject | any): FunctionalTestUtilityLibrary;
+}
+
+declare class ScreenshotFunctionalTestBase extends FunctionalTest { 
+	Notes: string;
+	ScreenshotCamera: CameraComponent;
+	ScreenshotOptions: AutomationScreenshotOptions;
+	static GetDefaultObject(): ScreenshotFunctionalTestBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ScreenshotFunctionalTestBase;
+	static C(Other: UObject | any): ScreenshotFunctionalTestBase;
+}
+
+declare type EWidgetTestAppearLocation = 'Viewport' | 'PlayerScreen' | 'EWidgetTestAppearLocation_MAX';
+declare var EWidgetTestAppearLocation : { Viewport:'Viewport',PlayerScreen:'PlayerScreen',EWidgetTestAppearLocation_MAX:'EWidgetTestAppearLocation_MAX', };
+declare class FunctionalUIScreenshotTest extends ScreenshotFunctionalTestBase { 
+	WidgetClass: UnrealEngineClass;
+	SpawnedWidget: UserWidget;
+	WidgetLocation: EWidgetTestAppearLocation;
+	ScreenshotRT: TextureRenderTarget2D;
+	static GetDefaultObject(): FunctionalUIScreenshotTest;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FunctionalUIScreenshotTest;
+	static C(Other: UObject | any): FunctionalUIScreenshotTest;
+}
+
+declare class GroundTruthData extends UObject { 
+	bResetGroundTruth: boolean;
+	ObjectData: UObject;
+	static Load(ResourceName: string): GroundTruthData;
+	static Find(Outer: UObject, ResourceName: string): GroundTruthData;
+	static GetDefaultObject(): GroundTruthData;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GroundTruthData;
+	SaveObject(GroundTruth: UObject): void;
+	LoadObject(): UObject;
+	CanModify(): boolean;
+	static C(Other: UObject | any): GroundTruthData;
+}
+
+declare class ScreenshotFunctionalTest extends ScreenshotFunctionalTestBase { 
+	bCameraCutOnScreenshotPrep: boolean;
+	static GetDefaultObject(): ScreenshotFunctionalTest;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ScreenshotFunctionalTest;
+	static C(Other: UObject | any): ScreenshotFunctionalTest;
+}
+
+declare class TestPhaseComponent extends SceneComponent { 
+	static Load(ResourceName: string): TestPhaseComponent;
+	static Find(Outer: UObject, ResourceName: string): TestPhaseComponent;
+	static GetDefaultObject(): TestPhaseComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TestPhaseComponent;
+	static C(Other: UObject | any): TestPhaseComponent;
+}
+
+declare class AIGraph extends EdGraph { 
+	GraphVersion: number;
+	static Load(ResourceName: string): AIGraph;
+	static Find(Outer: UObject, ResourceName: string): AIGraph;
+	static GetDefaultObject(): AIGraph;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIGraph;
+	static C(Other: UObject | any): AIGraph;
+}
+
+declare class GraphNodeClassData { 
+	AssetName: string;
+	GeneratedClassPackage: string;
+	ClassName: string;
+	Category: string;
+	clone() : GraphNodeClassData;
+	static C(Other: UObject | any): GraphNodeClassData;
+}
+
+declare class AIGraphNode extends EdGraphNode { 
+	ClassData: GraphNodeClassData;
+	NodeInstance: UObject;
+	ParentNode: AIGraphNode;
+	SubNodes: AIGraphNode[];
+	CopySubNodeIndex: number;
+	bIsReadOnly: boolean;
+	bIsSubNode: boolean;
+	ErrorMessage: string;
+	static Load(ResourceName: string): AIGraphNode;
+	static Find(Outer: UObject, ResourceName: string): AIGraphNode;
+	static GetDefaultObject(): AIGraphNode;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIGraphNode;
+	static C(Other: UObject | any): AIGraphNode;
+}
+
+declare class AIGraphSchema extends EdGraphSchema { 
+	static Load(ResourceName: string): AIGraphSchema;
+	static Find(Outer: UObject, ResourceName: string): AIGraphSchema;
+	static GetDefaultObject(): AIGraphSchema;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIGraphSchema;
+	static C(Other: UObject | any): AIGraphSchema;
+}
+
+declare class K2Node_AIMoveTo extends K2Node_BaseAsyncTask { 
+	static Load(ResourceName: string): K2Node_AIMoveTo;
+	static Find(Outer: UObject, ResourceName: string): K2Node_AIMoveTo;
+	static GetDefaultObject(): K2Node_AIMoveTo;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): K2Node_AIMoveTo;
+	static C(Other: UObject | any): K2Node_AIMoveTo;
+}
+
+declare class BehaviorTreeDecoratorGraph extends EdGraph { 
+	static Load(ResourceName: string): BehaviorTreeDecoratorGraph;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeDecoratorGraph;
+	static GetDefaultObject(): BehaviorTreeDecoratorGraph;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeDecoratorGraph;
+	static C(Other: UObject | any): BehaviorTreeDecoratorGraph;
+}
+
+declare class BehaviorTreeDecoratorGraphNode extends EdGraphNode { 
+	static Load(ResourceName: string): BehaviorTreeDecoratorGraphNode;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeDecoratorGraphNode;
+	static GetDefaultObject(): BehaviorTreeDecoratorGraphNode;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeDecoratorGraphNode;
+	static C(Other: UObject | any): BehaviorTreeDecoratorGraphNode;
+}
+
+declare class BehaviorTreeDecoratorGraphNode_Decorator extends BehaviorTreeDecoratorGraphNode { 
+	NodeInstance: UObject;
+	ClassData: GraphNodeClassData;
+	static Load(ResourceName: string): BehaviorTreeDecoratorGraphNode_Decorator;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeDecoratorGraphNode_Decorator;
+	static GetDefaultObject(): BehaviorTreeDecoratorGraphNode_Decorator;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeDecoratorGraphNode_Decorator;
+	static C(Other: UObject | any): BehaviorTreeDecoratorGraphNode_Decorator;
+}
+
+declare type EDecoratorLogicMode = 'Sink' | 'And' | 'Or' | 'Not' | 'EDecoratorLogicMode_MAX';
+declare var EDecoratorLogicMode : { Sink:'Sink',And:'And',Or:'Or',Not:'Not',EDecoratorLogicMode_MAX:'EDecoratorLogicMode_MAX', };
+declare class BehaviorTreeDecoratorGraphNode_Logic extends BehaviorTreeDecoratorGraphNode { 
+	LogicMode: EDecoratorLogicMode;
+	static Load(ResourceName: string): BehaviorTreeDecoratorGraphNode_Logic;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeDecoratorGraphNode_Logic;
+	static GetDefaultObject(): BehaviorTreeDecoratorGraphNode_Logic;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeDecoratorGraphNode_Logic;
+	static C(Other: UObject | any): BehaviorTreeDecoratorGraphNode_Logic;
+}
+
+declare class BehaviorTreeEditorTypes extends UObject { 
+	static Load(ResourceName: string): BehaviorTreeEditorTypes;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeEditorTypes;
+	static GetDefaultObject(): BehaviorTreeEditorTypes;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeEditorTypes;
+	static C(Other: UObject | any): BehaviorTreeEditorTypes;
+}
+
+declare class BehaviorTreeFactory extends Factory { 
+	static Load(ResourceName: string): BehaviorTreeFactory;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeFactory;
+	static GetDefaultObject(): BehaviorTreeFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeFactory;
+	static C(Other: UObject | any): BehaviorTreeFactory;
+}
+
+declare class BehaviorTreeGraph extends AIGraph { 
+	ModCounter: number;
+	bIsUsingModCounter: boolean;
+	static Load(ResourceName: string): BehaviorTreeGraph;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraph;
+	static GetDefaultObject(): BehaviorTreeGraph;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraph;
+	static C(Other: UObject | any): BehaviorTreeGraph;
+}
+
+declare class BehaviorTreeGraphNode extends AIGraphNode { 
+	Decorators: BehaviorTreeGraphNode[];
+	Services: BehaviorTreeGraphNode[];
+	bInjectedNode: boolean;
+	static Load(ResourceName: string): BehaviorTreeGraphNode;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode;
+	static GetDefaultObject(): BehaviorTreeGraphNode;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode;
+	static C(Other: UObject | any): BehaviorTreeGraphNode;
+}
+
+declare class BehaviorTreeGraphNode_Composite extends BehaviorTreeGraphNode { 
+	static Load(ResourceName: string): BehaviorTreeGraphNode_Composite;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode_Composite;
+	static GetDefaultObject(): BehaviorTreeGraphNode_Composite;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode_Composite;
+	static C(Other: UObject | any): BehaviorTreeGraphNode_Composite;
+}
+
+declare class BehaviorTreeGraphNode_CompositeDecorator extends BehaviorTreeGraphNode { 
+	BoundGraph: EdGraph;
+	CompositeName: string;
+	bShowOperations: boolean;
+	bCanAbortFlow: boolean;
+	ParentNodeInstance: BTCompositeNode;
+	CachedDescription: string;
+	static Load(ResourceName: string): BehaviorTreeGraphNode_CompositeDecorator;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode_CompositeDecorator;
+	static GetDefaultObject(): BehaviorTreeGraphNode_CompositeDecorator;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode_CompositeDecorator;
+	static C(Other: UObject | any): BehaviorTreeGraphNode_CompositeDecorator;
+}
+
+declare class BehaviorTreeGraphNode_Decorator extends BehaviorTreeGraphNode { 
+	static Load(ResourceName: string): BehaviorTreeGraphNode_Decorator;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode_Decorator;
+	static GetDefaultObject(): BehaviorTreeGraphNode_Decorator;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode_Decorator;
+	static C(Other: UObject | any): BehaviorTreeGraphNode_Decorator;
+}
+
+declare class BehaviorTreeGraphNode_Root extends BehaviorTreeGraphNode { 
+	BlackboardAsset: BlackboardData;
+	static Load(ResourceName: string): BehaviorTreeGraphNode_Root;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode_Root;
+	static GetDefaultObject(): BehaviorTreeGraphNode_Root;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode_Root;
+	static C(Other: UObject | any): BehaviorTreeGraphNode_Root;
+}
+
+declare class BehaviorTreeGraphNode_Service extends BehaviorTreeGraphNode { 
+	static Load(ResourceName: string): BehaviorTreeGraphNode_Service;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode_Service;
+	static GetDefaultObject(): BehaviorTreeGraphNode_Service;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode_Service;
+	static C(Other: UObject | any): BehaviorTreeGraphNode_Service;
+}
+
+declare class BehaviorTreeGraphNode_SimpleParallel extends BehaviorTreeGraphNode_Composite { 
+	static Load(ResourceName: string): BehaviorTreeGraphNode_SimpleParallel;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode_SimpleParallel;
+	static GetDefaultObject(): BehaviorTreeGraphNode_SimpleParallel;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode_SimpleParallel;
+	static C(Other: UObject | any): BehaviorTreeGraphNode_SimpleParallel;
+}
+
+declare class BehaviorTreeGraphNode_Task extends BehaviorTreeGraphNode { 
+	static Load(ResourceName: string): BehaviorTreeGraphNode_Task;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode_Task;
+	static GetDefaultObject(): BehaviorTreeGraphNode_Task;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode_Task;
+	static C(Other: UObject | any): BehaviorTreeGraphNode_Task;
+}
+
+declare class BehaviorTreeGraphNode_SubtreeTask extends BehaviorTreeGraphNode_Task { 
+	static Load(ResourceName: string): BehaviorTreeGraphNode_SubtreeTask;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode_SubtreeTask;
+	static GetDefaultObject(): BehaviorTreeGraphNode_SubtreeTask;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode_SubtreeTask;
+	static C(Other: UObject | any): BehaviorTreeGraphNode_SubtreeTask;
+}
+
+declare class BlackboardDataFactory extends Factory { 
+	static Load(ResourceName: string): BlackboardDataFactory;
+	static Find(Outer: UObject, ResourceName: string): BlackboardDataFactory;
+	static GetDefaultObject(): BlackboardDataFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlackboardDataFactory;
+	static C(Other: UObject | any): BlackboardDataFactory;
 }
 

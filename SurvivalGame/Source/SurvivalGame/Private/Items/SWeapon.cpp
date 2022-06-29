@@ -10,6 +10,7 @@
 #include "TimerManager.h"
 
 
+
 ASWeapon::ASWeapon()
 {
 	Mesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh3P"));
@@ -133,7 +134,7 @@ void ASWeapon::OnEquip(bool bPlayAnimation)
 
 	if (bPlayAnimation) // just checks here if there is a previous weapon, if there is then play an equip animation
 	{
-		float Duration = PlayWeaponAnimation(EquipAnim);//this EquipAnim is not defined anywhere in cpp, it's specified in Blueprints when a weapon actor is made (it's private to cpp but public for bp, very interesting implemnetation)
+		float Duration = PlayWeaponAnimation(EquipAnim);//this EquipAnim is not defined anywhere in cpp, it's specified in Blueprints when a weapon actor is made (it's private to cpp but public for bp, very interesting implementation)
 		if (Duration <= 0.0f)
 		{
 			// Failsafe in case animation is missing
@@ -142,7 +143,7 @@ void ASWeapon::OnEquip(bool bPlayAnimation)
 		EquipStartedTime = GetWorld()->TimeSeconds;
 		EquipDuration = Duration;
 
-		GetWorldTimerManager().SetTimer(EquipFinishedTimerHandle, this, &ASWeapon::OnEquipFinished, Duration, false);
+		GetWorldTimerManager().SetTimer(EquipFinishedTimerHandle, this, &ASWeapon::OnEquipFinished, Duration, false);//This timer runs for 'Duration' then calls OnEquipFinished
 	}
 	else
 	{
@@ -150,14 +151,14 @@ void ASWeapon::OnEquip(bool bPlayAnimation)
 		OnEquipFinished();
 	}
 
-	if (MyPawn && MyPawn->IsLocallyControlled())
+	if (MyPawn && MyPawn->IsLocallyControlled()) //locally controlled is for ensuring the local pc is controlling that pawn
 	{
 		PlayWeaponSound(EquipSound);
 	}
 }
 
-
-void ASWeapon::OnUnEquip()
+//Called in pawns/characters that are using a weapon to unequip it
+void ASWeapon::OnUnEquip() 
 {
 	bIsEquipped = false;
 	StopFire();
@@ -167,20 +168,20 @@ void ASWeapon::OnUnEquip()
 		StopWeaponAnimation(EquipAnim);
 		bPendingEquip = false;
 
-		GetWorldTimerManager().ClearTimer(EquipFinishedTimerHandle);
+		GetWorldTimerManager().ClearTimer(EquipFinishedTimerHandle); //Clears the timer that started OnEquip
 	}
 	if (bPendingReload)
 	{
 		StopWeaponAnimation(ReloadAnim);
 		bPendingReload = false;
 
-		GetWorldTimerManager().ClearTimer(TimerHandle_ReloadWeapon);
+		GetWorldTimerManager().ClearTimer(TimerHandle_ReloadWeapon); //Clears the reload anim timer
 	}
 
-	DetermineWeaponState();
+	DetermineWeaponState(); //Corrects weapon state
 }
 
-
+//Use to set owner and attach mesh
 void ASWeapon::OnEnterInventory(ASCharacter* NewOwner)
 {
 	SetOwningPawn(NewOwner);
@@ -195,7 +196,7 @@ void ASWeapon::OnLeaveInventory()
 		SetOwningPawn(nullptr);
 	}
 
-	if (IsAttachedToPawn())
+	if (IsAttachedToPawn())//called if it's in the main hand
 	{
 		OnUnEquip();
 	}
@@ -203,24 +204,24 @@ void ASWeapon::OnLeaveInventory()
 	DetachMeshFromPawn();
 }
 
-
+//Returns if a weapon is equipped
 bool ASWeapon::IsEquipped() const
 {
 	return bIsEquipped;
 }
 
-
+//Returns if a weapon is equipped or if it's pending an equip
 bool ASWeapon::IsAttachedToPawn() const // TODO: Review name to more accurately specify meaning.
 {
 	return bIsEquipped || bPendingEquip;
 }
 
-
+//
 void ASWeapon::StartFire()
 {
 	if (!HasAuthority())
 	{
-		ServerStartFire();
+		ServerStartFire(); //Not sure about what this does, but it doesn't matter rn as it's server stuff, imagine it's something to keep the clients in sync
 	}
 
 	if (!bWantsToFire)
@@ -269,7 +270,7 @@ void ASWeapon::ServerStopFire_Implementation()
 	StopFire();
 }
 
-
+//checks if the weapon has an owner that is alive and then checks a few states to ensure it's in the correct state
 bool ASWeapon::CanFire() const
 {
 	bool bPawnCanFire = MyPawn && MyPawn->CanFire();
@@ -556,7 +557,7 @@ void ASWeapon::OnBurstFinished()
 }
 
 /*
-Idle, Reloading, Firing, Equipping
+Default: Idle, bPendingReload: Reloading, !bPendingReload && bWantsToFire && CanFire(): Firing, bPendingEquip: Equipping
 */
 void ASWeapon::DetermineWeaponState()
 {

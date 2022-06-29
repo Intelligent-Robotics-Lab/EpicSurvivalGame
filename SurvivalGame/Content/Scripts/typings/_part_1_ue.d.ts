@@ -1,22 +1,3 @@
-declare class GameNetworkManagerSettings extends UObject { 
-	MinDynamicBandwidth: number;
-	MaxDynamicBandwidth: number;
-	TotalNetBandwidth: number;
-	BadPingThreshold: number;
-	bIsStandbyCheckingEnabled: boolean;
-	StandbyRxCheatTime: number;
-	StandbyTxCheatTime: number;
-	PercentMissingForRxStandby: number;
-	PercentMissingForTxStandby: number;
-	PercentForBadPing: number;
-	JoinInProgressStandbyWaitTime: number;
-	static Load(ResourceName: string): GameNetworkManagerSettings;
-	static Find(Outer: UObject, ResourceName: string): GameNetworkManagerSettings;
-	static GetDefaultObject(): GameNetworkManagerSettings;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GameNetworkManagerSettings;
-	static C(Other: UObject | any): GameNetworkManagerSettings;
-}
-
 declare class GameSessionSettings extends UObject { 
 	MaxSpectators: number;
 	MaxPlayers: number;
@@ -4840,7 +4821,7 @@ declare class HeadMountedDisplayFunctionLibrary extends BlueprintFunctionLibrary
 	static GetPixelDensity(): number;
 	static GetOrientationAndPosition(DeviceRotation?: Rotator,DevicePosition?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector};
 	static GetNumOfTrackingSensors(): number;
-	static GetMotionControllerData(WorldContext: UObject,hand: EControllerHand,MotionControllerData?: XRMotionControllerData): {MotionControllerData: XRMotionControllerData};
+	static GetMotionControllerData(WorldContext: UObject,Hand: EControllerHand,MotionControllerData?: XRMotionControllerData): {MotionControllerData: XRMotionControllerData};
 	static GetHMDWornState(): EHMDWornState;
 	static GetHMDDeviceName(): string;
 	static GetHMDData(WorldContext: UObject,HMDData?: XRHMDData): {HMDData: XRHMDData};
@@ -4855,7 +4836,7 @@ declare class HeadMountedDisplayFunctionLibrary extends BlueprintFunctionLibrary
 	static ConfigureGestures(GestureConfig: XRGestureConfig): boolean;
 	static ClearXRTimedInputActionDelegate(ActionPath: string): void;
 	static CalibrateExternalTrackingToHMD(ExternalTrackingTransform: Transform): void;
-	static BreakKey(InKey: Key,InteractionProfile?: string,hand?: EControllerHand,MotionSource?: string,Indentifier?: string,Component?: string): {InteractionProfile: string, hand: EControllerHand, MotionSource: string, Indentifier: string, Component: string};
+	static BreakKey(InKey: Key,InteractionProfile?: string,Hand?: EControllerHand,MotionSource?: string,Indentifier?: string,Component?: string): {InteractionProfile: string, Hand: EControllerHand, MotionSource: string, Indentifier: string, Component: string};
 	static C(Other: UObject | any): HeadMountedDisplayFunctionLibrary;
 }
 
@@ -4872,7 +4853,7 @@ declare class HandKeypointConversion extends BlueprintFunctionLibrary {
 
 declare class MotionControllerComponent extends PrimitiveComponent { 
 	PlayerIndex: number;
-	hand: EControllerHand;
+	Hand: EControllerHand;
 	MotionSource: string;
 	bDisableLowLatencyUpdate: boolean;
 	CurrentTrackingStatus: ETrackingStatus;
@@ -4912,7 +4893,7 @@ declare class MotionTrackedDeviceFunctionLibrary extends BlueprintFunctionLibrar
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MotionTrackedDeviceFunctionLibrary;
 	static SetIsControllerMotionTrackingEnabledByDefault(Enable: boolean): void;
 	static IsMotionTrackingEnabledForSource(PlayerIndex: number,SourceName: string): boolean;
-	static IsMotionTrackingEnabledForDevice(PlayerIndex: number,hand: EControllerHand): boolean;
+	static IsMotionTrackingEnabledForDevice(PlayerIndex: number,Hand: EControllerHand): boolean;
 	static IsMotionTrackingEnabledForComponent(MotionControllerComponent: MotionControllerComponent): boolean;
 	static IsMotionTrackedDeviceCountManagementNecessary(): boolean;
 	static IsMotionSourceTracking(PlayerIndex: number,SourceName: string): boolean;
@@ -4921,10 +4902,10 @@ declare class MotionTrackedDeviceFunctionLibrary extends BlueprintFunctionLibrar
 	static GetActiveTrackingSystemName(): string;
 	static EnumerateMotionSources(): string[];
 	static EnableMotionTrackingOfSource(PlayerIndex: number,SourceName: string): boolean;
-	static EnableMotionTrackingOfDevice(PlayerIndex: number,hand: EControllerHand): boolean;
+	static EnableMotionTrackingOfDevice(PlayerIndex: number,Hand: EControllerHand): boolean;
 	static EnableMotionTrackingForComponent(MotionControllerComponent: MotionControllerComponent): boolean;
 	static DisableMotionTrackingOfSource(PlayerIndex: number,SourceName: string): void;
-	static DisableMotionTrackingOfDevice(PlayerIndex: number,hand: EControllerHand): void;
+	static DisableMotionTrackingOfDevice(PlayerIndex: number,Hand: EControllerHand): void;
 	static DisableMotionTrackingOfControllersForPlayer(PlayerIndex: number): void;
 	static DisableMotionTrackingOfAllControllers(): void;
 	static DisableMotionTrackingForComponent(MotionControllerComponent: MotionControllerComponent): void;
@@ -20613,3 +20594,13 @@ declare class ShaderCodeLibraryToolsCommandlet extends Commandlet {
 	static C(Other: UObject | any): ShaderCodeLibraryToolsCommandlet;
 }
 
+declare class ShaderPipelineCacheToolsCommandlet extends Commandlet { 
+	static Load(ResourceName: string): ShaderPipelineCacheToolsCommandlet;
+	static Find(Outer: UObject, ResourceName: string): ShaderPipelineCacheToolsCommandlet;
+	static GetDefaultObject(): ShaderPipelineCacheToolsCommandlet;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ShaderPipelineCacheToolsCommandlet;
+	static C(Other: UObject | any): ShaderPipelineCacheToolsCommandlet;
+}
+
+declare type ESheetAxis = 'AX_Horizontal' | 'AX_XAxis' | 'AX_YAxis' | 'AX_MAX';
+declare var ESheetAxis : { AX_Horizontal:'AX_Horizontal',AX_XAxis:'AX_XAxis',AX_YAxis:'AX_YAxis',AX_MAX:'AX_MAX', };

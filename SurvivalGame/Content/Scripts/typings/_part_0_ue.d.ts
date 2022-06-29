@@ -116,8 +116,156 @@ declare type EActorUpdateOverlapsMethod = 'UseConfigDefault' | 'AlwaysUpdate' | 
 declare var EActorUpdateOverlapsMethod : { UseConfigDefault:'UseConfigDefault',AlwaysUpdate:'AlwaysUpdate',OnlyUpdateMovable:'OnlyUpdateMovable',NeverUpdate:'NeverUpdate',EActorUpdateOverlapsMethod_MAX:'EActorUpdateOverlapsMethod_MAX', };
 declare type ENetRole = 'ROLE_None' | 'ROLE_SimulatedProxy' | 'ROLE_AutonomousProxy' | 'ROLE_Authority' | 'ROLE_MAX';
 declare var ENetRole : { ROLE_None:'ROLE_None',ROLE_SimulatedProxy:'ROLE_SimulatedProxy',ROLE_AutonomousProxy:'ROLE_AutonomousProxy',ROLE_Authority:'ROLE_Authority',ROLE_MAX:'ROLE_MAX', };
+declare class IntPoint { 
+	X: number;
+	Y: number;
+	clone() : IntPoint;
+	static C(Other: UObject | any): IntPoint;
+	Conv_IntPointToString(): string;
+	Add_IntPointInt(B: number): IntPoint;
+	Add_IntPointIntPoint(B: IntPoint): IntPoint;
+	Conv_IntPointToVector2D(): Vector2D;
+	Divide_IntPointInt(B: number): IntPoint;
+	Divide_IntPointIntPoint(B: IntPoint): IntPoint;
+	Equal_IntPointIntPoint(B: IntPoint): boolean;
+	Multiply_IntPointInt(B: number): IntPoint;
+	Multiply_IntPointIntPoint(B: IntPoint): IntPoint;
+	NotEqual_IntPointIntPoint(B: IntPoint): boolean;
+	Subtract_IntPointInt(B: number): IntPoint;
+	Subtract_IntPointIntPoint(B: IntPoint): IntPoint;
+	ResizeXRCamera(): IntPoint;
+	static Conv_IntPointToString(InIntPoint: IntPoint): string;
+	static Add_IntPointInt(A: IntPoint,B: number): IntPoint;
+	static Add_IntPointIntPoint(A: IntPoint,B: IntPoint): IntPoint;
+	static Conv_IntPointToVector2D(InIntPoint: IntPoint): Vector2D;
+	static Divide_IntPointInt(A: IntPoint,B: number): IntPoint;
+	static Divide_IntPointIntPoint(A: IntPoint,B: IntPoint): IntPoint;
+	static Equal_IntPointIntPoint(A: IntPoint,B: IntPoint): boolean;
+	static Multiply_IntPointInt(A: IntPoint,B: number): IntPoint;
+	static Multiply_IntPointIntPoint(A: IntPoint,B: IntPoint): IntPoint;
+	static NotEqual_IntPointIntPoint(A: IntPoint,B: IntPoint): boolean;
+	static Subtract_IntPointInt(A: IntPoint,B: number): IntPoint;
+	static Subtract_IntPointIntPoint(A: IntPoint,B: IntPoint): IntPoint;
+	static ResizeXRCamera(InSize: IntPoint): IntPoint;
+	static IntPoint_Down(): IntPoint;
+	static IntPoint_Left(): IntPoint;
+	static IntPoint_One(): IntPoint;
+	static IntPoint_Right(): IntPoint;
+	static IntPoint_Up(): IntPoint;
+	static IntPoint_Zero(): IntPoint;
+}
+
+declare class Box2D { 
+	Min: Vector2D;
+	Max: Vector2D;
+	bIsValid: number;
+	clone() : Box2D;
+	static C(Other: UObject | any): Box2D;
+}
+
+declare type EARLineTraceChannels = 'None' | 'FeaturePoint' | 'GroundPlane' | 'PlaneUsingExtent' | 'PlaneUsingBoundaryPolygon' | 'EARLineTraceChannels_MAX';
+declare var EARLineTraceChannels : { None:'None',FeaturePoint:'FeaturePoint',GroundPlane:'GroundPlane',PlaneUsingExtent:'PlaneUsingExtent',PlaneUsingBoundaryPolygon:'PlaneUsingBoundaryPolygon',EARLineTraceChannels_MAX:'EARLineTraceChannels_MAX', };
 declare type EOrientPositionSelector = 'Orientation' | 'Position' | 'OrientationAndPosition' | 'EOrientPositionSelector_MAX';
 declare var EOrientPositionSelector : { Orientation:'Orientation',Position:'Position',OrientationAndPosition:'OrientationAndPosition',EOrientPositionSelector_MAX:'EOrientPositionSelector_MAX', };
+declare type EEasingFunc = 'Linear' | 'Step' | 'SinusoidalIn' | 'SinusoidalOut' | 'SinusoidalInOut' | 'EaseIn' | 'EaseOut' | 'EaseInOut' | 'ExpoIn' | 'ExpoOut' | 'ExpoInOut' | 'CircularIn' | 'CircularOut' | 'CircularInOut' | 'EEasingFunc_MAX';
+declare var EEasingFunc : { Linear:'Linear',Step:'Step',SinusoidalIn:'SinusoidalIn',SinusoidalOut:'SinusoidalOut',SinusoidalInOut:'SinusoidalInOut',EaseIn:'EaseIn',EaseOut:'EaseOut',EaseInOut:'EaseInOut',ExpoIn:'ExpoIn',ExpoOut:'ExpoOut',ExpoInOut:'ExpoInOut',CircularIn:'CircularIn',CircularOut:'CircularOut',CircularInOut:'CircularInOut',EEasingFunc_MAX:'EEasingFunc_MAX', };
+declare class RandomStream { 
+	InitialSeed: number;
+	Seed: number;
+	clone() : RandomStream;
+	static C(Other: UObject | any): RandomStream;
+	BreakRandomStream(InitialSeed?: number): {InitialSeed: number};
+	RandomBoolFromStream(): boolean;
+	RandomFloatFromStream(): number;
+	RandomUnitVectorFromStream(): Vector;
+	ResetRandomStream(): void;
+	SeedRandomStream(): {Stream: RandomStream};
+	SetRandomStreamSeed(NewSeed?: number): {Stream: RandomStream};
+	static BreakRandomStream(InRandomStream: RandomStream,InitialSeed?: number): {InitialSeed: number};
+	static RandomBoolFromStream(Stream: RandomStream): boolean;
+	static RandomFloatFromStream(Stream: RandomStream): number;
+	static RandomUnitVectorFromStream(Stream: RandomStream): Vector;
+	static ResetRandomStream(Stream: RandomStream): void;
+	static SeedRandomStream(Stream?: RandomStream): {Stream: RandomStream};
+	static SetRandomStreamSeed(Stream?: RandomStream,NewSeed?: number): {Stream: RandomStream};
+	static MakeRandomStream(InitialSeed: number): RandomStream;
+}
+
+declare class Rotator { 
+	Pitch: number;
+	Yaw: number;
+	Roll: number;
+	clone() : Rotator;
+	static C(Other: UObject | any): Rotator;
+	GetBaseRotationAndBaseOffsetInMeters(OutBaseOffsetInMeters?: Vector): {OutRotation: Rotator, OutBaseOffsetInMeters: Vector};
+	GetBaseRotationAndPositionOffset(OutPosOffset?: Vector): {OutRot: Rotator, OutPosOffset: Vector};
+	GetPose(DevicePosition?: Vector,NeckPosition?: Vector,bUseOrienationForPlayerCamera?: boolean,bUsePositionForPlayerCamera?: boolean,PositionScale?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector, NeckPosition: Vector};
+	SetBaseRotationAndBaseOffsetInMeters(BaseOffsetInMeters: Vector,Options: EOrientPositionSelector): void;
+	SetBaseRotationAndPositionOffset(PosOffset: Vector,Options: EOrientPositionSelector): void;
+	SetBaseRotation(): void;
+	IsValidAIRotation(): boolean;
+	Conv_RotatorToText(): string;
+	Conv_RotatorToString(): string;
+	BreakRotator(Roll?: number,Pitch?: number,Yaw?: number): {Roll: number, Pitch: number, Yaw: number};
+	BreakRotIntoAxes(X?: Vector,Y?: Vector,Z?: Vector): {X: Vector, Y: Vector, Z: Vector};
+	ComposeRotators(B: Rotator): Rotator;
+	Conv_RotatorToTransform(): Transform;
+	Conv_RotatorToVector(): Vector;
+	DynamicWeightedMovingAverage_FRotator(PreviousSample: Rotator,MaxDistance: number,MinWeight: number,MaxWeight: number): Rotator;
+	EqualEqual_RotatorRotator(B: Rotator,ErrorTolerance: number): boolean;
+	GetAxes(X?: Vector,Y?: Vector,Z?: Vector): {X: Vector, Y: Vector, Z: Vector};
+	GetForwardVector(): Vector;
+	GetRightVector(): Vector;
+	GetUpVector(): Vector;
+	Multiply_RotatorFloat(B: number): Rotator;
+	Multiply_RotatorInt(B: number): Rotator;
+	NegateRotator(): Rotator;
+	NormalizedDeltaRotator(B: Rotator): Rotator;
+	NotEqual_RotatorRotator(B: Rotator,ErrorTolerance: number): boolean;
+	REase(B: Rotator,Alpha: number,bShortestPath: boolean,EasingFunc: EEasingFunc,BlendExp: number,Steps: number): Rotator;
+	RInterpTo(Target: Rotator,DeltaTime: number,InterpSpeed: number): Rotator;
+	RInterpTo_Constant(Target: Rotator,DeltaTime: number,InterpSpeed: number): Rotator;
+	RLerp(B: Rotator,Alpha: number,bShortestPath: boolean): Rotator;
+	SelectRotator(B: Rotator,bPickA: boolean): Rotator;
+	WeightedMovingAverage_FRotator(PreviousSample: Rotator,Weight: number): Rotator;
+	GetOrientationAndPosition(DevicePosition?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector};
+	static GetBaseRotationAndBaseOffsetInMeters(OutRotation?: Rotator,OutBaseOffsetInMeters?: Vector): {OutRotation: Rotator, OutBaseOffsetInMeters: Vector};
+	static GetBaseRotationAndPositionOffset(OutRot?: Rotator,OutPosOffset?: Vector): {OutRot: Rotator, OutPosOffset: Vector};
+	static GetPose(DeviceRotation?: Rotator,DevicePosition?: Vector,NeckPosition?: Vector,bUseOrienationForPlayerCamera?: boolean,bUsePositionForPlayerCamera?: boolean,PositionScale?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector, NeckPosition: Vector};
+	static SetBaseRotationAndBaseOffsetInMeters(Rotation: Rotator,BaseOffsetInMeters: Vector,Options: EOrientPositionSelector): void;
+	static SetBaseRotationAndPositionOffset(BaseRot: Rotator,PosOffset: Vector,Options: EOrientPositionSelector): void;
+	static SetBaseRotation(InBaseRotation: Rotator): void;
+	static IsValidAIRotation(Rotation: Rotator): boolean;
+	static Conv_RotatorToText(InRot: Rotator): string;
+	static Conv_RotatorToString(InRot: Rotator): string;
+	static BreakRotator(InRot: Rotator,Roll?: number,Pitch?: number,Yaw?: number): {Roll: number, Pitch: number, Yaw: number};
+	static BreakRotIntoAxes(InRot: Rotator,X?: Vector,Y?: Vector,Z?: Vector): {X: Vector, Y: Vector, Z: Vector};
+	static ComposeRotators(A: Rotator,B: Rotator): Rotator;
+	static Conv_RotatorToTransform(InRotator: Rotator): Transform;
+	static Conv_RotatorToVector(InRot: Rotator): Vector;
+	static DynamicWeightedMovingAverage_FRotator(CurrentSample: Rotator,PreviousSample: Rotator,MaxDistance: number,MinWeight: number,MaxWeight: number): Rotator;
+	static EqualEqual_RotatorRotator(A: Rotator,B: Rotator,ErrorTolerance: number): boolean;
+	static GetAxes(A: Rotator,X?: Vector,Y?: Vector,Z?: Vector): {X: Vector, Y: Vector, Z: Vector};
+	static GetForwardVector(InRot: Rotator): Vector;
+	static GetRightVector(InRot: Rotator): Vector;
+	static GetUpVector(InRot: Rotator): Vector;
+	static Multiply_RotatorFloat(A: Rotator,B: number): Rotator;
+	static Multiply_RotatorInt(A: Rotator,B: number): Rotator;
+	static NegateRotator(A: Rotator): Rotator;
+	static NormalizedDeltaRotator(A: Rotator,B: Rotator): Rotator;
+	static NotEqual_RotatorRotator(A: Rotator,B: Rotator,ErrorTolerance: number): boolean;
+	static REase(A: Rotator,B: Rotator,Alpha: number,bShortestPath: boolean,EasingFunc: EEasingFunc,BlendExp: number,Steps: number): Rotator;
+	static RInterpTo(Current: Rotator,Target: Rotator,DeltaTime: number,InterpSpeed: number): Rotator;
+	static RInterpTo_Constant(Current: Rotator,Target: Rotator,DeltaTime: number,InterpSpeed: number): Rotator;
+	static RLerp(A: Rotator,B: Rotator,Alpha: number,bShortestPath: boolean): Rotator;
+	static SelectRotator(A: Rotator,B: Rotator,bPickA: boolean): Rotator;
+	static WeightedMovingAverage_FRotator(CurrentSample: Rotator,PreviousSample: Rotator,Weight: number): Rotator;
+	static GetOrientationAndPosition(DeviceRotation?: Rotator,DevicePosition?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector};
+	static MakeRotator(Roll: number,Pitch: number,Yaw: number): Rotator;
+	static RandomRotator(bRoll: boolean): Rotator;
+	static RandomRotatorFromStream(bRoll: boolean,Stream: RandomStream): Rotator;
+}
+
 declare type EOculusHandType = 'None' | 'HandLeft' | 'HandRight' | 'EOculusHandType_MAX';
 declare var EOculusHandType : { None:'None',HandLeft:'HandLeft',HandRight:'HandRight',EOculusHandType_MAX:'EOculusHandType_MAX', };
 declare type EBone = 'Wrist_Root' | 'Hand_Start' | 'Forearm_Stub' | 'Thumb_0' | 'Thumb_1' | 'Thumb_2' | 'Thumb_3' | 'Index_1' | 'Index_2' | 'Index_3' | 'Middle_1' | 'Middle_2' | 'Middle_3' | 'Ring_1' | 'Ring_2' | 'Ring_3' | 'Pinky_0' | 'Pinky_1' | 'Pinky_2' | 'Pinky_3' | 'Thumb_Tip' | 'Max_Skinnable' | 'Index_Tip' | 'Middle_Tip' | 'Ring_Tip' | 'Pinky_Tip' | 'Hand_End' | 'Bone_Max' | 'Invalid' | 'EBone_MAX';
@@ -384,8 +532,6 @@ declare class Matrix {
 	static Matrix_Identity(): Matrix;
 }
 
-declare type EEasingFunc = 'Linear' | 'Step' | 'SinusoidalIn' | 'SinusoidalOut' | 'SinusoidalInOut' | 'EaseIn' | 'EaseOut' | 'EaseInOut' | 'ExpoIn' | 'ExpoOut' | 'ExpoInOut' | 'CircularIn' | 'CircularOut' | 'CircularInOut' | 'EEasingFunc_MAX';
-declare var EEasingFunc : { Linear:'Linear',Step:'Step',SinusoidalIn:'SinusoidalIn',SinusoidalOut:'SinusoidalOut',SinusoidalInOut:'SinusoidalInOut',EaseIn:'EaseIn',EaseOut:'EaseOut',EaseInOut:'EaseInOut',ExpoIn:'ExpoIn',ExpoOut:'ExpoOut',ExpoInOut:'ExpoInOut',CircularIn:'CircularIn',CircularOut:'CircularOut',CircularInOut:'CircularInOut',EEasingFunc_MAX:'EEasingFunc_MAX', };
 declare type ELerpInterpolationMode = 'QuatInterp' | 'EulerInterp' | 'DualQuatInterp' | 'ELerpInterpolationMode_MAX';
 declare var ELerpInterpolationMode : { QuatInterp:'QuatInterp',EulerInterp:'EulerInterp',DualQuatInterp:'DualQuatInterp',ELerpInterpolationMode_MAX:'ELerpInterpolationMode_MAX', };
 declare class Transform { 
@@ -453,103 +599,6 @@ declare class Transform {
 	static GetAlignmentTransform(): Transform;
 }
 
-declare class RandomStream { 
-	InitialSeed: number;
-	Seed: number;
-	clone() : RandomStream;
-	static C(Other: UObject | any): RandomStream;
-	BreakRandomStream(InitialSeed?: number): {InitialSeed: number};
-	RandomBoolFromStream(): boolean;
-	RandomFloatFromStream(): number;
-	RandomUnitVectorFromStream(): Vector;
-	ResetRandomStream(): void;
-	SeedRandomStream(): {Stream: RandomStream};
-	SetRandomStreamSeed(NewSeed?: number): {Stream: RandomStream};
-	static BreakRandomStream(InRandomStream: RandomStream,InitialSeed?: number): {InitialSeed: number};
-	static RandomBoolFromStream(Stream: RandomStream): boolean;
-	static RandomFloatFromStream(Stream: RandomStream): number;
-	static RandomUnitVectorFromStream(Stream: RandomStream): Vector;
-	static ResetRandomStream(Stream: RandomStream): void;
-	static SeedRandomStream(Stream?: RandomStream): {Stream: RandomStream};
-	static SetRandomStreamSeed(Stream?: RandomStream,NewSeed?: number): {Stream: RandomStream};
-	static MakeRandomStream(InitialSeed: number): RandomStream;
-}
-
-declare class Rotator { 
-	Pitch: number;
-	Yaw: number;
-	Roll: number;
-	clone() : Rotator;
-	static C(Other: UObject | any): Rotator;
-	GetBaseRotationAndBaseOffsetInMeters(OutBaseOffsetInMeters?: Vector): {OutRotation: Rotator, OutBaseOffsetInMeters: Vector};
-	GetBaseRotationAndPositionOffset(OutPosOffset?: Vector): {OutRot: Rotator, OutPosOffset: Vector};
-	GetPose(DevicePosition?: Vector,NeckPosition?: Vector,bUseOrienationForPlayerCamera?: boolean,bUsePositionForPlayerCamera?: boolean,PositionScale?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector, NeckPosition: Vector};
-	SetBaseRotationAndBaseOffsetInMeters(BaseOffsetInMeters: Vector,Options: EOrientPositionSelector): void;
-	SetBaseRotationAndPositionOffset(PosOffset: Vector,Options: EOrientPositionSelector): void;
-	SetBaseRotation(): void;
-	IsValidAIRotation(): boolean;
-	Conv_RotatorToText(): string;
-	Conv_RotatorToString(): string;
-	BreakRotator(Roll?: number,Pitch?: number,Yaw?: number): {Roll: number, Pitch: number, Yaw: number};
-	BreakRotIntoAxes(X?: Vector,Y?: Vector,Z?: Vector): {X: Vector, Y: Vector, Z: Vector};
-	ComposeRotators(B: Rotator): Rotator;
-	Conv_RotatorToTransform(): Transform;
-	Conv_RotatorToVector(): Vector;
-	DynamicWeightedMovingAverage_FRotator(PreviousSample: Rotator,MaxDistance: number,MinWeight: number,MaxWeight: number): Rotator;
-	EqualEqual_RotatorRotator(B: Rotator,ErrorTolerance: number): boolean;
-	GetAxes(X?: Vector,Y?: Vector,Z?: Vector): {X: Vector, Y: Vector, Z: Vector};
-	GetForwardVector(): Vector;
-	GetRightVector(): Vector;
-	GetUpVector(): Vector;
-	Multiply_RotatorFloat(B: number): Rotator;
-	Multiply_RotatorInt(B: number): Rotator;
-	NegateRotator(): Rotator;
-	NormalizedDeltaRotator(B: Rotator): Rotator;
-	NotEqual_RotatorRotator(B: Rotator,ErrorTolerance: number): boolean;
-	REase(B: Rotator,Alpha: number,bShortestPath: boolean,EasingFunc: EEasingFunc,BlendExp: number,Steps: number): Rotator;
-	RInterpTo(Target: Rotator,DeltaTime: number,InterpSpeed: number): Rotator;
-	RInterpTo_Constant(Target: Rotator,DeltaTime: number,InterpSpeed: number): Rotator;
-	RLerp(B: Rotator,Alpha: number,bShortestPath: boolean): Rotator;
-	SelectRotator(B: Rotator,bPickA: boolean): Rotator;
-	WeightedMovingAverage_FRotator(PreviousSample: Rotator,Weight: number): Rotator;
-	GetOrientationAndPosition(DevicePosition?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector};
-	static GetBaseRotationAndBaseOffsetInMeters(OutRotation?: Rotator,OutBaseOffsetInMeters?: Vector): {OutRotation: Rotator, OutBaseOffsetInMeters: Vector};
-	static GetBaseRotationAndPositionOffset(OutRot?: Rotator,OutPosOffset?: Vector): {OutRot: Rotator, OutPosOffset: Vector};
-	static GetPose(DeviceRotation?: Rotator,DevicePosition?: Vector,NeckPosition?: Vector,bUseOrienationForPlayerCamera?: boolean,bUsePositionForPlayerCamera?: boolean,PositionScale?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector, NeckPosition: Vector};
-	static SetBaseRotationAndBaseOffsetInMeters(Rotation: Rotator,BaseOffsetInMeters: Vector,Options: EOrientPositionSelector): void;
-	static SetBaseRotationAndPositionOffset(BaseRot: Rotator,PosOffset: Vector,Options: EOrientPositionSelector): void;
-	static SetBaseRotation(InBaseRotation: Rotator): void;
-	static IsValidAIRotation(Rotation: Rotator): boolean;
-	static Conv_RotatorToText(InRot: Rotator): string;
-	static Conv_RotatorToString(InRot: Rotator): string;
-	static BreakRotator(InRot: Rotator,Roll?: number,Pitch?: number,Yaw?: number): {Roll: number, Pitch: number, Yaw: number};
-	static BreakRotIntoAxes(InRot: Rotator,X?: Vector,Y?: Vector,Z?: Vector): {X: Vector, Y: Vector, Z: Vector};
-	static ComposeRotators(A: Rotator,B: Rotator): Rotator;
-	static Conv_RotatorToTransform(InRotator: Rotator): Transform;
-	static Conv_RotatorToVector(InRot: Rotator): Vector;
-	static DynamicWeightedMovingAverage_FRotator(CurrentSample: Rotator,PreviousSample: Rotator,MaxDistance: number,MinWeight: number,MaxWeight: number): Rotator;
-	static EqualEqual_RotatorRotator(A: Rotator,B: Rotator,ErrorTolerance: number): boolean;
-	static GetAxes(A: Rotator,X?: Vector,Y?: Vector,Z?: Vector): {X: Vector, Y: Vector, Z: Vector};
-	static GetForwardVector(InRot: Rotator): Vector;
-	static GetRightVector(InRot: Rotator): Vector;
-	static GetUpVector(InRot: Rotator): Vector;
-	static Multiply_RotatorFloat(A: Rotator,B: number): Rotator;
-	static Multiply_RotatorInt(A: Rotator,B: number): Rotator;
-	static NegateRotator(A: Rotator): Rotator;
-	static NormalizedDeltaRotator(A: Rotator,B: Rotator): Rotator;
-	static NotEqual_RotatorRotator(A: Rotator,B: Rotator,ErrorTolerance: number): boolean;
-	static REase(A: Rotator,B: Rotator,Alpha: number,bShortestPath: boolean,EasingFunc: EEasingFunc,BlendExp: number,Steps: number): Rotator;
-	static RInterpTo(Current: Rotator,Target: Rotator,DeltaTime: number,InterpSpeed: number): Rotator;
-	static RInterpTo_Constant(Current: Rotator,Target: Rotator,DeltaTime: number,InterpSpeed: number): Rotator;
-	static RLerp(A: Rotator,B: Rotator,Alpha: number,bShortestPath: boolean): Rotator;
-	static SelectRotator(A: Rotator,B: Rotator,bPickA: boolean): Rotator;
-	static WeightedMovingAverage_FRotator(CurrentSample: Rotator,PreviousSample: Rotator,Weight: number): Rotator;
-	static GetOrientationAndPosition(DeviceRotation?: Rotator,DevicePosition?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector};
-	static MakeRotator(Roll: number,Pitch: number,Yaw: number): Rotator;
-	static RandomRotator(bRoll: boolean): Rotator;
-	static RandomRotatorFromStream(bRoll: boolean,Stream: RandomStream): Rotator;
-}
-
 declare type EMagicLeapARPinType = 'SingleUserSingleSession' | 'SingleUserMultiSession' | 'MultiUserMultiSession' | 'EMagicLeapARPinType_MAX';
 declare var EMagicLeapARPinType : { SingleUserSingleSession:'SingleUserSingleSession',SingleUserMultiSession:'SingleUserMultiSession',MultiUserMultiSession:'MultiUserMultiSession',EMagicLeapARPinType_MAX:'EMagicLeapARPinType_MAX', };
 declare class MagicLeapARPinState { 
@@ -599,57 +648,6 @@ declare class Guid {
 	static NewGuid(): Guid;
 }
 
-declare type ESteamVRHand = 'VR_Left' | 'VR_Right' | 'VR_MAX';
-declare var ESteamVRHand : { VR_Left:'VR_Left',VR_Right:'VR_Right',VR_MAX:'VR_MAX', };
-declare class IntPoint { 
-	X: number;
-	Y: number;
-	clone() : IntPoint;
-	static C(Other: UObject | any): IntPoint;
-	Conv_IntPointToString(): string;
-	Add_IntPointInt(B: number): IntPoint;
-	Add_IntPointIntPoint(B: IntPoint): IntPoint;
-	Conv_IntPointToVector2D(): Vector2D;
-	Divide_IntPointInt(B: number): IntPoint;
-	Divide_IntPointIntPoint(B: IntPoint): IntPoint;
-	Equal_IntPointIntPoint(B: IntPoint): boolean;
-	Multiply_IntPointInt(B: number): IntPoint;
-	Multiply_IntPointIntPoint(B: IntPoint): IntPoint;
-	NotEqual_IntPointIntPoint(B: IntPoint): boolean;
-	Subtract_IntPointInt(B: number): IntPoint;
-	Subtract_IntPointIntPoint(B: IntPoint): IntPoint;
-	ResizeXRCamera(): IntPoint;
-	static Conv_IntPointToString(InIntPoint: IntPoint): string;
-	static Add_IntPointInt(A: IntPoint,B: number): IntPoint;
-	static Add_IntPointIntPoint(A: IntPoint,B: IntPoint): IntPoint;
-	static Conv_IntPointToVector2D(InIntPoint: IntPoint): Vector2D;
-	static Divide_IntPointInt(A: IntPoint,B: number): IntPoint;
-	static Divide_IntPointIntPoint(A: IntPoint,B: IntPoint): IntPoint;
-	static Equal_IntPointIntPoint(A: IntPoint,B: IntPoint): boolean;
-	static Multiply_IntPointInt(A: IntPoint,B: number): IntPoint;
-	static Multiply_IntPointIntPoint(A: IntPoint,B: IntPoint): IntPoint;
-	static NotEqual_IntPointIntPoint(A: IntPoint,B: IntPoint): boolean;
-	static Subtract_IntPointInt(A: IntPoint,B: number): IntPoint;
-	static Subtract_IntPointIntPoint(A: IntPoint,B: IntPoint): IntPoint;
-	static ResizeXRCamera(InSize: IntPoint): IntPoint;
-	static IntPoint_Down(): IntPoint;
-	static IntPoint_Left(): IntPoint;
-	static IntPoint_One(): IntPoint;
-	static IntPoint_Right(): IntPoint;
-	static IntPoint_Up(): IntPoint;
-	static IntPoint_Zero(): IntPoint;
-}
-
-declare class Box2D { 
-	Min: Vector2D;
-	Max: Vector2D;
-	bIsValid: number;
-	clone() : Box2D;
-	static C(Other: UObject | any): Box2D;
-}
-
-declare type EARLineTraceChannels = 'None' | 'FeaturePoint' | 'GroundPlane' | 'PlaneUsingExtent' | 'PlaneUsingBoundaryPolygon' | 'EARLineTraceChannels_MAX';
-declare var EARLineTraceChannels : { None:'None',FeaturePoint:'FeaturePoint',GroundPlane:'GroundPlane',PlaneUsingExtent:'PlaneUsingExtent',PlaneUsingBoundaryPolygon:'PlaneUsingBoundaryPolygon',EARLineTraceChannels_MAX:'EARLineTraceChannels_MAX', };
 declare type EARTrackingState = 'Unknown' | 'Tracking' | 'NotTracking' | 'StoppedTracking' | 'EARTrackingState_MAX';
 declare var EARTrackingState : { Unknown:'Unknown',Tracking:'Tracking',NotTracking:'NotTracking',StoppedTracking:'StoppedTracking',EARTrackingState_MAX:'EARTrackingState_MAX', };
 declare class ActorComponentTickFunction extends TickFunction { 
@@ -3621,7 +3619,7 @@ declare class Key {
 	Key_IsMouseButton(): boolean;
 	Key_IsValid(): boolean;
 	Key_IsVectorAxis(): boolean;
-	BreakKey(InteractionProfile?: string,hand?: EControllerHand,MotionSource?: string,Indentifier?: string,Component?: string): {InteractionProfile: string, hand: EControllerHand, MotionSource: string, Indentifier: string, Component: string};
+	BreakKey(InteractionProfile?: string,Hand?: EControllerHand,MotionSource?: string,Indentifier?: string,Component?: string): {InteractionProfile: string, Hand: EControllerHand, MotionSource: string, Indentifier: string, Component: string};
 	static EqualEqual_KeyKey(A: Key,B: Key): boolean;
 	static Key_GetDisplayName(Key: Key): string;
 	static Key_GetNavigationAction(InKey: Key): EUINavigationAction;
@@ -3637,7 +3635,7 @@ declare class Key {
 	static Key_IsMouseButton(Key: Key): boolean;
 	static Key_IsValid(Key: Key): boolean;
 	static Key_IsVectorAxis(Key: Key): boolean;
-	static BreakKey(InKey: Key,InteractionProfile?: string,hand?: EControllerHand,MotionSource?: string,Indentifier?: string,Component?: string): {InteractionProfile: string, hand: EControllerHand, MotionSource: string, Indentifier: string, Component: string};
+	static BreakKey(InKey: Key,InteractionProfile?: string,Hand?: EControllerHand,MotionSource?: string,Indentifier?: string,Component?: string): {InteractionProfile: string, Hand: EControllerHand, MotionSource: string, Indentifier: string, Component: string};
 }
 
 declare type ETouchIndex = 'Touch1' | 'Touch2' | 'Touch3' | 'Touch4' | 'Touch5' | 'Touch6' | 'Touch7' | 'Touch8' | 'Touch9' | 'Touch10' | 'CursorPointerIndex' | 'MAX_TOUCHES' | 'ETouchIndex_MAX';
@@ -9871,14 +9869,14 @@ declare class PlayerController extends Controller {
 	ToggleSpeaking(bInSpeaking: boolean): void;
 	TestServerLevelVisibilityChange(PackageName: string,Filename: string): void;
 	SwitchLevel(URL: string): void;
-	StopHapticEffect(hand: EControllerHand): void;
+	StopHapticEffect(Hand: EControllerHand): void;
 	StartFire(FireModeNum: number): void;
 	SetVirtualJoystickVisibility(bVisible: boolean): void;
 	SetViewTargetWithBlend(NewViewTarget: Actor,BlendTime: number,BlendFunc: EViewTargetBlendFunction,BlendExp: number,bLockOutgoing: boolean): void;
 	SetName(S: string): void;
 	SetMouseLocation(X: number,Y: number): void;
 	SetMouseCursorWidget(Cursor: EMouseCursor,CursorWidget: UserWidget): void;
-	SetHapticsByValue(Frequency: number,Amplitude: number,hand: EControllerHand): void;
+	SetHapticsByValue(Frequency: number,Amplitude: number,Hand: EControllerHand): void;
 	SetDisableHaptics(bNewDisabled: boolean): void;
 	SetControllerLightColor(Color: Color): void;
 	SetCinematicMode(bInCinematicMode: boolean,bHidePlayer: boolean,bAffectsHUD: boolean,bAffectsMovement: boolean,bAffectsTurning: boolean): void;
@@ -9911,7 +9909,7 @@ declare class PlayerController extends Controller {
 	RestartLevel(): void;
 	ResetControllerLightColor(): void;
 	ProjectWorldLocationToScreen(WorldLocation: Vector,ScreenLocation?: Vector2D,bPlayerViewportRelative?: boolean): {ScreenLocation: Vector2D, $: boolean};
-	PlayHapticEffect(HapticEffect: HapticFeedbackEffect_Base,hand: EControllerHand,Scale: number,bLoop: boolean): void;
+	PlayHapticEffect(HapticEffect: HapticFeedbackEffect_Base,Hand: EControllerHand,Scale: number,bLoop: boolean): void;
 	PlayDynamicForceFeedback(Intensity: number,Duration: number,bAffectsLeftLarge: boolean,bAffectsLeftSmall: boolean,bAffectsRightLarge: boolean,bAffectsRightSmall: boolean,Action: EDynamicForceFeedbackAction,LatentInfo: LatentActionInfo): void;
 	Pause(): void;
 	OnServerStartedVisualLogger(bIsLogging: boolean): void;
@@ -12757,13 +12755,10 @@ declare class Vector {
 	Z: number;
 	clone() : Vector;
 	static C(Other: UObject | any): Vector;
+	GenerateBoxMesh(Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
 	SegmentIntersection2D(SegmentEndA: Vector,SegmentStartB: Vector,SegmentEndB: Vector,IntersectionPoint?: Vector): {IntersectionPoint: Vector, $: boolean};
 	GetClosestARPin(PinId?: Guid): {PinId: Guid, $: EMagicLeapPassableWorldError};
 	GetSelectionBounds(BoxExtent?: Vector,SphereRadius?: number): {Origin: Vector, BoxExtent: Vector, SphereRadius: number};
-	GetLeftHandPoseData(Orientation?: Rotator,AngularVelocity?: Vector,Velocity?: Vector): {Position: Vector, Orientation: Rotator, AngularVelocity: Vector, Velocity: Vector};
-	GetRightHandPoseData(Orientation?: Rotator,AngularVelocity?: Vector,Velocity?: Vector): {Position: Vector, Orientation: Rotator, AngularVelocity: Vector, Velocity: Vector};
-	GetSteamVR_HandPoseRelativeToNow(Orientation?: Rotator,hand?: ESteamVRHand,PredictedSecondsFromNow?: number): {Position: Vector, Orientation: Rotator, $: boolean};
-	GenerateBoxMesh(Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
 	GetPointGuardianIntersection(BoundaryType: EBoundaryType): GuardianTestResult;
 	GetRawSensorData(LinearAcceleration?: Vector,AngularVelocity?: Vector,LinearVelocity?: Vector,TimeInSeconds?: number,DeviceType?: ETrackedDeviceType): {AngularAcceleration: Vector, LinearAcceleration: Vector, AngularVelocity: Vector, LinearVelocity: Vector, TimeInSeconds: number};
 	SetPositionScale3D(): void;
@@ -12907,13 +12902,10 @@ declare class Vector {
 	GetObjectClassificationAtLocation(OutClassification?: EARObjectClassification,OutClassificationLocation?: Vector,MaxLocationDiff?: number): {OutClassification: EARObjectClassification, OutClassificationLocation: Vector, $: boolean};
 	LineTraceTrackedObjects3D(End: Vector,bTestFeaturePoints: boolean,bTestGroundPlane: boolean,bTestPlaneExtents: boolean,bTestPlaneBoundaryPolygon: boolean): ARTraceResult[];
 	SetARWorldOriginLocationAndRotation(OriginRotation: Rotator,bIsTransformInWorldSpace: boolean,bMaintainUpDirection: boolean): void;
+	static GenerateBoxMesh(BoxRadius: Vector,Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
 	static SegmentIntersection2D(SegmentStartA: Vector,SegmentEndA: Vector,SegmentStartB: Vector,SegmentEndB: Vector,IntersectionPoint?: Vector): {IntersectionPoint: Vector, $: boolean};
 	static GetClosestARPin(SearchPoint: Vector,PinId?: Guid): {PinId: Guid, $: EMagicLeapPassableWorldError};
 	static GetSelectionBounds(Origin?: Vector,BoxExtent?: Vector,SphereRadius?: number): {Origin: Vector, BoxExtent: Vector, SphereRadius: number};
-	static GetLeftHandPoseData(Position?: Vector,Orientation?: Rotator,AngularVelocity?: Vector,Velocity?: Vector): {Position: Vector, Orientation: Rotator, AngularVelocity: Vector, Velocity: Vector};
-	static GetRightHandPoseData(Position?: Vector,Orientation?: Rotator,AngularVelocity?: Vector,Velocity?: Vector): {Position: Vector, Orientation: Rotator, AngularVelocity: Vector, Velocity: Vector};
-	static GetSteamVR_HandPoseRelativeToNow(Position?: Vector,Orientation?: Rotator,hand?: ESteamVRHand,PredictedSecondsFromNow?: number): {Position: Vector, Orientation: Rotator, $: boolean};
-	static GenerateBoxMesh(BoxRadius: Vector,Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
 	static GetPointGuardianIntersection(Point: Vector,BoundaryType: EBoundaryType): GuardianTestResult;
 	static GetRawSensorData(AngularAcceleration?: Vector,LinearAcceleration?: Vector,AngularVelocity?: Vector,LinearVelocity?: Vector,TimeInSeconds?: number,DeviceType?: ETrackedDeviceType): {AngularAcceleration: Vector, LinearAcceleration: Vector, AngularVelocity: Vector, LinearVelocity: Vector, TimeInSeconds: number};
 	static SetPositionScale3D(PosScale3D: Vector): void;
@@ -15449,6 +15441,19 @@ declare class WorldPSCPool {
 	static C(Other: UObject | any): WorldPSCPool;
 }
 
+declare class VaRestURL { 
+	Protocol: string;
+	Host: string;
+	Port: number;
+	Valid: number;
+	Map: string;
+	RedirectURL: string;
+	Op: string[];
+	Portal: string;
+	clone() : VaRestURL;
+	static C(Other: UObject | any): VaRestURL;
+}
+
 declare class URL { 
 	Protocol: string;
 	Host: string;
@@ -15528,19 +15533,6 @@ declare class RecastNavMesh extends NavigationData {
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): RecastNavMesh;
 	K2_ReplaceAreaInTileBounds(Bounds: Box,OldArea: UnrealEngineClass,NewArea: UnrealEngineClass,ReplaceLinks: boolean): boolean;
 	static C(Other: UObject | any): RecastNavMesh;
-}
-
-declare class VaRestURL { 
-	Protocol: string;
-	Host: string;
-	Port: number;
-	Valid: number;
-	Map: string;
-	RedirectURL: string;
-	Op: string[];
-	Portal: string;
-	clone() : VaRestURL;
-	static C(Other: UObject | any): VaRestURL;
 }
 
 declare type EARWorldAlignment = 'Gravity' | 'GravityAndHeading' | 'Camera' | 'EARWorldAlignment_MAX';
@@ -17799,6 +17791,7 @@ declare class World extends UObject {
 	UpdatePieData(Value: number,Name: string): void;
 	UpdateScatterData(Name: string,Data: Vector2D): void;
 	ZeroBarChartData(): void;
+	GetWorldURL(): VaRestURL;
 	BeginPlay(): void;
 	DestroyWorld(): void;
 	InitializeActorsForPlay(URL: URL): void;
@@ -17811,7 +17804,6 @@ declare class World extends UObject {
 	IsGameWorld(): boolean;
 	IsPlayInEditor(): boolean;
 	IsPlayInPreview(): boolean;
-	GetWorldURL(): VaRestURL;
 	LuminARLineTrace(ScreenPosition: Vector2D,TraceChannels: any,OutHitResults?: ARTraceResult[]): {OutHitResults: ARTraceResult[], $: boolean};
 	StartLuminARSession(LatentInfo: LatentActionInfo,Configuration: LuminARSessionConfig): void;
 	GetNiagaraParameterCollection(Collection: NiagaraParameterCollection): NiagaraParameterCollectionInstance;
@@ -18062,7 +18054,7 @@ declare class World extends UObject {
 	GetControllerTransformForTime(ControllerIndex: number,MotionSource: string,Time: Timespan,bTimeWasUsed?: boolean,Orientation?: Rotator,Position?: Vector,bProvidedLinearVelocity?: boolean,LinearVelocity?: Vector,bProvidedAngularVelocity?: boolean,AngularVelocityRadPerSec?: Vector): {bTimeWasUsed: boolean, Orientation: Rotator, Position: Vector, bProvidedLinearVelocity: boolean, LinearVelocity: Vector, bProvidedAngularVelocity: boolean, AngularVelocityRadPerSec: Vector, $: boolean};
 	GetDeviceWorldPose(XRDeviceId: XRDeviceId,bIsTracked?: boolean,Orientation?: Rotator,bHasPositionalTracking?: boolean,Position?: Vector): {bIsTracked: boolean, Orientation: Rotator, bHasPositionalTracking: boolean, Position: Vector};
 	GetHMDData(HMDData?: XRHMDData): {HMDData: XRHMDData};
-	GetMotionControllerData(hand: EControllerHand,MotionControllerData?: XRMotionControllerData): {MotionControllerData: XRMotionControllerData};
+	GetMotionControllerData(Hand: EControllerHand,MotionControllerData?: XRMotionControllerData): {MotionControllerData: XRMotionControllerData};
 	GetTrackingToWorldTransform(): Transform;
 	GetWorldToMetersScale(): number;
 	SetWorldToMetersScale(NewScale: number): void;
@@ -18085,6 +18077,7 @@ declare class World extends UObject {
 	static UpdatePieData(WorldContextObject: UObject,Value: number,Name: string): void;
 	static UpdateScatterData(WorldContextObject: UObject,Name: string,Data: Vector2D): void;
 	static ZeroBarChartData(WorldContextObject: UObject): void;
+	static GetWorldURL(WorldContextObject: UObject): VaRestURL;
 	static BeginPlay(World: World): void;
 	static DestroyWorld(World: World): void;
 	static InitializeActorsForPlay(World: World,URL: URL): void;
@@ -18097,7 +18090,6 @@ declare class World extends UObject {
 	static IsGameWorld(World: World): boolean;
 	static IsPlayInEditor(World: World): boolean;
 	static IsPlayInPreview(World: World): boolean;
-	static GetWorldURL(WorldContextObject: UObject): VaRestURL;
 	static LuminARLineTrace(WorldContextObject: UObject,ScreenPosition: Vector2D,TraceChannels: any,OutHitResults?: ARTraceResult[]): {OutHitResults: ARTraceResult[], $: boolean};
 	static StartLuminARSession(WorldContextObject: UObject,LatentInfo: LatentActionInfo,Configuration: LuminARSessionConfig): void;
 	static GetNiagaraParameterCollection(WorldContextObject: UObject,Collection: NiagaraParameterCollection): NiagaraParameterCollectionInstance;
@@ -18348,7 +18340,7 @@ declare class World extends UObject {
 	static GetControllerTransformForTime(WorldContext: UObject,ControllerIndex: number,MotionSource: string,Time: Timespan,bTimeWasUsed?: boolean,Orientation?: Rotator,Position?: Vector,bProvidedLinearVelocity?: boolean,LinearVelocity?: Vector,bProvidedAngularVelocity?: boolean,AngularVelocityRadPerSec?: Vector): {bTimeWasUsed: boolean, Orientation: Rotator, Position: Vector, bProvidedLinearVelocity: boolean, LinearVelocity: Vector, bProvidedAngularVelocity: boolean, AngularVelocityRadPerSec: Vector, $: boolean};
 	static GetDeviceWorldPose(WorldContext: UObject,XRDeviceId: XRDeviceId,bIsTracked?: boolean,Orientation?: Rotator,bHasPositionalTracking?: boolean,Position?: Vector): {bIsTracked: boolean, Orientation: Rotator, bHasPositionalTracking: boolean, Position: Vector};
 	static GetHMDData(WorldContext: UObject,HMDData?: XRHMDData): {HMDData: XRHMDData};
-	static GetMotionControllerData(WorldContext: UObject,hand: EControllerHand,MotionControllerData?: XRMotionControllerData): {MotionControllerData: XRMotionControllerData};
+	static GetMotionControllerData(WorldContext: UObject,Hand: EControllerHand,MotionControllerData?: XRMotionControllerData): {MotionControllerData: XRMotionControllerData};
 	static GetTrackingToWorldTransform(WorldContext: UObject): Transform;
 	static GetWorldToMetersScale(WorldContext: UObject): number;
 	static SetWorldToMetersScale(WorldContext: UObject,NewScale: number): void;
@@ -19629,5 +19621,24 @@ declare class GameMapsSettings extends UObject {
 	GetSkipAssigningGamepadToPlayer1(): boolean;
 	static GetGameMapsSettings(): GameMapsSettings;
 	static C(Other: UObject | any): GameMapsSettings;
+}
+
+declare class GameNetworkManagerSettings extends UObject { 
+	MinDynamicBandwidth: number;
+	MaxDynamicBandwidth: number;
+	TotalNetBandwidth: number;
+	BadPingThreshold: number;
+	bIsStandbyCheckingEnabled: boolean;
+	StandbyRxCheatTime: number;
+	StandbyTxCheatTime: number;
+	PercentMissingForRxStandby: number;
+	PercentMissingForTxStandby: number;
+	PercentForBadPing: number;
+	JoinInProgressStandbyWaitTime: number;
+	static Load(ResourceName: string): GameNetworkManagerSettings;
+	static Find(Outer: UObject, ResourceName: string): GameNetworkManagerSettings;
+	static GetDefaultObject(): GameNetworkManagerSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GameNetworkManagerSettings;
+	static C(Other: UObject | any): GameNetworkManagerSettings;
 }
 
