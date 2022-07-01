@@ -47,8 +47,225 @@ declare namespace JSX {
 	}
 }
 
+declare class Field extends UObject { 
+	static Load(ResourceName: string): Field;
+	static Find(Outer: UObject, ResourceName: string): Field;
+	static GetDefaultObject(): Field;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Field;
+	static C(Other: UObject | any): Field;
+	HasMetaData(Key: string): boolean;
+	GetMetaData(Key: string): string;
+	static HasMetaData(Field: Field,Key: string): boolean;
+	static GetMetaData(Field: Field,Key: string): string;
+}
+
+declare class Enum extends Field { 
+	static Load(ResourceName: string): Enum;
+	static Find(Outer: UObject, ResourceName: string): Enum;
+	static GetDefaultObject(): Enum;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Enum;
+	static C(Other: UObject | any): Enum;
+	GetEnumeratorName(EnumeratorValue: number): string;
+	GetEnumeratorUserFriendlyName(EnumeratorValue: number): string;
+	GetEnumeratorValueFromIndex(EnumeratorIndex: number): number;
+	GetValidValue(EnumeratorValue: number): number;
+	static GetEnumeratorName(Enum: Enum,EnumeratorValue: number): string;
+	static GetEnumeratorUserFriendlyName(Enum: Enum,EnumeratorValue: number): string;
+	static GetEnumeratorValueFromIndex(Enum: Enum,EnumeratorIndex: number): number;
+	static GetValidValue(Enum: Enum,EnumeratorValue: number): number;
+}
+
+declare class LayerActorStats { 
+	Type: UnrealEngineClass;
+	Total: number;
+	clone() : LayerActorStats;
+	static C(Other: UObject | any): LayerActorStats;
+}
+
+declare class Layer extends UObject { 
+	LayerName: string;
+	bIsVisible: boolean;
+	ActorStats: LayerActorStats[];
+	static Load(ResourceName: string): Layer;
+	static Find(Outer: UObject, ResourceName: string): Layer;
+	static GetDefaultObject(): Layer;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Layer;
+	static C(Other: UObject | any): Layer;
+}
+
+declare type ETickingGroup = 'TG_PrePhysics' | 'TG_StartPhysics' | 'TG_DuringPhysics' | 'TG_EndPhysics' | 'TG_PostPhysics' | 'TG_PostUpdateWork' | 'TG_LastDemotable' | 'TG_NewlySpawned' | 'TG_MAX';
+declare var ETickingGroup : { TG_PrePhysics:'TG_PrePhysics',TG_StartPhysics:'TG_StartPhysics',TG_DuringPhysics:'TG_DuringPhysics',TG_EndPhysics:'TG_EndPhysics',TG_PostPhysics:'TG_PostPhysics',TG_PostUpdateWork:'TG_PostUpdateWork',TG_LastDemotable:'TG_LastDemotable',TG_NewlySpawned:'TG_NewlySpawned',TG_MAX:'TG_MAX', };
+declare class TickFunction { 
+	TickGroup: ETickingGroup;
+	EndTickGroup: ETickingGroup;
+	bTickEvenWhenPaused: boolean;
+	bCanEverTick: boolean;
+	bStartWithTickEnabled: boolean;
+	bAllowTickOnDedicatedServer: boolean;
+	TickInterval: number;
+	clone() : TickFunction;
+	static C(Other: UObject | any): TickFunction;
+}
+
+declare class ActorTickFunction extends TickFunction { 
+	clone() : ActorTickFunction;
+	static C(Other: UObject | any): ActorTickFunction;
+}
+
+declare type EActorUpdateOverlapsMethod = 'UseConfigDefault' | 'AlwaysUpdate' | 'OnlyUpdateMovable' | 'NeverUpdate' | 'EActorUpdateOverlapsMethod_MAX';
+declare var EActorUpdateOverlapsMethod : { UseConfigDefault:'UseConfigDefault',AlwaysUpdate:'AlwaysUpdate',OnlyUpdateMovable:'OnlyUpdateMovable',NeverUpdate:'NeverUpdate',EActorUpdateOverlapsMethod_MAX:'EActorUpdateOverlapsMethod_MAX', };
+declare type ENetRole = 'ROLE_None' | 'ROLE_SimulatedProxy' | 'ROLE_AutonomousProxy' | 'ROLE_Authority' | 'ROLE_MAX';
+declare var ENetRole : { ROLE_None:'ROLE_None',ROLE_SimulatedProxy:'ROLE_SimulatedProxy',ROLE_AutonomousProxy:'ROLE_AutonomousProxy',ROLE_Authority:'ROLE_Authority',ROLE_MAX:'ROLE_MAX', };
+declare class IntPoint { 
+	X: number;
+	Y: number;
+	clone() : IntPoint;
+	static C(Other: UObject | any): IntPoint;
+	Conv_IntPointToString(): string;
+	Add_IntPointInt(B: number): IntPoint;
+	Add_IntPointIntPoint(B: IntPoint): IntPoint;
+	Conv_IntPointToVector2D(): Vector2D;
+	Divide_IntPointInt(B: number): IntPoint;
+	Divide_IntPointIntPoint(B: IntPoint): IntPoint;
+	Equal_IntPointIntPoint(B: IntPoint): boolean;
+	Multiply_IntPointInt(B: number): IntPoint;
+	Multiply_IntPointIntPoint(B: IntPoint): IntPoint;
+	NotEqual_IntPointIntPoint(B: IntPoint): boolean;
+	Subtract_IntPointInt(B: number): IntPoint;
+	Subtract_IntPointIntPoint(B: IntPoint): IntPoint;
+	ResizeXRCamera(): IntPoint;
+	static Conv_IntPointToString(InIntPoint: IntPoint): string;
+	static Add_IntPointInt(A: IntPoint,B: number): IntPoint;
+	static Add_IntPointIntPoint(A: IntPoint,B: IntPoint): IntPoint;
+	static Conv_IntPointToVector2D(InIntPoint: IntPoint): Vector2D;
+	static Divide_IntPointInt(A: IntPoint,B: number): IntPoint;
+	static Divide_IntPointIntPoint(A: IntPoint,B: IntPoint): IntPoint;
+	static Equal_IntPointIntPoint(A: IntPoint,B: IntPoint): boolean;
+	static Multiply_IntPointInt(A: IntPoint,B: number): IntPoint;
+	static Multiply_IntPointIntPoint(A: IntPoint,B: IntPoint): IntPoint;
+	static NotEqual_IntPointIntPoint(A: IntPoint,B: IntPoint): boolean;
+	static Subtract_IntPointInt(A: IntPoint,B: number): IntPoint;
+	static Subtract_IntPointIntPoint(A: IntPoint,B: IntPoint): IntPoint;
+	static ResizeXRCamera(InSize: IntPoint): IntPoint;
+	static IntPoint_Down(): IntPoint;
+	static IntPoint_Left(): IntPoint;
+	static IntPoint_One(): IntPoint;
+	static IntPoint_Right(): IntPoint;
+	static IntPoint_Up(): IntPoint;
+	static IntPoint_Zero(): IntPoint;
+}
+
+declare class Box2D { 
+	Min: Vector2D;
+	Max: Vector2D;
+	bIsValid: number;
+	clone() : Box2D;
+	static C(Other: UObject | any): Box2D;
+}
+
+declare type EARLineTraceChannels = 'None' | 'FeaturePoint' | 'GroundPlane' | 'PlaneUsingExtent' | 'PlaneUsingBoundaryPolygon' | 'EARLineTraceChannels_MAX';
+declare var EARLineTraceChannels : { None:'None',FeaturePoint:'FeaturePoint',GroundPlane:'GroundPlane',PlaneUsingExtent:'PlaneUsingExtent',PlaneUsingBoundaryPolygon:'PlaneUsingBoundaryPolygon',EARLineTraceChannels_MAX:'EARLineTraceChannels_MAX', };
 declare type EOrientPositionSelector = 'Orientation' | 'Position' | 'OrientationAndPosition' | 'EOrientPositionSelector_MAX';
 declare var EOrientPositionSelector : { Orientation:'Orientation',Position:'Position',OrientationAndPosition:'OrientationAndPosition',EOrientPositionSelector_MAX:'EOrientPositionSelector_MAX', };
+declare type EEasingFunc = 'Linear' | 'Step' | 'SinusoidalIn' | 'SinusoidalOut' | 'SinusoidalInOut' | 'EaseIn' | 'EaseOut' | 'EaseInOut' | 'ExpoIn' | 'ExpoOut' | 'ExpoInOut' | 'CircularIn' | 'CircularOut' | 'CircularInOut' | 'EEasingFunc_MAX';
+declare var EEasingFunc : { Linear:'Linear',Step:'Step',SinusoidalIn:'SinusoidalIn',SinusoidalOut:'SinusoidalOut',SinusoidalInOut:'SinusoidalInOut',EaseIn:'EaseIn',EaseOut:'EaseOut',EaseInOut:'EaseInOut',ExpoIn:'ExpoIn',ExpoOut:'ExpoOut',ExpoInOut:'ExpoInOut',CircularIn:'CircularIn',CircularOut:'CircularOut',CircularInOut:'CircularInOut',EEasingFunc_MAX:'EEasingFunc_MAX', };
+declare class RandomStream { 
+	InitialSeed: number;
+	Seed: number;
+	clone() : RandomStream;
+	static C(Other: UObject | any): RandomStream;
+	BreakRandomStream(InitialSeed?: number): {InitialSeed: number};
+	RandomBoolFromStream(): boolean;
+	RandomFloatFromStream(): number;
+	RandomUnitVectorFromStream(): Vector;
+	ResetRandomStream(): void;
+	SeedRandomStream(): {Stream: RandomStream};
+	SetRandomStreamSeed(NewSeed?: number): {Stream: RandomStream};
+	static BreakRandomStream(InRandomStream: RandomStream,InitialSeed?: number): {InitialSeed: number};
+	static RandomBoolFromStream(Stream: RandomStream): boolean;
+	static RandomFloatFromStream(Stream: RandomStream): number;
+	static RandomUnitVectorFromStream(Stream: RandomStream): Vector;
+	static ResetRandomStream(Stream: RandomStream): void;
+	static SeedRandomStream(Stream?: RandomStream): {Stream: RandomStream};
+	static SetRandomStreamSeed(Stream?: RandomStream,NewSeed?: number): {Stream: RandomStream};
+	static MakeRandomStream(InitialSeed: number): RandomStream;
+}
+
+declare class Rotator { 
+	Pitch: number;
+	Yaw: number;
+	Roll: number;
+	clone() : Rotator;
+	static C(Other: UObject | any): Rotator;
+	GetBaseRotationAndBaseOffsetInMeters(OutBaseOffsetInMeters?: Vector): {OutRotation: Rotator, OutBaseOffsetInMeters: Vector};
+	GetBaseRotationAndPositionOffset(OutPosOffset?: Vector): {OutRot: Rotator, OutPosOffset: Vector};
+	GetPose(DevicePosition?: Vector,NeckPosition?: Vector,bUseOrienationForPlayerCamera?: boolean,bUsePositionForPlayerCamera?: boolean,PositionScale?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector, NeckPosition: Vector};
+	SetBaseRotationAndBaseOffsetInMeters(BaseOffsetInMeters: Vector,Options: EOrientPositionSelector): void;
+	SetBaseRotationAndPositionOffset(PosOffset: Vector,Options: EOrientPositionSelector): void;
+	SetBaseRotation(): void;
+	IsValidAIRotation(): boolean;
+	Conv_RotatorToText(): string;
+	Conv_RotatorToString(): string;
+	BreakRotator(Roll?: number,Pitch?: number,Yaw?: number): {Roll: number, Pitch: number, Yaw: number};
+	BreakRotIntoAxes(X?: Vector,Y?: Vector,Z?: Vector): {X: Vector, Y: Vector, Z: Vector};
+	ComposeRotators(B: Rotator): Rotator;
+	Conv_RotatorToTransform(): Transform;
+	Conv_RotatorToVector(): Vector;
+	DynamicWeightedMovingAverage_FRotator(PreviousSample: Rotator,MaxDistance: number,MinWeight: number,MaxWeight: number): Rotator;
+	EqualEqual_RotatorRotator(B: Rotator,ErrorTolerance: number): boolean;
+	GetAxes(X?: Vector,Y?: Vector,Z?: Vector): {X: Vector, Y: Vector, Z: Vector};
+	GetForwardVector(): Vector;
+	GetRightVector(): Vector;
+	GetUpVector(): Vector;
+	Multiply_RotatorFloat(B: number): Rotator;
+	Multiply_RotatorInt(B: number): Rotator;
+	NegateRotator(): Rotator;
+	NormalizedDeltaRotator(B: Rotator): Rotator;
+	NotEqual_RotatorRotator(B: Rotator,ErrorTolerance: number): boolean;
+	REase(B: Rotator,Alpha: number,bShortestPath: boolean,EasingFunc: EEasingFunc,BlendExp: number,Steps: number): Rotator;
+	RInterpTo(Target: Rotator,DeltaTime: number,InterpSpeed: number): Rotator;
+	RInterpTo_Constant(Target: Rotator,DeltaTime: number,InterpSpeed: number): Rotator;
+	RLerp(B: Rotator,Alpha: number,bShortestPath: boolean): Rotator;
+	SelectRotator(B: Rotator,bPickA: boolean): Rotator;
+	WeightedMovingAverage_FRotator(PreviousSample: Rotator,Weight: number): Rotator;
+	GetOrientationAndPosition(DevicePosition?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector};
+	static GetBaseRotationAndBaseOffsetInMeters(OutRotation?: Rotator,OutBaseOffsetInMeters?: Vector): {OutRotation: Rotator, OutBaseOffsetInMeters: Vector};
+	static GetBaseRotationAndPositionOffset(OutRot?: Rotator,OutPosOffset?: Vector): {OutRot: Rotator, OutPosOffset: Vector};
+	static GetPose(DeviceRotation?: Rotator,DevicePosition?: Vector,NeckPosition?: Vector,bUseOrienationForPlayerCamera?: boolean,bUsePositionForPlayerCamera?: boolean,PositionScale?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector, NeckPosition: Vector};
+	static SetBaseRotationAndBaseOffsetInMeters(Rotation: Rotator,BaseOffsetInMeters: Vector,Options: EOrientPositionSelector): void;
+	static SetBaseRotationAndPositionOffset(BaseRot: Rotator,PosOffset: Vector,Options: EOrientPositionSelector): void;
+	static SetBaseRotation(InBaseRotation: Rotator): void;
+	static IsValidAIRotation(Rotation: Rotator): boolean;
+	static Conv_RotatorToText(InRot: Rotator): string;
+	static Conv_RotatorToString(InRot: Rotator): string;
+	static BreakRotator(InRot: Rotator,Roll?: number,Pitch?: number,Yaw?: number): {Roll: number, Pitch: number, Yaw: number};
+	static BreakRotIntoAxes(InRot: Rotator,X?: Vector,Y?: Vector,Z?: Vector): {X: Vector, Y: Vector, Z: Vector};
+	static ComposeRotators(A: Rotator,B: Rotator): Rotator;
+	static Conv_RotatorToTransform(InRotator: Rotator): Transform;
+	static Conv_RotatorToVector(InRot: Rotator): Vector;
+	static DynamicWeightedMovingAverage_FRotator(CurrentSample: Rotator,PreviousSample: Rotator,MaxDistance: number,MinWeight: number,MaxWeight: number): Rotator;
+	static EqualEqual_RotatorRotator(A: Rotator,B: Rotator,ErrorTolerance: number): boolean;
+	static GetAxes(A: Rotator,X?: Vector,Y?: Vector,Z?: Vector): {X: Vector, Y: Vector, Z: Vector};
+	static GetForwardVector(InRot: Rotator): Vector;
+	static GetRightVector(InRot: Rotator): Vector;
+	static GetUpVector(InRot: Rotator): Vector;
+	static Multiply_RotatorFloat(A: Rotator,B: number): Rotator;
+	static Multiply_RotatorInt(A: Rotator,B: number): Rotator;
+	static NegateRotator(A: Rotator): Rotator;
+	static NormalizedDeltaRotator(A: Rotator,B: Rotator): Rotator;
+	static NotEqual_RotatorRotator(A: Rotator,B: Rotator,ErrorTolerance: number): boolean;
+	static REase(A: Rotator,B: Rotator,Alpha: number,bShortestPath: boolean,EasingFunc: EEasingFunc,BlendExp: number,Steps: number): Rotator;
+	static RInterpTo(Current: Rotator,Target: Rotator,DeltaTime: number,InterpSpeed: number): Rotator;
+	static RInterpTo_Constant(Current: Rotator,Target: Rotator,DeltaTime: number,InterpSpeed: number): Rotator;
+	static RLerp(A: Rotator,B: Rotator,Alpha: number,bShortestPath: boolean): Rotator;
+	static SelectRotator(A: Rotator,B: Rotator,bPickA: boolean): Rotator;
+	static WeightedMovingAverage_FRotator(CurrentSample: Rotator,PreviousSample: Rotator,Weight: number): Rotator;
+	static GetOrientationAndPosition(DeviceRotation?: Rotator,DevicePosition?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector};
+	static MakeRotator(Roll: number,Pitch: number,Yaw: number): Rotator;
+	static RandomRotator(bRoll: boolean): Rotator;
+	static RandomRotatorFromStream(bRoll: boolean,Stream: RandomStream): Rotator;
+}
+
 declare type EOculusHandType = 'None' | 'HandLeft' | 'HandRight' | 'EOculusHandType_MAX';
 declare var EOculusHandType : { None:'None',HandLeft:'HandLeft',HandRight:'HandRight',EOculusHandType_MAX:'EOculusHandType_MAX', };
 declare type EBone = 'Wrist_Root' | 'Hand_Start' | 'Forearm_Stub' | 'Thumb_0' | 'Thumb_1' | 'Thumb_2' | 'Thumb_3' | 'Index_1' | 'Index_2' | 'Index_3' | 'Middle_1' | 'Middle_2' | 'Middle_3' | 'Ring_1' | 'Ring_2' | 'Ring_3' | 'Pinky_0' | 'Pinky_1' | 'Pinky_2' | 'Pinky_3' | 'Thumb_Tip' | 'Max_Skinnable' | 'Index_Tip' | 'Middle_Tip' | 'Ring_Tip' | 'Pinky_Tip' | 'Hand_End' | 'Bone_Max' | 'Invalid' | 'EBone_MAX';
@@ -315,8 +532,6 @@ declare class Matrix {
 	static Matrix_Identity(): Matrix;
 }
 
-declare type EEasingFunc = 'Linear' | 'Step' | 'SinusoidalIn' | 'SinusoidalOut' | 'SinusoidalInOut' | 'EaseIn' | 'EaseOut' | 'EaseInOut' | 'ExpoIn' | 'ExpoOut' | 'ExpoInOut' | 'CircularIn' | 'CircularOut' | 'CircularInOut' | 'EEasingFunc_MAX';
-declare var EEasingFunc : { Linear:'Linear',Step:'Step',SinusoidalIn:'SinusoidalIn',SinusoidalOut:'SinusoidalOut',SinusoidalInOut:'SinusoidalInOut',EaseIn:'EaseIn',EaseOut:'EaseOut',EaseInOut:'EaseInOut',ExpoIn:'ExpoIn',ExpoOut:'ExpoOut',ExpoInOut:'ExpoInOut',CircularIn:'CircularIn',CircularOut:'CircularOut',CircularInOut:'CircularInOut',EEasingFunc_MAX:'EEasingFunc_MAX', };
 declare type ELerpInterpolationMode = 'QuatInterp' | 'EulerInterp' | 'DualQuatInterp' | 'ELerpInterpolationMode_MAX';
 declare var ELerpInterpolationMode : { QuatInterp:'QuatInterp',EulerInterp:'EulerInterp',DualQuatInterp:'DualQuatInterp',ELerpInterpolationMode_MAX:'ELerpInterpolationMode_MAX', };
 declare class Transform { 
@@ -384,103 +599,6 @@ declare class Transform {
 	static GetAlignmentTransform(): Transform;
 }
 
-declare class RandomStream { 
-	InitialSeed: number;
-	Seed: number;
-	clone() : RandomStream;
-	static C(Other: UObject | any): RandomStream;
-	BreakRandomStream(InitialSeed?: number): {InitialSeed: number};
-	RandomBoolFromStream(): boolean;
-	RandomFloatFromStream(): number;
-	RandomUnitVectorFromStream(): Vector;
-	ResetRandomStream(): void;
-	SeedRandomStream(): {Stream: RandomStream};
-	SetRandomStreamSeed(NewSeed?: number): {Stream: RandomStream};
-	static BreakRandomStream(InRandomStream: RandomStream,InitialSeed?: number): {InitialSeed: number};
-	static RandomBoolFromStream(Stream: RandomStream): boolean;
-	static RandomFloatFromStream(Stream: RandomStream): number;
-	static RandomUnitVectorFromStream(Stream: RandomStream): Vector;
-	static ResetRandomStream(Stream: RandomStream): void;
-	static SeedRandomStream(Stream?: RandomStream): {Stream: RandomStream};
-	static SetRandomStreamSeed(Stream?: RandomStream,NewSeed?: number): {Stream: RandomStream};
-	static MakeRandomStream(InitialSeed: number): RandomStream;
-}
-
-declare class Rotator { 
-	Pitch: number;
-	Yaw: number;
-	Roll: number;
-	clone() : Rotator;
-	static C(Other: UObject | any): Rotator;
-	GetBaseRotationAndBaseOffsetInMeters(OutBaseOffsetInMeters?: Vector): {OutRotation: Rotator, OutBaseOffsetInMeters: Vector};
-	GetBaseRotationAndPositionOffset(OutPosOffset?: Vector): {OutRot: Rotator, OutPosOffset: Vector};
-	GetPose(DevicePosition?: Vector,NeckPosition?: Vector,bUseOrienationForPlayerCamera?: boolean,bUsePositionForPlayerCamera?: boolean,PositionScale?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector, NeckPosition: Vector};
-	SetBaseRotationAndBaseOffsetInMeters(BaseOffsetInMeters: Vector,Options: EOrientPositionSelector): void;
-	SetBaseRotationAndPositionOffset(PosOffset: Vector,Options: EOrientPositionSelector): void;
-	SetBaseRotation(): void;
-	IsValidAIRotation(): boolean;
-	Conv_RotatorToText(): string;
-	Conv_RotatorToString(): string;
-	BreakRotator(Roll?: number,Pitch?: number,Yaw?: number): {Roll: number, Pitch: number, Yaw: number};
-	BreakRotIntoAxes(X?: Vector,Y?: Vector,Z?: Vector): {X: Vector, Y: Vector, Z: Vector};
-	ComposeRotators(B: Rotator): Rotator;
-	Conv_RotatorToTransform(): Transform;
-	Conv_RotatorToVector(): Vector;
-	DynamicWeightedMovingAverage_FRotator(PreviousSample: Rotator,MaxDistance: number,MinWeight: number,MaxWeight: number): Rotator;
-	EqualEqual_RotatorRotator(B: Rotator,ErrorTolerance: number): boolean;
-	GetAxes(X?: Vector,Y?: Vector,Z?: Vector): {X: Vector, Y: Vector, Z: Vector};
-	GetForwardVector(): Vector;
-	GetRightVector(): Vector;
-	GetUpVector(): Vector;
-	Multiply_RotatorFloat(B: number): Rotator;
-	Multiply_RotatorInt(B: number): Rotator;
-	NegateRotator(): Rotator;
-	NormalizedDeltaRotator(B: Rotator): Rotator;
-	NotEqual_RotatorRotator(B: Rotator,ErrorTolerance: number): boolean;
-	REase(B: Rotator,Alpha: number,bShortestPath: boolean,EasingFunc: EEasingFunc,BlendExp: number,Steps: number): Rotator;
-	RInterpTo(Target: Rotator,DeltaTime: number,InterpSpeed: number): Rotator;
-	RInterpTo_Constant(Target: Rotator,DeltaTime: number,InterpSpeed: number): Rotator;
-	RLerp(B: Rotator,Alpha: number,bShortestPath: boolean): Rotator;
-	SelectRotator(B: Rotator,bPickA: boolean): Rotator;
-	WeightedMovingAverage_FRotator(PreviousSample: Rotator,Weight: number): Rotator;
-	GetOrientationAndPosition(DevicePosition?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector};
-	static GetBaseRotationAndBaseOffsetInMeters(OutRotation?: Rotator,OutBaseOffsetInMeters?: Vector): {OutRotation: Rotator, OutBaseOffsetInMeters: Vector};
-	static GetBaseRotationAndPositionOffset(OutRot?: Rotator,OutPosOffset?: Vector): {OutRot: Rotator, OutPosOffset: Vector};
-	static GetPose(DeviceRotation?: Rotator,DevicePosition?: Vector,NeckPosition?: Vector,bUseOrienationForPlayerCamera?: boolean,bUsePositionForPlayerCamera?: boolean,PositionScale?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector, NeckPosition: Vector};
-	static SetBaseRotationAndBaseOffsetInMeters(Rotation: Rotator,BaseOffsetInMeters: Vector,Options: EOrientPositionSelector): void;
-	static SetBaseRotationAndPositionOffset(BaseRot: Rotator,PosOffset: Vector,Options: EOrientPositionSelector): void;
-	static SetBaseRotation(InBaseRotation: Rotator): void;
-	static IsValidAIRotation(Rotation: Rotator): boolean;
-	static Conv_RotatorToText(InRot: Rotator): string;
-	static Conv_RotatorToString(InRot: Rotator): string;
-	static BreakRotator(InRot: Rotator,Roll?: number,Pitch?: number,Yaw?: number): {Roll: number, Pitch: number, Yaw: number};
-	static BreakRotIntoAxes(InRot: Rotator,X?: Vector,Y?: Vector,Z?: Vector): {X: Vector, Y: Vector, Z: Vector};
-	static ComposeRotators(A: Rotator,B: Rotator): Rotator;
-	static Conv_RotatorToTransform(InRotator: Rotator): Transform;
-	static Conv_RotatorToVector(InRot: Rotator): Vector;
-	static DynamicWeightedMovingAverage_FRotator(CurrentSample: Rotator,PreviousSample: Rotator,MaxDistance: number,MinWeight: number,MaxWeight: number): Rotator;
-	static EqualEqual_RotatorRotator(A: Rotator,B: Rotator,ErrorTolerance: number): boolean;
-	static GetAxes(A: Rotator,X?: Vector,Y?: Vector,Z?: Vector): {X: Vector, Y: Vector, Z: Vector};
-	static GetForwardVector(InRot: Rotator): Vector;
-	static GetRightVector(InRot: Rotator): Vector;
-	static GetUpVector(InRot: Rotator): Vector;
-	static Multiply_RotatorFloat(A: Rotator,B: number): Rotator;
-	static Multiply_RotatorInt(A: Rotator,B: number): Rotator;
-	static NegateRotator(A: Rotator): Rotator;
-	static NormalizedDeltaRotator(A: Rotator,B: Rotator): Rotator;
-	static NotEqual_RotatorRotator(A: Rotator,B: Rotator,ErrorTolerance: number): boolean;
-	static REase(A: Rotator,B: Rotator,Alpha: number,bShortestPath: boolean,EasingFunc: EEasingFunc,BlendExp: number,Steps: number): Rotator;
-	static RInterpTo(Current: Rotator,Target: Rotator,DeltaTime: number,InterpSpeed: number): Rotator;
-	static RInterpTo_Constant(Current: Rotator,Target: Rotator,DeltaTime: number,InterpSpeed: number): Rotator;
-	static RLerp(A: Rotator,B: Rotator,Alpha: number,bShortestPath: boolean): Rotator;
-	static SelectRotator(A: Rotator,B: Rotator,bPickA: boolean): Rotator;
-	static WeightedMovingAverage_FRotator(CurrentSample: Rotator,PreviousSample: Rotator,Weight: number): Rotator;
-	static GetOrientationAndPosition(DeviceRotation?: Rotator,DevicePosition?: Vector): {DeviceRotation: Rotator, DevicePosition: Vector};
-	static MakeRotator(Roll: number,Pitch: number,Yaw: number): Rotator;
-	static RandomRotator(bRoll: boolean): Rotator;
-	static RandomRotatorFromStream(bRoll: boolean,Stream: RandomStream): Rotator;
-}
-
 declare type EMagicLeapARPinType = 'SingleUserSingleSession' | 'SingleUserMultiSession' | 'MultiUserMultiSession' | 'EMagicLeapARPinType_MAX';
 declare var EMagicLeapARPinType : { SingleUserSingleSession:'SingleUserSingleSession',SingleUserMultiSession:'SingleUserMultiSession',MultiUserMultiSession:'MultiUserMultiSession',EMagicLeapARPinType_MAX:'EMagicLeapARPinType_MAX', };
 declare class MagicLeapARPinState { 
@@ -530,73 +648,8 @@ declare class Guid {
 	static NewGuid(): Guid;
 }
 
-declare type ESteamVRHand = 'VR_Left' | 'VR_Right' | 'VR_MAX';
-declare var ESteamVRHand : { VR_Left:'VR_Left',VR_Right:'VR_Right',VR_MAX:'VR_MAX', };
-declare class IntPoint { 
-	X: number;
-	Y: number;
-	clone() : IntPoint;
-	static C(Other: UObject | any): IntPoint;
-	Conv_IntPointToString(): string;
-	Add_IntPointInt(B: number): IntPoint;
-	Add_IntPointIntPoint(B: IntPoint): IntPoint;
-	Conv_IntPointToVector2D(): Vector2D;
-	Divide_IntPointInt(B: number): IntPoint;
-	Divide_IntPointIntPoint(B: IntPoint): IntPoint;
-	Equal_IntPointIntPoint(B: IntPoint): boolean;
-	Multiply_IntPointInt(B: number): IntPoint;
-	Multiply_IntPointIntPoint(B: IntPoint): IntPoint;
-	NotEqual_IntPointIntPoint(B: IntPoint): boolean;
-	Subtract_IntPointInt(B: number): IntPoint;
-	Subtract_IntPointIntPoint(B: IntPoint): IntPoint;
-	ResizeXRCamera(): IntPoint;
-	static Conv_IntPointToString(InIntPoint: IntPoint): string;
-	static Add_IntPointInt(A: IntPoint,B: number): IntPoint;
-	static Add_IntPointIntPoint(A: IntPoint,B: IntPoint): IntPoint;
-	static Conv_IntPointToVector2D(InIntPoint: IntPoint): Vector2D;
-	static Divide_IntPointInt(A: IntPoint,B: number): IntPoint;
-	static Divide_IntPointIntPoint(A: IntPoint,B: IntPoint): IntPoint;
-	static Equal_IntPointIntPoint(A: IntPoint,B: IntPoint): boolean;
-	static Multiply_IntPointInt(A: IntPoint,B: number): IntPoint;
-	static Multiply_IntPointIntPoint(A: IntPoint,B: IntPoint): IntPoint;
-	static NotEqual_IntPointIntPoint(A: IntPoint,B: IntPoint): boolean;
-	static Subtract_IntPointInt(A: IntPoint,B: number): IntPoint;
-	static Subtract_IntPointIntPoint(A: IntPoint,B: IntPoint): IntPoint;
-	static ResizeXRCamera(InSize: IntPoint): IntPoint;
-	static IntPoint_Down(): IntPoint;
-	static IntPoint_Left(): IntPoint;
-	static IntPoint_One(): IntPoint;
-	static IntPoint_Right(): IntPoint;
-	static IntPoint_Up(): IntPoint;
-	static IntPoint_Zero(): IntPoint;
-}
-
-declare class Box2D { 
-	Min: Vector2D;
-	Max: Vector2D;
-	bIsValid: number;
-	clone() : Box2D;
-	static C(Other: UObject | any): Box2D;
-}
-
-declare type EARLineTraceChannels = 'None' | 'FeaturePoint' | 'GroundPlane' | 'PlaneUsingExtent' | 'PlaneUsingBoundaryPolygon' | 'EARLineTraceChannels_MAX';
-declare var EARLineTraceChannels : { None:'None',FeaturePoint:'FeaturePoint',GroundPlane:'GroundPlane',PlaneUsingExtent:'PlaneUsingExtent',PlaneUsingBoundaryPolygon:'PlaneUsingBoundaryPolygon',EARLineTraceChannels_MAX:'EARLineTraceChannels_MAX', };
 declare type EARTrackingState = 'Unknown' | 'Tracking' | 'NotTracking' | 'StoppedTracking' | 'EARTrackingState_MAX';
 declare var EARTrackingState : { Unknown:'Unknown',Tracking:'Tracking',NotTracking:'NotTracking',StoppedTracking:'StoppedTracking',EARTrackingState_MAX:'EARTrackingState_MAX', };
-declare type ETickingGroup = 'TG_PrePhysics' | 'TG_StartPhysics' | 'TG_DuringPhysics' | 'TG_EndPhysics' | 'TG_PostPhysics' | 'TG_PostUpdateWork' | 'TG_LastDemotable' | 'TG_NewlySpawned' | 'TG_MAX';
-declare var ETickingGroup : { TG_PrePhysics:'TG_PrePhysics',TG_StartPhysics:'TG_StartPhysics',TG_DuringPhysics:'TG_DuringPhysics',TG_EndPhysics:'TG_EndPhysics',TG_PostPhysics:'TG_PostPhysics',TG_PostUpdateWork:'TG_PostUpdateWork',TG_LastDemotable:'TG_LastDemotable',TG_NewlySpawned:'TG_NewlySpawned',TG_MAX:'TG_MAX', };
-declare class TickFunction { 
-	TickGroup: ETickingGroup;
-	EndTickGroup: ETickingGroup;
-	bTickEvenWhenPaused: boolean;
-	bCanEverTick: boolean;
-	bStartWithTickEnabled: boolean;
-	bAllowTickOnDedicatedServer: boolean;
-	TickInterval: number;
-	clone() : TickFunction;
-	static C(Other: UObject | any): TickFunction;
-}
-
 declare class ActorComponentTickFunction extends TickFunction { 
 	clone() : ActorComponentTickFunction;
 	static C(Other: UObject | any): ActorComponentTickFunction;
@@ -620,230 +673,77 @@ declare class SimpleMemberReference {
 	static C(Other: UObject | any): SimpleMemberReference;
 }
 
-declare class ActorTickFunction extends TickFunction { 
-	clone() : ActorTickFunction;
-	static C(Other: UObject | any): ActorTickFunction;
+declare type EEndPlayReason = 'Destroyed' | 'LevelTransition' | 'EndPlayInEditor' | 'RemovedFromWorld' | 'Quit' | 'EEndPlayReason_MAX';
+declare var EEndPlayReason : { Destroyed:'Destroyed',LevelTransition:'LevelTransition',EndPlayInEditor:'EndPlayInEditor',RemovedFromWorld:'RemovedFromWorld',Quit:'Quit',EEndPlayReason_MAX:'EEndPlayReason_MAX', };
+declare class ActorComponent extends UObject { 
+	PrimaryComponentTick: ActorComponentTickFunction;
+	ComponentTags: string[];
+	AssetUserData: AssetUserData[];
+	UCSSerializationIndex: number;
+	bNetAddressable: boolean;
+	bReplicates: boolean;
+	bCreatedByConstructionScript: boolean;
+	bInstanceComponent: boolean;
+	bAutoActivate: boolean;
+	bIsActive: boolean;
+	bEditableWhenInherited: boolean;
+	bCanEverAffectNavigation: boolean;
+	bIsEditorOnly: boolean;
+	bIsVisualizationComponent: boolean;
+	bNeedsUCSSerializationIndexEvaluted: boolean;
+	CreationMethod: EComponentCreationMethod;
+	OnComponentActivated: UnrealEngineMulticastDelegate<(Component: ActorComponent, bReset: boolean) => void>;
+	OnComponentDeactivated: UnrealEngineMulticastDelegate<(Component: ActorComponent) => void>;
+	UCSModifiedProperties: SimpleMemberReference[];
+	static Load(ResourceName: string): ActorComponent;
+	static Find(Outer: UObject, ResourceName: string): ActorComponent;
+	static GetDefaultObject(): ActorComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ActorComponent;
+	ToggleActive(): void;
+	SetTickGroup(NewTickGroup: ETickingGroup): void;
+	SetTickableWhenPaused(bTickableWhenPaused: boolean): void;
+	SetIsReplicated(ShouldReplicate: boolean): void;
+	SetComponentTickIntervalAndCooldown(TickInterval: number): void;
+	SetComponentTickInterval(TickInterval: number): void;
+	SetComponentTickEnabled(bEnabled: boolean): void;
+	SetAutoActivate(bNewAutoActivate: boolean): void;
+	SetActive(bNewActive: boolean,bReset: boolean): void;
+	RemoveTickPrerequisiteComponent(PrerequisiteComponent: ActorComponent): void;
+	RemoveTickPrerequisiteActor(PrerequisiteActor: Actor): void;
+	ReceiveTick(DeltaSeconds: number): void;
+	ReceiveEndPlay(EndPlayReason: EEndPlayReason): void;
+	ReceiveBeginPlay(): void;
+	OnRep_IsActive(): void;
+	K2_DestroyComponent(UObject: UObject): void;
+	IsComponentTickEnabled(): boolean;
+	IsBeingDestroyed(): boolean;
+	IsActive(): boolean;
+	GetOwner(): Actor;
+	GetComponentTickInterval(): number;
+	Deactivate(): void;
+	ComponentHasTag(Tag: string): boolean;
+	AddTickPrerequisiteComponent(PrerequisiteComponent: ActorComponent): void;
+	AddTickPrerequisiteActor(PrerequisiteActor: Actor): void;
+	Activate(bReset: boolean): void;
+	static C(Other: UObject | any): ActorComponent;
+	IsRegistered(): boolean;
+	MarkRenderStateDirty(): void;
+	RegisterComponent(): void;
+	ReregisterComponent(): void;
+	UnregisterComponent(): void;
+	static IsRegistered(ActorComponent: ActorComponent): boolean;
+	static MarkRenderStateDirty(Component: ActorComponent): void;
+	static RegisterComponent(ActorComponent: ActorComponent): void;
+	static ReregisterComponent(ActorComponent: ActorComponent): void;
+	static UnregisterComponent(ActorComponent: ActorComponent): void;
 }
 
-declare type EActorUpdateOverlapsMethod = 'UseConfigDefault' | 'AlwaysUpdate' | 'OnlyUpdateMovable' | 'NeverUpdate' | 'EActorUpdateOverlapsMethod_MAX';
-declare var EActorUpdateOverlapsMethod : { UseConfigDefault:'UseConfigDefault',AlwaysUpdate:'AlwaysUpdate',OnlyUpdateMovable:'OnlyUpdateMovable',NeverUpdate:'NeverUpdate',EActorUpdateOverlapsMethod_MAX:'EActorUpdateOverlapsMethod_MAX', };
-declare type ENetRole = 'ROLE_None' | 'ROLE_SimulatedProxy' | 'ROLE_AutonomousProxy' | 'ROLE_Authority' | 'ROLE_MAX';
-declare var ENetRole : { ROLE_None:'ROLE_None',ROLE_SimulatedProxy:'ROLE_SimulatedProxy',ROLE_AutonomousProxy:'ROLE_AutonomousProxy',ROLE_Authority:'ROLE_Authority',ROLE_MAX:'ROLE_MAX', };
-declare type EVectorQuantization = 'RoundWholeNumber' | 'RoundOneDecimal' | 'RoundTwoDecimals' | 'EVectorQuantization_MAX';
-declare var EVectorQuantization : { RoundWholeNumber:'RoundWholeNumber',RoundOneDecimal:'RoundOneDecimal',RoundTwoDecimals:'RoundTwoDecimals',EVectorQuantization_MAX:'EVectorQuantization_MAX', };
-declare type ERotatorQuantization = 'ByteComponents' | 'ShortComponents' | 'ERotatorQuantization_MAX';
-declare var ERotatorQuantization : { ByteComponents:'ByteComponents',ShortComponents:'ShortComponents',ERotatorQuantization_MAX:'ERotatorQuantization_MAX', };
-declare class RepMovement { 
-	LinearVelocity: Vector;
-	AngularVelocity: Vector;
-	Location: Vector;
-	Rotation: Rotator;
-	bSimulatedPhysicSleep: boolean;
-	bRepPhysics: boolean;
-	LocationQuantizationLevel: EVectorQuantization;
-	VelocityQuantizationLevel: EVectorQuantization;
-	RotationQuantizationLevel: ERotatorQuantization;
-	clone() : RepMovement;
-	static C(Other: UObject | any): RepMovement;
-}
-
-declare class Vector_NetQuantize100 extends Vector { 
-	clone() : Vector_NetQuantize100;
-	static C(Other: UObject | any): Vector_NetQuantize100;
-}
-
-declare class RepAttachment { 
-	AttachParent: Actor;
-	LocationOffset: Vector_NetQuantize100;
-	RelativeScale3D: Vector_NetQuantize100;
-	RotationOffset: Rotator;
-	AttachSocket: string;
-	AttachComponent: SceneComponent;
-	clone() : RepAttachment;
-	static C(Other: UObject | any): RepAttachment;
-}
-
-declare type ENetDormancy = 'DORM_Never' | 'DORM_Awake' | 'DORM_DormantAll' | 'DORM_DormantPartial' | 'DORM_Initial' | 'DORM_MAX';
-declare var ENetDormancy : { DORM_Never:'DORM_Never',DORM_Awake:'DORM_Awake',DORM_DormantAll:'DORM_DormantAll',DORM_DormantPartial:'DORM_DormantPartial',DORM_Initial:'DORM_Initial',DORM_MAX:'DORM_MAX', };
-declare type ESpawnActorCollisionHandlingMethod = 'Undefined' | 'AlwaysSpawn' | 'AdjustIfPossibleButAlwaysSpawn' | 'AdjustIfPossibleButDontSpawnIfColliding' | 'DontSpawnIfColliding' | 'ESpawnActorCollisionHandlingMethod_MAX';
-declare var ESpawnActorCollisionHandlingMethod : { Undefined:'Undefined',AlwaysSpawn:'AlwaysSpawn',AdjustIfPossibleButAlwaysSpawn:'AdjustIfPossibleButAlwaysSpawn',AdjustIfPossibleButDontSpawnIfColliding:'AdjustIfPossibleButDontSpawnIfColliding',DontSpawnIfColliding:'DontSpawnIfColliding',ESpawnActorCollisionHandlingMethod_MAX:'ESpawnActorCollisionHandlingMethod_MAX', };
-declare type EAutoReceiveInput = 'Disabled' | 'Player0' | 'Player1' | 'Player2' | 'Player3' | 'Player4' | 'Player5' | 'Player6' | 'Player7' | 'EAutoReceiveInput_MAX';
-declare var EAutoReceiveInput : { Disabled:'Disabled',Player0:'Player0',Player1:'Player1',Player2:'Player2',Player3:'Player3',Player4:'Player4',Player5:'Player5',Player6:'Player6',Player7:'Player7',EAutoReceiveInput_MAX:'EAutoReceiveInput_MAX', };
-declare type EUINavigationAction = 'Accept' | 'Back' | 'Num' | 'Invalid' | 'EUINavigationAction_MAX';
-declare var EUINavigationAction : { Accept:'Accept',Back:'Back',Num:'Num',Invalid:'Invalid',EUINavigationAction_MAX:'EUINavigationAction_MAX', };
-declare type EControllerHand = 'Left' | 'Right' | 'AnyHand' | 'Pad' | 'ExternalCamera' | 'Gun' | 'Special_1' | 'Special_2' | 'Special_3' | 'Special_4' | 'Special_5' | 'Special_6' | 'Special_7' | 'Special_8' | 'Special_9' | 'Special_10' | 'Special_11' | 'ControllerHand_Count' | 'EControllerHand_MAX';
-declare var EControllerHand : { Left:'Left',Right:'Right',AnyHand:'AnyHand',Pad:'Pad',ExternalCamera:'ExternalCamera',Gun:'Gun',Special_1:'Special_1',Special_2:'Special_2',Special_3:'Special_3',Special_4:'Special_4',Special_5:'Special_5',Special_6:'Special_6',Special_7:'Special_7',Special_8:'Special_8',Special_9:'Special_9',Special_10:'Special_10',Special_11:'Special_11',ControllerHand_Count:'ControllerHand_Count',EControllerHand_MAX:'EControllerHand_MAX', };
-declare class Key { 
-	KeyName: string;
-	clone() : Key;
-	static C(Other: UObject | any): Key;
-	EqualEqual_KeyKey(B: Key): boolean;
-	Key_GetDisplayName(): string;
-	Key_GetNavigationAction(): EUINavigationAction;
-	Key_IsAnalog(): boolean;
-	Key_IsAxis1D(): boolean;
-	Key_IsAxis2D(): boolean;
-	Key_IsAxis3D(): boolean;
-	Key_IsButtonAxis(): boolean;
-	Key_IsDigital(): boolean;
-	Key_IsGamepadKey(): boolean;
-	Key_IsKeyboardKey(): boolean;
-	Key_IsModifierKey(): boolean;
-	Key_IsMouseButton(): boolean;
-	Key_IsValid(): boolean;
-	Key_IsVectorAxis(): boolean;
-	BreakKey(InteractionProfile?: string,hand?: EControllerHand,MotionSource?: string,Indentifier?: string,Component?: string): {InteractionProfile: string, hand: EControllerHand, MotionSource: string, Indentifier: string, Component: string};
-	static EqualEqual_KeyKey(A: Key,B: Key): boolean;
-	static Key_GetDisplayName(Key: Key): string;
-	static Key_GetNavigationAction(InKey: Key): EUINavigationAction;
-	static Key_IsAnalog(Key: Key): boolean;
-	static Key_IsAxis1D(Key: Key): boolean;
-	static Key_IsAxis2D(Key: Key): boolean;
-	static Key_IsAxis3D(Key: Key): boolean;
-	static Key_IsButtonAxis(Key: Key): boolean;
-	static Key_IsDigital(Key: Key): boolean;
-	static Key_IsGamepadKey(Key: Key): boolean;
-	static Key_IsKeyboardKey(Key: Key): boolean;
-	static Key_IsModifierKey(Key: Key): boolean;
-	static Key_IsMouseButton(Key: Key): boolean;
-	static Key_IsValid(Key: Key): boolean;
-	static Key_IsVectorAxis(Key: Key): boolean;
-	static BreakKey(InKey: Key,InteractionProfile?: string,hand?: EControllerHand,MotionSource?: string,Indentifier?: string,Component?: string): {InteractionProfile: string, hand: EControllerHand, MotionSource: string, Indentifier: string, Component: string};
-}
-
-declare class KeyBind { 
-	Key: Key;
-	Command: string;
-	Control: boolean;
-	Shift: boolean;
-	Alt: boolean;
-	Cmd: boolean;
-	bIgnoreCtrl: boolean;
-	bIgnoreShift: boolean;
-	bIgnoreAlt: boolean;
-	bIgnoreCmd: boolean;
-	bDisabled: boolean;
-	clone() : KeyBind;
-	static C(Other: UObject | any): KeyBind;
-}
-
-declare class PlayerInput extends UObject { 
-	DebugExecBindings: KeyBind[];
-	InvertedAxis: string[];
-	static Load(ResourceName: string): PlayerInput;
-	static Find(Outer: UObject, ResourceName: string): PlayerInput;
-	static GetDefaultObject(): PlayerInput;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PlayerInput;
-	SetMouseSensitivity(Sensitivity: number): void;
-	SetBind(BindName: string,Command: string): void;
-	InvertAxisKey(AxisKey: Key): void;
-	InvertAxis(AxisName: string): void;
-	ClearSmoothing(): void;
-	static C(Other: UObject | any): PlayerInput;
-}
-
-declare class CachedKeyToActionInfo { 
-	PlayerInput: PlayerInput;
-	clone() : CachedKeyToActionInfo;
-	static C(Other: UObject | any): CachedKeyToActionInfo;
-}
-
-declare type EControllerAnalogStick = 'CAS_LeftStick' | 'CAS_RightStick' | 'CAS_MAX';
-declare var EControllerAnalogStick : { CAS_LeftStick:'CAS_LeftStick',CAS_RightStick:'CAS_RightStick',CAS_MAX:'CAS_MAX', };
-declare class InputComponent extends ActorComponent { 
-	CachedKeyToActionInfo: CachedKeyToActionInfo[];
-	static Load(ResourceName: string): InputComponent;
-	static Find(Outer: UObject, ResourceName: string): InputComponent;
-	static GetDefaultObject(): InputComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InputComponent;
-	WasControllerKeyJustReleased(Key: Key): boolean;
-	WasControllerKeyJustPressed(Key: Key): boolean;
-	IsControllerKeyDown(Key: Key): boolean;
-	GetTouchState(FingerIndex: number,LocationX?: number,LocationY?: number,bIsCurrentlyPressed?: boolean): {LocationX: number, LocationY: number, bIsCurrentlyPressed: boolean};
-	GetControllerVectorKeyState(Key: Key): Vector;
-	GetControllerMouseDelta(DeltaX?: number,DeltaY?: number): {DeltaX: number, DeltaY: number};
-	GetControllerKeyTimeDown(Key: Key): number;
-	GetControllerAnalogStickState(WhichStick: EControllerAnalogStick,StickX?: number,StickY?: number): {StickX: number, StickY: number};
-	GetControllerAnalogKeyState(Key: Key): number;
-	static C(Other: UObject | any): InputComponent;
-}
-
-declare type EAutoPossessAI = 'Disabled' | 'PlacedInWorld' | 'Spawned' | 'PlacedInWorldOrSpawned' | 'EAutoPossessAI_MAX';
-declare var EAutoPossessAI : { Disabled:'Disabled',PlacedInWorld:'PlacedInWorld',Spawned:'Spawned',PlacedInWorldOrSpawned:'PlacedInWorldOrSpawned',EAutoPossessAI_MAX:'EAutoPossessAI_MAX', };
-declare class StreamableRenderAsset extends UObject { 
-	ForceMipLevelsToBeResidentTimestamp: any;
-	NumCinematicMipLevels: number;
-	StreamingIndex: number;
-	CachedCombinedLODBias: number;
-	NeverStream: boolean;
-	bGlobalForceMipLevelsToBeResident: boolean;
-	bHasStreamingUpdatePending: boolean;
-	bForceMiplevelsToBeResident: boolean;
-	bIgnoreStreamingMipBias: boolean;
-	bUseCinematicMipLevels: boolean;
-	static Load(ResourceName: string): StreamableRenderAsset;
-	static Find(Outer: UObject, ResourceName: string): StreamableRenderAsset;
-	static GetDefaultObject(): StreamableRenderAsset;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): StreamableRenderAsset;
-	static C(Other: UObject | any): StreamableRenderAsset;
-}
-
-declare type ETextureSourceFormat = 'TSF_Invalid' | 'TSF_G8' | 'TSF_BGRA8' | 'TSF_BGRE8' | 'TSF_RGBA16' | 'TSF_RGBA16F' | 'TSF_RGBA8' | 'TSF_RGBE8' | 'TSF_G16' | 'TSF_MAX';
-declare var ETextureSourceFormat : { TSF_Invalid:'TSF_Invalid',TSF_G8:'TSF_G8',TSF_BGRA8:'TSF_BGRA8',TSF_BGRE8:'TSF_BGRE8',TSF_RGBA16:'TSF_RGBA16',TSF_RGBA16F:'TSF_RGBA16F',TSF_RGBA8:'TSF_RGBA8',TSF_RGBE8:'TSF_RGBE8',TSF_G16:'TSF_G16',TSF_MAX:'TSF_MAX', };
-declare class TextureSourceBlock { 
-	BlockX: number;
-	BlockY: number;
-	SizeX: number;
-	SizeY: number;
-	NumSlices: number;
-	NumMips: number;
-	clone() : TextureSourceBlock;
-	static C(Other: UObject | any): TextureSourceBlock;
-}
-
-declare class TextureSource { 
-	ID: Guid;
-	BaseBlockX: number;
-	BaseBlockY: number;
-	SizeX: number;
-	SizeY: number;
-	NumSlices: number;
-	NumMips: number;
-	NumLayers: number;
-	bPNGCompressed: boolean;
-	bGuidIsHash: boolean;
-	Format: ETextureSourceFormat;
-	LayerFormat: ETextureSourceFormat[];
-	Blocks: TextureSourceBlock[];
-	clone() : TextureSource;
-	static C(Other: UObject | any): TextureSource;
-}
-
-declare class AssetImportInfo { 
-	clone() : AssetImportInfo;
-	static C(Other: UObject | any): AssetImportInfo;
-}
-
-declare class AssetImportData extends UObject { 
-	SourceFilePath: string;
-	SourceFileTimestamp: string;
-	SourceData: AssetImportInfo;
-	static Load(ResourceName: string): AssetImportData;
-	static Find(Outer: UObject, ResourceName: string): AssetImportData;
-	static GetDefaultObject(): AssetImportData;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AssetImportData;
-	ScriptedAddFilename(InPath: string,index: number,SourceFileLabel: string): void;
-	K2_GetFirstFilename(): string;
-	K2_ExtractFilenames(): string[];
-	static C(Other: UObject | any): AssetImportData;
-}
-
-declare type ETextureLossyCompressionAmount = 'TLCA_Default' | 'TLCA_None' | 'TLCA_Lowest' | 'TLCA_Low' | 'TLCA_Medium' | 'TLCA_High' | 'TLCA_Highest' | 'TLCA_MAX';
-declare var ETextureLossyCompressionAmount : { TLCA_Default:'TLCA_Default',TLCA_None:'TLCA_None',TLCA_Lowest:'TLCA_Lowest',TLCA_Low:'TLCA_Low',TLCA_Medium:'TLCA_Medium',TLCA_High:'TLCA_High',TLCA_Highest:'TLCA_Highest',TLCA_MAX:'TLCA_MAX', };
-declare type ETextureCompressionQuality = 'TCQ_Default' | 'TCQ_Lowest' | 'TCQ_Low' | 'TCQ_Medium' | 'TCQ_High' | 'TCQ_Highest' | 'TCQ_MAX';
-declare var ETextureCompressionQuality : { TCQ_Default:'TCQ_Default',TCQ_Lowest:'TCQ_Lowest',TCQ_Low:'TCQ_Low',TCQ_Medium:'TCQ_Medium',TCQ_High:'TCQ_High',TCQ_Highest:'TCQ_Highest',TCQ_MAX:'TCQ_MAX', };
-declare type ETexturePowerOfTwoSetting = 'None' | 'PadToPowerOfTwo' | 'PadToSquarePowerOfTwo' | 'ETexturePowerOfTwoSetting_MAX';
-declare var ETexturePowerOfTwoSetting : { None:'None',PadToPowerOfTwo:'PadToPowerOfTwo',PadToSquarePowerOfTwo:'PadToSquarePowerOfTwo',ETexturePowerOfTwoSetting_MAX:'ETexturePowerOfTwoSetting_MAX', };
+declare type EComponentMobility = 'Static' | 'Stationary' | 'Movable' | 'EComponentMobility_MAX';
+declare var EComponentMobility : { Static:'Static',Stationary:'Stationary',Movable:'Movable',EComponentMobility_MAX:'EComponentMobility_MAX', };
+declare type EDetailMode = 'DM_Low' | 'DM_Medium' | 'DM_High' | 'DM_MAX';
+declare var EDetailMode : { DM_Low:'DM_Low',DM_Medium:'DM_Medium',DM_High:'DM_High',DM_MAX:'DM_MAX', };
+declare type EBrushType = 'Brush_Default' | 'Brush_Add' | 'Brush_Subtract' | 'Brush_MAX';
+declare var EBrushType : { Brush_Default:'Brush_Default',Brush_Add:'Brush_Add',Brush_Subtract:'Brush_Subtract',Brush_MAX:'Brush_MAX', };
 declare class LinearColor { 
 	R: number;
 	G: number;
@@ -953,6 +853,683 @@ declare class Color {
 	static Conv_ColorToLinearColor(InColor: Color): LinearColor;
 }
 
+declare class Model extends UObject { 
+	static Load(ResourceName: string): Model;
+	static Find(Outer: UObject, ResourceName: string): Model;
+	static GetDefaultObject(): Model;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Model;
+	static C(Other: UObject | any): Model;
+}
+
+declare type EPhysicsType = 'PhysType_Default' | 'PhysType_Kinematic' | 'PhysType_Simulated' | 'PhysType_MAX';
+declare var EPhysicsType : { PhysType_Default:'PhysType_Default',PhysType_Kinematic:'PhysType_Kinematic',PhysType_Simulated:'PhysType_Simulated',PhysType_MAX:'PhysType_MAX', };
+declare type ECollisionTraceFlag = 'CTF_UseDefault' | 'CTF_UseSimpleAndComplex' | 'CTF_UseSimpleAsComplex' | 'CTF_UseComplexAsSimple' | 'CTF_MAX';
+declare var ECollisionTraceFlag : { CTF_UseDefault:'CTF_UseDefault',CTF_UseSimpleAndComplex:'CTF_UseSimpleAndComplex',CTF_UseSimpleAsComplex:'CTF_UseSimpleAsComplex',CTF_UseComplexAsSimple:'CTF_UseComplexAsSimple',CTF_MAX:'CTF_MAX', };
+declare type EBodyCollisionResponse = 'BodyCollision_Enabled' | 'BodyCollision_Disabled' | 'BodyCollision_MAX';
+declare var EBodyCollisionResponse : { BodyCollision_Enabled:'BodyCollision_Enabled',BodyCollision_Disabled:'BodyCollision_Disabled',BodyCollision_MAX:'BodyCollision_MAX', };
+declare class BodySetupCore extends UObject { 
+	BoneName: string;
+	PhysicsType: EPhysicsType;
+	CollisionTraceFlag: ECollisionTraceFlag;
+	CollisionReponse: EBodyCollisionResponse;
+	static Load(ResourceName: string): BodySetupCore;
+	static Find(Outer: UObject, ResourceName: string): BodySetupCore;
+	static GetDefaultObject(): BodySetupCore;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BodySetupCore;
+	static C(Other: UObject | any): BodySetupCore;
+}
+
+declare type ECollisionEnabled = 'NoCollision' | 'QueryOnly' | 'PhysicsOnly' | 'QueryAndPhysics' | 'ECollisionEnabled_MAX';
+declare var ECollisionEnabled : { NoCollision:'NoCollision',QueryOnly:'QueryOnly',PhysicsOnly:'PhysicsOnly',QueryAndPhysics:'QueryAndPhysics',ECollisionEnabled_MAX:'ECollisionEnabled_MAX', };
+declare class KShapeElem { 
+	RestOffset: number;
+	bIsGenerated: boolean;
+	Name: string;
+	bContributeToMass: boolean;
+	CollisionEnabled: ECollisionEnabled;
+	clone() : KShapeElem;
+	static C(Other: UObject | any): KShapeElem;
+}
+
+declare class KSphereElem extends KShapeElem { 
+	TM: Matrix;
+	Center: Vector;
+	Radius: number;
+	clone() : KSphereElem;
+	static C(Other: UObject | any): KSphereElem;
+}
+
+declare class KBoxElem extends KShapeElem { 
+	TM: Matrix;
+	Orientation: Quat;
+	Center: Vector;
+	Rotation: Rotator;
+	X: number;
+	Y: number;
+	Z: number;
+	clone() : KBoxElem;
+	static C(Other: UObject | any): KBoxElem;
+}
+
+declare class KSphylElem extends KShapeElem { 
+	TM: Matrix;
+	Orientation: Quat;
+	Center: Vector;
+	Rotation: Rotator;
+	Radius: number;
+	Length: number;
+	clone() : KSphylElem;
+	static C(Other: UObject | any): KSphylElem;
+}
+
+declare class Box { 
+	Min: Vector;
+	Max: Vector;
+	IsValid: number;
+	clone() : Box;
+	static C(Other: UObject | any): Box;
+}
+
+declare class KConvexElem extends KShapeElem { 
+	VertexData: Vector[];
+	IndexData: number[];
+	ElemBox: Box;
+	Transform: Transform;
+	clone() : KConvexElem;
+	static C(Other: UObject | any): KConvexElem;
+}
+
+declare class KTaperedCapsuleElem extends KShapeElem { 
+	Center: Vector;
+	Rotation: Rotator;
+	Radius0: number;
+	Radius1: number;
+	Length: number;
+	clone() : KTaperedCapsuleElem;
+	static C(Other: UObject | any): KTaperedCapsuleElem;
+}
+
+declare class KAggregateGeom { 
+	SphereElems: KSphereElem[];
+	BoxElems: KBoxElem[];
+	SphylElems: KSphylElem[];
+	ConvexElems: KConvexElem[];
+	TaperedCapsuleElems: KTaperedCapsuleElem[];
+	clone() : KAggregateGeom;
+	static C(Other: UObject | any): KAggregateGeom;
+}
+
+declare type EFrictionCombineMode = 'Average' | 'Min' | 'Multiply' | 'Max' | 'EFrictionCombineMode_MAX';
+declare var EFrictionCombineMode : { Average:'Average',Min:'Min',Multiply:'Multiply',Max:'Max',EFrictionCombineMode_MAX:'EFrictionCombineMode_MAX', };
+declare class PhysicalMaterialPropertyBase extends UObject { 
+	static Load(ResourceName: string): PhysicalMaterialPropertyBase;
+	static Find(Outer: UObject, ResourceName: string): PhysicalMaterialPropertyBase;
+	static GetDefaultObject(): PhysicalMaterialPropertyBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PhysicalMaterialPropertyBase;
+	static C(Other: UObject | any): PhysicalMaterialPropertyBase;
+}
+
+declare type EPhysicalSurface = 'SurfaceType_Default' | 'SurfaceType1' | 'SurfaceType2' | 'SurfaceType3' | 'SurfaceType4' | 'SurfaceType5' | 'SurfaceType6' | 'SurfaceType7' | 'SurfaceType8' | 'SurfaceType9' | 'SurfaceType10' | 'SurfaceType11' | 'SurfaceType12' | 'SurfaceType13' | 'SurfaceType14' | 'SurfaceType15' | 'SurfaceType16' | 'SurfaceType17' | 'SurfaceType18' | 'SurfaceType19' | 'SurfaceType20' | 'SurfaceType21' | 'SurfaceType22' | 'SurfaceType23' | 'SurfaceType24' | 'SurfaceType25' | 'SurfaceType26' | 'SurfaceType27' | 'SurfaceType28' | 'SurfaceType29' | 'SurfaceType30' | 'SurfaceType31' | 'SurfaceType32' | 'SurfaceType33' | 'SurfaceType34' | 'SurfaceType35' | 'SurfaceType36' | 'SurfaceType37' | 'SurfaceType38' | 'SurfaceType39' | 'SurfaceType40' | 'SurfaceType41' | 'SurfaceType42' | 'SurfaceType43' | 'SurfaceType44' | 'SurfaceType45' | 'SurfaceType46' | 'SurfaceType47' | 'SurfaceType48' | 'SurfaceType49' | 'SurfaceType50' | 'SurfaceType51' | 'SurfaceType52' | 'SurfaceType53' | 'SurfaceType54' | 'SurfaceType55' | 'SurfaceType56' | 'SurfaceType57' | 'SurfaceType58' | 'SurfaceType59' | 'SurfaceType60' | 'SurfaceType61' | 'SurfaceType62' | 'SurfaceType_Max' | 'EPhysicalSurface_MAX';
+declare var EPhysicalSurface : { SurfaceType_Default:'SurfaceType_Default',SurfaceType1:'SurfaceType1',SurfaceType2:'SurfaceType2',SurfaceType3:'SurfaceType3',SurfaceType4:'SurfaceType4',SurfaceType5:'SurfaceType5',SurfaceType6:'SurfaceType6',SurfaceType7:'SurfaceType7',SurfaceType8:'SurfaceType8',SurfaceType9:'SurfaceType9',SurfaceType10:'SurfaceType10',SurfaceType11:'SurfaceType11',SurfaceType12:'SurfaceType12',SurfaceType13:'SurfaceType13',SurfaceType14:'SurfaceType14',SurfaceType15:'SurfaceType15',SurfaceType16:'SurfaceType16',SurfaceType17:'SurfaceType17',SurfaceType18:'SurfaceType18',SurfaceType19:'SurfaceType19',SurfaceType20:'SurfaceType20',SurfaceType21:'SurfaceType21',SurfaceType22:'SurfaceType22',SurfaceType23:'SurfaceType23',SurfaceType24:'SurfaceType24',SurfaceType25:'SurfaceType25',SurfaceType26:'SurfaceType26',SurfaceType27:'SurfaceType27',SurfaceType28:'SurfaceType28',SurfaceType29:'SurfaceType29',SurfaceType30:'SurfaceType30',SurfaceType31:'SurfaceType31',SurfaceType32:'SurfaceType32',SurfaceType33:'SurfaceType33',SurfaceType34:'SurfaceType34',SurfaceType35:'SurfaceType35',SurfaceType36:'SurfaceType36',SurfaceType37:'SurfaceType37',SurfaceType38:'SurfaceType38',SurfaceType39:'SurfaceType39',SurfaceType40:'SurfaceType40',SurfaceType41:'SurfaceType41',SurfaceType42:'SurfaceType42',SurfaceType43:'SurfaceType43',SurfaceType44:'SurfaceType44',SurfaceType45:'SurfaceType45',SurfaceType46:'SurfaceType46',SurfaceType47:'SurfaceType47',SurfaceType48:'SurfaceType48',SurfaceType49:'SurfaceType49',SurfaceType50:'SurfaceType50',SurfaceType51:'SurfaceType51',SurfaceType52:'SurfaceType52',SurfaceType53:'SurfaceType53',SurfaceType54:'SurfaceType54',SurfaceType55:'SurfaceType55',SurfaceType56:'SurfaceType56',SurfaceType57:'SurfaceType57',SurfaceType58:'SurfaceType58',SurfaceType59:'SurfaceType59',SurfaceType60:'SurfaceType60',SurfaceType61:'SurfaceType61',SurfaceType62:'SurfaceType62',SurfaceType_Max:'SurfaceType_Max',EPhysicalSurface_MAX:'EPhysicalSurface_MAX', };
+declare class PhysicalMaterial extends UObject { 
+	Friction: number;
+	StaticFriction: number;
+	FrictionCombineMode: EFrictionCombineMode;
+	bOverrideFrictionCombineMode: boolean;
+	Restitution: number;
+	RestitutionCombineMode: EFrictionCombineMode;
+	bOverrideRestitutionCombineMode: boolean;
+	Density: number;
+	SleepLinearVelocityThreshold: number;
+	SleepAngularVelocityThreshold: number;
+	SleepCounterThreshold: number;
+	RaiseMassToPower: number;
+	DestructibleDamageThresholdScale: number;
+	PhysicalMaterialProperty: PhysicalMaterialPropertyBase;
+	SurfaceType: EPhysicalSurface;
+	static Load(ResourceName: string): PhysicalMaterial;
+	static Find(Outer: UObject, ResourceName: string): PhysicalMaterial;
+	static GetDefaultObject(): PhysicalMaterial;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PhysicalMaterial;
+	static C(Other: UObject | any): PhysicalMaterial;
+}
+
+declare type EWalkableSlopeBehavior = 'WalkableSlope_Default' | 'WalkableSlope_Increase' | 'WalkableSlope_Decrease' | 'WalkableSlope_Unwalkable' | 'WalkableSlope_Max';
+declare var EWalkableSlopeBehavior : { WalkableSlope_Default:'WalkableSlope_Default',WalkableSlope_Increase:'WalkableSlope_Increase',WalkableSlope_Decrease:'WalkableSlope_Decrease',WalkableSlope_Unwalkable:'WalkableSlope_Unwalkable',WalkableSlope_Max:'WalkableSlope_Max', };
+declare class WalkableSlopeOverride { 
+	WalkableSlopeBehavior: EWalkableSlopeBehavior;
+	WalkableSlopeAngle: number;
+	clone() : WalkableSlopeOverride;
+	static C(Other: UObject | any): WalkableSlopeOverride;
+}
+
+declare class BodyInstanceCore { 
+	bSimulatePhysics: boolean;
+	bOverrideMass: boolean;
+	bEnableGravity: boolean;
+	bAutoWeld: boolean;
+	bStartAwake: boolean;
+	bGenerateWakeEvents: boolean;
+	bUpdateMassWhenScaleChanges: boolean;
+	clone() : BodyInstanceCore;
+	static C(Other: UObject | any): BodyInstanceCore;
+}
+
+declare type ECollisionChannel = 'ECC_WorldStatic' | 'ECC_WorldDynamic' | 'ECC_Pawn' | 'ECC_Visibility' | 'ECC_Camera' | 'ECC_PhysicsBody' | 'ECC_Vehicle' | 'ECC_Destructible' | 'ECC_EngineTraceChannel1' | 'ECC_EngineTraceChannel2' | 'ECC_EngineTraceChannel3' | 'ECC_EngineTraceChannel4' | 'ECC_EngineTraceChannel5' | 'ECC_EngineTraceChannel6' | 'ECC_GameTraceChannel1' | 'ECC_GameTraceChannel2' | 'ECC_GameTraceChannel3' | 'ECC_GameTraceChannel4' | 'ECC_GameTraceChannel5' | 'ECC_GameTraceChannel6' | 'ECC_GameTraceChannel7' | 'ECC_GameTraceChannel8' | 'ECC_GameTraceChannel9' | 'ECC_GameTraceChannel10' | 'ECC_GameTraceChannel11' | 'ECC_GameTraceChannel12' | 'ECC_GameTraceChannel13' | 'ECC_GameTraceChannel14' | 'ECC_GameTraceChannel15' | 'ECC_GameTraceChannel16' | 'ECC_GameTraceChannel17' | 'ECC_GameTraceChannel18' | 'ECC_OverlapAll_Deprecated' | 'ECC_MAX';
+declare var ECollisionChannel : { ECC_WorldStatic:'ECC_WorldStatic',ECC_WorldDynamic:'ECC_WorldDynamic',ECC_Pawn:'ECC_Pawn',ECC_Visibility:'ECC_Visibility',ECC_Camera:'ECC_Camera',ECC_PhysicsBody:'ECC_PhysicsBody',ECC_Vehicle:'ECC_Vehicle',ECC_Destructible:'ECC_Destructible',ECC_EngineTraceChannel1:'ECC_EngineTraceChannel1',ECC_EngineTraceChannel2:'ECC_EngineTraceChannel2',ECC_EngineTraceChannel3:'ECC_EngineTraceChannel3',ECC_EngineTraceChannel4:'ECC_EngineTraceChannel4',ECC_EngineTraceChannel5:'ECC_EngineTraceChannel5',ECC_EngineTraceChannel6:'ECC_EngineTraceChannel6',ECC_GameTraceChannel1:'ECC_GameTraceChannel1',ECC_GameTraceChannel2:'ECC_GameTraceChannel2',ECC_GameTraceChannel3:'ECC_GameTraceChannel3',ECC_GameTraceChannel4:'ECC_GameTraceChannel4',ECC_GameTraceChannel5:'ECC_GameTraceChannel5',ECC_GameTraceChannel6:'ECC_GameTraceChannel6',ECC_GameTraceChannel7:'ECC_GameTraceChannel7',ECC_GameTraceChannel8:'ECC_GameTraceChannel8',ECC_GameTraceChannel9:'ECC_GameTraceChannel9',ECC_GameTraceChannel10:'ECC_GameTraceChannel10',ECC_GameTraceChannel11:'ECC_GameTraceChannel11',ECC_GameTraceChannel12:'ECC_GameTraceChannel12',ECC_GameTraceChannel13:'ECC_GameTraceChannel13',ECC_GameTraceChannel14:'ECC_GameTraceChannel14',ECC_GameTraceChannel15:'ECC_GameTraceChannel15',ECC_GameTraceChannel16:'ECC_GameTraceChannel16',ECC_GameTraceChannel17:'ECC_GameTraceChannel17',ECC_GameTraceChannel18:'ECC_GameTraceChannel18',ECC_OverlapAll_Deprecated:'ECC_OverlapAll_Deprecated',ECC_MAX:'ECC_MAX', };
+declare type ESleepFamily = 'Normal' | 'Sensitive' | 'Custom' | 'ESleepFamily_MAX';
+declare var ESleepFamily : { Normal:'Normal',Sensitive:'Sensitive',Custom:'Custom',ESleepFamily_MAX:'ESleepFamily_MAX', };
+declare type EDOFMode = 'Default' | 'SixDOF' | 'YZPlane' | 'XZPlane' | 'XYPlane' | 'CustomPlane' | 'None' | 'EDOFMode_MAX';
+declare var EDOFMode : { Default:'Default',SixDOF:'SixDOF',YZPlane:'YZPlane',XZPlane:'XZPlane',XYPlane:'XYPlane',CustomPlane:'CustomPlane',None:'None',EDOFMode_MAX:'EDOFMode_MAX', };
+declare type ECollisionResponse = 'ECR_Ignore' | 'ECR_Overlap' | 'ECR_Block' | 'ECR_MAX';
+declare var ECollisionResponse : { ECR_Ignore:'ECR_Ignore',ECR_Overlap:'ECR_Overlap',ECR_Block:'ECR_Block',ECR_MAX:'ECR_MAX', };
+declare class CollisionResponseContainer { 
+	WorldStatic: ECollisionResponse;
+	WorldDynamic: ECollisionResponse;
+	Pawn: ECollisionResponse;
+	Visibility: ECollisionResponse;
+	Camera: ECollisionResponse;
+	PhysicsBody: ECollisionResponse;
+	Vehicle: ECollisionResponse;
+	Destructible: ECollisionResponse;
+	EngineTraceChannel1: ECollisionResponse;
+	EngineTraceChannel2: ECollisionResponse;
+	EngineTraceChannel3: ECollisionResponse;
+	EngineTraceChannel4: ECollisionResponse;
+	EngineTraceChannel5: ECollisionResponse;
+	EngineTraceChannel6: ECollisionResponse;
+	GameTraceChannel1: ECollisionResponse;
+	GameTraceChannel2: ECollisionResponse;
+	GameTraceChannel3: ECollisionResponse;
+	GameTraceChannel4: ECollisionResponse;
+	GameTraceChannel5: ECollisionResponse;
+	GameTraceChannel6: ECollisionResponse;
+	GameTraceChannel7: ECollisionResponse;
+	GameTraceChannel8: ECollisionResponse;
+	GameTraceChannel9: ECollisionResponse;
+	GameTraceChannel10: ECollisionResponse;
+	GameTraceChannel11: ECollisionResponse;
+	GameTraceChannel12: ECollisionResponse;
+	GameTraceChannel13: ECollisionResponse;
+	GameTraceChannel14: ECollisionResponse;
+	GameTraceChannel15: ECollisionResponse;
+	GameTraceChannel16: ECollisionResponse;
+	GameTraceChannel17: ECollisionResponse;
+	GameTraceChannel18: ECollisionResponse;
+	clone() : CollisionResponseContainer;
+	static C(Other: UObject | any): CollisionResponseContainer;
+}
+
+declare class ResponseChannel { 
+	Channel: string;
+	Response: ECollisionResponse;
+	clone() : ResponseChannel;
+	static C(Other: UObject | any): ResponseChannel;
+}
+
+declare class CollisionResponse { 
+	ResponseToChannels: CollisionResponseContainer;
+	ResponseArray: ResponseChannel[];
+	clone() : CollisionResponse;
+	static C(Other: UObject | any): CollisionResponse;
+}
+
+declare class BodyInstance extends BodyInstanceCore { 
+	ObjectType: ECollisionChannel;
+	CollisionEnabled: ECollisionEnabled;
+	SleepFamily: ESleepFamily;
+	DOFMode: EDOFMode;
+	bUseCCD: boolean;
+	bIgnoreAnalyticCollisions: boolean;
+	bNotifyRigidBodyCollision: boolean;
+	bLockTranslation: boolean;
+	bLockRotation: boolean;
+	bLockXTranslation: boolean;
+	bLockYTranslation: boolean;
+	bLockZTranslation: boolean;
+	bLockXRotation: boolean;
+	bLockYRotation: boolean;
+	bLockZRotation: boolean;
+	bOverrideMaxAngularVelocity: boolean;
+	bOverrideMaxDepenetrationVelocity: boolean;
+	bOverrideWalkableSlopeOnInstance: boolean;
+	bInterpolateWhenSubStepping: boolean;
+	ResponseToChannels: CollisionResponseContainer;
+	CollisionProfileName: string;
+	PositionSolverIterationCount: number;
+	VelocitySolverIterationCount: number;
+	CollisionResponses: CollisionResponse;
+	MaxDepenetrationVelocity: number;
+	MassInKgOverride: number;
+	LinearDamping: number;
+	AngularDamping: number;
+	CustomDOFPlaneNormal: Vector;
+	COMNudge: Vector;
+	MassScale: number;
+	InertiaTensorScale: Vector;
+	WalkableSlopeOverride: WalkableSlopeOverride;
+	PhysMaterialOverride: PhysicalMaterial;
+	MaxAngularVelocity: number;
+	CustomSleepThresholdMultiplier: number;
+	StabilizationThresholdMultiplier: number;
+	PhysicsBlendWeight: number;
+	clone() : BodyInstance;
+	static C(Other: UObject | any): BodyInstance;
+}
+
+declare class BodySetup extends BodySetupCore { 
+	AggGeom: KAggregateGeom;
+	bAlwaysFullAnimWeight: boolean;
+	bConsiderForBounds: boolean;
+	bMeshCollideAll: boolean;
+	bDoubleSidedGeometry: boolean;
+	bGenerateNonMirroredCollision: boolean;
+	bSharedCookedData: boolean;
+	bGenerateMirroredCollision: boolean;
+	bSupportUVsAndFaceRemap: boolean;
+	PhysMaterial: PhysicalMaterial;
+	WalkableSlopeOverride: WalkableSlopeOverride;
+	BuildScale: number;
+	DefaultInstance: BodyInstance;
+	BuildScale3D: Vector;
+	static Load(ResourceName: string): BodySetup;
+	static Find(Outer: UObject, ResourceName: string): BodySetup;
+	static GetDefaultObject(): BodySetup;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BodySetup;
+	static C(Other: UObject | any): BodySetup;
+}
+
+declare class BrushComponent extends PrimitiveComponent { 
+	Brush: Model;
+	BrushBodySetup: BodySetup;
+	PrePivot: Vector;
+	static Load(ResourceName: string): BrushComponent;
+	static Find(Outer: UObject, ResourceName: string): BrushComponent;
+	static GetDefaultObject(): BrushComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BrushComponent;
+	static C(Other: UObject | any): BrushComponent;
+}
+
+declare class BuilderPoly { 
+	VertexIndices: number[];
+	Direction: number;
+	ItemName: string;
+	PolyFlags: number;
+	clone() : BuilderPoly;
+	static C(Other: UObject | any): BuilderPoly;
+}
+
+declare class BrushBuilder extends UObject { 
+	BitmapFilename: string;
+	Tooltip: string;
+	NotifyBadParams: boolean;
+	Vertices: Vector[];
+	Polys: BuilderPoly[];
+	Layer: string;
+	MergeCoplanars: boolean;
+	static Load(ResourceName: string): BrushBuilder;
+	static Find(Outer: UObject, ResourceName: string): BrushBuilder;
+	static GetDefaultObject(): BrushBuilder;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BrushBuilder;
+	static C(Other: UObject | any): BrushBuilder;
+	Build(InWorld: World,InBrush: Brush): boolean;
+	static Build(Builder: BrushBuilder,InWorld: World,InBrush: Brush): boolean;
+}
+
+declare class GeomSelection { 
+	Type: number;
+	index: number;
+	SelectionIndex: number;
+	clone() : GeomSelection;
+	static C(Other: UObject | any): GeomSelection;
+}
+
+declare class Brush extends Actor { 
+	BrushType: EBrushType;
+	BrushColor: Color;
+	PolyFlags: number;
+	bColored: boolean;
+	bSolidWhenSelected: boolean;
+	bPlaceableFromClassBrowser: boolean;
+	bNotForClientOrServer: boolean;
+	Brush: Model;
+	BrushComponent: BrushComponent;
+	BrushBuilder: BrushBuilder;
+	bInManipulation: boolean;
+	SavedSelections: GeomSelection[];
+	static GetDefaultObject(): Brush;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Brush;
+	static C(Other: UObject | any): Brush;
+	csgAdd(PolyFlags: number,BrushType: EBrushType): Brush;
+	GetSurfaces(Surfaces?: number[]): {Surfaces: number[]};
+	static csgAdd(DefaultBrush: Brush,PolyFlags: number,BrushType: EBrushType): Brush;
+	static GetSurfaces(Brush: Brush,Surfaces?: number[]): {Surfaces: number[]};
+}
+
+declare class Volume extends Brush { 
+	static GetDefaultObject(): Volume;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Volume;
+	static C(Other: UObject | any): Volume;
+	CreateBrushForVolumeActor(BrushBuilder: BrushBuilder): void;
+	static CreateBrushForVolumeActor(NewActor: Volume,BrushBuilder: BrushBuilder): void;
+}
+
+declare class PhysicsVolume extends Volume { 
+	TerminalVelocity: number;
+	Priority: number;
+	FluidFriction: number;
+	bWaterVolume: boolean;
+	bPhysicsOnContact: boolean;
+	static GetDefaultObject(): PhysicsVolume;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PhysicsVolume;
+	static C(Other: UObject | any): PhysicsVolume;
+}
+
+declare class Vector_NetQuantize extends Vector { 
+	clone() : Vector_NetQuantize;
+	static C(Other: UObject | any): Vector_NetQuantize;
+}
+
+declare class Vector_NetQuantizeNormal extends Vector { 
+	clone() : Vector_NetQuantizeNormal;
+	static C(Other: UObject | any): Vector_NetQuantizeNormal;
+}
+
+declare class HitResult { 
+	FaceIndex: number;
+	Time: number;
+	Distance: number;
+	Location: Vector_NetQuantize;
+	ImpactPoint: Vector_NetQuantize;
+	Normal: Vector_NetQuantizeNormal;
+	ImpactNormal: Vector_NetQuantizeNormal;
+	TraceStart: Vector_NetQuantize;
+	TraceEnd: Vector_NetQuantize;
+	PenetrationDepth: number;
+	Item: number;
+	ElementIndex: number;
+	bBlockingHit: boolean;
+	bStartPenetrating: boolean;
+	PhysMaterial: any;
+	Actor: any;
+	Component: any;
+	BoneName: string;
+	MyBoneName: string;
+	clone() : HitResult;
+	static C(Other: UObject | any): HitResult;
+	BreakHitResult(bBlockingHit?: boolean,bInitialOverlap?: boolean,Time?: number,Distance?: number,Location?: Vector,ImpactPoint?: Vector,Normal?: Vector,ImpactNormal?: Vector,PhysMat?: PhysicalMaterial,HitActor?: Actor,HitComponent?: PrimitiveComponent,HitBoneName?: string,HitItem?: number,ElementIndex?: number,FaceIndex?: number,TraceStart?: Vector,TraceEnd?: Vector): {bBlockingHit: boolean, bInitialOverlap: boolean, Time: number, Distance: number, Location: Vector, ImpactPoint: Vector, Normal: Vector, ImpactNormal: Vector, PhysMat: PhysicalMaterial, HitActor: Actor, HitComponent: PrimitiveComponent, HitBoneName: string, HitItem: number, ElementIndex: number, FaceIndex: number, TraceStart: Vector, TraceEnd: Vector};
+	FindCollisionUV(UVChannel: number,UV?: Vector2D): {UV: Vector2D, $: boolean};
+	GetSurfaceType(): EPhysicalSurface;
+	static BreakHitResult(Hit: HitResult,bBlockingHit?: boolean,bInitialOverlap?: boolean,Time?: number,Distance?: number,Location?: Vector,ImpactPoint?: Vector,Normal?: Vector,ImpactNormal?: Vector,PhysMat?: PhysicalMaterial,HitActor?: Actor,HitComponent?: PrimitiveComponent,HitBoneName?: string,HitItem?: number,ElementIndex?: number,FaceIndex?: number,TraceStart?: Vector,TraceEnd?: Vector): {bBlockingHit: boolean, bInitialOverlap: boolean, Time: number, Distance: number, Location: Vector, ImpactPoint: Vector, Normal: Vector, ImpactNormal: Vector, PhysMat: PhysicalMaterial, HitActor: Actor, HitComponent: PrimitiveComponent, HitBoneName: string, HitItem: number, ElementIndex: number, FaceIndex: number, TraceStart: Vector, TraceEnd: Vector};
+	static FindCollisionUV(Hit: HitResult,UVChannel: number,UV?: Vector2D): {UV: Vector2D, $: boolean};
+	static GetSurfaceType(Hit: HitResult): EPhysicalSurface;
+	static MakeHitResult(bBlockingHit: boolean,bInitialOverlap: boolean,Time: number,Distance: number,Location: Vector,ImpactPoint: Vector,Normal: Vector,ImpactNormal: Vector,PhysMat: PhysicalMaterial,HitActor: Actor,HitComponent: PrimitiveComponent,HitBoneName: string,HitItem: number,ElementIndex: number,FaceIndex: number,TraceStart: Vector,TraceEnd: Vector): HitResult;
+}
+
+declare type EDetachmentRule = 'KeepRelative' | 'KeepWorld' | 'EDetachmentRule_MAX';
+declare var EDetachmentRule : { KeepRelative:'KeepRelative',KeepWorld:'KeepWorld',EDetachmentRule_MAX:'EDetachmentRule_MAX', };
+declare type EAttachmentRule = 'KeepRelative' | 'KeepWorld' | 'SnapToTarget' | 'EAttachmentRule_MAX';
+declare var EAttachmentRule : { KeepRelative:'KeepRelative',KeepWorld:'KeepWorld',SnapToTarget:'SnapToTarget',EAttachmentRule_MAX:'EAttachmentRule_MAX', };
+declare type EAttachLocation = 'KeepRelativeOffset' | 'KeepWorldPosition' | 'SnapToTarget' | 'SnapToTargetIncludingScale' | 'EAttachLocation_MAX';
+declare var EAttachLocation : { KeepRelativeOffset:'KeepRelativeOffset',KeepWorldPosition:'KeepWorldPosition',SnapToTarget:'SnapToTarget',SnapToTargetIncludingScale:'SnapToTargetIncludingScale',EAttachLocation_MAX:'EAttachLocation_MAX', };
+declare type ERelativeTransformSpace = 'RTS_World' | 'RTS_Actor' | 'RTS_Component' | 'RTS_ParentBoneSpace' | 'RTS_MAX';
+declare var ERelativeTransformSpace : { RTS_World:'RTS_World',RTS_Actor:'RTS_Actor',RTS_Component:'RTS_Component',RTS_ParentBoneSpace:'RTS_ParentBoneSpace',RTS_MAX:'RTS_MAX', };
+declare type EMoveComponentAction = 'Move' | 'Stop' | 'Return' | 'EMoveComponentAction_MAX';
+declare var EMoveComponentAction : { Move:'Move',Stop:'Stop',Return:'Return',EMoveComponentAction_MAX:'EMoveComponentAction_MAX', };
+declare class LatentActionInfo { 
+	Linkage: number;
+	UUID: number;
+	ExecutionFunction: string;
+	CallbackTarget: UObject;
+	clone() : LatentActionInfo;
+	static C(Other: UObject | any): LatentActionInfo;
+}
+
+declare class ARPin extends UObject { 
+	TrackedGeometry: ARTrackedGeometry;
+	PinnedComponent: SceneComponent;
+	LocalToTrackingTransform: Transform;
+	LocalToAlignedTrackingTransform: Transform;
+	TrackingState: EARTrackingState;
+	OnARTrackingStateChanged: UnrealEngineMulticastDelegate<(NewTrackingState: EARTrackingState) => void>;
+	OnARTransformUpdated: UnrealEngineMulticastDelegate<(OldToNewTransform: Transform) => void>;
+	static Load(ResourceName: string): ARPin;
+	static Find(Outer: UObject, ResourceName: string): ARPin;
+	static GetDefaultObject(): ARPin;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARPin;
+	GetTrackingState(): EARTrackingState;
+	GetTrackedGeometry(): ARTrackedGeometry;
+	GetPinnedComponent(): SceneComponent;
+	GetLocalToWorldTransform(): Transform;
+	GetLocalToTrackingTransform(): Transform;
+	GetDebugName(): string;
+	DebugDraw(World: World,Color: LinearColor,Scale: number,PersistForSeconds: number): void;
+	static C(Other: UObject | any): ARPin;
+	DebugDrawPin(WorldContextObject: UObject,Color: LinearColor,Scale: number,PersistForSeconds: number): void;
+	RemovePin(): void;
+	static DebugDrawPin(ARPin: ARPin,WorldContextObject: UObject,Color: LinearColor,Scale: number,PersistForSeconds: number): void;
+	static RemovePin(PinToRemove: ARPin): void;
+}
+
+declare class SceneComponent extends ActorComponent { 
+	PhysicsVolume: any;
+	AttachParent: SceneComponent;
+	AttachSocketName: string;
+	AttachChildren: SceneComponent[];
+	ClientAttachedChildren: SceneComponent[];
+	RelativeLocation: Vector;
+	RelativeRotation: Rotator;
+	RelativeScale3D: Vector;
+	ComponentVelocity: Vector;
+	bComponentToWorldUpdated: boolean;
+	bAbsoluteLocation: boolean;
+	bAbsoluteRotation: boolean;
+	bAbsoluteScale: boolean;
+	bVisible: boolean;
+	bShouldBeAttached: boolean;
+	bShouldSnapLocationWhenAttached: boolean;
+	bShouldSnapRotationWhenAttached: boolean;
+	bShouldUpdatePhysicsVolume: boolean;
+	bHiddenInGame: boolean;
+	bBoundsChangeTriggersStreamingDataRebuild: boolean;
+	bUseAttachParentBound: boolean;
+	bVisualizeComponent: boolean;
+	Mobility: EComponentMobility;
+	DetailMode: EDetailMode;
+	PhysicsVolumeChangedDelegate: UnrealEngineMulticastDelegate<(NewVolume: PhysicsVolume) => void>;
+	static Load(ResourceName: string): SceneComponent;
+	static Find(Outer: UObject, ResourceName: string): SceneComponent;
+	static GetDefaultObject(): SceneComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SceneComponent;
+	ToggleVisibility(bPropagateToChildren: boolean): void;
+	SnapTo(InParent: SceneComponent,InSocketName: string): boolean;
+	SetWorldScale3D(NewScale: Vector): void;
+	SetVisibility(bNewVisibility: boolean,bPropagateToChildren: boolean): void;
+	SetShouldUpdatePhysicsVolume(bInShouldUpdatePhysicsVolume: boolean): void;
+	SetRelativeScale3D(NewScale3D: Vector): void;
+	SetMobility(NewMobility: EComponentMobility): void;
+	SetHiddenInGame(NewHidden: boolean,bPropagateToChildren: boolean): void;
+	SetAbsolute(bNewAbsoluteLocation: boolean,bNewAbsoluteRotation: boolean,bNewAbsoluteScale: boolean): void;
+	ResetRelativeTransform(): void;
+	OnRep_Visibility(OldValue: boolean): void;
+	OnRep_Transform(): void;
+	OnRep_AttachSocketName(): void;
+	OnRep_AttachParent(): void;
+	OnRep_AttachChildren(): void;
+	K2_SetWorldTransform(NewTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_SetWorldRotation(NewRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_SetWorldLocationAndRotation(NewLocation: Vector,NewRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_SetWorldLocation(NewLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_SetRelativeTransform(NewTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_SetRelativeRotation(NewRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_SetRelativeLocationAndRotation(NewLocation: Vector,NewRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_SetRelativeLocation(NewLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_GetComponentToWorld(): Transform;
+	K2_GetComponentScale(): Vector;
+	K2_GetComponentRotation(): Rotator;
+	K2_GetComponentLocation(): Vector;
+	K2_DetachFromComponent(LocationRule: EDetachmentRule,RotationRule: EDetachmentRule,ScaleRule: EDetachmentRule,bCallModify: boolean): void;
+	K2_AttachToComponent(Parent: SceneComponent,SocketName: string,LocationRule: EAttachmentRule,RotationRule: EAttachmentRule,ScaleRule: EAttachmentRule,bWeldSimulatedBodies: boolean): boolean;
+	K2_AttachTo(InParent: SceneComponent,InSocketName: string,AttachType: EAttachLocation,bWeldSimulatedBodies: boolean): boolean;
+	K2_AddWorldTransformKeepScale(DeltaTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_AddWorldTransform(DeltaTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_AddWorldRotation(DeltaRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_AddWorldOffset(DeltaLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_AddRelativeRotation(DeltaRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_AddRelativeLocation(DeltaLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_AddLocalTransform(DeltaTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_AddLocalRotation(DeltaRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_AddLocalOffset(DeltaLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	IsVisible(): boolean;
+	IsSimulatingPhysics(BoneName: string): boolean;
+	IsAnySimulatingPhysics(): boolean;
+	GetUpVector(): Vector;
+	GetSocketTransform(InSocketName: string,TransformSpace: ERelativeTransformSpace): Transform;
+	GetSocketRotation(InSocketName: string): Rotator;
+	GetSocketQuaternion(InSocketName: string): Quat;
+	GetSocketLocation(InSocketName: string): Vector;
+	GetShouldUpdatePhysicsVolume(): boolean;
+	GetRightVector(): Vector;
+	GetRelativeTransform(): Transform;
+	GetPhysicsVolume(): PhysicsVolume;
+	GetParentComponents(Parents?: SceneComponent[]): {Parents: SceneComponent[]};
+	GetNumChildrenComponents(): number;
+	GetForwardVector(): Vector;
+	GetComponentVelocity(): Vector;
+	GetChildrenComponents(bIncludeAllDescendants: boolean,Children?: SceneComponent[]): {Children: SceneComponent[]};
+	GetChildComponent(ChildIndex: number): SceneComponent;
+	GetAttachSocketName(): string;
+	GetAttachParent(): SceneComponent;
+	GetAllSocketNames(): string[];
+	DoesSocketExist(InSocketName: string): boolean;
+	DetachFromParent(bMaintainWorldPosition: boolean,bCallModify: boolean): void;
+	static C(Other: UObject | any): SceneComponent;
+	SetTrackingReferenceComponent(): boolean;
+	SetMobile(): void;
+	SetMobility(Type: EComponentMobility): void;
+	GetComponentBounds(Origin?: Vector,BoxExtent?: Vector,SphereRadius?: number): {Origin: Vector, BoxExtent: Vector, SphereRadius: number};
+	MoveComponentTo(TargetRelativeLocation: Vector,TargetRelativeRotation: Rotator,bEaseOut: boolean,bEaseIn: boolean,OverTime: number,bForceShortestRotationPath: boolean,MoveAction: EMoveComponentAction,LatentInfo: LatentActionInfo): void;
+	PinComponent(PinToWorldTransform: Transform,TrackedGeometry: ARTrackedGeometry,DebugName: string): ARPin;
+	PinComponentToARPin(Pin: ARPin): boolean;
+	PinComponentToTraceResult(TraceResult: ARTraceResult,DebugName: string): ARPin;
+	UnpinComponent(): void;
+	static SetTrackingReferenceComponent(Component: SceneComponent): boolean;
+	static SetMobile(SceneComponent: SceneComponent): void;
+	static SetMobility(SceneComponent: SceneComponent,Type: EComponentMobility): void;
+	static GetComponentBounds(Component: SceneComponent,Origin?: Vector,BoxExtent?: Vector,SphereRadius?: number): {Origin: Vector, BoxExtent: Vector, SphereRadius: number};
+	static MoveComponentTo(Component: SceneComponent,TargetRelativeLocation: Vector,TargetRelativeRotation: Rotator,bEaseOut: boolean,bEaseIn: boolean,OverTime: number,bForceShortestRotationPath: boolean,MoveAction: EMoveComponentAction,LatentInfo: LatentActionInfo): void;
+	static PinComponent(ComponentToPin: SceneComponent,PinToWorldTransform: Transform,TrackedGeometry: ARTrackedGeometry,DebugName: string): ARPin;
+	static PinComponentToARPin(ComponentToPin: SceneComponent,Pin: ARPin): boolean;
+	static PinComponentToTraceResult(ComponentToPin: SceneComponent,TraceResult: ARTraceResult,DebugName: string): ARPin;
+	static UnpinComponent(ComponentToUnpin: SceneComponent): void;
+}
+
+declare type ESceneDepthPriorityGroup = 'SDPG_World' | 'SDPG_Foreground' | 'SDPG_MAX';
+declare var ESceneDepthPriorityGroup : { SDPG_World:'SDPG_World',SDPG_Foreground:'SDPG_Foreground',SDPG_MAX:'SDPG_MAX', };
+declare type EIndirectLightingCacheQuality = 'ILCQ_Off' | 'ILCQ_Point' | 'ILCQ_Volume' | 'ILCQ_MAX';
+declare var EIndirectLightingCacheQuality : { ILCQ_Off:'ILCQ_Off',ILCQ_Point:'ILCQ_Point',ILCQ_Volume:'ILCQ_Volume',ILCQ_MAX:'ILCQ_MAX', };
+declare type ELightmapType = 'Default' | 'ForceSurface' | 'ForceVolumetric' | 'ELightmapType_MAX';
+declare var ELightmapType : { Default:'Default',ForceSurface:'ForceSurface',ForceVolumetric:'ForceVolumetric',ELightmapType_MAX:'ELightmapType_MAX', };
+declare type EHasCustomNavigableGeometry = 'No' | 'Yes' | 'EvenIfNotCollidable' | 'DontExport' | 'EHasCustomNavigableGeometry_MAX';
+declare var EHasCustomNavigableGeometry : { No:'No',Yes:'Yes',EvenIfNotCollidable:'EvenIfNotCollidable',DontExport:'DontExport',EHasCustomNavigableGeometry_MAX:'EHasCustomNavigableGeometry_MAX', };
+declare type EHitProxyPriority = 'HPP_World' | 'HPP_Wireframe' | 'HPP_Foreground' | 'HPP_UI' | 'HPP_MAX';
+declare var EHitProxyPriority : { HPP_World:'HPP_World',HPP_Wireframe:'HPP_Wireframe',HPP_Foreground:'HPP_Foreground',HPP_UI:'HPP_UI',HPP_MAX:'HPP_MAX', };
+declare type ECanBeCharacterBase = 'ECB_No' | 'ECB_Yes' | 'ECB_Owner' | 'ECB_MAX';
+declare var ECanBeCharacterBase : { ECB_No:'ECB_No',ECB_Yes:'ECB_Yes',ECB_Owner:'ECB_Owner',ECB_MAX:'ECB_MAX', };
+declare class LightingChannels { 
+	bChannel0: boolean;
+	bChannel1: boolean;
+	bChannel2: boolean;
+	clone() : LightingChannels;
+	static C(Other: UObject | any): LightingChannels;
+}
+
+declare type ERendererStencilMask = 'ERSM_Default' | 'ERSM_255' | 'ERSM_1' | 'ERSM_2' | 'ERSM_4' | 'ERSM_8' | 'ERSM_16' | 'ERSM_32' | 'ERSM_64' | 'ERSM_128' | 'ERSM_MAX';
+declare var ERendererStencilMask : { ERSM_Default:'ERSM_Default',ERSM_255:'ERSM_255',ERSM_1:'ERSM_1',ERSM_2:'ERSM_2',ERSM_4:'ERSM_4',ERSM_8:'ERSM_8',ERSM_16:'ERSM_16',ERSM_32:'ERSM_32',ERSM_64:'ERSM_64',ERSM_128:'ERSM_128',ERSM_MAX:'ERSM_MAX', };
+declare class CustomPrimitiveData { 
+	Data: number[];
+	clone() : CustomPrimitiveData;
+	static C(Other: UObject | any): CustomPrimitiveData;
+}
+
+declare type ERuntimeVirtualTextureMaterialType = 'BaseColor' | 'BaseColor_Normal_DEPRECATED' | 'BaseColor_Normal_Specular' | 'BaseColor_Normal_Specular_YCoCg' | 'BaseColor_Normal_Specular_Mask_YCoCg' | 'WorldHeight' | 'Count' | 'ERuntimeVirtualTextureMaterialType_MAX';
+declare var ERuntimeVirtualTextureMaterialType : { BaseColor:'BaseColor',BaseColor_Normal_DEPRECATED:'BaseColor_Normal_DEPRECATED',BaseColor_Normal_Specular:'BaseColor_Normal_Specular',BaseColor_Normal_Specular_YCoCg:'BaseColor_Normal_Specular_YCoCg',BaseColor_Normal_Specular_Mask_YCoCg:'BaseColor_Normal_Specular_Mask_YCoCg',WorldHeight:'WorldHeight',Count:'Count',ERuntimeVirtualTextureMaterialType_MAX:'ERuntimeVirtualTextureMaterialType_MAX', };
+declare type TextureGroup = 'TEXTUREGROUP_World' | 'TEXTUREGROUP_WorldNormalMap' | 'TEXTUREGROUP_WorldSpecular' | 'TEXTUREGROUP_Character' | 'TEXTUREGROUP_CharacterNormalMap' | 'TEXTUREGROUP_CharacterSpecular' | 'TEXTUREGROUP_Weapon' | 'TEXTUREGROUP_WeaponNormalMap' | 'TEXTUREGROUP_WeaponSpecular' | 'TEXTUREGROUP_Vehicle' | 'TEXTUREGROUP_VehicleNormalMap' | 'TEXTUREGROUP_VehicleSpecular' | 'TEXTUREGROUP_Cinematic' | 'TEXTUREGROUP_Effects' | 'TEXTUREGROUP_EffectsNotFiltered' | 'TEXTUREGROUP_Skybox' | 'TEXTUREGROUP_UI' | 'TEXTUREGROUP_Lightmap' | 'TEXTUREGROUP_RenderTarget' | 'TEXTUREGROUP_MobileFlattened' | 'TEXTUREGROUP_ProcBuilding_Face' | 'TEXTUREGROUP_ProcBuilding_LightMap' | 'TEXTUREGROUP_Shadowmap' | 'TEXTUREGROUP_ColorLookupTable' | 'TEXTUREGROUP_Terrain_Heightmap' | 'TEXTUREGROUP_Terrain_Weightmap' | 'TEXTUREGROUP_Bokeh' | 'TEXTUREGROUP_IESLightProfile' | 'TEXTUREGROUP_Pixels2D' | 'TEXTUREGROUP_HierarchicalLOD' | 'TEXTUREGROUP_Impostor' | 'TEXTUREGROUP_ImpostorNormalDepth' | 'TEXTUREGROUP_8BitData' | 'TEXTUREGROUP_16BitData' | 'TEXTUREGROUP_Project01' | 'TEXTUREGROUP_Project02' | 'TEXTUREGROUP_Project03' | 'TEXTUREGROUP_Project04' | 'TEXTUREGROUP_Project05' | 'TEXTUREGROUP_Project06' | 'TEXTUREGROUP_Project07' | 'TEXTUREGROUP_Project08' | 'TEXTUREGROUP_Project09' | 'TEXTUREGROUP_Project10' | 'TEXTUREGROUP_Project11' | 'TEXTUREGROUP_Project12' | 'TEXTUREGROUP_Project13' | 'TEXTUREGROUP_Project14' | 'TEXTUREGROUP_Project15' | 'TEXTUREGROUP_MAX';
+declare var TextureGroup : { TEXTUREGROUP_World:'TEXTUREGROUP_World',TEXTUREGROUP_WorldNormalMap:'TEXTUREGROUP_WorldNormalMap',TEXTUREGROUP_WorldSpecular:'TEXTUREGROUP_WorldSpecular',TEXTUREGROUP_Character:'TEXTUREGROUP_Character',TEXTUREGROUP_CharacterNormalMap:'TEXTUREGROUP_CharacterNormalMap',TEXTUREGROUP_CharacterSpecular:'TEXTUREGROUP_CharacterSpecular',TEXTUREGROUP_Weapon:'TEXTUREGROUP_Weapon',TEXTUREGROUP_WeaponNormalMap:'TEXTUREGROUP_WeaponNormalMap',TEXTUREGROUP_WeaponSpecular:'TEXTUREGROUP_WeaponSpecular',TEXTUREGROUP_Vehicle:'TEXTUREGROUP_Vehicle',TEXTUREGROUP_VehicleNormalMap:'TEXTUREGROUP_VehicleNormalMap',TEXTUREGROUP_VehicleSpecular:'TEXTUREGROUP_VehicleSpecular',TEXTUREGROUP_Cinematic:'TEXTUREGROUP_Cinematic',TEXTUREGROUP_Effects:'TEXTUREGROUP_Effects',TEXTUREGROUP_EffectsNotFiltered:'TEXTUREGROUP_EffectsNotFiltered',TEXTUREGROUP_Skybox:'TEXTUREGROUP_Skybox',TEXTUREGROUP_UI:'TEXTUREGROUP_UI',TEXTUREGROUP_Lightmap:'TEXTUREGROUP_Lightmap',TEXTUREGROUP_RenderTarget:'TEXTUREGROUP_RenderTarget',TEXTUREGROUP_MobileFlattened:'TEXTUREGROUP_MobileFlattened',TEXTUREGROUP_ProcBuilding_Face:'TEXTUREGROUP_ProcBuilding_Face',TEXTUREGROUP_ProcBuilding_LightMap:'TEXTUREGROUP_ProcBuilding_LightMap',TEXTUREGROUP_Shadowmap:'TEXTUREGROUP_Shadowmap',TEXTUREGROUP_ColorLookupTable:'TEXTUREGROUP_ColorLookupTable',TEXTUREGROUP_Terrain_Heightmap:'TEXTUREGROUP_Terrain_Heightmap',TEXTUREGROUP_Terrain_Weightmap:'TEXTUREGROUP_Terrain_Weightmap',TEXTUREGROUP_Bokeh:'TEXTUREGROUP_Bokeh',TEXTUREGROUP_IESLightProfile:'TEXTUREGROUP_IESLightProfile',TEXTUREGROUP_Pixels2D:'TEXTUREGROUP_Pixels2D',TEXTUREGROUP_HierarchicalLOD:'TEXTUREGROUP_HierarchicalLOD',TEXTUREGROUP_Impostor:'TEXTUREGROUP_Impostor',TEXTUREGROUP_ImpostorNormalDepth:'TEXTUREGROUP_ImpostorNormalDepth',TEXTUREGROUP_8BitData:'TEXTUREGROUP_8BitData',TEXTUREGROUP_16BitData:'TEXTUREGROUP_16BitData',TEXTUREGROUP_Project01:'TEXTUREGROUP_Project01',TEXTUREGROUP_Project02:'TEXTUREGROUP_Project02',TEXTUREGROUP_Project03:'TEXTUREGROUP_Project03',TEXTUREGROUP_Project04:'TEXTUREGROUP_Project04',TEXTUREGROUP_Project05:'TEXTUREGROUP_Project05',TEXTUREGROUP_Project06:'TEXTUREGROUP_Project06',TEXTUREGROUP_Project07:'TEXTUREGROUP_Project07',TEXTUREGROUP_Project08:'TEXTUREGROUP_Project08',TEXTUREGROUP_Project09:'TEXTUREGROUP_Project09',TEXTUREGROUP_Project10:'TEXTUREGROUP_Project10',TEXTUREGROUP_Project11:'TEXTUREGROUP_Project11',TEXTUREGROUP_Project12:'TEXTUREGROUP_Project12',TEXTUREGROUP_Project13:'TEXTUREGROUP_Project13',TEXTUREGROUP_Project14:'TEXTUREGROUP_Project14',TEXTUREGROUP_Project15:'TEXTUREGROUP_Project15',TEXTUREGROUP_MAX:'TEXTUREGROUP_MAX', };
+declare class StreamableRenderAsset extends UObject { 
+	ForceMipLevelsToBeResidentTimestamp: any;
+	NumCinematicMipLevels: number;
+	StreamingIndex: number;
+	CachedCombinedLODBias: number;
+	NeverStream: boolean;
+	bGlobalForceMipLevelsToBeResident: boolean;
+	bHasStreamingUpdatePending: boolean;
+	bForceMiplevelsToBeResident: boolean;
+	bIgnoreStreamingMipBias: boolean;
+	bUseCinematicMipLevels: boolean;
+	static Load(ResourceName: string): StreamableRenderAsset;
+	static Find(Outer: UObject, ResourceName: string): StreamableRenderAsset;
+	static GetDefaultObject(): StreamableRenderAsset;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): StreamableRenderAsset;
+	static C(Other: UObject | any): StreamableRenderAsset;
+}
+
+declare type ETextureSourceFormat = 'TSF_Invalid' | 'TSF_G8' | 'TSF_BGRA8' | 'TSF_BGRE8' | 'TSF_RGBA16' | 'TSF_RGBA16F' | 'TSF_RGBA8' | 'TSF_RGBE8' | 'TSF_G16' | 'TSF_MAX';
+declare var ETextureSourceFormat : { TSF_Invalid:'TSF_Invalid',TSF_G8:'TSF_G8',TSF_BGRA8:'TSF_BGRA8',TSF_BGRE8:'TSF_BGRE8',TSF_RGBA16:'TSF_RGBA16',TSF_RGBA16F:'TSF_RGBA16F',TSF_RGBA8:'TSF_RGBA8',TSF_RGBE8:'TSF_RGBE8',TSF_G16:'TSF_G16',TSF_MAX:'TSF_MAX', };
+declare class TextureSourceBlock { 
+	BlockX: number;
+	BlockY: number;
+	SizeX: number;
+	SizeY: number;
+	NumSlices: number;
+	NumMips: number;
+	clone() : TextureSourceBlock;
+	static C(Other: UObject | any): TextureSourceBlock;
+}
+
+declare class TextureSource { 
+	ID: Guid;
+	BaseBlockX: number;
+	BaseBlockY: number;
+	SizeX: number;
+	SizeY: number;
+	NumSlices: number;
+	NumMips: number;
+	NumLayers: number;
+	bPNGCompressed: boolean;
+	bGuidIsHash: boolean;
+	Format: ETextureSourceFormat;
+	LayerFormat: ETextureSourceFormat[];
+	Blocks: TextureSourceBlock[];
+	clone() : TextureSource;
+	static C(Other: UObject | any): TextureSource;
+}
+
+declare class AssetImportInfo { 
+	clone() : AssetImportInfo;
+	static C(Other: UObject | any): AssetImportInfo;
+}
+
+declare class AssetImportData extends UObject { 
+	SourceFilePath: string;
+	SourceFileTimestamp: string;
+	SourceData: AssetImportInfo;
+	static Load(ResourceName: string): AssetImportData;
+	static Find(Outer: UObject, ResourceName: string): AssetImportData;
+	static GetDefaultObject(): AssetImportData;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AssetImportData;
+	ScriptedAddFilename(InPath: string,index: number,SourceFileLabel: string): void;
+	K2_GetFirstFilename(): string;
+	K2_ExtractFilenames(): string[];
+	static C(Other: UObject | any): AssetImportData;
+}
+
+declare type ETextureLossyCompressionAmount = 'TLCA_Default' | 'TLCA_None' | 'TLCA_Lowest' | 'TLCA_Low' | 'TLCA_Medium' | 'TLCA_High' | 'TLCA_Highest' | 'TLCA_MAX';
+declare var ETextureLossyCompressionAmount : { TLCA_Default:'TLCA_Default',TLCA_None:'TLCA_None',TLCA_Lowest:'TLCA_Lowest',TLCA_Low:'TLCA_Low',TLCA_Medium:'TLCA_Medium',TLCA_High:'TLCA_High',TLCA_Highest:'TLCA_Highest',TLCA_MAX:'TLCA_MAX', };
+declare type ETextureCompressionQuality = 'TCQ_Default' | 'TCQ_Lowest' | 'TCQ_Low' | 'TCQ_Medium' | 'TCQ_High' | 'TCQ_Highest' | 'TCQ_MAX';
+declare var ETextureCompressionQuality : { TCQ_Default:'TCQ_Default',TCQ_Lowest:'TCQ_Lowest',TCQ_Low:'TCQ_Low',TCQ_Medium:'TCQ_Medium',TCQ_High:'TCQ_High',TCQ_Highest:'TCQ_Highest',TCQ_MAX:'TCQ_MAX', };
+declare type ETexturePowerOfTwoSetting = 'None' | 'PadToPowerOfTwo' | 'PadToSquarePowerOfTwo' | 'ETexturePowerOfTwoSetting_MAX';
+declare var ETexturePowerOfTwoSetting : { None:'None',PadToPowerOfTwo:'PadToPowerOfTwo',PadToSquarePowerOfTwo:'PadToSquarePowerOfTwo',ETexturePowerOfTwoSetting_MAX:'ETexturePowerOfTwoSetting_MAX', };
 declare type TextureMipGenSettings = 'TMGS_FromTextureGroup' | 'TMGS_SimpleAverage' | 'TMGS_Sharpen0' | 'TMGS_Sharpen1' | 'TMGS_Sharpen2' | 'TMGS_Sharpen3' | 'TMGS_Sharpen4' | 'TMGS_Sharpen5' | 'TMGS_Sharpen6' | 'TMGS_Sharpen7' | 'TMGS_Sharpen8' | 'TMGS_Sharpen9' | 'TMGS_Sharpen10' | 'TMGS_NoMipmaps' | 'TMGS_LeaveExistingMips' | 'TMGS_Blur1' | 'TMGS_Blur2' | 'TMGS_Blur3' | 'TMGS_Blur4' | 'TMGS_Blur5' | 'TMGS_Unfiltered' | 'TMGS_MAX';
 declare var TextureMipGenSettings : { TMGS_FromTextureGroup:'TMGS_FromTextureGroup',TMGS_SimpleAverage:'TMGS_SimpleAverage',TMGS_Sharpen0:'TMGS_Sharpen0',TMGS_Sharpen1:'TMGS_Sharpen1',TMGS_Sharpen2:'TMGS_Sharpen2',TMGS_Sharpen3:'TMGS_Sharpen3',TMGS_Sharpen4:'TMGS_Sharpen4',TMGS_Sharpen5:'TMGS_Sharpen5',TMGS_Sharpen6:'TMGS_Sharpen6',TMGS_Sharpen7:'TMGS_Sharpen7',TMGS_Sharpen8:'TMGS_Sharpen8',TMGS_Sharpen9:'TMGS_Sharpen9',TMGS_Sharpen10:'TMGS_Sharpen10',TMGS_NoMipmaps:'TMGS_NoMipmaps',TMGS_LeaveExistingMips:'TMGS_LeaveExistingMips',TMGS_Blur1:'TMGS_Blur1',TMGS_Blur2:'TMGS_Blur2',TMGS_Blur3:'TMGS_Blur3',TMGS_Blur4:'TMGS_Blur4',TMGS_Blur5:'TMGS_Blur5',TMGS_Unfiltered:'TMGS_Unfiltered',TMGS_MAX:'TMGS_MAX', };
 declare type ECompositeTextureMode = 'CTM_Disabled' | 'CTM_NormalRoughnessToRed' | 'CTM_NormalRoughnessToGreen' | 'CTM_NormalRoughnessToBlue' | 'CTM_NormalRoughnessToAlpha' | 'CTM_MAX';
@@ -973,8 +1550,6 @@ declare type TextureFilter = 'TF_Nearest' | 'TF_Bilinear' | 'TF_Trilinear' | 'TF
 declare var TextureFilter : { TF_Nearest:'TF_Nearest',TF_Bilinear:'TF_Bilinear',TF_Trilinear:'TF_Trilinear',TF_Default:'TF_Default',TF_MAX:'TF_MAX', };
 declare type ETextureMipLoadOptions = 'Default' | 'AllMips' | 'OnlyFirstMip' | 'ETextureMipLoadOptions_MAX';
 declare var ETextureMipLoadOptions : { Default:'Default',AllMips:'AllMips',OnlyFirstMip:'OnlyFirstMip',ETextureMipLoadOptions_MAX:'ETextureMipLoadOptions_MAX', };
-declare type TextureGroup = 'TEXTUREGROUP_World' | 'TEXTUREGROUP_WorldNormalMap' | 'TEXTUREGROUP_WorldSpecular' | 'TEXTUREGROUP_Character' | 'TEXTUREGROUP_CharacterNormalMap' | 'TEXTUREGROUP_CharacterSpecular' | 'TEXTUREGROUP_Weapon' | 'TEXTUREGROUP_WeaponNormalMap' | 'TEXTUREGROUP_WeaponSpecular' | 'TEXTUREGROUP_Vehicle' | 'TEXTUREGROUP_VehicleNormalMap' | 'TEXTUREGROUP_VehicleSpecular' | 'TEXTUREGROUP_Cinematic' | 'TEXTUREGROUP_Effects' | 'TEXTUREGROUP_EffectsNotFiltered' | 'TEXTUREGROUP_Skybox' | 'TEXTUREGROUP_UI' | 'TEXTUREGROUP_Lightmap' | 'TEXTUREGROUP_RenderTarget' | 'TEXTUREGROUP_MobileFlattened' | 'TEXTUREGROUP_ProcBuilding_Face' | 'TEXTUREGROUP_ProcBuilding_LightMap' | 'TEXTUREGROUP_Shadowmap' | 'TEXTUREGROUP_ColorLookupTable' | 'TEXTUREGROUP_Terrain_Heightmap' | 'TEXTUREGROUP_Terrain_Weightmap' | 'TEXTUREGROUP_Bokeh' | 'TEXTUREGROUP_IESLightProfile' | 'TEXTUREGROUP_Pixels2D' | 'TEXTUREGROUP_HierarchicalLOD' | 'TEXTUREGROUP_Impostor' | 'TEXTUREGROUP_ImpostorNormalDepth' | 'TEXTUREGROUP_8BitData' | 'TEXTUREGROUP_16BitData' | 'TEXTUREGROUP_Project01' | 'TEXTUREGROUP_Project02' | 'TEXTUREGROUP_Project03' | 'TEXTUREGROUP_Project04' | 'TEXTUREGROUP_Project05' | 'TEXTUREGROUP_Project06' | 'TEXTUREGROUP_Project07' | 'TEXTUREGROUP_Project08' | 'TEXTUREGROUP_Project09' | 'TEXTUREGROUP_Project10' | 'TEXTUREGROUP_Project11' | 'TEXTUREGROUP_Project12' | 'TEXTUREGROUP_Project13' | 'TEXTUREGROUP_Project14' | 'TEXTUREGROUP_Project15' | 'TEXTUREGROUP_MAX';
-declare var TextureGroup : { TEXTUREGROUP_World:'TEXTUREGROUP_World',TEXTUREGROUP_WorldNormalMap:'TEXTUREGROUP_WorldNormalMap',TEXTUREGROUP_WorldSpecular:'TEXTUREGROUP_WorldSpecular',TEXTUREGROUP_Character:'TEXTUREGROUP_Character',TEXTUREGROUP_CharacterNormalMap:'TEXTUREGROUP_CharacterNormalMap',TEXTUREGROUP_CharacterSpecular:'TEXTUREGROUP_CharacterSpecular',TEXTUREGROUP_Weapon:'TEXTUREGROUP_Weapon',TEXTUREGROUP_WeaponNormalMap:'TEXTUREGROUP_WeaponNormalMap',TEXTUREGROUP_WeaponSpecular:'TEXTUREGROUP_WeaponSpecular',TEXTUREGROUP_Vehicle:'TEXTUREGROUP_Vehicle',TEXTUREGROUP_VehicleNormalMap:'TEXTUREGROUP_VehicleNormalMap',TEXTUREGROUP_VehicleSpecular:'TEXTUREGROUP_VehicleSpecular',TEXTUREGROUP_Cinematic:'TEXTUREGROUP_Cinematic',TEXTUREGROUP_Effects:'TEXTUREGROUP_Effects',TEXTUREGROUP_EffectsNotFiltered:'TEXTUREGROUP_EffectsNotFiltered',TEXTUREGROUP_Skybox:'TEXTUREGROUP_Skybox',TEXTUREGROUP_UI:'TEXTUREGROUP_UI',TEXTUREGROUP_Lightmap:'TEXTUREGROUP_Lightmap',TEXTUREGROUP_RenderTarget:'TEXTUREGROUP_RenderTarget',TEXTUREGROUP_MobileFlattened:'TEXTUREGROUP_MobileFlattened',TEXTUREGROUP_ProcBuilding_Face:'TEXTUREGROUP_ProcBuilding_Face',TEXTUREGROUP_ProcBuilding_LightMap:'TEXTUREGROUP_ProcBuilding_LightMap',TEXTUREGROUP_Shadowmap:'TEXTUREGROUP_Shadowmap',TEXTUREGROUP_ColorLookupTable:'TEXTUREGROUP_ColorLookupTable',TEXTUREGROUP_Terrain_Heightmap:'TEXTUREGROUP_Terrain_Heightmap',TEXTUREGROUP_Terrain_Weightmap:'TEXTUREGROUP_Terrain_Weightmap',TEXTUREGROUP_Bokeh:'TEXTUREGROUP_Bokeh',TEXTUREGROUP_IESLightProfile:'TEXTUREGROUP_IESLightProfile',TEXTUREGROUP_Pixels2D:'TEXTUREGROUP_Pixels2D',TEXTUREGROUP_HierarchicalLOD:'TEXTUREGROUP_HierarchicalLOD',TEXTUREGROUP_Impostor:'TEXTUREGROUP_Impostor',TEXTUREGROUP_ImpostorNormalDepth:'TEXTUREGROUP_ImpostorNormalDepth',TEXTUREGROUP_8BitData:'TEXTUREGROUP_8BitData',TEXTUREGROUP_16BitData:'TEXTUREGROUP_16BitData',TEXTUREGROUP_Project01:'TEXTUREGROUP_Project01',TEXTUREGROUP_Project02:'TEXTUREGROUP_Project02',TEXTUREGROUP_Project03:'TEXTUREGROUP_Project03',TEXTUREGROUP_Project04:'TEXTUREGROUP_Project04',TEXTUREGROUP_Project05:'TEXTUREGROUP_Project05',TEXTUREGROUP_Project06:'TEXTUREGROUP_Project06',TEXTUREGROUP_Project07:'TEXTUREGROUP_Project07',TEXTUREGROUP_Project08:'TEXTUREGROUP_Project08',TEXTUREGROUP_Project09:'TEXTUREGROUP_Project09',TEXTUREGROUP_Project10:'TEXTUREGROUP_Project10',TEXTUREGROUP_Project11:'TEXTUREGROUP_Project11',TEXTUREGROUP_Project12:'TEXTUREGROUP_Project12',TEXTUREGROUP_Project13:'TEXTUREGROUP_Project13',TEXTUREGROUP_Project14:'TEXTUREGROUP_Project14',TEXTUREGROUP_Project15:'TEXTUREGROUP_Project15',TEXTUREGROUP_MAX:'TEXTUREGROUP_MAX', };
 declare class PerPlatformFloat { 
 	Default: number;
 	PerPlatform: any;
@@ -1195,41 +1770,6 @@ declare class PhysicalMaterialMask extends UObject {
 	static GetDefaultObject(): PhysicalMaterialMask;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PhysicalMaterialMask;
 	static C(Other: UObject | any): PhysicalMaterialMask;
-}
-
-declare type EFrictionCombineMode = 'Average' | 'Min' | 'Multiply' | 'Max' | 'EFrictionCombineMode_MAX';
-declare var EFrictionCombineMode : { Average:'Average',Min:'Min',Multiply:'Multiply',Max:'Max',EFrictionCombineMode_MAX:'EFrictionCombineMode_MAX', };
-declare class PhysicalMaterialPropertyBase extends UObject { 
-	static Load(ResourceName: string): PhysicalMaterialPropertyBase;
-	static Find(Outer: UObject, ResourceName: string): PhysicalMaterialPropertyBase;
-	static GetDefaultObject(): PhysicalMaterialPropertyBase;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PhysicalMaterialPropertyBase;
-	static C(Other: UObject | any): PhysicalMaterialPropertyBase;
-}
-
-declare type EPhysicalSurface = 'SurfaceType_Default' | 'SurfaceType1' | 'SurfaceType2' | 'SurfaceType3' | 'SurfaceType4' | 'SurfaceType5' | 'SurfaceType6' | 'SurfaceType7' | 'SurfaceType8' | 'SurfaceType9' | 'SurfaceType10' | 'SurfaceType11' | 'SurfaceType12' | 'SurfaceType13' | 'SurfaceType14' | 'SurfaceType15' | 'SurfaceType16' | 'SurfaceType17' | 'SurfaceType18' | 'SurfaceType19' | 'SurfaceType20' | 'SurfaceType21' | 'SurfaceType22' | 'SurfaceType23' | 'SurfaceType24' | 'SurfaceType25' | 'SurfaceType26' | 'SurfaceType27' | 'SurfaceType28' | 'SurfaceType29' | 'SurfaceType30' | 'SurfaceType31' | 'SurfaceType32' | 'SurfaceType33' | 'SurfaceType34' | 'SurfaceType35' | 'SurfaceType36' | 'SurfaceType37' | 'SurfaceType38' | 'SurfaceType39' | 'SurfaceType40' | 'SurfaceType41' | 'SurfaceType42' | 'SurfaceType43' | 'SurfaceType44' | 'SurfaceType45' | 'SurfaceType46' | 'SurfaceType47' | 'SurfaceType48' | 'SurfaceType49' | 'SurfaceType50' | 'SurfaceType51' | 'SurfaceType52' | 'SurfaceType53' | 'SurfaceType54' | 'SurfaceType55' | 'SurfaceType56' | 'SurfaceType57' | 'SurfaceType58' | 'SurfaceType59' | 'SurfaceType60' | 'SurfaceType61' | 'SurfaceType62' | 'SurfaceType_Max' | 'EPhysicalSurface_MAX';
-declare var EPhysicalSurface : { SurfaceType_Default:'SurfaceType_Default',SurfaceType1:'SurfaceType1',SurfaceType2:'SurfaceType2',SurfaceType3:'SurfaceType3',SurfaceType4:'SurfaceType4',SurfaceType5:'SurfaceType5',SurfaceType6:'SurfaceType6',SurfaceType7:'SurfaceType7',SurfaceType8:'SurfaceType8',SurfaceType9:'SurfaceType9',SurfaceType10:'SurfaceType10',SurfaceType11:'SurfaceType11',SurfaceType12:'SurfaceType12',SurfaceType13:'SurfaceType13',SurfaceType14:'SurfaceType14',SurfaceType15:'SurfaceType15',SurfaceType16:'SurfaceType16',SurfaceType17:'SurfaceType17',SurfaceType18:'SurfaceType18',SurfaceType19:'SurfaceType19',SurfaceType20:'SurfaceType20',SurfaceType21:'SurfaceType21',SurfaceType22:'SurfaceType22',SurfaceType23:'SurfaceType23',SurfaceType24:'SurfaceType24',SurfaceType25:'SurfaceType25',SurfaceType26:'SurfaceType26',SurfaceType27:'SurfaceType27',SurfaceType28:'SurfaceType28',SurfaceType29:'SurfaceType29',SurfaceType30:'SurfaceType30',SurfaceType31:'SurfaceType31',SurfaceType32:'SurfaceType32',SurfaceType33:'SurfaceType33',SurfaceType34:'SurfaceType34',SurfaceType35:'SurfaceType35',SurfaceType36:'SurfaceType36',SurfaceType37:'SurfaceType37',SurfaceType38:'SurfaceType38',SurfaceType39:'SurfaceType39',SurfaceType40:'SurfaceType40',SurfaceType41:'SurfaceType41',SurfaceType42:'SurfaceType42',SurfaceType43:'SurfaceType43',SurfaceType44:'SurfaceType44',SurfaceType45:'SurfaceType45',SurfaceType46:'SurfaceType46',SurfaceType47:'SurfaceType47',SurfaceType48:'SurfaceType48',SurfaceType49:'SurfaceType49',SurfaceType50:'SurfaceType50',SurfaceType51:'SurfaceType51',SurfaceType52:'SurfaceType52',SurfaceType53:'SurfaceType53',SurfaceType54:'SurfaceType54',SurfaceType55:'SurfaceType55',SurfaceType56:'SurfaceType56',SurfaceType57:'SurfaceType57',SurfaceType58:'SurfaceType58',SurfaceType59:'SurfaceType59',SurfaceType60:'SurfaceType60',SurfaceType61:'SurfaceType61',SurfaceType62:'SurfaceType62',SurfaceType_Max:'SurfaceType_Max',EPhysicalSurface_MAX:'EPhysicalSurface_MAX', };
-declare class PhysicalMaterial extends UObject { 
-	Friction: number;
-	StaticFriction: number;
-	FrictionCombineMode: EFrictionCombineMode;
-	bOverrideFrictionCombineMode: boolean;
-	Restitution: number;
-	RestitutionCombineMode: EFrictionCombineMode;
-	bOverrideRestitutionCombineMode: boolean;
-	Density: number;
-	SleepLinearVelocityThreshold: number;
-	SleepAngularVelocityThreshold: number;
-	SleepCounterThreshold: number;
-	RaiseMassToPower: number;
-	DestructibleDamageThresholdScale: number;
-	PhysicalMaterialProperty: PhysicalMaterialPropertyBase;
-	SurfaceType: EPhysicalSurface;
-	static Load(ResourceName: string): PhysicalMaterial;
-	static Find(Outer: UObject, ResourceName: string): PhysicalMaterial;
-	static GetDefaultObject(): PhysicalMaterial;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PhysicalMaterial;
-	static C(Other: UObject | any): PhysicalMaterial;
 }
 
 declare type EMaterialParameterAssociation = 'LayerParameter' | 'BlendParameter' | 'GlobalParameter' | 'EMaterialParameterAssociation_MAX';
@@ -1816,43 +2356,6 @@ declare class Font extends UObject {
 	static C(Other: UObject | any): Font;
 }
 
-declare type ERuntimeVirtualTextureMaterialType = 'BaseColor' | 'BaseColor_Normal_DEPRECATED' | 'BaseColor_Normal_Specular' | 'BaseColor_Normal_Specular_YCoCg' | 'BaseColor_Normal_Specular_Mask_YCoCg' | 'WorldHeight' | 'Count' | 'ERuntimeVirtualTextureMaterialType_MAX';
-declare var ERuntimeVirtualTextureMaterialType : { BaseColor:'BaseColor',BaseColor_Normal_DEPRECATED:'BaseColor_Normal_DEPRECATED',BaseColor_Normal_Specular:'BaseColor_Normal_Specular',BaseColor_Normal_Specular_YCoCg:'BaseColor_Normal_Specular_YCoCg',BaseColor_Normal_Specular_Mask_YCoCg:'BaseColor_Normal_Specular_Mask_YCoCg',WorldHeight:'WorldHeight',Count:'Count',ERuntimeVirtualTextureMaterialType_MAX:'ERuntimeVirtualTextureMaterialType_MAX', };
-declare class RuntimeVirtualTextureStreamingProxy extends Texture2D { 
-	static Load(ResourceName: string): RuntimeVirtualTextureStreamingProxy;
-	static Find(Outer: UObject, ResourceName: string): RuntimeVirtualTextureStreamingProxy;
-	static GetDefaultObject(): RuntimeVirtualTextureStreamingProxy;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): RuntimeVirtualTextureStreamingProxy;
-	static C(Other: UObject | any): RuntimeVirtualTextureStreamingProxy;
-}
-
-declare class RuntimeVirtualTexture extends UObject { 
-	TileCount: number;
-	TileSize: number;
-	TileBorderSize: number;
-	MaterialType: ERuntimeVirtualTextureMaterialType;
-	bCompressTextures: boolean;
-	bClearTextures: boolean;
-	bSinglePhysicalSpace: boolean;
-	bPrivateSpace: boolean;
-	bAdaptive: boolean;
-	bContinuousUpdate: boolean;
-	RemoveLowMips: number;
-	LODGroup: TextureGroup;
-	Size: number;
-	StreamingTexture: RuntimeVirtualTextureStreamingProxy;
-	static Load(ResourceName: string): RuntimeVirtualTexture;
-	static Find(Outer: UObject, ResourceName: string): RuntimeVirtualTexture;
-	static GetDefaultObject(): RuntimeVirtualTexture;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): RuntimeVirtualTexture;
-	GetTileSize(): number;
-	GetTileCount(): number;
-	GetTileBorderSize(): number;
-	GetSize(): number;
-	GetPageTableSize(): number;
-	static C(Other: UObject | any): RuntimeVirtualTexture;
-}
-
 declare class StaticComponentMaskValue { 
 	R: boolean;
 	G: boolean;
@@ -2145,249 +2648,6 @@ declare class StaticMaterial {
 	static C(Other: UObject | any): StaticMaterial;
 }
 
-declare type EPhysicsType = 'PhysType_Default' | 'PhysType_Kinematic' | 'PhysType_Simulated' | 'PhysType_MAX';
-declare var EPhysicsType : { PhysType_Default:'PhysType_Default',PhysType_Kinematic:'PhysType_Kinematic',PhysType_Simulated:'PhysType_Simulated',PhysType_MAX:'PhysType_MAX', };
-declare type ECollisionTraceFlag = 'CTF_UseDefault' | 'CTF_UseSimpleAndComplex' | 'CTF_UseSimpleAsComplex' | 'CTF_UseComplexAsSimple' | 'CTF_MAX';
-declare var ECollisionTraceFlag : { CTF_UseDefault:'CTF_UseDefault',CTF_UseSimpleAndComplex:'CTF_UseSimpleAndComplex',CTF_UseSimpleAsComplex:'CTF_UseSimpleAsComplex',CTF_UseComplexAsSimple:'CTF_UseComplexAsSimple',CTF_MAX:'CTF_MAX', };
-declare type EBodyCollisionResponse = 'BodyCollision_Enabled' | 'BodyCollision_Disabled' | 'BodyCollision_MAX';
-declare var EBodyCollisionResponse : { BodyCollision_Enabled:'BodyCollision_Enabled',BodyCollision_Disabled:'BodyCollision_Disabled',BodyCollision_MAX:'BodyCollision_MAX', };
-declare class BodySetupCore extends UObject { 
-	BoneName: string;
-	PhysicsType: EPhysicsType;
-	CollisionTraceFlag: ECollisionTraceFlag;
-	CollisionReponse: EBodyCollisionResponse;
-	static Load(ResourceName: string): BodySetupCore;
-	static Find(Outer: UObject, ResourceName: string): BodySetupCore;
-	static GetDefaultObject(): BodySetupCore;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BodySetupCore;
-	static C(Other: UObject | any): BodySetupCore;
-}
-
-declare type ECollisionEnabled = 'NoCollision' | 'QueryOnly' | 'PhysicsOnly' | 'QueryAndPhysics' | 'ECollisionEnabled_MAX';
-declare var ECollisionEnabled : { NoCollision:'NoCollision',QueryOnly:'QueryOnly',PhysicsOnly:'PhysicsOnly',QueryAndPhysics:'QueryAndPhysics',ECollisionEnabled_MAX:'ECollisionEnabled_MAX', };
-declare class KShapeElem { 
-	RestOffset: number;
-	bIsGenerated: boolean;
-	Name: string;
-	bContributeToMass: boolean;
-	CollisionEnabled: ECollisionEnabled;
-	clone() : KShapeElem;
-	static C(Other: UObject | any): KShapeElem;
-}
-
-declare class KSphereElem extends KShapeElem { 
-	TM: Matrix;
-	Center: Vector;
-	Radius: number;
-	clone() : KSphereElem;
-	static C(Other: UObject | any): KSphereElem;
-}
-
-declare class KBoxElem extends KShapeElem { 
-	TM: Matrix;
-	Orientation: Quat;
-	Center: Vector;
-	Rotation: Rotator;
-	X: number;
-	Y: number;
-	Z: number;
-	clone() : KBoxElem;
-	static C(Other: UObject | any): KBoxElem;
-}
-
-declare class KSphylElem extends KShapeElem { 
-	TM: Matrix;
-	Orientation: Quat;
-	Center: Vector;
-	Rotation: Rotator;
-	Radius: number;
-	Length: number;
-	clone() : KSphylElem;
-	static C(Other: UObject | any): KSphylElem;
-}
-
-declare class Box { 
-	Min: Vector;
-	Max: Vector;
-	IsValid: number;
-	clone() : Box;
-	static C(Other: UObject | any): Box;
-}
-
-declare class KConvexElem extends KShapeElem { 
-	VertexData: Vector[];
-	IndexData: number[];
-	ElemBox: Box;
-	Transform: Transform;
-	clone() : KConvexElem;
-	static C(Other: UObject | any): KConvexElem;
-}
-
-declare class KTaperedCapsuleElem extends KShapeElem { 
-	Center: Vector;
-	Rotation: Rotator;
-	Radius0: number;
-	Radius1: number;
-	Length: number;
-	clone() : KTaperedCapsuleElem;
-	static C(Other: UObject | any): KTaperedCapsuleElem;
-}
-
-declare class KAggregateGeom { 
-	SphereElems: KSphereElem[];
-	BoxElems: KBoxElem[];
-	SphylElems: KSphylElem[];
-	ConvexElems: KConvexElem[];
-	TaperedCapsuleElems: KTaperedCapsuleElem[];
-	clone() : KAggregateGeom;
-	static C(Other: UObject | any): KAggregateGeom;
-}
-
-declare type EWalkableSlopeBehavior = 'WalkableSlope_Default' | 'WalkableSlope_Increase' | 'WalkableSlope_Decrease' | 'WalkableSlope_Unwalkable' | 'WalkableSlope_Max';
-declare var EWalkableSlopeBehavior : { WalkableSlope_Default:'WalkableSlope_Default',WalkableSlope_Increase:'WalkableSlope_Increase',WalkableSlope_Decrease:'WalkableSlope_Decrease',WalkableSlope_Unwalkable:'WalkableSlope_Unwalkable',WalkableSlope_Max:'WalkableSlope_Max', };
-declare class WalkableSlopeOverride { 
-	WalkableSlopeBehavior: EWalkableSlopeBehavior;
-	WalkableSlopeAngle: number;
-	clone() : WalkableSlopeOverride;
-	static C(Other: UObject | any): WalkableSlopeOverride;
-}
-
-declare class BodyInstanceCore { 
-	bSimulatePhysics: boolean;
-	bOverrideMass: boolean;
-	bEnableGravity: boolean;
-	bAutoWeld: boolean;
-	bStartAwake: boolean;
-	bGenerateWakeEvents: boolean;
-	bUpdateMassWhenScaleChanges: boolean;
-	clone() : BodyInstanceCore;
-	static C(Other: UObject | any): BodyInstanceCore;
-}
-
-declare type ECollisionChannel = 'ECC_WorldStatic' | 'ECC_WorldDynamic' | 'ECC_Pawn' | 'ECC_Visibility' | 'ECC_Camera' | 'ECC_PhysicsBody' | 'ECC_Vehicle' | 'ECC_Destructible' | 'ECC_EngineTraceChannel1' | 'ECC_EngineTraceChannel2' | 'ECC_EngineTraceChannel3' | 'ECC_EngineTraceChannel4' | 'ECC_EngineTraceChannel5' | 'ECC_EngineTraceChannel6' | 'ECC_GameTraceChannel1' | 'ECC_GameTraceChannel2' | 'ECC_GameTraceChannel3' | 'ECC_GameTraceChannel4' | 'ECC_GameTraceChannel5' | 'ECC_GameTraceChannel6' | 'ECC_GameTraceChannel7' | 'ECC_GameTraceChannel8' | 'ECC_GameTraceChannel9' | 'ECC_GameTraceChannel10' | 'ECC_GameTraceChannel11' | 'ECC_GameTraceChannel12' | 'ECC_GameTraceChannel13' | 'ECC_GameTraceChannel14' | 'ECC_GameTraceChannel15' | 'ECC_GameTraceChannel16' | 'ECC_GameTraceChannel17' | 'ECC_GameTraceChannel18' | 'ECC_OverlapAll_Deprecated' | 'ECC_MAX';
-declare var ECollisionChannel : { ECC_WorldStatic:'ECC_WorldStatic',ECC_WorldDynamic:'ECC_WorldDynamic',ECC_Pawn:'ECC_Pawn',ECC_Visibility:'ECC_Visibility',ECC_Camera:'ECC_Camera',ECC_PhysicsBody:'ECC_PhysicsBody',ECC_Vehicle:'ECC_Vehicle',ECC_Destructible:'ECC_Destructible',ECC_EngineTraceChannel1:'ECC_EngineTraceChannel1',ECC_EngineTraceChannel2:'ECC_EngineTraceChannel2',ECC_EngineTraceChannel3:'ECC_EngineTraceChannel3',ECC_EngineTraceChannel4:'ECC_EngineTraceChannel4',ECC_EngineTraceChannel5:'ECC_EngineTraceChannel5',ECC_EngineTraceChannel6:'ECC_EngineTraceChannel6',ECC_GameTraceChannel1:'ECC_GameTraceChannel1',ECC_GameTraceChannel2:'ECC_GameTraceChannel2',ECC_GameTraceChannel3:'ECC_GameTraceChannel3',ECC_GameTraceChannel4:'ECC_GameTraceChannel4',ECC_GameTraceChannel5:'ECC_GameTraceChannel5',ECC_GameTraceChannel6:'ECC_GameTraceChannel6',ECC_GameTraceChannel7:'ECC_GameTraceChannel7',ECC_GameTraceChannel8:'ECC_GameTraceChannel8',ECC_GameTraceChannel9:'ECC_GameTraceChannel9',ECC_GameTraceChannel10:'ECC_GameTraceChannel10',ECC_GameTraceChannel11:'ECC_GameTraceChannel11',ECC_GameTraceChannel12:'ECC_GameTraceChannel12',ECC_GameTraceChannel13:'ECC_GameTraceChannel13',ECC_GameTraceChannel14:'ECC_GameTraceChannel14',ECC_GameTraceChannel15:'ECC_GameTraceChannel15',ECC_GameTraceChannel16:'ECC_GameTraceChannel16',ECC_GameTraceChannel17:'ECC_GameTraceChannel17',ECC_GameTraceChannel18:'ECC_GameTraceChannel18',ECC_OverlapAll_Deprecated:'ECC_OverlapAll_Deprecated',ECC_MAX:'ECC_MAX', };
-declare type ESleepFamily = 'Normal' | 'Sensitive' | 'Custom' | 'ESleepFamily_MAX';
-declare var ESleepFamily : { Normal:'Normal',Sensitive:'Sensitive',Custom:'Custom',ESleepFamily_MAX:'ESleepFamily_MAX', };
-declare type EDOFMode = 'Default' | 'SixDOF' | 'YZPlane' | 'XZPlane' | 'XYPlane' | 'CustomPlane' | 'None' | 'EDOFMode_MAX';
-declare var EDOFMode : { Default:'Default',SixDOF:'SixDOF',YZPlane:'YZPlane',XZPlane:'XZPlane',XYPlane:'XYPlane',CustomPlane:'CustomPlane',None:'None',EDOFMode_MAX:'EDOFMode_MAX', };
-declare type ECollisionResponse = 'ECR_Ignore' | 'ECR_Overlap' | 'ECR_Block' | 'ECR_MAX';
-declare var ECollisionResponse : { ECR_Ignore:'ECR_Ignore',ECR_Overlap:'ECR_Overlap',ECR_Block:'ECR_Block',ECR_MAX:'ECR_MAX', };
-declare class CollisionResponseContainer { 
-	WorldStatic: ECollisionResponse;
-	WorldDynamic: ECollisionResponse;
-	Pawn: ECollisionResponse;
-	Visibility: ECollisionResponse;
-	Camera: ECollisionResponse;
-	PhysicsBody: ECollisionResponse;
-	Vehicle: ECollisionResponse;
-	Destructible: ECollisionResponse;
-	EngineTraceChannel1: ECollisionResponse;
-	EngineTraceChannel2: ECollisionResponse;
-	EngineTraceChannel3: ECollisionResponse;
-	EngineTraceChannel4: ECollisionResponse;
-	EngineTraceChannel5: ECollisionResponse;
-	EngineTraceChannel6: ECollisionResponse;
-	GameTraceChannel1: ECollisionResponse;
-	GameTraceChannel2: ECollisionResponse;
-	GameTraceChannel3: ECollisionResponse;
-	GameTraceChannel4: ECollisionResponse;
-	GameTraceChannel5: ECollisionResponse;
-	GameTraceChannel6: ECollisionResponse;
-	GameTraceChannel7: ECollisionResponse;
-	GameTraceChannel8: ECollisionResponse;
-	GameTraceChannel9: ECollisionResponse;
-	GameTraceChannel10: ECollisionResponse;
-	GameTraceChannel11: ECollisionResponse;
-	GameTraceChannel12: ECollisionResponse;
-	GameTraceChannel13: ECollisionResponse;
-	GameTraceChannel14: ECollisionResponse;
-	GameTraceChannel15: ECollisionResponse;
-	GameTraceChannel16: ECollisionResponse;
-	GameTraceChannel17: ECollisionResponse;
-	GameTraceChannel18: ECollisionResponse;
-	clone() : CollisionResponseContainer;
-	static C(Other: UObject | any): CollisionResponseContainer;
-}
-
-declare class ResponseChannel { 
-	Channel: string;
-	Response: ECollisionResponse;
-	clone() : ResponseChannel;
-	static C(Other: UObject | any): ResponseChannel;
-}
-
-declare class CollisionResponse { 
-	ResponseToChannels: CollisionResponseContainer;
-	ResponseArray: ResponseChannel[];
-	clone() : CollisionResponse;
-	static C(Other: UObject | any): CollisionResponse;
-}
-
-declare class BodyInstance extends BodyInstanceCore { 
-	ObjectType: ECollisionChannel;
-	CollisionEnabled: ECollisionEnabled;
-	SleepFamily: ESleepFamily;
-	DOFMode: EDOFMode;
-	bUseCCD: boolean;
-	bIgnoreAnalyticCollisions: boolean;
-	bNotifyRigidBodyCollision: boolean;
-	bLockTranslation: boolean;
-	bLockRotation: boolean;
-	bLockXTranslation: boolean;
-	bLockYTranslation: boolean;
-	bLockZTranslation: boolean;
-	bLockXRotation: boolean;
-	bLockYRotation: boolean;
-	bLockZRotation: boolean;
-	bOverrideMaxAngularVelocity: boolean;
-	bOverrideMaxDepenetrationVelocity: boolean;
-	bOverrideWalkableSlopeOnInstance: boolean;
-	bInterpolateWhenSubStepping: boolean;
-	ResponseToChannels: CollisionResponseContainer;
-	CollisionProfileName: string;
-	PositionSolverIterationCount: number;
-	VelocitySolverIterationCount: number;
-	CollisionResponses: CollisionResponse;
-	MaxDepenetrationVelocity: number;
-	MassInKgOverride: number;
-	LinearDamping: number;
-	AngularDamping: number;
-	CustomDOFPlaneNormal: Vector;
-	COMNudge: Vector;
-	MassScale: number;
-	InertiaTensorScale: Vector;
-	WalkableSlopeOverride: WalkableSlopeOverride;
-	PhysMaterialOverride: PhysicalMaterial;
-	MaxAngularVelocity: number;
-	CustomSleepThresholdMultiplier: number;
-	StabilizationThresholdMultiplier: number;
-	PhysicsBlendWeight: number;
-	clone() : BodyInstance;
-	static C(Other: UObject | any): BodyInstance;
-}
-
-declare class BodySetup extends BodySetupCore { 
-	AggGeom: KAggregateGeom;
-	bAlwaysFullAnimWeight: boolean;
-	bConsiderForBounds: boolean;
-	bMeshCollideAll: boolean;
-	bDoubleSidedGeometry: boolean;
-	bGenerateNonMirroredCollision: boolean;
-	bSharedCookedData: boolean;
-	bGenerateMirroredCollision: boolean;
-	bSupportUVsAndFaceRemap: boolean;
-	PhysMaterial: PhysicalMaterial;
-	WalkableSlopeOverride: WalkableSlopeOverride;
-	BuildScale: number;
-	DefaultInstance: BodyInstance;
-	BuildScale3D: Vector;
-	static Load(ResourceName: string): BodySetup;
-	static Find(Outer: UObject, ResourceName: string): BodySetup;
-	static GetDefaultObject(): BodySetup;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BodySetup;
-	static C(Other: UObject | any): BodySetup;
-}
-
 declare class AssetEditorOrbitCameraPosition { 
 	bIsSet: boolean;
 	CamOrbitPoint: Vector;
@@ -2612,22 +2872,6 @@ declare class JavascriptRawMesh {
 	static IsValidOrFixable(RawMesh: JavascriptRawMesh): boolean;
 }
 
-declare type EScriptingCollisionShapeType = 'Box' | 'Sphere' | 'Capsule' | 'NDOP10_X' | 'NDOP10_Y' | 'NDOP10_Z' | 'NDOP18' | 'NDOP26' | 'EScriptingCollisionShapeType_MAX';
-declare var EScriptingCollisionShapeType : { Box:'Box',Sphere:'Sphere',Capsule:'Capsule',NDOP10_X:'NDOP10_X',NDOP10_Y:'NDOP10_Y',NDOP10_Z:'NDOP10_Z',NDOP18:'NDOP18',NDOP26:'NDOP26',EScriptingCollisionShapeType_MAX:'EScriptingCollisionShapeType_MAX', };
-declare class EditorScriptingMeshReductionSettings { 
-	PercentTriangles: number;
-	ScreenSize: number;
-	clone() : EditorScriptingMeshReductionSettings;
-	static C(Other: UObject | any): EditorScriptingMeshReductionSettings;
-}
-
-declare class EditorScriptingMeshReductionOptions { 
-	bAutoComputeLODScreenSize: boolean;
-	ReductionSettings: EditorScriptingMeshReductionSettings[];
-	clone() : EditorScriptingMeshReductionOptions;
-	static C(Other: UObject | any): EditorScriptingMeshReductionOptions;
-}
-
 declare class ProcMeshTangent { 
 	TangentX: Vector;
 	bFlipTangentY: boolean;
@@ -2709,44 +2953,6 @@ declare class StaticMesh extends StreamableRenderAsset {
 	LoadRawMesh(SourceModelIndex: number,OutMesh?: JavascriptRawMesh): {OutMesh: JavascriptRawMesh};
 	SaveRawMesh(SourceModelIndex: number,InMesh?: JavascriptRawMesh): {InMesh: JavascriptRawMesh};
 	SetSectionInfo(LODIndex: number,SectionIndex: number,Info: MeshSectionInfo): void;
-	AddSimpleCollisions(ShapeType: EScriptingCollisionShapeType): number;
-	AddSimpleCollisionsWithNotification(ShapeType: EScriptingCollisionShapeType,bApplyChanges: boolean): number;
-	AddUVChannel(LODIndex: number): boolean;
-	EnableSectionCastShadow(bCastShadow: boolean,LODIndex: number,SectionIndex: number): void;
-	EnableSectionCollision(bCollisionEnabled: boolean,LODIndex: number,SectionIndex: number): void;
-	GenerateBoxUVChannel(LODIndex: number,UVChannelIndex: number,Position: Vector,Orientation: Rotator,Size: Vector): boolean;
-	GenerateCylindricalUVChannel(LODIndex: number,UVChannelIndex: number,Position: Vector,Orientation: Rotator,Tiling: Vector2D): boolean;
-	GeneratePlanarUVChannel(LODIndex: number,UVChannelIndex: number,Position: Vector,Orientation: Rotator,Tiling: Vector2D): boolean;
-	GetCollisionComplexity(): ECollisionTraceFlag;
-	GetConvexCollisionCount(): number;
-	GetLodBuildSettings(LODIndex: number,OutBuildOptions?: MeshBuildSettings): {OutBuildOptions: MeshBuildSettings};
-	GetLodCount(): number;
-	GetLODMaterialSlot(LODIndex: number,SectionIndex: number): number;
-	GetLodReductionSettings(LODIndex: number,OutReductionOptions?: MeshReductionSettings): {OutReductionOptions: MeshReductionSettings};
-	GetLodScreenSizes(): number[];
-	GetNumberMaterials(): number;
-	GetNumberVerts(LODIndex: number): number;
-	GetNumUVChannels(LODIndex: number): number;
-	GetSimpleCollisionCount(): number;
-	HasVertexColors(): boolean;
-	ImportLOD(LODIndex: number,SourceFilename: string): number;
-	InsertUVChannel(LODIndex: number,UVChannelIndex: number): boolean;
-	IsSectionCollisionEnabled(LODIndex: number,SectionIndex: number): boolean;
-	ReimportAllCustomLODs(): boolean;
-	RemoveCollisions(): boolean;
-	RemoveCollisionsWithNotification(bApplyChanges: boolean): boolean;
-	RemoveLods(): boolean;
-	RemoveUVChannel(LODIndex: number,UVChannelIndex: number): boolean;
-	SetAllowCPUAccess(bAllowCPUAccess: boolean): void;
-	SetConvexDecompositionCollisions(HullCount: number,MaxHullVerts: number,HullPrecision: number): boolean;
-	SetConvexDecompositionCollisionsWithNotification(HullCount: number,MaxHullVerts: number,HullPrecision: number,bApplyChanges: boolean): boolean;
-	SetGenerateLightmapUVs(bGenerateLightmapUVs: boolean): boolean;
-	SetLodBuildSettings(LODIndex: number,BuildOptions: MeshBuildSettings): void;
-	SetLodFromStaticMesh(DestinationLodIndex: number,SourceStaticMesh: StaticMesh,SourceLodIndex: number,bReuseExistingMaterialSlots: boolean): number;
-	SetLODMaterialSlot(MaterialSlotIndex: number,LODIndex: number,SectionIndex: number): void;
-	SetLodReductionSettings(LODIndex: number,ReductionOptions: MeshReductionSettings): void;
-	SetLods(ReductionOptions: EditorScriptingMeshReductionOptions): number;
-	SetLodsWithNotification(ReductionOptions: EditorScriptingMeshReductionOptions,bApplyChanges: boolean): number;
 	GetSectionFromStaticMesh(LODIndex: number,SectionIndex: number,Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
 	static Build(StaticMesh: StaticMesh): void;
 	static GetPhysicsBodySetupFromStaticMesh(InStaticMesh: StaticMesh): BodySetup;
@@ -2754,44 +2960,6 @@ declare class StaticMesh extends StreamableRenderAsset {
 	static LoadRawMesh(StaticMesh: StaticMesh,SourceModelIndex: number,OutMesh?: JavascriptRawMesh): {OutMesh: JavascriptRawMesh};
 	static SaveRawMesh(StaticMesh: StaticMesh,SourceModelIndex: number,InMesh?: JavascriptRawMesh): {InMesh: JavascriptRawMesh};
 	static SetSectionInfo(StaticMesh: StaticMesh,LODIndex: number,SectionIndex: number,Info: MeshSectionInfo): void;
-	static AddSimpleCollisions(StaticMesh: StaticMesh,ShapeType: EScriptingCollisionShapeType): number;
-	static AddSimpleCollisionsWithNotification(StaticMesh: StaticMesh,ShapeType: EScriptingCollisionShapeType,bApplyChanges: boolean): number;
-	static AddUVChannel(StaticMesh: StaticMesh,LODIndex: number): boolean;
-	static EnableSectionCastShadow(StaticMesh: StaticMesh,bCastShadow: boolean,LODIndex: number,SectionIndex: number): void;
-	static EnableSectionCollision(StaticMesh: StaticMesh,bCollisionEnabled: boolean,LODIndex: number,SectionIndex: number): void;
-	static GenerateBoxUVChannel(StaticMesh: StaticMesh,LODIndex: number,UVChannelIndex: number,Position: Vector,Orientation: Rotator,Size: Vector): boolean;
-	static GenerateCylindricalUVChannel(StaticMesh: StaticMesh,LODIndex: number,UVChannelIndex: number,Position: Vector,Orientation: Rotator,Tiling: Vector2D): boolean;
-	static GeneratePlanarUVChannel(StaticMesh: StaticMesh,LODIndex: number,UVChannelIndex: number,Position: Vector,Orientation: Rotator,Tiling: Vector2D): boolean;
-	static GetCollisionComplexity(StaticMesh: StaticMesh): ECollisionTraceFlag;
-	static GetConvexCollisionCount(StaticMesh: StaticMesh): number;
-	static GetLodBuildSettings(StaticMesh: StaticMesh,LODIndex: number,OutBuildOptions?: MeshBuildSettings): {OutBuildOptions: MeshBuildSettings};
-	static GetLodCount(StaticMesh: StaticMesh): number;
-	static GetLODMaterialSlot(StaticMesh: StaticMesh,LODIndex: number,SectionIndex: number): number;
-	static GetLodReductionSettings(StaticMesh: StaticMesh,LODIndex: number,OutReductionOptions?: MeshReductionSettings): {OutReductionOptions: MeshReductionSettings};
-	static GetLodScreenSizes(StaticMesh: StaticMesh): number[];
-	static GetNumberMaterials(StaticMesh: StaticMesh): number;
-	static GetNumberVerts(StaticMesh: StaticMesh,LODIndex: number): number;
-	static GetNumUVChannels(StaticMesh: StaticMesh,LODIndex: number): number;
-	static GetSimpleCollisionCount(StaticMesh: StaticMesh): number;
-	static HasVertexColors(StaticMesh: StaticMesh): boolean;
-	static ImportLOD(BaseStaticMesh: StaticMesh,LODIndex: number,SourceFilename: string): number;
-	static InsertUVChannel(StaticMesh: StaticMesh,LODIndex: number,UVChannelIndex: number): boolean;
-	static IsSectionCollisionEnabled(StaticMesh: StaticMesh,LODIndex: number,SectionIndex: number): boolean;
-	static ReimportAllCustomLODs(StaticMesh: StaticMesh): boolean;
-	static RemoveCollisions(StaticMesh: StaticMesh): boolean;
-	static RemoveCollisionsWithNotification(StaticMesh: StaticMesh,bApplyChanges: boolean): boolean;
-	static RemoveLods(StaticMesh: StaticMesh): boolean;
-	static RemoveUVChannel(StaticMesh: StaticMesh,LODIndex: number,UVChannelIndex: number): boolean;
-	static SetAllowCPUAccess(StaticMesh: StaticMesh,bAllowCPUAccess: boolean): void;
-	static SetConvexDecompositionCollisions(StaticMesh: StaticMesh,HullCount: number,MaxHullVerts: number,HullPrecision: number): boolean;
-	static SetConvexDecompositionCollisionsWithNotification(StaticMesh: StaticMesh,HullCount: number,MaxHullVerts: number,HullPrecision: number,bApplyChanges: boolean): boolean;
-	static SetGenerateLightmapUVs(StaticMesh: StaticMesh,bGenerateLightmapUVs: boolean): boolean;
-	static SetLodBuildSettings(StaticMesh: StaticMesh,LODIndex: number,BuildOptions: MeshBuildSettings): void;
-	static SetLodFromStaticMesh(DestinationStaticMesh: StaticMesh,DestinationLodIndex: number,SourceStaticMesh: StaticMesh,SourceLodIndex: number,bReuseExistingMaterialSlots: boolean): number;
-	static SetLODMaterialSlot(StaticMesh: StaticMesh,MaterialSlotIndex: number,LODIndex: number,SectionIndex: number): void;
-	static SetLodReductionSettings(StaticMesh: StaticMesh,LODIndex: number,ReductionOptions: MeshReductionSettings): void;
-	static SetLods(StaticMesh: StaticMesh,ReductionOptions: EditorScriptingMeshReductionOptions): number;
-	static SetLodsWithNotification(StaticMesh: StaticMesh,ReductionOptions: EditorScriptingMeshReductionOptions,bApplyChanges: boolean): number;
 	static GetSectionFromStaticMesh(InMesh: StaticMesh,LODIndex: number,SectionIndex: number,Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
 }
 
@@ -2802,14 +2970,6 @@ declare class FloatInterval {
 	Max: number;
 	clone() : FloatInterval;
 	static C(Other: UObject | any): FloatInterval;
-}
-
-declare class LightingChannels { 
-	bChannel0: boolean;
-	bChannel1: boolean;
-	bChannel2: boolean;
-	clone() : LightingChannels;
-	static C(Other: UObject | any): LightingChannels;
 }
 
 declare class GrassVariety { 
@@ -3060,8 +3220,6 @@ declare class MaterialFunctionInterface extends UObject {
 	static UpdateMaterialFunction(MaterialFunction: MaterialFunctionInterface,PreviewMaterial: Material): void;
 }
 
-declare type EAttachLocation = 'KeepRelativeOffset' | 'KeepWorldPosition' | 'SnapToTarget' | 'SnapToTargetIncludingScale' | 'EAttachLocation_MAX';
-declare var EAttachLocation : { KeepRelativeOffset:'KeepRelativeOffset',KeepWorldPosition:'KeepWorldPosition',SnapToTarget:'SnapToTarget',SnapToTargetIncludingScale:'SnapToTargetIncludingScale',EAttachLocation_MAX:'EAttachLocation_MAX', };
 declare class ScalarParameterAtlasInstanceData { 
 	bIsUsedAsAtlasPosition: boolean;
 	Curve: CurveLinearColor;
@@ -3279,7 +3437,6 @@ declare class AssetData {
 	AssetClass: string;
 	clone() : AssetData;
 	static C(Other: UObject | any): AssetData;
-	static FindAssetData(AssetPath: string): AssetData;
 }
 
 declare class MaterialStatistics { 
@@ -3402,6 +3559,91 @@ declare class Texture2D extends Texture {
 	static MakeBrushFromTexture(Texture: Texture2D,Width: number,Height: number): SlateBrush;
 }
 
+declare class RuntimeVirtualTextureStreamingProxy extends Texture2D { 
+	static Load(ResourceName: string): RuntimeVirtualTextureStreamingProxy;
+	static Find(Outer: UObject, ResourceName: string): RuntimeVirtualTextureStreamingProxy;
+	static GetDefaultObject(): RuntimeVirtualTextureStreamingProxy;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): RuntimeVirtualTextureStreamingProxy;
+	static C(Other: UObject | any): RuntimeVirtualTextureStreamingProxy;
+}
+
+declare class RuntimeVirtualTexture extends UObject { 
+	TileCount: number;
+	TileSize: number;
+	TileBorderSize: number;
+	MaterialType: ERuntimeVirtualTextureMaterialType;
+	bCompressTextures: boolean;
+	bClearTextures: boolean;
+	bSinglePhysicalSpace: boolean;
+	bPrivateSpace: boolean;
+	bAdaptive: boolean;
+	bContinuousUpdate: boolean;
+	RemoveLowMips: number;
+	LODGroup: TextureGroup;
+	Size: number;
+	StreamingTexture: RuntimeVirtualTextureStreamingProxy;
+	static Load(ResourceName: string): RuntimeVirtualTexture;
+	static Find(Outer: UObject, ResourceName: string): RuntimeVirtualTexture;
+	static GetDefaultObject(): RuntimeVirtualTexture;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): RuntimeVirtualTexture;
+	GetTileSize(): number;
+	GetTileCount(): number;
+	GetTileBorderSize(): number;
+	GetSize(): number;
+	GetPageTableSize(): number;
+	static C(Other: UObject | any): RuntimeVirtualTexture;
+}
+
+declare type ERuntimeVirtualTextureMainPassType = 'Never' | 'Exclusive' | 'Always' | 'ERuntimeVirtualTextureMainPassType_MAX';
+declare var ERuntimeVirtualTextureMainPassType : { Never:'Never',Exclusive:'Exclusive',Always:'Always',ERuntimeVirtualTextureMainPassType_MAX:'ERuntimeVirtualTextureMainPassType_MAX', };
+declare type EUINavigationAction = 'Accept' | 'Back' | 'Num' | 'Invalid' | 'EUINavigationAction_MAX';
+declare var EUINavigationAction : { Accept:'Accept',Back:'Back',Num:'Num',Invalid:'Invalid',EUINavigationAction_MAX:'EUINavigationAction_MAX', };
+declare type EControllerHand = 'Left' | 'Right' | 'AnyHand' | 'Pad' | 'ExternalCamera' | 'Gun' | 'Special_1' | 'Special_2' | 'Special_3' | 'Special_4' | 'Special_5' | 'Special_6' | 'Special_7' | 'Special_8' | 'Special_9' | 'Special_10' | 'Special_11' | 'ControllerHand_Count' | 'EControllerHand_MAX';
+declare var EControllerHand : { Left:'Left',Right:'Right',AnyHand:'AnyHand',Pad:'Pad',ExternalCamera:'ExternalCamera',Gun:'Gun',Special_1:'Special_1',Special_2:'Special_2',Special_3:'Special_3',Special_4:'Special_4',Special_5:'Special_5',Special_6:'Special_6',Special_7:'Special_7',Special_8:'Special_8',Special_9:'Special_9',Special_10:'Special_10',Special_11:'Special_11',ControllerHand_Count:'ControllerHand_Count',EControllerHand_MAX:'EControllerHand_MAX', };
+declare class Key { 
+	KeyName: string;
+	clone() : Key;
+	static C(Other: UObject | any): Key;
+	EqualEqual_KeyKey(B: Key): boolean;
+	Key_GetDisplayName(): string;
+	Key_GetNavigationAction(): EUINavigationAction;
+	Key_IsAnalog(): boolean;
+	Key_IsAxis1D(): boolean;
+	Key_IsAxis2D(): boolean;
+	Key_IsAxis3D(): boolean;
+	Key_IsButtonAxis(): boolean;
+	Key_IsDigital(): boolean;
+	Key_IsGamepadKey(): boolean;
+	Key_IsKeyboardKey(): boolean;
+	Key_IsModifierKey(): boolean;
+	Key_IsMouseButton(): boolean;
+	Key_IsValid(): boolean;
+	Key_IsVectorAxis(): boolean;
+	BreakKey(InteractionProfile?: string,Hand?: EControllerHand,MotionSource?: string,Indentifier?: string,Component?: string): {InteractionProfile: string, Hand: EControllerHand, MotionSource: string, Indentifier: string, Component: string};
+	static EqualEqual_KeyKey(A: Key,B: Key): boolean;
+	static Key_GetDisplayName(Key: Key): string;
+	static Key_GetNavigationAction(InKey: Key): EUINavigationAction;
+	static Key_IsAnalog(Key: Key): boolean;
+	static Key_IsAxis1D(Key: Key): boolean;
+	static Key_IsAxis2D(Key: Key): boolean;
+	static Key_IsAxis3D(Key: Key): boolean;
+	static Key_IsButtonAxis(Key: Key): boolean;
+	static Key_IsDigital(Key: Key): boolean;
+	static Key_IsGamepadKey(Key: Key): boolean;
+	static Key_IsKeyboardKey(Key: Key): boolean;
+	static Key_IsModifierKey(Key: Key): boolean;
+	static Key_IsMouseButton(Key: Key): boolean;
+	static Key_IsValid(Key: Key): boolean;
+	static Key_IsVectorAxis(Key: Key): boolean;
+	static BreakKey(InKey: Key,InteractionProfile?: string,Hand?: EControllerHand,MotionSource?: string,Indentifier?: string,Component?: string): {InteractionProfile: string, Hand: EControllerHand, MotionSource: string, Indentifier: string, Component: string};
+}
+
+declare type ETouchIndex = 'Touch1' | 'Touch2' | 'Touch3' | 'Touch4' | 'Touch5' | 'Touch6' | 'Touch7' | 'Touch8' | 'Touch9' | 'Touch10' | 'CursorPointerIndex' | 'MAX_TOUCHES' | 'ETouchIndex_MAX';
+declare var ETouchIndex : { Touch1:'Touch1',Touch2:'Touch2',Touch3:'Touch3',Touch4:'Touch4',Touch5:'Touch5',Touch6:'Touch6',Touch7:'Touch7',Touch8:'Touch8',Touch9:'Touch9',Touch10:'Touch10',CursorPointerIndex:'CursorPointerIndex',MAX_TOUCHES:'MAX_TOUCHES',ETouchIndex_MAX:'ETouchIndex_MAX', };
+declare type EAutoReceiveInput = 'Disabled' | 'Player0' | 'Player1' | 'Player2' | 'Player3' | 'Player4' | 'Player5' | 'Player6' | 'Player7' | 'EAutoReceiveInput_MAX';
+declare var EAutoReceiveInput : { Disabled:'Disabled',Player0:'Player0',Player1:'Player1',Player2:'Player2',Player3:'Player3',Player4:'Player4',Player5:'Player5',Player6:'Player6',Player7:'Player7',EAutoReceiveInput_MAX:'EAutoReceiveInput_MAX', };
+declare type EAutoPossessAI = 'Disabled' | 'PlacedInWorld' | 'Spawned' | 'PlacedInWorldOrSpawned' | 'EAutoPossessAI_MAX';
+declare var EAutoPossessAI : { Disabled:'Disabled',PlacedInWorld:'PlacedInWorld',Spawned:'Spawned',PlacedInWorldOrSpawned:'PlacedInWorldOrSpawned',EAutoPossessAI_MAX:'EAutoPossessAI_MAX', };
 declare class SpriteCategoryInfo { 
 	Category: string;
 	DisplayName: string;
@@ -3431,2002 +3673,75 @@ declare class BillboardComponent extends PrimitiveComponent {
 	static C(Other: UObject | any): BillboardComponent;
 }
 
-declare class LayerActorStats { 
-	Type: UnrealEngineClass;
-	Total: number;
-	clone() : LayerActorStats;
-	static C(Other: UObject | any): LayerActorStats;
-}
-
-declare class Layer extends UObject { 
-	LayerName: string;
-	bIsVisible: boolean;
-	ActorStats: LayerActorStats[];
-	static Load(ResourceName: string): Layer;
-	static Find(Outer: UObject, ResourceName: string): Layer;
-	static GetDefaultObject(): Layer;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Layer;
-	static C(Other: UObject | any): Layer;
-}
-
-declare class Model extends UObject { 
-	static Load(ResourceName: string): Model;
-	static Find(Outer: UObject, ResourceName: string): Model;
-	static GetDefaultObject(): Model;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Model;
-	static C(Other: UObject | any): Model;
-}
-
-declare class ModelComponent extends PrimitiveComponent { 
-	ModelBodySetup: BodySetup;
-	static Load(ResourceName: string): ModelComponent;
-	static Find(Outer: UObject, ResourceName: string): ModelComponent;
-	static GetDefaultObject(): ModelComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ModelComponent;
-	static C(Other: UObject | any): ModelComponent;
-}
-
-declare class LevelActorContainer extends UObject { 
-	Actors: Actor[];
-	static Load(ResourceName: string): LevelActorContainer;
-	static Find(Outer: UObject, ResourceName: string): LevelActorContainer;
-	static GetDefaultObject(): LevelActorContainer;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LevelActorContainer;
-	static C(Other: UObject | any): LevelActorContainer;
-}
-
-declare class BlueprintCore extends UObject { 
-	SkeletonGeneratedClass: UnrealEngineClass;
-	GeneratedClass: UnrealEngineClass;
-	bLegacyNeedToPurgeSkelRefs: boolean;
-	BlueprintGuid: Guid;
-	static Load(ResourceName: string): BlueprintCore;
-	static Find(Outer: UObject, ResourceName: string): BlueprintCore;
-	static GetDefaultObject(): BlueprintCore;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlueprintCore;
-	static C(Other: UObject | any): BlueprintCore;
-}
-
-declare type EBlueprintType = 'BPTYPE_Normal' | 'BPTYPE_Const' | 'BPTYPE_MacroLibrary' | 'BPTYPE_Interface' | 'BPTYPE_LevelScript' | 'BPTYPE_FunctionLibrary' | 'BPTYPE_MAX';
-declare var EBlueprintType : { BPTYPE_Normal:'BPTYPE_Normal',BPTYPE_Const:'BPTYPE_Const',BPTYPE_MacroLibrary:'BPTYPE_MacroLibrary',BPTYPE_Interface:'BPTYPE_Interface',BPTYPE_LevelScript:'BPTYPE_LevelScript',BPTYPE_FunctionLibrary:'BPTYPE_FunctionLibrary',BPTYPE_MAX:'BPTYPE_MAX', };
-declare type EBlueprintNativizationFlag = 'Disabled' | 'Dependency' | 'ExplicitlyEnabled' | 'EBlueprintNativizationFlag_MAX';
-declare var EBlueprintNativizationFlag : { Disabled:'Disabled',Dependency:'Dependency',ExplicitlyEnabled:'ExplicitlyEnabled',EBlueprintNativizationFlag_MAX:'EBlueprintNativizationFlag_MAX', };
-declare type EBlueprintCompileMode = 'Default' | 'Development' | 'FinalRelease' | 'EBlueprintCompileMode_MAX';
-declare var EBlueprintCompileMode : { Default:'Default',Development:'Development',FinalRelease:'FinalRelease',EBlueprintCompileMode_MAX:'EBlueprintCompileMode_MAX', };
-declare type EBlueprintStatus = 'BS_Unknown' | 'BS_Dirty' | 'BS_Error' | 'BS_UpToDate' | 'BS_BeingCreated' | 'BS_UpToDateWithWarnings' | 'BS_MAX';
-declare var EBlueprintStatus : { BS_Unknown:'BS_Unknown',BS_Dirty:'BS_Dirty',BS_Error:'BS_Error',BS_UpToDate:'BS_UpToDate',BS_BeingCreated:'BS_BeingCreated',BS_UpToDateWithWarnings:'BS_UpToDateWithWarnings',BS_MAX:'BS_MAX', };
-declare class Field extends UObject { 
-	static Load(ResourceName: string): Field;
-	static Find(Outer: UObject, ResourceName: string): Field;
-	static GetDefaultObject(): Field;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Field;
-	static C(Other: UObject | any): Field;
-	HasMetaData(Key: string): boolean;
-	GetMetaData(Key: string): string;
-	static HasMetaData(Field: Field,Key: string): boolean;
-	static GetMetaData(Field: Field,Key: string): string;
-}
-
-declare class Struct extends Field { 
-	static Load(ResourceName: string): Struct;
-	static Find(Outer: UObject, ResourceName: string): Struct;
-	static GetDefaultObject(): Struct;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Struct;
-	static C(Other: UObject | any): Struct;
-}
-
-declare class BlueprintComponentChangedPropertyInfo { 
-	PropertyName: string;
-	ArrayIndex: number;
-	PropertyScope: Struct;
-	clone() : BlueprintComponentChangedPropertyInfo;
-	static C(Other: UObject | any): BlueprintComponentChangedPropertyInfo;
-}
-
-declare class BlueprintCookedComponentInstancingData { 
-	ChangedPropertyList: BlueprintComponentChangedPropertyInfo[];
-	bHasValidCookedData: boolean;
-	clone() : BlueprintCookedComponentInstancingData;
-	static C(Other: UObject | any): BlueprintCookedComponentInstancingData;
-}
-
-declare class BPVariableMetaDataEntry { 
-	DataKey: string;
-	DataValue: string;
-	clone() : BPVariableMetaDataEntry;
-	static C(Other: UObject | any): BPVariableMetaDataEntry;
-}
-
-declare class SCS_Node extends UObject { 
-	ComponentClass: UnrealEngineClass;
-	ComponentTemplate: ActorComponent;
-	CookedComponentInstancingData: BlueprintCookedComponentInstancingData;
-	CategoryName: string;
-	AttachToName: string;
-	ParentComponentOrVariableName: string;
-	ParentComponentOwnerClassName: string;
-	bIsParentComponentNative: boolean;
-	ChildNodes: SCS_Node[];
-	MetaDataArray: BPVariableMetaDataEntry[];
-	VariableGuid: Guid;
-	bIsNative: boolean;
-	NativeComponentName: string;
-	bVariableNameAutoGenerated: boolean;
-	InternalVariableName: string;
-	static Load(ResourceName: string): SCS_Node;
-	static Find(Outer: UObject, ResourceName: string): SCS_Node;
-	static GetDefaultObject(): SCS_Node;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SCS_Node;
-	static C(Other: UObject | any): SCS_Node;
-}
-
-declare class SimpleConstructionScript extends UObject { 
-	RootNodes: SCS_Node[];
-	AllNodes: SCS_Node[];
-	DefaultSceneRootNode: SCS_Node;
-	RootNode: SCS_Node;
-	ActorComponentNodes: SCS_Node[];
-	static Load(ResourceName: string): SimpleConstructionScript;
-	static Find(Outer: UObject, ResourceName: string): SimpleConstructionScript;
-	static GetDefaultObject(): SimpleConstructionScript;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SimpleConstructionScript;
-	static C(Other: UObject | any): SimpleConstructionScript;
-}
-
-declare class EdGraphSchema extends UObject { 
-	static Load(ResourceName: string): EdGraphSchema;
-	static Find(Outer: UObject, ResourceName: string): EdGraphSchema;
-	static GetDefaultObject(): EdGraphSchema;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EdGraphSchema;
-	static C(Other: UObject | any): EdGraphSchema;
-	SetNodeMetaData(UNode: EdGraphNode,KeyValue: string): boolean;
-	TryConnection(A: JavascriptEdGraphPin,B: JavascriptEdGraphPin): boolean;
-	static SetNodeMetaData(Schema: EdGraphSchema,UNode: EdGraphNode,KeyValue: string): boolean;
-	static TryConnection(Schema: EdGraphSchema,A: JavascriptEdGraphPin,B: JavascriptEdGraphPin): boolean;
-}
-
-declare class EdGraph extends UObject { 
-	Schema: UnrealEngineClass;
-	Nodes: EdGraphNode[];
-	bEditable: boolean;
-	bAllowDeletion: boolean;
-	bAllowRenaming: boolean;
-	SubGraphs: EdGraph[];
-	GraphGuid: Guid;
-	InterfaceGuid: Guid;
-	static Load(ResourceName: string): EdGraph;
-	static Find(Outer: UObject, ResourceName: string): EdGraph;
-	static GetDefaultObject(): EdGraph;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EdGraph;
-	static C(Other: UObject | any): EdGraph;
-}
-
-declare type ETimelineLengthMode = 'TL_TimelineLength' | 'TL_LastKeyFrame' | 'TL_MAX';
-declare var ETimelineLengthMode : { TL_TimelineLength:'TL_TimelineLength',TL_LastKeyFrame:'TL_LastKeyFrame',TL_MAX:'TL_MAX', };
-declare class TTTrackBase { 
-	TrackName: string;
-	bIsExternalCurve: boolean;
-	bIsExpanded: boolean;
-	bIsCurveViewSynchronized: boolean;
-	clone() : TTTrackBase;
-	static C(Other: UObject | any): TTTrackBase;
-}
-
-declare class CurveFloat extends CurveBase { 
-	FloatCurve: RichCurve;
-	bIsEventCurve: boolean;
-	static Load(ResourceName: string): CurveFloat;
-	static Find(Outer: UObject, ResourceName: string): CurveFloat;
-	static GetDefaultObject(): CurveFloat;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CurveFloat;
-	GetFloatValue(InTime: number): number;
-	static C(Other: UObject | any): CurveFloat;
-}
-
-declare class TTEventTrack extends TTTrackBase { 
-	FunctionName: string;
-	CurveKeys: CurveFloat;
-	clone() : TTEventTrack;
-	static C(Other: UObject | any): TTEventTrack;
-}
-
-declare class TTPropertyTrack extends TTTrackBase { 
-	PropertyName: string;
-	clone() : TTPropertyTrack;
-	static C(Other: UObject | any): TTPropertyTrack;
-}
-
-declare class TTFloatTrack extends TTPropertyTrack { 
-	CurveFloat: CurveFloat;
-	clone() : TTFloatTrack;
-	static C(Other: UObject | any): TTFloatTrack;
-}
-
-declare class CurveVector extends CurveBase { 
-	FloatCurves: RichCurve;
-	static Load(ResourceName: string): CurveVector;
-	static Find(Outer: UObject, ResourceName: string): CurveVector;
-	static GetDefaultObject(): CurveVector;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CurveVector;
-	GetVectorValue(InTime: number): Vector;
-	static C(Other: UObject | any): CurveVector;
-}
-
-declare class TTVectorTrack extends TTPropertyTrack { 
-	CurveVector: CurveVector;
-	clone() : TTVectorTrack;
-	static C(Other: UObject | any): TTVectorTrack;
-}
-
-declare class TTLinearColorTrack extends TTPropertyTrack { 
-	CurveLinearColor: CurveLinearColor;
-	clone() : TTLinearColorTrack;
-	static C(Other: UObject | any): TTLinearColorTrack;
-}
-
-declare class TTTrackId { 
-	TrackType: number;
-	TrackIndex: number;
-	clone() : TTTrackId;
-	static C(Other: UObject | any): TTTrackId;
-}
-
-declare class TimelineTemplate extends UObject { 
-	TimelineLength: number;
-	LengthMode: ETimelineLengthMode;
-	bAutoPlay: boolean;
-	bLoop: boolean;
-	bReplicated: boolean;
-	bIgnoreTimeDilation: boolean;
-	EventTracks: TTEventTrack[];
-	FloatTracks: TTFloatTrack[];
-	VectorTracks: TTVectorTrack[];
-	LinearColorTracks: TTLinearColorTrack[];
-	MetaDataArray: BPVariableMetaDataEntry[];
-	TimelineGuid: Guid;
-	TimelineTickGroup: ETickingGroup;
-	VariableName: string;
-	DirectionPropertyName: string;
-	UpdateFunctionName: string;
-	FinishedFunctionName: string;
-	TrackDisplayOrder: TTTrackId[];
-	static Load(ResourceName: string): TimelineTemplate;
-	static Find(Outer: UObject, ResourceName: string): TimelineTemplate;
-	static GetDefaultObject(): TimelineTemplate;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TimelineTemplate;
-	static C(Other: UObject | any): TimelineTemplate;
-}
-
-declare class BPComponentClassOverride { 
-	ComponentName: string;
-	ComponentClass: UnrealEngineClass;
-	clone() : BPComponentClassOverride;
-	static C(Other: UObject | any): BPComponentClassOverride;
-}
-
-declare class ComponentKey { 
-	OwnerClass: UnrealEngineClass;
-	SCSVariableName: string;
-	AssociatedGuid: Guid;
-	clone() : ComponentKey;
-	static C(Other: UObject | any): ComponentKey;
-}
-
-declare class ComponentOverrideRecord { 
-	ComponentClass: UnrealEngineClass;
-	ComponentTemplate: ActorComponent;
-	ComponentKey: ComponentKey;
-	CookedComponentInstancingData: BlueprintCookedComponentInstancingData;
-	clone() : ComponentOverrideRecord;
-	static C(Other: UObject | any): ComponentOverrideRecord;
-}
-
-declare class InheritableComponentHandler extends UObject { 
-	Records: ComponentOverrideRecord[];
-	UnnecessaryComponents: ActorComponent[];
-	static Load(ResourceName: string): InheritableComponentHandler;
-	static Find(Outer: UObject, ResourceName: string): InheritableComponentHandler;
-	static GetDefaultObject(): InheritableComponentHandler;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InheritableComponentHandler;
-	static C(Other: UObject | any): InheritableComponentHandler;
-}
-
-declare type ELifetimeCondition = 'COND_None' | 'COND_InitialOnly' | 'COND_OwnerOnly' | 'COND_SkipOwner' | 'COND_SimulatedOnly' | 'COND_AutonomousOnly' | 'COND_SimulatedOrPhysics' | 'COND_InitialOrOwner' | 'COND_Custom' | 'COND_ReplayOrOwner' | 'COND_ReplayOnly' | 'COND_SimulatedOnlyNoReplay' | 'COND_SimulatedOrPhysicsNoReplay' | 'COND_SkipReplay' | 'COND_Never' | 'COND_Max';
-declare var ELifetimeCondition : { COND_None:'COND_None',COND_InitialOnly:'COND_InitialOnly',COND_OwnerOnly:'COND_OwnerOnly',COND_SkipOwner:'COND_SkipOwner',COND_SimulatedOnly:'COND_SimulatedOnly',COND_AutonomousOnly:'COND_AutonomousOnly',COND_SimulatedOrPhysics:'COND_SimulatedOrPhysics',COND_InitialOrOwner:'COND_InitialOrOwner',COND_Custom:'COND_Custom',COND_ReplayOrOwner:'COND_ReplayOrOwner',COND_ReplayOnly:'COND_ReplayOnly',COND_SimulatedOnlyNoReplay:'COND_SimulatedOnlyNoReplay',COND_SimulatedOrPhysicsNoReplay:'COND_SimulatedOrPhysicsNoReplay',COND_SkipReplay:'COND_SkipReplay',COND_Never:'COND_Never',COND_Max:'COND_Max', };
-declare class BPVariableDescription { 
-	VarName: string;
-	VarGuid: Guid;
-	VarType: EdGraphPinType;
-	FriendlyName: string;
-	Category: string;
-	PropertyFlags: any;
-	RepNotifyFunc: string;
-	ReplicationCondition: ELifetimeCondition;
-	MetaDataArray: BPVariableMetaDataEntry[];
-	DefaultValue: string;
-	clone() : BPVariableDescription;
-	static C(Other: UObject | any): BPVariableDescription;
-}
-
-declare class Interface extends UObject { 
-	static Load(ResourceName: string): Interface;
-	static Find(Outer: UObject, ResourceName: string): Interface;
-	static GetDefaultObject(): Interface;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Interface;
-	static C(Other: UObject | any): Interface;
-}
-
-declare class BPInterfaceDescription { 
-	Interface: UnrealEngineClass;
-	Graphs: EdGraph[];
-	clone() : BPInterfaceDescription;
-	static C(Other: UObject | any): BPInterfaceDescription;
-}
-
-declare class EditedDocumentInfo { 
-	EditedObjectPath: SoftObjectPath;
-	SavedViewOffset: Vector2D;
-	SavedZoomAmount: number;
-	EditedObject: UObject;
-	clone() : EditedDocumentInfo;
-	static C(Other: UObject | any): EditedDocumentInfo;
-}
-
-declare class BPEditorBookmarkNode { 
-	NodeGuid: Guid;
-	ParentGuid: Guid;
-	DisplayName: string;
-	clone() : BPEditorBookmarkNode;
-	static C(Other: UObject | any): BPEditorBookmarkNode;
-}
-
-declare class Breakpoint extends UObject { 
-	bEnabled: boolean;
-	UNode: EdGraphNode;
-	bStepOnce: boolean;
-	bStepOnce_WasPreviouslyDisabled: boolean;
-	bStepOnce_RemoveAfterHit: boolean;
-	static Load(ResourceName: string): Breakpoint;
-	static Find(Outer: UObject, ResourceName: string): Breakpoint;
-	static GetDefaultObject(): Breakpoint;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Breakpoint;
-	static C(Other: UObject | any): Breakpoint;
-}
-
-declare class EdGraphPinReference { 
-	OwningNode: any;
-	PinId: Guid;
-	clone() : EdGraphPinReference;
-	static C(Other: UObject | any): EdGraphPinReference;
-}
-
-declare class BlueprintExtension extends UObject { 
-	static Load(ResourceName: string): BlueprintExtension;
-	static Find(Outer: UObject, ResourceName: string): BlueprintExtension;
-	static GetDefaultObject(): BlueprintExtension;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlueprintExtension;
-	static C(Other: UObject | any): BlueprintExtension;
-}
-
-declare class Blueprint extends BlueprintCore { 
-	ParentClass: UnrealEngineClass;
-	BlueprintType: EBlueprintType;
-	bRecompileOnLoad: boolean;
-	bHasBeenRegenerated: boolean;
-	bIsRegeneratingOnLoad: boolean;
-	bBeingCompiled: boolean;
-	bIsNewlyCreated: boolean;
-	bForceFullEditor: boolean;
-	bQueuedForCompilation: boolean;
-	bRunConstructionScriptOnDrag: boolean;
-	bRunConstructionScriptInSequencer: boolean;
-	bGenerateConstClass: boolean;
-	bGenerateAbstractClass: boolean;
-	bDisplayCompilePIEWarning: boolean;
-	bDeprecate: boolean;
-	bDuplicatingReadOnly: boolean;
-	bNativize: boolean;
-	NativizationFlag: EBlueprintNativizationFlag;
-	CompileMode: EBlueprintCompileMode;
-	Status: EBlueprintStatus;
-	BlueprintDisplayName: string;
-	BlueprintDescription: string;
-	BlueprintNamespace: string;
-	BlueprintCategory: string;
-	HideCategories: string[];
-	BlueprintSystemVersion: number;
-	SimpleConstructionScript: SimpleConstructionScript;
-	UbergraphPages: EdGraph[];
-	FunctionGraphs: EdGraph[];
-	DelegateSignatureGraphs: EdGraph[];
-	MacroGraphs: EdGraph[];
-	IntermediateGeneratedGraphs: EdGraph[];
-	EventGraphs: EdGraph[];
-	PRIVATE_CachedMacroInfo: any;
-	ComponentTemplates: ActorComponent[];
-	Timelines: TimelineTemplate[];
-	ComponentClassOverrides: BPComponentClassOverride[];
-	InheritableComponentHandler: InheritableComponentHandler;
-	NewVariables: BPVariableDescription[];
-	CategorySorting: string[];
-	ImplementedInterfaces: BPInterfaceDescription[];
-	LastEditedDocuments: EditedDocumentInfo[];
-	Bookmarks: any;
-	BookmarkNodes: BPEditorBookmarkNode[];
-	Breakpoints: Breakpoint[];
-	WatchedPins: EdGraphPinReference[];
-	DeprecatedPinWatches: EdGraphPin_Deprecated[];
-	ComponentTemplateNameIndex: any;
-	OldToNewComponentTemplateNames: any;
-	Extensions: BlueprintExtension[];
-	ThumbnailInfo: ThumbnailInfo;
-	CrcLastCompiledCDO: any;
-	CrcLastCompiledSignature: any;
-	OriginalClass: UnrealEngineClass;
-	static Load(ResourceName: string): Blueprint;
-	static Find(Outer: UObject, ResourceName: string): Blueprint;
-	static GetDefaultObject(): Blueprint;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Blueprint;
-	static C(Other: UObject | any): Blueprint;
-	AddComponentsToBlueprint(Components: ActorComponent[],bHarvesting: boolean,OptionalNewRootComponent: ActorComponent,bKeepMobility: boolean): void;
-	CompileBlueprint(): void;
-	GetParentClassOfBlueprint(): UnrealEngineClass;
-	RemoveComponentFromBlueprint(RemoveComponent: ActorComponent,bPromoteChildren: boolean): void;
-	GetBlueprintGeneratedClass(): UnrealEngineClass;
-	static AddComponentsToBlueprint(Blueprint: Blueprint,Components: ActorComponent[],bHarvesting: boolean,OptionalNewRootComponent: ActorComponent,bKeepMobility: boolean): void;
-	static CompileBlueprint(Blueprint: Blueprint): void;
-	static GetParentClassOfBlueprint(Blueprint: Blueprint): UnrealEngineClass;
-	static RemoveComponentFromBlueprint(Blueprint: Blueprint,RemoveComponent: ActorComponent,bPromoteChildren: boolean): void;
-	static GetBlueprintGeneratedClass(Blueprint: Blueprint): UnrealEngineClass;
-}
-
-declare class LevelScriptBlueprint extends Blueprint { 
-	FriendlyName: string;
-	static Load(ResourceName: string): LevelScriptBlueprint;
-	static Find(Outer: UObject, ResourceName: string): LevelScriptBlueprint;
-	static GetDefaultObject(): LevelScriptBlueprint;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LevelScriptBlueprint;
-	static C(Other: UObject | any): LevelScriptBlueprint;
-}
-
-declare class IntVector { 
-	X: number;
-	Y: number;
-	Z: number;
-	clone() : IntVector;
-	static C(Other: UObject | any): IntVector;
-	Conv_IntVectorToString(): string;
-	Conv_IntVectorToVector(): Vector;
-	static Conv_IntVectorToString(InIntVec: IntVector): string;
-	static Conv_IntVectorToVector(InIntVector: IntVector): Vector;
-	static Conv_IntToIntVector(inInt: number): IntVector;
-}
-
-declare class LevelScriptActor extends Actor { 
-	bInputEnabled: boolean;
-	static GetDefaultObject(): LevelScriptActor;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LevelScriptActor;
-	WorldOriginLocationChanged(OldOriginLocation: IntVector,NewOriginLocation: IntVector): void;
-	SetCinematicMode(bCinematicMode: boolean,bHidePlayer: boolean,bAffectsHUD: boolean,bAffectsMovement: boolean,bAffectsTurning: boolean): void;
-	RemoteEvent(EventName: string): boolean;
-	LevelReset(): void;
-	static C(Other: UObject | any): LevelScriptActor;
-}
-
-declare class NavAreaBase extends UObject { 
-	static Load(ResourceName: string): NavAreaBase;
-	static Find(Outer: UObject, ResourceName: string): NavAreaBase;
-	static GetDefaultObject(): NavAreaBase;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NavAreaBase;
-	static C(Other: UObject | any): NavAreaBase;
-}
-
-declare class ShapeComponent extends PrimitiveComponent { 
-	ShapeBodySetup: BodySetup;
-	AreaClass: UnrealEngineClass;
-	ShapeColor: Color;
-	bDrawOnlyIfSelected: boolean;
-	bShouldCollideWhenPlacing: boolean;
-	bDynamicObstacle: boolean;
-	static Load(ResourceName: string): ShapeComponent;
-	static Find(Outer: UObject, ResourceName: string): ShapeComponent;
-	static GetDefaultObject(): ShapeComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ShapeComponent;
-	static C(Other: UObject | any): ShapeComponent;
-}
-
-declare class CapsuleComponent extends ShapeComponent { 
-	CapsuleHalfHeight: number;
-	CapsuleRadius: number;
-	CapsuleHeight: number;
-	static Load(ResourceName: string): CapsuleComponent;
-	static Find(Outer: UObject, ResourceName: string): CapsuleComponent;
-	static GetDefaultObject(): CapsuleComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CapsuleComponent;
-	SetCapsuleSize(InRadius: number,InHalfHeight: number,bUpdateOverlaps: boolean): void;
-	SetCapsuleRadius(Radius: number,bUpdateOverlaps: boolean): void;
-	SetCapsuleHalfHeight(HalfHeight: number,bUpdateOverlaps: boolean): void;
-	GetUnscaledCapsuleSize_WithoutHemisphere(OutRadius?: number,OutHalfHeightWithoutHemisphere?: number): {OutRadius: number, OutHalfHeightWithoutHemisphere: number};
-	GetUnscaledCapsuleSize(OutRadius?: number,OutHalfHeight?: number): {OutRadius: number, OutHalfHeight: number};
-	GetUnscaledCapsuleRadius(): number;
-	GetUnscaledCapsuleHalfHeight_WithoutHemisphere(): number;
-	GetUnscaledCapsuleHalfHeight(): number;
-	GetShapeScale(): number;
-	GetScaledCapsuleSize_WithoutHemisphere(OutRadius?: number,OutHalfHeightWithoutHemisphere?: number): {OutRadius: number, OutHalfHeightWithoutHemisphere: number};
-	GetScaledCapsuleSize(OutRadius?: number,OutHalfHeight?: number): {OutRadius: number, OutHalfHeight: number};
-	GetScaledCapsuleRadius(): number;
-	GetScaledCapsuleHalfHeight_WithoutHemisphere(): number;
-	GetScaledCapsuleHalfHeight(): number;
-	static C(Other: UObject | any): CapsuleComponent;
-}
-
-declare class NavigationObjectBase extends Actor { 
-	CapsuleComponent: CapsuleComponent;
-	GoodSprite: BillboardComponent;
-	BadSprite: BillboardComponent;
-	bIsPIEPlayerStart: boolean;
-	static GetDefaultObject(): NavigationObjectBase;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NavigationObjectBase;
-	static C(Other: UObject | any): NavigationObjectBase;
-}
-
-declare class NavigationDataChunk extends UObject { 
-	NavigationDataName: string;
-	static Load(ResourceName: string): NavigationDataChunk;
-	static Find(Outer: UObject, ResourceName: string): NavigationDataChunk;
-	static GetDefaultObject(): NavigationDataChunk;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NavigationDataChunk;
-	static C(Other: UObject | any): NavigationDataChunk;
-}
-
-declare type ELightingBuildQuality = 'Quality_Preview' | 'Quality_Medium' | 'Quality_High' | 'Quality_Production' | 'Quality_MAX';
-declare var ELightingBuildQuality : { Quality_Preview:'Quality_Preview',Quality_Medium:'Quality_Medium',Quality_High:'Quality_High',Quality_Production:'Quality_Production',Quality_MAX:'Quality_MAX', };
-declare class MapBuildDataRegistry extends UObject { 
-	LevelLightingQuality: ELightingBuildQuality;
-	static Load(ResourceName: string): MapBuildDataRegistry;
-	static Find(Outer: UObject, ResourceName: string): MapBuildDataRegistry;
-	static GetDefaultObject(): MapBuildDataRegistry;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MapBuildDataRegistry;
-	static C(Other: UObject | any): MapBuildDataRegistry;
-}
-
-declare type ETextureSizingType = 'TextureSizingType_UseSingleTextureSize' | 'TextureSizingType_UseAutomaticBiasedSizes' | 'TextureSizingType_UseManualOverrideTextureSize' | 'TextureSizingType_UseSimplygonAutomaticSizing' | 'TextureSizingType_MAX';
-declare var ETextureSizingType : { TextureSizingType_UseSingleTextureSize:'TextureSizingType_UseSingleTextureSize',TextureSizingType_UseAutomaticBiasedSizes:'TextureSizingType_UseAutomaticBiasedSizes',TextureSizingType_UseManualOverrideTextureSize:'TextureSizingType_UseManualOverrideTextureSize',TextureSizingType_UseSimplygonAutomaticSizing:'TextureSizingType_UseSimplygonAutomaticSizing',TextureSizingType_MAX:'TextureSizingType_MAX', };
-declare type EMaterialMergeType = 'MaterialMergeType_Default' | 'MaterialMergeType_Simplygon' | 'MaterialMergeType_MAX';
-declare var EMaterialMergeType : { MaterialMergeType_Default:'MaterialMergeType_Default',MaterialMergeType_Simplygon:'MaterialMergeType_Simplygon',MaterialMergeType_MAX:'MaterialMergeType_MAX', };
-declare class MaterialProxySettings { 
-	TextureSize: IntPoint;
-	GutterSpace: number;
-	MetallicConstant: number;
-	RoughnessConstant: number;
-	AnisotropyConstant: number;
-	SpecularConstant: number;
-	OpacityConstant: number;
-	OpacityMaskConstant: number;
-	AmbientOcclusionConstant: number;
-	TextureSizingType: ETextureSizingType;
-	MaterialMergeType: EMaterialMergeType;
-	BlendMode: EBlendMode;
-	bAllowTwoSidedMaterial: boolean;
-	bNormalMap: boolean;
-	bTangentMap: boolean;
-	bMetallicMap: boolean;
-	bRoughnessMap: boolean;
-	bAnisotropyMap: boolean;
-	bSpecularMap: boolean;
-	bEmissiveMap: boolean;
-	bOpacityMap: boolean;
-	bOpacityMaskMap: boolean;
-	bAmbientOcclusionMap: boolean;
-	DiffuseTextureSize: IntPoint;
-	NormalTextureSize: IntPoint;
-	TangentTextureSize: IntPoint;
-	MetallicTextureSize: IntPoint;
-	RoughnessTextureSize: IntPoint;
-	AnisotropyTextureSize: IntPoint;
-	SpecularTextureSize: IntPoint;
-	EmissiveTextureSize: IntPoint;
-	OpacityTextureSize: IntPoint;
-	OpacityMaskTextureSize: IntPoint;
-	AmbientOcclusionTextureSize: IntPoint;
-	clone() : MaterialProxySettings;
-	static C(Other: UObject | any): MaterialProxySettings;
-}
-
-declare class LevelSimplificationDetails { 
-	bCreatePackagePerAsset: boolean;
-	DetailsPercentage: number;
-	StaticMeshMaterialSettings: MaterialProxySettings;
-	bOverrideLandscapeExportLOD: boolean;
-	LandscapeExportLOD: number;
-	LandscapeMaterialSettings: MaterialProxySettings;
-	bBakeFoliageToLandscape: boolean;
-	bBakeGrassToLandscape: boolean;
-	bGenerateMeshNormalMap: boolean;
-	bGenerateMeshMetallicMap: boolean;
-	bGenerateMeshRoughnessMap: boolean;
-	bGenerateMeshSpecularMap: boolean;
-	bGenerateLandscapeNormalMap: boolean;
-	bGenerateLandscapeMetallicMap: boolean;
-	bGenerateLandscapeRoughnessMap: boolean;
-	bGenerateLandscapeSpecularMap: boolean;
-	clone() : LevelSimplificationDetails;
-	static C(Other: UObject | any): LevelSimplificationDetails;
-}
-
-declare type EVisibilityAggressiveness = 'VIS_LeastAggressive' | 'VIS_ModeratelyAggressive' | 'VIS_MostAggressive' | 'VIS_Max';
-declare var EVisibilityAggressiveness : { VIS_LeastAggressive:'VIS_LeastAggressive',VIS_ModeratelyAggressive:'VIS_ModeratelyAggressive',VIS_MostAggressive:'VIS_MostAggressive',VIS_Max:'VIS_Max', };
-declare class DynamicBlueprintBinding extends UObject { 
-	static Load(ResourceName: string): DynamicBlueprintBinding;
-	static Find(Outer: UObject, ResourceName: string): DynamicBlueprintBinding;
-	static GetDefaultObject(): DynamicBlueprintBinding;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): DynamicBlueprintBinding;
-	static C(Other: UObject | any): DynamicBlueprintBinding;
-}
-
-declare class DatasmithAssetUserData extends AssetUserData { 
-	MetaData: any;
-	ObjectTemplates: any;
-	static Load(ResourceName: string): DatasmithAssetUserData;
-	static Find(Outer: UObject, ResourceName: string): DatasmithAssetUserData;
-	static GetDefaultObject(): DatasmithAssetUserData;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): DatasmithAssetUserData;
-	static C(Other: UObject | any): DatasmithAssetUserData;
-}
-
-declare class Subsystem extends UObject { 
-	static Load(ResourceName: string): Subsystem;
-	static Find(Outer: UObject, ResourceName: string): Subsystem;
-	static GetDefaultObject(): Subsystem;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Subsystem;
-	static C(Other: UObject | any): Subsystem;
-}
-
-declare class DynamicSubsystem extends Subsystem { 
-	static Load(ResourceName: string): DynamicSubsystem;
-	static Find(Outer: UObject, ResourceName: string): DynamicSubsystem;
-	static GetDefaultObject(): DynamicSubsystem;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): DynamicSubsystem;
-	static C(Other: UObject | any): DynamicSubsystem;
-}
-
-declare class EngineSubsystem extends DynamicSubsystem { 
-	static Load(ResourceName: string): EngineSubsystem;
-	static Find(Outer: UObject, ResourceName: string): EngineSubsystem;
-	static GetDefaultObject(): EngineSubsystem;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EngineSubsystem;
-	static C(Other: UObject | any): EngineSubsystem;
-}
-
-declare class PrimaryAssetType { 
-	Name: string;
-	clone() : PrimaryAssetType;
-	static C(Other: UObject | any): PrimaryAssetType;
-	Conv_PrimaryAssetTypeToString(): string;
-	EqualEqual_PrimaryAssetType(B: PrimaryAssetType): boolean;
-	GetPrimaryAssetIdList(OutPrimaryAssetIdList?: PrimaryAssetId[]): {OutPrimaryAssetIdList: PrimaryAssetId[]};
-	IsValidPrimaryAssetType(): boolean;
-	NotEqual_PrimaryAssetType(B: PrimaryAssetType): boolean;
-	static Conv_PrimaryAssetTypeToString(PrimaryAssetType: PrimaryAssetType): string;
-	static EqualEqual_PrimaryAssetType(A: PrimaryAssetType,B: PrimaryAssetType): boolean;
-	static GetPrimaryAssetIdList(PrimaryAssetType: PrimaryAssetType,OutPrimaryAssetIdList?: PrimaryAssetId[]): {OutPrimaryAssetIdList: PrimaryAssetId[]};
-	static IsValidPrimaryAssetType(PrimaryAssetType: PrimaryAssetType): boolean;
-	static NotEqual_PrimaryAssetType(A: PrimaryAssetType,B: PrimaryAssetType): boolean;
-}
-
-declare class PrimaryAssetId { 
-	PrimaryAssetType: PrimaryAssetType;
-	PrimaryAssetName: string;
-	clone() : PrimaryAssetId;
-	static C(Other: UObject | any): PrimaryAssetId;
-	Conv_PrimaryAssetIdToString(): string;
-	EqualEqual_PrimaryAssetId(B: PrimaryAssetId): boolean;
-	GetClassFromPrimaryAssetId(): UnrealEngineClass;
-	GetCurrentBundleState(bForceCurrentState: boolean,OutBundles?: string[]): {OutBundles: string[], $: boolean};
-	GetObjectFromPrimaryAssetId(): UObject;
-	GetSoftClassReferenceFromPrimaryAssetId(): Class;
-	GetSoftObjectReferenceFromPrimaryAssetId(): UObject;
-	IsValidPrimaryAssetId(): boolean;
-	NotEqual_PrimaryAssetId(B: PrimaryAssetId): boolean;
-	UnloadPrimaryAsset(): void;
-	static Conv_PrimaryAssetIdToString(PrimaryAssetId: PrimaryAssetId): string;
-	static EqualEqual_PrimaryAssetId(A: PrimaryAssetId,B: PrimaryAssetId): boolean;
-	static GetClassFromPrimaryAssetId(PrimaryAssetId: PrimaryAssetId): UnrealEngineClass;
-	static GetCurrentBundleState(PrimaryAssetId: PrimaryAssetId,bForceCurrentState: boolean,OutBundles?: string[]): {OutBundles: string[], $: boolean};
-	static GetObjectFromPrimaryAssetId(PrimaryAssetId: PrimaryAssetId): UObject;
-	static GetSoftClassReferenceFromPrimaryAssetId(PrimaryAssetId: PrimaryAssetId): Class;
-	static GetSoftObjectReferenceFromPrimaryAssetId(PrimaryAssetId: PrimaryAssetId): UObject;
-	static IsValidPrimaryAssetId(PrimaryAssetId: PrimaryAssetId): boolean;
-	static NotEqual_PrimaryAssetId(A: PrimaryAssetId,B: PrimaryAssetId): boolean;
-	static UnloadPrimaryAsset(PrimaryAssetId: PrimaryAssetId): void;
-}
-
-declare class SaveGame extends UObject { 
-	static Load(ResourceName: string): SaveGame;
-	static Find(Outer: UObject, ResourceName: string): SaveGame;
-	static GetDefaultObject(): SaveGame;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SaveGame;
-	static C(Other: UObject | any): SaveGame;
-	SaveGameToSlot(SlotName: string,UserIndex: number): boolean;
-	static SaveGameToSlot(SaveGameObject: SaveGame,SlotName: string,UserIndex: number): boolean;
-}
-
-declare class EditorSubsystem extends DynamicSubsystem { 
-	static Load(ResourceName: string): EditorSubsystem;
-	static Find(Outer: UObject, ResourceName: string): EditorSubsystem;
-	static GetDefaultObject(): EditorSubsystem;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EditorSubsystem;
-	static C(Other: UObject | any): EditorSubsystem;
-}
-
-declare class Visual extends UObject { 
-	static Load(ResourceName: string): Visual;
-	static Find(Outer: UObject, ResourceName: string): Visual;
-	static GetDefaultObject(): Visual;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Visual;
-	static C(Other: UObject | any): Visual;
-}
-
-declare class PanelWidget extends Widget { 
-	Slots: PanelSlot[];
-	static Load(ResourceName: string): PanelWidget;
-	static Find(Outer: UObject, ResourceName: string): PanelWidget;
-	static GetDefaultObject(): PanelWidget;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PanelWidget;
-	RemoveChildAt(index: number): boolean;
-	RemoveChild(Content: Widget): boolean;
-	HasChild(Content: Widget): boolean;
-	HasAnyChildren(): boolean;
-	GetChildrenCount(): number;
-	GetChildIndex(Content: Widget): number;
-	GetChildAt(index: number): Widget;
-	GetAllChildren(): Widget[];
-	ClearChildren(): void;
-	AddChild(Content: Widget): PanelSlot;
-	static C(Other: UObject | any): PanelWidget;
-}
-
-declare class PanelSlot extends Visual { 
-	Parent: PanelWidget;
-	Content: Widget;
-	static Load(ResourceName: string): PanelSlot;
-	static Find(Outer: UObject, ResourceName: string): PanelSlot;
-	static GetDefaultObject(): PanelSlot;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PanelSlot;
-	static C(Other: UObject | any): PanelSlot;
-}
-
-declare type ESlateVisibility = 'Visible' | 'Collapsed' | 'Hidden' | 'HitTestInvisible' | 'SelfHitTestInvisible' | 'ESlateVisibility_MAX';
-declare var ESlateVisibility : { Visible:'Visible',Collapsed:'Collapsed',Hidden:'Hidden',HitTestInvisible:'HitTestInvisible',SelfHitTestInvisible:'SelfHitTestInvisible',ESlateVisibility_MAX:'ESlateVisibility_MAX', };
-declare class WidgetTransform { 
-	Translation: Vector2D;
-	Scale: Vector2D;
-	Shear: Vector2D;
-	Angle: number;
-	clone() : WidgetTransform;
-	static C(Other: UObject | any): WidgetTransform;
-}
-
-declare type ESlateAccessibleBehavior = 'NotAccessible' | 'Auto' | 'Summary' | 'Custom' | 'ToolTip' | 'ESlateAccessibleBehavior_MAX';
-declare var ESlateAccessibleBehavior : { NotAccessible:'NotAccessible',Auto:'Auto',Summary:'Summary',Custom:'Custom',ToolTip:'ToolTip',ESlateAccessibleBehavior_MAX:'ESlateAccessibleBehavior_MAX', };
-declare class SlateAccessibleWidgetData extends UObject { 
-	bCanChildrenBeAccessible: boolean;
-	AccessibleBehavior: ESlateAccessibleBehavior;
-	AccessibleSummaryBehavior: ESlateAccessibleBehavior;
-	AccessibleText: string;
-	AccessibleTextDelegate: UnrealEngineDelegate<() => string>;
-	AccessibleSummaryText: string;
-	AccessibleSummaryTextDelegate: UnrealEngineDelegate<() => string>;
-	static Load(ResourceName: string): SlateAccessibleWidgetData;
-	static Find(Outer: UObject, ResourceName: string): SlateAccessibleWidgetData;
-	static GetDefaultObject(): SlateAccessibleWidgetData;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SlateAccessibleWidgetData;
-	static C(Other: UObject | any): SlateAccessibleWidgetData;
-}
-
-declare type EMouseCursor = 'None' | 'Default' | 'TextEditBeam' | 'ResizeLeftRight' | 'ResizeUpDown' | 'ResizeSouthEast' | 'ResizeSouthWest' | 'CardinalCross' | 'Crosshairs' | 'Hand' | 'GrabHand' | 'GrabHandClosed' | 'SlashedCircle' | 'EyeDropper' | 'EMouseCursor_MAX';
-declare var EMouseCursor : { None:'None',Default:'Default',TextEditBeam:'TextEditBeam',ResizeLeftRight:'ResizeLeftRight',ResizeUpDown:'ResizeUpDown',ResizeSouthEast:'ResizeSouthEast',ResizeSouthWest:'ResizeSouthWest',CardinalCross:'CardinalCross',Crosshairs:'Crosshairs',Hand:'Hand',GrabHand:'GrabHand',GrabHandClosed:'GrabHandClosed',SlashedCircle:'SlashedCircle',EyeDropper:'EyeDropper',EMouseCursor_MAX:'EMouseCursor_MAX', };
-declare type EWidgetClipping = 'Inherit' | 'ClipToBounds' | 'ClipToBoundsWithoutIntersecting' | 'ClipToBoundsAlways' | 'OnDemand' | 'EWidgetClipping_MAX';
-declare var EWidgetClipping : { Inherit:'Inherit',ClipToBounds:'ClipToBounds',ClipToBoundsWithoutIntersecting:'ClipToBoundsWithoutIntersecting',ClipToBoundsAlways:'ClipToBoundsAlways',OnDemand:'OnDemand',EWidgetClipping_MAX:'EWidgetClipping_MAX', };
-declare type EUINavigationRule = 'Escape' | 'Explicit' | 'Wrap' | 'Stop' | 'Custom' | 'CustomBoundary' | 'Invalid' | 'EUINavigationRule_MAX';
-declare var EUINavigationRule : { Escape:'Escape',Explicit:'Explicit',Wrap:'Wrap',Stop:'Stop',Custom:'Custom',CustomBoundary:'CustomBoundary',Invalid:'Invalid',EUINavigationRule_MAX:'EUINavigationRule_MAX', };
-declare type EUINavigation = 'Left' | 'Right' | 'Up' | 'Down' | 'Next' | 'Previous' | 'Num' | 'Invalid' | 'EUINavigation_MAX';
-declare var EUINavigation : { Left:'Left',Right:'Right',Up:'Up',Down:'Down',Next:'Next',Previous:'Previous',Num:'Num',Invalid:'Invalid',EUINavigation_MAX:'EUINavigation_MAX', };
-declare class WidgetNavigationData { 
-	Rule: EUINavigationRule;
-	WidgetToFocus: string;
-	Widget: any;
-	CustomDelegate: UnrealEngineDelegate<(Navigation: EUINavigation) => Widget>;
-	clone() : WidgetNavigationData;
-	static C(Other: UObject | any): WidgetNavigationData;
-}
-
-declare class WidgetNavigation extends UObject { 
-	Up: WidgetNavigationData;
-	Down: WidgetNavigationData;
-	Left: WidgetNavigationData;
-	Right: WidgetNavigationData;
-	Next: WidgetNavigationData;
-	Previous: WidgetNavigationData;
-	static Load(ResourceName: string): WidgetNavigation;
-	static Find(Outer: UObject, ResourceName: string): WidgetNavigation;
-	static GetDefaultObject(): WidgetNavigation;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WidgetNavigation;
-	static C(Other: UObject | any): WidgetNavigation;
-}
-
-declare type EFlowDirectionPreference = 'Inherit' | 'Culture' | 'LeftToRight' | 'RightToLeft' | 'EFlowDirectionPreference_MAX';
-declare var EFlowDirectionPreference : { Inherit:'Inherit',Culture:'Culture',LeftToRight:'LeftToRight',RightToLeft:'RightToLeft',EFlowDirectionPreference_MAX:'EFlowDirectionPreference_MAX', };
-declare class PropertyPathSegment { 
-	Name: string;
-	ArrayIndex: number;
-	struct: Struct;
-	clone() : PropertyPathSegment;
-	static C(Other: UObject | any): PropertyPathSegment;
-}
-
-declare class UFunction extends Struct { 
-	static Load(ResourceName: string): UFunction;
-	static Find(Outer: UObject, ResourceName: string): UFunction;
-	static GetDefaultObject(): UFunction;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): UFunction;
-	static C(Other: UObject | any): UFunction;
-	GetFunctionParmsSize(): number;
-	static GetFunctionParmsSize(UFunction: UFunction): number;
-}
-
-declare class CachedPropertyPath { 
-	Segments: PropertyPathSegment[];
-	CachedFunction: UFunction;
-	clone() : CachedPropertyPath;
-	static C(Other: UObject | any): CachedPropertyPath;
-}
-
-declare class DynamicPropertyPath extends CachedPropertyPath { 
-	clone() : DynamicPropertyPath;
-	static C(Other: UObject | any): DynamicPropertyPath;
-}
-
-declare class PropertyBinding extends UObject { 
-	SourceObject: any;
-	SourcePath: DynamicPropertyPath;
-	DestinationProperty: string;
-	static Load(ResourceName: string): PropertyBinding;
-	static Find(Outer: UObject, ResourceName: string): PropertyBinding;
-	static GetDefaultObject(): PropertyBinding;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PropertyBinding;
-	static C(Other: UObject | any): PropertyBinding;
-}
-
-declare class Player extends UObject { 
-	PlayerController: PlayerController;
-	CurrentNetSpeed: number;
-	ConfiguredInternetSpeed: number;
-	ConfiguredLanSpeed: number;
-	static Load(ResourceName: string): Player;
-	static Find(Outer: UObject, ResourceName: string): Player;
-	static GetDefaultObject(): Player;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Player;
-	static C(Other: UObject | any): Player;
-}
-
-declare class InterpTrackInst extends UObject { 
-	static Load(ResourceName: string): InterpTrackInst;
-	static Find(Outer: UObject, ResourceName: string): InterpTrackInst;
-	static GetDefaultObject(): InterpTrackInst;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InterpTrackInst;
-	static C(Other: UObject | any): InterpTrackInst;
-}
-
-declare class InterpTrackInstDirector extends InterpTrackInst { 
-	OldViewTarget: Actor;
-	static Load(ResourceName: string): InterpTrackInstDirector;
-	static Find(Outer: UObject, ResourceName: string): InterpTrackInstDirector;
-	static GetDefaultObject(): InterpTrackInstDirector;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InterpTrackInstDirector;
-	static C(Other: UObject | any): InterpTrackInstDirector;
-}
-
-declare class ReporterBase extends UObject { 
-	static Load(ResourceName: string): ReporterBase;
-	static Find(Outer: UObject, ResourceName: string): ReporterBase;
-	static GetDefaultObject(): ReporterBase;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ReporterBase;
-	static C(Other: UObject | any): ReporterBase;
-}
-
-declare class ReporterGraph extends ReporterBase { 
-	static Load(ResourceName: string): ReporterGraph;
-	static Find(Outer: UObject, ResourceName: string): ReporterGraph;
-	static GetDefaultObject(): ReporterGraph;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ReporterGraph;
-	static C(Other: UObject | any): ReporterGraph;
-}
-
-declare class CanvasUVTri { 
-	V0_Pos: Vector2D;
-	V0_UV: Vector2D;
-	V0_Color: LinearColor;
-	V1_Pos: Vector2D;
-	V1_UV: Vector2D;
-	V1_Color: LinearColor;
-	V2_Pos: Vector2D;
-	V2_UV: Vector2D;
-	V2_Color: LinearColor;
-	clone() : CanvasUVTri;
-	static C(Other: UObject | any): CanvasUVTri;
-}
-
-declare class Canvas extends UObject { 
-	OrgX: number;
-	OrgY: number;
-	ClipX: number;
-	ClipY: number;
-	DrawColor: Color;
-	bCenterX: boolean;
-	bCenterY: boolean;
-	bNoSmooth: boolean;
-	SizeX: number;
-	SizeY: number;
-	ColorModulate: Plane;
-	DefaultTexture: Texture2D;
-	GradientTexture0: Texture2D;
-	ReporterGraph: ReporterGraph;
-	static Load(ResourceName: string): Canvas;
-	static Find(Outer: UObject, ResourceName: string): Canvas;
-	static GetDefaultObject(): Canvas;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Canvas;
-	K2_TextSize(RenderFont: Font,RenderText: string,Scale: Vector2D): Vector2D;
-	K2_StrLen(RenderFont: Font,RenderText: string): Vector2D;
-	K2_Project(WorldLocation: Vector): Vector;
-	K2_DrawTriangle(RenderTexture: Texture,Triangles: CanvasUVTri[]): void;
-	K2_DrawTexture(RenderTexture: Texture,ScreenPosition: Vector2D,ScreenSize: Vector2D,CoordinatePosition: Vector2D,CoordinateSize: Vector2D,RenderColor: LinearColor,BlendMode: EBlendMode,Rotation: number,PivotPoint: Vector2D): void;
-	K2_DrawText(RenderFont: Font,RenderText: string,ScreenPosition: Vector2D,Scale: Vector2D,RenderColor: LinearColor,Kerning: number,ShadowColor: LinearColor,ShadowOffset: Vector2D,bCentreX: boolean,bCentreY: boolean,bOutlined: boolean,OutlineColor: LinearColor): void;
-	K2_DrawPolygon(RenderTexture: Texture,ScreenPosition: Vector2D,Radius: Vector2D,NumberOfSides: number,RenderColor: LinearColor): void;
-	K2_DrawMaterialTriangle(RenderMaterial: MaterialInterface,Triangles: CanvasUVTri[]): void;
-	K2_DrawMaterial(RenderMaterial: MaterialInterface,ScreenPosition: Vector2D,ScreenSize: Vector2D,CoordinatePosition: Vector2D,CoordinateSize: Vector2D,Rotation: number,PivotPoint: Vector2D): void;
-	K2_DrawLine(ScreenPositionA: Vector2D,ScreenPositionB: Vector2D,Thickness: number,RenderColor: LinearColor): void;
-	K2_DrawBox(ScreenPosition: Vector2D,ScreenSize: Vector2D,Thickness: number,RenderColor: LinearColor): void;
-	K2_DrawBorder(BorderTexture: Texture,BackgroundTexture: Texture,LeftBorderTexture: Texture,RightBorderTexture: Texture,TopBorderTexture: Texture,BottomBorderTexture: Texture,ScreenPosition: Vector2D,ScreenSize: Vector2D,CoordinatePosition: Vector2D,CoordinateSize: Vector2D,RenderColor: LinearColor,BorderScale: Vector2D,BackgroundScale: Vector2D,Rotation: number,PivotPoint: Vector2D,CornerSize: Vector2D): void;
-	K2_Deproject(ScreenPosition: Vector2D,WorldOrigin?: Vector,WorldDirection?: Vector): {WorldOrigin: Vector, WorldDirection: Vector};
-	static C(Other: UObject | any): Canvas;
-}
-
-declare class DebugTextInfo { 
-	SrcActor: Actor;
-	SrcActorOffset: Vector;
-	SrcActorDesiredOffset: Vector;
-	DebugText: string;
-	TimeRemaining: number;
-	Duration: number;
-	TextColor: Color;
-	bAbsoluteLocation: boolean;
-	bKeepAttachedToActor: boolean;
-	bDrawShadow: boolean;
-	OrigActorLocation: Vector;
-	Font: Font;
-	FontScale: number;
-	clone() : DebugTextInfo;
-	static C(Other: UObject | any): DebugTextInfo;
-}
-
-declare class HUD extends Actor { 
-	PlayerOwner: PlayerController;
-	bLostFocusPaused: boolean;
-	bShowHUD: boolean;
-	bShowDebugInfo: boolean;
-	CurrentTargetIndex: number;
-	bShowHitBoxDebugInfo: boolean;
-	bShowOverlays: boolean;
-	bEnableDebugTextShadow: boolean;
-	PostRenderedActors: Actor[];
-	DebugDisplay: string[];
-	ToggledDebugCategories: string[];
-	Canvas: Canvas;
-	DebugCanvas: Canvas;
-	DebugTextList: DebugTextInfo[];
-	ShowDebugTargetDesiredClass: UnrealEngineClass;
-	ShowDebugTargetActor: Actor;
-	static GetDefaultObject(): HUD;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): HUD;
-	ShowHUD(): void;
-	ShowDebugToggleSubCategory(Category: string): void;
-	ShowDebugForReticleTargetToggle(DesiredClass: UnrealEngineClass): void;
-	ShowDebug(DebugType: string): void;
-	RemoveDebugText(SrcActor: Actor,bLeaveDurationText: boolean): void;
-	RemoveAllDebugStrings(): void;
-	ReceiveHitBoxRelease(BoxName: string): void;
-	ReceiveHitBoxEndCursorOver(BoxName: string): void;
-	ReceiveHitBoxClick(BoxName: string): void;
-	ReceiveHitBoxBeginCursorOver(BoxName: string): void;
-	ReceiveDrawHUD(SizeX: number,SizeY: number): void;
-	Project(Location: Vector): Vector;
-	PreviousDebugTarget(): void;
-	NextDebugTarget(): void;
-	GetTextSize(text: string,OutWidth?: number,OutHeight?: number,Font?: Font,Scale?: number): {OutWidth: number, OutHeight: number};
-	GetOwningPlayerController(): PlayerController;
-	GetOwningPawn(): Pawn;
-	GetActorsInSelectionRectangle(ClassFilter: UnrealEngineClass,FirstPoint: Vector2D,SecondPoint: Vector2D,OutActors?: Actor[],bIncludeNonCollidingComponents?: boolean,bActorMustBeFullyEnclosed?: boolean): {OutActors: Actor[]};
-	DrawTextureSimple(Texture: Texture,ScreenX: number,ScreenY: number,Scale: number,bScalePosition: boolean): void;
-	DrawTexture(Texture: Texture,ScreenX: number,ScreenY: number,ScreenW: number,ScreenH: number,TextureU: number,TextureV: number,TextureUWidth: number,TextureVHeight: number,TintColor: LinearColor,BlendMode: EBlendMode,Scale: number,bScalePosition: boolean,Rotation: number,RotPivot: Vector2D): void;
-	DrawText(text: string,TextColor: LinearColor,ScreenX: number,ScreenY: number,Font: Font,Scale: number,bScalePosition: boolean): void;
-	DrawRect(RectColor: LinearColor,ScreenX: number,ScreenY: number,ScreenW: number,ScreenH: number): void;
-	DrawMaterialTriangle(Material: MaterialInterface,V0_Pos: Vector2D,V1_Pos: Vector2D,V2_Pos: Vector2D,V0_UV: Vector2D,V1_UV: Vector2D,V2_UV: Vector2D,V0_Color: LinearColor,V1_Color: LinearColor,V2_Color: LinearColor): void;
-	DrawMaterialSimple(Material: MaterialInterface,ScreenX: number,ScreenY: number,ScreenW: number,ScreenH: number,Scale: number,bScalePosition: boolean): void;
-	DrawMaterial(Material: MaterialInterface,ScreenX: number,ScreenY: number,ScreenW: number,ScreenH: number,MaterialU: number,MaterialV: number,MaterialUWidth: number,MaterialVHeight: number,Scale: number,bScalePosition: boolean,Rotation: number,RotPivot: Vector2D): void;
-	DrawLine(StartScreenX: number,StartScreenY: number,EndScreenX: number,EndScreenY: number,LineColor: LinearColor,LineThickness: number): void;
-	Deproject(ScreenX: number,ScreenY: number,WorldPosition?: Vector,WorldDirection?: Vector): {WorldPosition: Vector, WorldDirection: Vector};
-	AddHitBox(Position: Vector2D,Size: Vector2D,InName: string,bConsumesInput: boolean,Priority: number): void;
-	AddDebugText(DebugText: string,SrcActor: Actor,Duration: number,Offset: Vector,DesiredOffset: Vector,TextColor: Color,bSkipOverwriteCheck: boolean,bAbsoluteLocation: boolean,bKeepAttachedToActor: boolean,InFont: Font,FontScale: number,bDrawShadow: boolean): void;
-	static C(Other: UObject | any): HUD;
-}
-
-declare type ECameraProjectionMode = 'Perspective' | 'Orthographic' | 'ECameraProjectionMode_MAX';
-declare var ECameraProjectionMode : { Perspective:'Perspective',Orthographic:'Orthographic',ECameraProjectionMode_MAX:'ECameraProjectionMode_MAX', };
-declare type EBloomMethod = 'BM_SOG' | 'BM_FFT' | 'BM_MAX';
-declare var EBloomMethod : { BM_SOG:'BM_SOG',BM_FFT:'BM_FFT',BM_MAX:'BM_MAX', };
-declare type EAutoExposureMethod = 'AEM_Histogram' | 'AEM_Basic' | 'AEM_Manual' | 'AEM_MAX';
-declare var EAutoExposureMethod : { AEM_Histogram:'AEM_Histogram',AEM_Basic:'AEM_Basic',AEM_Manual:'AEM_Manual',AEM_MAX:'AEM_MAX', };
-declare type EDepthOfFieldMethod = 'DOFM_BokehDOF' | 'DOFM_Gaussian' | 'DOFM_CircleDOF' | 'DOFM_MAX';
-declare var EDepthOfFieldMethod : { DOFM_BokehDOF:'DOFM_BokehDOF',DOFM_Gaussian:'DOFM_Gaussian',DOFM_CircleDOF:'DOFM_CircleDOF',DOFM_MAX:'DOFM_MAX', };
-declare type ETemperatureMethod = 'TEMP_WhiteBalance' | 'TEMP_ColorTemperature' | 'TEMP_MAX';
-declare var ETemperatureMethod : { TEMP_WhiteBalance:'TEMP_WhiteBalance',TEMP_ColorTemperature:'TEMP_ColorTemperature',TEMP_MAX:'TEMP_MAX', };
-declare class TextureCube extends Texture { 
-	static Load(ResourceName: string): TextureCube;
-	static Find(Outer: UObject, ResourceName: string): TextureCube;
-	static GetDefaultObject(): TextureCube;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TextureCube;
-	static C(Other: UObject | any): TextureCube;
-}
-
-declare type ERayTracingGlobalIlluminationType = 'Disabled' | 'BruteForce' | 'FinalGather' | 'ERayTracingGlobalIlluminationType_MAX';
-declare var ERayTracingGlobalIlluminationType : { Disabled:'Disabled',BruteForce:'BruteForce',FinalGather:'FinalGather',ERayTracingGlobalIlluminationType_MAX:'ERayTracingGlobalIlluminationType_MAX', };
-declare type EReflectionsType = 'ScreenSpace' | 'RayTracing' | 'EReflectionsType_MAX';
-declare var EReflectionsType : { ScreenSpace:'ScreenSpace',RayTracing:'RayTracing',EReflectionsType_MAX:'EReflectionsType_MAX', };
-declare type EReflectedAndRefractedRayTracedShadows = 'Disabled' | 'Hard_shadows' | 'Area_shadows' | 'EReflectedAndRefractedRayTracedShadows_MAX';
-declare var EReflectedAndRefractedRayTracedShadows : { Disabled:'Disabled',Hard_shadows:'Hard_shadows',Area_shadows:'Area_shadows',EReflectedAndRefractedRayTracedShadows_MAX:'EReflectedAndRefractedRayTracedShadows_MAX', };
-declare type ETranslucencyType = 'Raster' | 'RayTracing' | 'ETranslucencyType_MAX';
-declare var ETranslucencyType : { Raster:'Raster',RayTracing:'RayTracing',ETranslucencyType_MAX:'ETranslucencyType_MAX', };
-declare class WeightedBlendable { 
-	Weight: number;
-	UObject: UObject;
-	clone() : WeightedBlendable;
-	static C(Other: UObject | any): WeightedBlendable;
-}
-
-declare class WeightedBlendables { 
-	Array: WeightedBlendable[];
-	clone() : WeightedBlendables;
-	static C(Other: UObject | any): WeightedBlendables;
-}
-
-declare class PostProcessSettings { 
-	bOverride_TemperatureType: boolean;
-	bOverride_WhiteTemp: boolean;
-	bOverride_WhiteTint: boolean;
-	bOverride_ColorSaturation: boolean;
-	bOverride_ColorContrast: boolean;
-	bOverride_ColorGamma: boolean;
-	bOverride_ColorGain: boolean;
-	bOverride_ColorOffset: boolean;
-	bOverride_ColorSaturationShadows: boolean;
-	bOverride_ColorContrastShadows: boolean;
-	bOverride_ColorGammaShadows: boolean;
-	bOverride_ColorGainShadows: boolean;
-	bOverride_ColorOffsetShadows: boolean;
-	bOverride_ColorSaturationMidtones: boolean;
-	bOverride_ColorContrastMidtones: boolean;
-	bOverride_ColorGammaMidtones: boolean;
-	bOverride_ColorGainMidtones: boolean;
-	bOverride_ColorOffsetMidtones: boolean;
-	bOverride_ColorSaturationHighlights: boolean;
-	bOverride_ColorContrastHighlights: boolean;
-	bOverride_ColorGammaHighlights: boolean;
-	bOverride_ColorGainHighlights: boolean;
-	bOverride_ColorOffsetHighlights: boolean;
-	bOverride_ColorCorrectionShadowsMax: boolean;
-	bOverride_ColorCorrectionHighlightsMin: boolean;
-	bOverride_BlueCorrection: boolean;
-	bOverride_ExpandGamut: boolean;
-	bOverride_ToneCurveAmount: boolean;
-	bOverride_FilmWhitePoint: boolean;
-	bOverride_FilmSaturation: boolean;
-	bOverride_FilmChannelMixerRed: boolean;
-	bOverride_FilmChannelMixerGreen: boolean;
-	bOverride_FilmChannelMixerBlue: boolean;
-	bOverride_FilmContrast: boolean;
-	bOverride_FilmDynamicRange: boolean;
-	bOverride_FilmHealAmount: boolean;
-	bOverride_FilmToeAmount: boolean;
-	bOverride_FilmShadowTint: boolean;
-	bOverride_FilmShadowTintBlend: boolean;
-	bOverride_FilmShadowTintAmount: boolean;
-	bOverride_FilmSlope: boolean;
-	bOverride_FilmToe: boolean;
-	bOverride_FilmShoulder: boolean;
-	bOverride_FilmBlackClip: boolean;
-	bOverride_FilmWhiteClip: boolean;
-	bOverride_SceneColorTint: boolean;
-	bOverride_SceneFringeIntensity: boolean;
-	bOverride_ChromaticAberrationStartOffset: boolean;
-	bOverride_AmbientCubemapTint: boolean;
-	bOverride_AmbientCubemapIntensity: boolean;
-	bOverride_BloomMethod: boolean;
-	bOverride_BloomIntensity: boolean;
-	bOverride_BloomThreshold: boolean;
-	bOverride_Bloom1Tint: boolean;
-	bOverride_Bloom1Size: boolean;
-	bOverride_Bloom2Size: boolean;
-	bOverride_Bloom2Tint: boolean;
-	bOverride_Bloom3Tint: boolean;
-	bOverride_Bloom3Size: boolean;
-	bOverride_Bloom4Tint: boolean;
-	bOverride_Bloom4Size: boolean;
-	bOverride_Bloom5Tint: boolean;
-	bOverride_Bloom5Size: boolean;
-	bOverride_Bloom6Tint: boolean;
-	bOverride_Bloom6Size: boolean;
-	bOverride_BloomSizeScale: boolean;
-	bOverride_BloomConvolutionTexture: boolean;
-	bOverride_BloomConvolutionSize: boolean;
-	bOverride_BloomConvolutionCenterUV: boolean;
-	bOverride_BloomConvolutionPreFilter: boolean;
-	bOverride_BloomConvolutionPreFilterMin: boolean;
-	bOverride_BloomConvolutionPreFilterMax: boolean;
-	bOverride_BloomConvolutionPreFilterMult: boolean;
-	bOverride_BloomConvolutionBufferScale: boolean;
-	bOverride_BloomDirtMaskIntensity: boolean;
-	bOverride_BloomDirtMaskTint: boolean;
-	bOverride_BloomDirtMask: boolean;
-	bOverride_CameraShutterSpeed: boolean;
-	bOverride_CameraISO: boolean;
-	bOverride_AutoExposureMethod: boolean;
-	bOverride_AutoExposureLowPercent: boolean;
-	bOverride_AutoExposureHighPercent: boolean;
-	bOverride_AutoExposureMinBrightness: boolean;
-	bOverride_AutoExposureMaxBrightness: boolean;
-	bOverride_AutoExposureCalibrationConstant: boolean;
-	bOverride_AutoExposureSpeedUp: boolean;
-	bOverride_AutoExposureSpeedDown: boolean;
-	bOverride_AutoExposureBias: boolean;
-	bOverride_AutoExposureBiasCurve: boolean;
-	bOverride_AutoExposureMeterMask: boolean;
-	bOverride_AutoExposureApplyPhysicalCameraExposure: boolean;
-	bOverride_HistogramLogMin: boolean;
-	bOverride_HistogramLogMax: boolean;
-	bOverride_LensFlareIntensity: boolean;
-	bOverride_LensFlareTint: boolean;
-	bOverride_LensFlareTints: boolean;
-	bOverride_LensFlareBokehSize: boolean;
-	bOverride_LensFlareBokehShape: boolean;
-	bOverride_LensFlareThreshold: boolean;
-	bOverride_VignetteIntensity: boolean;
-	bOverride_GrainIntensity: boolean;
-	bOverride_GrainJitter: boolean;
-	bOverride_AmbientOcclusionIntensity: boolean;
-	bOverride_AmbientOcclusionStaticFraction: boolean;
-	bOverride_AmbientOcclusionRadius: boolean;
-	bOverride_AmbientOcclusionFadeDistance: boolean;
-	bOverride_AmbientOcclusionFadeRadius: boolean;
-	bOverride_AmbientOcclusionDistance: boolean;
-	bOverride_AmbientOcclusionRadiusInWS: boolean;
-	bOverride_AmbientOcclusionPower: boolean;
-	bOverride_AmbientOcclusionBias: boolean;
-	bOverride_AmbientOcclusionQuality: boolean;
-	bOverride_AmbientOcclusionMipBlend: boolean;
-	bOverride_AmbientOcclusionMipScale: boolean;
-	bOverride_AmbientOcclusionMipThreshold: boolean;
-	bOverride_AmbientOcclusionTemporalBlendWeight: boolean;
-	bOverride_RayTracingAO: boolean;
-	bOverride_RayTracingAOSamplesPerPixel: boolean;
-	bOverride_RayTracingAOIntensity: boolean;
-	bOverride_RayTracingAORadius: boolean;
-	bOverride_LPVIntensity: boolean;
-	bOverride_LPVDirectionalOcclusionIntensity: boolean;
-	bOverride_LPVDirectionalOcclusionRadius: boolean;
-	bOverride_LPVDiffuseOcclusionExponent: boolean;
-	bOverride_LPVSpecularOcclusionExponent: boolean;
-	bOverride_LPVDiffuseOcclusionIntensity: boolean;
-	bOverride_LPVSpecularOcclusionIntensity: boolean;
-	bOverride_LPVSize: boolean;
-	bOverride_LPVSecondaryOcclusionIntensity: boolean;
-	bOverride_LPVSecondaryBounceIntensity: boolean;
-	bOverride_LPVGeometryVolumeBias: boolean;
-	bOverride_LPVVplInjectionBias: boolean;
-	bOverride_LPVEmissiveInjectionIntensity: boolean;
-	bOverride_LPVFadeRange: boolean;
-	bOverride_LPVDirectionalOcclusionFadeRange: boolean;
-	bOverride_IndirectLightingColor: boolean;
-	bOverride_IndirectLightingIntensity: boolean;
-	bOverride_ColorGradingIntensity: boolean;
-	bOverride_ColorGradingLUT: boolean;
-	bOverride_DepthOfFieldFocalDistance: boolean;
-	bOverride_DepthOfFieldFstop: boolean;
-	bOverride_DepthOfFieldMinFstop: boolean;
-	bOverride_DepthOfFieldBladeCount: boolean;
-	bOverride_DepthOfFieldSensorWidth: boolean;
-	bOverride_DepthOfFieldDepthBlurRadius: boolean;
-	bOverride_DepthOfFieldDepthBlurAmount: boolean;
-	bOverride_DepthOfFieldFocalRegion: boolean;
-	bOverride_DepthOfFieldNearTransitionRegion: boolean;
-	bOverride_DepthOfFieldFarTransitionRegion: boolean;
-	bOverride_DepthOfFieldScale: boolean;
-	bOverride_DepthOfFieldNearBlurSize: boolean;
-	bOverride_DepthOfFieldFarBlurSize: boolean;
-	bOverride_MobileHQGaussian: boolean;
-	bOverride_DepthOfFieldOcclusion: boolean;
-	bOverride_DepthOfFieldSkyFocusDistance: boolean;
-	bOverride_DepthOfFieldVignetteSize: boolean;
-	bOverride_MotionBlurAmount: boolean;
-	bOverride_MotionBlurMax: boolean;
-	bOverride_MotionBlurTargetFPS: boolean;
-	bOverride_MotionBlurPerObjectSize: boolean;
-	bOverride_ScreenPercentage: boolean;
-	bOverride_ScreenSpaceReflectionIntensity: boolean;
-	bOverride_ScreenSpaceReflectionQuality: boolean;
-	bOverride_ScreenSpaceReflectionMaxRoughness: boolean;
-	bOverride_ScreenSpaceReflectionRoughnessScale: boolean;
-	bOverride_ReflectionsType: boolean;
-	bOverride_RayTracingReflectionsMaxRoughness: boolean;
-	bOverride_RayTracingReflectionsMaxBounces: boolean;
-	bOverride_RayTracingReflectionsSamplesPerPixel: boolean;
-	bOverride_RayTracingReflectionsShadows: boolean;
-	bOverride_RayTracingReflectionsTranslucency: boolean;
-	bOverride_TranslucencyType: boolean;
-	bOverride_RayTracingTranslucencyMaxRoughness: boolean;
-	bOverride_RayTracingTranslucencyRefractionRays: boolean;
-	bOverride_RayTracingTranslucencySamplesPerPixel: boolean;
-	bOverride_RayTracingTranslucencyShadows: boolean;
-	bOverride_RayTracingTranslucencyRefraction: boolean;
-	bOverride_RayTracingGI: boolean;
-	bOverride_RayTracingGIMaxBounces: boolean;
-	bOverride_RayTracingGISamplesPerPixel: boolean;
-	bOverride_PathTracingMaxBounces: boolean;
-	bOverride_PathTracingSamplesPerPixel: boolean;
-	bOverride_PathTracingFilterWidth: boolean;
-	bOverride_PathTracingEnableEmissive: boolean;
-	bOverride_PathTracingMaxPathExposure: boolean;
-	bOverride_PathTracingEnableDenoiser: boolean;
-	bMobileHQGaussian: boolean;
-	BloomMethod: EBloomMethod;
-	AutoExposureMethod: EAutoExposureMethod;
-	DepthOfFieldMethod: EDepthOfFieldMethod;
-	TemperatureType: ETemperatureMethod;
-	WhiteTemp: number;
-	WhiteTint: number;
-	ColorSaturation: Vector4;
-	ColorContrast: Vector4;
-	ColorGamma: Vector4;
-	ColorGain: Vector4;
-	ColorOffset: Vector4;
-	ColorSaturationShadows: Vector4;
-	ColorContrastShadows: Vector4;
-	ColorGammaShadows: Vector4;
-	ColorGainShadows: Vector4;
-	ColorOffsetShadows: Vector4;
-	ColorSaturationMidtones: Vector4;
-	ColorContrastMidtones: Vector4;
-	ColorGammaMidtones: Vector4;
-	ColorGainMidtones: Vector4;
-	ColorOffsetMidtones: Vector4;
-	ColorSaturationHighlights: Vector4;
-	ColorContrastHighlights: Vector4;
-	ColorGammaHighlights: Vector4;
-	ColorGainHighlights: Vector4;
-	ColorOffsetHighlights: Vector4;
-	ColorCorrectionHighlightsMin: number;
-	ColorCorrectionShadowsMax: number;
-	BlueCorrection: number;
-	ExpandGamut: number;
-	ToneCurveAmount: number;
-	FilmSlope: number;
-	FilmToe: number;
-	FilmShoulder: number;
-	FilmBlackClip: number;
-	FilmWhiteClip: number;
-	FilmWhitePoint: LinearColor;
-	FilmShadowTint: LinearColor;
-	FilmShadowTintBlend: number;
-	FilmShadowTintAmount: number;
-	FilmSaturation: number;
-	FilmChannelMixerRed: LinearColor;
-	FilmChannelMixerGreen: LinearColor;
-	FilmChannelMixerBlue: LinearColor;
-	FilmContrast: number;
-	FilmToeAmount: number;
-	FilmHealAmount: number;
-	FilmDynamicRange: number;
-	SceneColorTint: LinearColor;
-	SceneFringeIntensity: number;
-	ChromaticAberrationStartOffset: number;
-	BloomIntensity: number;
-	BloomThreshold: number;
-	BloomSizeScale: number;
-	Bloom1Size: number;
-	Bloom2Size: number;
-	Bloom3Size: number;
-	Bloom4Size: number;
-	Bloom5Size: number;
-	Bloom6Size: number;
-	Bloom1Tint: LinearColor;
-	Bloom2Tint: LinearColor;
-	Bloom3Tint: LinearColor;
-	Bloom4Tint: LinearColor;
-	Bloom5Tint: LinearColor;
-	Bloom6Tint: LinearColor;
-	BloomConvolutionSize: number;
-	BloomConvolutionTexture: Texture2D;
-	BloomConvolutionCenterUV: Vector2D;
-	BloomConvolutionPreFilter: Vector;
-	BloomConvolutionPreFilterMin: number;
-	BloomConvolutionPreFilterMax: number;
-	BloomConvolutionPreFilterMult: number;
-	BloomConvolutionBufferScale: number;
-	BloomDirtMask: Texture;
-	BloomDirtMaskIntensity: number;
-	BloomDirtMaskTint: LinearColor;
-	AmbientCubemapTint: LinearColor;
-	AmbientCubemapIntensity: number;
-	AmbientCubemap: TextureCube;
-	CameraShutterSpeed: number;
-	CameraISO: number;
-	DepthOfFieldFstop: number;
-	DepthOfFieldMinFstop: number;
-	DepthOfFieldBladeCount: number;
-	AutoExposureBias: number;
-	AutoExposureBiasBackup: number;
-	bOverride_AutoExposureBiasBackup: boolean;
-	AutoExposureApplyPhysicalCameraExposure: boolean;
-	AutoExposureBiasCurve: CurveFloat;
-	AutoExposureMeterMask: Texture;
-	AutoExposureLowPercent: number;
-	AutoExposureHighPercent: number;
-	AutoExposureMinBrightness: number;
-	AutoExposureMaxBrightness: number;
-	AutoExposureSpeedUp: number;
-	AutoExposureSpeedDown: number;
-	HistogramLogMin: number;
-	HistogramLogMax: number;
-	AutoExposureCalibrationConstant: number;
-	LensFlareIntensity: number;
-	LensFlareTint: LinearColor;
-	LensFlareBokehSize: number;
-	LensFlareThreshold: number;
-	LensFlareBokehShape: Texture;
-	LensFlareTints: LinearColor;
-	VignetteIntensity: number;
-	GrainJitter: number;
-	GrainIntensity: number;
-	AmbientOcclusionIntensity: number;
-	AmbientOcclusionStaticFraction: number;
-	AmbientOcclusionRadius: number;
-	AmbientOcclusionRadiusInWS: boolean;
-	AmbientOcclusionFadeDistance: number;
-	AmbientOcclusionFadeRadius: number;
-	AmbientOcclusionDistance: number;
-	AmbientOcclusionPower: number;
-	AmbientOcclusionBias: number;
-	AmbientOcclusionQuality: number;
-	AmbientOcclusionMipBlend: number;
-	AmbientOcclusionMipScale: number;
-	AmbientOcclusionMipThreshold: number;
-	AmbientOcclusionTemporalBlendWeight: number;
-	RayTracingAO: boolean;
-	RayTracingAOSamplesPerPixel: number;
-	RayTracingAOIntensity: number;
-	RayTracingAORadius: number;
-	IndirectLightingColor: LinearColor;
-	IndirectLightingIntensity: number;
-	RayTracingGI: boolean;
-	RayTracingGIType: ERayTracingGlobalIlluminationType;
-	RayTracingGIMaxBounces: number;
-	RayTracingGISamplesPerPixel: number;
-	ColorGradingIntensity: number;
-	ColorGradingLUT: Texture;
-	DepthOfFieldSensorWidth: number;
-	DepthOfFieldFocalDistance: number;
-	DepthOfFieldDepthBlurAmount: number;
-	DepthOfFieldDepthBlurRadius: number;
-	DepthOfFieldFocalRegion: number;
-	DepthOfFieldNearTransitionRegion: number;
-	DepthOfFieldFarTransitionRegion: number;
-	DepthOfFieldScale: number;
-	DepthOfFieldNearBlurSize: number;
-	DepthOfFieldFarBlurSize: number;
-	DepthOfFieldOcclusion: number;
-	DepthOfFieldSkyFocusDistance: number;
-	DepthOfFieldVignetteSize: number;
-	MotionBlurAmount: number;
-	MotionBlurMax: number;
-	MotionBlurTargetFPS: number;
-	MotionBlurPerObjectSize: number;
-	LPVIntensity: number;
-	LPVVplInjectionBias: number;
-	LPVSize: number;
-	LPVSecondaryOcclusionIntensity: number;
-	LPVSecondaryBounceIntensity: number;
-	LPVGeometryVolumeBias: number;
-	LPVEmissiveInjectionIntensity: number;
-	LPVDirectionalOcclusionIntensity: number;
-	LPVDirectionalOcclusionRadius: number;
-	LPVDiffuseOcclusionExponent: number;
-	LPVSpecularOcclusionExponent: number;
-	LPVDiffuseOcclusionIntensity: number;
-	LPVSpecularOcclusionIntensity: number;
-	ReflectionsType: EReflectionsType;
-	ScreenSpaceReflectionIntensity: number;
-	ScreenSpaceReflectionQuality: number;
-	ScreenSpaceReflectionMaxRoughness: number;
-	RayTracingReflectionsMaxRoughness: number;
-	RayTracingReflectionsMaxBounces: number;
-	RayTracingReflectionsSamplesPerPixel: number;
-	RayTracingReflectionsShadows: EReflectedAndRefractedRayTracedShadows;
-	RayTracingReflectionsTranslucency: boolean;
-	TranslucencyType: ETranslucencyType;
-	RayTracingTranslucencyMaxRoughness: number;
-	RayTracingTranslucencyRefractionRays: number;
-	RayTracingTranslucencySamplesPerPixel: number;
-	RayTracingTranslucencyShadows: EReflectedAndRefractedRayTracedShadows;
-	RayTracingTranslucencyRefraction: boolean;
-	PathTracingMaxBounces: number;
-	PathTracingSamplesPerPixel: number;
-	PathTracingFilterWidth: number;
-	PathTracingEnableEmissive: boolean;
-	PathTracingMaxPathExposure: number;
-	PathTracingEnableDenoiser: boolean;
-	LPVFadeRange: number;
-	LPVDirectionalOcclusionFadeRange: number;
-	ScreenPercentage: number;
-	WeightedBlendables: WeightedBlendables;
-	Blendables: UObject[];
-	clone() : PostProcessSettings;
-	static C(Other: UObject | any): PostProcessSettings;
-}
-
-declare class MinimalViewInfo { 
-	Location: Vector;
-	Rotation: Rotator;
-	FOV: number;
-	DesiredFOV: number;
-	OrthoWidth: number;
-	OrthoNearClipPlane: number;
-	OrthoFarClipPlane: number;
-	AspectRatio: number;
-	bConstrainAspectRatio: boolean;
-	bUseFieldOfViewForLOD: boolean;
-	ProjectionMode: ECameraProjectionMode;
-	PostProcessBlendWeight: number;
-	PostProcessSettings: PostProcessSettings;
-	OffCenterProjectionOffset: Vector2D;
-	clone() : MinimalViewInfo;
-	static C(Other: UObject | any): MinimalViewInfo;
-	GetViewProjectionMatrix(ViewMatrix?: Matrix,ProjectionMatrix?: Matrix,ViewProjectionMatrix?: Matrix): {ViewMatrix: Matrix, ProjectionMatrix: Matrix, ViewProjectionMatrix: Matrix};
-	static GetViewProjectionMatrix(DesiredView: MinimalViewInfo,ViewMatrix?: Matrix,ProjectionMatrix?: Matrix,ViewProjectionMatrix?: Matrix): {ViewMatrix: Matrix, ProjectionMatrix: Matrix, ViewProjectionMatrix: Matrix};
-}
-
-declare class CameraCacheEntry { 
-	Timestamp: number;
-	POV: MinimalViewInfo;
-	clone() : CameraCacheEntry;
-	static C(Other: UObject | any): CameraCacheEntry;
-}
-
-declare class TViewTarget { 
-	Target: Actor;
-	POV: MinimalViewInfo;
-	PlayerState: PlayerState;
-	clone() : TViewTarget;
-	static C(Other: UObject | any): TViewTarget;
-}
-
-declare class CameraModifier extends UObject { 
-	bDebug: boolean;
-	bExclusive: boolean;
-	Priority: number;
-	CameraOwner: PlayerCameraManager;
-	AlphaInTime: number;
-	AlphaOutTime: number;
-	Alpha: number;
-	static Load(ResourceName: string): CameraModifier;
-	static Find(Outer: UObject, ResourceName: string): CameraModifier;
-	static GetDefaultObject(): CameraModifier;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CameraModifier;
-	IsDisabled(): boolean;
-	GetViewTarget(): Actor;
-	EnableModifier(): void;
-	DisableModifier(bImmediate: boolean): void;
-	BlueprintModifyPostProcess(DeltaTime: number,PostProcessBlendWeight?: number,PostProcessSettings?: PostProcessSettings): {PostProcessBlendWeight: number, PostProcessSettings: PostProcessSettings};
-	BlueprintModifyCamera(DeltaTime: number,ViewLocation: Vector,ViewRotation: Rotator,FOV: number,NewViewLocation?: Vector,NewViewRotation?: Rotator,NewFOV?: number): {NewViewLocation: Vector, NewViewRotation: Rotator, NewFOV: number};
-	static C(Other: UObject | any): CameraModifier;
-}
-
-declare type EAttachmentRule = 'KeepRelative' | 'KeepWorld' | 'SnapToTarget' | 'EAttachmentRule_MAX';
-declare var EAttachmentRule : { KeepRelative:'KeepRelative',KeepWorld:'KeepWorld',SnapToTarget:'SnapToTarget',EAttachmentRule_MAX:'EAttachmentRule_MAX', };
-declare class FXSystemAsset extends UObject { 
-	MaxPoolSize: any;
-	PoolPrimeSize: any;
-	static Load(ResourceName: string): FXSystemAsset;
-	static Find(Outer: UObject, ResourceName: string): FXSystemAsset;
-	static GetDefaultObject(): FXSystemAsset;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FXSystemAsset;
-	static C(Other: UObject | any): FXSystemAsset;
-}
-
-declare class FXSystemComponent extends PrimitiveComponent { 
-	static Load(ResourceName: string): FXSystemComponent;
-	static Find(Outer: UObject, ResourceName: string): FXSystemComponent;
-	static GetDefaultObject(): FXSystemComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FXSystemComponent;
-	SetVectorParameter(ParameterName: string,Param: Vector): void;
-	SetUseAutoManageAttachment(bAutoManage: boolean): void;
-	SetIntParameter(ParameterName: string,Param: number): void;
-	SetFloatParameter(ParameterName: string,Param: number): void;
-	SetEmitterEnable(EmitterName: string,bNewEnableState: boolean): void;
-	SetColorParameter(ParameterName: string,Param: LinearColor): void;
-	SetBoolParameter(ParameterName: string,Param: boolean): void;
-	SetAutoAttachmentParameters(Parent: SceneComponent,SocketName: string,LocationRule: EAttachmentRule,RotationRule: EAttachmentRule,ScaleRule: EAttachmentRule): void;
-	SetActorParameter(ParameterName: string,Param: Actor): void;
-	ReleaseToPool(): void;
-	GetFXSystemAsset(): FXSystemAsset;
-	static C(Other: UObject | any): FXSystemComponent;
-}
-
-declare type EEmitterRenderMode = 'ERM_Normal' | 'ERM_Point' | 'ERM_Cross' | 'ERM_LightsOnly' | 'ERM_None' | 'ERM_MAX';
-declare var EEmitterRenderMode : { ERM_Normal:'ERM_Normal',ERM_Point:'ERM_Point',ERM_Cross:'ERM_Cross',ERM_LightsOnly:'ERM_LightsOnly',ERM_None:'ERM_None',ERM_MAX:'ERM_MAX', };
-declare type EParticleSignificanceLevel = 'Low' | 'Medium' | 'High' | 'Critical' | 'Num' | 'EParticleSignificanceLevel_MAX';
-declare var EParticleSignificanceLevel : { Low:'Low',Medium:'Medium',High:'High',Critical:'Critical',Num:'Num',EParticleSignificanceLevel_MAX:'EParticleSignificanceLevel_MAX', };
-declare type EDetailMode = 'DM_Low' | 'DM_Medium' | 'DM_High' | 'DM_MAX';
-declare var EDetailMode : { DM_Low:'DM_Low',DM_Medium:'DM_Medium',DM_High:'DM_High',DM_MAX:'DM_MAX', };
-declare class ParticleModule extends UObject { 
-	bSpawnModule: boolean;
-	bUpdateModule: boolean;
-	bFinalUpdateModule: boolean;
-	bUpdateForGPUEmitter: boolean;
-	bCurvesAsColor: boolean;
-	b3DDrawMode: boolean;
-	bSupported3DDrawMode: boolean;
-	bEnabled: boolean;
-	bEditable: boolean;
-	LODDuplicate: boolean;
-	bSupportsRandomSeed: boolean;
-	bRequiresLoopingNotification: boolean;
-	LODValidity: number;
-	ModuleEditorColor: Color;
-	static Load(ResourceName: string): ParticleModule;
-	static Find(Outer: UObject, ResourceName: string): ParticleModule;
-	static GetDefaultObject(): ParticleModule;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModule;
-	static C(Other: UObject | any): ParticleModule;
-}
-
-declare type EParticleScreenAlignment = 'PSA_FacingCameraPosition' | 'PSA_Square' | 'PSA_Rectangle' | 'PSA_Velocity' | 'PSA_AwayFromCenter' | 'PSA_TypeSpecific' | 'PSA_FacingCameraDistanceBlend' | 'PSA_MAX';
-declare var EParticleScreenAlignment : { PSA_FacingCameraPosition:'PSA_FacingCameraPosition',PSA_Square:'PSA_Square',PSA_Rectangle:'PSA_Rectangle',PSA_Velocity:'PSA_Velocity',PSA_AwayFromCenter:'PSA_AwayFromCenter',PSA_TypeSpecific:'PSA_TypeSpecific',PSA_FacingCameraDistanceBlend:'PSA_FacingCameraDistanceBlend',PSA_MAX:'PSA_MAX', };
-declare type EParticleSortMode = 'PSORTMODE_None' | 'PSORTMODE_ViewProjDepth' | 'PSORTMODE_DistanceToView' | 'PSORTMODE_Age_OldestFirst' | 'PSORTMODE_Age_NewestFirst' | 'PSORTMODE_MAX';
-declare var EParticleSortMode : { PSORTMODE_None:'PSORTMODE_None',PSORTMODE_ViewProjDepth:'PSORTMODE_ViewProjDepth',PSORTMODE_DistanceToView:'PSORTMODE_DistanceToView',PSORTMODE_Age_OldestFirst:'PSORTMODE_Age_OldestFirst',PSORTMODE_Age_NewestFirst:'PSORTMODE_Age_NewestFirst',PSORTMODE_MAX:'PSORTMODE_MAX', };
-declare class DistributionLookupTable { 
-	TimeScale: number;
-	TimeBias: number;
-	Values: number[];
-	Op: number;
-	EntryCount: number;
-	EntryStride: number;
-	SubEntryStride: number;
-	LockFlag: number;
-	clone() : DistributionLookupTable;
-	static C(Other: UObject | any): DistributionLookupTable;
-}
-
-declare class RawDistribution { 
-	Table: DistributionLookupTable;
-	clone() : RawDistribution;
-	static C(Other: UObject | any): RawDistribution;
-}
-
-declare class Distribution extends UObject { 
-	static Load(ResourceName: string): Distribution;
-	static Find(Outer: UObject, ResourceName: string): Distribution;
-	static GetDefaultObject(): Distribution;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Distribution;
-	static C(Other: UObject | any): Distribution;
-}
-
-declare class DistributionFloat extends Distribution { 
-	bCanBeBaked: boolean;
-	bBakedDataSuccesfully: boolean;
-	static Load(ResourceName: string): DistributionFloat;
-	static Find(Outer: UObject, ResourceName: string): DistributionFloat;
-	static GetDefaultObject(): DistributionFloat;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): DistributionFloat;
-	static C(Other: UObject | any): DistributionFloat;
-}
-
-declare class RawDistributionFloat extends RawDistribution { 
-	MinValue: number;
-	MaxValue: number;
-	Distribution: DistributionFloat;
-	clone() : RawDistributionFloat;
-	static C(Other: UObject | any): RawDistributionFloat;
-}
-
-declare class ParticleBurst { 
-	Count: number;
-	CountLow: number;
-	Time: number;
-	clone() : ParticleBurst;
-	static C(Other: UObject | any): ParticleBurst;
-}
-
-declare type EParticleSubUVInterpMethod = 'PSUVIM_None' | 'PSUVIM_Linear' | 'PSUVIM_Linear_Blend' | 'PSUVIM_Random' | 'PSUVIM_Random_Blend' | 'PSUVIM_MAX';
-declare var EParticleSubUVInterpMethod : { PSUVIM_None:'PSUVIM_None',PSUVIM_Linear:'PSUVIM_Linear',PSUVIM_Linear_Blend:'PSUVIM_Linear_Blend',PSUVIM_Random:'PSUVIM_Random',PSUVIM_Random_Blend:'PSUVIM_Random_Blend',PSUVIM_MAX:'PSUVIM_MAX', };
-declare type EParticleBurstMethod = 'EPBM_Instant' | 'EPBM_Interpolated' | 'EPBM_MAX';
-declare var EParticleBurstMethod : { EPBM_Instant:'EPBM_Instant',EPBM_Interpolated:'EPBM_Interpolated',EPBM_MAX:'EPBM_MAX', };
-declare type EOpacitySourceMode = 'OSM_Alpha' | 'OSM_ColorBrightness' | 'OSM_RedChannel' | 'OSM_GreenChannel' | 'OSM_BlueChannel' | 'OSM_MAX';
-declare var EOpacitySourceMode : { OSM_Alpha:'OSM_Alpha',OSM_ColorBrightness:'OSM_ColorBrightness',OSM_RedChannel:'OSM_RedChannel',OSM_GreenChannel:'OSM_GreenChannel',OSM_BlueChannel:'OSM_BlueChannel',OSM_MAX:'OSM_MAX', };
-declare type EEmitterNormalsMode = 'ENM_CameraFacing' | 'ENM_Spherical' | 'ENM_Cylindrical' | 'ENM_MAX';
-declare var EEmitterNormalsMode : { ENM_CameraFacing:'ENM_CameraFacing',ENM_Spherical:'ENM_Spherical',ENM_Cylindrical:'ENM_Cylindrical',ENM_MAX:'ENM_MAX', };
-declare type EParticleUVFlipMode = 'None' | 'FlipUV' | 'FlipUOnly' | 'FlipVOnly' | 'RandomFlipUV' | 'RandomFlipUOnly' | 'RandomFlipVOnly' | 'RandomFlipUVIndependent' | 'EParticleUVFlipMode_MAX';
-declare var EParticleUVFlipMode : { None:'None',FlipUV:'FlipUV',FlipUOnly:'FlipUOnly',FlipVOnly:'FlipVOnly',RandomFlipUV:'RandomFlipUV',RandomFlipUOnly:'RandomFlipUOnly',RandomFlipVOnly:'RandomFlipVOnly',RandomFlipUVIndependent:'RandomFlipUVIndependent',EParticleUVFlipMode_MAX:'EParticleUVFlipMode_MAX', };
-declare type ESubUVBoundingVertexCount = 'BVC_FourVertices' | 'BVC_EightVertices' | 'BVC_MAX';
-declare var ESubUVBoundingVertexCount : { BVC_FourVertices:'BVC_FourVertices',BVC_EightVertices:'BVC_EightVertices',BVC_MAX:'BVC_MAX', };
-declare class ParticleModuleRequired extends ParticleModule { 
-	Material: MaterialInterface;
-	MinFacingCameraBlendDistance: number;
-	MaxFacingCameraBlendDistance: number;
-	EmitterOrigin: Vector;
-	EmitterRotation: Rotator;
-	ScreenAlignment: EParticleScreenAlignment;
-	bUseLocalSpace: boolean;
-	bKillOnDeactivate: boolean;
-	bKillOnCompleted: boolean;
-	SortMode: EParticleSortMode;
-	bUseLegacyEmitterTime: boolean;
-	bRemoveHMDRoll: boolean;
-	bEmitterDurationUseRange: boolean;
-	EmitterDuration: number;
-	SpawnRate: RawDistributionFloat;
-	BurstList: ParticleBurst[];
-	EmitterDelay: number;
-	EmitterDelayLow: number;
-	bDelayFirstLoopOnly: boolean;
-	InterpolationMethod: EParticleSubUVInterpMethod;
-	bScaleUV: boolean;
-	bEmitterDelayUseRange: boolean;
-	ParticleBurstMethod: EParticleBurstMethod;
-	bOverrideSystemMacroUV: boolean;
-	bUseMaxDrawCount: boolean;
-	OpacitySourceMode: EOpacitySourceMode;
-	EmitterNormalsMode: EEmitterNormalsMode;
-	bOrbitModuleAffectsVelocityAlignment: boolean;
-	SubImages_Horizontal: number;
-	SubImages_Vertical: number;
-	RandomImageTime: number;
-	RandomImageChanges: number;
-	MacroUVPosition: Vector;
-	MacroUVRadius: number;
-	UVFlippingMode: EParticleUVFlipMode;
-	BoundingMode: ESubUVBoundingVertexCount;
-	bDurationRecalcEachLoop: boolean;
-	NormalsSphereCenter: Vector;
-	AlphaThreshold: number;
-	EmitterLoops: number;
-	CutoutTexture: Texture2D;
-	MaxDrawCount: number;
-	EmitterDurationLow: number;
-	NormalsCylinderDirection: Vector;
-	NamedMaterialOverrides: string[];
-	static Load(ResourceName: string): ParticleModuleRequired;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleRequired;
-	static GetDefaultObject(): ParticleModuleRequired;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleRequired;
-	static C(Other: UObject | any): ParticleModuleRequired;
-}
-
-declare class ParticleModuleTypeDataBase extends ParticleModule { 
-	static Load(ResourceName: string): ParticleModuleTypeDataBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleTypeDataBase;
-	static GetDefaultObject(): ParticleModuleTypeDataBase;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleTypeDataBase;
-	static C(Other: UObject | any): ParticleModuleTypeDataBase;
-}
-
-declare class ParticleModuleSpawnBase extends ParticleModule { 
-	bProcessSpawnRate: boolean;
-	bProcessBurstList: boolean;
-	static Load(ResourceName: string): ParticleModuleSpawnBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleSpawnBase;
-	static GetDefaultObject(): ParticleModuleSpawnBase;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleSpawnBase;
-	static C(Other: UObject | any): ParticleModuleSpawnBase;
-}
-
-declare class ParticleModuleSpawn extends ParticleModuleSpawnBase { 
-	Rate: RawDistributionFloat;
-	RateScale: RawDistributionFloat;
-	ParticleBurstMethod: EParticleBurstMethod;
-	BurstList: ParticleBurst[];
-	BurstScale: RawDistributionFloat;
-	bApplyGlobalSpawnRateScale: boolean;
-	static Load(ResourceName: string): ParticleModuleSpawn;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleSpawn;
-	static GetDefaultObject(): ParticleModuleSpawn;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleSpawn;
-	static C(Other: UObject | any): ParticleModuleSpawn;
-}
-
-declare class ParticleModuleEventBase extends ParticleModule { 
-	static Load(ResourceName: string): ParticleModuleEventBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleEventBase;
-	static GetDefaultObject(): ParticleModuleEventBase;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleEventBase;
-	static C(Other: UObject | any): ParticleModuleEventBase;
-}
-
-declare type EParticleEventType = 'EPET_Any' | 'EPET_Spawn' | 'EPET_Death' | 'EPET_Collision' | 'EPET_Burst' | 'EPET_Blueprint' | 'EPET_MAX';
-declare var EParticleEventType : { EPET_Any:'EPET_Any',EPET_Spawn:'EPET_Spawn',EPET_Death:'EPET_Death',EPET_Collision:'EPET_Collision',EPET_Burst:'EPET_Burst',EPET_Blueprint:'EPET_Blueprint',EPET_MAX:'EPET_MAX', };
-declare class ParticleModuleEventSendToGame extends UObject { 
-	static Load(ResourceName: string): ParticleModuleEventSendToGame;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleEventSendToGame;
-	static GetDefaultObject(): ParticleModuleEventSendToGame;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleEventSendToGame;
-	static C(Other: UObject | any): ParticleModuleEventSendToGame;
-}
-
-declare class ParticleEvent_GenerateInfo { 
-	Type: EParticleEventType;
-	Frequency: number;
-	ParticleFrequency: number;
-	FirstTimeOnly: boolean;
-	LastTimeOnly: boolean;
-	UseReflectedImpactVector: boolean;
-	bUseOrbitOffset: boolean;
-	CustomName: string;
-	ParticleModuleEventsToSendToGame: ParticleModuleEventSendToGame[];
-	clone() : ParticleEvent_GenerateInfo;
-	static C(Other: UObject | any): ParticleEvent_GenerateInfo;
-}
-
-declare class ParticleModuleEventGenerator extends ParticleModuleEventBase { 
-	Events: ParticleEvent_GenerateInfo[];
-	static Load(ResourceName: string): ParticleModuleEventGenerator;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleEventGenerator;
-	static GetDefaultObject(): ParticleModuleEventGenerator;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleEventGenerator;
-	static C(Other: UObject | any): ParticleModuleEventGenerator;
-}
-
-declare class ParticleModuleOrbitBase extends ParticleModule { 
-	bUseEmitterTime: boolean;
-	static Load(ResourceName: string): ParticleModuleOrbitBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleOrbitBase;
-	static GetDefaultObject(): ParticleModuleOrbitBase;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleOrbitBase;
-	static C(Other: UObject | any): ParticleModuleOrbitBase;
-}
-
-declare type EOrbitChainMode = 'EOChainMode_Add' | 'EOChainMode_Scale' | 'EOChainMode_Link' | 'EOChainMode_MAX';
-declare var EOrbitChainMode : { EOChainMode_Add:'EOChainMode_Add',EOChainMode_Scale:'EOChainMode_Scale',EOChainMode_Link:'EOChainMode_Link',EOChainMode_MAX:'EOChainMode_MAX', };
-declare class DistributionVector extends Distribution { 
-	bCanBeBaked: boolean;
-	bIsDirty: boolean;
-	bBakedDataSuccesfully: boolean;
-	static Load(ResourceName: string): DistributionVector;
-	static Find(Outer: UObject, ResourceName: string): DistributionVector;
-	static GetDefaultObject(): DistributionVector;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): DistributionVector;
-	static C(Other: UObject | any): DistributionVector;
-}
-
-declare class RawDistributionVector extends RawDistribution { 
-	MinValue: number;
-	MaxValue: number;
-	MinValueVec: Vector;
-	MaxValueVec: Vector;
-	Distribution: DistributionVector;
-	clone() : RawDistributionVector;
-	static C(Other: UObject | any): RawDistributionVector;
-}
-
-declare class OrbitOptions { 
-	bProcessDuringSpawn: boolean;
-	bProcessDuringUpdate: boolean;
-	bUseEmitterTime: boolean;
-	clone() : OrbitOptions;
-	static C(Other: UObject | any): OrbitOptions;
-}
-
-declare class ParticleModuleOrbit extends ParticleModuleOrbitBase { 
-	ChainMode: EOrbitChainMode;
-	OffsetAmount: RawDistributionVector;
-	OffsetOptions: OrbitOptions;
-	RotationAmount: RawDistributionVector;
-	RotationOptions: OrbitOptions;
-	RotationRateAmount: RawDistributionVector;
-	RotationRateOptions: OrbitOptions;
-	static Load(ResourceName: string): ParticleModuleOrbit;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleOrbit;
-	static GetDefaultObject(): ParticleModuleOrbit;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleOrbit;
-	static C(Other: UObject | any): ParticleModuleOrbit;
-}
-
-declare class ParticleModuleEventReceiverBase extends ParticleModuleEventBase { 
-	EventGeneratorType: EParticleEventType;
-	EventName: string;
-	static Load(ResourceName: string): ParticleModuleEventReceiverBase;
-	static Find(Outer: UObject, ResourceName: string): ParticleModuleEventReceiverBase;
-	static GetDefaultObject(): ParticleModuleEventReceiverBase;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleEventReceiverBase;
-	static C(Other: UObject | any): ParticleModuleEventReceiverBase;
-}
-
-declare class ParticleLODLevel extends UObject { 
-	Level: number;
-	bEnabled: boolean;
-	RequiredModule: ParticleModuleRequired;
-	Modules: ParticleModule[];
-	TypeDataModule: ParticleModuleTypeDataBase;
-	SpawnModule: ParticleModuleSpawn;
-	EventGenerator: ParticleModuleEventGenerator;
-	SpawningModules: ParticleModuleSpawnBase[];
-	SpawnModules: ParticleModule[];
-	UpdateModules: ParticleModule[];
-	OrbitModules: ParticleModuleOrbit[];
-	EventReceiverModules: ParticleModuleEventReceiverBase[];
-	ConvertedModules: boolean;
-	PeakActiveParticles: number;
-	static Load(ResourceName: string): ParticleLODLevel;
-	static Find(Outer: UObject, ResourceName: string): ParticleLODLevel;
-	static GetDefaultObject(): ParticleLODLevel;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleLODLevel;
-	static C(Other: UObject | any): ParticleLODLevel;
-}
-
-declare class ParticleEmitter extends UObject { 
-	EmitterName: string;
-	SubUVDataOffset: number;
-	EmitterRenderMode: EEmitterRenderMode;
-	SignificanceLevel: EParticleSignificanceLevel;
-	bUseLegacySpawningBehavior: boolean;
-	ConvertedModules: boolean;
-	bIsSoloing: boolean;
-	bCookedOut: boolean;
-	bDisabledLODsKeepEmitterAlive: boolean;
-	bDisableWhenInsignficant: boolean;
-	bCollapsed: boolean;
-	DetailMode: EDetailMode;
-	EmitterEditorColor: Color;
-	LODLevels: ParticleLODLevel[];
-	PeakActiveParticles: number;
-	InitialAllocationCount: number;
-	QualityLevelSpawnRateScale: number;
-	DetailModeBitmask: any;
-	DetailModeDisplay: string;
-	static Load(ResourceName: string): ParticleEmitter;
-	static Find(Outer: UObject, ResourceName: string): ParticleEmitter;
-	static GetDefaultObject(): ParticleEmitter;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleEmitter;
-	static C(Other: UObject | any): ParticleEmitter;
-}
-
-declare class CurveEdEntry { 
-	CurveObject: UObject;
-	CurveColor: Color;
-	CurveName: string;
-	bHideCurve: number;
-	bColorCurve: number;
-	bFloatingPointColorCurve: number;
-	bClamp: number;
-	ClampLow: number;
-	ClampHigh: number;
-	clone() : CurveEdEntry;
-	static C(Other: UObject | any): CurveEdEntry;
-}
-
-declare class CurveEdTab { 
-	TabName: string;
-	Curves: CurveEdEntry[];
-	ViewStartInput: number;
-	ViewEndInput: number;
-	ViewStartOutput: number;
-	ViewEndOutput: number;
-	clone() : CurveEdTab;
-	static C(Other: UObject | any): CurveEdTab;
-}
-
-declare class InterpCurveEdSetup extends UObject { 
-	Tabs: CurveEdTab[];
-	ActiveTab: number;
-	static Load(ResourceName: string): InterpCurveEdSetup;
-	static Find(Outer: UObject, ResourceName: string): InterpCurveEdSetup;
-	static GetDefaultObject(): InterpCurveEdSetup;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InterpCurveEdSetup;
-	static C(Other: UObject | any): InterpCurveEdSetup;
-}
-
-declare class ParticleSystemLOD { 
-	clone() : ParticleSystemLOD;
-	static C(Other: UObject | any): ParticleSystemLOD;
-}
-
-declare type EParticleSystemUpdateMode = 'EPSUM_RealTime' | 'EPSUM_FixedTime' | 'EPSUM_MAX';
-declare var EParticleSystemUpdateMode : { EPSUM_RealTime:'EPSUM_RealTime',EPSUM_FixedTime:'EPSUM_FixedTime',EPSUM_MAX:'EPSUM_MAX', };
-declare type ParticleSystemLODMethod = 'PARTICLESYSTEMLODMETHOD_Automatic' | 'PARTICLESYSTEMLODMETHOD_DirectSet' | 'PARTICLESYSTEMLODMETHOD_ActivateAutomatic' | 'PARTICLESYSTEMLODMETHOD_MAX';
-declare var ParticleSystemLODMethod : { PARTICLESYSTEMLODMETHOD_Automatic:'PARTICLESYSTEMLODMETHOD_Automatic',PARTICLESYSTEMLODMETHOD_DirectSet:'PARTICLESYSTEMLODMETHOD_DirectSet',PARTICLESYSTEMLODMETHOD_ActivateAutomatic:'PARTICLESYSTEMLODMETHOD_ActivateAutomatic',PARTICLESYSTEMLODMETHOD_MAX:'PARTICLESYSTEMLODMETHOD_MAX', };
-declare type EParticleSystemInsignificanceReaction = 'Auto' | 'Complete' | 'DisableTick' | 'DisableTickAndKill' | 'Num' | 'EParticleSystemInsignificanceReaction_MAX';
-declare var EParticleSystemInsignificanceReaction : { Auto:'Auto',Complete:'Complete',DisableTick:'DisableTick',DisableTickAndKill:'DisableTickAndKill',Num:'Num',EParticleSystemInsignificanceReaction_MAX:'EParticleSystemInsignificanceReaction_MAX', };
-declare type EParticleSystemOcclusionBoundsMethod = 'EPSOBM_None' | 'EPSOBM_ParticleBounds' | 'EPSOBM_CustomBounds' | 'EPSOBM_MAX';
-declare var EParticleSystemOcclusionBoundsMethod : { EPSOBM_None:'EPSOBM_None',EPSOBM_ParticleBounds:'EPSOBM_ParticleBounds',EPSOBM_CustomBounds:'EPSOBM_CustomBounds',EPSOBM_MAX:'EPSOBM_MAX', };
-declare class LODSoloTrack { 
-	SoloEnableSetting: number[];
-	clone() : LODSoloTrack;
-	static C(Other: UObject | any): LODSoloTrack;
-}
-
-declare class NamedEmitterMaterial { 
-	Name: string;
-	Material: MaterialInterface;
-	clone() : NamedEmitterMaterial;
-	static C(Other: UObject | any): NamedEmitterMaterial;
-}
-
-declare type EPSCPoolMethod = 'None' | 'AutoRelease' | 'ManualRelease' | 'ManualRelease_OnComplete' | 'FreeInPool' | 'EPSCPoolMethod_MAX';
-declare var EPSCPoolMethod : { None:'None',AutoRelease:'AutoRelease',ManualRelease:'ManualRelease',ManualRelease_OnComplete:'ManualRelease_OnComplete',FreeInPool:'FreeInPool',EPSCPoolMethod_MAX:'EPSCPoolMethod_MAX', };
-declare class ParticleSystem extends FXSystemAsset { 
-	UpdateTime_FPS: number;
-	UpdateTime_Delta: number;
-	WarmupTime: number;
-	WarmupTickRate: number;
-	Emitters: ParticleEmitter[];
-	PreviewComponent: ParticleSystemComponent;
-	ThumbnailAngle: Rotator;
-	ThumbnailDistance: number;
-	ThumbnailWarmup: number;
-	CurveEdSetup: InterpCurveEdSetup;
-	LODDistanceCheckTime: number;
-	MacroUVRadius: number;
-	LODDistances: number[];
-	EditorLODSetting: number;
-	LODSettings: ParticleSystemLOD[];
-	FixedRelativeBoundingBox: Box;
-	SecondsBeforeInactive: number;
-	FloorMesh: string;
-	FloorPosition: Vector;
-	FloorRotation: Rotator;
-	FloorScale: number;
-	FloorScale3D: Vector;
-	BackgroundColor: Color;
-	Delay: number;
-	DelayLow: number;
-	bOrientZAxisTowardCamera: boolean;
-	bUseFixedRelativeBoundingBox: boolean;
-	bShouldResetPeakCounts: boolean;
-	bHasPhysics: boolean;
-	bUseRealtimeThumbnail: boolean;
-	ThumbnailImageOutOfDate: boolean;
-	ThumbnailImage: Texture2D;
-	bUseDelayRange: boolean;
-	bAllowManagedTicking: boolean;
-	bAutoDeactivate: boolean;
-	bRegenerateLODDuplicate: boolean;
-	SystemUpdateMode: EParticleSystemUpdateMode;
-	LODMethod: ParticleSystemLODMethod;
-	InsignificantReaction: EParticleSystemInsignificanceReaction;
-	OcclusionBoundsMethod: EParticleSystemOcclusionBoundsMethod;
-	MaxSignificanceLevel: EParticleSignificanceLevel;
-	MinTimeBetweenTicks: any;
-	InsignificanceDelay: number;
-	MacroUVPosition: Vector;
-	CustomOcclusionBounds: Box;
-	SoloTracking: LODSoloTrack[];
-	NamedMaterialSlots: NamedEmitterMaterial[];
-	static Load(ResourceName: string): ParticleSystem;
-	static Find(Outer: UObject, ResourceName: string): ParticleSystem;
-	static GetDefaultObject(): ParticleSystem;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleSystem;
-	ContainsEmitterType(TypeData: UnrealEngineClass): boolean;
-	static C(Other: UObject | any): ParticleSystem;
-	SpawnEmitterAttached(AttachToComponent: SceneComponent,AttachPointName: string,Location: Vector,Rotation: Rotator,Scale: Vector,LocationType: EAttachLocation,bAutoDestroy: boolean,PoolingMethod: EPSCPoolMethod,bAutoActivate: boolean): ParticleSystemComponent;
-	static SpawnEmitterAttached(EmitterTemplate: ParticleSystem,AttachToComponent: SceneComponent,AttachPointName: string,Location: Vector,Rotation: Rotator,Scale: Vector,LocationType: EAttachLocation,bAutoDestroy: boolean,PoolingMethod: EPSCPoolMethod,bAutoActivate: boolean): ParticleSystemComponent;
+declare class Info extends Actor { 
+	SpriteComponent: BillboardComponent;
+	static GetDefaultObject(): Info;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Info;
+	static C(Other: UObject | any): Info;
+}
+
+declare class LocalMessage extends UObject { 
+	static Load(ResourceName: string): LocalMessage;
+	static Find(Outer: UObject, ResourceName: string): LocalMessage;
+	static GetDefaultObject(): LocalMessage;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LocalMessage;
+	static C(Other: UObject | any): LocalMessage;
+}
+
+declare class UniqueNetIdWrapper { 
+	clone() : UniqueNetIdWrapper;
+	static C(Other: UObject | any): UniqueNetIdWrapper;
+}
+
+declare class UniqueNetIdRepl extends UniqueNetIdWrapper { 
+	ReplicationBytes: number[];
+	clone() : UniqueNetIdRepl;
+	static C(Other: UObject | any): UniqueNetIdRepl;
+}
+
+declare class PlayerState extends Info { 
+	Score: number;
+	PlayerId: number;
+	Ping: number;
+	bShouldUpdateReplicatedPing: boolean;
+	bIsSpectator: boolean;
+	bOnlySpectator: boolean;
+	bIsABot: boolean;
+	bIsInactive: boolean;
+	bFromPreviousLevel: boolean;
+	StartTime: number;
+	EngineMessageClass: UnrealEngineClass;
+	SavedNetworkAddress: string;
+	UniqueId: UniqueNetIdRepl;
+	PawnPrivate: Pawn;
+	PlayerNamePrivate: string;
+	static GetDefaultObject(): PlayerState;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PlayerState;
+	ReceiveOverrideWith(OldPlayerState: PlayerState): void;
+	ReceiveCopyProperties(NewPlayerState: PlayerState): void;
+	OnRep_UniqueId(): void;
+	OnRep_Score(): void;
+	OnRep_PlayerName(): void;
+	OnRep_PlayerId(): void;
+	OnRep_bIsInactive(): void;
+	IsOnlyASpectator(): boolean;
+	GetPlayerName(): string;
+	static C(Other: UObject | any): PlayerState;
+}
+
+declare class DamageType extends UObject { 
+	bCausedByWorld: boolean;
+	bScaleMomentumByMass: boolean;
+	bRadialDamageVelChange: boolean;
+	DamageImpulse: number;
+	DestructibleImpulse: number;
+	DestructibleDamageSpreadScale: number;
+	DamageFalloff: number;
+	static Load(ResourceName: string): DamageType;
+	static Find(Outer: UObject, ResourceName: string): DamageType;
+	static GetDefaultObject(): DamageType;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): DamageType;
+	static C(Other: UObject | any): DamageType;
 }
 
 declare class MeshComponent extends PrimitiveComponent { 
@@ -5763,6 +4078,17 @@ declare class AnimCompositeBase extends AnimSequenceBase {
 	static GetDefaultObject(): AnimCompositeBase;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimCompositeBase;
 	static C(Other: UObject | any): AnimCompositeBase;
+}
+
+declare class CurveFloat extends CurveBase { 
+	FloatCurve: RichCurve;
+	bIsEventCurve: boolean;
+	static Load(ResourceName: string): CurveFloat;
+	static Find(Outer: UObject, ResourceName: string): CurveFloat;
+	static GetDefaultObject(): CurveFloat;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CurveFloat;
+	GetFloatValue(InTime: number): number;
+	static C(Other: UObject | any): CurveFloat;
 }
 
 declare type EAlphaBlendOption = 'Linear' | 'Cubic' | 'HermiteCubic' | 'Sinusoidal' | 'QuadraticInOut' | 'CubicInOut' | 'QuarticInOut' | 'QuinticInOut' | 'CircularIn' | 'CircularOut' | 'CircularInOut' | 'ExpIn' | 'ExpOut' | 'ExpInOut' | 'Custom' | 'EAlphaBlendOption_MAX';
@@ -6829,715 +5155,1381 @@ declare class ClothingAssetData_Legacy {
 
 declare type ERootMotionMode = 'NoRootMotionExtraction' | 'IgnoreRootMotion' | 'RootMotionFromEverything' | 'RootMotionFromMontagesOnly' | 'ERootMotionMode_MAX';
 declare var ERootMotionMode : { NoRootMotionExtraction:'NoRootMotionExtraction',IgnoreRootMotion:'IgnoreRootMotion',RootMotionFromEverything:'RootMotionFromEverything',RootMotionFromMontagesOnly:'RootMotionFromMontagesOnly',ERootMotionMode_MAX:'ERootMotionMode_MAX', };
-declare class AnimNotifyEventReference { 
-	NotifySource: UObject;
-	clone() : AnimNotifyEventReference;
-	static C(Other: UObject | any): AnimNotifyEventReference;
+declare class Struct extends Field { 
+	static Load(ResourceName: string): Struct;
+	static Find(Outer: UObject, ResourceName: string): Struct;
+	static GetDefaultObject(): Struct;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Struct;
+	static C(Other: UObject | any): Struct;
 }
 
-declare class AnimNotifyQueue { 
-	AnimNotifies: AnimNotifyEventReference[];
-	UnfilteredMontageAnimNotifies: any;
-	clone() : AnimNotifyQueue;
-	static C(Other: UObject | any): AnimNotifyQueue;
+declare class DynamicBlueprintBinding extends UObject { 
+	static Load(ResourceName: string): DynamicBlueprintBinding;
+	static Find(Outer: UObject, ResourceName: string): DynamicBlueprintBinding;
+	static GetDefaultObject(): DynamicBlueprintBinding;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): DynamicBlueprintBinding;
+	static C(Other: UObject | any): DynamicBlueprintBinding;
 }
 
-declare class PoseSnapshot { 
-	LocalTransforms: Transform[];
-	BoneNames: string[];
-	SkeletalMeshName: string;
-	SnapshotName: string;
-	bIsValid: boolean;
-	clone() : PoseSnapshot;
-	static C(Other: UObject | any): PoseSnapshot;
+declare class DatasmithAssetUserData extends AssetUserData { 
+	MetaData: any;
+	ObjectTemplates: any;
+	static Load(ResourceName: string): DatasmithAssetUserData;
+	static Find(Outer: UObject, ResourceName: string): DatasmithAssetUserData;
+	static GetDefaultObject(): DatasmithAssetUserData;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): DatasmithAssetUserData;
+	static C(Other: UObject | any): DatasmithAssetUserData;
 }
 
-declare type ETeleportType = 'None' | 'TeleportPhysics' | 'ResetPhysics' | 'ETeleportType_MAX';
-declare var ETeleportType : { None:'None',TeleportPhysics:'TeleportPhysics',ResetPhysics:'ResetPhysics',ETeleportType_MAX:'ETeleportType_MAX', };
-declare type EMontagePlayReturnType = 'MontageLength' | 'Duration' | 'EMontagePlayReturnType_MAX';
-declare var EMontagePlayReturnType : { MontageLength:'MontageLength',Duration:'Duration',EMontagePlayReturnType_MAX:'EMontagePlayReturnType_MAX', };
-declare class MarkerSyncAnimPosition { 
-	PreviousMarkerName: string;
-	NextMarkerName: string;
-	PositionBetweenMarkers: number;
-	clone() : MarkerSyncAnimPosition;
-	static C(Other: UObject | any): MarkerSyncAnimPosition;
+declare class Subsystem extends UObject { 
+	static Load(ResourceName: string): Subsystem;
+	static Find(Outer: UObject, ResourceName: string): Subsystem;
+	static GetDefaultObject(): Subsystem;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Subsystem;
+	static C(Other: UObject | any): Subsystem;
 }
 
-declare type EAnimCurveType = 'AttributeCurve' | 'MaterialCurve' | 'MorphTargetCurve' | 'MaxAnimCurveType' | 'EAnimCurveType_MAX';
-declare var EAnimCurveType : { AttributeCurve:'AttributeCurve',MaterialCurve:'MaterialCurve',MorphTargetCurve:'MorphTargetCurve',MaxAnimCurveType:'MaxAnimCurveType',EAnimCurveType_MAX:'EAnimCurveType_MAX', };
-declare class AnimInstance extends UObject { 
-	CurrentSkeleton: Skeleton;
-	RootMotionMode: ERootMotionMode;
-	DeltaTime: number;
-	bRunUpdatesInWorkerThreads: boolean;
-	bCanUseParallelUpdateAnimation: boolean;
-	bWarnAboutBlueprintUsage: boolean;
-	bUseMultiThreadedAnimationUpdate: boolean;
-	bUsingCopyPoseFromMesh: boolean;
-	bReceiveNotifiesFromLinkedInstances: boolean;
-	bPropagateNotifiesToLinkedInstances: boolean;
-	bQueueMontageEvents: boolean;
-	OnMontageBlendingOut: UnrealEngineMulticastDelegate<(Montage: AnimMontage, bInterrupted: boolean) => void>;
-	OnMontageStarted: UnrealEngineMulticastDelegate<(Montage: AnimMontage) => void>;
-	OnMontageEnded: UnrealEngineMulticastDelegate<(Montage: AnimMontage, bInterrupted: boolean) => void>;
-	OnAllMontageInstancesEnded: UnrealEngineMulticastDelegate<() => void>;
-	PostCompileValidationClassName: SoftClassPath;
-	NotifyQueue: AnimNotifyQueue;
-	ActiveAnimNotifyState: AnimNotifyEvent[];
-	static Load(ResourceName: string): AnimInstance;
-	static Find(Outer: UObject, ResourceName: string): AnimInstance;
-	static GetDefaultObject(): AnimInstance;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimInstance;
-	UnlockAIResources(bUnlockMovement: boolean,UnlockAILogic: boolean): void;
-	UnlinkAnimClassLayers(InClass: UnrealEngineClass): void;
-	TryGetPawnOwner(): Pawn;
-	StopSlotAnimation(InBlendOutTime: number,SlotNodeName: string): void;
-	SnapshotPose(Snapshot?: PoseSnapshot): {Snapshot: PoseSnapshot};
-	SetRootMotionMode(Value: ERootMotionMode): void;
-	SetReceiveNotifiesFromLinkedInstances(bSet: boolean): void;
-	SetPropagateNotifiesToLinkedInstances(bSet: boolean): void;
-	SetMorphTarget(MorphTargetName: string,Value: number): void;
-	SavePoseSnapshot(SnapshotName: string): void;
-	ResetDynamics(InTeleportType: ETeleportType): void;
-	PlaySlotAnimationAsDynamicMontage(Asset: AnimSequenceBase,SlotNodeName: string,BlendInTime: number,BlendOutTime: number,InPlayRate: number,LoopCount: number,BlendOutTriggerTime: number,InTimeToStartMontageAt: number): AnimMontage;
-	PlaySlotAnimation(Asset: AnimSequenceBase,SlotNodeName: string,BlendInTime: number,BlendOutTime: number,InPlayRate: number,LoopCount: number): number;
-	Montage_StopGroupByName(InBlendOutTime: number,GroupName: string): void;
-	Montage_Stop(InBlendOutTime: number,Montage: AnimMontage): void;
-	Montage_SetPosition(Montage: AnimMontage,NewPosition: number): void;
-	Montage_SetPlayRate(Montage: AnimMontage,NewPlayRate: number): void;
-	Montage_SetNextSection(SectionNameToChange: string,NextSection: string,Montage: AnimMontage): void;
-	Montage_Resume(Montage: AnimMontage): void;
-	Montage_Play(MontageToPlay: AnimMontage,InPlayRate: number,ReturnValueType: EMontagePlayReturnType,InTimeToStartMontageAt: number,bStopAllMontages: boolean): number;
-	Montage_Pause(Montage: AnimMontage): void;
-	Montage_JumpToSectionsEnd(SectionName: string,Montage: AnimMontage): void;
-	Montage_JumpToSection(SectionName: string,Montage: AnimMontage): void;
-	Montage_IsPlaying(Montage: AnimMontage): boolean;
-	Montage_IsActive(Montage: AnimMontage): boolean;
-	Montage_GetPosition(Montage: AnimMontage): number;
-	Montage_GetPlayRate(Montage: AnimMontage): number;
-	Montage_GetIsStopped(Montage: AnimMontage): boolean;
-	Montage_GetCurrentSection(Montage: AnimMontage): string;
-	Montage_GetBlendTime(Montage: AnimMontage): number;
-	LockAIResources(bLockMovement: boolean,LockAILogic: boolean): void;
-	LinkAnimGraphByTag(InTag: string,InClass: UnrealEngineClass): void;
-	LinkAnimClassLayers(InClass: UnrealEngineClass): void;
-	IsSyncGroupBetweenMarkers(InSyncGroupName: string,PreviousMarker: string,NextMarker: string,bRespectMarkerOrder: boolean): boolean;
-	IsPlayingSlotAnimation(Asset: AnimSequenceBase,SlotNodeName: string): boolean;
-	IsAnyMontagePlaying(): boolean;
-	HasMarkerBeenHitThisFrame(SyncGroup: string,MarkerName: string): boolean;
-	GetTimeToClosestMarker(SyncGroup: string,MarkerName: string,OutMarkerTime?: number): {OutMarkerTime: number, $: boolean};
-	GetSyncGroupPosition(InSyncGroupName: string): MarkerSyncAnimPosition;
-	GetRelevantAnimTimeRemainingFraction(MachineIndex: number,StateIndex: number): number;
-	GetRelevantAnimTimeRemaining(MachineIndex: number,StateIndex: number): number;
-	GetRelevantAnimTimeFraction(MachineIndex: number,StateIndex: number): number;
-	GetRelevantAnimTime(MachineIndex: number,StateIndex: number): number;
-	GetRelevantAnimLength(MachineIndex: number,StateIndex: number): number;
-	GetReceiveNotifiesFromLinkedInstances(): boolean;
-	GetPropagateNotifiesToLinkedInstances(): boolean;
-	GetOwningComponent(): SkeletalMeshComponent;
-	GetOwningActor(): Actor;
-	GetLinkedAnimLayerInstancesByGroup(InGroup: string,OutLinkedInstances?: AnimInstance[]): {OutLinkedInstances: AnimInstance[]};
-	GetLinkedAnimLayerInstanceByGroupAndClass(InGroup: string,InClass: UnrealEngineClass): AnimInstance;
-	GetLinkedAnimLayerInstanceByGroup(InGroup: string): AnimInstance;
-	GetLinkedAnimLayerInstanceByClass(InClass: UnrealEngineClass): AnimInstance;
-	GetLinkedAnimGraphInstancesByTag(InTag: string,OutLinkedInstances?: AnimInstance[]): {OutLinkedInstances: AnimInstance[]};
-	GetLinkedAnimGraphInstanceByTag(InTag: string): AnimInstance;
-	GetInstanceTransitionTimeElapsedFraction(MachineIndex: number,TransitionIndex: number): number;
-	GetInstanceTransitionTimeElapsed(MachineIndex: number,TransitionIndex: number): number;
-	GetInstanceTransitionCrossfadeDuration(MachineIndex: number,TransitionIndex: number): number;
-	GetInstanceStateWeight(MachineIndex: number,StateIndex: number): number;
-	GetInstanceMachineWeight(MachineIndex: number): number;
-	GetInstanceCurrentStateElapsedTime(MachineIndex: number): number;
-	GetInstanceAssetPlayerTimeFromEndFraction(AssetPlayerIndex: number): number;
-	GetInstanceAssetPlayerTimeFromEnd(AssetPlayerIndex: number): number;
-	GetInstanceAssetPlayerTimeFraction(AssetPlayerIndex: number): number;
-	GetInstanceAssetPlayerTime(AssetPlayerIndex: number): number;
-	GetInstanceAssetPlayerLength(AssetPlayerIndex: number): number;
-	GetCurveValue(CurveName: string): number;
-	GetCurrentStateName(MachineIndex: number): string;
-	GetCurrentActiveMontage(): AnimMontage;
-	GetAllCurveNames(OutNames?: string[]): {OutNames: string[]};
-	GetActiveCurveNames(CurveType: EAnimCurveType,OutNames?: string[]): {OutNames: string[]};
-	ClearMorphTargets(): void;
-	CalculateDirection(Velocity: Vector,BaseRotation: Rotator): number;
-	BlueprintUpdateAnimation(DeltaTimeX: number): void;
-	BlueprintPostEvaluateAnimation(): void;
-	BlueprintLinkedAnimationLayersInitialized(): void;
-	BlueprintInitializeAnimation(): void;
-	BlueprintBeginPlay(): void;
-	static C(Other: UObject | any): AnimInstance;
-	LockAIResourcesWithAnimation(bLockMovement: boolean,LockAILogic: boolean): void;
-	UnlockAIResourcesWithAnimation(bUnlockMovement: boolean,UnlockAILogic: boolean): void;
-	static LockAIResourcesWithAnimation(AnimInstance: AnimInstance,bLockMovement: boolean,LockAILogic: boolean): void;
-	static UnlockAIResourcesWithAnimation(AnimInstance: AnimInstance,bUnlockMovement: boolean,UnlockAILogic: boolean): void;
+declare class DynamicSubsystem extends Subsystem { 
+	static Load(ResourceName: string): DynamicSubsystem;
+	static Find(Outer: UObject, ResourceName: string): DynamicSubsystem;
+	static GetDefaultObject(): DynamicSubsystem;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): DynamicSubsystem;
+	static C(Other: UObject | any): DynamicSubsystem;
 }
 
-declare class ClothingAssetBase extends UObject { 
-	ImportedFilePath: string;
-	AssetGuid: Guid;
-	static Load(ResourceName: string): ClothingAssetBase;
-	static Find(Outer: UObject, ResourceName: string): ClothingAssetBase;
-	static GetDefaultObject(): ClothingAssetBase;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ClothingAssetBase;
-	static C(Other: UObject | any): ClothingAssetBase;
+declare class EngineSubsystem extends DynamicSubsystem { 
+	static Load(ResourceName: string): EngineSubsystem;
+	static Find(Outer: UObject, ResourceName: string): EngineSubsystem;
+	static GetDefaultObject(): EngineSubsystem;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EngineSubsystem;
+	static C(Other: UObject | any): EngineSubsystem;
 }
 
-declare class SkeletalMeshSamplingRegionMaterialFilter { 
-	MaterialName: string;
-	clone() : SkeletalMeshSamplingRegionMaterialFilter;
-	static C(Other: UObject | any): SkeletalMeshSamplingRegionMaterialFilter;
-}
-
-declare class SkeletalMeshSamplingRegionBoneFilter { 
-	BoneName: string;
-	bIncludeOrExclude: boolean;
-	bApplyToChildren: boolean;
-	clone() : SkeletalMeshSamplingRegionBoneFilter;
-	static C(Other: UObject | any): SkeletalMeshSamplingRegionBoneFilter;
-}
-
-declare class SkeletalMeshSamplingRegion { 
+declare class PrimaryAssetType { 
 	Name: string;
-	LODIndex: number;
-	bSupportUniformlyDistributedSampling: boolean;
-	MaterialFilters: SkeletalMeshSamplingRegionMaterialFilter[];
-	BoneFilters: SkeletalMeshSamplingRegionBoneFilter[];
-	clone() : SkeletalMeshSamplingRegion;
-	static C(Other: UObject | any): SkeletalMeshSamplingRegion;
+	clone() : PrimaryAssetType;
+	static C(Other: UObject | any): PrimaryAssetType;
+	Conv_PrimaryAssetTypeToString(): string;
+	EqualEqual_PrimaryAssetType(B: PrimaryAssetType): boolean;
+	GetPrimaryAssetIdList(OutPrimaryAssetIdList?: PrimaryAssetId[]): {OutPrimaryAssetIdList: PrimaryAssetId[]};
+	IsValidPrimaryAssetType(): boolean;
+	NotEqual_PrimaryAssetType(B: PrimaryAssetType): boolean;
+	static Conv_PrimaryAssetTypeToString(PrimaryAssetType: PrimaryAssetType): string;
+	static EqualEqual_PrimaryAssetType(A: PrimaryAssetType,B: PrimaryAssetType): boolean;
+	static GetPrimaryAssetIdList(PrimaryAssetType: PrimaryAssetType,OutPrimaryAssetIdList?: PrimaryAssetId[]): {OutPrimaryAssetIdList: PrimaryAssetId[]};
+	static IsValidPrimaryAssetType(PrimaryAssetType: PrimaryAssetType): boolean;
+	static NotEqual_PrimaryAssetType(A: PrimaryAssetType,B: PrimaryAssetType): boolean;
 }
 
-declare class SkeletalMeshSamplingLODBuiltData { 
-	clone() : SkeletalMeshSamplingLODBuiltData;
-	static C(Other: UObject | any): SkeletalMeshSamplingLODBuiltData;
+declare class PrimaryAssetId { 
+	PrimaryAssetType: PrimaryAssetType;
+	PrimaryAssetName: string;
+	clone() : PrimaryAssetId;
+	static C(Other: UObject | any): PrimaryAssetId;
+	Conv_PrimaryAssetIdToString(): string;
+	EqualEqual_PrimaryAssetId(B: PrimaryAssetId): boolean;
+	GetClassFromPrimaryAssetId(): UnrealEngineClass;
+	GetCurrentBundleState(bForceCurrentState: boolean,OutBundles?: string[]): {OutBundles: string[], $: boolean};
+	GetObjectFromPrimaryAssetId(): UObject;
+	GetSoftClassReferenceFromPrimaryAssetId(): Class;
+	GetSoftObjectReferenceFromPrimaryAssetId(): UObject;
+	IsValidPrimaryAssetId(): boolean;
+	NotEqual_PrimaryAssetId(B: PrimaryAssetId): boolean;
+	UnloadPrimaryAsset(): void;
+	static Conv_PrimaryAssetIdToString(PrimaryAssetId: PrimaryAssetId): string;
+	static EqualEqual_PrimaryAssetId(A: PrimaryAssetId,B: PrimaryAssetId): boolean;
+	static GetClassFromPrimaryAssetId(PrimaryAssetId: PrimaryAssetId): UnrealEngineClass;
+	static GetCurrentBundleState(PrimaryAssetId: PrimaryAssetId,bForceCurrentState: boolean,OutBundles?: string[]): {OutBundles: string[], $: boolean};
+	static GetObjectFromPrimaryAssetId(PrimaryAssetId: PrimaryAssetId): UObject;
+	static GetSoftClassReferenceFromPrimaryAssetId(PrimaryAssetId: PrimaryAssetId): Class;
+	static GetSoftObjectReferenceFromPrimaryAssetId(PrimaryAssetId: PrimaryAssetId): UObject;
+	static IsValidPrimaryAssetId(PrimaryAssetId: PrimaryAssetId): boolean;
+	static NotEqual_PrimaryAssetId(A: PrimaryAssetId,B: PrimaryAssetId): boolean;
+	static UnloadPrimaryAsset(PrimaryAssetId: PrimaryAssetId): void;
 }
 
-declare class SkeletalMeshSamplingRegionBuiltData { 
-	clone() : SkeletalMeshSamplingRegionBuiltData;
-	static C(Other: UObject | any): SkeletalMeshSamplingRegionBuiltData;
+declare class SaveGame extends UObject { 
+	static Load(ResourceName: string): SaveGame;
+	static Find(Outer: UObject, ResourceName: string): SaveGame;
+	static GetDefaultObject(): SaveGame;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SaveGame;
+	static C(Other: UObject | any): SaveGame;
+	SaveGameToSlot(SlotName: string,UserIndex: number): boolean;
+	static SaveGameToSlot(SaveGameObject: SaveGame,SlotName: string,UserIndex: number): boolean;
 }
 
-declare class SkeletalMeshSamplingBuiltData { 
-	WholeMeshBuiltData: SkeletalMeshSamplingLODBuiltData[];
-	RegionBuiltData: SkeletalMeshSamplingRegionBuiltData[];
-	clone() : SkeletalMeshSamplingBuiltData;
-	static C(Other: UObject | any): SkeletalMeshSamplingBuiltData;
+declare class EditorSubsystem extends DynamicSubsystem { 
+	static Load(ResourceName: string): EditorSubsystem;
+	static Find(Outer: UObject, ResourceName: string): EditorSubsystem;
+	static GetDefaultObject(): EditorSubsystem;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EditorSubsystem;
+	static C(Other: UObject | any): EditorSubsystem;
 }
 
-declare class SkeletalMeshSamplingInfo { 
-	Regions: SkeletalMeshSamplingRegion[];
-	BuiltData: SkeletalMeshSamplingBuiltData;
-	clone() : SkeletalMeshSamplingInfo;
-	static C(Other: UObject | any): SkeletalMeshSamplingInfo;
+declare class Visual extends UObject { 
+	static Load(ResourceName: string): Visual;
+	static Find(Outer: UObject, ResourceName: string): Visual;
+	static GetDefaultObject(): Visual;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Visual;
+	static C(Other: UObject | any): Visual;
 }
 
-declare class SkinWeightProfileInfo { 
+declare class PanelWidget extends Widget { 
+	Slots: PanelSlot[];
+	static Load(ResourceName: string): PanelWidget;
+	static Find(Outer: UObject, ResourceName: string): PanelWidget;
+	static GetDefaultObject(): PanelWidget;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PanelWidget;
+	RemoveChildAt(index: number): boolean;
+	RemoveChild(Content: Widget): boolean;
+	HasChild(Content: Widget): boolean;
+	HasAnyChildren(): boolean;
+	GetChildrenCount(): number;
+	GetChildIndex(Content: Widget): number;
+	GetChildAt(index: number): Widget;
+	GetAllChildren(): Widget[];
+	ClearChildren(): void;
+	AddChild(Content: Widget): PanelSlot;
+	static C(Other: UObject | any): PanelWidget;
+}
+
+declare class PanelSlot extends Visual { 
+	Parent: PanelWidget;
+	Content: Widget;
+	static Load(ResourceName: string): PanelSlot;
+	static Find(Outer: UObject, ResourceName: string): PanelSlot;
+	static GetDefaultObject(): PanelSlot;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PanelSlot;
+	static C(Other: UObject | any): PanelSlot;
+}
+
+declare type ESlateVisibility = 'Visible' | 'Collapsed' | 'Hidden' | 'HitTestInvisible' | 'SelfHitTestInvisible' | 'ESlateVisibility_MAX';
+declare var ESlateVisibility : { Visible:'Visible',Collapsed:'Collapsed',Hidden:'Hidden',HitTestInvisible:'HitTestInvisible',SelfHitTestInvisible:'SelfHitTestInvisible',ESlateVisibility_MAX:'ESlateVisibility_MAX', };
+declare class WidgetTransform { 
+	Translation: Vector2D;
+	Scale: Vector2D;
+	Shear: Vector2D;
+	Angle: number;
+	clone() : WidgetTransform;
+	static C(Other: UObject | any): WidgetTransform;
+}
+
+declare type ESlateAccessibleBehavior = 'NotAccessible' | 'Auto' | 'Summary' | 'Custom' | 'ToolTip' | 'ESlateAccessibleBehavior_MAX';
+declare var ESlateAccessibleBehavior : { NotAccessible:'NotAccessible',Auto:'Auto',Summary:'Summary',Custom:'Custom',ToolTip:'ToolTip',ESlateAccessibleBehavior_MAX:'ESlateAccessibleBehavior_MAX', };
+declare class SlateAccessibleWidgetData extends UObject { 
+	bCanChildrenBeAccessible: boolean;
+	AccessibleBehavior: ESlateAccessibleBehavior;
+	AccessibleSummaryBehavior: ESlateAccessibleBehavior;
+	AccessibleText: string;
+	AccessibleTextDelegate: UnrealEngineDelegate<() => string>;
+	AccessibleSummaryText: string;
+	AccessibleSummaryTextDelegate: UnrealEngineDelegate<() => string>;
+	static Load(ResourceName: string): SlateAccessibleWidgetData;
+	static Find(Outer: UObject, ResourceName: string): SlateAccessibleWidgetData;
+	static GetDefaultObject(): SlateAccessibleWidgetData;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SlateAccessibleWidgetData;
+	static C(Other: UObject | any): SlateAccessibleWidgetData;
+}
+
+declare type EMouseCursor = 'None' | 'Default' | 'TextEditBeam' | 'ResizeLeftRight' | 'ResizeUpDown' | 'ResizeSouthEast' | 'ResizeSouthWest' | 'CardinalCross' | 'Crosshairs' | 'Hand' | 'GrabHand' | 'GrabHandClosed' | 'SlashedCircle' | 'EyeDropper' | 'EMouseCursor_MAX';
+declare var EMouseCursor : { None:'None',Default:'Default',TextEditBeam:'TextEditBeam',ResizeLeftRight:'ResizeLeftRight',ResizeUpDown:'ResizeUpDown',ResizeSouthEast:'ResizeSouthEast',ResizeSouthWest:'ResizeSouthWest',CardinalCross:'CardinalCross',Crosshairs:'Crosshairs',Hand:'Hand',GrabHand:'GrabHand',GrabHandClosed:'GrabHandClosed',SlashedCircle:'SlashedCircle',EyeDropper:'EyeDropper',EMouseCursor_MAX:'EMouseCursor_MAX', };
+declare type EWidgetClipping = 'Inherit' | 'ClipToBounds' | 'ClipToBoundsWithoutIntersecting' | 'ClipToBoundsAlways' | 'OnDemand' | 'EWidgetClipping_MAX';
+declare var EWidgetClipping : { Inherit:'Inherit',ClipToBounds:'ClipToBounds',ClipToBoundsWithoutIntersecting:'ClipToBoundsWithoutIntersecting',ClipToBoundsAlways:'ClipToBoundsAlways',OnDemand:'OnDemand',EWidgetClipping_MAX:'EWidgetClipping_MAX', };
+declare type EUINavigationRule = 'Escape' | 'Explicit' | 'Wrap' | 'Stop' | 'Custom' | 'CustomBoundary' | 'Invalid' | 'EUINavigationRule_MAX';
+declare var EUINavigationRule : { Escape:'Escape',Explicit:'Explicit',Wrap:'Wrap',Stop:'Stop',Custom:'Custom',CustomBoundary:'CustomBoundary',Invalid:'Invalid',EUINavigationRule_MAX:'EUINavigationRule_MAX', };
+declare type EUINavigation = 'Left' | 'Right' | 'Up' | 'Down' | 'Next' | 'Previous' | 'Num' | 'Invalid' | 'EUINavigation_MAX';
+declare var EUINavigation : { Left:'Left',Right:'Right',Up:'Up',Down:'Down',Next:'Next',Previous:'Previous',Num:'Num',Invalid:'Invalid',EUINavigation_MAX:'EUINavigation_MAX', };
+declare class WidgetNavigationData { 
+	Rule: EUINavigationRule;
+	WidgetToFocus: string;
+	Widget: any;
+	CustomDelegate: UnrealEngineDelegate<(Navigation: EUINavigation) => Widget>;
+	clone() : WidgetNavigationData;
+	static C(Other: UObject | any): WidgetNavigationData;
+}
+
+declare class WidgetNavigation extends UObject { 
+	Up: WidgetNavigationData;
+	Down: WidgetNavigationData;
+	Left: WidgetNavigationData;
+	Right: WidgetNavigationData;
+	Next: WidgetNavigationData;
+	Previous: WidgetNavigationData;
+	static Load(ResourceName: string): WidgetNavigation;
+	static Find(Outer: UObject, ResourceName: string): WidgetNavigation;
+	static GetDefaultObject(): WidgetNavigation;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WidgetNavigation;
+	static C(Other: UObject | any): WidgetNavigation;
+}
+
+declare type EFlowDirectionPreference = 'Inherit' | 'Culture' | 'LeftToRight' | 'RightToLeft' | 'EFlowDirectionPreference_MAX';
+declare var EFlowDirectionPreference : { Inherit:'Inherit',Culture:'Culture',LeftToRight:'LeftToRight',RightToLeft:'RightToLeft',EFlowDirectionPreference_MAX:'EFlowDirectionPreference_MAX', };
+declare class PropertyPathSegment { 
 	Name: string;
-	DefaultProfile: PerPlatformBool;
-	DefaultProfileFromLODIndex: PerPlatformInt;
-	PerLODSourceFiles: any;
-	clone() : SkinWeightProfileInfo;
-	static C(Other: UObject | any): SkinWeightProfileInfo;
+	ArrayIndex: number;
+	struct: Struct;
+	clone() : PropertyPathSegment;
+	static C(Other: UObject | any): PropertyPathSegment;
 }
 
-declare class SkeletalMesh extends StreamableRenderAsset { 
-	MeshEditorDataObject: SkeletalMeshEditorData;
-	Skeleton: Skeleton;
-	ImportedBounds: BoxSphereBounds;
-	ExtendedBounds: BoxSphereBounds;
-	PositiveBoundsExtension: Vector;
-	NegativeBoundsExtension: Vector;
-	Materials: SkeletalMaterial[];
-	SkelMirrorTable: BoneMirrorInfo[];
-	LODInfo: SkeletalMeshLODInfo[];
-	MinLOD: PerPlatformInt;
-	DisableBelowMinLodStripping: PerPlatformBool;
-	bOverrideLODStreamingSettings: boolean;
-	bSupportLODStreaming: PerPlatformBool;
-	MaxNumStreamedLODs: PerPlatformInt;
-	MaxNumOptionalLODs: PerPlatformInt;
-	LODSettings: SkeletalMeshLODSettings;
-	DefaultAnimatingRig: UObject;
-	SkelMirrorAxis: EAxis;
-	SkelMirrorFlipAxis: EAxis;
-	bUseFullPrecisionUVs: boolean;
-	bUseHighPrecisionTangentBasis: boolean;
-	bHasBeenSimplified: boolean;
-	bHasVertexColors: boolean;
-	bEnablePerPolyCollision: boolean;
-	VertexColorGuid: Guid;
-	BodySetup: BodySetup;
-	PhysicsAsset: PhysicsAsset;
-	ShadowPhysicsAsset: PhysicsAsset;
-	NodeMappingData: NodeMappingContainer[];
-	AssetImportData: AssetImportData;
-	SourceFilePath: string;
-	SourceFileTimestamp: string;
-	ThumbnailInfo: ThumbnailInfo;
-	bHasCustomDefaultEditorCamera: boolean;
-	DefaultEditorCameraLocation: Vector;
-	DefaultEditorCameraRotation: Rotator;
-	DefaultEditorCameraLookAt: Vector;
-	DefaultEditorCameraOrthoZoom: number;
-	PreviewAttachedAssetContainer: PreviewAssetAttachContainer;
-	bSupportRayTracing: boolean;
-	MorphTargets: MorphTarget[];
-	FloorOffset: number;
-	RetargetBasePose: Transform[];
-	ClothingAssets: ClothingAssetData_Legacy[];
-	PostProcessAnimBlueprint: UnrealEngineClass;
-	MeshClothingAssets: ClothingAssetBase[];
-	SamplingInfo: SkeletalMeshSamplingInfo;
-	AssetUserData: AssetUserData[];
-	Sockets: SkeletalMeshSocket[];
-	SkinWeightProfiles: SkinWeightProfileInfo[];
-	static Load(ResourceName: string): SkeletalMesh;
-	static Find(Outer: UObject, ResourceName: string): SkeletalMesh;
-	static GetDefaultObject(): SkeletalMesh;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SkeletalMesh;
-	SetMorphTargets(InMorphTargets: MorphTarget[]): void;
-	SetMeshClothingAssets(InMeshClothingAssets: ClothingAssetBase[]): void;
-	SetMaterials(InMaterials: SkeletalMaterial[]): void;
-	SetLODSettings(InLODSettings: SkeletalMeshLODSettings): void;
-	SetDefaultAnimatingRig(InAnimatingRig: UObject): void;
-	NumSockets(): number;
-	K2_GetAllMorphTargetNames(): string[];
-	IsSectionUsingCloth(InSectionIndex: number,bCheckCorrespondingSections: boolean): boolean;
-	GetSocketByIndex(index: number): SkeletalMeshSocket;
-	GetSkeleton(): Skeleton;
-	GetShadowPhysicsAsset(): PhysicsAsset;
-	GetPhysicsAsset(): PhysicsAsset;
-	GetNodeMappingData(): NodeMappingContainer[];
-	GetNodeMappingContainer(SourceAsset: Blueprint): NodeMappingContainer;
-	GetMorphTargets(): MorphTarget[];
-	GetMeshClothingAssets(): ClothingAssetBase[];
-	GetMaterials(): SkeletalMaterial[];
-	GetLODSettings(): SkeletalMeshLODSettings;
-	GetImportedBounds(): BoxSphereBounds;
-	GetDefaultAnimatingRig(): UObject;
-	GetBounds(): BoxSphereBounds;
-	FindSocketInfo(InSocketName: string,OutTransform?: Transform,OutBoneIndex?: number,OutIndex?: number): {OutTransform: Transform, OutBoneIndex: number, OutIndex: number, $: SkeletalMeshSocket};
-	FindSocketAndIndex(InSocketName: string,OutIndex?: number): {OutIndex: number, $: SkeletalMeshSocket};
-	FindSocket(InSocketName: string): SkeletalMeshSocket;
-	static C(Other: UObject | any): SkeletalMesh;
-	GetPhysicsBodySetupFromMesh(InName: string): BodySetup;
-	GetHandSkeletalMesh(SkeletonType: EOculusHandType,MeshType: EOculusHandType,WorldToMeters: number): boolean;
-	CreatePhysicsAsset(): PhysicsAsset;
-	GetLodBuildSettings(LODIndex: number,OutBuildOptions?: SkeletalMeshBuildSettings): {OutBuildOptions: SkeletalMeshBuildSettings};
-	GetLODCount(): number;
-	GetLODMaterialSlot(LODIndex: number,SectionIndex: number): number;
-	GetNumSections(LODIndex: number): number;
-	GetNumVerts(LODIndex: number): number;
-	ImportLOD(LODIndex: number,SourceFilename: string): number;
-	RegenerateLOD(NewLODCount: number,bRegenerateEvenIfImported: boolean,bGenerateBaseLOD: boolean): boolean;
-	ReimportAllCustomLODs(): boolean;
-	RemoveLODs(ToRemoveLODs: number[]): boolean;
-	RenameSocket(OldName: string,NewName: string): boolean;
-	SetLodBuildSettings(LODIndex: number,BuildOptions: SkeletalMeshBuildSettings): void;
-	StripLODGeometry(LODIndex: number,TextureMask: Texture2D,Threshold: number): boolean;
-	static GetPhysicsBodySetupFromMesh(InSkeletalMesh: SkeletalMesh,InName: string): BodySetup;
-	static GetHandSkeletalMesh(HandSkeletalMesh: SkeletalMesh,SkeletonType: EOculusHandType,MeshType: EOculusHandType,WorldToMeters: number): boolean;
-	static CreatePhysicsAsset(SkeletalMesh: SkeletalMesh): PhysicsAsset;
-	static GetLodBuildSettings(SkeletalMesh: SkeletalMesh,LODIndex: number,OutBuildOptions?: SkeletalMeshBuildSettings): {OutBuildOptions: SkeletalMeshBuildSettings};
-	static GetLODCount(SkeletalMesh: SkeletalMesh): number;
-	static GetLODMaterialSlot(SkeletalMesh: SkeletalMesh,LODIndex: number,SectionIndex: number): number;
-	static GetNumSections(SkeletalMesh: SkeletalMesh,LODIndex: number): number;
-	static GetNumVerts(SkeletalMesh: SkeletalMesh,LODIndex: number): number;
-	static ImportLOD(BaseMesh: SkeletalMesh,LODIndex: number,SourceFilename: string): number;
-	static RegenerateLOD(SkeletalMesh: SkeletalMesh,NewLODCount: number,bRegenerateEvenIfImported: boolean,bGenerateBaseLOD: boolean): boolean;
-	static ReimportAllCustomLODs(SkeletalMesh: SkeletalMesh): boolean;
-	static RemoveLODs(SkeletalMesh: SkeletalMesh,ToRemoveLODs: number[]): boolean;
-	static RenameSocket(SkeletalMesh: SkeletalMesh,OldName: string,NewName: string): boolean;
-	static SetLodBuildSettings(SkeletalMesh: SkeletalMesh,LODIndex: number,BuildOptions: SkeletalMeshBuildSettings): void;
-	static StripLODGeometry(SkeletalMesh: SkeletalMesh,LODIndex: number,TextureMask: Texture2D,Threshold: number): boolean;
+declare class UFunction extends Struct { 
+	static Load(ResourceName: string): UFunction;
+	static Find(Outer: UObject, ResourceName: string): UFunction;
+	static GetDefaultObject(): UFunction;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): UFunction;
+	static C(Other: UObject | any): UFunction;
+	GetFunctionParmsSize(): number;
+	static GetFunctionParmsSize(UFunction: UFunction): number;
 }
 
-declare class VertexOffsetUsage { 
-	Usage: number;
-	clone() : VertexOffsetUsage;
-	static C(Other: UObject | any): VertexOffsetUsage;
+declare class CachedPropertyPath { 
+	Segments: PropertyPathSegment[];
+	CachedFunction: UFunction;
+	clone() : CachedPropertyPath;
+	static C(Other: UObject | any): CachedPropertyPath;
 }
 
-declare class SkelMeshComponentLODInfo { 
-	HiddenMaterials: boolean[];
-	clone() : SkelMeshComponentLODInfo;
-	static C(Other: UObject | any): SkelMeshComponentLODInfo;
+declare class DynamicPropertyPath extends CachedPropertyPath { 
+	clone() : DynamicPropertyPath;
+	static C(Other: UObject | any): DynamicPropertyPath;
 }
 
-declare type EVisibilityBasedAnimTickOption = 'AlwaysTickPoseAndRefreshBones' | 'AlwaysTickPose' | 'OnlyTickMontagesWhenNotRendered' | 'OnlyTickPoseWhenRendered' | 'EVisibilityBasedAnimTickOption_MAX';
-declare var EVisibilityBasedAnimTickOption : { AlwaysTickPoseAndRefreshBones:'AlwaysTickPoseAndRefreshBones',AlwaysTickPose:'AlwaysTickPose',OnlyTickMontagesWhenNotRendered:'OnlyTickMontagesWhenNotRendered',OnlyTickPoseWhenRendered:'OnlyTickPoseWhenRendered',EVisibilityBasedAnimTickOption_MAX:'EVisibilityBasedAnimTickOption_MAX', };
-declare class SkelMeshSkinWeightInfo { 
-	Bones: number;
-	Weights: number;
-	clone() : SkelMeshSkinWeightInfo;
-	static C(Other: UObject | any): SkelMeshSkinWeightInfo;
-	BreakSkinWeightInfo(Bone0?: number,Weight0?: number,Bone1?: number,Weight1?: number,Bone2?: number,Weight2?: number,Bone3?: number,Weight3?: number): {Bone0: number, Weight0: number, Bone1: number, Weight1: number, Bone2: number, Weight2: number, Bone3: number, Weight3: number};
-	static BreakSkinWeightInfo(InWeight: SkelMeshSkinWeightInfo,Bone0?: number,Weight0?: number,Bone1?: number,Weight1?: number,Bone2?: number,Weight2?: number,Bone3?: number,Weight3?: number): {Bone0: number, Weight0: number, Bone1: number, Weight1: number, Bone2: number, Weight2: number, Bone3: number, Weight3: number};
-	static MakeSkinWeightInfo(Bone0: number,Weight0: number,Bone1: number,Weight1: number,Bone2: number,Weight2: number,Bone3: number,Weight3: number): SkelMeshSkinWeightInfo;
+declare class PropertyBinding extends UObject { 
+	SourceObject: any;
+	SourcePath: DynamicPropertyPath;
+	DestinationProperty: string;
+	static Load(ResourceName: string): PropertyBinding;
+	static Find(Outer: UObject, ResourceName: string): PropertyBinding;
+	static GetDefaultObject(): PropertyBinding;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PropertyBinding;
+	static C(Other: UObject | any): PropertyBinding;
 }
 
-declare type EPhysBodyOp = 'PBO_None' | 'PBO_Term' | 'PBO_MAX';
-declare var EPhysBodyOp : { PBO_None:'PBO_None',PBO_Term:'PBO_Term',PBO_MAX:'PBO_MAX', };
-declare class SkinnedMeshComponent extends MeshComponent { 
-	SkeletalMesh: SkeletalMesh;
-	MasterPoseComponent: any;
-	SkinCacheUsage: ESkinCacheUsage[];
-	VertexOffsetUsage: VertexOffsetUsage[];
-	WireframeColor: Color;
-	PhysicsAssetOverride: PhysicsAsset;
-	ForcedLodModel: number;
-	MinLodModel: number;
-	StreamingDistanceMultiplier: number;
-	LODInfo: SkelMeshComponentLODInfo[];
-	VisibilityBasedAnimTickOption: EVisibilityBasedAnimTickOption;
-	bOverrideMinLOD: boolean;
-	bUseBoundsFromMasterPoseComponent: boolean;
-	bForceWireframe: boolean;
-	bDisplayBones: boolean;
-	bDisableMorphTarget: boolean;
-	bHideSkin: boolean;
-	bPerBoneMotionBlur: boolean;
-	bComponentUseFixedSkelBounds: boolean;
-	bConsiderAllBodiesForBounds: boolean;
-	bSyncAttachParentLOD: boolean;
-	bCanHighlightSelectedSections: boolean;
-	bRecentlyRendered: boolean;
-	bCastCapsuleDirectShadow: boolean;
-	bCastCapsuleIndirectShadow: boolean;
-	bCPUSkinning: boolean;
-	bEnableUpdateRateOptimizations: boolean;
-	bDisplayDebugUpdateRateOptimizations: boolean;
-	bRenderStatic: boolean;
-	bIgnoreMasterPoseComponentLOD: boolean;
-	bCachedLocalBoundsUpToDate: boolean;
-	bForceMeshObjectUpdate: boolean;
-	CapsuleIndirectShadowMinVisibility: number;
-	CachedWorldSpaceBounds: BoxSphereBounds;
-	CachedWorldToLocalTransform: Matrix;
-	static Load(ResourceName: string): SkinnedMeshComponent;
-	static Find(Outer: UObject, ResourceName: string): SkinnedMeshComponent;
-	static GetDefaultObject(): SkinnedMeshComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SkinnedMeshComponent;
-	UnloadSkinWeightProfile(InProfileName: string): void;
-	UnHideBoneByName(BoneName: string): void;
-	TransformToBoneSpace(BoneName: string,InPosition: Vector,InRotation: Rotator,OutPosition?: Vector,OutRotation?: Rotator): {OutPosition: Vector, OutRotation: Rotator};
-	TransformFromBoneSpace(BoneName: string,InPosition: Vector,InRotation: Rotator,OutPosition?: Vector,OutRotation?: Rotator): {OutPosition: Vector, OutRotation: Rotator};
-	ShowMaterialSection(MaterialID: number,SectionIndex: number,bShow: boolean,LODIndex: number): void;
-	ShowAllMaterialSections(LODIndex: number): void;
-	SetVertexOffsetUsage(LODIndex: number,Usage: number): void;
-	SetVertexColorOverride_LinearColor(LODIndex: number,VertexColors: LinearColor[]): void;
-	SetSkinWeightProfile(InProfileName: string): boolean;
-	SetSkinWeightOverride(LODIndex: number,SkinWeights: SkelMeshSkinWeightInfo[]): void;
-	SetSkeletalMesh(NewMesh: SkeletalMesh,bReinitPose: boolean): void;
-	SetRenderStatic(bNewValue: boolean): void;
-	SetPreSkinningOffsets(LODIndex: number,Offsets: Vector[]): void;
-	SetPostSkinningOffsets(LODIndex: number,Offsets: Vector[]): void;
-	SetPhysicsAsset(NewPhysicsAsset: PhysicsAsset,bForceReInit: boolean): void;
-	SetMinLOD(InNewMinLOD: number): void;
-	SetMasterPoseComponent(NewMasterBoneComponent: SkinnedMeshComponent,bForceUpdate: boolean): void;
-	SetForcedLOD(InNewForcedLOD: number): void;
-	SetCastCapsuleIndirectShadow(bNewValue: boolean): void;
-	SetCastCapsuleDirectShadow(bNewValue: boolean): void;
-	SetCapsuleIndirectShadowMinVisibility(NewValue: number): void;
-	IsUsingSkinWeightProfile(): boolean;
-	IsMaterialSectionShown(MaterialID: number,LODIndex: number): boolean;
-	IsBoneHiddenByName(BoneName: string): boolean;
-	HideBoneByName(BoneName: string,PhysBodyOption: EPhysBodyOp): void;
-	GetVertexOffsetUsage(LODIndex: number): number;
-	GetTwistAndSwingAngleOfDeltaRotationFromRefPose(BoneName: string,OutTwistAngle?: number,OutSwingAngle?: number): {OutTwistAngle: number, OutSwingAngle: number, $: boolean};
-	GetSocketBoneName(InSocketName: string): string;
-	GetRefPosePosition(BoneIndex: number): Vector;
-	GetParentBone(BoneName: string): string;
-	GetNumLODs(): number;
-	GetNumBones(): number;
-	GetForcedLOD(): number;
-	GetDeltaTransformFromRefPose(BoneName: string,BaseName: string): Transform;
-	GetCurrentSkinWeightProfileName(): string;
-	GetBoneName(BoneIndex: number): string;
-	GetBoneIndex(BoneName: string): number;
-	FindClosestBone_K2(TestLocation: Vector,BoneLocation?: Vector,IgnoreScale?: number,bRequirePhysicsAsset?: boolean): {BoneLocation: Vector, $: string};
-	ClearVertexColorOverride(LODIndex: number): void;
-	ClearSkinWeightProfile(): void;
-	ClearSkinWeightOverride(LODIndex: number): void;
-	BoneIsChildOf(BoneName: string,ParentBoneName: string): boolean;
-	static C(Other: UObject | any): SkinnedMeshComponent;
+declare class Player extends UObject { 
+	PlayerController: PlayerController;
+	CurrentNetSpeed: number;
+	ConfiguredInternetSpeed: number;
+	ConfiguredLanSpeed: number;
+	static Load(ResourceName: string): Player;
+	static Find(Outer: UObject, ResourceName: string): Player;
+	static GetDefaultObject(): Player;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Player;
+	static C(Other: UObject | any): Player;
 }
 
-declare class AnimGroupInfo { 
+declare class InterpTrackInst extends UObject { 
+	static Load(ResourceName: string): InterpTrackInst;
+	static Find(Outer: UObject, ResourceName: string): InterpTrackInst;
+	static GetDefaultObject(): InterpTrackInst;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InterpTrackInst;
+	static C(Other: UObject | any): InterpTrackInst;
+}
+
+declare class InterpTrackInstDirector extends InterpTrackInst { 
+	OldViewTarget: Actor;
+	static Load(ResourceName: string): InterpTrackInstDirector;
+	static Find(Outer: UObject, ResourceName: string): InterpTrackInstDirector;
+	static GetDefaultObject(): InterpTrackInstDirector;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InterpTrackInstDirector;
+	static C(Other: UObject | any): InterpTrackInstDirector;
+}
+
+declare class ReporterBase extends UObject { 
+	static Load(ResourceName: string): ReporterBase;
+	static Find(Outer: UObject, ResourceName: string): ReporterBase;
+	static GetDefaultObject(): ReporterBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ReporterBase;
+	static C(Other: UObject | any): ReporterBase;
+}
+
+declare class ReporterGraph extends ReporterBase { 
+	static Load(ResourceName: string): ReporterGraph;
+	static Find(Outer: UObject, ResourceName: string): ReporterGraph;
+	static GetDefaultObject(): ReporterGraph;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ReporterGraph;
+	static C(Other: UObject | any): ReporterGraph;
+}
+
+declare class CanvasUVTri { 
+	V0_Pos: Vector2D;
+	V0_UV: Vector2D;
+	V0_Color: LinearColor;
+	V1_Pos: Vector2D;
+	V1_UV: Vector2D;
+	V1_Color: LinearColor;
+	V2_Pos: Vector2D;
+	V2_UV: Vector2D;
+	V2_Color: LinearColor;
+	clone() : CanvasUVTri;
+	static C(Other: UObject | any): CanvasUVTri;
+}
+
+declare class Canvas extends UObject { 
+	OrgX: number;
+	OrgY: number;
+	ClipX: number;
+	ClipY: number;
+	DrawColor: Color;
+	bCenterX: boolean;
+	bCenterY: boolean;
+	bNoSmooth: boolean;
+	SizeX: number;
+	SizeY: number;
+	ColorModulate: Plane;
+	DefaultTexture: Texture2D;
+	GradientTexture0: Texture2D;
+	ReporterGraph: ReporterGraph;
+	static Load(ResourceName: string): Canvas;
+	static Find(Outer: UObject, ResourceName: string): Canvas;
+	static GetDefaultObject(): Canvas;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Canvas;
+	K2_TextSize(RenderFont: Font,RenderText: string,Scale: Vector2D): Vector2D;
+	K2_StrLen(RenderFont: Font,RenderText: string): Vector2D;
+	K2_Project(WorldLocation: Vector): Vector;
+	K2_DrawTriangle(RenderTexture: Texture,Triangles: CanvasUVTri[]): void;
+	K2_DrawTexture(RenderTexture: Texture,ScreenPosition: Vector2D,ScreenSize: Vector2D,CoordinatePosition: Vector2D,CoordinateSize: Vector2D,RenderColor: LinearColor,BlendMode: EBlendMode,Rotation: number,PivotPoint: Vector2D): void;
+	K2_DrawText(RenderFont: Font,RenderText: string,ScreenPosition: Vector2D,Scale: Vector2D,RenderColor: LinearColor,Kerning: number,ShadowColor: LinearColor,ShadowOffset: Vector2D,bCentreX: boolean,bCentreY: boolean,bOutlined: boolean,OutlineColor: LinearColor): void;
+	K2_DrawPolygon(RenderTexture: Texture,ScreenPosition: Vector2D,Radius: Vector2D,NumberOfSides: number,RenderColor: LinearColor): void;
+	K2_DrawMaterialTriangle(RenderMaterial: MaterialInterface,Triangles: CanvasUVTri[]): void;
+	K2_DrawMaterial(RenderMaterial: MaterialInterface,ScreenPosition: Vector2D,ScreenSize: Vector2D,CoordinatePosition: Vector2D,CoordinateSize: Vector2D,Rotation: number,PivotPoint: Vector2D): void;
+	K2_DrawLine(ScreenPositionA: Vector2D,ScreenPositionB: Vector2D,Thickness: number,RenderColor: LinearColor): void;
+	K2_DrawBox(ScreenPosition: Vector2D,ScreenSize: Vector2D,Thickness: number,RenderColor: LinearColor): void;
+	K2_DrawBorder(BorderTexture: Texture,BackgroundTexture: Texture,LeftBorderTexture: Texture,RightBorderTexture: Texture,TopBorderTexture: Texture,BottomBorderTexture: Texture,ScreenPosition: Vector2D,ScreenSize: Vector2D,CoordinatePosition: Vector2D,CoordinateSize: Vector2D,RenderColor: LinearColor,BorderScale: Vector2D,BackgroundScale: Vector2D,Rotation: number,PivotPoint: Vector2D,CornerSize: Vector2D): void;
+	K2_Deproject(ScreenPosition: Vector2D,WorldOrigin?: Vector,WorldDirection?: Vector): {WorldOrigin: Vector, WorldDirection: Vector};
+	static C(Other: UObject | any): Canvas;
+}
+
+declare class DebugTextInfo { 
+	SrcActor: Actor;
+	SrcActorOffset: Vector;
+	SrcActorDesiredOffset: Vector;
+	DebugText: string;
+	TimeRemaining: number;
+	Duration: number;
+	TextColor: Color;
+	bAbsoluteLocation: boolean;
+	bKeepAttachedToActor: boolean;
+	bDrawShadow: boolean;
+	OrigActorLocation: Vector;
+	Font: Font;
+	FontScale: number;
+	clone() : DebugTextInfo;
+	static C(Other: UObject | any): DebugTextInfo;
+}
+
+declare class HUD extends Actor { 
+	PlayerOwner: PlayerController;
+	bLostFocusPaused: boolean;
+	bShowHUD: boolean;
+	bShowDebugInfo: boolean;
+	CurrentTargetIndex: number;
+	bShowHitBoxDebugInfo: boolean;
+	bShowOverlays: boolean;
+	bEnableDebugTextShadow: boolean;
+	PostRenderedActors: Actor[];
+	DebugDisplay: string[];
+	ToggledDebugCategories: string[];
+	Canvas: Canvas;
+	DebugCanvas: Canvas;
+	DebugTextList: DebugTextInfo[];
+	ShowDebugTargetDesiredClass: UnrealEngineClass;
+	ShowDebugTargetActor: Actor;
+	static GetDefaultObject(): HUD;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): HUD;
+	ShowHUD(): void;
+	ShowDebugToggleSubCategory(Category: string): void;
+	ShowDebugForReticleTargetToggle(DesiredClass: UnrealEngineClass): void;
+	ShowDebug(DebugType: string): void;
+	RemoveDebugText(SrcActor: Actor,bLeaveDurationText: boolean): void;
+	RemoveAllDebugStrings(): void;
+	ReceiveHitBoxRelease(BoxName: string): void;
+	ReceiveHitBoxEndCursorOver(BoxName: string): void;
+	ReceiveHitBoxClick(BoxName: string): void;
+	ReceiveHitBoxBeginCursorOver(BoxName: string): void;
+	ReceiveDrawHUD(SizeX: number,SizeY: number): void;
+	Project(Location: Vector): Vector;
+	PreviousDebugTarget(): void;
+	NextDebugTarget(): void;
+	GetTextSize(text: string,OutWidth?: number,OutHeight?: number,Font?: Font,Scale?: number): {OutWidth: number, OutHeight: number};
+	GetOwningPlayerController(): PlayerController;
+	GetOwningPawn(): Pawn;
+	GetActorsInSelectionRectangle(ClassFilter: UnrealEngineClass,FirstPoint: Vector2D,SecondPoint: Vector2D,OutActors?: Actor[],bIncludeNonCollidingComponents?: boolean,bActorMustBeFullyEnclosed?: boolean): {OutActors: Actor[]};
+	DrawTextureSimple(Texture: Texture,ScreenX: number,ScreenY: number,Scale: number,bScalePosition: boolean): void;
+	DrawTexture(Texture: Texture,ScreenX: number,ScreenY: number,ScreenW: number,ScreenH: number,TextureU: number,TextureV: number,TextureUWidth: number,TextureVHeight: number,TintColor: LinearColor,BlendMode: EBlendMode,Scale: number,bScalePosition: boolean,Rotation: number,RotPivot: Vector2D): void;
+	DrawText(text: string,TextColor: LinearColor,ScreenX: number,ScreenY: number,Font: Font,Scale: number,bScalePosition: boolean): void;
+	DrawRect(RectColor: LinearColor,ScreenX: number,ScreenY: number,ScreenW: number,ScreenH: number): void;
+	DrawMaterialTriangle(Material: MaterialInterface,V0_Pos: Vector2D,V1_Pos: Vector2D,V2_Pos: Vector2D,V0_UV: Vector2D,V1_UV: Vector2D,V2_UV: Vector2D,V0_Color: LinearColor,V1_Color: LinearColor,V2_Color: LinearColor): void;
+	DrawMaterialSimple(Material: MaterialInterface,ScreenX: number,ScreenY: number,ScreenW: number,ScreenH: number,Scale: number,bScalePosition: boolean): void;
+	DrawMaterial(Material: MaterialInterface,ScreenX: number,ScreenY: number,ScreenW: number,ScreenH: number,MaterialU: number,MaterialV: number,MaterialUWidth: number,MaterialVHeight: number,Scale: number,bScalePosition: boolean,Rotation: number,RotPivot: Vector2D): void;
+	DrawLine(StartScreenX: number,StartScreenY: number,EndScreenX: number,EndScreenY: number,LineColor: LinearColor,LineThickness: number): void;
+	Deproject(ScreenX: number,ScreenY: number,WorldPosition?: Vector,WorldDirection?: Vector): {WorldPosition: Vector, WorldDirection: Vector};
+	AddHitBox(Position: Vector2D,Size: Vector2D,InName: string,bConsumesInput: boolean,Priority: number): void;
+	AddDebugText(DebugText: string,SrcActor: Actor,Duration: number,Offset: Vector,DesiredOffset: Vector,TextColor: Color,bSkipOverwriteCheck: boolean,bAbsoluteLocation: boolean,bKeepAttachedToActor: boolean,InFont: Font,FontScale: number,bDrawShadow: boolean): void;
+	static C(Other: UObject | any): HUD;
+}
+
+declare type ECameraProjectionMode = 'Perspective' | 'Orthographic' | 'ECameraProjectionMode_MAX';
+declare var ECameraProjectionMode : { Perspective:'Perspective',Orthographic:'Orthographic',ECameraProjectionMode_MAX:'ECameraProjectionMode_MAX', };
+declare type EBloomMethod = 'BM_SOG' | 'BM_FFT' | 'BM_MAX';
+declare var EBloomMethod : { BM_SOG:'BM_SOG',BM_FFT:'BM_FFT',BM_MAX:'BM_MAX', };
+declare type EAutoExposureMethod = 'AEM_Histogram' | 'AEM_Basic' | 'AEM_Manual' | 'AEM_MAX';
+declare var EAutoExposureMethod : { AEM_Histogram:'AEM_Histogram',AEM_Basic:'AEM_Basic',AEM_Manual:'AEM_Manual',AEM_MAX:'AEM_MAX', };
+declare type EDepthOfFieldMethod = 'DOFM_BokehDOF' | 'DOFM_Gaussian' | 'DOFM_CircleDOF' | 'DOFM_MAX';
+declare var EDepthOfFieldMethod : { DOFM_BokehDOF:'DOFM_BokehDOF',DOFM_Gaussian:'DOFM_Gaussian',DOFM_CircleDOF:'DOFM_CircleDOF',DOFM_MAX:'DOFM_MAX', };
+declare type ETemperatureMethod = 'TEMP_WhiteBalance' | 'TEMP_ColorTemperature' | 'TEMP_MAX';
+declare var ETemperatureMethod : { TEMP_WhiteBalance:'TEMP_WhiteBalance',TEMP_ColorTemperature:'TEMP_ColorTemperature',TEMP_MAX:'TEMP_MAX', };
+declare class TextureCube extends Texture { 
+	static Load(ResourceName: string): TextureCube;
+	static Find(Outer: UObject, ResourceName: string): TextureCube;
+	static GetDefaultObject(): TextureCube;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TextureCube;
+	static C(Other: UObject | any): TextureCube;
+}
+
+declare type ERayTracingGlobalIlluminationType = 'Disabled' | 'BruteForce' | 'FinalGather' | 'ERayTracingGlobalIlluminationType_MAX';
+declare var ERayTracingGlobalIlluminationType : { Disabled:'Disabled',BruteForce:'BruteForce',FinalGather:'FinalGather',ERayTracingGlobalIlluminationType_MAX:'ERayTracingGlobalIlluminationType_MAX', };
+declare type EReflectionsType = 'ScreenSpace' | 'RayTracing' | 'EReflectionsType_MAX';
+declare var EReflectionsType : { ScreenSpace:'ScreenSpace',RayTracing:'RayTracing',EReflectionsType_MAX:'EReflectionsType_MAX', };
+declare type EReflectedAndRefractedRayTracedShadows = 'Disabled' | 'Hard_shadows' | 'Area_shadows' | 'EReflectedAndRefractedRayTracedShadows_MAX';
+declare var EReflectedAndRefractedRayTracedShadows : { Disabled:'Disabled',Hard_shadows:'Hard_shadows',Area_shadows:'Area_shadows',EReflectedAndRefractedRayTracedShadows_MAX:'EReflectedAndRefractedRayTracedShadows_MAX', };
+declare type ETranslucencyType = 'Raster' | 'RayTracing' | 'ETranslucencyType_MAX';
+declare var ETranslucencyType : { Raster:'Raster',RayTracing:'RayTracing',ETranslucencyType_MAX:'ETranslucencyType_MAX', };
+declare class WeightedBlendable { 
+	Weight: number;
+	UObject: UObject;
+	clone() : WeightedBlendable;
+	static C(Other: UObject | any): WeightedBlendable;
+}
+
+declare class WeightedBlendables { 
+	Array: WeightedBlendable[];
+	clone() : WeightedBlendables;
+	static C(Other: UObject | any): WeightedBlendables;
+}
+
+declare class PostProcessSettings { 
+	bOverride_TemperatureType: boolean;
+	bOverride_WhiteTemp: boolean;
+	bOverride_WhiteTint: boolean;
+	bOverride_ColorSaturation: boolean;
+	bOverride_ColorContrast: boolean;
+	bOverride_ColorGamma: boolean;
+	bOverride_ColorGain: boolean;
+	bOverride_ColorOffset: boolean;
+	bOverride_ColorSaturationShadows: boolean;
+	bOverride_ColorContrastShadows: boolean;
+	bOverride_ColorGammaShadows: boolean;
+	bOverride_ColorGainShadows: boolean;
+	bOverride_ColorOffsetShadows: boolean;
+	bOverride_ColorSaturationMidtones: boolean;
+	bOverride_ColorContrastMidtones: boolean;
+	bOverride_ColorGammaMidtones: boolean;
+	bOverride_ColorGainMidtones: boolean;
+	bOverride_ColorOffsetMidtones: boolean;
+	bOverride_ColorSaturationHighlights: boolean;
+	bOverride_ColorContrastHighlights: boolean;
+	bOverride_ColorGammaHighlights: boolean;
+	bOverride_ColorGainHighlights: boolean;
+	bOverride_ColorOffsetHighlights: boolean;
+	bOverride_ColorCorrectionShadowsMax: boolean;
+	bOverride_ColorCorrectionHighlightsMin: boolean;
+	bOverride_BlueCorrection: boolean;
+	bOverride_ExpandGamut: boolean;
+	bOverride_ToneCurveAmount: boolean;
+	bOverride_FilmWhitePoint: boolean;
+	bOverride_FilmSaturation: boolean;
+	bOverride_FilmChannelMixerRed: boolean;
+	bOverride_FilmChannelMixerGreen: boolean;
+	bOverride_FilmChannelMixerBlue: boolean;
+	bOverride_FilmContrast: boolean;
+	bOverride_FilmDynamicRange: boolean;
+	bOverride_FilmHealAmount: boolean;
+	bOverride_FilmToeAmount: boolean;
+	bOverride_FilmShadowTint: boolean;
+	bOverride_FilmShadowTintBlend: boolean;
+	bOverride_FilmShadowTintAmount: boolean;
+	bOverride_FilmSlope: boolean;
+	bOverride_FilmToe: boolean;
+	bOverride_FilmShoulder: boolean;
+	bOverride_FilmBlackClip: boolean;
+	bOverride_FilmWhiteClip: boolean;
+	bOverride_SceneColorTint: boolean;
+	bOverride_SceneFringeIntensity: boolean;
+	bOverride_ChromaticAberrationStartOffset: boolean;
+	bOverride_AmbientCubemapTint: boolean;
+	bOverride_AmbientCubemapIntensity: boolean;
+	bOverride_BloomMethod: boolean;
+	bOverride_BloomIntensity: boolean;
+	bOverride_BloomThreshold: boolean;
+	bOverride_Bloom1Tint: boolean;
+	bOverride_Bloom1Size: boolean;
+	bOverride_Bloom2Size: boolean;
+	bOverride_Bloom2Tint: boolean;
+	bOverride_Bloom3Tint: boolean;
+	bOverride_Bloom3Size: boolean;
+	bOverride_Bloom4Tint: boolean;
+	bOverride_Bloom4Size: boolean;
+	bOverride_Bloom5Tint: boolean;
+	bOverride_Bloom5Size: boolean;
+	bOverride_Bloom6Tint: boolean;
+	bOverride_Bloom6Size: boolean;
+	bOverride_BloomSizeScale: boolean;
+	bOverride_BloomConvolutionTexture: boolean;
+	bOverride_BloomConvolutionSize: boolean;
+	bOverride_BloomConvolutionCenterUV: boolean;
+	bOverride_BloomConvolutionPreFilter: boolean;
+	bOverride_BloomConvolutionPreFilterMin: boolean;
+	bOverride_BloomConvolutionPreFilterMax: boolean;
+	bOverride_BloomConvolutionPreFilterMult: boolean;
+	bOverride_BloomConvolutionBufferScale: boolean;
+	bOverride_BloomDirtMaskIntensity: boolean;
+	bOverride_BloomDirtMaskTint: boolean;
+	bOverride_BloomDirtMask: boolean;
+	bOverride_CameraShutterSpeed: boolean;
+	bOverride_CameraISO: boolean;
+	bOverride_AutoExposureMethod: boolean;
+	bOverride_AutoExposureLowPercent: boolean;
+	bOverride_AutoExposureHighPercent: boolean;
+	bOverride_AutoExposureMinBrightness: boolean;
+	bOverride_AutoExposureMaxBrightness: boolean;
+	bOverride_AutoExposureCalibrationConstant: boolean;
+	bOverride_AutoExposureSpeedUp: boolean;
+	bOverride_AutoExposureSpeedDown: boolean;
+	bOverride_AutoExposureBias: boolean;
+	bOverride_AutoExposureBiasCurve: boolean;
+	bOverride_AutoExposureMeterMask: boolean;
+	bOverride_AutoExposureApplyPhysicalCameraExposure: boolean;
+	bOverride_HistogramLogMin: boolean;
+	bOverride_HistogramLogMax: boolean;
+	bOverride_LensFlareIntensity: boolean;
+	bOverride_LensFlareTint: boolean;
+	bOverride_LensFlareTints: boolean;
+	bOverride_LensFlareBokehSize: boolean;
+	bOverride_LensFlareBokehShape: boolean;
+	bOverride_LensFlareThreshold: boolean;
+	bOverride_VignetteIntensity: boolean;
+	bOverride_GrainIntensity: boolean;
+	bOverride_GrainJitter: boolean;
+	bOverride_AmbientOcclusionIntensity: boolean;
+	bOverride_AmbientOcclusionStaticFraction: boolean;
+	bOverride_AmbientOcclusionRadius: boolean;
+	bOverride_AmbientOcclusionFadeDistance: boolean;
+	bOverride_AmbientOcclusionFadeRadius: boolean;
+	bOverride_AmbientOcclusionDistance: boolean;
+	bOverride_AmbientOcclusionRadiusInWS: boolean;
+	bOverride_AmbientOcclusionPower: boolean;
+	bOverride_AmbientOcclusionBias: boolean;
+	bOverride_AmbientOcclusionQuality: boolean;
+	bOverride_AmbientOcclusionMipBlend: boolean;
+	bOverride_AmbientOcclusionMipScale: boolean;
+	bOverride_AmbientOcclusionMipThreshold: boolean;
+	bOverride_AmbientOcclusionTemporalBlendWeight: boolean;
+	bOverride_RayTracingAO: boolean;
+	bOverride_RayTracingAOSamplesPerPixel: boolean;
+	bOverride_RayTracingAOIntensity: boolean;
+	bOverride_RayTracingAORadius: boolean;
+	bOverride_LPVIntensity: boolean;
+	bOverride_LPVDirectionalOcclusionIntensity: boolean;
+	bOverride_LPVDirectionalOcclusionRadius: boolean;
+	bOverride_LPVDiffuseOcclusionExponent: boolean;
+	bOverride_LPVSpecularOcclusionExponent: boolean;
+	bOverride_LPVDiffuseOcclusionIntensity: boolean;
+	bOverride_LPVSpecularOcclusionIntensity: boolean;
+	bOverride_LPVSize: boolean;
+	bOverride_LPVSecondaryOcclusionIntensity: boolean;
+	bOverride_LPVSecondaryBounceIntensity: boolean;
+	bOverride_LPVGeometryVolumeBias: boolean;
+	bOverride_LPVVplInjectionBias: boolean;
+	bOverride_LPVEmissiveInjectionIntensity: boolean;
+	bOverride_LPVFadeRange: boolean;
+	bOverride_LPVDirectionalOcclusionFadeRange: boolean;
+	bOverride_IndirectLightingColor: boolean;
+	bOverride_IndirectLightingIntensity: boolean;
+	bOverride_ColorGradingIntensity: boolean;
+	bOverride_ColorGradingLUT: boolean;
+	bOverride_DepthOfFieldFocalDistance: boolean;
+	bOverride_DepthOfFieldFstop: boolean;
+	bOverride_DepthOfFieldMinFstop: boolean;
+	bOverride_DepthOfFieldBladeCount: boolean;
+	bOverride_DepthOfFieldSensorWidth: boolean;
+	bOverride_DepthOfFieldDepthBlurRadius: boolean;
+	bOverride_DepthOfFieldDepthBlurAmount: boolean;
+	bOverride_DepthOfFieldFocalRegion: boolean;
+	bOverride_DepthOfFieldNearTransitionRegion: boolean;
+	bOverride_DepthOfFieldFarTransitionRegion: boolean;
+	bOverride_DepthOfFieldScale: boolean;
+	bOverride_DepthOfFieldNearBlurSize: boolean;
+	bOverride_DepthOfFieldFarBlurSize: boolean;
+	bOverride_MobileHQGaussian: boolean;
+	bOverride_DepthOfFieldOcclusion: boolean;
+	bOverride_DepthOfFieldSkyFocusDistance: boolean;
+	bOverride_DepthOfFieldVignetteSize: boolean;
+	bOverride_MotionBlurAmount: boolean;
+	bOverride_MotionBlurMax: boolean;
+	bOverride_MotionBlurTargetFPS: boolean;
+	bOverride_MotionBlurPerObjectSize: boolean;
+	bOverride_ScreenPercentage: boolean;
+	bOverride_ScreenSpaceReflectionIntensity: boolean;
+	bOverride_ScreenSpaceReflectionQuality: boolean;
+	bOverride_ScreenSpaceReflectionMaxRoughness: boolean;
+	bOverride_ScreenSpaceReflectionRoughnessScale: boolean;
+	bOverride_ReflectionsType: boolean;
+	bOverride_RayTracingReflectionsMaxRoughness: boolean;
+	bOverride_RayTracingReflectionsMaxBounces: boolean;
+	bOverride_RayTracingReflectionsSamplesPerPixel: boolean;
+	bOverride_RayTracingReflectionsShadows: boolean;
+	bOverride_RayTracingReflectionsTranslucency: boolean;
+	bOverride_TranslucencyType: boolean;
+	bOverride_RayTracingTranslucencyMaxRoughness: boolean;
+	bOverride_RayTracingTranslucencyRefractionRays: boolean;
+	bOverride_RayTracingTranslucencySamplesPerPixel: boolean;
+	bOverride_RayTracingTranslucencyShadows: boolean;
+	bOverride_RayTracingTranslucencyRefraction: boolean;
+	bOverride_RayTracingGI: boolean;
+	bOverride_RayTracingGIMaxBounces: boolean;
+	bOverride_RayTracingGISamplesPerPixel: boolean;
+	bOverride_PathTracingMaxBounces: boolean;
+	bOverride_PathTracingSamplesPerPixel: boolean;
+	bOverride_PathTracingFilterWidth: boolean;
+	bOverride_PathTracingEnableEmissive: boolean;
+	bOverride_PathTracingMaxPathExposure: boolean;
+	bOverride_PathTracingEnableDenoiser: boolean;
+	bMobileHQGaussian: boolean;
+	BloomMethod: EBloomMethod;
+	AutoExposureMethod: EAutoExposureMethod;
+	DepthOfFieldMethod: EDepthOfFieldMethod;
+	TemperatureType: ETemperatureMethod;
+	WhiteTemp: number;
+	WhiteTint: number;
+	ColorSaturation: Vector4;
+	ColorContrast: Vector4;
+	ColorGamma: Vector4;
+	ColorGain: Vector4;
+	ColorOffset: Vector4;
+	ColorSaturationShadows: Vector4;
+	ColorContrastShadows: Vector4;
+	ColorGammaShadows: Vector4;
+	ColorGainShadows: Vector4;
+	ColorOffsetShadows: Vector4;
+	ColorSaturationMidtones: Vector4;
+	ColorContrastMidtones: Vector4;
+	ColorGammaMidtones: Vector4;
+	ColorGainMidtones: Vector4;
+	ColorOffsetMidtones: Vector4;
+	ColorSaturationHighlights: Vector4;
+	ColorContrastHighlights: Vector4;
+	ColorGammaHighlights: Vector4;
+	ColorGainHighlights: Vector4;
+	ColorOffsetHighlights: Vector4;
+	ColorCorrectionHighlightsMin: number;
+	ColorCorrectionShadowsMax: number;
+	BlueCorrection: number;
+	ExpandGamut: number;
+	ToneCurveAmount: number;
+	FilmSlope: number;
+	FilmToe: number;
+	FilmShoulder: number;
+	FilmBlackClip: number;
+	FilmWhiteClip: number;
+	FilmWhitePoint: LinearColor;
+	FilmShadowTint: LinearColor;
+	FilmShadowTintBlend: number;
+	FilmShadowTintAmount: number;
+	FilmSaturation: number;
+	FilmChannelMixerRed: LinearColor;
+	FilmChannelMixerGreen: LinearColor;
+	FilmChannelMixerBlue: LinearColor;
+	FilmContrast: number;
+	FilmToeAmount: number;
+	FilmHealAmount: number;
+	FilmDynamicRange: number;
+	SceneColorTint: LinearColor;
+	SceneFringeIntensity: number;
+	ChromaticAberrationStartOffset: number;
+	BloomIntensity: number;
+	BloomThreshold: number;
+	BloomSizeScale: number;
+	Bloom1Size: number;
+	Bloom2Size: number;
+	Bloom3Size: number;
+	Bloom4Size: number;
+	Bloom5Size: number;
+	Bloom6Size: number;
+	Bloom1Tint: LinearColor;
+	Bloom2Tint: LinearColor;
+	Bloom3Tint: LinearColor;
+	Bloom4Tint: LinearColor;
+	Bloom5Tint: LinearColor;
+	Bloom6Tint: LinearColor;
+	BloomConvolutionSize: number;
+	BloomConvolutionTexture: Texture2D;
+	BloomConvolutionCenterUV: Vector2D;
+	BloomConvolutionPreFilter: Vector;
+	BloomConvolutionPreFilterMin: number;
+	BloomConvolutionPreFilterMax: number;
+	BloomConvolutionPreFilterMult: number;
+	BloomConvolutionBufferScale: number;
+	BloomDirtMask: Texture;
+	BloomDirtMaskIntensity: number;
+	BloomDirtMaskTint: LinearColor;
+	AmbientCubemapTint: LinearColor;
+	AmbientCubemapIntensity: number;
+	AmbientCubemap: TextureCube;
+	CameraShutterSpeed: number;
+	CameraISO: number;
+	DepthOfFieldFstop: number;
+	DepthOfFieldMinFstop: number;
+	DepthOfFieldBladeCount: number;
+	AutoExposureBias: number;
+	AutoExposureBiasBackup: number;
+	bOverride_AutoExposureBiasBackup: boolean;
+	AutoExposureApplyPhysicalCameraExposure: boolean;
+	AutoExposureBiasCurve: CurveFloat;
+	AutoExposureMeterMask: Texture;
+	AutoExposureLowPercent: number;
+	AutoExposureHighPercent: number;
+	AutoExposureMinBrightness: number;
+	AutoExposureMaxBrightness: number;
+	AutoExposureSpeedUp: number;
+	AutoExposureSpeedDown: number;
+	HistogramLogMin: number;
+	HistogramLogMax: number;
+	AutoExposureCalibrationConstant: number;
+	LensFlareIntensity: number;
+	LensFlareTint: LinearColor;
+	LensFlareBokehSize: number;
+	LensFlareThreshold: number;
+	LensFlareBokehShape: Texture;
+	LensFlareTints: LinearColor;
+	VignetteIntensity: number;
+	GrainJitter: number;
+	GrainIntensity: number;
+	AmbientOcclusionIntensity: number;
+	AmbientOcclusionStaticFraction: number;
+	AmbientOcclusionRadius: number;
+	AmbientOcclusionRadiusInWS: boolean;
+	AmbientOcclusionFadeDistance: number;
+	AmbientOcclusionFadeRadius: number;
+	AmbientOcclusionDistance: number;
+	AmbientOcclusionPower: number;
+	AmbientOcclusionBias: number;
+	AmbientOcclusionQuality: number;
+	AmbientOcclusionMipBlend: number;
+	AmbientOcclusionMipScale: number;
+	AmbientOcclusionMipThreshold: number;
+	AmbientOcclusionTemporalBlendWeight: number;
+	RayTracingAO: boolean;
+	RayTracingAOSamplesPerPixel: number;
+	RayTracingAOIntensity: number;
+	RayTracingAORadius: number;
+	IndirectLightingColor: LinearColor;
+	IndirectLightingIntensity: number;
+	RayTracingGI: boolean;
+	RayTracingGIType: ERayTracingGlobalIlluminationType;
+	RayTracingGIMaxBounces: number;
+	RayTracingGISamplesPerPixel: number;
+	ColorGradingIntensity: number;
+	ColorGradingLUT: Texture;
+	DepthOfFieldSensorWidth: number;
+	DepthOfFieldFocalDistance: number;
+	DepthOfFieldDepthBlurAmount: number;
+	DepthOfFieldDepthBlurRadius: number;
+	DepthOfFieldFocalRegion: number;
+	DepthOfFieldNearTransitionRegion: number;
+	DepthOfFieldFarTransitionRegion: number;
+	DepthOfFieldScale: number;
+	DepthOfFieldNearBlurSize: number;
+	DepthOfFieldFarBlurSize: number;
+	DepthOfFieldOcclusion: number;
+	DepthOfFieldSkyFocusDistance: number;
+	DepthOfFieldVignetteSize: number;
+	MotionBlurAmount: number;
+	MotionBlurMax: number;
+	MotionBlurTargetFPS: number;
+	MotionBlurPerObjectSize: number;
+	LPVIntensity: number;
+	LPVVplInjectionBias: number;
+	LPVSize: number;
+	LPVSecondaryOcclusionIntensity: number;
+	LPVSecondaryBounceIntensity: number;
+	LPVGeometryVolumeBias: number;
+	LPVEmissiveInjectionIntensity: number;
+	LPVDirectionalOcclusionIntensity: number;
+	LPVDirectionalOcclusionRadius: number;
+	LPVDiffuseOcclusionExponent: number;
+	LPVSpecularOcclusionExponent: number;
+	LPVDiffuseOcclusionIntensity: number;
+	LPVSpecularOcclusionIntensity: number;
+	ReflectionsType: EReflectionsType;
+	ScreenSpaceReflectionIntensity: number;
+	ScreenSpaceReflectionQuality: number;
+	ScreenSpaceReflectionMaxRoughness: number;
+	RayTracingReflectionsMaxRoughness: number;
+	RayTracingReflectionsMaxBounces: number;
+	RayTracingReflectionsSamplesPerPixel: number;
+	RayTracingReflectionsShadows: EReflectedAndRefractedRayTracedShadows;
+	RayTracingReflectionsTranslucency: boolean;
+	TranslucencyType: ETranslucencyType;
+	RayTracingTranslucencyMaxRoughness: number;
+	RayTracingTranslucencyRefractionRays: number;
+	RayTracingTranslucencySamplesPerPixel: number;
+	RayTracingTranslucencyShadows: EReflectedAndRefractedRayTracedShadows;
+	RayTracingTranslucencyRefraction: boolean;
+	PathTracingMaxBounces: number;
+	PathTracingSamplesPerPixel: number;
+	PathTracingFilterWidth: number;
+	PathTracingEnableEmissive: boolean;
+	PathTracingMaxPathExposure: number;
+	PathTracingEnableDenoiser: boolean;
+	LPVFadeRange: number;
+	LPVDirectionalOcclusionFadeRange: number;
+	ScreenPercentage: number;
+	WeightedBlendables: WeightedBlendables;
+	Blendables: UObject[];
+	clone() : PostProcessSettings;
+	static C(Other: UObject | any): PostProcessSettings;
+}
+
+declare class MinimalViewInfo { 
+	Location: Vector;
+	Rotation: Rotator;
+	FOV: number;
+	DesiredFOV: number;
+	OrthoWidth: number;
+	OrthoNearClipPlane: number;
+	OrthoFarClipPlane: number;
+	AspectRatio: number;
+	bConstrainAspectRatio: boolean;
+	bUseFieldOfViewForLOD: boolean;
+	ProjectionMode: ECameraProjectionMode;
+	PostProcessBlendWeight: number;
+	PostProcessSettings: PostProcessSettings;
+	OffCenterProjectionOffset: Vector2D;
+	clone() : MinimalViewInfo;
+	static C(Other: UObject | any): MinimalViewInfo;
+	GetViewProjectionMatrix(ViewMatrix?: Matrix,ProjectionMatrix?: Matrix,ViewProjectionMatrix?: Matrix): {ViewMatrix: Matrix, ProjectionMatrix: Matrix, ViewProjectionMatrix: Matrix};
+	static GetViewProjectionMatrix(DesiredView: MinimalViewInfo,ViewMatrix?: Matrix,ProjectionMatrix?: Matrix,ViewProjectionMatrix?: Matrix): {ViewMatrix: Matrix, ProjectionMatrix: Matrix, ViewProjectionMatrix: Matrix};
+}
+
+declare class CameraCacheEntry { 
+	Timestamp: number;
+	POV: MinimalViewInfo;
+	clone() : CameraCacheEntry;
+	static C(Other: UObject | any): CameraCacheEntry;
+}
+
+declare class TViewTarget { 
+	Target: Actor;
+	POV: MinimalViewInfo;
+	PlayerState: PlayerState;
+	clone() : TViewTarget;
+	static C(Other: UObject | any): TViewTarget;
+}
+
+declare class CameraModifier extends UObject { 
+	bDebug: boolean;
+	bExclusive: boolean;
+	Priority: number;
+	CameraOwner: PlayerCameraManager;
+	AlphaInTime: number;
+	AlphaOutTime: number;
+	Alpha: number;
+	static Load(ResourceName: string): CameraModifier;
+	static Find(Outer: UObject, ResourceName: string): CameraModifier;
+	static GetDefaultObject(): CameraModifier;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CameraModifier;
+	IsDisabled(): boolean;
+	GetViewTarget(): Actor;
+	EnableModifier(): void;
+	DisableModifier(bImmediate: boolean): void;
+	BlueprintModifyPostProcess(DeltaTime: number,PostProcessBlendWeight?: number,PostProcessSettings?: PostProcessSettings): {PostProcessBlendWeight: number, PostProcessSettings: PostProcessSettings};
+	BlueprintModifyCamera(DeltaTime: number,ViewLocation: Vector,ViewRotation: Rotator,FOV: number,NewViewLocation?: Vector,NewViewRotation?: Rotator,NewFOV?: number): {NewViewLocation: Vector, NewViewRotation: Rotator, NewFOV: number};
+	static C(Other: UObject | any): CameraModifier;
+}
+
+declare class FXSystemAsset extends UObject { 
+	MaxPoolSize: any;
+	PoolPrimeSize: any;
+	static Load(ResourceName: string): FXSystemAsset;
+	static Find(Outer: UObject, ResourceName: string): FXSystemAsset;
+	static GetDefaultObject(): FXSystemAsset;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FXSystemAsset;
+	static C(Other: UObject | any): FXSystemAsset;
+}
+
+declare class FXSystemComponent extends PrimitiveComponent { 
+	static Load(ResourceName: string): FXSystemComponent;
+	static Find(Outer: UObject, ResourceName: string): FXSystemComponent;
+	static GetDefaultObject(): FXSystemComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FXSystemComponent;
+	SetVectorParameter(ParameterName: string,Param: Vector): void;
+	SetUseAutoManageAttachment(bAutoManage: boolean): void;
+	SetIntParameter(ParameterName: string,Param: number): void;
+	SetFloatParameter(ParameterName: string,Param: number): void;
+	SetEmitterEnable(EmitterName: string,bNewEnableState: boolean): void;
+	SetColorParameter(ParameterName: string,Param: LinearColor): void;
+	SetBoolParameter(ParameterName: string,Param: boolean): void;
+	SetAutoAttachmentParameters(Parent: SceneComponent,SocketName: string,LocationRule: EAttachmentRule,RotationRule: EAttachmentRule,ScaleRule: EAttachmentRule): void;
+	SetActorParameter(ParameterName: string,Param: Actor): void;
+	ReleaseToPool(): void;
+	GetFXSystemAsset(): FXSystemAsset;
+	static C(Other: UObject | any): FXSystemComponent;
+}
+
+declare type EEmitterRenderMode = 'ERM_Normal' | 'ERM_Point' | 'ERM_Cross' | 'ERM_LightsOnly' | 'ERM_None' | 'ERM_MAX';
+declare var EEmitterRenderMode : { ERM_Normal:'ERM_Normal',ERM_Point:'ERM_Point',ERM_Cross:'ERM_Cross',ERM_LightsOnly:'ERM_LightsOnly',ERM_None:'ERM_None',ERM_MAX:'ERM_MAX', };
+declare type EParticleSignificanceLevel = 'Low' | 'Medium' | 'High' | 'Critical' | 'Num' | 'EParticleSignificanceLevel_MAX';
+declare var EParticleSignificanceLevel : { Low:'Low',Medium:'Medium',High:'High',Critical:'Critical',Num:'Num',EParticleSignificanceLevel_MAX:'EParticleSignificanceLevel_MAX', };
+declare class ParticleModule extends UObject { 
+	bSpawnModule: boolean;
+	bUpdateModule: boolean;
+	bFinalUpdateModule: boolean;
+	bUpdateForGPUEmitter: boolean;
+	bCurvesAsColor: boolean;
+	b3DDrawMode: boolean;
+	bSupported3DDrawMode: boolean;
+	bEnabled: boolean;
+	bEditable: boolean;
+	LODDuplicate: boolean;
+	bSupportsRandomSeed: boolean;
+	bRequiresLoopingNotification: boolean;
+	LODValidity: number;
+	ModuleEditorColor: Color;
+	static Load(ResourceName: string): ParticleModule;
+	static Find(Outer: UObject, ResourceName: string): ParticleModule;
+	static GetDefaultObject(): ParticleModule;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModule;
+	static C(Other: UObject | any): ParticleModule;
+}
+
+declare type EParticleScreenAlignment = 'PSA_FacingCameraPosition' | 'PSA_Square' | 'PSA_Rectangle' | 'PSA_Velocity' | 'PSA_AwayFromCenter' | 'PSA_TypeSpecific' | 'PSA_FacingCameraDistanceBlend' | 'PSA_MAX';
+declare var EParticleScreenAlignment : { PSA_FacingCameraPosition:'PSA_FacingCameraPosition',PSA_Square:'PSA_Square',PSA_Rectangle:'PSA_Rectangle',PSA_Velocity:'PSA_Velocity',PSA_AwayFromCenter:'PSA_AwayFromCenter',PSA_TypeSpecific:'PSA_TypeSpecific',PSA_FacingCameraDistanceBlend:'PSA_FacingCameraDistanceBlend',PSA_MAX:'PSA_MAX', };
+declare type EParticleSortMode = 'PSORTMODE_None' | 'PSORTMODE_ViewProjDepth' | 'PSORTMODE_DistanceToView' | 'PSORTMODE_Age_OldestFirst' | 'PSORTMODE_Age_NewestFirst' | 'PSORTMODE_MAX';
+declare var EParticleSortMode : { PSORTMODE_None:'PSORTMODE_None',PSORTMODE_ViewProjDepth:'PSORTMODE_ViewProjDepth',PSORTMODE_DistanceToView:'PSORTMODE_DistanceToView',PSORTMODE_Age_OldestFirst:'PSORTMODE_Age_OldestFirst',PSORTMODE_Age_NewestFirst:'PSORTMODE_Age_NewestFirst',PSORTMODE_MAX:'PSORTMODE_MAX', };
+declare class DistributionLookupTable { 
+	TimeScale: number;
+	TimeBias: number;
+	Values: number[];
+	Op: number;
+	EntryCount: number;
+	EntryStride: number;
+	SubEntryStride: number;
+	LockFlag: number;
+	clone() : DistributionLookupTable;
+	static C(Other: UObject | any): DistributionLookupTable;
+}
+
+declare class RawDistribution { 
+	Table: DistributionLookupTable;
+	clone() : RawDistribution;
+	static C(Other: UObject | any): RawDistribution;
+}
+
+declare class Distribution extends UObject { 
+	static Load(ResourceName: string): Distribution;
+	static Find(Outer: UObject, ResourceName: string): Distribution;
+	static GetDefaultObject(): Distribution;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Distribution;
+	static C(Other: UObject | any): Distribution;
+}
+
+declare class DistributionFloat extends Distribution { 
+	bCanBeBaked: boolean;
+	bBakedDataSuccesfully: boolean;
+	static Load(ResourceName: string): DistributionFloat;
+	static Find(Outer: UObject, ResourceName: string): DistributionFloat;
+	static GetDefaultObject(): DistributionFloat;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): DistributionFloat;
+	static C(Other: UObject | any): DistributionFloat;
+}
+
+declare class RawDistributionFloat extends RawDistribution { 
+	MinValue: number;
+	MaxValue: number;
+	Distribution: DistributionFloat;
+	clone() : RawDistributionFloat;
+	static C(Other: UObject | any): RawDistributionFloat;
+}
+
+declare class ParticleBurst { 
+	Count: number;
+	CountLow: number;
+	Time: number;
+	clone() : ParticleBurst;
+	static C(Other: UObject | any): ParticleBurst;
+}
+
+declare type EParticleSubUVInterpMethod = 'PSUVIM_None' | 'PSUVIM_Linear' | 'PSUVIM_Linear_Blend' | 'PSUVIM_Random' | 'PSUVIM_Random_Blend' | 'PSUVIM_MAX';
+declare var EParticleSubUVInterpMethod : { PSUVIM_None:'PSUVIM_None',PSUVIM_Linear:'PSUVIM_Linear',PSUVIM_Linear_Blend:'PSUVIM_Linear_Blend',PSUVIM_Random:'PSUVIM_Random',PSUVIM_Random_Blend:'PSUVIM_Random_Blend',PSUVIM_MAX:'PSUVIM_MAX', };
+declare type EParticleBurstMethod = 'EPBM_Instant' | 'EPBM_Interpolated' | 'EPBM_MAX';
+declare var EParticleBurstMethod : { EPBM_Instant:'EPBM_Instant',EPBM_Interpolated:'EPBM_Interpolated',EPBM_MAX:'EPBM_MAX', };
+declare type EOpacitySourceMode = 'OSM_Alpha' | 'OSM_ColorBrightness' | 'OSM_RedChannel' | 'OSM_GreenChannel' | 'OSM_BlueChannel' | 'OSM_MAX';
+declare var EOpacitySourceMode : { OSM_Alpha:'OSM_Alpha',OSM_ColorBrightness:'OSM_ColorBrightness',OSM_RedChannel:'OSM_RedChannel',OSM_GreenChannel:'OSM_GreenChannel',OSM_BlueChannel:'OSM_BlueChannel',OSM_MAX:'OSM_MAX', };
+declare type EEmitterNormalsMode = 'ENM_CameraFacing' | 'ENM_Spherical' | 'ENM_Cylindrical' | 'ENM_MAX';
+declare var EEmitterNormalsMode : { ENM_CameraFacing:'ENM_CameraFacing',ENM_Spherical:'ENM_Spherical',ENM_Cylindrical:'ENM_Cylindrical',ENM_MAX:'ENM_MAX', };
+declare type EParticleUVFlipMode = 'None' | 'FlipUV' | 'FlipUOnly' | 'FlipVOnly' | 'RandomFlipUV' | 'RandomFlipUOnly' | 'RandomFlipVOnly' | 'RandomFlipUVIndependent' | 'EParticleUVFlipMode_MAX';
+declare var EParticleUVFlipMode : { None:'None',FlipUV:'FlipUV',FlipUOnly:'FlipUOnly',FlipVOnly:'FlipVOnly',RandomFlipUV:'RandomFlipUV',RandomFlipUOnly:'RandomFlipUOnly',RandomFlipVOnly:'RandomFlipVOnly',RandomFlipUVIndependent:'RandomFlipUVIndependent',EParticleUVFlipMode_MAX:'EParticleUVFlipMode_MAX', };
+declare type ESubUVBoundingVertexCount = 'BVC_FourVertices' | 'BVC_EightVertices' | 'BVC_MAX';
+declare var ESubUVBoundingVertexCount : { BVC_FourVertices:'BVC_FourVertices',BVC_EightVertices:'BVC_EightVertices',BVC_MAX:'BVC_MAX', };
+declare class ParticleModuleRequired extends ParticleModule { 
+	Material: MaterialInterface;
+	MinFacingCameraBlendDistance: number;
+	MaxFacingCameraBlendDistance: number;
+	EmitterOrigin: Vector;
+	EmitterRotation: Rotator;
+	ScreenAlignment: EParticleScreenAlignment;
+	bUseLocalSpace: boolean;
+	bKillOnDeactivate: boolean;
+	bKillOnCompleted: boolean;
+	SortMode: EParticleSortMode;
+	bUseLegacyEmitterTime: boolean;
+	bRemoveHMDRoll: boolean;
+	bEmitterDurationUseRange: boolean;
+	EmitterDuration: number;
+	SpawnRate: RawDistributionFloat;
+	BurstList: ParticleBurst[];
+	EmitterDelay: number;
+	EmitterDelayLow: number;
+	bDelayFirstLoopOnly: boolean;
+	InterpolationMethod: EParticleSubUVInterpMethod;
+	bScaleUV: boolean;
+	bEmitterDelayUseRange: boolean;
+	ParticleBurstMethod: EParticleBurstMethod;
+	bOverrideSystemMacroUV: boolean;
+	bUseMaxDrawCount: boolean;
+	OpacitySourceMode: EOpacitySourceMode;
+	EmitterNormalsMode: EEmitterNormalsMode;
+	bOrbitModuleAffectsVelocityAlignment: boolean;
+	SubImages_Horizontal: number;
+	SubImages_Vertical: number;
+	RandomImageTime: number;
+	RandomImageChanges: number;
+	MacroUVPosition: Vector;
+	MacroUVRadius: number;
+	UVFlippingMode: EParticleUVFlipMode;
+	BoundingMode: ESubUVBoundingVertexCount;
+	bDurationRecalcEachLoop: boolean;
+	NormalsSphereCenter: Vector;
+	AlphaThreshold: number;
+	EmitterLoops: number;
+	CutoutTexture: Texture2D;
+	MaxDrawCount: number;
+	EmitterDurationLow: number;
+	NormalsCylinderDirection: Vector;
+	NamedMaterialOverrides: string[];
+	static Load(ResourceName: string): ParticleModuleRequired;
+	static Find(Outer: UObject, ResourceName: string): ParticleModuleRequired;
+	static GetDefaultObject(): ParticleModuleRequired;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleRequired;
+	static C(Other: UObject | any): ParticleModuleRequired;
+}
+
+declare class ParticleModuleTypeDataBase extends ParticleModule { 
+	static Load(ResourceName: string): ParticleModuleTypeDataBase;
+	static Find(Outer: UObject, ResourceName: string): ParticleModuleTypeDataBase;
+	static GetDefaultObject(): ParticleModuleTypeDataBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleTypeDataBase;
+	static C(Other: UObject | any): ParticleModuleTypeDataBase;
+}
+
+declare class ParticleModuleSpawnBase extends ParticleModule { 
+	bProcessSpawnRate: boolean;
+	bProcessBurstList: boolean;
+	static Load(ResourceName: string): ParticleModuleSpawnBase;
+	static Find(Outer: UObject, ResourceName: string): ParticleModuleSpawnBase;
+	static GetDefaultObject(): ParticleModuleSpawnBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleSpawnBase;
+	static C(Other: UObject | any): ParticleModuleSpawnBase;
+}
+
+declare class ParticleModuleSpawn extends ParticleModuleSpawnBase { 
+	Rate: RawDistributionFloat;
+	RateScale: RawDistributionFloat;
+	ParticleBurstMethod: EParticleBurstMethod;
+	BurstList: ParticleBurst[];
+	BurstScale: RawDistributionFloat;
+	bApplyGlobalSpawnRateScale: boolean;
+	static Load(ResourceName: string): ParticleModuleSpawn;
+	static Find(Outer: UObject, ResourceName: string): ParticleModuleSpawn;
+	static GetDefaultObject(): ParticleModuleSpawn;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleSpawn;
+	static C(Other: UObject | any): ParticleModuleSpawn;
+}
+
+declare class ParticleModuleEventBase extends ParticleModule { 
+	static Load(ResourceName: string): ParticleModuleEventBase;
+	static Find(Outer: UObject, ResourceName: string): ParticleModuleEventBase;
+	static GetDefaultObject(): ParticleModuleEventBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleEventBase;
+	static C(Other: UObject | any): ParticleModuleEventBase;
+}
+
+declare type EParticleEventType = 'EPET_Any' | 'EPET_Spawn' | 'EPET_Death' | 'EPET_Collision' | 'EPET_Burst' | 'EPET_Blueprint' | 'EPET_MAX';
+declare var EParticleEventType : { EPET_Any:'EPET_Any',EPET_Spawn:'EPET_Spawn',EPET_Death:'EPET_Death',EPET_Collision:'EPET_Collision',EPET_Burst:'EPET_Burst',EPET_Blueprint:'EPET_Blueprint',EPET_MAX:'EPET_MAX', };
+declare class ParticleModuleEventSendToGame extends UObject { 
+	static Load(ResourceName: string): ParticleModuleEventSendToGame;
+	static Find(Outer: UObject, ResourceName: string): ParticleModuleEventSendToGame;
+	static GetDefaultObject(): ParticleModuleEventSendToGame;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleEventSendToGame;
+	static C(Other: UObject | any): ParticleModuleEventSendToGame;
+}
+
+declare class ParticleEvent_GenerateInfo { 
+	Type: EParticleEventType;
+	Frequency: number;
+	ParticleFrequency: number;
+	FirstTimeOnly: boolean;
+	LastTimeOnly: boolean;
+	UseReflectedImpactVector: boolean;
+	bUseOrbitOffset: boolean;
+	CustomName: string;
+	ParticleModuleEventsToSendToGame: ParticleModuleEventSendToGame[];
+	clone() : ParticleEvent_GenerateInfo;
+	static C(Other: UObject | any): ParticleEvent_GenerateInfo;
+}
+
+declare class ParticleModuleEventGenerator extends ParticleModuleEventBase { 
+	Events: ParticleEvent_GenerateInfo[];
+	static Load(ResourceName: string): ParticleModuleEventGenerator;
+	static Find(Outer: UObject, ResourceName: string): ParticleModuleEventGenerator;
+	static GetDefaultObject(): ParticleModuleEventGenerator;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleEventGenerator;
+	static C(Other: UObject | any): ParticleModuleEventGenerator;
+}
+
+declare class ParticleModuleOrbitBase extends ParticleModule { 
+	bUseEmitterTime: boolean;
+	static Load(ResourceName: string): ParticleModuleOrbitBase;
+	static Find(Outer: UObject, ResourceName: string): ParticleModuleOrbitBase;
+	static GetDefaultObject(): ParticleModuleOrbitBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleOrbitBase;
+	static C(Other: UObject | any): ParticleModuleOrbitBase;
+}
+
+declare type EOrbitChainMode = 'EOChainMode_Add' | 'EOChainMode_Scale' | 'EOChainMode_Link' | 'EOChainMode_MAX';
+declare var EOrbitChainMode : { EOChainMode_Add:'EOChainMode_Add',EOChainMode_Scale:'EOChainMode_Scale',EOChainMode_Link:'EOChainMode_Link',EOChainMode_MAX:'EOChainMode_MAX', };
+declare class DistributionVector extends Distribution { 
+	bCanBeBaked: boolean;
+	bIsDirty: boolean;
+	bBakedDataSuccesfully: boolean;
+	static Load(ResourceName: string): DistributionVector;
+	static Find(Outer: UObject, ResourceName: string): DistributionVector;
+	static GetDefaultObject(): DistributionVector;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): DistributionVector;
+	static C(Other: UObject | any): DistributionVector;
+}
+
+declare class RawDistributionVector extends RawDistribution { 
+	MinValue: number;
+	MaxValue: number;
+	MinValueVec: Vector;
+	MaxValueVec: Vector;
+	Distribution: DistributionVector;
+	clone() : RawDistributionVector;
+	static C(Other: UObject | any): RawDistributionVector;
+}
+
+declare class OrbitOptions { 
+	bProcessDuringSpawn: boolean;
+	bProcessDuringUpdate: boolean;
+	bUseEmitterTime: boolean;
+	clone() : OrbitOptions;
+	static C(Other: UObject | any): OrbitOptions;
+}
+
+declare class ParticleModuleOrbit extends ParticleModuleOrbitBase { 
+	ChainMode: EOrbitChainMode;
+	OffsetAmount: RawDistributionVector;
+	OffsetOptions: OrbitOptions;
+	RotationAmount: RawDistributionVector;
+	RotationOptions: OrbitOptions;
+	RotationRateAmount: RawDistributionVector;
+	RotationRateOptions: OrbitOptions;
+	static Load(ResourceName: string): ParticleModuleOrbit;
+	static Find(Outer: UObject, ResourceName: string): ParticleModuleOrbit;
+	static GetDefaultObject(): ParticleModuleOrbit;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleOrbit;
+	static C(Other: UObject | any): ParticleModuleOrbit;
+}
+
+declare class ParticleModuleEventReceiverBase extends ParticleModuleEventBase { 
+	EventGeneratorType: EParticleEventType;
+	EventName: string;
+	static Load(ResourceName: string): ParticleModuleEventReceiverBase;
+	static Find(Outer: UObject, ResourceName: string): ParticleModuleEventReceiverBase;
+	static GetDefaultObject(): ParticleModuleEventReceiverBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleModuleEventReceiverBase;
+	static C(Other: UObject | any): ParticleModuleEventReceiverBase;
+}
+
+declare class ParticleLODLevel extends UObject { 
+	Level: number;
+	bEnabled: boolean;
+	RequiredModule: ParticleModuleRequired;
+	Modules: ParticleModule[];
+	TypeDataModule: ParticleModuleTypeDataBase;
+	SpawnModule: ParticleModuleSpawn;
+	EventGenerator: ParticleModuleEventGenerator;
+	SpawningModules: ParticleModuleSpawnBase[];
+	SpawnModules: ParticleModule[];
+	UpdateModules: ParticleModule[];
+	OrbitModules: ParticleModuleOrbit[];
+	EventReceiverModules: ParticleModuleEventReceiverBase[];
+	ConvertedModules: boolean;
+	PeakActiveParticles: number;
+	static Load(ResourceName: string): ParticleLODLevel;
+	static Find(Outer: UObject, ResourceName: string): ParticleLODLevel;
+	static GetDefaultObject(): ParticleLODLevel;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleLODLevel;
+	static C(Other: UObject | any): ParticleLODLevel;
+}
+
+declare class ParticleEmitter extends UObject { 
+	EmitterName: string;
+	SubUVDataOffset: number;
+	EmitterRenderMode: EEmitterRenderMode;
+	SignificanceLevel: EParticleSignificanceLevel;
+	bUseLegacySpawningBehavior: boolean;
+	ConvertedModules: boolean;
+	bIsSoloing: boolean;
+	bCookedOut: boolean;
+	bDisabledLODsKeepEmitterAlive: boolean;
+	bDisableWhenInsignficant: boolean;
+	bCollapsed: boolean;
+	DetailMode: EDetailMode;
+	EmitterEditorColor: Color;
+	LODLevels: ParticleLODLevel[];
+	PeakActiveParticles: number;
+	InitialAllocationCount: number;
+	QualityLevelSpawnRateScale: number;
+	DetailModeBitmask: any;
+	DetailModeDisplay: string;
+	static Load(ResourceName: string): ParticleEmitter;
+	static Find(Outer: UObject, ResourceName: string): ParticleEmitter;
+	static GetDefaultObject(): ParticleEmitter;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleEmitter;
+	static C(Other: UObject | any): ParticleEmitter;
+}
+
+declare class CurveEdEntry { 
+	CurveObject: UObject;
+	CurveColor: Color;
+	CurveName: string;
+	bHideCurve: number;
+	bColorCurve: number;
+	bFloatingPointColorCurve: number;
+	bClamp: number;
+	ClampLow: number;
+	ClampHigh: number;
+	clone() : CurveEdEntry;
+	static C(Other: UObject | any): CurveEdEntry;
+}
+
+declare class CurveEdTab { 
+	TabName: string;
+	Curves: CurveEdEntry[];
+	ViewStartInput: number;
+	ViewEndInput: number;
+	ViewStartOutput: number;
+	ViewEndOutput: number;
+	clone() : CurveEdTab;
+	static C(Other: UObject | any): CurveEdTab;
+}
+
+declare class InterpCurveEdSetup extends UObject { 
+	Tabs: CurveEdTab[];
+	ActiveTab: number;
+	static Load(ResourceName: string): InterpCurveEdSetup;
+	static Find(Outer: UObject, ResourceName: string): InterpCurveEdSetup;
+	static GetDefaultObject(): InterpCurveEdSetup;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InterpCurveEdSetup;
+	static C(Other: UObject | any): InterpCurveEdSetup;
+}
+
+declare class ParticleSystemLOD { 
+	clone() : ParticleSystemLOD;
+	static C(Other: UObject | any): ParticleSystemLOD;
+}
+
+declare type EParticleSystemUpdateMode = 'EPSUM_RealTime' | 'EPSUM_FixedTime' | 'EPSUM_MAX';
+declare var EParticleSystemUpdateMode : { EPSUM_RealTime:'EPSUM_RealTime',EPSUM_FixedTime:'EPSUM_FixedTime',EPSUM_MAX:'EPSUM_MAX', };
+declare type ParticleSystemLODMethod = 'PARTICLESYSTEMLODMETHOD_Automatic' | 'PARTICLESYSTEMLODMETHOD_DirectSet' | 'PARTICLESYSTEMLODMETHOD_ActivateAutomatic' | 'PARTICLESYSTEMLODMETHOD_MAX';
+declare var ParticleSystemLODMethod : { PARTICLESYSTEMLODMETHOD_Automatic:'PARTICLESYSTEMLODMETHOD_Automatic',PARTICLESYSTEMLODMETHOD_DirectSet:'PARTICLESYSTEMLODMETHOD_DirectSet',PARTICLESYSTEMLODMETHOD_ActivateAutomatic:'PARTICLESYSTEMLODMETHOD_ActivateAutomatic',PARTICLESYSTEMLODMETHOD_MAX:'PARTICLESYSTEMLODMETHOD_MAX', };
+declare type EParticleSystemInsignificanceReaction = 'Auto' | 'Complete' | 'DisableTick' | 'DisableTickAndKill' | 'Num' | 'EParticleSystemInsignificanceReaction_MAX';
+declare var EParticleSystemInsignificanceReaction : { Auto:'Auto',Complete:'Complete',DisableTick:'DisableTick',DisableTickAndKill:'DisableTickAndKill',Num:'Num',EParticleSystemInsignificanceReaction_MAX:'EParticleSystemInsignificanceReaction_MAX', };
+declare type EParticleSystemOcclusionBoundsMethod = 'EPSOBM_None' | 'EPSOBM_ParticleBounds' | 'EPSOBM_CustomBounds' | 'EPSOBM_MAX';
+declare var EParticleSystemOcclusionBoundsMethod : { EPSOBM_None:'EPSOBM_None',EPSOBM_ParticleBounds:'EPSOBM_ParticleBounds',EPSOBM_CustomBounds:'EPSOBM_CustomBounds',EPSOBM_MAX:'EPSOBM_MAX', };
+declare class LODSoloTrack { 
+	SoloEnableSetting: number[];
+	clone() : LODSoloTrack;
+	static C(Other: UObject | any): LODSoloTrack;
+}
+
+declare class NamedEmitterMaterial { 
 	Name: string;
-	Color: LinearColor;
-	clone() : AnimGroupInfo;
-	static C(Other: UObject | any): AnimGroupInfo;
+	Material: MaterialInterface;
+	clone() : NamedEmitterMaterial;
+	static C(Other: UObject | any): NamedEmitterMaterial;
 }
 
-declare class AnimParentNodeAssetOverride { 
-	NewAsset: AnimationAsset;
-	ParentNodeGuid: Guid;
-	clone() : AnimParentNodeAssetOverride;
-	static C(Other: UObject | any): AnimParentNodeAssetOverride;
-}
-
-declare class PoseWatch extends UObject { 
-	UNode: EdGraphNode;
-	PoseWatchColour: Color;
-	static Load(ResourceName: string): PoseWatch;
-	static Find(Outer: UObject, ResourceName: string): PoseWatch;
-	static GetDefaultObject(): PoseWatch;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PoseWatch;
-	static C(Other: UObject | any): PoseWatch;
-}
-
-declare type EPreviewAnimationBlueprintApplicationMethod = 'LinkedLayers' | 'LinkedAnimGraph' | 'EPreviewAnimationBlueprintApplicationMethod_MAX';
-declare var EPreviewAnimationBlueprintApplicationMethod : { LinkedLayers:'LinkedLayers',LinkedAnimGraph:'LinkedAnimGraph',EPreviewAnimationBlueprintApplicationMethod_MAX:'EPreviewAnimationBlueprintApplicationMethod_MAX', };
-declare class AnimBlueprint extends Blueprint { 
-	TargetSkeleton: Skeleton;
-	Groups: AnimGroupInfo[];
-	bUseMultiThreadedAnimationUpdate: boolean;
-	bWarnAboutBlueprintUsage: boolean;
-	ParentAssetOverrides: AnimParentNodeAssetOverride[];
-	PoseWatches: PoseWatch[];
-	PreviewSkeletalMesh: SkeletalMesh;
-	PreviewAnimationBlueprint: AnimBlueprint;
-	PreviewAnimationBlueprintApplicationMethod: EPreviewAnimationBlueprintApplicationMethod;
-	PreviewAnimationBlueprintTag: string;
-	static Load(ResourceName: string): AnimBlueprint;
-	static Find(Outer: UObject, ResourceName: string): AnimBlueprint;
-	static GetDefaultObject(): AnimBlueprint;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimBlueprint;
-	static C(Other: UObject | any): AnimBlueprint;
-}
-
-declare class SingleAnimationPlayData { 
-	AnimToPlay: AnimationAsset;
-	bSavedLooping: boolean;
-	bSavedPlaying: boolean;
-	SavedPosition: number;
-	SavedPlayRate: number;
-	clone() : SingleAnimationPlayData;
-	static C(Other: UObject | any): SingleAnimationPlayData;
-}
-
-declare type EKinematicBonesUpdateToPhysics = 'SkipSimulatingBones' | 'SkipAllBones' | 'EKinematicBonesUpdateToPhysics_MAX';
-declare var EKinematicBonesUpdateToPhysics : { SkipSimulatingBones:'SkipSimulatingBones',SkipAllBones:'SkipAllBones',EKinematicBonesUpdateToPhysics_MAX:'EKinematicBonesUpdateToPhysics_MAX', };
-declare type EPhysicsTransformUpdateMode = 'SimulationUpatesComponentTransform' | 'ComponentTransformIsKinematic' | 'EPhysicsTransformUpdateMode_MAX';
-declare var EPhysicsTransformUpdateMode : { SimulationUpatesComponentTransform:'SimulationUpatesComponentTransform',ComponentTransformIsKinematic:'ComponentTransformIsKinematic',EPhysicsTransformUpdateMode_MAX:'EPhysicsTransformUpdateMode_MAX', };
-declare type EAnimationMode = 'AnimationBlueprint' | 'AnimationSingleNode' | 'AnimationCustomMode' | 'EAnimationMode_MAX';
-declare var EAnimationMode : { AnimationBlueprint:'AnimationBlueprint',AnimationSingleNode:'AnimationSingleNode',AnimationCustomMode:'AnimationCustomMode',EAnimationMode_MAX:'EAnimationMode_MAX', };
-declare class ClothingSimulationFactory extends UObject { 
-	static Load(ResourceName: string): ClothingSimulationFactory;
-	static Find(Outer: UObject, ResourceName: string): ClothingSimulationFactory;
-	static GetDefaultObject(): ClothingSimulationFactory;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ClothingSimulationFactory;
-	static C(Other: UObject | any): ClothingSimulationFactory;
-}
-
-declare class ClothingInteractor extends UObject { 
-	static Load(ResourceName: string): ClothingInteractor;
-	static Find(Outer: UObject, ResourceName: string): ClothingInteractor;
-	static GetDefaultObject(): ClothingInteractor;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ClothingInteractor;
-	static C(Other: UObject | any): ClothingInteractor;
-}
-
-declare class ClothingSimulationInteractor extends UObject { 
-	ClothingInteractors: any;
-	static Load(ResourceName: string): ClothingSimulationInteractor;
-	static Find(Outer: UObject, ResourceName: string): ClothingSimulationInteractor;
-	static GetDefaultObject(): ClothingSimulationInteractor;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ClothingSimulationInteractor;
-	SetNumSubsteps(NumSubsteps: number): void;
-	SetNumIterations(NumIterations: number): void;
-	SetAnimDriveSpringStiffness(InStiffness: number): void;
-	PhysicsAssetUpdated(): void;
-	GetSimulationTime(): number;
-	GetNumSubsteps(): number;
-	GetNumKinematicParticles(): number;
-	GetNumIterations(): number;
-	GetNumDynamicParticles(): number;
-	GetNumCloths(): number;
-	GetClothingInteractor(ClothingAssetName: string): ClothingInteractor;
-	EnableGravityOverride(InVector: Vector): void;
-	DisableGravityOverride(): void;
-	ClothConfigUpdated(): void;
-	static C(Other: UObject | any): ClothingSimulationInteractor;
-}
-
-declare type ECustomBoneAttributeLookup = 'BoneOnly' | 'ImmediateParent' | 'ParentHierarchy' | 'ECustomBoneAttributeLookup_MAX';
-declare var ECustomBoneAttributeLookup : { BoneOnly:'BoneOnly',ImmediateParent:'ImmediateParent',ParentHierarchy:'ParentHierarchy',ECustomBoneAttributeLookup_MAX:'ECustomBoneAttributeLookup_MAX', };
-declare type ERelativeTransformSpace = 'RTS_World' | 'RTS_Actor' | 'RTS_Component' | 'RTS_ParentBoneSpace' | 'RTS_MAX';
-declare var ERelativeTransformSpace : { RTS_World:'RTS_World',RTS_Actor:'RTS_Actor',RTS_Component:'RTS_Component',RTS_ParentBoneSpace:'RTS_ParentBoneSpace',RTS_MAX:'RTS_MAX', };
-declare class SkeletalMeshComponent extends SkinnedMeshComponent { 
-	AnimationBlueprint: AnimBlueprint;
-	AnimBlueprintGeneratedClass: UnrealEngineClass;
-	AnimClass: UnrealEngineClass;
-	AnimScriptInstance: AnimInstance;
-	SubInstances: AnimInstance[];
-	PostProcessAnimInstance: AnimInstance;
-	AnimationData: SingleAnimationPlayData;
-	RootBoneTranslation: Vector;
-	LineCheckBoundsScale: Vector;
-	LinkedInstances: AnimInstance[];
-	CachedBoneSpaceTransforms: Transform[];
-	CachedComponentSpaceTransforms: Transform[];
-	GlobalAnimRateScale: number;
-	KinematicBonesUpdateType: EKinematicBonesUpdateToPhysics;
-	PhysicsTransformUpdateMode: EPhysicsTransformUpdateMode;
-	AnimationMode: EAnimationMode;
-	bDisablePostProcessBlueprint: boolean;
-	bUpdateOverlapsOnAnimationFinalize: boolean;
-	bHasValidBodies: boolean;
-	bBlendPhysics: boolean;
-	bEnablePhysicsOnDedicatedServer: boolean;
-	bUpdateJointsFromAnimation: boolean;
-	bDisableClothSimulation: boolean;
-	bDisableRigidBodyAnimNode: boolean;
-	bAllowAnimCurveEvaluation: boolean;
-	bDisableAnimCurves: boolean;
-	bCollideWithEnvironment: boolean;
-	bCollideWithAttachedChildren: boolean;
-	bLocalSpaceSimulation: boolean;
-	bResetAfterTeleport: boolean;
-	bDeferKinematicBoneUpdate: boolean;
-	bNoSkeletonUpdate: boolean;
-	bPauseAnims: boolean;
-	bUseRefPoseOnInitAnim: boolean;
-	bEnablePerPolyCollision: boolean;
-	bForceRefpose: boolean;
-	bOnlyAllowAutonomousTickPose: boolean;
-	bIsAutonomousTickPose: boolean;
-	bOldForceRefPose: boolean;
-	bShowPrePhysBones: boolean;
-	bRequiredBonesUpToDate: boolean;
-	bAnimTreeInitialised: boolean;
-	bIncludeComponentLocationIntoBounds: boolean;
-	bEnableLineCheckWithBounds: boolean;
-	bPropagateCurvesToSlaves: boolean;
-	bSkipKinematicUpdateWhenInterpolating: boolean;
-	bSkipBoundsUpdateWhenInterpolating: boolean;
-	bUpdateAnimationInEditor: boolean;
-	bUpdateClothInEditor: boolean;
-	bNeedsQueuedAnimEventsDispatched: boolean;
-	CachedAnimCurveUidVersion: any;
-	ClothBlendWeight: number;
-	bWaitForParallelClothTask: boolean;
-	DisallowedAnimCurves: string[];
-	BodySetup: BodySetup;
-	OnConstraintBroken: UnrealEngineMulticastDelegate<(ConstraintIndex: number) => void>;
-	ClothingSimulationFactory: UnrealEngineClass;
-	TeleportDistanceThreshold: number;
-	TeleportRotationThreshold: number;
-	LastPoseTickFrame: any;
-	ClothingInteractor: ClothingSimulationInteractor;
-	OnAnimInitialized: UnrealEngineMulticastDelegate<() => void>;
-	SequenceToPlay: AnimSequence;
-	AnimToPlay: AnimationAsset;
-	bDefaultLooping: boolean;
-	bDefaultPlaying: boolean;
-	DefaultPosition: number;
-	DefaultPlayRate: number;
-	static Load(ResourceName: string): SkeletalMeshComponent;
-	static Find(Outer: UObject, ResourceName: string): SkeletalMeshComponent;
-	static GetDefaultObject(): SkeletalMeshComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SkeletalMeshComponent;
-	UnlinkAnimClassLayers(InClass: UnrealEngineClass): void;
-	UnbindClothFromMasterPoseComponent(bRestoreSimulationSpace: boolean): void;
-	ToggleDisablePostProcessBlueprint(): void;
-	TermBodiesBelow(ParentBoneName: string): void;
-	SuspendClothingSimulation(): void;
-	Stop(): void;
-	SnapshotPose(Snapshot?: PoseSnapshot): {Snapshot: PoseSnapshot};
-	SetUpdateClothInEditor(NewUpdateState: boolean): void;
-	SetUpdateAnimationInEditor(NewUpdateState: boolean): void;
-	SetTeleportRotationThreshold(Threshold: number): void;
-	SetTeleportDistanceThreshold(Threshold: number): void;
-	SetPosition(InPos: number,bFireNotifies: boolean): void;
-	SetPlayRate(Rate: number): void;
-	SetPhysicsBlendWeight(PhysicsBlendWeight: number): void;
-	SetNotifyRigidBodyCollisionBelow(bNewNotifyRigidBodyCollision: boolean,BoneName: string,bIncludeSelf: boolean): void;
-	SetMorphTarget(MorphTargetName: string,Value: number,bRemoveZeroWeight: boolean): void;
-	SetEnablePhysicsBlending(bNewBlendPhysics: boolean): void;
-	SetEnableGravityOnAllBodiesBelow(bEnableGravity: boolean,BoneName: string,bIncludeSelf: boolean): void;
-	SetEnableBodyGravity(bEnableGravity: boolean,BoneName: string): void;
-	SetDisablePostProcessBlueprint(bInDisablePostProcess: boolean): void;
-	SetDisableAnimCurves(bInDisableAnimCurves: boolean): void;
-	SetConstraintProfileForAll(ProfileName: string,bDefaultIfNotFound: boolean): void;
-	SetConstraintProfile(JointName: string,ProfileName: string,bDefaultIfNotFound: boolean): void;
-	SetClothMaxDistanceScale(Scale: number): void;
-	SetBodyNotifyRigidBodyCollision(bNewNotifyRigidBodyCollision: boolean,BoneName: string): void;
-	SetAnimClass(NewClass: UnrealEngineClass): void;
-	SetAnimationMode(InAnimationMode: EAnimationMode): void;
-	SetAnimation(NewAnimToPlay: AnimationAsset): void;
-	SetAngularLimits(InBoneName: string,Swing1LimitAngle: number,TwistLimitAngle: number,Swing2LimitAngle: number): void;
-	SetAllowRigidBodyAnimNode(bInAllow: boolean,bReinitAnim: boolean): void;
-	SetAllowedAnimCurvesEvaluation(List: string[],bAllow: boolean): void;
-	SetAllowAnimCurveEvaluation(bInAllow: boolean): void;
-	SetAllMotorsAngularVelocityDrive(bEnableSwingDrive: boolean,bEnableTwistDrive: boolean,bSkipCustomPhysicsType: boolean): void;
-	SetAllMotorsAngularPositionDrive(bEnableSwingDrive: boolean,bEnableTwistDrive: boolean,bSkipCustomPhysicsType: boolean): void;
-	SetAllMotorsAngularDriveParams(InSpring: number,InDamping: number,InForceLimit: number,bSkipCustomPhysicsType: boolean): void;
-	SetAllBodiesSimulatePhysics(bNewSimulate: boolean): void;
-	SetAllBodiesPhysicsBlendWeight(PhysicsBlendWeight: number,bSkipCustomPhysicsType: boolean): void;
-	SetAllBodiesBelowSimulatePhysics(InBoneName: string,bNewSimulate: boolean,bIncludeSelf: boolean): void;
-	SetAllBodiesBelowPhysicsBlendWeight(InBoneName: string,PhysicsBlendWeight: number,bSkipCustomPhysicsType: boolean,bIncludeSelf: boolean): void;
-	ResumeClothingSimulation(): void;
-	ResetClothTeleportMode(): void;
-	ResetAnimInstanceDynamics(InTeleportType: ETeleportType): void;
-	ResetAllowedAnimCurveEvaluation(): void;
-	ResetAllBodiesSimulatePhysics(): void;
-	PlayAnimation(NewAnimToPlay: AnimationAsset,bLooping: boolean): void;
-	Play(bLooping: boolean): void;
-	OverrideAnimationData(InAnimToPlay: AnimationAsset,bIsLooping: boolean,bIsPlaying: boolean,Position: number,PlayRate: number): void;
-	LinkAnimGraphByTag(InTag: string,InClass: UnrealEngineClass): void;
-	LinkAnimClassLayers(InClass: UnrealEngineClass): void;
-	K2_GetClosestPointOnPhysicsAsset(WorldPosition: Vector,ClosestWorldPosition?: Vector,Normal?: Vector,BoneName?: string,Distance?: number): {ClosestWorldPosition: Vector, Normal: Vector, BoneName: string, Distance: number, $: boolean};
-	IsPlaying(): boolean;
-	IsClothingSimulationSuspended(): boolean;
-	IsBodyGravityEnabled(BoneName: string): boolean;
-	HasValidAnimationInstance(): boolean;
-	GetTeleportRotationThreshold(): number;
-	GetTeleportDistanceThreshold(): number;
-	GetStringAttribute_Ref(BoneName: string,AttributeName: string,OutValue?: string,LookupType?: ECustomBoneAttributeLookup): {OutValue: string, $: boolean};
-	GetStringAttribute(BoneName: string,AttributeName: string,DefaultValue: string,OutValue?: string,LookupType?: ECustomBoneAttributeLookup): {OutValue: string, $: boolean};
-	GetSkeletalCenterOfMass(): Vector;
-	GetPostProcessInstance(): AnimInstance;
-	GetPosition(): number;
-	GetPlayRate(): number;
-	GetMorphTarget(MorphTargetName: string): number;
-	GetLinkedAnimLayerInstanceByGroup(InGroup: string): AnimInstance;
-	GetLinkedAnimLayerInstanceByClass(InClass: UnrealEngineClass): AnimInstance;
-	GetLinkedAnimGraphInstancesByTag(InTag: string,OutLinkedInstances?: AnimInstance[]): {OutLinkedInstances: AnimInstance[]};
-	GetLinkedAnimGraphInstanceByTag(InTag: string): AnimInstance;
-	GetIntegerAttribute_Ref(BoneName: string,AttributeName: string,OutValue?: number,LookupType?: ECustomBoneAttributeLookup): {OutValue: number, $: boolean};
-	GetIntegerAttribute(BoneName: string,AttributeName: string,DefaultValue: number,OutValue?: number,LookupType?: ECustomBoneAttributeLookup): {OutValue: number, $: boolean};
-	GetFloatAttribute_Ref(BoneName: string,AttributeName: string,OutValue?: number,LookupType?: ECustomBoneAttributeLookup): {OutValue: number, $: boolean};
-	GetFloatAttribute(BoneName: string,AttributeName: string,DefaultValue: number,OutValue?: number,LookupType?: ECustomBoneAttributeLookup): {OutValue: number, $: boolean};
-	GetDisablePostProcessBlueprint(): boolean;
-	GetDisableAnimCurves(): boolean;
-	GetCurrentJointAngles(InBoneName: string,Swing1Angle?: number,TwistAngle?: number,Swing2Angle?: number): {Swing1Angle: number, TwistAngle: number, Swing2Angle: number};
-	GetClothMaxDistanceScale(): number;
-	GetClothingSimulationInteractor(): ClothingSimulationInteractor;
-	GetBoneMass(BoneName: string,bScaleMass: boolean): number;
-	GetAnimInstance(): AnimInstance;
-	GetAnimClass(): UnrealEngineClass;
-	GetAnimationMode(): EAnimationMode;
-	GetAllowRigidBodyAnimNode(): boolean;
-	GetAllowedAnimCurveEvaluate(): boolean;
-	ForceClothNextUpdateTeleportAndReset(): void;
-	ForceClothNextUpdateTeleport(): void;
-	FindConstraintBoneName(ConstraintIndex: number): string;
-	ClearMorphTargets(): void;
-	BreakConstraint(Impulse: Vector,HitLocation: Vector,InBoneName: string): void;
-	BindClothToMasterPoseComponent(): void;
-	AllowAnimCurveEvaluation(NameOfCurve: string,bAllow: boolean): void;
-	AddImpulseToAllBodiesBelow(Impulse: Vector,BoneName: string,bVelChange: boolean,bIncludeSelf: boolean): void;
-	AddForceToAllBodiesBelow(Force: Vector,BoneName: string,bAccelChange: boolean,bIncludeSelf: boolean): void;
-	AccumulateAllBodiesBelowPhysicsBlendWeight(InBoneName: string,AddPhysicsBlendWeight: number,bSkipCustomPhysicsType: boolean): void;
-	static C(Other: UObject | any): SkeletalMeshComponent;
-	GetPhysicsBodySetup(InName: string): BodySetup;
-	K2_DirectionBetweenSockets(SocketOrBoneNameFrom: string,SocketOrBoneNameTo: string): Vector;
-	K2_DistanceBetweenTwoSocketsAndMapRange(SocketOrBoneNameA: string,SocketSpaceA: ERelativeTransformSpace,SocketOrBoneNameB: string,SocketSpaceB: ERelativeTransformSpace,bRemapRange: boolean,InRangeMin: number,InRangeMax: number,OutRangeMin: number,OutRangeMax: number): number;
-	static GetPhysicsBodySetup(InSkeletalMeshComp: SkeletalMeshComponent,InName: string): BodySetup;
-	static K2_DirectionBetweenSockets(Component: SkeletalMeshComponent,SocketOrBoneNameFrom: string,SocketOrBoneNameTo: string): Vector;
-	static K2_DistanceBetweenTwoSocketsAndMapRange(Component: SkeletalMeshComponent,SocketOrBoneNameA: string,SocketSpaceA: ERelativeTransformSpace,SocketOrBoneNameB: string,SocketSpaceB: ERelativeTransformSpace,bRemapRange: boolean,InRangeMin: number,InRangeMax: number,OutRangeMin: number,OutRangeMax: number): number;
+declare type EPSCPoolMethod = 'None' | 'AutoRelease' | 'ManualRelease' | 'ManualRelease_OnComplete' | 'FreeInPool' | 'EPSCPoolMethod_MAX';
+declare var EPSCPoolMethod : { None:'None',AutoRelease:'AutoRelease',ManualRelease:'ManualRelease',ManualRelease_OnComplete:'ManualRelease_OnComplete',FreeInPool:'FreeInPool',EPSCPoolMethod_MAX:'EPSCPoolMethod_MAX', };
+declare class ParticleSystem extends FXSystemAsset { 
+	UpdateTime_FPS: number;
+	UpdateTime_Delta: number;
+	WarmupTime: number;
+	WarmupTickRate: number;
+	Emitters: ParticleEmitter[];
+	PreviewComponent: ParticleSystemComponent;
+	ThumbnailAngle: Rotator;
+	ThumbnailDistance: number;
+	ThumbnailWarmup: number;
+	CurveEdSetup: InterpCurveEdSetup;
+	LODDistanceCheckTime: number;
+	MacroUVRadius: number;
+	LODDistances: number[];
+	EditorLODSetting: number;
+	LODSettings: ParticleSystemLOD[];
+	FixedRelativeBoundingBox: Box;
+	SecondsBeforeInactive: number;
+	FloorMesh: string;
+	FloorPosition: Vector;
+	FloorRotation: Rotator;
+	FloorScale: number;
+	FloorScale3D: Vector;
+	BackgroundColor: Color;
+	Delay: number;
+	DelayLow: number;
+	bOrientZAxisTowardCamera: boolean;
+	bUseFixedRelativeBoundingBox: boolean;
+	bShouldResetPeakCounts: boolean;
+	bHasPhysics: boolean;
+	bUseRealtimeThumbnail: boolean;
+	ThumbnailImageOutOfDate: boolean;
+	ThumbnailImage: Texture2D;
+	bUseDelayRange: boolean;
+	bAllowManagedTicking: boolean;
+	bAutoDeactivate: boolean;
+	bRegenerateLODDuplicate: boolean;
+	SystemUpdateMode: EParticleSystemUpdateMode;
+	LODMethod: ParticleSystemLODMethod;
+	InsignificantReaction: EParticleSystemInsignificanceReaction;
+	OcclusionBoundsMethod: EParticleSystemOcclusionBoundsMethod;
+	MaxSignificanceLevel: EParticleSignificanceLevel;
+	MinTimeBetweenTicks: any;
+	InsignificanceDelay: number;
+	MacroUVPosition: Vector;
+	CustomOcclusionBounds: Box;
+	SoloTracking: LODSoloTrack[];
+	NamedMaterialSlots: NamedEmitterMaterial[];
+	static Load(ResourceName: string): ParticleSystem;
+	static Find(Outer: UObject, ResourceName: string): ParticleSystem;
+	static GetDefaultObject(): ParticleSystem;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ParticleSystem;
+	ContainsEmitterType(TypeData: UnrealEngineClass): boolean;
+	static C(Other: UObject | any): ParticleSystem;
+	SpawnEmitterAttached(AttachToComponent: SceneComponent,AttachPointName: string,Location: Vector,Rotation: Rotator,Scale: Vector,LocationType: EAttachLocation,bAutoDestroy: boolean,PoolingMethod: EPSCPoolMethod,bAutoActivate: boolean): ParticleSystemComponent;
+	static SpawnEmitterAttached(EmitterTemplate: ParticleSystem,AttachToComponent: SceneComponent,AttachPointName: string,Location: Vector,Rotation: Rotator,Scale: Vector,LocationType: EAttachLocation,bAutoDestroy: boolean,PoolingMethod: EPSCPoolMethod,bAutoActivate: boolean): ParticleSystemComponent;
 }
 
 declare type EParticleSysParamType = 'PSPT_None' | 'PSPT_Scalar' | 'PSPT_ScalarRand' | 'PSPT_Vector' | 'PSPT_VectorRand' | 'PSPT_Color' | 'PSPT_Actor' | 'PSPT_Material' | 'PSPT_VectorUnitRand' | 'PSPT_MAX';
@@ -8905,47 +7897,6 @@ declare class DrawFrustumComponent extends PrimitiveComponent {
 	static C(Other: UObject | any): DrawFrustumComponent;
 }
 
-declare class Vector_NetQuantize extends Vector { 
-	clone() : Vector_NetQuantize;
-	static C(Other: UObject | any): Vector_NetQuantize;
-}
-
-declare class Vector_NetQuantizeNormal extends Vector { 
-	clone() : Vector_NetQuantizeNormal;
-	static C(Other: UObject | any): Vector_NetQuantizeNormal;
-}
-
-declare class HitResult { 
-	FaceIndex: number;
-	Time: number;
-	Distance: number;
-	Location: Vector_NetQuantize;
-	ImpactPoint: Vector_NetQuantize;
-	Normal: Vector_NetQuantizeNormal;
-	ImpactNormal: Vector_NetQuantizeNormal;
-	TraceStart: Vector_NetQuantize;
-	TraceEnd: Vector_NetQuantize;
-	PenetrationDepth: number;
-	Item: number;
-	ElementIndex: number;
-	bBlockingHit: boolean;
-	bStartPenetrating: boolean;
-	PhysMaterial: any;
-	Actor: any;
-	Component: any;
-	BoneName: string;
-	MyBoneName: string;
-	clone() : HitResult;
-	static C(Other: UObject | any): HitResult;
-	BreakHitResult(bBlockingHit?: boolean,bInitialOverlap?: boolean,Time?: number,Distance?: number,Location?: Vector,ImpactPoint?: Vector,Normal?: Vector,ImpactNormal?: Vector,PhysMat?: PhysicalMaterial,HitActor?: Actor,HitComponent?: PrimitiveComponent,HitBoneName?: string,HitItem?: number,ElementIndex?: number,FaceIndex?: number,TraceStart?: Vector,TraceEnd?: Vector): {bBlockingHit: boolean, bInitialOverlap: boolean, Time: number, Distance: number, Location: Vector, ImpactPoint: Vector, Normal: Vector, ImpactNormal: Vector, PhysMat: PhysicalMaterial, HitActor: Actor, HitComponent: PrimitiveComponent, HitBoneName: string, HitItem: number, ElementIndex: number, FaceIndex: number, TraceStart: Vector, TraceEnd: Vector};
-	FindCollisionUV(UVChannel: number,UV?: Vector2D): {UV: Vector2D, $: boolean};
-	GetSurfaceType(): EPhysicalSurface;
-	static BreakHitResult(Hit: HitResult,bBlockingHit?: boolean,bInitialOverlap?: boolean,Time?: number,Distance?: number,Location?: Vector,ImpactPoint?: Vector,Normal?: Vector,ImpactNormal?: Vector,PhysMat?: PhysicalMaterial,HitActor?: Actor,HitComponent?: PrimitiveComponent,HitBoneName?: string,HitItem?: number,ElementIndex?: number,FaceIndex?: number,TraceStart?: Vector,TraceEnd?: Vector): {bBlockingHit: boolean, bInitialOverlap: boolean, Time: number, Distance: number, Location: Vector, ImpactPoint: Vector, Normal: Vector, ImpactNormal: Vector, PhysMat: PhysicalMaterial, HitActor: Actor, HitComponent: PrimitiveComponent, HitBoneName: string, HitItem: number, ElementIndex: number, FaceIndex: number, TraceStart: Vector, TraceEnd: Vector};
-	static FindCollisionUV(Hit: HitResult,UVChannel: number,UV?: Vector2D): {UV: Vector2D, $: boolean};
-	static GetSurfaceType(Hit: HitResult): EPhysicalSurface;
-	static MakeHitResult(bBlockingHit: boolean,bInitialOverlap: boolean,Time: number,Distance: number,Location: Vector,ImpactPoint: Vector,Normal: Vector,ImpactNormal: Vector,PhysMat: PhysicalMaterial,HitActor: Actor,HitComponent: PrimitiveComponent,HitBoneName: string,HitItem: number,ElementIndex: number,FaceIndex: number,TraceStart: Vector,TraceEnd: Vector): HitResult;
-}
-
 declare class DebugCameraController extends PlayerController { 
 	bShowSelectedInfo: boolean;
 	bIsFrozenRendering: boolean;
@@ -9051,6 +8002,37 @@ declare class CheatManager extends UObject {
 	static C(Other: UObject | any): CheatManager;
 }
 
+declare class KeyBind { 
+	Key: Key;
+	Command: string;
+	Control: boolean;
+	Shift: boolean;
+	Alt: boolean;
+	Cmd: boolean;
+	bIgnoreCtrl: boolean;
+	bIgnoreShift: boolean;
+	bIgnoreAlt: boolean;
+	bIgnoreCmd: boolean;
+	bDisabled: boolean;
+	clone() : KeyBind;
+	static C(Other: UObject | any): KeyBind;
+}
+
+declare class PlayerInput extends UObject { 
+	DebugExecBindings: KeyBind[];
+	InvertedAxis: string[];
+	static Load(ResourceName: string): PlayerInput;
+	static Find(Outer: UObject, ResourceName: string): PlayerInput;
+	static GetDefaultObject(): PlayerInput;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PlayerInput;
+	SetMouseSensitivity(Sensitivity: number): void;
+	SetBind(BindName: string,Command: string): void;
+	InvertAxisKey(AxisKey: Key): void;
+	InvertAxis(AxisName: string): void;
+	ClearSmoothing(): void;
+	static C(Other: UObject | any): PlayerInput;
+}
+
 declare class RuntimeFloatCurve { 
 	EditorCurveData: RichCurve;
 	ExternalCurve: CurveFloat;
@@ -9152,26 +8134,6 @@ declare class ChildConnection extends NetConnection {
 	static C(Other: UObject | any): ChildConnection;
 }
 
-declare class Package extends UObject { 
-	static Load(ResourceName: string): Package;
-	static Find(Outer: UObject, ResourceName: string): Package;
-	static GetDefaultObject(): Package;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Package;
-	static C(Other: UObject | any): Package;
-	DeletePackage(): boolean;
-	FindWorldInPackage(): World;
-	SavePackage(Filename: string): boolean;
-	GetLongPackagePath(): string;
-	HasAnyPackageFlags(Flags: number): boolean;
-	LoadPackage(PackageName: string): Package;
-	static DeletePackage(Package: Package): boolean;
-	static FindWorldInPackage(Package: Package): World;
-	static SavePackage(Package: Package,Filename: string): boolean;
-	static GetLongPackagePath(InPackage: Package): string;
-	static HasAnyPackageFlags(Package: Package,Flags: number): boolean;
-	static LoadPackage(InOuter: Package,PackageName: string): Package;
-}
-
 declare class ChannelDefinition { 
 	ChannelName: string;
 	ClassName: string;
@@ -9249,17 +8211,6 @@ declare class PackageMap extends UObject {
 	static C(Other: UObject | any): PackageMap;
 }
 
-declare class UniqueNetIdWrapper { 
-	clone() : UniqueNetIdWrapper;
-	static C(Other: UObject | any): UniqueNetIdWrapper;
-}
-
-declare class UniqueNetIdRepl extends UniqueNetIdWrapper { 
-	ReplicationBytes: number[];
-	clone() : UniqueNetIdRepl;
-	static C(Other: UObject | any): UniqueNetIdRepl;
-}
-
 declare class NetConnection extends Player { 
 	Children: ChildConnection[];
 	Driver: NetDriver;
@@ -9279,6 +8230,32 @@ declare class NetConnection extends Player {
 	static GetDefaultObject(): NetConnection;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NetConnection;
 	static C(Other: UObject | any): NetConnection;
+}
+
+declare class CachedKeyToActionInfo { 
+	PlayerInput: PlayerInput;
+	clone() : CachedKeyToActionInfo;
+	static C(Other: UObject | any): CachedKeyToActionInfo;
+}
+
+declare type EControllerAnalogStick = 'CAS_LeftStick' | 'CAS_RightStick' | 'CAS_MAX';
+declare var EControllerAnalogStick : { CAS_LeftStick:'CAS_LeftStick',CAS_RightStick:'CAS_RightStick',CAS_MAX:'CAS_MAX', };
+declare class InputComponent extends ActorComponent { 
+	CachedKeyToActionInfo: CachedKeyToActionInfo[];
+	static Load(ResourceName: string): InputComponent;
+	static Find(Outer: UObject, ResourceName: string): InputComponent;
+	static GetDefaultObject(): InputComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InputComponent;
+	WasControllerKeyJustReleased(Key: Key): boolean;
+	WasControllerKeyJustPressed(Key: Key): boolean;
+	IsControllerKeyDown(Key: Key): boolean;
+	GetTouchState(FingerIndex: number,LocationX?: number,LocationY?: number,bIsCurrentlyPressed?: boolean): {LocationX: number, LocationY: number, bIsCurrentlyPressed: boolean};
+	GetControllerVectorKeyState(Key: Key): Vector;
+	GetControllerMouseDelta(DeltaX?: number,DeltaY?: number): {DeltaX: number, DeltaY: number};
+	GetControllerKeyTimeDown(Key: Key): number;
+	GetControllerAnalogStickState(WhichStick: EControllerAnalogStick,StickX?: number,StickY?: number): {StickX: number, StickY: number};
+	GetControllerAnalogKeyState(Key: Key): number;
+	static C(Other: UObject | any): InputComponent;
 }
 
 declare class TouchInputControl { 
@@ -9313,94 +8290,6 @@ declare class TouchInterface extends UObject {
 
 declare type EPlaneConstraintAxisSetting = 'Custom' | 'X' | 'Y' | 'Z' | 'UseGlobalPhysicsSetting' | 'EPlaneConstraintAxisSetting_MAX';
 declare var EPlaneConstraintAxisSetting : { Custom:'Custom',X:'X',Y:'Y',Z:'Z',UseGlobalPhysicsSetting:'UseGlobalPhysicsSetting',EPlaneConstraintAxisSetting_MAX:'EPlaneConstraintAxisSetting_MAX', };
-declare type EBrushType = 'Brush_Default' | 'Brush_Add' | 'Brush_Subtract' | 'Brush_MAX';
-declare var EBrushType : { Brush_Default:'Brush_Default',Brush_Add:'Brush_Add',Brush_Subtract:'Brush_Subtract',Brush_MAX:'Brush_MAX', };
-declare class BrushComponent extends PrimitiveComponent { 
-	Brush: Model;
-	BrushBodySetup: BodySetup;
-	PrePivot: Vector;
-	static Load(ResourceName: string): BrushComponent;
-	static Find(Outer: UObject, ResourceName: string): BrushComponent;
-	static GetDefaultObject(): BrushComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BrushComponent;
-	static C(Other: UObject | any): BrushComponent;
-}
-
-declare class BuilderPoly { 
-	VertexIndices: number[];
-	Direction: number;
-	ItemName: string;
-	PolyFlags: number;
-	clone() : BuilderPoly;
-	static C(Other: UObject | any): BuilderPoly;
-}
-
-declare class BrushBuilder extends UObject { 
-	BitmapFilename: string;
-	Tooltip: string;
-	NotifyBadParams: boolean;
-	Vertices: Vector[];
-	Polys: BuilderPoly[];
-	Layer: string;
-	MergeCoplanars: boolean;
-	static Load(ResourceName: string): BrushBuilder;
-	static Find(Outer: UObject, ResourceName: string): BrushBuilder;
-	static GetDefaultObject(): BrushBuilder;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BrushBuilder;
-	static C(Other: UObject | any): BrushBuilder;
-	Build(InWorld: World,InBrush: Brush): boolean;
-	static Build(Builder: BrushBuilder,InWorld: World,InBrush: Brush): boolean;
-}
-
-declare class GeomSelection { 
-	Type: number;
-	index: number;
-	SelectionIndex: number;
-	clone() : GeomSelection;
-	static C(Other: UObject | any): GeomSelection;
-}
-
-declare class Brush extends Actor { 
-	BrushType: EBrushType;
-	BrushColor: Color;
-	PolyFlags: number;
-	bColored: boolean;
-	bSolidWhenSelected: boolean;
-	bPlaceableFromClassBrowser: boolean;
-	bNotForClientOrServer: boolean;
-	Brush: Model;
-	BrushComponent: BrushComponent;
-	BrushBuilder: BrushBuilder;
-	bInManipulation: boolean;
-	SavedSelections: GeomSelection[];
-	static GetDefaultObject(): Brush;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Brush;
-	static C(Other: UObject | any): Brush;
-	csgAdd(PolyFlags: number,BrushType: EBrushType): Brush;
-	GetSurfaces(Surfaces?: number[]): {Surfaces: number[]};
-	static csgAdd(DefaultBrush: Brush,PolyFlags: number,BrushType: EBrushType): Brush;
-	static GetSurfaces(Brush: Brush,Surfaces?: number[]): {Surfaces: number[]};
-}
-
-declare class Volume extends Brush { 
-	static GetDefaultObject(): Volume;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Volume;
-	static C(Other: UObject | any): Volume;
-	CreateBrushForVolumeActor(BrushBuilder: BrushBuilder): void;
-	static CreateBrushForVolumeActor(NewActor: Volume,BrushBuilder: BrushBuilder): void;
-}
-
-declare class PhysicsVolume extends Volume { 
-	TerminalVelocity: number;
-	Priority: number;
-	FluidFriction: number;
-	bWaterVolume: boolean;
-	bPhysicsOnContact: boolean;
-	static GetDefaultObject(): PhysicsVolume;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PhysicsVolume;
-	static C(Other: UObject | any): PhysicsVolume;
-}
-
 declare class MovementComponent extends ActorComponent { 
 	UpdatedComponent: SceneComponent;
 	UpdatedPrimitive: PrimitiveComponent;
@@ -9501,6 +8390,28 @@ declare class PawnMovementComponent extends NavMovementComponent {
 	ConsumeInputVector(): Vector;
 	AddInputVector(WorldVector: Vector,bForce: boolean): void;
 	static C(Other: UObject | any): PawnMovementComponent;
+}
+
+declare class NavAreaBase extends UObject { 
+	static Load(ResourceName: string): NavAreaBase;
+	static Find(Outer: UObject, ResourceName: string): NavAreaBase;
+	static GetDefaultObject(): NavAreaBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NavAreaBase;
+	static C(Other: UObject | any): NavAreaBase;
+}
+
+declare class ShapeComponent extends PrimitiveComponent { 
+	ShapeBodySetup: BodySetup;
+	AreaClass: UnrealEngineClass;
+	ShapeColor: Color;
+	bDrawOnlyIfSelected: boolean;
+	bShouldCollideWhenPlacing: boolean;
+	bDynamicObstacle: boolean;
+	static Load(ResourceName: string): ShapeComponent;
+	static Find(Outer: UObject, ResourceName: string): ShapeComponent;
+	static GetDefaultObject(): ShapeComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ShapeComponent;
+	static C(Other: UObject | any): ShapeComponent;
 }
 
 declare class SphereComponent extends ShapeComponent { 
@@ -9651,13 +8562,11 @@ declare class StaticMeshComponent extends MeshComponent {
 	GetLocalBounds(Min?: Vector,Max?: Vector): {Min: Vector, Max: Vector};
 	static C(Other: UObject | any): StaticMeshComponent;
 	GetPhysicsBodySetupFromStaticMeshComponent(): BodySetup;
-	HasInstanceVertexColors(): boolean;
 	CopyProceduralMeshFromStaticMeshComponent(LODIndex: number,ProcMeshComponent: ProceduralMeshComponent,bCreateCollision: boolean): void;
 	PaintVerticesLerpAlongAxis(StartColor: LinearColor,EndColor: LinearColor,Axis: EVertexPaintAxis,bConvertToSRGB: boolean): void;
 	PaintVerticesSingleColor(FillColor: LinearColor,bConvertToSRGB: boolean): void;
 	RemovePaintedVertices(): void;
 	static GetPhysicsBodySetupFromStaticMeshComponent(InStaticMeshComp: StaticMeshComponent): BodySetup;
-	static HasInstanceVertexColors(StaticMeshComponent: StaticMeshComponent): boolean;
 	static CopyProceduralMeshFromStaticMeshComponent(StaticMeshComponent: StaticMeshComponent,LODIndex: number,ProcMeshComponent: ProceduralMeshComponent,bCreateCollision: boolean): void;
 	static PaintVerticesLerpAlongAxis(StaticMeshComponent: StaticMeshComponent,StartColor: LinearColor,EndColor: LinearColor,Axis: EVertexPaintAxis,bConvertToSRGB: boolean): void;
 	static PaintVerticesSingleColor(StaticMeshComponent: StaticMeshComponent,FillColor: LinearColor,bConvertToSRGB: boolean): void;
@@ -10870,17 +9779,6 @@ declare class HapticFeedbackEffect_Base extends UObject {
 
 declare type EDynamicForceFeedbackAction = 'Start' | 'Update' | 'Stop' | 'EDynamicForceFeedbackAction_MAX';
 declare var EDynamicForceFeedbackAction : { Start:'Start',Update:'Update',Stop:'Stop',EDynamicForceFeedbackAction_MAX:'EDynamicForceFeedbackAction_MAX', };
-declare class LatentActionInfo { 
-	Linkage: number;
-	UUID: number;
-	ExecutionFunction: string;
-	CallbackTarget: UObject;
-	clone() : LatentActionInfo;
-	static C(Other: UObject | any): LatentActionInfo;
-}
-
-declare type ETouchIndex = 'Touch1' | 'Touch2' | 'Touch3' | 'Touch4' | 'Touch5' | 'Touch6' | 'Touch7' | 'Touch8' | 'Touch9' | 'Touch10' | 'CursorPointerIndex' | 'MAX_TOUCHES' | 'ETouchIndex_MAX';
-declare var ETouchIndex : { Touch1:'Touch1',Touch2:'Touch2',Touch3:'Touch3',Touch4:'Touch4',Touch5:'Touch5',Touch6:'Touch6',Touch7:'Touch7',Touch8:'Touch8',Touch9:'Touch9',Touch10:'Touch10',CursorPointerIndex:'CursorPointerIndex',MAX_TOUCHES:'MAX_TOUCHES',ETouchIndex_MAX:'ETouchIndex_MAX', };
 declare type EObjectTypeQuery = 'ObjectTypeQuery1' | 'ObjectTypeQuery2' | 'ObjectTypeQuery3' | 'ObjectTypeQuery4' | 'ObjectTypeQuery5' | 'ObjectTypeQuery6' | 'ObjectTypeQuery7' | 'ObjectTypeQuery8' | 'ObjectTypeQuery9' | 'ObjectTypeQuery10' | 'ObjectTypeQuery11' | 'ObjectTypeQuery12' | 'ObjectTypeQuery13' | 'ObjectTypeQuery14' | 'ObjectTypeQuery15' | 'ObjectTypeQuery16' | 'ObjectTypeQuery17' | 'ObjectTypeQuery18' | 'ObjectTypeQuery19' | 'ObjectTypeQuery20' | 'ObjectTypeQuery21' | 'ObjectTypeQuery22' | 'ObjectTypeQuery23' | 'ObjectTypeQuery24' | 'ObjectTypeQuery25' | 'ObjectTypeQuery26' | 'ObjectTypeQuery27' | 'ObjectTypeQuery28' | 'ObjectTypeQuery29' | 'ObjectTypeQuery30' | 'ObjectTypeQuery31' | 'ObjectTypeQuery32' | 'ObjectTypeQuery_MAX' | 'EObjectTypeQuery_MAX';
 declare var EObjectTypeQuery : { ObjectTypeQuery1:'ObjectTypeQuery1',ObjectTypeQuery2:'ObjectTypeQuery2',ObjectTypeQuery3:'ObjectTypeQuery3',ObjectTypeQuery4:'ObjectTypeQuery4',ObjectTypeQuery5:'ObjectTypeQuery5',ObjectTypeQuery6:'ObjectTypeQuery6',ObjectTypeQuery7:'ObjectTypeQuery7',ObjectTypeQuery8:'ObjectTypeQuery8',ObjectTypeQuery9:'ObjectTypeQuery9',ObjectTypeQuery10:'ObjectTypeQuery10',ObjectTypeQuery11:'ObjectTypeQuery11',ObjectTypeQuery12:'ObjectTypeQuery12',ObjectTypeQuery13:'ObjectTypeQuery13',ObjectTypeQuery14:'ObjectTypeQuery14',ObjectTypeQuery15:'ObjectTypeQuery15',ObjectTypeQuery16:'ObjectTypeQuery16',ObjectTypeQuery17:'ObjectTypeQuery17',ObjectTypeQuery18:'ObjectTypeQuery18',ObjectTypeQuery19:'ObjectTypeQuery19',ObjectTypeQuery20:'ObjectTypeQuery20',ObjectTypeQuery21:'ObjectTypeQuery21',ObjectTypeQuery22:'ObjectTypeQuery22',ObjectTypeQuery23:'ObjectTypeQuery23',ObjectTypeQuery24:'ObjectTypeQuery24',ObjectTypeQuery25:'ObjectTypeQuery25',ObjectTypeQuery26:'ObjectTypeQuery26',ObjectTypeQuery27:'ObjectTypeQuery27',ObjectTypeQuery28:'ObjectTypeQuery28',ObjectTypeQuery29:'ObjectTypeQuery29',ObjectTypeQuery30:'ObjectTypeQuery30',ObjectTypeQuery31:'ObjectTypeQuery31',ObjectTypeQuery32:'ObjectTypeQuery32',ObjectTypeQuery_MAX:'ObjectTypeQuery_MAX',EObjectTypeQuery_MAX:'EObjectTypeQuery_MAX', };
 declare type ETraceTypeQuery = 'TraceTypeQuery1' | 'TraceTypeQuery2' | 'TraceTypeQuery3' | 'TraceTypeQuery4' | 'TraceTypeQuery5' | 'TraceTypeQuery6' | 'TraceTypeQuery7' | 'TraceTypeQuery8' | 'TraceTypeQuery9' | 'TraceTypeQuery10' | 'TraceTypeQuery11' | 'TraceTypeQuery12' | 'TraceTypeQuery13' | 'TraceTypeQuery14' | 'TraceTypeQuery15' | 'TraceTypeQuery16' | 'TraceTypeQuery17' | 'TraceTypeQuery18' | 'TraceTypeQuery19' | 'TraceTypeQuery20' | 'TraceTypeQuery21' | 'TraceTypeQuery22' | 'TraceTypeQuery23' | 'TraceTypeQuery24' | 'TraceTypeQuery25' | 'TraceTypeQuery26' | 'TraceTypeQuery27' | 'TraceTypeQuery28' | 'TraceTypeQuery29' | 'TraceTypeQuery30' | 'TraceTypeQuery31' | 'TraceTypeQuery32' | 'TraceTypeQuery_MAX' | 'ETraceTypeQuery_MAX';
@@ -10897,14 +9795,6 @@ declare class UpdateLevelStreamingLevelStatus {
 
 declare type ETravelType = 'TRAVEL_Absolute' | 'TRAVEL_Partial' | 'TRAVEL_Relative' | 'TRAVEL_MAX';
 declare var ETravelType : { TRAVEL_Absolute:'TRAVEL_Absolute',TRAVEL_Partial:'TRAVEL_Partial',TRAVEL_Relative:'TRAVEL_Relative',TRAVEL_MAX:'TRAVEL_MAX', };
-declare class LocalMessage extends UObject { 
-	static Load(ResourceName: string): LocalMessage;
-	static Find(Outer: UObject, ResourceName: string): LocalMessage;
-	static GetDefaultObject(): LocalMessage;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LocalMessage;
-	static C(Other: UObject | any): LocalMessage;
-}
-
 declare class ForceFeedbackParameters { 
 	Tag: string;
 	bLooping: boolean;
@@ -10979,14 +9869,14 @@ declare class PlayerController extends Controller {
 	ToggleSpeaking(bInSpeaking: boolean): void;
 	TestServerLevelVisibilityChange(PackageName: string,Filename: string): void;
 	SwitchLevel(URL: string): void;
-	StopHapticEffect(hand: EControllerHand): void;
+	StopHapticEffect(Hand: EControllerHand): void;
 	StartFire(FireModeNum: number): void;
 	SetVirtualJoystickVisibility(bVisible: boolean): void;
 	SetViewTargetWithBlend(NewViewTarget: Actor,BlendTime: number,BlendFunc: EViewTargetBlendFunction,BlendExp: number,bLockOutgoing: boolean): void;
 	SetName(S: string): void;
 	SetMouseLocation(X: number,Y: number): void;
 	SetMouseCursorWidget(Cursor: EMouseCursor,CursorWidget: UserWidget): void;
-	SetHapticsByValue(Frequency: number,Amplitude: number,hand: EControllerHand): void;
+	SetHapticsByValue(Frequency: number,Amplitude: number,Hand: EControllerHand): void;
 	SetDisableHaptics(bNewDisabled: boolean): void;
 	SetControllerLightColor(Color: Color): void;
 	SetCinematicMode(bInCinematicMode: boolean,bHidePlayer: boolean,bAffectsHUD: boolean,bAffectsMovement: boolean,bAffectsTurning: boolean): void;
@@ -11019,7 +9909,7 @@ declare class PlayerController extends Controller {
 	RestartLevel(): void;
 	ResetControllerLightColor(): void;
 	ProjectWorldLocationToScreen(WorldLocation: Vector,ScreenLocation?: Vector2D,bPlayerViewportRelative?: boolean): {ScreenLocation: Vector2D, $: boolean};
-	PlayHapticEffect(HapticEffect: HapticFeedbackEffect_Base,hand: EControllerHand,Scale: number,bLoop: boolean): void;
+	PlayHapticEffect(HapticEffect: HapticFeedbackEffect_Base,Hand: EControllerHand,Scale: number,bLoop: boolean): void;
 	PlayDynamicForceFeedback(Intensity: number,Duration: number,bAffectsLeftLarge: boolean,bAffectsLeftSmall: boolean,bAffectsRightLarge: boolean,bAffectsRightSmall: boolean,Action: EDynamicForceFeedbackAction,LatentInfo: LatentActionInfo): void;
 	Pause(): void;
 	OnServerStartedVisualLogger(bIsLogging: boolean): void;
@@ -11666,7 +10556,6 @@ declare class Class extends Struct {
 	static GetDefaultObject(): Class;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Class;
 	static C(Other: UObject | any): Class;
-	SpawnActorFromClass(Location: Vector,Rotation: Rotator,bTransient: boolean): Actor;
 	AddDynamicBinding(BindingObject: DynamicBlueprintBinding): void;
 	GetClassPathName(): string;
 	GetDerivedClasses(Results?: UnrealEngineClass[],bRecursive?: boolean): {Results: UnrealEngineClass[]};
@@ -11696,7 +10585,6 @@ declare class Class extends Struct {
 	GetEditorSubsystem(): EditorSubsystem;
 	CreateDragDropOperation(): DragDropOperation;
 	GetAllGeometriesByClass(): ARTrackedGeometry[];
-	static SpawnActorFromClass(ActorClass: UnrealEngineClass,Location: Vector,Rotation: Rotator,bTransient: boolean): Actor;
 	static AddDynamicBinding(Outer: UnrealEngineClass,BindingObject: DynamicBlueprintBinding): void;
 	static GetClassPathName(Class: UnrealEngineClass): string;
 	static GetDerivedClasses(ClassToLookFor: UnrealEngineClass,Results?: UnrealEngineClass[],bRecursive?: boolean): {Results: UnrealEngineClass[]};
@@ -11738,6 +10626,2737 @@ declare class SoftClassPath extends SoftObjectPath {
 	static MakeSoftClassPath(PathString: string): SoftClassPath;
 }
 
+declare class AnimNotifyEventReference { 
+	NotifySource: UObject;
+	clone() : AnimNotifyEventReference;
+	static C(Other: UObject | any): AnimNotifyEventReference;
+}
+
+declare class AnimNotifyQueue { 
+	AnimNotifies: AnimNotifyEventReference[];
+	UnfilteredMontageAnimNotifies: any;
+	clone() : AnimNotifyQueue;
+	static C(Other: UObject | any): AnimNotifyQueue;
+}
+
+declare class PoseSnapshot { 
+	LocalTransforms: Transform[];
+	BoneNames: string[];
+	SkeletalMeshName: string;
+	SnapshotName: string;
+	bIsValid: boolean;
+	clone() : PoseSnapshot;
+	static C(Other: UObject | any): PoseSnapshot;
+}
+
+declare type ETeleportType = 'None' | 'TeleportPhysics' | 'ResetPhysics' | 'ETeleportType_MAX';
+declare var ETeleportType : { None:'None',TeleportPhysics:'TeleportPhysics',ResetPhysics:'ResetPhysics',ETeleportType_MAX:'ETeleportType_MAX', };
+declare type EMontagePlayReturnType = 'MontageLength' | 'Duration' | 'EMontagePlayReturnType_MAX';
+declare var EMontagePlayReturnType : { MontageLength:'MontageLength',Duration:'Duration',EMontagePlayReturnType_MAX:'EMontagePlayReturnType_MAX', };
+declare class MarkerSyncAnimPosition { 
+	PreviousMarkerName: string;
+	NextMarkerName: string;
+	PositionBetweenMarkers: number;
+	clone() : MarkerSyncAnimPosition;
+	static C(Other: UObject | any): MarkerSyncAnimPosition;
+}
+
+declare type EAnimCurveType = 'AttributeCurve' | 'MaterialCurve' | 'MorphTargetCurve' | 'MaxAnimCurveType' | 'EAnimCurveType_MAX';
+declare var EAnimCurveType : { AttributeCurve:'AttributeCurve',MaterialCurve:'MaterialCurve',MorphTargetCurve:'MorphTargetCurve',MaxAnimCurveType:'MaxAnimCurveType',EAnimCurveType_MAX:'EAnimCurveType_MAX', };
+declare class AnimInstance extends UObject { 
+	CurrentSkeleton: Skeleton;
+	RootMotionMode: ERootMotionMode;
+	DeltaTime: number;
+	bRunUpdatesInWorkerThreads: boolean;
+	bCanUseParallelUpdateAnimation: boolean;
+	bWarnAboutBlueprintUsage: boolean;
+	bUseMultiThreadedAnimationUpdate: boolean;
+	bUsingCopyPoseFromMesh: boolean;
+	bReceiveNotifiesFromLinkedInstances: boolean;
+	bPropagateNotifiesToLinkedInstances: boolean;
+	bQueueMontageEvents: boolean;
+	OnMontageBlendingOut: UnrealEngineMulticastDelegate<(Montage: AnimMontage, bInterrupted: boolean) => void>;
+	OnMontageStarted: UnrealEngineMulticastDelegate<(Montage: AnimMontage) => void>;
+	OnMontageEnded: UnrealEngineMulticastDelegate<(Montage: AnimMontage, bInterrupted: boolean) => void>;
+	OnAllMontageInstancesEnded: UnrealEngineMulticastDelegate<() => void>;
+	PostCompileValidationClassName: SoftClassPath;
+	NotifyQueue: AnimNotifyQueue;
+	ActiveAnimNotifyState: AnimNotifyEvent[];
+	static Load(ResourceName: string): AnimInstance;
+	static Find(Outer: UObject, ResourceName: string): AnimInstance;
+	static GetDefaultObject(): AnimInstance;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimInstance;
+	UnlockAIResources(bUnlockMovement: boolean,UnlockAILogic: boolean): void;
+	UnlinkAnimClassLayers(InClass: UnrealEngineClass): void;
+	TryGetPawnOwner(): Pawn;
+	StopSlotAnimation(InBlendOutTime: number,SlotNodeName: string): void;
+	SnapshotPose(Snapshot?: PoseSnapshot): {Snapshot: PoseSnapshot};
+	SetRootMotionMode(Value: ERootMotionMode): void;
+	SetReceiveNotifiesFromLinkedInstances(bSet: boolean): void;
+	SetPropagateNotifiesToLinkedInstances(bSet: boolean): void;
+	SetMorphTarget(MorphTargetName: string,Value: number): void;
+	SavePoseSnapshot(SnapshotName: string): void;
+	ResetDynamics(InTeleportType: ETeleportType): void;
+	PlaySlotAnimationAsDynamicMontage(Asset: AnimSequenceBase,SlotNodeName: string,BlendInTime: number,BlendOutTime: number,InPlayRate: number,LoopCount: number,BlendOutTriggerTime: number,InTimeToStartMontageAt: number): AnimMontage;
+	PlaySlotAnimation(Asset: AnimSequenceBase,SlotNodeName: string,BlendInTime: number,BlendOutTime: number,InPlayRate: number,LoopCount: number): number;
+	Montage_StopGroupByName(InBlendOutTime: number,GroupName: string): void;
+	Montage_Stop(InBlendOutTime: number,Montage: AnimMontage): void;
+	Montage_SetPosition(Montage: AnimMontage,NewPosition: number): void;
+	Montage_SetPlayRate(Montage: AnimMontage,NewPlayRate: number): void;
+	Montage_SetNextSection(SectionNameToChange: string,NextSection: string,Montage: AnimMontage): void;
+	Montage_Resume(Montage: AnimMontage): void;
+	Montage_Play(MontageToPlay: AnimMontage,InPlayRate: number,ReturnValueType: EMontagePlayReturnType,InTimeToStartMontageAt: number,bStopAllMontages: boolean): number;
+	Montage_Pause(Montage: AnimMontage): void;
+	Montage_JumpToSectionsEnd(SectionName: string,Montage: AnimMontage): void;
+	Montage_JumpToSection(SectionName: string,Montage: AnimMontage): void;
+	Montage_IsPlaying(Montage: AnimMontage): boolean;
+	Montage_IsActive(Montage: AnimMontage): boolean;
+	Montage_GetPosition(Montage: AnimMontage): number;
+	Montage_GetPlayRate(Montage: AnimMontage): number;
+	Montage_GetIsStopped(Montage: AnimMontage): boolean;
+	Montage_GetCurrentSection(Montage: AnimMontage): string;
+	Montage_GetBlendTime(Montage: AnimMontage): number;
+	LockAIResources(bLockMovement: boolean,LockAILogic: boolean): void;
+	LinkAnimGraphByTag(InTag: string,InClass: UnrealEngineClass): void;
+	LinkAnimClassLayers(InClass: UnrealEngineClass): void;
+	IsSyncGroupBetweenMarkers(InSyncGroupName: string,PreviousMarker: string,NextMarker: string,bRespectMarkerOrder: boolean): boolean;
+	IsPlayingSlotAnimation(Asset: AnimSequenceBase,SlotNodeName: string): boolean;
+	IsAnyMontagePlaying(): boolean;
+	HasMarkerBeenHitThisFrame(SyncGroup: string,MarkerName: string): boolean;
+	GetTimeToClosestMarker(SyncGroup: string,MarkerName: string,OutMarkerTime?: number): {OutMarkerTime: number, $: boolean};
+	GetSyncGroupPosition(InSyncGroupName: string): MarkerSyncAnimPosition;
+	GetRelevantAnimTimeRemainingFraction(MachineIndex: number,StateIndex: number): number;
+	GetRelevantAnimTimeRemaining(MachineIndex: number,StateIndex: number): number;
+	GetRelevantAnimTimeFraction(MachineIndex: number,StateIndex: number): number;
+	GetRelevantAnimTime(MachineIndex: number,StateIndex: number): number;
+	GetRelevantAnimLength(MachineIndex: number,StateIndex: number): number;
+	GetReceiveNotifiesFromLinkedInstances(): boolean;
+	GetPropagateNotifiesToLinkedInstances(): boolean;
+	GetOwningComponent(): SkeletalMeshComponent;
+	GetOwningActor(): Actor;
+	GetLinkedAnimLayerInstancesByGroup(InGroup: string,OutLinkedInstances?: AnimInstance[]): {OutLinkedInstances: AnimInstance[]};
+	GetLinkedAnimLayerInstanceByGroupAndClass(InGroup: string,InClass: UnrealEngineClass): AnimInstance;
+	GetLinkedAnimLayerInstanceByGroup(InGroup: string): AnimInstance;
+	GetLinkedAnimLayerInstanceByClass(InClass: UnrealEngineClass): AnimInstance;
+	GetLinkedAnimGraphInstancesByTag(InTag: string,OutLinkedInstances?: AnimInstance[]): {OutLinkedInstances: AnimInstance[]};
+	GetLinkedAnimGraphInstanceByTag(InTag: string): AnimInstance;
+	GetInstanceTransitionTimeElapsedFraction(MachineIndex: number,TransitionIndex: number): number;
+	GetInstanceTransitionTimeElapsed(MachineIndex: number,TransitionIndex: number): number;
+	GetInstanceTransitionCrossfadeDuration(MachineIndex: number,TransitionIndex: number): number;
+	GetInstanceStateWeight(MachineIndex: number,StateIndex: number): number;
+	GetInstanceMachineWeight(MachineIndex: number): number;
+	GetInstanceCurrentStateElapsedTime(MachineIndex: number): number;
+	GetInstanceAssetPlayerTimeFromEndFraction(AssetPlayerIndex: number): number;
+	GetInstanceAssetPlayerTimeFromEnd(AssetPlayerIndex: number): number;
+	GetInstanceAssetPlayerTimeFraction(AssetPlayerIndex: number): number;
+	GetInstanceAssetPlayerTime(AssetPlayerIndex: number): number;
+	GetInstanceAssetPlayerLength(AssetPlayerIndex: number): number;
+	GetCurveValue(CurveName: string): number;
+	GetCurrentStateName(MachineIndex: number): string;
+	GetCurrentActiveMontage(): AnimMontage;
+	GetAllCurveNames(OutNames?: string[]): {OutNames: string[]};
+	GetActiveCurveNames(CurveType: EAnimCurveType,OutNames?: string[]): {OutNames: string[]};
+	ClearMorphTargets(): void;
+	CalculateDirection(Velocity: Vector,BaseRotation: Rotator): number;
+	BlueprintUpdateAnimation(DeltaTimeX: number): void;
+	BlueprintPostEvaluateAnimation(): void;
+	BlueprintLinkedAnimationLayersInitialized(): void;
+	BlueprintInitializeAnimation(): void;
+	BlueprintBeginPlay(): void;
+	static C(Other: UObject | any): AnimInstance;
+	LockAIResourcesWithAnimation(bLockMovement: boolean,LockAILogic: boolean): void;
+	UnlockAIResourcesWithAnimation(bUnlockMovement: boolean,UnlockAILogic: boolean): void;
+	static LockAIResourcesWithAnimation(AnimInstance: AnimInstance,bLockMovement: boolean,LockAILogic: boolean): void;
+	static UnlockAIResourcesWithAnimation(AnimInstance: AnimInstance,bUnlockMovement: boolean,UnlockAILogic: boolean): void;
+}
+
+declare class ClothingAssetBase extends UObject { 
+	ImportedFilePath: string;
+	AssetGuid: Guid;
+	static Load(ResourceName: string): ClothingAssetBase;
+	static Find(Outer: UObject, ResourceName: string): ClothingAssetBase;
+	static GetDefaultObject(): ClothingAssetBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ClothingAssetBase;
+	static C(Other: UObject | any): ClothingAssetBase;
+}
+
+declare class SkeletalMeshSamplingRegionMaterialFilter { 
+	MaterialName: string;
+	clone() : SkeletalMeshSamplingRegionMaterialFilter;
+	static C(Other: UObject | any): SkeletalMeshSamplingRegionMaterialFilter;
+}
+
+declare class SkeletalMeshSamplingRegionBoneFilter { 
+	BoneName: string;
+	bIncludeOrExclude: boolean;
+	bApplyToChildren: boolean;
+	clone() : SkeletalMeshSamplingRegionBoneFilter;
+	static C(Other: UObject | any): SkeletalMeshSamplingRegionBoneFilter;
+}
+
+declare class SkeletalMeshSamplingRegion { 
+	Name: string;
+	LODIndex: number;
+	bSupportUniformlyDistributedSampling: boolean;
+	MaterialFilters: SkeletalMeshSamplingRegionMaterialFilter[];
+	BoneFilters: SkeletalMeshSamplingRegionBoneFilter[];
+	clone() : SkeletalMeshSamplingRegion;
+	static C(Other: UObject | any): SkeletalMeshSamplingRegion;
+}
+
+declare class SkeletalMeshSamplingLODBuiltData { 
+	clone() : SkeletalMeshSamplingLODBuiltData;
+	static C(Other: UObject | any): SkeletalMeshSamplingLODBuiltData;
+}
+
+declare class SkeletalMeshSamplingRegionBuiltData { 
+	clone() : SkeletalMeshSamplingRegionBuiltData;
+	static C(Other: UObject | any): SkeletalMeshSamplingRegionBuiltData;
+}
+
+declare class SkeletalMeshSamplingBuiltData { 
+	WholeMeshBuiltData: SkeletalMeshSamplingLODBuiltData[];
+	RegionBuiltData: SkeletalMeshSamplingRegionBuiltData[];
+	clone() : SkeletalMeshSamplingBuiltData;
+	static C(Other: UObject | any): SkeletalMeshSamplingBuiltData;
+}
+
+declare class SkeletalMeshSamplingInfo { 
+	Regions: SkeletalMeshSamplingRegion[];
+	BuiltData: SkeletalMeshSamplingBuiltData;
+	clone() : SkeletalMeshSamplingInfo;
+	static C(Other: UObject | any): SkeletalMeshSamplingInfo;
+}
+
+declare class SkinWeightProfileInfo { 
+	Name: string;
+	DefaultProfile: PerPlatformBool;
+	DefaultProfileFromLODIndex: PerPlatformInt;
+	PerLODSourceFiles: any;
+	clone() : SkinWeightProfileInfo;
+	static C(Other: UObject | any): SkinWeightProfileInfo;
+}
+
+declare class BlueprintCore extends UObject { 
+	SkeletonGeneratedClass: UnrealEngineClass;
+	GeneratedClass: UnrealEngineClass;
+	bLegacyNeedToPurgeSkelRefs: boolean;
+	BlueprintGuid: Guid;
+	static Load(ResourceName: string): BlueprintCore;
+	static Find(Outer: UObject, ResourceName: string): BlueprintCore;
+	static GetDefaultObject(): BlueprintCore;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlueprintCore;
+	static C(Other: UObject | any): BlueprintCore;
+}
+
+declare type EBlueprintType = 'BPTYPE_Normal' | 'BPTYPE_Const' | 'BPTYPE_MacroLibrary' | 'BPTYPE_Interface' | 'BPTYPE_LevelScript' | 'BPTYPE_FunctionLibrary' | 'BPTYPE_MAX';
+declare var EBlueprintType : { BPTYPE_Normal:'BPTYPE_Normal',BPTYPE_Const:'BPTYPE_Const',BPTYPE_MacroLibrary:'BPTYPE_MacroLibrary',BPTYPE_Interface:'BPTYPE_Interface',BPTYPE_LevelScript:'BPTYPE_LevelScript',BPTYPE_FunctionLibrary:'BPTYPE_FunctionLibrary',BPTYPE_MAX:'BPTYPE_MAX', };
+declare type EBlueprintNativizationFlag = 'Disabled' | 'Dependency' | 'ExplicitlyEnabled' | 'EBlueprintNativizationFlag_MAX';
+declare var EBlueprintNativizationFlag : { Disabled:'Disabled',Dependency:'Dependency',ExplicitlyEnabled:'ExplicitlyEnabled',EBlueprintNativizationFlag_MAX:'EBlueprintNativizationFlag_MAX', };
+declare type EBlueprintCompileMode = 'Default' | 'Development' | 'FinalRelease' | 'EBlueprintCompileMode_MAX';
+declare var EBlueprintCompileMode : { Default:'Default',Development:'Development',FinalRelease:'FinalRelease',EBlueprintCompileMode_MAX:'EBlueprintCompileMode_MAX', };
+declare type EBlueprintStatus = 'BS_Unknown' | 'BS_Dirty' | 'BS_Error' | 'BS_UpToDate' | 'BS_BeingCreated' | 'BS_UpToDateWithWarnings' | 'BS_MAX';
+declare var EBlueprintStatus : { BS_Unknown:'BS_Unknown',BS_Dirty:'BS_Dirty',BS_Error:'BS_Error',BS_UpToDate:'BS_UpToDate',BS_BeingCreated:'BS_BeingCreated',BS_UpToDateWithWarnings:'BS_UpToDateWithWarnings',BS_MAX:'BS_MAX', };
+declare class BlueprintComponentChangedPropertyInfo { 
+	PropertyName: string;
+	ArrayIndex: number;
+	PropertyScope: Struct;
+	clone() : BlueprintComponentChangedPropertyInfo;
+	static C(Other: UObject | any): BlueprintComponentChangedPropertyInfo;
+}
+
+declare class BlueprintCookedComponentInstancingData { 
+	ChangedPropertyList: BlueprintComponentChangedPropertyInfo[];
+	bHasValidCookedData: boolean;
+	clone() : BlueprintCookedComponentInstancingData;
+	static C(Other: UObject | any): BlueprintCookedComponentInstancingData;
+}
+
+declare class BPVariableMetaDataEntry { 
+	DataKey: string;
+	DataValue: string;
+	clone() : BPVariableMetaDataEntry;
+	static C(Other: UObject | any): BPVariableMetaDataEntry;
+}
+
+declare class SCS_Node extends UObject { 
+	ComponentClass: UnrealEngineClass;
+	ComponentTemplate: ActorComponent;
+	CookedComponentInstancingData: BlueprintCookedComponentInstancingData;
+	CategoryName: string;
+	AttachToName: string;
+	ParentComponentOrVariableName: string;
+	ParentComponentOwnerClassName: string;
+	bIsParentComponentNative: boolean;
+	ChildNodes: SCS_Node[];
+	MetaDataArray: BPVariableMetaDataEntry[];
+	VariableGuid: Guid;
+	bIsNative: boolean;
+	NativeComponentName: string;
+	bVariableNameAutoGenerated: boolean;
+	InternalVariableName: string;
+	static Load(ResourceName: string): SCS_Node;
+	static Find(Outer: UObject, ResourceName: string): SCS_Node;
+	static GetDefaultObject(): SCS_Node;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SCS_Node;
+	static C(Other: UObject | any): SCS_Node;
+}
+
+declare class SimpleConstructionScript extends UObject { 
+	RootNodes: SCS_Node[];
+	AllNodes: SCS_Node[];
+	DefaultSceneRootNode: SCS_Node;
+	RootNode: SCS_Node;
+	ActorComponentNodes: SCS_Node[];
+	static Load(ResourceName: string): SimpleConstructionScript;
+	static Find(Outer: UObject, ResourceName: string): SimpleConstructionScript;
+	static GetDefaultObject(): SimpleConstructionScript;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SimpleConstructionScript;
+	static C(Other: UObject | any): SimpleConstructionScript;
+}
+
+declare class EdGraphSchema extends UObject { 
+	static Load(ResourceName: string): EdGraphSchema;
+	static Find(Outer: UObject, ResourceName: string): EdGraphSchema;
+	static GetDefaultObject(): EdGraphSchema;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EdGraphSchema;
+	static C(Other: UObject | any): EdGraphSchema;
+	SetNodeMetaData(UNode: EdGraphNode,KeyValue: string): boolean;
+	TryConnection(A: JavascriptEdGraphPin,B: JavascriptEdGraphPin): boolean;
+	static SetNodeMetaData(Schema: EdGraphSchema,UNode: EdGraphNode,KeyValue: string): boolean;
+	static TryConnection(Schema: EdGraphSchema,A: JavascriptEdGraphPin,B: JavascriptEdGraphPin): boolean;
+}
+
+declare class EdGraph extends UObject { 
+	Schema: UnrealEngineClass;
+	Nodes: EdGraphNode[];
+	bEditable: boolean;
+	bAllowDeletion: boolean;
+	bAllowRenaming: boolean;
+	SubGraphs: EdGraph[];
+	GraphGuid: Guid;
+	InterfaceGuid: Guid;
+	static Load(ResourceName: string): EdGraph;
+	static Find(Outer: UObject, ResourceName: string): EdGraph;
+	static GetDefaultObject(): EdGraph;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EdGraph;
+	static C(Other: UObject | any): EdGraph;
+}
+
+declare type ETimelineLengthMode = 'TL_TimelineLength' | 'TL_LastKeyFrame' | 'TL_MAX';
+declare var ETimelineLengthMode : { TL_TimelineLength:'TL_TimelineLength',TL_LastKeyFrame:'TL_LastKeyFrame',TL_MAX:'TL_MAX', };
+declare class TTTrackBase { 
+	TrackName: string;
+	bIsExternalCurve: boolean;
+	bIsExpanded: boolean;
+	bIsCurveViewSynchronized: boolean;
+	clone() : TTTrackBase;
+	static C(Other: UObject | any): TTTrackBase;
+}
+
+declare class TTEventTrack extends TTTrackBase { 
+	FunctionName: string;
+	CurveKeys: CurveFloat;
+	clone() : TTEventTrack;
+	static C(Other: UObject | any): TTEventTrack;
+}
+
+declare class TTPropertyTrack extends TTTrackBase { 
+	PropertyName: string;
+	clone() : TTPropertyTrack;
+	static C(Other: UObject | any): TTPropertyTrack;
+}
+
+declare class TTFloatTrack extends TTPropertyTrack { 
+	CurveFloat: CurveFloat;
+	clone() : TTFloatTrack;
+	static C(Other: UObject | any): TTFloatTrack;
+}
+
+declare class CurveVector extends CurveBase { 
+	FloatCurves: RichCurve;
+	static Load(ResourceName: string): CurveVector;
+	static Find(Outer: UObject, ResourceName: string): CurveVector;
+	static GetDefaultObject(): CurveVector;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CurveVector;
+	GetVectorValue(InTime: number): Vector;
+	static C(Other: UObject | any): CurveVector;
+}
+
+declare class TTVectorTrack extends TTPropertyTrack { 
+	CurveVector: CurveVector;
+	clone() : TTVectorTrack;
+	static C(Other: UObject | any): TTVectorTrack;
+}
+
+declare class TTLinearColorTrack extends TTPropertyTrack { 
+	CurveLinearColor: CurveLinearColor;
+	clone() : TTLinearColorTrack;
+	static C(Other: UObject | any): TTLinearColorTrack;
+}
+
+declare class TTTrackId { 
+	TrackType: number;
+	TrackIndex: number;
+	clone() : TTTrackId;
+	static C(Other: UObject | any): TTTrackId;
+}
+
+declare class TimelineTemplate extends UObject { 
+	TimelineLength: number;
+	LengthMode: ETimelineLengthMode;
+	bAutoPlay: boolean;
+	bLoop: boolean;
+	bReplicated: boolean;
+	bIgnoreTimeDilation: boolean;
+	EventTracks: TTEventTrack[];
+	FloatTracks: TTFloatTrack[];
+	VectorTracks: TTVectorTrack[];
+	LinearColorTracks: TTLinearColorTrack[];
+	MetaDataArray: BPVariableMetaDataEntry[];
+	TimelineGuid: Guid;
+	TimelineTickGroup: ETickingGroup;
+	VariableName: string;
+	DirectionPropertyName: string;
+	UpdateFunctionName: string;
+	FinishedFunctionName: string;
+	TrackDisplayOrder: TTTrackId[];
+	static Load(ResourceName: string): TimelineTemplate;
+	static Find(Outer: UObject, ResourceName: string): TimelineTemplate;
+	static GetDefaultObject(): TimelineTemplate;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TimelineTemplate;
+	static C(Other: UObject | any): TimelineTemplate;
+}
+
+declare class BPComponentClassOverride { 
+	ComponentName: string;
+	ComponentClass: UnrealEngineClass;
+	clone() : BPComponentClassOverride;
+	static C(Other: UObject | any): BPComponentClassOverride;
+}
+
+declare class ComponentKey { 
+	OwnerClass: UnrealEngineClass;
+	SCSVariableName: string;
+	AssociatedGuid: Guid;
+	clone() : ComponentKey;
+	static C(Other: UObject | any): ComponentKey;
+}
+
+declare class ComponentOverrideRecord { 
+	ComponentClass: UnrealEngineClass;
+	ComponentTemplate: ActorComponent;
+	ComponentKey: ComponentKey;
+	CookedComponentInstancingData: BlueprintCookedComponentInstancingData;
+	clone() : ComponentOverrideRecord;
+	static C(Other: UObject | any): ComponentOverrideRecord;
+}
+
+declare class InheritableComponentHandler extends UObject { 
+	Records: ComponentOverrideRecord[];
+	UnnecessaryComponents: ActorComponent[];
+	static Load(ResourceName: string): InheritableComponentHandler;
+	static Find(Outer: UObject, ResourceName: string): InheritableComponentHandler;
+	static GetDefaultObject(): InheritableComponentHandler;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InheritableComponentHandler;
+	static C(Other: UObject | any): InheritableComponentHandler;
+}
+
+declare type ELifetimeCondition = 'COND_None' | 'COND_InitialOnly' | 'COND_OwnerOnly' | 'COND_SkipOwner' | 'COND_SimulatedOnly' | 'COND_AutonomousOnly' | 'COND_SimulatedOrPhysics' | 'COND_InitialOrOwner' | 'COND_Custom' | 'COND_ReplayOrOwner' | 'COND_ReplayOnly' | 'COND_SimulatedOnlyNoReplay' | 'COND_SimulatedOrPhysicsNoReplay' | 'COND_SkipReplay' | 'COND_Never' | 'COND_Max';
+declare var ELifetimeCondition : { COND_None:'COND_None',COND_InitialOnly:'COND_InitialOnly',COND_OwnerOnly:'COND_OwnerOnly',COND_SkipOwner:'COND_SkipOwner',COND_SimulatedOnly:'COND_SimulatedOnly',COND_AutonomousOnly:'COND_AutonomousOnly',COND_SimulatedOrPhysics:'COND_SimulatedOrPhysics',COND_InitialOrOwner:'COND_InitialOrOwner',COND_Custom:'COND_Custom',COND_ReplayOrOwner:'COND_ReplayOrOwner',COND_ReplayOnly:'COND_ReplayOnly',COND_SimulatedOnlyNoReplay:'COND_SimulatedOnlyNoReplay',COND_SimulatedOrPhysicsNoReplay:'COND_SimulatedOrPhysicsNoReplay',COND_SkipReplay:'COND_SkipReplay',COND_Never:'COND_Never',COND_Max:'COND_Max', };
+declare class BPVariableDescription { 
+	VarName: string;
+	VarGuid: Guid;
+	VarType: EdGraphPinType;
+	FriendlyName: string;
+	Category: string;
+	PropertyFlags: any;
+	RepNotifyFunc: string;
+	ReplicationCondition: ELifetimeCondition;
+	MetaDataArray: BPVariableMetaDataEntry[];
+	DefaultValue: string;
+	clone() : BPVariableDescription;
+	static C(Other: UObject | any): BPVariableDescription;
+}
+
+declare class Interface extends UObject { 
+	static Load(ResourceName: string): Interface;
+	static Find(Outer: UObject, ResourceName: string): Interface;
+	static GetDefaultObject(): Interface;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Interface;
+	static C(Other: UObject | any): Interface;
+}
+
+declare class BPInterfaceDescription { 
+	Interface: UnrealEngineClass;
+	Graphs: EdGraph[];
+	clone() : BPInterfaceDescription;
+	static C(Other: UObject | any): BPInterfaceDescription;
+}
+
+declare class EditedDocumentInfo { 
+	EditedObjectPath: SoftObjectPath;
+	SavedViewOffset: Vector2D;
+	SavedZoomAmount: number;
+	EditedObject: UObject;
+	clone() : EditedDocumentInfo;
+	static C(Other: UObject | any): EditedDocumentInfo;
+}
+
+declare class BPEditorBookmarkNode { 
+	NodeGuid: Guid;
+	ParentGuid: Guid;
+	DisplayName: string;
+	clone() : BPEditorBookmarkNode;
+	static C(Other: UObject | any): BPEditorBookmarkNode;
+}
+
+declare class Breakpoint extends UObject { 
+	bEnabled: boolean;
+	UNode: EdGraphNode;
+	bStepOnce: boolean;
+	bStepOnce_WasPreviouslyDisabled: boolean;
+	bStepOnce_RemoveAfterHit: boolean;
+	static Load(ResourceName: string): Breakpoint;
+	static Find(Outer: UObject, ResourceName: string): Breakpoint;
+	static GetDefaultObject(): Breakpoint;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Breakpoint;
+	static C(Other: UObject | any): Breakpoint;
+}
+
+declare class EdGraphPinReference { 
+	OwningNode: any;
+	PinId: Guid;
+	clone() : EdGraphPinReference;
+	static C(Other: UObject | any): EdGraphPinReference;
+}
+
+declare class BlueprintExtension extends UObject { 
+	static Load(ResourceName: string): BlueprintExtension;
+	static Find(Outer: UObject, ResourceName: string): BlueprintExtension;
+	static GetDefaultObject(): BlueprintExtension;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlueprintExtension;
+	static C(Other: UObject | any): BlueprintExtension;
+}
+
+declare class Blueprint extends BlueprintCore { 
+	ParentClass: UnrealEngineClass;
+	BlueprintType: EBlueprintType;
+	bRecompileOnLoad: boolean;
+	bHasBeenRegenerated: boolean;
+	bIsRegeneratingOnLoad: boolean;
+	bBeingCompiled: boolean;
+	bIsNewlyCreated: boolean;
+	bForceFullEditor: boolean;
+	bQueuedForCompilation: boolean;
+	bRunConstructionScriptOnDrag: boolean;
+	bRunConstructionScriptInSequencer: boolean;
+	bGenerateConstClass: boolean;
+	bGenerateAbstractClass: boolean;
+	bDisplayCompilePIEWarning: boolean;
+	bDeprecate: boolean;
+	bDuplicatingReadOnly: boolean;
+	bNativize: boolean;
+	NativizationFlag: EBlueprintNativizationFlag;
+	CompileMode: EBlueprintCompileMode;
+	Status: EBlueprintStatus;
+	BlueprintDisplayName: string;
+	BlueprintDescription: string;
+	BlueprintNamespace: string;
+	BlueprintCategory: string;
+	HideCategories: string[];
+	BlueprintSystemVersion: number;
+	SimpleConstructionScript: SimpleConstructionScript;
+	UbergraphPages: EdGraph[];
+	FunctionGraphs: EdGraph[];
+	DelegateSignatureGraphs: EdGraph[];
+	MacroGraphs: EdGraph[];
+	IntermediateGeneratedGraphs: EdGraph[];
+	EventGraphs: EdGraph[];
+	PRIVATE_CachedMacroInfo: any;
+	ComponentTemplates: ActorComponent[];
+	Timelines: TimelineTemplate[];
+	ComponentClassOverrides: BPComponentClassOverride[];
+	InheritableComponentHandler: InheritableComponentHandler;
+	NewVariables: BPVariableDescription[];
+	CategorySorting: string[];
+	ImplementedInterfaces: BPInterfaceDescription[];
+	LastEditedDocuments: EditedDocumentInfo[];
+	Bookmarks: any;
+	BookmarkNodes: BPEditorBookmarkNode[];
+	Breakpoints: Breakpoint[];
+	WatchedPins: EdGraphPinReference[];
+	DeprecatedPinWatches: EdGraphPin_Deprecated[];
+	ComponentTemplateNameIndex: any;
+	OldToNewComponentTemplateNames: any;
+	Extensions: BlueprintExtension[];
+	ThumbnailInfo: ThumbnailInfo;
+	CrcLastCompiledCDO: any;
+	CrcLastCompiledSignature: any;
+	OriginalClass: UnrealEngineClass;
+	static Load(ResourceName: string): Blueprint;
+	static Find(Outer: UObject, ResourceName: string): Blueprint;
+	static GetDefaultObject(): Blueprint;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Blueprint;
+	static C(Other: UObject | any): Blueprint;
+	AddComponentsToBlueprint(Components: ActorComponent[],bHarvesting: boolean,OptionalNewRootComponent: ActorComponent,bKeepMobility: boolean): void;
+	CompileBlueprint(): void;
+	GetParentClassOfBlueprint(): UnrealEngineClass;
+	RemoveComponentFromBlueprint(RemoveComponent: ActorComponent,bPromoteChildren: boolean): void;
+	GetBlueprintGeneratedClass(): UnrealEngineClass;
+	static AddComponentsToBlueprint(Blueprint: Blueprint,Components: ActorComponent[],bHarvesting: boolean,OptionalNewRootComponent: ActorComponent,bKeepMobility: boolean): void;
+	static CompileBlueprint(Blueprint: Blueprint): void;
+	static GetParentClassOfBlueprint(Blueprint: Blueprint): UnrealEngineClass;
+	static RemoveComponentFromBlueprint(Blueprint: Blueprint,RemoveComponent: ActorComponent,bPromoteChildren: boolean): void;
+	static GetBlueprintGeneratedClass(Blueprint: Blueprint): UnrealEngineClass;
+}
+
+declare class SkeletalMesh extends StreamableRenderAsset { 
+	MeshEditorDataObject: SkeletalMeshEditorData;
+	Skeleton: Skeleton;
+	ImportedBounds: BoxSphereBounds;
+	ExtendedBounds: BoxSphereBounds;
+	PositiveBoundsExtension: Vector;
+	NegativeBoundsExtension: Vector;
+	Materials: SkeletalMaterial[];
+	SkelMirrorTable: BoneMirrorInfo[];
+	LODInfo: SkeletalMeshLODInfo[];
+	MinLOD: PerPlatformInt;
+	DisableBelowMinLodStripping: PerPlatformBool;
+	bOverrideLODStreamingSettings: boolean;
+	bSupportLODStreaming: PerPlatformBool;
+	MaxNumStreamedLODs: PerPlatformInt;
+	MaxNumOptionalLODs: PerPlatformInt;
+	LODSettings: SkeletalMeshLODSettings;
+	DefaultAnimatingRig: UObject;
+	SkelMirrorAxis: EAxis;
+	SkelMirrorFlipAxis: EAxis;
+	bUseFullPrecisionUVs: boolean;
+	bUseHighPrecisionTangentBasis: boolean;
+	bHasBeenSimplified: boolean;
+	bHasVertexColors: boolean;
+	bEnablePerPolyCollision: boolean;
+	VertexColorGuid: Guid;
+	BodySetup: BodySetup;
+	PhysicsAsset: PhysicsAsset;
+	ShadowPhysicsAsset: PhysicsAsset;
+	NodeMappingData: NodeMappingContainer[];
+	AssetImportData: AssetImportData;
+	SourceFilePath: string;
+	SourceFileTimestamp: string;
+	ThumbnailInfo: ThumbnailInfo;
+	bHasCustomDefaultEditorCamera: boolean;
+	DefaultEditorCameraLocation: Vector;
+	DefaultEditorCameraRotation: Rotator;
+	DefaultEditorCameraLookAt: Vector;
+	DefaultEditorCameraOrthoZoom: number;
+	PreviewAttachedAssetContainer: PreviewAssetAttachContainer;
+	bSupportRayTracing: boolean;
+	MorphTargets: MorphTarget[];
+	FloorOffset: number;
+	RetargetBasePose: Transform[];
+	ClothingAssets: ClothingAssetData_Legacy[];
+	PostProcessAnimBlueprint: UnrealEngineClass;
+	MeshClothingAssets: ClothingAssetBase[];
+	SamplingInfo: SkeletalMeshSamplingInfo;
+	AssetUserData: AssetUserData[];
+	Sockets: SkeletalMeshSocket[];
+	SkinWeightProfiles: SkinWeightProfileInfo[];
+	static Load(ResourceName: string): SkeletalMesh;
+	static Find(Outer: UObject, ResourceName: string): SkeletalMesh;
+	static GetDefaultObject(): SkeletalMesh;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SkeletalMesh;
+	SetMorphTargets(InMorphTargets: MorphTarget[]): void;
+	SetMeshClothingAssets(InMeshClothingAssets: ClothingAssetBase[]): void;
+	SetMaterials(InMaterials: SkeletalMaterial[]): void;
+	SetLODSettings(InLODSettings: SkeletalMeshLODSettings): void;
+	SetDefaultAnimatingRig(InAnimatingRig: UObject): void;
+	NumSockets(): number;
+	K2_GetAllMorphTargetNames(): string[];
+	IsSectionUsingCloth(InSectionIndex: number,bCheckCorrespondingSections: boolean): boolean;
+	GetSocketByIndex(index: number): SkeletalMeshSocket;
+	GetSkeleton(): Skeleton;
+	GetShadowPhysicsAsset(): PhysicsAsset;
+	GetPhysicsAsset(): PhysicsAsset;
+	GetNodeMappingData(): NodeMappingContainer[];
+	GetNodeMappingContainer(SourceAsset: Blueprint): NodeMappingContainer;
+	GetMorphTargets(): MorphTarget[];
+	GetMeshClothingAssets(): ClothingAssetBase[];
+	GetMaterials(): SkeletalMaterial[];
+	GetLODSettings(): SkeletalMeshLODSettings;
+	GetImportedBounds(): BoxSphereBounds;
+	GetDefaultAnimatingRig(): UObject;
+	GetBounds(): BoxSphereBounds;
+	FindSocketInfo(InSocketName: string,OutTransform?: Transform,OutBoneIndex?: number,OutIndex?: number): {OutTransform: Transform, OutBoneIndex: number, OutIndex: number, $: SkeletalMeshSocket};
+	FindSocketAndIndex(InSocketName: string,OutIndex?: number): {OutIndex: number, $: SkeletalMeshSocket};
+	FindSocket(InSocketName: string): SkeletalMeshSocket;
+	static C(Other: UObject | any): SkeletalMesh;
+	GetPhysicsBodySetupFromMesh(InName: string): BodySetup;
+	GetHandSkeletalMesh(SkeletonType: EOculusHandType,MeshType: EOculusHandType,WorldToMeters: number): boolean;
+	static GetPhysicsBodySetupFromMesh(InSkeletalMesh: SkeletalMesh,InName: string): BodySetup;
+	static GetHandSkeletalMesh(HandSkeletalMesh: SkeletalMesh,SkeletonType: EOculusHandType,MeshType: EOculusHandType,WorldToMeters: number): boolean;
+}
+
+declare class VertexOffsetUsage { 
+	Usage: number;
+	clone() : VertexOffsetUsage;
+	static C(Other: UObject | any): VertexOffsetUsage;
+}
+
+declare class SkelMeshComponentLODInfo { 
+	HiddenMaterials: boolean[];
+	clone() : SkelMeshComponentLODInfo;
+	static C(Other: UObject | any): SkelMeshComponentLODInfo;
+}
+
+declare type EVisibilityBasedAnimTickOption = 'AlwaysTickPoseAndRefreshBones' | 'AlwaysTickPose' | 'OnlyTickMontagesWhenNotRendered' | 'OnlyTickPoseWhenRendered' | 'EVisibilityBasedAnimTickOption_MAX';
+declare var EVisibilityBasedAnimTickOption : { AlwaysTickPoseAndRefreshBones:'AlwaysTickPoseAndRefreshBones',AlwaysTickPose:'AlwaysTickPose',OnlyTickMontagesWhenNotRendered:'OnlyTickMontagesWhenNotRendered',OnlyTickPoseWhenRendered:'OnlyTickPoseWhenRendered',EVisibilityBasedAnimTickOption_MAX:'EVisibilityBasedAnimTickOption_MAX', };
+declare class SkelMeshSkinWeightInfo { 
+	Bones: number;
+	Weights: number;
+	clone() : SkelMeshSkinWeightInfo;
+	static C(Other: UObject | any): SkelMeshSkinWeightInfo;
+	BreakSkinWeightInfo(Bone0?: number,Weight0?: number,Bone1?: number,Weight1?: number,Bone2?: number,Weight2?: number,Bone3?: number,Weight3?: number): {Bone0: number, Weight0: number, Bone1: number, Weight1: number, Bone2: number, Weight2: number, Bone3: number, Weight3: number};
+	static BreakSkinWeightInfo(InWeight: SkelMeshSkinWeightInfo,Bone0?: number,Weight0?: number,Bone1?: number,Weight1?: number,Bone2?: number,Weight2?: number,Bone3?: number,Weight3?: number): {Bone0: number, Weight0: number, Bone1: number, Weight1: number, Bone2: number, Weight2: number, Bone3: number, Weight3: number};
+	static MakeSkinWeightInfo(Bone0: number,Weight0: number,Bone1: number,Weight1: number,Bone2: number,Weight2: number,Bone3: number,Weight3: number): SkelMeshSkinWeightInfo;
+}
+
+declare type EPhysBodyOp = 'PBO_None' | 'PBO_Term' | 'PBO_MAX';
+declare var EPhysBodyOp : { PBO_None:'PBO_None',PBO_Term:'PBO_Term',PBO_MAX:'PBO_MAX', };
+declare class SkinnedMeshComponent extends MeshComponent { 
+	SkeletalMesh: SkeletalMesh;
+	MasterPoseComponent: any;
+	SkinCacheUsage: ESkinCacheUsage[];
+	VertexOffsetUsage: VertexOffsetUsage[];
+	WireframeColor: Color;
+	PhysicsAssetOverride: PhysicsAsset;
+	ForcedLodModel: number;
+	MinLodModel: number;
+	StreamingDistanceMultiplier: number;
+	LODInfo: SkelMeshComponentLODInfo[];
+	VisibilityBasedAnimTickOption: EVisibilityBasedAnimTickOption;
+	bOverrideMinLOD: boolean;
+	bUseBoundsFromMasterPoseComponent: boolean;
+	bForceWireframe: boolean;
+	bDisplayBones: boolean;
+	bDisableMorphTarget: boolean;
+	bHideSkin: boolean;
+	bPerBoneMotionBlur: boolean;
+	bComponentUseFixedSkelBounds: boolean;
+	bConsiderAllBodiesForBounds: boolean;
+	bSyncAttachParentLOD: boolean;
+	bCanHighlightSelectedSections: boolean;
+	bRecentlyRendered: boolean;
+	bCastCapsuleDirectShadow: boolean;
+	bCastCapsuleIndirectShadow: boolean;
+	bCPUSkinning: boolean;
+	bEnableUpdateRateOptimizations: boolean;
+	bDisplayDebugUpdateRateOptimizations: boolean;
+	bRenderStatic: boolean;
+	bIgnoreMasterPoseComponentLOD: boolean;
+	bCachedLocalBoundsUpToDate: boolean;
+	bForceMeshObjectUpdate: boolean;
+	CapsuleIndirectShadowMinVisibility: number;
+	CachedWorldSpaceBounds: BoxSphereBounds;
+	CachedWorldToLocalTransform: Matrix;
+	static Load(ResourceName: string): SkinnedMeshComponent;
+	static Find(Outer: UObject, ResourceName: string): SkinnedMeshComponent;
+	static GetDefaultObject(): SkinnedMeshComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SkinnedMeshComponent;
+	UnloadSkinWeightProfile(InProfileName: string): void;
+	UnHideBoneByName(BoneName: string): void;
+	TransformToBoneSpace(BoneName: string,InPosition: Vector,InRotation: Rotator,OutPosition?: Vector,OutRotation?: Rotator): {OutPosition: Vector, OutRotation: Rotator};
+	TransformFromBoneSpace(BoneName: string,InPosition: Vector,InRotation: Rotator,OutPosition?: Vector,OutRotation?: Rotator): {OutPosition: Vector, OutRotation: Rotator};
+	ShowMaterialSection(MaterialID: number,SectionIndex: number,bShow: boolean,LODIndex: number): void;
+	ShowAllMaterialSections(LODIndex: number): void;
+	SetVertexOffsetUsage(LODIndex: number,Usage: number): void;
+	SetVertexColorOverride_LinearColor(LODIndex: number,VertexColors: LinearColor[]): void;
+	SetSkinWeightProfile(InProfileName: string): boolean;
+	SetSkinWeightOverride(LODIndex: number,SkinWeights: SkelMeshSkinWeightInfo[]): void;
+	SetSkeletalMesh(NewMesh: SkeletalMesh,bReinitPose: boolean): void;
+	SetRenderStatic(bNewValue: boolean): void;
+	SetPreSkinningOffsets(LODIndex: number,Offsets: Vector[]): void;
+	SetPostSkinningOffsets(LODIndex: number,Offsets: Vector[]): void;
+	SetPhysicsAsset(NewPhysicsAsset: PhysicsAsset,bForceReInit: boolean): void;
+	SetMinLOD(InNewMinLOD: number): void;
+	SetMasterPoseComponent(NewMasterBoneComponent: SkinnedMeshComponent,bForceUpdate: boolean): void;
+	SetForcedLOD(InNewForcedLOD: number): void;
+	SetCastCapsuleIndirectShadow(bNewValue: boolean): void;
+	SetCastCapsuleDirectShadow(bNewValue: boolean): void;
+	SetCapsuleIndirectShadowMinVisibility(NewValue: number): void;
+	IsUsingSkinWeightProfile(): boolean;
+	IsMaterialSectionShown(MaterialID: number,LODIndex: number): boolean;
+	IsBoneHiddenByName(BoneName: string): boolean;
+	HideBoneByName(BoneName: string,PhysBodyOption: EPhysBodyOp): void;
+	GetVertexOffsetUsage(LODIndex: number): number;
+	GetTwistAndSwingAngleOfDeltaRotationFromRefPose(BoneName: string,OutTwistAngle?: number,OutSwingAngle?: number): {OutTwistAngle: number, OutSwingAngle: number, $: boolean};
+	GetSocketBoneName(InSocketName: string): string;
+	GetRefPosePosition(BoneIndex: number): Vector;
+	GetParentBone(BoneName: string): string;
+	GetNumLODs(): number;
+	GetNumBones(): number;
+	GetForcedLOD(): number;
+	GetDeltaTransformFromRefPose(BoneName: string,BaseName: string): Transform;
+	GetCurrentSkinWeightProfileName(): string;
+	GetBoneName(BoneIndex: number): string;
+	GetBoneIndex(BoneName: string): number;
+	FindClosestBone_K2(TestLocation: Vector,BoneLocation?: Vector,IgnoreScale?: number,bRequirePhysicsAsset?: boolean): {BoneLocation: Vector, $: string};
+	ClearVertexColorOverride(LODIndex: number): void;
+	ClearSkinWeightProfile(): void;
+	ClearSkinWeightOverride(LODIndex: number): void;
+	BoneIsChildOf(BoneName: string,ParentBoneName: string): boolean;
+	static C(Other: UObject | any): SkinnedMeshComponent;
+}
+
+declare class AnimGroupInfo { 
+	Name: string;
+	Color: LinearColor;
+	clone() : AnimGroupInfo;
+	static C(Other: UObject | any): AnimGroupInfo;
+}
+
+declare class AnimParentNodeAssetOverride { 
+	NewAsset: AnimationAsset;
+	ParentNodeGuid: Guid;
+	clone() : AnimParentNodeAssetOverride;
+	static C(Other: UObject | any): AnimParentNodeAssetOverride;
+}
+
+declare class PoseWatch extends UObject { 
+	UNode: EdGraphNode;
+	PoseWatchColour: Color;
+	static Load(ResourceName: string): PoseWatch;
+	static Find(Outer: UObject, ResourceName: string): PoseWatch;
+	static GetDefaultObject(): PoseWatch;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PoseWatch;
+	static C(Other: UObject | any): PoseWatch;
+}
+
+declare type EPreviewAnimationBlueprintApplicationMethod = 'LinkedLayers' | 'LinkedAnimGraph' | 'EPreviewAnimationBlueprintApplicationMethod_MAX';
+declare var EPreviewAnimationBlueprintApplicationMethod : { LinkedLayers:'LinkedLayers',LinkedAnimGraph:'LinkedAnimGraph',EPreviewAnimationBlueprintApplicationMethod_MAX:'EPreviewAnimationBlueprintApplicationMethod_MAX', };
+declare class AnimBlueprint extends Blueprint { 
+	TargetSkeleton: Skeleton;
+	Groups: AnimGroupInfo[];
+	bUseMultiThreadedAnimationUpdate: boolean;
+	bWarnAboutBlueprintUsage: boolean;
+	ParentAssetOverrides: AnimParentNodeAssetOverride[];
+	PoseWatches: PoseWatch[];
+	PreviewSkeletalMesh: SkeletalMesh;
+	PreviewAnimationBlueprint: AnimBlueprint;
+	PreviewAnimationBlueprintApplicationMethod: EPreviewAnimationBlueprintApplicationMethod;
+	PreviewAnimationBlueprintTag: string;
+	static Load(ResourceName: string): AnimBlueprint;
+	static Find(Outer: UObject, ResourceName: string): AnimBlueprint;
+	static GetDefaultObject(): AnimBlueprint;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AnimBlueprint;
+	static C(Other: UObject | any): AnimBlueprint;
+}
+
+declare class SingleAnimationPlayData { 
+	AnimToPlay: AnimationAsset;
+	bSavedLooping: boolean;
+	bSavedPlaying: boolean;
+	SavedPosition: number;
+	SavedPlayRate: number;
+	clone() : SingleAnimationPlayData;
+	static C(Other: UObject | any): SingleAnimationPlayData;
+}
+
+declare type EKinematicBonesUpdateToPhysics = 'SkipSimulatingBones' | 'SkipAllBones' | 'EKinematicBonesUpdateToPhysics_MAX';
+declare var EKinematicBonesUpdateToPhysics : { SkipSimulatingBones:'SkipSimulatingBones',SkipAllBones:'SkipAllBones',EKinematicBonesUpdateToPhysics_MAX:'EKinematicBonesUpdateToPhysics_MAX', };
+declare type EPhysicsTransformUpdateMode = 'SimulationUpatesComponentTransform' | 'ComponentTransformIsKinematic' | 'EPhysicsTransformUpdateMode_MAX';
+declare var EPhysicsTransformUpdateMode : { SimulationUpatesComponentTransform:'SimulationUpatesComponentTransform',ComponentTransformIsKinematic:'ComponentTransformIsKinematic',EPhysicsTransformUpdateMode_MAX:'EPhysicsTransformUpdateMode_MAX', };
+declare type EAnimationMode = 'AnimationBlueprint' | 'AnimationSingleNode' | 'AnimationCustomMode' | 'EAnimationMode_MAX';
+declare var EAnimationMode : { AnimationBlueprint:'AnimationBlueprint',AnimationSingleNode:'AnimationSingleNode',AnimationCustomMode:'AnimationCustomMode',EAnimationMode_MAX:'EAnimationMode_MAX', };
+declare class ClothingSimulationFactory extends UObject { 
+	static Load(ResourceName: string): ClothingSimulationFactory;
+	static Find(Outer: UObject, ResourceName: string): ClothingSimulationFactory;
+	static GetDefaultObject(): ClothingSimulationFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ClothingSimulationFactory;
+	static C(Other: UObject | any): ClothingSimulationFactory;
+}
+
+declare class ClothingInteractor extends UObject { 
+	static Load(ResourceName: string): ClothingInteractor;
+	static Find(Outer: UObject, ResourceName: string): ClothingInteractor;
+	static GetDefaultObject(): ClothingInteractor;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ClothingInteractor;
+	static C(Other: UObject | any): ClothingInteractor;
+}
+
+declare class ClothingSimulationInteractor extends UObject { 
+	ClothingInteractors: any;
+	static Load(ResourceName: string): ClothingSimulationInteractor;
+	static Find(Outer: UObject, ResourceName: string): ClothingSimulationInteractor;
+	static GetDefaultObject(): ClothingSimulationInteractor;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ClothingSimulationInteractor;
+	SetNumSubsteps(NumSubsteps: number): void;
+	SetNumIterations(NumIterations: number): void;
+	SetAnimDriveSpringStiffness(InStiffness: number): void;
+	PhysicsAssetUpdated(): void;
+	GetSimulationTime(): number;
+	GetNumSubsteps(): number;
+	GetNumKinematicParticles(): number;
+	GetNumIterations(): number;
+	GetNumDynamicParticles(): number;
+	GetNumCloths(): number;
+	GetClothingInteractor(ClothingAssetName: string): ClothingInteractor;
+	EnableGravityOverride(InVector: Vector): void;
+	DisableGravityOverride(): void;
+	ClothConfigUpdated(): void;
+	static C(Other: UObject | any): ClothingSimulationInteractor;
+}
+
+declare type ECustomBoneAttributeLookup = 'BoneOnly' | 'ImmediateParent' | 'ParentHierarchy' | 'ECustomBoneAttributeLookup_MAX';
+declare var ECustomBoneAttributeLookup : { BoneOnly:'BoneOnly',ImmediateParent:'ImmediateParent',ParentHierarchy:'ParentHierarchy',ECustomBoneAttributeLookup_MAX:'ECustomBoneAttributeLookup_MAX', };
+declare class SkeletalMeshComponent extends SkinnedMeshComponent { 
+	AnimationBlueprint: AnimBlueprint;
+	AnimBlueprintGeneratedClass: UnrealEngineClass;
+	AnimClass: UnrealEngineClass;
+	AnimScriptInstance: AnimInstance;
+	SubInstances: AnimInstance[];
+	PostProcessAnimInstance: AnimInstance;
+	AnimationData: SingleAnimationPlayData;
+	RootBoneTranslation: Vector;
+	LineCheckBoundsScale: Vector;
+	LinkedInstances: AnimInstance[];
+	CachedBoneSpaceTransforms: Transform[];
+	CachedComponentSpaceTransforms: Transform[];
+	GlobalAnimRateScale: number;
+	KinematicBonesUpdateType: EKinematicBonesUpdateToPhysics;
+	PhysicsTransformUpdateMode: EPhysicsTransformUpdateMode;
+	AnimationMode: EAnimationMode;
+	bDisablePostProcessBlueprint: boolean;
+	bUpdateOverlapsOnAnimationFinalize: boolean;
+	bHasValidBodies: boolean;
+	bBlendPhysics: boolean;
+	bEnablePhysicsOnDedicatedServer: boolean;
+	bUpdateJointsFromAnimation: boolean;
+	bDisableClothSimulation: boolean;
+	bDisableRigidBodyAnimNode: boolean;
+	bAllowAnimCurveEvaluation: boolean;
+	bDisableAnimCurves: boolean;
+	bCollideWithEnvironment: boolean;
+	bCollideWithAttachedChildren: boolean;
+	bLocalSpaceSimulation: boolean;
+	bResetAfterTeleport: boolean;
+	bDeferKinematicBoneUpdate: boolean;
+	bNoSkeletonUpdate: boolean;
+	bPauseAnims: boolean;
+	bUseRefPoseOnInitAnim: boolean;
+	bEnablePerPolyCollision: boolean;
+	bForceRefpose: boolean;
+	bOnlyAllowAutonomousTickPose: boolean;
+	bIsAutonomousTickPose: boolean;
+	bOldForceRefPose: boolean;
+	bShowPrePhysBones: boolean;
+	bRequiredBonesUpToDate: boolean;
+	bAnimTreeInitialised: boolean;
+	bIncludeComponentLocationIntoBounds: boolean;
+	bEnableLineCheckWithBounds: boolean;
+	bPropagateCurvesToSlaves: boolean;
+	bSkipKinematicUpdateWhenInterpolating: boolean;
+	bSkipBoundsUpdateWhenInterpolating: boolean;
+	bUpdateAnimationInEditor: boolean;
+	bUpdateClothInEditor: boolean;
+	bNeedsQueuedAnimEventsDispatched: boolean;
+	CachedAnimCurveUidVersion: any;
+	ClothBlendWeight: number;
+	bWaitForParallelClothTask: boolean;
+	DisallowedAnimCurves: string[];
+	BodySetup: BodySetup;
+	OnConstraintBroken: UnrealEngineMulticastDelegate<(ConstraintIndex: number) => void>;
+	ClothingSimulationFactory: UnrealEngineClass;
+	TeleportDistanceThreshold: number;
+	TeleportRotationThreshold: number;
+	LastPoseTickFrame: any;
+	ClothingInteractor: ClothingSimulationInteractor;
+	OnAnimInitialized: UnrealEngineMulticastDelegate<() => void>;
+	SequenceToPlay: AnimSequence;
+	AnimToPlay: AnimationAsset;
+	bDefaultLooping: boolean;
+	bDefaultPlaying: boolean;
+	DefaultPosition: number;
+	DefaultPlayRate: number;
+	static Load(ResourceName: string): SkeletalMeshComponent;
+	static Find(Outer: UObject, ResourceName: string): SkeletalMeshComponent;
+	static GetDefaultObject(): SkeletalMeshComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SkeletalMeshComponent;
+	UnlinkAnimClassLayers(InClass: UnrealEngineClass): void;
+	UnbindClothFromMasterPoseComponent(bRestoreSimulationSpace: boolean): void;
+	ToggleDisablePostProcessBlueprint(): void;
+	TermBodiesBelow(ParentBoneName: string): void;
+	SuspendClothingSimulation(): void;
+	Stop(): void;
+	SnapshotPose(Snapshot?: PoseSnapshot): {Snapshot: PoseSnapshot};
+	SetUpdateClothInEditor(NewUpdateState: boolean): void;
+	SetUpdateAnimationInEditor(NewUpdateState: boolean): void;
+	SetTeleportRotationThreshold(Threshold: number): void;
+	SetTeleportDistanceThreshold(Threshold: number): void;
+	SetPosition(InPos: number,bFireNotifies: boolean): void;
+	SetPlayRate(Rate: number): void;
+	SetPhysicsBlendWeight(PhysicsBlendWeight: number): void;
+	SetNotifyRigidBodyCollisionBelow(bNewNotifyRigidBodyCollision: boolean,BoneName: string,bIncludeSelf: boolean): void;
+	SetMorphTarget(MorphTargetName: string,Value: number,bRemoveZeroWeight: boolean): void;
+	SetEnablePhysicsBlending(bNewBlendPhysics: boolean): void;
+	SetEnableGravityOnAllBodiesBelow(bEnableGravity: boolean,BoneName: string,bIncludeSelf: boolean): void;
+	SetEnableBodyGravity(bEnableGravity: boolean,BoneName: string): void;
+	SetDisablePostProcessBlueprint(bInDisablePostProcess: boolean): void;
+	SetDisableAnimCurves(bInDisableAnimCurves: boolean): void;
+	SetConstraintProfileForAll(ProfileName: string,bDefaultIfNotFound: boolean): void;
+	SetConstraintProfile(JointName: string,ProfileName: string,bDefaultIfNotFound: boolean): void;
+	SetClothMaxDistanceScale(Scale: number): void;
+	SetBodyNotifyRigidBodyCollision(bNewNotifyRigidBodyCollision: boolean,BoneName: string): void;
+	SetAnimClass(NewClass: UnrealEngineClass): void;
+	SetAnimationMode(InAnimationMode: EAnimationMode): void;
+	SetAnimation(NewAnimToPlay: AnimationAsset): void;
+	SetAngularLimits(InBoneName: string,Swing1LimitAngle: number,TwistLimitAngle: number,Swing2LimitAngle: number): void;
+	SetAllowRigidBodyAnimNode(bInAllow: boolean,bReinitAnim: boolean): void;
+	SetAllowedAnimCurvesEvaluation(List: string[],bAllow: boolean): void;
+	SetAllowAnimCurveEvaluation(bInAllow: boolean): void;
+	SetAllMotorsAngularVelocityDrive(bEnableSwingDrive: boolean,bEnableTwistDrive: boolean,bSkipCustomPhysicsType: boolean): void;
+	SetAllMotorsAngularPositionDrive(bEnableSwingDrive: boolean,bEnableTwistDrive: boolean,bSkipCustomPhysicsType: boolean): void;
+	SetAllMotorsAngularDriveParams(InSpring: number,InDamping: number,InForceLimit: number,bSkipCustomPhysicsType: boolean): void;
+	SetAllBodiesSimulatePhysics(bNewSimulate: boolean): void;
+	SetAllBodiesPhysicsBlendWeight(PhysicsBlendWeight: number,bSkipCustomPhysicsType: boolean): void;
+	SetAllBodiesBelowSimulatePhysics(InBoneName: string,bNewSimulate: boolean,bIncludeSelf: boolean): void;
+	SetAllBodiesBelowPhysicsBlendWeight(InBoneName: string,PhysicsBlendWeight: number,bSkipCustomPhysicsType: boolean,bIncludeSelf: boolean): void;
+	ResumeClothingSimulation(): void;
+	ResetClothTeleportMode(): void;
+	ResetAnimInstanceDynamics(InTeleportType: ETeleportType): void;
+	ResetAllowedAnimCurveEvaluation(): void;
+	ResetAllBodiesSimulatePhysics(): void;
+	PlayAnimation(NewAnimToPlay: AnimationAsset,bLooping: boolean): void;
+	Play(bLooping: boolean): void;
+	OverrideAnimationData(InAnimToPlay: AnimationAsset,bIsLooping: boolean,bIsPlaying: boolean,Position: number,PlayRate: number): void;
+	LinkAnimGraphByTag(InTag: string,InClass: UnrealEngineClass): void;
+	LinkAnimClassLayers(InClass: UnrealEngineClass): void;
+	K2_GetClosestPointOnPhysicsAsset(WorldPosition: Vector,ClosestWorldPosition?: Vector,Normal?: Vector,BoneName?: string,Distance?: number): {ClosestWorldPosition: Vector, Normal: Vector, BoneName: string, Distance: number, $: boolean};
+	IsPlaying(): boolean;
+	IsClothingSimulationSuspended(): boolean;
+	IsBodyGravityEnabled(BoneName: string): boolean;
+	HasValidAnimationInstance(): boolean;
+	GetTeleportRotationThreshold(): number;
+	GetTeleportDistanceThreshold(): number;
+	GetStringAttribute_Ref(BoneName: string,AttributeName: string,OutValue?: string,LookupType?: ECustomBoneAttributeLookup): {OutValue: string, $: boolean};
+	GetStringAttribute(BoneName: string,AttributeName: string,DefaultValue: string,OutValue?: string,LookupType?: ECustomBoneAttributeLookup): {OutValue: string, $: boolean};
+	GetSkeletalCenterOfMass(): Vector;
+	GetPostProcessInstance(): AnimInstance;
+	GetPosition(): number;
+	GetPlayRate(): number;
+	GetMorphTarget(MorphTargetName: string): number;
+	GetLinkedAnimLayerInstanceByGroup(InGroup: string): AnimInstance;
+	GetLinkedAnimLayerInstanceByClass(InClass: UnrealEngineClass): AnimInstance;
+	GetLinkedAnimGraphInstancesByTag(InTag: string,OutLinkedInstances?: AnimInstance[]): {OutLinkedInstances: AnimInstance[]};
+	GetLinkedAnimGraphInstanceByTag(InTag: string): AnimInstance;
+	GetIntegerAttribute_Ref(BoneName: string,AttributeName: string,OutValue?: number,LookupType?: ECustomBoneAttributeLookup): {OutValue: number, $: boolean};
+	GetIntegerAttribute(BoneName: string,AttributeName: string,DefaultValue: number,OutValue?: number,LookupType?: ECustomBoneAttributeLookup): {OutValue: number, $: boolean};
+	GetFloatAttribute_Ref(BoneName: string,AttributeName: string,OutValue?: number,LookupType?: ECustomBoneAttributeLookup): {OutValue: number, $: boolean};
+	GetFloatAttribute(BoneName: string,AttributeName: string,DefaultValue: number,OutValue?: number,LookupType?: ECustomBoneAttributeLookup): {OutValue: number, $: boolean};
+	GetDisablePostProcessBlueprint(): boolean;
+	GetDisableAnimCurves(): boolean;
+	GetCurrentJointAngles(InBoneName: string,Swing1Angle?: number,TwistAngle?: number,Swing2Angle?: number): {Swing1Angle: number, TwistAngle: number, Swing2Angle: number};
+	GetClothMaxDistanceScale(): number;
+	GetClothingSimulationInteractor(): ClothingSimulationInteractor;
+	GetBoneMass(BoneName: string,bScaleMass: boolean): number;
+	GetAnimInstance(): AnimInstance;
+	GetAnimClass(): UnrealEngineClass;
+	GetAnimationMode(): EAnimationMode;
+	GetAllowRigidBodyAnimNode(): boolean;
+	GetAllowedAnimCurveEvaluate(): boolean;
+	ForceClothNextUpdateTeleportAndReset(): void;
+	ForceClothNextUpdateTeleport(): void;
+	FindConstraintBoneName(ConstraintIndex: number): string;
+	ClearMorphTargets(): void;
+	BreakConstraint(Impulse: Vector,HitLocation: Vector,InBoneName: string): void;
+	BindClothToMasterPoseComponent(): void;
+	AllowAnimCurveEvaluation(NameOfCurve: string,bAllow: boolean): void;
+	AddImpulseToAllBodiesBelow(Impulse: Vector,BoneName: string,bVelChange: boolean,bIncludeSelf: boolean): void;
+	AddForceToAllBodiesBelow(Force: Vector,BoneName: string,bAccelChange: boolean,bIncludeSelf: boolean): void;
+	AccumulateAllBodiesBelowPhysicsBlendWeight(InBoneName: string,AddPhysicsBlendWeight: number,bSkipCustomPhysicsType: boolean): void;
+	static C(Other: UObject | any): SkeletalMeshComponent;
+	GetPhysicsBodySetup(InName: string): BodySetup;
+	K2_DirectionBetweenSockets(SocketOrBoneNameFrom: string,SocketOrBoneNameTo: string): Vector;
+	K2_DistanceBetweenTwoSocketsAndMapRange(SocketOrBoneNameA: string,SocketSpaceA: ERelativeTransformSpace,SocketOrBoneNameB: string,SocketSpaceB: ERelativeTransformSpace,bRemapRange: boolean,InRangeMin: number,InRangeMax: number,OutRangeMin: number,OutRangeMax: number): number;
+	static GetPhysicsBodySetup(InSkeletalMeshComp: SkeletalMeshComponent,InName: string): BodySetup;
+	static K2_DirectionBetweenSockets(Component: SkeletalMeshComponent,SocketOrBoneNameFrom: string,SocketOrBoneNameTo: string): Vector;
+	static K2_DistanceBetweenTwoSocketsAndMapRange(Component: SkeletalMeshComponent,SocketOrBoneNameA: string,SocketSpaceA: ERelativeTransformSpace,SocketOrBoneNameB: string,SocketSpaceB: ERelativeTransformSpace,bRemapRange: boolean,InRangeMin: number,InRangeMax: number,OutRangeMin: number,OutRangeMax: number): number;
+}
+
+declare type EMovementMode = 'MOVE_None' | 'MOVE_Walking' | 'MOVE_NavWalking' | 'MOVE_Falling' | 'MOVE_Swimming' | 'MOVE_Flying' | 'MOVE_Custom' | 'MOVE_MAX';
+declare var EMovementMode : { MOVE_None:'MOVE_None',MOVE_Walking:'MOVE_Walking',MOVE_NavWalking:'MOVE_NavWalking',MOVE_Falling:'MOVE_Falling',MOVE_Swimming:'MOVE_Swimming',MOVE_Flying:'MOVE_Flying',MOVE_Custom:'MOVE_Custom',MOVE_MAX:'MOVE_MAX', };
+declare type ENetworkSmoothingMode = 'Disabled' | 'Linear' | 'Exponential' | 'Replay' | 'ENetworkSmoothingMode_MAX';
+declare var ENetworkSmoothingMode : { Disabled:'Disabled',Linear:'Linear',Exponential:'Exponential',Replay:'Replay',ENetworkSmoothingMode_MAX:'ENetworkSmoothingMode_MAX', };
+declare class FindFloorResult { 
+	bBlockingHit: boolean;
+	bWalkableFloor: boolean;
+	bLineTrace: boolean;
+	FloorDist: number;
+	LineDist: number;
+	HitResult: HitResult;
+	clone() : FindFloorResult;
+	static C(Other: UObject | any): FindFloorResult;
+}
+
+declare class NavAvoidanceMask { 
+	bGroup0: boolean;
+	bGroup1: boolean;
+	bGroup2: boolean;
+	bGroup3: boolean;
+	bGroup4: boolean;
+	bGroup5: boolean;
+	bGroup6: boolean;
+	bGroup7: boolean;
+	bGroup8: boolean;
+	bGroup9: boolean;
+	bGroup10: boolean;
+	bGroup11: boolean;
+	bGroup12: boolean;
+	bGroup13: boolean;
+	bGroup14: boolean;
+	bGroup15: boolean;
+	bGroup16: boolean;
+	bGroup17: boolean;
+	bGroup18: boolean;
+	bGroup19: boolean;
+	bGroup20: boolean;
+	bGroup21: boolean;
+	bGroup22: boolean;
+	bGroup23: boolean;
+	bGroup24: boolean;
+	bGroup25: boolean;
+	bGroup26: boolean;
+	bGroup27: boolean;
+	bGroup28: boolean;
+	bGroup29: boolean;
+	bGroup30: boolean;
+	bGroup31: boolean;
+	clone() : NavAvoidanceMask;
+	static C(Other: UObject | any): NavAvoidanceMask;
+}
+
+declare class CharacterMovementComponentPostPhysicsTickFunction extends TickFunction { 
+	clone() : CharacterMovementComponentPostPhysicsTickFunction;
+	static C(Other: UObject | any): CharacterMovementComponentPostPhysicsTickFunction;
+}
+
+declare class RootMotionSourceSettings { 
+	Flags: number;
+	clone() : RootMotionSourceSettings;
+	static C(Other: UObject | any): RootMotionSourceSettings;
+}
+
+declare class Vector_NetQuantize10 extends Vector { 
+	clone() : Vector_NetQuantize10;
+	static C(Other: UObject | any): Vector_NetQuantize10;
+}
+
+declare class RootMotionSourceGroup { 
+	bHasAdditiveSources: boolean;
+	bHasOverrideSources: boolean;
+	bHasOverrideSourcesWithIgnoreZAccumulate: boolean;
+	bIsAdditiveVelocityApplied: boolean;
+	LastAccumulatedSettings: RootMotionSourceSettings;
+	LastPreAdditiveVelocity: Vector_NetQuantize10;
+	clone() : RootMotionSourceGroup;
+	static C(Other: UObject | any): RootMotionSourceGroup;
+}
+
+declare class RootMotionMovementParams { 
+	bHasRootMotion: boolean;
+	BlendWeight: number;
+	RootMotionTransform: Transform;
+	clone() : RootMotionMovementParams;
+	static C(Other: UObject | any): RootMotionMovementParams;
+}
+
+declare class CharacterMovementComponent extends PawnMovementComponent { 
+	CharacterOwner: Character;
+	GravityScale: number;
+	MaxStepHeight: number;
+	JumpZVelocity: number;
+	JumpOffJumpZFactor: number;
+	WalkableFloorAngle: number;
+	WalkableFloorZ: number;
+	MovementMode: EMovementMode;
+	CustomMovementMode: number;
+	NetworkSmoothingMode: ENetworkSmoothingMode;
+	GroundFriction: number;
+	MaxWalkSpeed: number;
+	MaxWalkSpeedCrouched: number;
+	MaxSwimSpeed: number;
+	MaxFlySpeed: number;
+	MaxCustomMovementSpeed: number;
+	MaxAcceleration: number;
+	MinAnalogWalkSpeed: number;
+	BrakingFrictionFactor: number;
+	BrakingFriction: number;
+	BrakingSubStepTime: number;
+	BrakingDecelerationWalking: number;
+	BrakingDecelerationFalling: number;
+	BrakingDecelerationSwimming: number;
+	BrakingDecelerationFlying: number;
+	AirControl: number;
+	AirControlBoostMultiplier: number;
+	AirControlBoostVelocityThreshold: number;
+	FallingLateralFriction: number;
+	CrouchedHalfHeight: number;
+	Buoyancy: number;
+	PerchRadiusThreshold: number;
+	PerchAdditionalHeight: number;
+	RotationRate: Rotator;
+	bUseSeparateBrakingFriction: boolean;
+	bApplyGravityWhileJumping: boolean;
+	bUseControllerDesiredRotation: boolean;
+	bOrientRotationToMovement: boolean;
+	bSweepWhileNavWalking: boolean;
+	bMovementInProgress: boolean;
+	bEnableScopedMovementUpdates: boolean;
+	bEnableServerDualMoveScopedMovementUpdates: boolean;
+	bForceMaxAccel: boolean;
+	bRunPhysicsWithNoController: boolean;
+	bForceNextFloorCheck: boolean;
+	bShrinkProxyCapsule: boolean;
+	bCanWalkOffLedges: boolean;
+	bCanWalkOffLedgesWhenCrouching: boolean;
+	bNetworkSkipProxyPredictionOnNetUpdate: boolean;
+	bNetworkAlwaysReplicateTransformUpdateTimestamp: boolean;
+	bDeferUpdateMoveComponent: boolean;
+	bEnablePhysicsInteraction: boolean;
+	bTouchForceScaledToMass: boolean;
+	bPushForceScaledToMass: boolean;
+	bPushForceUsingZOffset: boolean;
+	bScalePushForceToVelocity: boolean;
+	DeferredUpdatedMoveComponent: SceneComponent;
+	MaxOutOfWaterStepHeight: number;
+	OutofWaterZ: number;
+	Mass: number;
+	StandingDownwardForceScale: number;
+	InitialPushForceFactor: number;
+	PushForceFactor: number;
+	PushForcePointZOffsetFactor: number;
+	TouchForceFactor: number;
+	MinTouchForce: number;
+	MaxTouchForce: number;
+	RepulsionForce: number;
+	bForceBraking: boolean;
+	CrouchedSpeedMultiplier: number;
+	UpperImpactNormalScale: number;
+	Acceleration: Vector;
+	LastUpdateRotation: Quat;
+	LastUpdateLocation: Vector;
+	LastUpdateVelocity: Vector;
+	ServerLastTransformUpdateTimeStamp: number;
+	ServerLastClientGoodMoveAckTime: number;
+	ServerLastClientAdjustmentTime: number;
+	PendingImpulseToApply: Vector;
+	PendingForceToApply: Vector;
+	AnalogInputModifier: number;
+	MaxSimulationTimeStep: number;
+	MaxSimulationIterations: number;
+	MaxJumpApexAttemptsPerSimulation: number;
+	MaxDepenetrationWithGeometry: number;
+	MaxDepenetrationWithGeometryAsProxy: number;
+	MaxDepenetrationWithPawn: number;
+	MaxDepenetrationWithPawnAsProxy: number;
+	NetworkSimulatedSmoothLocationTime: number;
+	NetworkSimulatedSmoothRotationTime: number;
+	ListenServerNetworkSimulatedSmoothLocationTime: number;
+	ListenServerNetworkSimulatedSmoothRotationTime: number;
+	NetProxyShrinkRadius: number;
+	NetProxyShrinkHalfHeight: number;
+	NetworkMaxSmoothUpdateDistance: number;
+	NetworkNoSmoothUpdateDistance: number;
+	NetworkMinTimeBetweenClientAckGoodMoves: number;
+	NetworkMinTimeBetweenClientAdjustments: number;
+	NetworkMinTimeBetweenClientAdjustmentsLargeCorrection: number;
+	NetworkLargeClientCorrectionDistance: number;
+	LedgeCheckThreshold: number;
+	JumpOutOfWaterPitch: number;
+	CurrentFloor: FindFloorResult;
+	DefaultLandMovementMode: EMovementMode;
+	DefaultWaterMovementMode: EMovementMode;
+	GroundMovementMode: EMovementMode;
+	bMaintainHorizontalGroundVelocity: boolean;
+	bImpartBaseVelocityX: boolean;
+	bImpartBaseVelocityY: boolean;
+	bImpartBaseVelocityZ: boolean;
+	bImpartBaseAngularVelocity: boolean;
+	bJustTeleported: boolean;
+	bNetworkUpdateReceived: boolean;
+	bNetworkMovementModeChanged: boolean;
+	bIgnoreClientMovementErrorChecksAndCorrection: boolean;
+	bServerAcceptClientAuthoritativePosition: boolean;
+	bNotifyApex: boolean;
+	bCheatFlying: boolean;
+	bWantsToCrouch: boolean;
+	bCrouchMaintainsBaseLocation: boolean;
+	bIgnoreBaseRotation: boolean;
+	bFastAttachedMove: boolean;
+	bAlwaysCheckFloor: boolean;
+	bUseFlatBaseForFloorChecks: boolean;
+	bPerformingJumpOff: boolean;
+	bWantsToLeaveNavWalking: boolean;
+	bUseRVOAvoidance: boolean;
+	bRequestedMoveUseAcceleration: boolean;
+	bWasSimulatingRootMotion: boolean;
+	bAllowPhysicsRotationDuringAnimRootMotion: boolean;
+	bHasRequestedVelocity: boolean;
+	bRequestedMoveWithMaxSpeed: boolean;
+	bWasAvoidanceUpdated: boolean;
+	bProjectNavMeshWalking: boolean;
+	bProjectNavMeshOnBothWorldChannels: boolean;
+	AvoidanceConsiderationRadius: number;
+	RequestedVelocity: Vector;
+	AvoidanceUID: number;
+	AvoidanceGroup: NavAvoidanceMask;
+	GroupsToAvoid: NavAvoidanceMask;
+	GroupsToIgnore: NavAvoidanceMask;
+	AvoidanceWeight: number;
+	PendingLaunchVelocity: Vector;
+	NavMeshProjectionInterval: number;
+	NavMeshProjectionTimer: number;
+	NavMeshProjectionInterpSpeed: number;
+	NavMeshProjectionHeightScaleUp: number;
+	NavMeshProjectionHeightScaleDown: number;
+	NavWalkingFloorDistTolerance: number;
+	PostPhysicsTickFunction: CharacterMovementComponentPostPhysicsTickFunction;
+	MinTimeBetweenTimeStampResets: number;
+	CurrentRootMotion: RootMotionSourceGroup;
+	ServerCorrectionRootMotion: RootMotionSourceGroup;
+	RootMotionParams: RootMotionMovementParams;
+	AnimRootMotionVelocity: Vector;
+	static Load(ResourceName: string): CharacterMovementComponent;
+	static Find(Outer: UObject, ResourceName: string): CharacterMovementComponent;
+	static GetDefaultObject(): CharacterMovementComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CharacterMovementComponent;
+	SetWalkableFloorZ(InWalkableFloorZ: number): void;
+	SetWalkableFloorAngle(InWalkableFloorAngle: number): void;
+	SetMovementMode(NewMovementMode: EMovementMode,NewCustomMode: number): void;
+	SetGroupsToIgnoreMask(GroupMask: NavAvoidanceMask): void;
+	SetGroupsToIgnore(GroupFlags: number): void;
+	SetGroupsToAvoidMask(GroupMask: NavAvoidanceMask): void;
+	SetGroupsToAvoid(GroupFlags: number): void;
+	SetAvoidanceGroupMask(GroupMask: NavAvoidanceMask): void;
+	SetAvoidanceGroup(GroupFlags: number): void;
+	SetAvoidanceEnabled(bEnable: boolean): void;
+	K2_GetWalkableFloorZ(): number;
+	K2_GetWalkableFloorAngle(): number;
+	K2_GetModifiedMaxAcceleration(): number;
+	K2_FindFloor(CapsuleLocation: Vector,FloorResult?: FindFloorResult): {FloorResult: FindFloorResult};
+	K2_ComputeFloorDist(CapsuleLocation: Vector,LineDistance: number,SweepDistance: number,SweepRadius: number,FloorResult?: FindFloorResult): {FloorResult: FindFloorResult};
+	IsWalking(): boolean;
+	IsWalkable(Hit: HitResult): boolean;
+	GetValidPerchRadius(): number;
+	GetPerchRadiusThreshold(): number;
+	GetMovementBase(): PrimitiveComponent;
+	GetMinAnalogSpeed(): number;
+	GetMaxJumpHeightWithJumpTime(): number;
+	GetMaxJumpHeight(): number;
+	GetMaxBrakingDeceleration(): number;
+	GetMaxAcceleration(): number;
+	GetLastUpdateVelocity(): Vector;
+	GetLastUpdateRotation(): Rotator;
+	GetLastUpdateLocation(): Vector;
+	GetImpartedMovementBaseVelocity(): Vector;
+	GetCurrentAcceleration(): Vector;
+	GetCharacterOwner(): Character;
+	GetAnalogInputModifier(): number;
+	DisableMovement(): void;
+	ClearAccumulatedForces(): void;
+	CapsuleTouched(OverlappedComp: PrimitiveComponent,Other: Actor,OtherComp: PrimitiveComponent,OtherBodyIndex: number,bFromSweep: boolean,SweepResult: HitResult): void;
+	CalcVelocity(DeltaTime: number,Friction: number,bFluid: boolean,BrakingDeceleration: number): void;
+	AddImpulse(Impulse: Vector,bVelocityChange: boolean): void;
+	AddForce(Force: Vector): void;
+	static C(Other: UObject | any): CharacterMovementComponent;
+}
+
+declare class CapsuleComponent extends ShapeComponent { 
+	CapsuleHalfHeight: number;
+	CapsuleRadius: number;
+	CapsuleHeight: number;
+	static Load(ResourceName: string): CapsuleComponent;
+	static Find(Outer: UObject, ResourceName: string): CapsuleComponent;
+	static GetDefaultObject(): CapsuleComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CapsuleComponent;
+	SetCapsuleSize(InRadius: number,InHalfHeight: number,bUpdateOverlaps: boolean): void;
+	SetCapsuleRadius(Radius: number,bUpdateOverlaps: boolean): void;
+	SetCapsuleHalfHeight(HalfHeight: number,bUpdateOverlaps: boolean): void;
+	GetUnscaledCapsuleSize_WithoutHemisphere(OutRadius?: number,OutHalfHeightWithoutHemisphere?: number): {OutRadius: number, OutHalfHeightWithoutHemisphere: number};
+	GetUnscaledCapsuleSize(OutRadius?: number,OutHalfHeight?: number): {OutRadius: number, OutHalfHeight: number};
+	GetUnscaledCapsuleRadius(): number;
+	GetUnscaledCapsuleHalfHeight_WithoutHemisphere(): number;
+	GetUnscaledCapsuleHalfHeight(): number;
+	GetShapeScale(): number;
+	GetScaledCapsuleSize_WithoutHemisphere(OutRadius?: number,OutHalfHeightWithoutHemisphere?: number): {OutRadius: number, OutHalfHeightWithoutHemisphere: number};
+	GetScaledCapsuleSize(OutRadius?: number,OutHalfHeight?: number): {OutRadius: number, OutHalfHeight: number};
+	GetScaledCapsuleRadius(): number;
+	GetScaledCapsuleHalfHeight_WithoutHemisphere(): number;
+	GetScaledCapsuleHalfHeight(): number;
+	static C(Other: UObject | any): CapsuleComponent;
+}
+
+declare class Vector_NetQuantize100 extends Vector { 
+	clone() : Vector_NetQuantize100;
+	static C(Other: UObject | any): Vector_NetQuantize100;
+}
+
+declare class BasedMovementInfo { 
+	MovementBase: PrimitiveComponent;
+	BoneName: string;
+	Location: Vector_NetQuantize100;
+	Rotation: Rotator;
+	bServerHasBaseComponent: boolean;
+	bRelativeRotation: boolean;
+	bServerHasVelocity: boolean;
+	clone() : BasedMovementInfo;
+	static C(Other: UObject | any): BasedMovementInfo;
+}
+
+declare class RepRootMotionMontage { 
+	bIsActive: boolean;
+	AnimMontage: AnimMontage;
+	Position: number;
+	Location: Vector_NetQuantize100;
+	Rotation: Rotator;
+	MovementBase: PrimitiveComponent;
+	MovementBaseBoneName: string;
+	bRelativePosition: boolean;
+	bRelativeRotation: boolean;
+	AuthoritativeRootMotion: RootMotionSourceGroup;
+	Acceleration: Vector_NetQuantize10;
+	LinearVelocity: Vector_NetQuantize10;
+	clone() : RepRootMotionMontage;
+	static C(Other: UObject | any): RepRootMotionMontage;
+}
+
+declare class SimulatedRootMotionReplicatedMove { 
+	Time: number;
+	RootMotion: RepRootMotionMontage;
+	clone() : SimulatedRootMotionReplicatedMove;
+	static C(Other: UObject | any): SimulatedRootMotionReplicatedMove;
+}
+
+declare class CharacterNetworkSerializationPackedBits { 
+	clone() : CharacterNetworkSerializationPackedBits;
+	static C(Other: UObject | any): CharacterNetworkSerializationPackedBits;
+}
+
+declare class CharacterServerMovePackedBits extends CharacterNetworkSerializationPackedBits { 
+	clone() : CharacterServerMovePackedBits;
+	static C(Other: UObject | any): CharacterServerMovePackedBits;
+}
+
+declare class CharacterMoveResponsePackedBits extends CharacterNetworkSerializationPackedBits { 
+	clone() : CharacterMoveResponsePackedBits;
+	static C(Other: UObject | any): CharacterMoveResponsePackedBits;
+}
+
+declare class Character extends Pawn { 
+	Mesh: SkeletalMeshComponent;
+	CharacterMovement: CharacterMovementComponent;
+	CapsuleComponent: CapsuleComponent;
+	ArrowComponent: ArrowComponent;
+	BasedMovement: BasedMovementInfo;
+	ReplicatedBasedMovement: BasedMovementInfo;
+	AnimRootMotionTranslationScale: number;
+	BaseTranslationOffset: Vector;
+	BaseRotationOffset: Quat;
+	ReplicatedServerLastTransformUpdateTimeStamp: number;
+	ReplayLastTransformUpdateTimeStamp: number;
+	ReplicatedMovementMode: number;
+	bInBaseReplication: boolean;
+	CrouchedEyeHeight: number;
+	bIsCrouched: boolean;
+	bProxyIsJumpForceApplied: boolean;
+	bPressedJump: boolean;
+	bClientUpdating: boolean;
+	bClientWasFalling: boolean;
+	bClientResimulateRootMotion: boolean;
+	bClientResimulateRootMotionSources: boolean;
+	bSimGravityDisabled: boolean;
+	bClientCheckEncroachmentOnNetUpdate: boolean;
+	bServerMoveIgnoreRootMotion: boolean;
+	bWasJumping: boolean;
+	JumpKeyHoldTime: number;
+	JumpForceTimeRemaining: number;
+	ProxyJumpForceStartedTime: number;
+	JumpMaxHoldTime: number;
+	JumpMaxCount: number;
+	JumpCurrentCount: number;
+	JumpCurrentCountPreJump: number;
+	OnReachedJumpApex: UnrealEngineMulticastDelegate<() => void>;
+	MovementModeChangedDelegate: UnrealEngineMulticastDelegate<(Character: Character, PrevMovementMode: EMovementMode, PreviousCustomMode: number) => void>;
+	OnCharacterMovementUpdated: UnrealEngineMulticastDelegate<(DeltaSeconds: number, OldLocation: Vector, OldVelocity: Vector) => void>;
+	SavedRootMotion: RootMotionSourceGroup;
+	ClientRootMotionParams: RootMotionMovementParams;
+	RootMotionRepMoves: SimulatedRootMotionReplicatedMove[];
+	RepRootMotion: RepRootMotionMontage;
+	static GetDefaultObject(): Character;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Character;
+	UnCrouch(bClientSimulation: boolean): void;
+	StopJumping(): void;
+	StopAnimMontage(AnimMontage: AnimMontage): void;
+	ServerMovePacked(PackedBits: CharacterServerMovePackedBits): void;
+	ServerMoveOld(OldTimeStamp: number,OldAccel: Vector_NetQuantize10,OldMoveFlags: number): void;
+	ServerMoveNoBase(Timestamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,CompressedMoveFlags: number,ClientRoll: number,View: any,ClientMovementMode: number): void;
+	ServerMoveDualNoBase(TimeStamp0: number,InAccel0: Vector_NetQuantize10,PendingFlags: number,View0: any,Timestamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,NewFlags: number,ClientRoll: number,View: any,ClientMovementMode: number): void;
+	ServerMoveDualHybridRootMotion(TimeStamp0: number,InAccel0: Vector_NetQuantize10,PendingFlags: number,View0: any,Timestamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,NewFlags: number,ClientRoll: number,View: any,ClientMovementBase: PrimitiveComponent,ClientBaseBoneName: string,ClientMovementMode: number): void;
+	ServerMoveDual(TimeStamp0: number,InAccel0: Vector_NetQuantize10,PendingFlags: number,View0: any,Timestamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,NewFlags: number,ClientRoll: number,View: any,ClientMovementBase: PrimitiveComponent,ClientBaseBoneName: string,ClientMovementMode: number): void;
+	ServerMove(Timestamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,CompressedMoveFlags: number,ClientRoll: number,View: any,ClientMovementBase: PrimitiveComponent,ClientBaseBoneName: string,ClientMovementMode: number): void;
+	RootMotionDebugClientPrintOnScreen(inString: string): void;
+	PlayAnimMontage(AnimMontage: AnimMontage,InPlayRate: number,StartSectionName: string): number;
+	OnWalkingOffLedge(PreviousFloorImpactNormal: Vector,PreviousFloorContactNormal: Vector,PreviousLocation: Vector,TimeDelta: number): void;
+	OnRep_RootMotion(): void;
+	OnRep_ReplicatedBasedMovement(): void;
+	OnRep_ReplayLastTransformUpdateTimeStamp(): void;
+	OnRep_IsCrouched(): void;
+	OnLaunched(LaunchVelocity: Vector,bXYOverride: boolean,bZOverride: boolean): void;
+	OnLanded(Hit: HitResult): void;
+	OnJumped(): void;
+	LaunchCharacter(LaunchVelocity: Vector,bXYOverride: boolean,bZOverride: boolean): void;
+	K2_UpdateCustomMovement(DeltaTime: number): void;
+	K2_OnStartCrouch(HalfHeightAdjust: number,ScaledHalfHeightAdjust: number): void;
+	K2_OnMovementModeChanged(PrevMovementMode: EMovementMode,NewMovementMode: EMovementMode,PrevCustomMode: number,NewCustomMode: number): void;
+	K2_OnEndCrouch(HalfHeightAdjust: number,ScaledHalfHeightAdjust: number): void;
+	Jump(): void;
+	IsPlayingRootMotion(): boolean;
+	IsPlayingNetworkedRootMotionMontage(): boolean;
+	IsJumpProvidingForce(): boolean;
+	HasAnyRootMotion(): boolean;
+	GetCurrentMontage(): AnimMontage;
+	GetBaseTranslationOffset(): Vector;
+	GetBaseRotationOffsetRotator(): Rotator;
+	GetAnimRootMotionTranslationScale(): number;
+	Crouch(bClientSimulation: boolean): void;
+	ClientVeryShortAdjustPosition(Timestamp: number,NewLoc: Vector,NewBase: PrimitiveComponent,NewBaseBoneName: string,bHasBase: boolean,bBaseRelativePosition: boolean,ServerMovementMode: number): void;
+	ClientMoveResponsePacked(PackedBits: CharacterMoveResponsePackedBits): void;
+	ClientCheatWalk(): void;
+	ClientCheatGhost(): void;
+	ClientCheatFly(): void;
+	ClientAdjustRootMotionSourcePosition(Timestamp: number,ServerRootMotion: RootMotionSourceGroup,bHasAnimRootMotion: boolean,ServerMontageTrackPosition: number,ServerLoc: Vector,ServerRotation: Vector_NetQuantizeNormal,ServerVelZ: number,ServerBase: PrimitiveComponent,ServerBoneName: string,bHasBase: boolean,bBaseRelativePosition: boolean,ServerMovementMode: number): void;
+	ClientAdjustRootMotionPosition(Timestamp: number,ServerMontageTrackPosition: number,ServerLoc: Vector,ServerRotation: Vector_NetQuantizeNormal,ServerVelZ: number,ServerBase: PrimitiveComponent,ServerBoneName: string,bHasBase: boolean,bBaseRelativePosition: boolean,ServerMovementMode: number): void;
+	ClientAdjustPosition(Timestamp: number,NewLoc: Vector,NewVel: Vector,NewBase: PrimitiveComponent,NewBaseBoneName: string,bHasBase: boolean,bBaseRelativePosition: boolean,ServerMovementMode: number): void;
+	ClientAckGoodMove(Timestamp: number): void;
+	CanJumpInternal(): boolean;
+	CanJump(): boolean;
+	CanCrouch(): boolean;
+	CacheInitialMeshOffset(MeshRelativeLocation: Vector,MeshRelativeRotation: Rotator): void;
+	static C(Other: UObject | any): Character;
+}
+
+declare type ENavPathEvent = 'Cleared' | 'NewPath' | 'UpdatedDueToGoalMoved' | 'UpdatedDueToNavigationChanged' | 'Invalidated' | 'RePathFailed' | 'MetaPathUpdate' | 'Custom' | 'ENavPathEvent_MAX';
+declare var ENavPathEvent : { Cleared:'Cleared',NewPath:'NewPath',UpdatedDueToGoalMoved:'UpdatedDueToGoalMoved',UpdatedDueToNavigationChanged:'UpdatedDueToNavigationChanged',Invalidated:'Invalidated',RePathFailed:'RePathFailed',MetaPathUpdate:'MetaPathUpdate',Custom:'Custom',ENavPathEvent_MAX:'ENavPathEvent_MAX', };
+declare type ENavigationOptionFlag = 'Default' | 'Enable' | 'Disable' | 'MAX';
+declare var ENavigationOptionFlag : { Default:'Default',Enable:'Enable',Disable:'Disable',MAX:'MAX', };
+declare class NavigationPath extends UObject { 
+	PathUpdatedNotifier: UnrealEngineMulticastDelegate<(AffectedPath: NavigationPath, PathEvent: ENavPathEvent) => void>;
+	PathPoints: Vector[];
+	RecalculateOnInvalidation: ENavigationOptionFlag;
+	static Load(ResourceName: string): NavigationPath;
+	static Find(Outer: UObject, ResourceName: string): NavigationPath;
+	static GetDefaultObject(): NavigationPath;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NavigationPath;
+	IsValid(): boolean;
+	IsStringPulled(): boolean;
+	IsPartial(): boolean;
+	GetPathLength(): number;
+	GetPathCost(): number;
+	GetDebugString(): string;
+	EnableRecalculationOnInvalidation(DoRecalculation: ENavigationOptionFlag): void;
+	EnableDebugDrawing(bShouldDrawDebugData: boolean,PathColor: LinearColor): void;
+	static C(Other: UObject | any): NavigationPath;
+}
+
+declare class Controller extends Actor { 
+	PlayerState: PlayerState;
+	OnInstigatedAnyDamage: UnrealEngineMulticastDelegate<(Damage: number, DamageType: DamageType, DamagedActor: Actor, DamageCauser: Actor) => void>;
+	StateName: string;
+	Pawn: Pawn;
+	Character: Character;
+	TransformComponent: SceneComponent;
+	ControlRotation: Rotator;
+	bAttachToPawn: boolean;
+	static GetDefaultObject(): Controller;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Controller;
+	UnPossess(): void;
+	StopMovement(): void;
+	SetInitialLocationAndRotation(NewLocation: Vector,NewRotation: Rotator): void;
+	SetIgnoreMoveInput(bNewMoveInput: boolean): void;
+	SetIgnoreLookInput(bNewLookInput: boolean): void;
+	SetControlRotation(NewRotation: Rotator): void;
+	ResetIgnoreMoveInput(): void;
+	ResetIgnoreLookInput(): void;
+	ResetIgnoreInputFlags(): void;
+	ReceiveUnPossess(UnpossessedPawn: Pawn): void;
+	ReceivePossess(PossessedPawn: Pawn): void;
+	ReceiveInstigatedAnyDamage(Damage: number,DamageType: DamageType,DamagedActor: Actor,DamageCauser: Actor): void;
+	Possess(InPawn: Pawn): void;
+	OnRep_PlayerState(): void;
+	OnRep_Pawn(): void;
+	LineOfSightTo(Other: Actor,ViewPoint: Vector,bAlternateChecks: boolean): boolean;
+	K2_GetPawn(): Pawn;
+	IsPlayerController(): boolean;
+	IsMoveInputIgnored(): boolean;
+	IsLookInputIgnored(): boolean;
+	IsLocalPlayerController(): boolean;
+	IsLocalController(): boolean;
+	GetViewTarget(): Actor;
+	GetDesiredRotation(): Rotator;
+	GetControlRotation(): Rotator;
+	ClientSetRotation(NewRotation: Rotator,bResetCamera: boolean): void;
+	ClientSetLocation(NewLocation: Vector,NewRotation: Rotator): void;
+	CastToPlayerController(): PlayerController;
+	static C(Other: UObject | any): Controller;
+	GetCurrentPath(): NavigationPath;
+	GetCurrentPathIndex(): number;
+	GetCurrentPathPoints(): Vector[];
+	GetNextNavLinkIndex(): number;
+	SimpleMoveToActor(Goal: Actor): void;
+	SimpleMoveToLocation(Goal: Vector): void;
+	static GetCurrentPath(Controller: Controller): NavigationPath;
+	static GetCurrentPathIndex(Controller: Controller): number;
+	static GetCurrentPathPoints(Controller: Controller): Vector[];
+	static GetNextNavLinkIndex(Controller: Controller): number;
+	static SimpleMoveToActor(Controller: Controller,Goal: Actor): void;
+	static SimpleMoveToLocation(Controller: Controller,Goal: Vector): void;
+}
+
+declare class Pawn extends Actor { 
+	bUseControllerRotationPitch: boolean;
+	bUseControllerRotationYaw: boolean;
+	bUseControllerRotationRoll: boolean;
+	bCanAffectNavigationGeneration: boolean;
+	BaseEyeHeight: number;
+	AutoPossessPlayer: EAutoReceiveInput;
+	AutoPossessAI: EAutoPossessAI;
+	RemoteViewPitch: number;
+	AIControllerClass: UnrealEngineClass;
+	PlayerState: PlayerState;
+	LastHitBy: Controller;
+	Controller: Controller;
+	ControlInputVector: Vector;
+	LastControlInputVector: Vector;
+	static GetDefaultObject(): Pawn;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Pawn;
+	SpawnDefaultController(): void;
+	SetCanAffectNavigationGeneration(bNewValue: boolean,bForceUpdate: boolean): void;
+	ReceiveUnpossessed(OldController: Controller): void;
+	ReceivePossessed(NewController: Controller): void;
+	PawnMakeNoise(Loudness: number,NoiseLocation: Vector,bUseNoiseMakerLocation: boolean,NoiseMaker: Actor): void;
+	OnRep_PlayerState(): void;
+	OnRep_Controller(): void;
+	LaunchPawn(LaunchVelocity: Vector,bXYOverride: boolean,bZOverride: boolean): void;
+	K2_GetMovementInputVector(): Vector;
+	IsPlayerControlled(): boolean;
+	IsPawnControlled(): boolean;
+	IsMoveInputIgnored(): boolean;
+	IsLocallyControlled(): boolean;
+	IsControlled(): boolean;
+	IsBotControlled(): boolean;
+	GetPendingMovementInputVector(): Vector;
+	GetNavAgentLocation(): Vector;
+	GetMovementComponent(): PawnMovementComponent;
+	static GetMovementBaseActor(Pawn: Pawn): Actor;
+	GetLastMovementInputVector(): Vector;
+	GetControlRotation(): Rotator;
+	GetController(): Controller;
+	GetBaseAimRotation(): Rotator;
+	DetachFromControllerPendingDestroy(): void;
+	ConsumeMovementInputVector(): Vector;
+	AddMovementInput(WorldDirection: Vector,ScaleValue: number,bForce: boolean): void;
+	AddControllerYawInput(Val: number): void;
+	AddControllerRollInput(Val: number): void;
+	AddControllerPitchInput(Val: number): void;
+	static C(Other: UObject | any): Pawn;
+	SendAIMessage(Message: string,MessageSource: UObject,bSuccess: boolean): void;
+	static SendAIMessage(Target: Pawn,Message: string,MessageSource: UObject,bSuccess: boolean): void;
+}
+
+declare type ERadialImpulseFalloff = 'RIF_Constant' | 'RIF_Linear' | 'RIF_MAX';
+declare var ERadialImpulseFalloff : { RIF_Constant:'RIF_Constant',RIF_Linear:'RIF_Linear',RIF_MAX:'RIF_MAX', };
+declare class PrimitiveComponent extends SceneComponent { 
+	MinDrawDistance: number;
+	LDMaxDrawDistance: number;
+	CachedMaxDrawDistance: number;
+	DepthPriorityGroup: ESceneDepthPriorityGroup;
+	ViewOwnerDepthPriorityGroup: ESceneDepthPriorityGroup;
+	IndirectLightingCacheQuality: EIndirectLightingCacheQuality;
+	LightmapType: ELightmapType;
+	ExcludeForSpecificHLODLevels: number[];
+	bEnableAutoLODGeneration: boolean;
+	bUseMaxLODAsImposter: boolean;
+	bBatchImpostersAsInstances: boolean;
+	bNeverDistanceCull: boolean;
+	bAlwaysCreatePhysicsState: boolean;
+	bGenerateOverlapEvents: boolean;
+	bMultiBodyOverlap: boolean;
+	bTraceComplexOnMove: boolean;
+	bReturnMaterialOnMove: boolean;
+	bUseViewOwnerDepthPriorityGroup: boolean;
+	bAllowCullDistanceVolume: boolean;
+	bHasMotionBlurVelocityMeshes: boolean;
+	bVisibleInReflectionCaptures: boolean;
+	bVisibleInRealTimeSkyCaptures: boolean;
+	bVisibleInRayTracing: boolean;
+	bRenderInMainPass: boolean;
+	bRenderInDepthPass: boolean;
+	bReceivesDecals: boolean;
+	bOwnerNoSee: boolean;
+	bOnlyOwnerSee: boolean;
+	bTreatAsBackgroundForOcclusion: boolean;
+	bUseAsOccluder: boolean;
+	bSelectable: boolean;
+	bForceMipStreaming: boolean;
+	bHasPerInstanceHitProxies: boolean;
+	CastShadow: boolean;
+	bAffectDynamicIndirectLighting: boolean;
+	bAffectDistanceFieldLighting: boolean;
+	bCastDynamicShadow: boolean;
+	bCastStaticShadow: boolean;
+	bCastVolumetricTranslucentShadow: boolean;
+	bCastContactShadow: boolean;
+	bSelfShadowOnly: boolean;
+	bCastFarShadow: boolean;
+	bCastInsetShadow: boolean;
+	bCastCinematicShadow: boolean;
+	bCastHiddenShadow: boolean;
+	bCastShadowAsTwoSided: boolean;
+	bLightAsIfStatic: boolean;
+	bLightAttachmentsAsGroup: boolean;
+	bExcludeFromLightAttachmentGroup: boolean;
+	bReceiveMobileCSMShadows: boolean;
+	bSingleSampleShadowFromStationaryLights: boolean;
+	bIgnoreRadialImpulse: boolean;
+	bIgnoreRadialForce: boolean;
+	bApplyImpulseOnDamage: boolean;
+	bReplicatePhysicsToAutonomousProxy: boolean;
+	bFillCollisionUnderneathForNavmesh: boolean;
+	AlwaysLoadOnClient: boolean;
+	AlwaysLoadOnServer: boolean;
+	bUseEditorCompositing: boolean;
+	bRenderCustomDepth: boolean;
+	bVisibleInSceneCaptureOnly: boolean;
+	bHiddenInSceneCapture: boolean;
+	bHasCustomNavigableGeometry: EHasCustomNavigableGeometry;
+	HitProxyPriority: EHitProxyPriority;
+	CanBeCharacterBase: ECanBeCharacterBase;
+	CanCharacterStepUpOn: ECanBeCharacterBase;
+	LightingChannels: LightingChannels;
+	CustomDepthStencilWriteMask: ERendererStencilMask;
+	CustomDepthStencilValue: number;
+	CustomPrimitiveData: CustomPrimitiveData;
+	CustomPrimitiveDataInternal: CustomPrimitiveData;
+	TranslucencySortPriority: number;
+	TranslucencySortDistanceOffset: number;
+	VisibilityId: number;
+	RuntimeVirtualTextures: RuntimeVirtualTexture[];
+	VirtualTextureLodBias: any;
+	VirtualTextureCullMips: any;
+	VirtualTextureMinCoverage: any;
+	VirtualTextureRenderPassType: ERuntimeVirtualTextureMainPassType;
+	LpvBiasMultiplier: number;
+	BoundsScale: number;
+	MoveIgnoreActors: Actor[];
+	MoveIgnoreComponents: PrimitiveComponent[];
+	BodyInstance: BodyInstance;
+	OnComponentHit: UnrealEngineMulticastDelegate<(HitComponent: PrimitiveComponent, OtherActor: Actor, OtherComp: PrimitiveComponent, NormalImpulse: Vector, Hit: HitResult) => void>;
+	OnComponentBeginOverlap: UnrealEngineMulticastDelegate<(OverlappedComponent: PrimitiveComponent, OtherActor: Actor, OtherComp: PrimitiveComponent, OtherBodyIndex: number, bFromSweep: boolean, SweepResult: HitResult) => void>;
+	OnComponentEndOverlap: UnrealEngineMulticastDelegate<(OverlappedComponent: PrimitiveComponent, OtherActor: Actor, OtherComp: PrimitiveComponent, OtherBodyIndex: number) => void>;
+	OnComponentWake: UnrealEngineMulticastDelegate<(WakingComponent: PrimitiveComponent, BoneName: string) => void>;
+	OnComponentSleep: UnrealEngineMulticastDelegate<(SleepingComponent: PrimitiveComponent, BoneName: string) => void>;
+	OnBeginCursorOver: UnrealEngineMulticastDelegate<(TouchedComponent: PrimitiveComponent) => void>;
+	OnEndCursorOver: UnrealEngineMulticastDelegate<(TouchedComponent: PrimitiveComponent) => void>;
+	OnClicked: UnrealEngineMulticastDelegate<(TouchedComponent: PrimitiveComponent, ButtonPressed: Key) => void>;
+	OnReleased: UnrealEngineMulticastDelegate<(TouchedComponent: PrimitiveComponent, ButtonReleased: Key) => void>;
+	OnInputTouchBegin: UnrealEngineMulticastDelegate<(FingerIndex: ETouchIndex, TouchedComponent: PrimitiveComponent) => void>;
+	OnInputTouchEnd: UnrealEngineMulticastDelegate<(FingerIndex: ETouchIndex, TouchedComponent: PrimitiveComponent) => void>;
+	OnInputTouchEnter: UnrealEngineMulticastDelegate<(FingerIndex: ETouchIndex, TouchedComponent: PrimitiveComponent) => void>;
+	OnInputTouchLeave: UnrealEngineMulticastDelegate<(FingerIndex: ETouchIndex, TouchedComponent: PrimitiveComponent) => void>;
+	LODParentPrimitive: PrimitiveComponent;
+	static Load(ResourceName: string): PrimitiveComponent;
+	static Find(Outer: UObject, ResourceName: string): PrimitiveComponent;
+	static GetDefaultObject(): PrimitiveComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PrimitiveComponent;
+	WasRecentlyRendered(Tolerance: number): boolean;
+	WakeRigidBody(BoneName: string): void;
+	WakeAllRigidBodies(): void;
+	SetWalkableSlopeOverride(NewOverride: WalkableSlopeOverride): void;
+	SetVisibleInSceneCaptureOnly(bValue: boolean): void;
+	SetUseCCD(InUseCCD: boolean,BoneName: string): void;
+	SetTranslucentSortPriority(NewTranslucentSortPriority: number): void;
+	SetTranslucencySortDistanceOffset(NewTranslucencySortDistanceOffset: number): void;
+	SetSingleSampleShadowFromStationaryLights(bNewSingleSampleShadowFromStationaryLights: boolean): void;
+	SetSimulatePhysics(bSimulate: boolean): void;
+	SetRenderInMainPass(bValue: boolean): void;
+	SetRenderCustomDepth(bValue: boolean): void;
+	SetReceivesDecals(bNewReceivesDecals: boolean): void;
+	SetPhysMaterialOverride(NewPhysMaterial: PhysicalMaterial): void;
+	SetPhysicsMaxAngularVelocityInRadians(NewMaxAngVel: number,bAddToCurrent: boolean,BoneName: string): void;
+	SetPhysicsMaxAngularVelocityInDegrees(NewMaxAngVel: number,bAddToCurrent: boolean,BoneName: string): void;
+	SetPhysicsMaxAngularVelocity(NewMaxAngVel: number,bAddToCurrent: boolean,BoneName: string): void;
+	SetPhysicsLinearVelocity(NewVel: Vector,bAddToCurrent: boolean,BoneName: string): void;
+	SetPhysicsAngularVelocityInRadians(NewAngVel: Vector,bAddToCurrent: boolean,BoneName: string): void;
+	SetPhysicsAngularVelocityInDegrees(NewAngVel: Vector,bAddToCurrent: boolean,BoneName: string): void;
+	SetPhysicsAngularVelocity(NewAngVel: Vector,bAddToCurrent: boolean,BoneName: string): void;
+	SetOwnerNoSee(bNewOwnerNoSee: boolean): void;
+	SetOnlyOwnerSee(bNewOnlyOwnerSee: boolean): void;
+	SetNotifyRigidBodyCollision(bNewNotifyRigidBodyCollision: boolean): void;
+	SetMaterialByName(MaterialSlotName: string,Material: MaterialInterface): void;
+	SetMaterial(ElementIndex: number,Material: MaterialInterface): void;
+	SetMassScale(BoneName: string,InMassScale: number): void;
+	SetMassOverrideInKg(BoneName: string,MassInKg: number,bOverrideMass: boolean): void;
+	SetLinearDamping(InDamping: number): void;
+	SetLightingChannels(bChannel0: boolean,bChannel1: boolean,bChannel2: boolean): void;
+	SetLightAttachmentsAsGroup(bInLightAttachmentsAsGroup: boolean): void;
+	SetHiddenInSceneCapture(bValue: boolean): void;
+	SetGenerateOverlapEvents(bInGenerateOverlapEvents: boolean): void;
+	SetExcludeFromLightAttachmentGroup(bInExcludeFromLightAttachmentGroup: boolean): void;
+	SetEnableGravity(bGravityEnabled: boolean): void;
+	SetDefaultCustomPrimitiveDataVector4(DataIndex: number,Value: Vector4): void;
+	SetDefaultCustomPrimitiveDataVector3(DataIndex: number,Value: Vector): void;
+	SetDefaultCustomPrimitiveDataVector2(DataIndex: number,Value: Vector2D): void;
+	SetDefaultCustomPrimitiveDataFloat(DataIndex: number,Value: number): void;
+	SetCustomPrimitiveDataVector4(DataIndex: number,Value: Vector4): void;
+	SetCustomPrimitiveDataVector3(DataIndex: number,Value: Vector): void;
+	SetCustomPrimitiveDataVector2(DataIndex: number,Value: Vector2D): void;
+	SetCustomPrimitiveDataFloat(DataIndex: number,Value: number): void;
+	SetCustomDepthStencilWriteMask(WriteMaskBit: ERendererStencilMask): void;
+	SetCustomDepthStencilValue(Value: number): void;
+	SetCullDistance(NewCullDistance: number): void;
+	SetConstraintMode(ConstraintMode: EDOFMode): void;
+	SetCollisionResponseToChannel(Channel: ECollisionChannel,NewResponse: ECollisionResponse): void;
+	SetCollisionResponseToAllChannels(NewResponse: ECollisionResponse): void;
+	SetCollisionProfileName(InCollisionProfileName: string,bUpdateOverlaps: boolean): void;
+	SetCollisionObjectType(Channel: ECollisionChannel): void;
+	SetCollisionEnabled(NewType: ECollisionEnabled): void;
+	SetCenterOfMass(CenterOfMassOffset: Vector,BoneName: string): void;
+	SetCastShadow(NewCastShadow: boolean): void;
+	SetCastInsetShadow(bInCastInsetShadow: boolean): void;
+	SetCastHiddenShadow(NewCastHiddenShadow: boolean): void;
+	SetBoundsScale(NewBoundsScale: number): void;
+	SetAngularDamping(InDamping: number): void;
+	SetAllUseCCD(InUseCCD: boolean): void;
+	SetAllPhysicsLinearVelocity(NewVel: Vector,bAddToCurrent: boolean): void;
+	SetAllPhysicsAngularVelocityInRadians(NewAngVel: Vector,bAddToCurrent: boolean): void;
+	SetAllPhysicsAngularVelocityInDegrees(NewAngVel: Vector,bAddToCurrent: boolean): void;
+	SetAllMassScale(InMassScale: number): void;
+	ScaleByMomentOfInertia(InputVector: Vector,BoneName: string): Vector;
+	PutRigidBodyToSleep(BoneName: string): void;
+	K2_SphereTraceComponent(TraceStart: Vector,TraceEnd: Vector,SphereRadius: number,bTraceComplex: boolean,bShowTrace: boolean,bPersistentShowTrace: boolean,HitLocation?: Vector,HitNormal?: Vector,BoneName?: string,OutHit?: HitResult): {HitLocation: Vector, HitNormal: Vector, BoneName: string, OutHit: HitResult, $: boolean};
+	K2_SphereOverlapComponent(InSphereCentre: Vector,InSphereRadius: number,bTraceComplex: boolean,bShowTrace: boolean,bPersistentShowTrace: boolean,HitLocation?: Vector,HitNormal?: Vector,BoneName?: string,OutHit?: HitResult): {HitLocation: Vector, HitNormal: Vector, BoneName: string, OutHit: HitResult, $: boolean};
+	K2_LineTraceComponent(TraceStart: Vector,TraceEnd: Vector,bTraceComplex: boolean,bShowTrace: boolean,bPersistentShowTrace: boolean,HitLocation?: Vector,HitNormal?: Vector,BoneName?: string,OutHit?: HitResult): {HitLocation: Vector, HitNormal: Vector, BoneName: string, OutHit: HitResult, $: boolean};
+	K2_IsQueryCollisionEnabled(): boolean;
+	K2_IsPhysicsCollisionEnabled(): boolean;
+	K2_IsCollisionEnabled(): boolean;
+	K2_BoxOverlapComponent(InBoxCentre: Vector,InBox: Box,bTraceComplex: boolean,bShowTrace: boolean,bPersistentShowTrace: boolean,HitLocation?: Vector,HitNormal?: Vector,BoneName?: string,OutHit?: HitResult): {HitLocation: Vector, HitNormal: Vector, BoneName: string, OutHit: HitResult, $: boolean};
+	IsOverlappingComponent(OtherComp: PrimitiveComponent): boolean;
+	IsOverlappingActor(Other: Actor): boolean;
+	IsGravityEnabled(): boolean;
+	IsAnyRigidBodyAwake(): boolean;
+	IgnoreComponentWhenMoving(Component: PrimitiveComponent,bShouldIgnore: boolean): void;
+	IgnoreActorWhenMoving(Actor: Actor,bShouldIgnore: boolean): void;
+	GetWalkableSlopeOverride(): WalkableSlopeOverride;
+	GetPhysicsLinearVelocityAtPoint(Point: Vector,BoneName: string): Vector;
+	GetPhysicsLinearVelocity(BoneName: string): Vector;
+	GetPhysicsAngularVelocityInRadians(BoneName: string): Vector;
+	GetPhysicsAngularVelocityInDegrees(BoneName: string): Vector;
+	GetPhysicsAngularVelocity(BoneName: string): Vector;
+	GetOverlappingComponents(OutOverlappingComponents?: PrimitiveComponent[]): {OutOverlappingComponents: PrimitiveComponent[]};
+	GetOverlappingActors(OverlappingActors?: Actor[],ClassFilter?: UnrealEngineClass): {OverlappingActors: Actor[]};
+	GetNumMaterials(): number;
+	GetMaterialFromCollisionFaceIndex(FaceIndex: number,SectionIndex?: number): {SectionIndex: number, $: MaterialInterface};
+	GetMaterial(ElementIndex: number): MaterialInterface;
+	GetMassScale(BoneName: string): number;
+	GetMass(): number;
+	GetLinearDamping(): number;
+	GetInertiaTensor(BoneName: string): Vector;
+	GetGenerateOverlapEvents(): boolean;
+	GetCollisionResponseToChannel(Channel: ECollisionChannel): ECollisionResponse;
+	GetCollisionProfileName(): string;
+	GetCollisionObjectType(): ECollisionChannel;
+	GetCollisionEnabled(): ECollisionEnabled;
+	GetClosestPointOnCollision(Point: Vector,OutPointOnBody?: Vector,BoneName?: string): {OutPointOnBody: Vector, $: number};
+	GetCenterOfMass(BoneName: string): Vector;
+	GetAngularDamping(): number;
+	CreateDynamicMaterialInstance(ElementIndex: number,SourceMaterial: MaterialInterface,OptionalName: string): MaterialInstanceDynamic;
+	CreateAndSetMaterialInstanceDynamicFromMaterial(ElementIndex: number,Parent: MaterialInterface): MaterialInstanceDynamic;
+	CreateAndSetMaterialInstanceDynamic(ElementIndex: number): MaterialInstanceDynamic;
+	CopyArrayOfMoveIgnoreComponents(): PrimitiveComponent[];
+	CopyArrayOfMoveIgnoreActors(): Actor[];
+	ClearMoveIgnoreComponents(): void;
+	ClearMoveIgnoreActors(): void;
+	CanCharacterStepUp(Pawn: Pawn): boolean;
+	AddTorqueInRadians(Torque: Vector,BoneName: string,bAccelChange: boolean): void;
+	AddTorqueInDegrees(Torque: Vector,BoneName: string,bAccelChange: boolean): void;
+	AddTorque(Torque: Vector,BoneName: string,bAccelChange: boolean): void;
+	AddRadialImpulse(Origin: Vector,Radius: number,Strength: number,Falloff: ERadialImpulseFalloff,bVelChange: boolean): void;
+	AddRadialForce(Origin: Vector,Radius: number,Strength: number,Falloff: ERadialImpulseFalloff,bAccelChange: boolean): void;
+	AddImpulseAtLocation(Impulse: Vector,Location: Vector,BoneName: string): void;
+	AddImpulse(Impulse: Vector,BoneName: string,bVelChange: boolean): void;
+	AddForceAtLocationLocal(Force: Vector,Location: Vector,BoneName: string): void;
+	AddForceAtLocation(Force: Vector,Location: Vector,BoneName: string): void;
+	AddForce(Force: Vector,BoneName: string,bAccelChange: boolean): void;
+	AddAngularImpulseInRadians(Impulse: Vector,BoneName: string,bVelChange: boolean): void;
+	AddAngularImpulseInDegrees(Impulse: Vector,BoneName: string,bVelChange: boolean): void;
+	AddAngularImpulse(Impulse: Vector,BoneName: string,bVelChange: boolean): void;
+	static C(Other: UObject | any): PrimitiveComponent;
+	ComponentOverlapActors(ComponentTransform: Transform,ObjectTypes: EObjectTypeQuery[],ActorClassFilter: UnrealEngineClass,ActorsToIgnore: Actor[],OutActors?: Actor[]): {OutActors: Actor[], $: boolean};
+	ComponentOverlapComponents(ComponentTransform: Transform,ObjectTypes: EObjectTypeQuery[],ComponentClassFilter: UnrealEngineClass,ActorsToIgnore: Actor[],OutComponents?: PrimitiveComponent[]): {OutComponents: PrimitiveComponent[], $: boolean};
+	SetCastInsetShadowForAllAttachments(bCastInsetShadow: boolean,bLightAttachmentsAsGroup: boolean): void;
+	static ComponentOverlapActors(Component: PrimitiveComponent,ComponentTransform: Transform,ObjectTypes: EObjectTypeQuery[],ActorClassFilter: UnrealEngineClass,ActorsToIgnore: Actor[],OutActors?: Actor[]): {OutActors: Actor[], $: boolean};
+	static ComponentOverlapComponents(Component: PrimitiveComponent,ComponentTransform: Transform,ObjectTypes: EObjectTypeQuery[],ComponentClassFilter: UnrealEngineClass,ActorsToIgnore: Actor[],OutComponents?: PrimitiveComponent[]): {OutComponents: PrimitiveComponent[], $: boolean};
+	static SetCastInsetShadowForAllAttachments(PrimitiveComponent: PrimitiveComponent,bCastInsetShadow: boolean,bLightAttachmentsAsGroup: boolean): void;
+}
+
+declare class MRMeshComponent extends PrimitiveComponent { 
+	Material: MaterialInterface;
+	WireframeMaterial: MaterialInterface;
+	bCreateMeshProxySections: boolean;
+	bUpdateNavMeshOnMeshUpdate: boolean;
+	bNeverCreateCollisionMesh: boolean;
+	CachedBodySetup: BodySetup;
+	BodySetups: BodySetup[];
+	static Load(ResourceName: string): MRMeshComponent;
+	static Find(Outer: UObject, ResourceName: string): MRMeshComponent;
+	static GetDefaultObject(): MRMeshComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MRMeshComponent;
+	SetWireframeMaterial(InMaterial: MaterialInterface): void;
+	SetWireframeColor(InColor: LinearColor): void;
+	SetUseWireframe(bUseWireframe: boolean): void;
+	SetEnableMeshOcclusion(bEnable: boolean): void;
+	IsConnected(): boolean;
+	GetWireframeColor(): LinearColor;
+	GetUseWireframe(): boolean;
+	GetEnableMeshOcclusion(): boolean;
+	ForceNavMeshUpdate(): void;
+	Clear(): void;
+	static C(Other: UObject | any): MRMeshComponent;
+	ConnectMRMesh(): boolean;
+	DisconnectMRMesh(): boolean;
+	static ConnectMRMesh(InMRMeshPtr: MRMeshComponent): boolean;
+	static DisconnectMRMesh(InMRMeshPtr: MRMeshComponent): boolean;
+}
+
+declare type EARObjectClassification = 'NotApplicable' | 'Unknown' | 'Wall' | 'Ceiling' | 'Floor' | 'Table' | 'Seat' | 'Face' | 'Image' | 'World' | 'SceneObject' | 'HandMesh' | 'Door' | 'Window' | 'EARObjectClassification_MAX';
+declare var EARObjectClassification : { NotApplicable:'NotApplicable',Unknown:'Unknown',Wall:'Wall',Ceiling:'Ceiling',Floor:'Floor',Table:'Table',Seat:'Seat',Face:'Face',Image:'Image',World:'World',SceneObject:'SceneObject',HandMesh:'HandMesh',Door:'Door',Window:'Window',EARObjectClassification_MAX:'EARObjectClassification_MAX', };
+declare type EARSpatialMeshUsageFlags = 'NotApplicable' | 'Visible' | 'Collision' | 'EARSpatialMeshUsageFlags_MAX';
+declare var EARSpatialMeshUsageFlags : { NotApplicable:'NotApplicable',Visible:'Visible',Collision:'Collision',EARSpatialMeshUsageFlags_MAX:'EARSpatialMeshUsageFlags_MAX', };
+declare class ARTrackedGeometry extends UObject { 
+	UniqueId: Guid;
+	LocalToTrackingTransform: Transform;
+	LocalToAlignedTrackingTransform: Transform;
+	TrackingState: EARTrackingState;
+	UnderlyingMesh: MRMeshComponent;
+	ObjectClassification: EARObjectClassification;
+	SpatialMeshUsageFlags: EARSpatialMeshUsageFlags;
+	LastUpdateFrameNumber: number;
+	DebugName: string;
+	static Load(ResourceName: string): ARTrackedGeometry;
+	static Find(Outer: UObject, ResourceName: string): ARTrackedGeometry;
+	static GetDefaultObject(): ARTrackedGeometry;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARTrackedGeometry;
+	IsTracked(): boolean;
+	HasSpatialMeshUsageFlag(InFlag: EARSpatialMeshUsageFlags): boolean;
+	GetUnderlyingMesh(): MRMeshComponent;
+	GetTrackingState(): EARTrackingState;
+	GetObjectClassification(): EARObjectClassification;
+	GetName(): string;
+	GetLocalToWorldTransform(): Transform;
+	GetLocalToTrackingTransform(): Transform;
+	GetLastUpdateTimestamp(): number;
+	GetLastUpdateFrameNumber(): number;
+	GetDebugName(): string;
+	static C(Other: UObject | any): ARTrackedGeometry;
+	DebugDrawTrackedGeometry(WorldContextObject: UObject,Color: LinearColor,OutlineThickness: number,PersistForSeconds: number): void;
+	static DebugDrawTrackedGeometry(TrackedGeometry: ARTrackedGeometry,WorldContextObject: UObject,Color: LinearColor,OutlineThickness: number,PersistForSeconds: number): void;
+}
+
+declare class ARTraceResult { 
+	DistanceFromCamera: number;
+	TraceChannel: EARLineTraceChannels;
+	LocalTransform: Transform;
+	TrackedGeometry: ARTrackedGeometry;
+	clone() : ARTraceResult;
+	static C(Other: UObject | any): ARTraceResult;
+	GetDistanceFromCamera(): number;
+	GetLocalToTrackingTransform(): Transform;
+	GetLocalToWorldTransform(): Transform;
+	GetLocalTransform(): Transform;
+	GetTraceChannel(): EARLineTraceChannels;
+	GetTrackedGeometry(): ARTrackedGeometry;
+	static GetDistanceFromCamera(TraceResult: ARTraceResult): number;
+	static GetLocalToTrackingTransform(TraceResult: ARTraceResult): Transform;
+	static GetLocalToWorldTransform(TraceResult: ARTraceResult): Transform;
+	static GetLocalTransform(TraceResult: ARTraceResult): Transform;
+	static GetTraceChannel(TraceResult: ARTraceResult): EARLineTraceChannels;
+	static GetTrackedGeometry(TraceResult: ARTraceResult): ARTrackedGeometry;
+}
+
+declare type EHMDTrackingOrigin = 'Floor' | 'Eye' | 'Stage' | 'EHMDTrackingOrigin_MAX';
+declare var EHMDTrackingOrigin : { Floor:'Floor',Eye:'Eye',Stage:'Stage',EHMDTrackingOrigin_MAX:'EHMDTrackingOrigin_MAX', };
+declare class Vector2D { 
+	X: number;
+	Y: number;
+	clone() : Vector2D;
+	static C(Other: UObject | any): Vector2D;
+	Conv_Vector2dToText(): string;
+	Conv_Vector2dToString(): string;
+	Add_Vector2DFloat(B: number): Vector2D;
+	Add_Vector2DVector2D(B: Vector2D): Vector2D;
+	BreakVector2D(X?: number,Y?: number): {X: number, Y: number};
+	ClampAxes2D(MinAxisVal: number,MaxAxisVal: number): Vector2D;
+	Conv_Vector2DToIntPoint(): IntPoint;
+	Conv_Vector2DToVector(Z: number): Vector;
+	CrossProduct2D(B: Vector2D): number;
+	Distance2D(v2: Vector2D): number;
+	DistanceSquared2D(v2: Vector2D): number;
+	Divide_Vector2DFloat(B: number): Vector2D;
+	Divide_Vector2DVector2D(B: Vector2D): Vector2D;
+	DotProduct2D(B: Vector2D): number;
+	EqualEqual_Vector2DVector2D(B: Vector2D,ErrorTolerance: number): boolean;
+	EqualExactly_Vector2DVector2D(B: Vector2D): boolean;
+	GetAbs2D(): Vector2D;
+	GetAbsMax2D(): number;
+	GetMax2D(): number;
+	GetMin2D(): number;
+	GetRotated2D(AngleDeg: number): Vector2D;
+	IsNearlyZero2D(Tolerance: number): boolean;
+	IsZero2D(): boolean;
+	MakeBox2D(Max: Vector2D): Box2D;
+	Multiply_Vector2DFloat(B: number): Vector2D;
+	Multiply_Vector2DVector2D(B: Vector2D): Vector2D;
+	Negated2D(): Vector2D;
+	Normal2D(): Vector2D;
+	Normalize2D(Tolerance?: number): {A: Vector2D};
+	NormalSafe2D(Tolerance: number): Vector2D;
+	NotEqual_Vector2DVector2D(B: Vector2D,ErrorTolerance: number): boolean;
+	NotEqualExactly_Vector2DVector2D(B: Vector2D): boolean;
+	Set2D(X?: number,Y?: number): {A: Vector2D};
+	Spherical2DToUnitCartesian(): Vector;
+	Subtract_Vector2DFloat(B: number): Vector2D;
+	Subtract_Vector2DVector2D(B: Vector2D): Vector2D;
+	ToDirectionAndLength2D(OutDir?: Vector2D,OutLength?: number): {OutDir: Vector2D, OutLength: number};
+	ToRounded2D(): Vector2D;
+	ToSign2D(): Vector2D;
+	Vector2DInterpTo(Target: Vector2D,DeltaTime: number,InterpSpeed: number): Vector2D;
+	Vector2DInterpTo_Constant(Target: Vector2D,DeltaTime: number,InterpSpeed: number): Vector2D;
+	VSize2D(): number;
+	VSize2DSquared(): number;
+	SetSpectatorScreenModeTexturePlusEyeLayout(EyeRectMax: Vector2D,TextureRectMin: Vector2D,TextureRectMax: Vector2D,bDrawEyeFirst: boolean,bClearBlack: boolean,bUseAlpha: boolean): void;
+	LineTraceTrackedObjects(bTestFeaturePoints: boolean,bTestGroundPlane: boolean,bTestPlaneExtents: boolean,bTestPlaneBoundaryPolygon: boolean): ARTraceResult[];
+	static Conv_Vector2dToText(InVec: Vector2D): string;
+	static Conv_Vector2dToString(InVec: Vector2D): string;
+	static Add_Vector2DFloat(A: Vector2D,B: number): Vector2D;
+	static Add_Vector2DVector2D(A: Vector2D,B: Vector2D): Vector2D;
+	static BreakVector2D(InVec: Vector2D,X?: number,Y?: number): {X: number, Y: number};
+	static ClampAxes2D(A: Vector2D,MinAxisVal: number,MaxAxisVal: number): Vector2D;
+	static Conv_Vector2DToIntPoint(InVector2D: Vector2D): IntPoint;
+	static Conv_Vector2DToVector(InVector2D: Vector2D,Z: number): Vector;
+	static CrossProduct2D(A: Vector2D,B: Vector2D): number;
+	static Distance2D(v1: Vector2D,v2: Vector2D): number;
+	static DistanceSquared2D(v1: Vector2D,v2: Vector2D): number;
+	static Divide_Vector2DFloat(A: Vector2D,B: number): Vector2D;
+	static Divide_Vector2DVector2D(A: Vector2D,B: Vector2D): Vector2D;
+	static DotProduct2D(A: Vector2D,B: Vector2D): number;
+	static EqualEqual_Vector2DVector2D(A: Vector2D,B: Vector2D,ErrorTolerance: number): boolean;
+	static EqualExactly_Vector2DVector2D(A: Vector2D,B: Vector2D): boolean;
+	static GetAbs2D(A: Vector2D): Vector2D;
+	static GetAbsMax2D(A: Vector2D): number;
+	static GetMax2D(A: Vector2D): number;
+	static GetMin2D(A: Vector2D): number;
+	static GetRotated2D(A: Vector2D,AngleDeg: number): Vector2D;
+	static IsNearlyZero2D(A: Vector2D,Tolerance: number): boolean;
+	static IsZero2D(A: Vector2D): boolean;
+	static MakeBox2D(Min: Vector2D,Max: Vector2D): Box2D;
+	static Multiply_Vector2DFloat(A: Vector2D,B: number): Vector2D;
+	static Multiply_Vector2DVector2D(A: Vector2D,B: Vector2D): Vector2D;
+	static Negated2D(A: Vector2D): Vector2D;
+	static Normal2D(A: Vector2D): Vector2D;
+	static Normalize2D(A?: Vector2D,Tolerance?: number): {A: Vector2D};
+	static NormalSafe2D(A: Vector2D,Tolerance: number): Vector2D;
+	static NotEqual_Vector2DVector2D(A: Vector2D,B: Vector2D,ErrorTolerance: number): boolean;
+	static NotEqualExactly_Vector2DVector2D(A: Vector2D,B: Vector2D): boolean;
+	static Set2D(A?: Vector2D,X?: number,Y?: number): {A: Vector2D};
+	static Spherical2DToUnitCartesian(A: Vector2D): Vector;
+	static Subtract_Vector2DFloat(A: Vector2D,B: number): Vector2D;
+	static Subtract_Vector2DVector2D(A: Vector2D,B: Vector2D): Vector2D;
+	static ToDirectionAndLength2D(A: Vector2D,OutDir?: Vector2D,OutLength?: number): {OutDir: Vector2D, OutLength: number};
+	static ToRounded2D(A: Vector2D): Vector2D;
+	static ToSign2D(A: Vector2D): Vector2D;
+	static Vector2DInterpTo(Current: Vector2D,Target: Vector2D,DeltaTime: number,InterpSpeed: number): Vector2D;
+	static Vector2DInterpTo_Constant(Current: Vector2D,Target: Vector2D,DeltaTime: number,InterpSpeed: number): Vector2D;
+	static VSize2D(A: Vector2D): number;
+	static VSize2DSquared(A: Vector2D): number;
+	static SetSpectatorScreenModeTexturePlusEyeLayout(EyeRectMin: Vector2D,EyeRectMax: Vector2D,TextureRectMin: Vector2D,TextureRectMax: Vector2D,bDrawEyeFirst: boolean,bClearBlack: boolean,bUseAlpha: boolean): void;
+	static LineTraceTrackedObjects(ScreenCoord: Vector2D,bTestFeaturePoints: boolean,bTestGroundPlane: boolean,bTestPlaneExtents: boolean,bTestPlaneBoundaryPolygon: boolean): ARTraceResult[];
+	static GenerateDynamicImageResource(InDynamicBrushName: string): Vector2D;
+	static MakeVector2D(X: number,Y: number): Vector2D;
+	static Vector2D_One(): Vector2D;
+	static Vector2D_Unit45Deg(): Vector2D;
+	static Vector2D_Zero(): Vector2D;
+	static NextSobolCell2D(index: number,NumCells: number,PreviousValue: Vector2D): Vector2D;
+	static RandomSobolCell2D(index: number,NumCells: number,Cell: Vector2D,Seed: Vector2D): Vector2D;
+	static GetMousePositionOnPlatform(): Vector2D;
+	static GetPlayAreaBounds(Origin: EHMDTrackingOrigin): Vector2D;
+}
+
+declare type EBoundaryType = 'Boundary_Outer' | 'Boundary_PlayArea' | 'Boundary_MAX';
+declare var EBoundaryType : { Boundary_Outer:'Boundary_Outer',Boundary_PlayArea:'Boundary_PlayArea',Boundary_MAX:'Boundary_MAX', };
+declare type ETrackedDeviceType = 'None' | 'HMD' | 'LTouch' | 'RTouch' | 'Touch' | 'DeviceObjectZero' | 'All' | 'ETrackedDeviceType_MAX';
+declare var ETrackedDeviceType : { None:'None',HMD:'HMD',LTouch:'LTouch',RTouch:'RTouch',Touch:'Touch',DeviceObjectZero:'DeviceObjectZero',All:'All',ETrackedDeviceType_MAX:'ETrackedDeviceType_MAX', };
+declare class GuardianTestResult { 
+	IsTriggering: boolean;
+	DeviceType: ETrackedDeviceType;
+	ClosestDistance: number;
+	ClosestPoint: Vector;
+	ClosestPointNormal: Vector;
+	clone() : GuardianTestResult;
+	static C(Other: UObject | any): GuardianTestResult;
+	static GetNodeGuardianIntersection(DeviceType: ETrackedDeviceType,BoundaryType: EBoundaryType): GuardianTestResult;
+}
+
+declare class MagicLeapRaycastQueryParams { 
+	Position: Vector;
+	Direction: Vector;
+	UpVector: Vector;
+	Width: number;
+	Height: number;
+	HorizontalFovDegrees: number;
+	CollideWithUnobserved: boolean;
+	UserData: number;
+	clone() : MagicLeapRaycastQueryParams;
+	static C(Other: UObject | any): MagicLeapRaycastQueryParams;
+}
+
+declare class IntVector { 
+	X: number;
+	Y: number;
+	Z: number;
+	clone() : IntVector;
+	static C(Other: UObject | any): IntVector;
+	Conv_IntVectorToString(): string;
+	Conv_IntVectorToVector(): Vector;
+	static Conv_IntVectorToString(InIntVec: IntVector): string;
+	static Conv_IntVectorToVector(InIntVector: IntVector): Vector;
+	static Conv_IntToIntVector(inInt: number): IntVector;
+}
+
+declare class VectorSpringState { 
+	clone() : VectorSpringState;
+	static C(Other: UObject | any): VectorSpringState;
+	ResetVectorSpringState(): {SpringState: VectorSpringState};
+	static ResetVectorSpringState(SpringState?: VectorSpringState): {SpringState: VectorSpringState};
+}
+
+declare class Vector { 
+	X: number;
+	Y: number;
+	Z: number;
+	clone() : Vector;
+	static C(Other: UObject | any): Vector;
+	GenerateBoxMesh(Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
+	SegmentIntersection2D(SegmentEndA: Vector,SegmentStartB: Vector,SegmentEndB: Vector,IntersectionPoint?: Vector): {IntersectionPoint: Vector, $: boolean};
+	GetClosestARPin(PinId?: Guid): {PinId: Guid, $: EMagicLeapPassableWorldError};
+	GetSelectionBounds(BoxExtent?: Vector,SphereRadius?: number): {Origin: Vector, BoxExtent: Vector, SphereRadius: number};
+	GetPointGuardianIntersection(BoundaryType: EBoundaryType): GuardianTestResult;
+	GetRawSensorData(LinearAcceleration?: Vector,AngularVelocity?: Vector,LinearVelocity?: Vector,TimeInSeconds?: number,DeviceType?: ETrackedDeviceType): {AngularAcceleration: Vector, LinearAcceleration: Vector, AngularVelocity: Vector, LinearVelocity: Vector, TimeInSeconds: number};
+	SetPositionScale3D(): void;
+	MakeRaycastQueryParams(Direction: Vector,UpVector: Vector,Width: number,Height: number,HorizontalFovDegrees: number,CollideWithUnobserved: boolean,UserData: number): MagicLeapRaycastQueryParams;
+	SetBasePosition(): void;
+	IsValidAIDirection(): boolean;
+	IsValidAILocation(): boolean;
+	Conv_VectorToText(): string;
+	Conv_VectorToString(): string;
+	Add_VectorFloat(B: number): Vector;
+	Add_VectorInt(B: number): Vector;
+	Add_VectorVector(B: Vector): Vector;
+	BreakVector(X?: number,Y?: number,Z?: number): {X: number, Y: number, Z: number};
+	ClampVectorSize(Min: number,Max: number): Vector;
+	Conv_VectorToLinearColor(): LinearColor;
+	Conv_VectorToQuaternion(): Quat;
+	Conv_VectorToRotator(): Rotator;
+	Conv_VectorToTransform(): Transform;
+	Conv_VectorToVector2D(): Vector2D;
+	Cross_VectorVector(B: Vector): Vector;
+	Divide_VectorFloat(B: number): Vector;
+	Divide_VectorInt(B: number): Vector;
+	Divide_VectorVector(B: Vector): Vector;
+	Dot_VectorVector(B: Vector): number;
+	DynamicWeightedMovingAverage_FVector(PreviousSample: Vector,MaxDistance: number,MinWeight: number,MaxWeight: number): Vector;
+	EqualEqual_VectorVector(B: Vector,ErrorTolerance: number): boolean;
+	EqualExactly_VectorVector(B: Vector): boolean;
+	FindClosestPointOnLine(LineOrigin: Vector,LineDirection: Vector): Vector;
+	FindClosestPointOnSegment(SegmentStart: Vector,SegmentEnd: Vector): Vector;
+	FindLookAtRotation(Target: Vector): Rotator;
+	FindNearestPointsOnLineSegments(Segment1End: Vector,Segment2Start: Vector,Segment2End: Vector,Segment1Point?: Vector,Segment2Point?: Vector): {Segment1Point: Vector, Segment2Point: Vector};
+	FTruncVector(): IntVector;
+	GetAzimuthAndElevation(ReferenceFrame: Transform,Azimuth?: number,Elevation?: number): {Azimuth: number, Elevation: number};
+	GetDirectionUnitVector(To: Vector): Vector;
+	GetMaxElement(): number;
+	GetMinElement(): number;
+	GetPointDistanceToLine(LineOrigin: Vector,LineDirection: Vector): number;
+	GetPointDistanceToSegment(SegmentStart: Vector,SegmentEnd: Vector): number;
+	GetReflectionVector(SurfaceNormal: Vector): Vector;
+	GetSlopeDegreeAngles(FloorNormal: Vector,UpVector: Vector,OutSlopePitchDegreeAngle?: number,OutSlopeRollDegreeAngle?: number): {OutSlopePitchDegreeAngle: number, OutSlopeRollDegreeAngle: number};
+	GetYawPitchFromVector(Yaw?: number,Pitch?: number): {Yaw: number, Pitch: number};
+	GreaterGreater_VectorRotator(B: Rotator): Vector;
+	IsPointInBox(BoxOrigin: Vector,BoxExtent: Vector): boolean;
+	IsPointInBoxWithTransform(BoxWorldTransform: Transform,BoxExtent: Vector): boolean;
+	LessLess_VectorRotator(B: Rotator): Vector;
+	LinePlaneIntersection(LineEnd: Vector,APlane: Plane,T?: number,Intersection?: Vector): {T: number, Intersection: Vector, $: boolean};
+	LinePlaneIntersection_OriginNormal(LineEnd: Vector,PlaneOrigin: Vector,PlaneNormal: Vector,T?: number,Intersection?: Vector): {T: number, Intersection: Vector, $: boolean};
+	MakeBox(Max: Vector): Box;
+	MakePlaneFromPointAndNormal(Normal: Vector): Plane;
+	MakeRotationFromAxes(Right: Vector,Up: Vector): Rotator;
+	MakeRotFromX(): Rotator;
+	MakeRotFromXY(Y: Vector): Rotator;
+	MakeRotFromXZ(Z: Vector): Rotator;
+	MakeRotFromY(): Rotator;
+	MakeRotFromYX(X: Vector): Rotator;
+	MakeRotFromYZ(Z: Vector): Rotator;
+	MakeRotFromZ(): Rotator;
+	MakeRotFromZX(X: Vector): Rotator;
+	MakeRotFromZY(Y: Vector): Rotator;
+	MakeTransform(Rotation: Rotator,Scale: Vector): Transform;
+	MirrorVectorByNormal(InNormal: Vector): Vector;
+	Multiply_VectorFloat(B: number): Vector;
+	Multiply_VectorInt(B: number): Vector;
+	Multiply_VectorVector(B: Vector): Vector;
+	NegateVector(): Vector;
+	Normal(Tolerance: number): Vector;
+	NotEqual_VectorVector(B: Vector,ErrorTolerance: number): boolean;
+	NotEqualExactly_VectorVector(B: Vector): boolean;
+	ProjectPointOnToPlane(PlaneBase: Vector,PlaneNormal: Vector): Vector;
+	ProjectVectorOnToPlane(PlaneNormal: Vector): Vector;
+	ProjectVectorOnToVector(Target: Vector): Vector;
+	Quat_MakeFromEuler(): Quat;
+	RandomPointInBoundingBox(BoxExtent: Vector): Vector;
+	RandomUnitVectorInConeInDegrees(ConeHalfAngleInDegrees: number): Vector;
+	RandomUnitVectorInConeInDegreesFromStream(ConeHalfAngleInDegrees: number,Stream: RandomStream): Vector;
+	RandomUnitVectorInConeInRadians(ConeHalfAngleInRadians: number): Vector;
+	RandomUnitVectorInConeInRadiansFromStream(ConeHalfAngleInRadians: number,Stream: RandomStream): Vector;
+	RandomUnitVectorInEllipticalConeInDegrees(MaxYawInDegrees: number,MaxPitchInDegrees: number): Vector;
+	RandomUnitVectorInEllipticalConeInDegreesFromStream(MaxYawInDegrees: number,MaxPitchInDegrees: number,Stream: RandomStream): Vector;
+	RandomUnitVectorInEllipticalConeInRadians(MaxYawInRadians: number,MaxPitchInRadians: number): Vector;
+	RandomUnitVectorInEllipticalConeInRadiansFromStream(MaxYawInRadians: number,MaxPitchInRadians: number,Stream: RandomStream): Vector;
+	RotateAngleAxis(AngleDeg: number,Axis: Vector): Vector;
+	RotatorFromAxisAndAngle(Angle: number): Rotator;
+	SelectVector(B: Vector,bPickA: boolean): Vector;
+	Subtract_VectorFloat(B: number): Vector;
+	Subtract_VectorInt(B: number): Vector;
+	Subtract_VectorVector(B: Vector): Vector;
+	VEase(B: Vector,Alpha: number,EasingFunc: EEasingFunc,BlendExp: number,Steps: number): Vector;
+	Vector_AddBounded(InAddVect?: Vector,InRadius?: number): {A: Vector};
+	Vector_Assign(InVector?: Vector): {A: Vector};
+	Vector_BoundedToBox(InBoxMin: Vector,InBoxMax: Vector): Vector;
+	Vector_BoundedToCube(InRadius: number): Vector;
+	Vector_ClampSize2D(Min: number,Max: number): Vector;
+	Vector_ClampSizeMax(Max: number): Vector;
+	Vector_ClampSizeMax2D(Max: number): Vector;
+	Vector_ComponentMax(B: Vector): Vector;
+	Vector_ComponentMin(B: Vector): Vector;
+	Vector_CosineAngle2D(B: Vector): number;
+	Vector_Distance(v2: Vector): number;
+	Vector_Distance2D(v2: Vector): number;
+	Vector_Distance2DSquared(v2: Vector): number;
+	Vector_DistanceSquared(v2: Vector): number;
+	Vector_GetAbs(): Vector;
+	Vector_GetAbsMax(): number;
+	Vector_GetAbsMin(): number;
+	Vector_GetProjection(): Vector;
+	Vector_GetSignVector(): Vector;
+	Vector_HeadingAngle(): number;
+	Vector_IsNAN(): boolean;
+	Vector_IsNearlyZero(Tolerance: number): boolean;
+	Vector_IsNormal(): boolean;
+	Vector_IsUniform(Tolerance: number): boolean;
+	Vector_IsUnit(SquaredLenthTolerance: number): boolean;
+	Vector_IsZero(): boolean;
+	Vector_MirrorByPlane(InPlane: Plane): Vector;
+	Vector_Normal2D(Tolerance: number): Vector;
+	Vector_Normalize(Tolerance?: number): {A: Vector};
+	Vector_NormalUnsafe(): Vector;
+	Vector_ProjectOnToNormal(InNormal: Vector): Vector;
+	Vector_Reciprocal(): Vector;
+	Vector_Set(X?: number,Y?: number,Z?: number): {A: Vector};
+	Vector_SnappedToGrid(InGridSize: number): Vector;
+	Vector_ToDegrees(): Vector;
+	Vector_ToRadians(): Vector;
+	Vector_UnitCartesianToSpherical(): Vector2D;
+	Vector_UnwindEuler(): {A: Vector};
+	VectorSpringInterp(Target: Vector,SpringState?: VectorSpringState,Stiffness?: number,CriticalDampingFactor?: number,DeltaTime?: number,Mass?: number): {SpringState: VectorSpringState, $: Vector};
+	VInterpTo(Target: Vector,DeltaTime: number,InterpSpeed: number): Vector;
+	VInterpTo_Constant(Target: Vector,DeltaTime: number,InterpSpeed: number): Vector;
+	VLerp(B: Vector,Alpha: number): Vector;
+	VSize(): number;
+	VSizeSquared(): number;
+	VSizeXY(): number;
+	VSizeXYSquared(): number;
+	WeightedMovingAverage_FVector(PreviousSample: Vector,Weight: number): Vector;
+	FindNearestActor(ActorsToCheck: Actor[],Distance?: number): {Distance: number, $: Actor};
+	K2_TwoBoneIK(JointPos: Vector,EndPos: Vector,JointTarget: Vector,Effector: Vector,OutJointPos?: Vector,OutEndPos?: Vector,bAllowStretching?: boolean,StartStretchRatio?: number,MaxStretchScale?: number): {OutJointPos: Vector, OutEndPos: Vector};
+	GetPositionalTrackingCameraParameters(CameraRotation?: Rotator,HFOV?: number,VFOV?: number,CameraDistance?: number,NearPlane?: number,FarPlane?: number): {CameraOrigin: Vector, CameraRotation: Rotator, HFOV: number, VFOV: number, CameraDistance: number, NearPlane: number, FarPlane: number};
+	GetTrackingSensorParameters(Rotation?: Rotator,LeftFOV?: number,RightFOV?: number,TopFOV?: number,BottomFOV?: number,Distance?: number,NearPlane?: number,FarPlane?: number,IsActive?: boolean,index?: number): {Origin: Vector, Rotation: Rotator, LeftFOV: number, RightFOV: number, TopFOV: number, BottomFOV: number, Distance: number, NearPlane: number, FarPlane: number, IsActive: boolean};
+	AddManualEnvironmentCaptureProbe(Extent: Vector): boolean;
+	GetObjectClassificationAtLocation(OutClassification?: EARObjectClassification,OutClassificationLocation?: Vector,MaxLocationDiff?: number): {OutClassification: EARObjectClassification, OutClassificationLocation: Vector, $: boolean};
+	LineTraceTrackedObjects3D(End: Vector,bTestFeaturePoints: boolean,bTestGroundPlane: boolean,bTestPlaneExtents: boolean,bTestPlaneBoundaryPolygon: boolean): ARTraceResult[];
+	SetARWorldOriginLocationAndRotation(OriginRotation: Rotator,bIsTransformInWorldSpace: boolean,bMaintainUpDirection: boolean): void;
+	static GenerateBoxMesh(BoxRadius: Vector,Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
+	static SegmentIntersection2D(SegmentStartA: Vector,SegmentEndA: Vector,SegmentStartB: Vector,SegmentEndB: Vector,IntersectionPoint?: Vector): {IntersectionPoint: Vector, $: boolean};
+	static GetClosestARPin(SearchPoint: Vector,PinId?: Guid): {PinId: Guid, $: EMagicLeapPassableWorldError};
+	static GetSelectionBounds(Origin?: Vector,BoxExtent?: Vector,SphereRadius?: number): {Origin: Vector, BoxExtent: Vector, SphereRadius: number};
+	static GetPointGuardianIntersection(Point: Vector,BoundaryType: EBoundaryType): GuardianTestResult;
+	static GetRawSensorData(AngularAcceleration?: Vector,LinearAcceleration?: Vector,AngularVelocity?: Vector,LinearVelocity?: Vector,TimeInSeconds?: number,DeviceType?: ETrackedDeviceType): {AngularAcceleration: Vector, LinearAcceleration: Vector, AngularVelocity: Vector, LinearVelocity: Vector, TimeInSeconds: number};
+	static SetPositionScale3D(PosScale3D: Vector): void;
+	static MakeRaycastQueryParams(Position: Vector,Direction: Vector,UpVector: Vector,Width: number,Height: number,HorizontalFovDegrees: number,CollideWithUnobserved: boolean,UserData: number): MagicLeapRaycastQueryParams;
+	static SetBasePosition(InBasePosition: Vector): void;
+	static IsValidAIDirection(DirectionVector: Vector): boolean;
+	static IsValidAILocation(Location: Vector): boolean;
+	static Conv_VectorToText(InVec: Vector): string;
+	static Conv_VectorToString(InVec: Vector): string;
+	static Add_VectorFloat(A: Vector,B: number): Vector;
+	static Add_VectorInt(A: Vector,B: number): Vector;
+	static Add_VectorVector(A: Vector,B: Vector): Vector;
+	static BreakVector(InVec: Vector,X?: number,Y?: number,Z?: number): {X: number, Y: number, Z: number};
+	static ClampVectorSize(A: Vector,Min: number,Max: number): Vector;
+	static Conv_VectorToLinearColor(InVec: Vector): LinearColor;
+	static Conv_VectorToQuaternion(InVec: Vector): Quat;
+	static Conv_VectorToRotator(InVec: Vector): Rotator;
+	static Conv_VectorToTransform(InLocation: Vector): Transform;
+	static Conv_VectorToVector2D(InVector: Vector): Vector2D;
+	static Cross_VectorVector(A: Vector,B: Vector): Vector;
+	static Divide_VectorFloat(A: Vector,B: number): Vector;
+	static Divide_VectorInt(A: Vector,B: number): Vector;
+	static Divide_VectorVector(A: Vector,B: Vector): Vector;
+	static Dot_VectorVector(A: Vector,B: Vector): number;
+	static DynamicWeightedMovingAverage_FVector(CurrentSample: Vector,PreviousSample: Vector,MaxDistance: number,MinWeight: number,MaxWeight: number): Vector;
+	static EqualEqual_VectorVector(A: Vector,B: Vector,ErrorTolerance: number): boolean;
+	static EqualExactly_VectorVector(A: Vector,B: Vector): boolean;
+	static FindClosestPointOnLine(Point: Vector,LineOrigin: Vector,LineDirection: Vector): Vector;
+	static FindClosestPointOnSegment(Point: Vector,SegmentStart: Vector,SegmentEnd: Vector): Vector;
+	static FindLookAtRotation(Start: Vector,Target: Vector): Rotator;
+	static FindNearestPointsOnLineSegments(Segment1Start: Vector,Segment1End: Vector,Segment2Start: Vector,Segment2End: Vector,Segment1Point?: Vector,Segment2Point?: Vector): {Segment1Point: Vector, Segment2Point: Vector};
+	static FTruncVector(InVector: Vector): IntVector;
+	static GetAzimuthAndElevation(InDirection: Vector,ReferenceFrame: Transform,Azimuth?: number,Elevation?: number): {Azimuth: number, Elevation: number};
+	static GetDirectionUnitVector(From: Vector,To: Vector): Vector;
+	static GetMaxElement(A: Vector): number;
+	static GetMinElement(A: Vector): number;
+	static GetPointDistanceToLine(Point: Vector,LineOrigin: Vector,LineDirection: Vector): number;
+	static GetPointDistanceToSegment(Point: Vector,SegmentStart: Vector,SegmentEnd: Vector): number;
+	static GetReflectionVector(Direction: Vector,SurfaceNormal: Vector): Vector;
+	static GetSlopeDegreeAngles(MyRightYAxis: Vector,FloorNormal: Vector,UpVector: Vector,OutSlopePitchDegreeAngle?: number,OutSlopeRollDegreeAngle?: number): {OutSlopePitchDegreeAngle: number, OutSlopeRollDegreeAngle: number};
+	static GetYawPitchFromVector(InVec: Vector,Yaw?: number,Pitch?: number): {Yaw: number, Pitch: number};
+	static GreaterGreater_VectorRotator(A: Vector,B: Rotator): Vector;
+	static IsPointInBox(Point: Vector,BoxOrigin: Vector,BoxExtent: Vector): boolean;
+	static IsPointInBoxWithTransform(Point: Vector,BoxWorldTransform: Transform,BoxExtent: Vector): boolean;
+	static LessLess_VectorRotator(A: Vector,B: Rotator): Vector;
+	static LinePlaneIntersection(LineStart: Vector,LineEnd: Vector,APlane: Plane,T?: number,Intersection?: Vector): {T: number, Intersection: Vector, $: boolean};
+	static LinePlaneIntersection_OriginNormal(LineStart: Vector,LineEnd: Vector,PlaneOrigin: Vector,PlaneNormal: Vector,T?: number,Intersection?: Vector): {T: number, Intersection: Vector, $: boolean};
+	static MakeBox(Min: Vector,Max: Vector): Box;
+	static MakePlaneFromPointAndNormal(Point: Vector,Normal: Vector): Plane;
+	static MakeRotationFromAxes(Forward: Vector,Right: Vector,Up: Vector): Rotator;
+	static MakeRotFromX(X: Vector): Rotator;
+	static MakeRotFromXY(X: Vector,Y: Vector): Rotator;
+	static MakeRotFromXZ(X: Vector,Z: Vector): Rotator;
+	static MakeRotFromY(Y: Vector): Rotator;
+	static MakeRotFromYX(Y: Vector,X: Vector): Rotator;
+	static MakeRotFromYZ(Y: Vector,Z: Vector): Rotator;
+	static MakeRotFromZ(Z: Vector): Rotator;
+	static MakeRotFromZX(Z: Vector,X: Vector): Rotator;
+	static MakeRotFromZY(Z: Vector,Y: Vector): Rotator;
+	static MakeTransform(Location: Vector,Rotation: Rotator,Scale: Vector): Transform;
+	static MirrorVectorByNormal(InVect: Vector,InNormal: Vector): Vector;
+	static Multiply_VectorFloat(A: Vector,B: number): Vector;
+	static Multiply_VectorInt(A: Vector,B: number): Vector;
+	static Multiply_VectorVector(A: Vector,B: Vector): Vector;
+	static NegateVector(A: Vector): Vector;
+	static Normal(A: Vector,Tolerance: number): Vector;
+	static NotEqual_VectorVector(A: Vector,B: Vector,ErrorTolerance: number): boolean;
+	static NotEqualExactly_VectorVector(A: Vector,B: Vector): boolean;
+	static ProjectPointOnToPlane(Point: Vector,PlaneBase: Vector,PlaneNormal: Vector): Vector;
+	static ProjectVectorOnToPlane(V: Vector,PlaneNormal: Vector): Vector;
+	static ProjectVectorOnToVector(V: Vector,Target: Vector): Vector;
+	static Quat_MakeFromEuler(Euler: Vector): Quat;
+	static RandomPointInBoundingBox(Origin: Vector,BoxExtent: Vector): Vector;
+	static RandomUnitVectorInConeInDegrees(ConeDir: Vector,ConeHalfAngleInDegrees: number): Vector;
+	static RandomUnitVectorInConeInDegreesFromStream(ConeDir: Vector,ConeHalfAngleInDegrees: number,Stream: RandomStream): Vector;
+	static RandomUnitVectorInConeInRadians(ConeDir: Vector,ConeHalfAngleInRadians: number): Vector;
+	static RandomUnitVectorInConeInRadiansFromStream(ConeDir: Vector,ConeHalfAngleInRadians: number,Stream: RandomStream): Vector;
+	static RandomUnitVectorInEllipticalConeInDegrees(ConeDir: Vector,MaxYawInDegrees: number,MaxPitchInDegrees: number): Vector;
+	static RandomUnitVectorInEllipticalConeInDegreesFromStream(ConeDir: Vector,MaxYawInDegrees: number,MaxPitchInDegrees: number,Stream: RandomStream): Vector;
+	static RandomUnitVectorInEllipticalConeInRadians(ConeDir: Vector,MaxYawInRadians: number,MaxPitchInRadians: number): Vector;
+	static RandomUnitVectorInEllipticalConeInRadiansFromStream(ConeDir: Vector,MaxYawInRadians: number,MaxPitchInRadians: number,Stream: RandomStream): Vector;
+	static RotateAngleAxis(InVect: Vector,AngleDeg: number,Axis: Vector): Vector;
+	static RotatorFromAxisAndAngle(Axis: Vector,Angle: number): Rotator;
+	static SelectVector(A: Vector,B: Vector,bPickA: boolean): Vector;
+	static Subtract_VectorFloat(A: Vector,B: number): Vector;
+	static Subtract_VectorInt(A: Vector,B: number): Vector;
+	static Subtract_VectorVector(A: Vector,B: Vector): Vector;
+	static VEase(A: Vector,B: Vector,Alpha: number,EasingFunc: EEasingFunc,BlendExp: number,Steps: number): Vector;
+	static Vector_AddBounded(A?: Vector,InAddVect?: Vector,InRadius?: number): {A: Vector};
+	static Vector_Assign(A?: Vector,InVector?: Vector): {A: Vector};
+	static Vector_BoundedToBox(InVect: Vector,InBoxMin: Vector,InBoxMax: Vector): Vector;
+	static Vector_BoundedToCube(InVect: Vector,InRadius: number): Vector;
+	static Vector_ClampSize2D(A: Vector,Min: number,Max: number): Vector;
+	static Vector_ClampSizeMax(A: Vector,Max: number): Vector;
+	static Vector_ClampSizeMax2D(A: Vector,Max: number): Vector;
+	static Vector_ComponentMax(A: Vector,B: Vector): Vector;
+	static Vector_ComponentMin(A: Vector,B: Vector): Vector;
+	static Vector_CosineAngle2D(A: Vector,B: Vector): number;
+	static Vector_Distance(v1: Vector,v2: Vector): number;
+	static Vector_Distance2D(v1: Vector,v2: Vector): number;
+	static Vector_Distance2DSquared(v1: Vector,v2: Vector): number;
+	static Vector_DistanceSquared(v1: Vector,v2: Vector): number;
+	static Vector_GetAbs(A: Vector): Vector;
+	static Vector_GetAbsMax(A: Vector): number;
+	static Vector_GetAbsMin(A: Vector): number;
+	static Vector_GetProjection(A: Vector): Vector;
+	static Vector_GetSignVector(A: Vector): Vector;
+	static Vector_HeadingAngle(A: Vector): number;
+	static Vector_IsNAN(A: Vector): boolean;
+	static Vector_IsNearlyZero(A: Vector,Tolerance: number): boolean;
+	static Vector_IsNormal(A: Vector): boolean;
+	static Vector_IsUniform(A: Vector,Tolerance: number): boolean;
+	static Vector_IsUnit(A: Vector,SquaredLenthTolerance: number): boolean;
+	static Vector_IsZero(A: Vector): boolean;
+	static Vector_MirrorByPlane(A: Vector,InPlane: Plane): Vector;
+	static Vector_Normal2D(A: Vector,Tolerance: number): Vector;
+	static Vector_Normalize(A?: Vector,Tolerance?: number): {A: Vector};
+	static Vector_NormalUnsafe(A: Vector): Vector;
+	static Vector_ProjectOnToNormal(V: Vector,InNormal: Vector): Vector;
+	static Vector_Reciprocal(A: Vector): Vector;
+	static Vector_Set(A?: Vector,X?: number,Y?: number,Z?: number): {A: Vector};
+	static Vector_SnappedToGrid(InVect: Vector,InGridSize: number): Vector;
+	static Vector_ToDegrees(A: Vector): Vector;
+	static Vector_ToRadians(A: Vector): Vector;
+	static Vector_UnitCartesianToSpherical(A: Vector): Vector2D;
+	static Vector_UnwindEuler(A?: Vector): {A: Vector};
+	static VectorSpringInterp(Current: Vector,Target: Vector,SpringState?: VectorSpringState,Stiffness?: number,CriticalDampingFactor?: number,DeltaTime?: number,Mass?: number): {SpringState: VectorSpringState, $: Vector};
+	static VInterpTo(Current: Vector,Target: Vector,DeltaTime: number,InterpSpeed: number): Vector;
+	static VInterpTo_Constant(Current: Vector,Target: Vector,DeltaTime: number,InterpSpeed: number): Vector;
+	static VLerp(A: Vector,B: Vector,Alpha: number): Vector;
+	static VSize(A: Vector): number;
+	static VSizeSquared(A: Vector): number;
+	static VSizeXY(A: Vector): number;
+	static VSizeXYSquared(A: Vector): number;
+	static WeightedMovingAverage_FVector(CurrentSample: Vector,PreviousSample: Vector,Weight: number): Vector;
+	static FindNearestActor(Origin: Vector,ActorsToCheck: Actor[],Distance?: number): {Distance: number, $: Actor};
+	static K2_TwoBoneIK(RootPos: Vector,JointPos: Vector,EndPos: Vector,JointTarget: Vector,Effector: Vector,OutJointPos?: Vector,OutEndPos?: Vector,bAllowStretching?: boolean,StartStretchRatio?: number,MaxStretchScale?: number): {OutJointPos: Vector, OutEndPos: Vector};
+	static GetPositionalTrackingCameraParameters(CameraOrigin?: Vector,CameraRotation?: Rotator,HFOV?: number,VFOV?: number,CameraDistance?: number,NearPlane?: number,FarPlane?: number): {CameraOrigin: Vector, CameraRotation: Rotator, HFOV: number, VFOV: number, CameraDistance: number, NearPlane: number, FarPlane: number};
+	static GetTrackingSensorParameters(Origin?: Vector,Rotation?: Rotator,LeftFOV?: number,RightFOV?: number,TopFOV?: number,BottomFOV?: number,Distance?: number,NearPlane?: number,FarPlane?: number,IsActive?: boolean,index?: number): {Origin: Vector, Rotation: Rotator, LeftFOV: number, RightFOV: number, TopFOV: number, BottomFOV: number, Distance: number, NearPlane: number, FarPlane: number, IsActive: boolean};
+	static AddManualEnvironmentCaptureProbe(Location: Vector,Extent: Vector): boolean;
+	static GetObjectClassificationAtLocation(InWorldLocation: Vector,OutClassification?: EARObjectClassification,OutClassificationLocation?: Vector,MaxLocationDiff?: number): {OutClassification: EARObjectClassification, OutClassificationLocation: Vector, $: boolean};
+	static LineTraceTrackedObjects3D(Start: Vector,End: Vector,bTestFeaturePoints: boolean,bTestGroundPlane: boolean,bTestPlaneExtents: boolean,bTestPlaneBoundaryPolygon: boolean): ARTraceResult[];
+	static SetARWorldOriginLocationAndRotation(OriginLocation: Vector,OriginRotation: Rotator,bIsTransformInWorldSpace: boolean,bMaintainUpDirection: boolean): void;
+	static GetGuardianDimensions(BoundaryType: EBoundaryType): Vector;
+	static Conv_FloatToVector(InFloat: number): Vector;
+	static CreateVectorFromYawPitch(Yaw: number,Pitch: number,Length: number): Vector;
+	static GetVectorArrayAverage(Vectors: Vector[]): Vector;
+	static MakeVector(X: number,Y: number,Z: number): Vector;
+	static RandomUnitVector(): Vector;
+	static Vector_Backward(): Vector;
+	static Vector_Down(): Vector;
+	static Vector_Forward(): Vector;
+	static Vector_Left(): Vector;
+	static Vector_One(): Vector;
+	static Vector_Right(): Vector;
+	static Vector_Up(): Vector;
+	static Vector_Zero(): Vector;
+	static NextSobolCell3D(index: number,NumCells: number,PreviousValue: Vector): Vector;
+	static RandomSobolCell3D(index: number,NumCells: number,Cell: Vector,Seed: Vector): Vector;
+	static GetActorArrayAverageLocation(Actors: Actor[]): Vector;
+	static K2_MakePerlinNoiseVectorAndRemap(X: number,Y: number,Z: number,RangeOutMinX: number,RangeOutMaxX: number,RangeOutMinY: number,RangeOutMaxY: number,RangeOutMinZ: number,RangeOutMaxZ: number): Vector;
+}
+
+declare type EVectorQuantization = 'RoundWholeNumber' | 'RoundOneDecimal' | 'RoundTwoDecimals' | 'EVectorQuantization_MAX';
+declare var EVectorQuantization : { RoundWholeNumber:'RoundWholeNumber',RoundOneDecimal:'RoundOneDecimal',RoundTwoDecimals:'RoundTwoDecimals',EVectorQuantization_MAX:'EVectorQuantization_MAX', };
+declare type ERotatorQuantization = 'ByteComponents' | 'ShortComponents' | 'ERotatorQuantization_MAX';
+declare var ERotatorQuantization : { ByteComponents:'ByteComponents',ShortComponents:'ShortComponents',ERotatorQuantization_MAX:'ERotatorQuantization_MAX', };
+declare class RepMovement { 
+	LinearVelocity: Vector;
+	AngularVelocity: Vector;
+	Location: Vector;
+	Rotation: Rotator;
+	bSimulatedPhysicSleep: boolean;
+	bRepPhysics: boolean;
+	LocationQuantizationLevel: EVectorQuantization;
+	VelocityQuantizationLevel: EVectorQuantization;
+	RotationQuantizationLevel: ERotatorQuantization;
+	clone() : RepMovement;
+	static C(Other: UObject | any): RepMovement;
+}
+
+declare class RepAttachment { 
+	AttachParent: Actor;
+	LocationOffset: Vector_NetQuantize100;
+	RelativeScale3D: Vector_NetQuantize100;
+	RotationOffset: Rotator;
+	AttachSocket: string;
+	AttachComponent: SceneComponent;
+	clone() : RepAttachment;
+	static C(Other: UObject | any): RepAttachment;
+}
+
+declare type ENetDormancy = 'DORM_Never' | 'DORM_Awake' | 'DORM_DormantAll' | 'DORM_DormantPartial' | 'DORM_Initial' | 'DORM_MAX';
+declare var ENetDormancy : { DORM_Never:'DORM_Never',DORM_Awake:'DORM_Awake',DORM_DormantAll:'DORM_DormantAll',DORM_DormantPartial:'DORM_DormantPartial',DORM_Initial:'DORM_Initial',DORM_MAX:'DORM_MAX', };
+declare type ESpawnActorCollisionHandlingMethod = 'Undefined' | 'AlwaysSpawn' | 'AdjustIfPossibleButAlwaysSpawn' | 'AdjustIfPossibleButDontSpawnIfColliding' | 'DontSpawnIfColliding' | 'ESpawnActorCollisionHandlingMethod_MAX';
+declare var ESpawnActorCollisionHandlingMethod : { Undefined:'Undefined',AlwaysSpawn:'AlwaysSpawn',AdjustIfPossibleButAlwaysSpawn:'AdjustIfPossibleButAlwaysSpawn',AdjustIfPossibleButDontSpawnIfColliding:'AdjustIfPossibleButDontSpawnIfColliding',DontSpawnIfColliding:'DontSpawnIfColliding',ESpawnActorCollisionHandlingMethod_MAX:'ESpawnActorCollisionHandlingMethod_MAX', };
+declare class InterpFilter extends UObject { 
+	Caption: string;
+	static Load(ResourceName: string): InterpFilter;
+	static Find(Outer: UObject, ResourceName: string): InterpFilter;
+	static GetDefaultObject(): InterpFilter;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InterpFilter;
+	static C(Other: UObject | any): InterpFilter;
+}
+
+declare class InterpGroupDirector extends InterpGroup { 
+	static Load(ResourceName: string): InterpGroupDirector;
+	static Find(Outer: UObject, ResourceName: string): InterpGroupDirector;
+	static GetDefaultObject(): InterpGroupDirector;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InterpGroupDirector;
+	static C(Other: UObject | any): InterpGroupDirector;
+}
+
+declare class InterpData extends UObject { 
+	InterpLength: number;
+	PathBuildTime: number;
+	InterpGroups: InterpGroup[];
+	CurveEdSetup: InterpCurveEdSetup;
+	InterpFilters: InterpFilter[];
+	SelectedFilter: InterpFilter;
+	DefaultFilters: InterpFilter[];
+	EdSectionStart: number;
+	EdSectionEnd: number;
+	bShouldBakeAndPrune: boolean;
+	CachedDirectorGroup: InterpGroupDirector;
+	AllEventNames: string[];
+	static Load(ResourceName: string): InterpData;
+	static Find(Outer: UObject, ResourceName: string): InterpData;
+	static GetDefaultObject(): InterpData;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InterpData;
+	static C(Other: UObject | any): InterpData;
+}
+
+declare class InterpGroupActorInfo { 
+	ObjectName: string;
+	Actors: Actor[];
+	clone() : InterpGroupActorInfo;
+	static C(Other: UObject | any): InterpGroupActorInfo;
+}
+
+declare class CameraCutInfo { 
+	Location: Vector;
+	Timestamp: number;
+	clone() : CameraCutInfo;
+	static C(Other: UObject | any): CameraCutInfo;
+}
+
+declare class MatineeActor extends Actor { 
+	MatineeData: InterpData;
+	MatineeControllerName: string;
+	PlayRate: number;
+	bPlayOnLevelLoad: boolean;
+	bForceStartPos: boolean;
+	ForceStartPosition: number;
+	bLooping: boolean;
+	bRewindOnPlay: boolean;
+	bNoResetOnRewind: boolean;
+	bRewindIfAlreadyPlaying: boolean;
+	bDisableRadioFilter: boolean;
+	bClientSideOnly: boolean;
+	bSkipUpdateIfNotVisible: boolean;
+	bIsSkippable: boolean;
+	PreferredSplitScreenNum: number;
+	bDisableMovementInput: boolean;
+	bDisableLookAtInput: boolean;
+	bHidePlayer: boolean;
+	bHideHud: boolean;
+	GroupActorInfos: InterpGroupActorInfo[];
+	bShouldShowGore: boolean;
+	GroupInst: InterpGroupInst[];
+	CameraCuts: CameraCutInfo[];
+	SpriteComponent: BillboardComponent;
+	bIsBeingEdited: boolean;
+	bIsScrubbing: boolean;
+	bIsPlaying: boolean;
+	bReversePlayback: boolean;
+	bPaused: boolean;
+	bPendingStop: boolean;
+	InterpPosition: number;
+	ReplicationForceIsPlaying: number;
+	OnPlay: UnrealEngineMulticastDelegate<() => void>;
+	OnStop: UnrealEngineMulticastDelegate<() => void>;
+	OnPause: UnrealEngineMulticastDelegate<() => void>;
+	static GetDefaultObject(): MatineeActor;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MatineeActor;
+	Stop(): void;
+	SetPosition(NewPosition: number,bJump: boolean): void;
+	SetLoopingState(bNewLooping: boolean): void;
+	Reverse(): void;
+	Play(): void;
+	Pause(): void;
+	EnableGroupByName(GroupName: string,bEnable: boolean): void;
+	ChangePlaybackDirection(): void;
+	static C(Other: UObject | any): MatineeActor;
+}
+
+declare type EChildActorComponentTreeViewVisualizationMode = 'UseDefault' | 'ComponentOnly' | 'ComponentWithChildActor' | 'ChildActorOnly' | 'EChildActorComponentTreeViewVisualizationMode_MAX';
+declare var EChildActorComponentTreeViewVisualizationMode : { UseDefault:'UseDefault',ComponentOnly:'ComponentOnly',ComponentWithChildActor:'ComponentWithChildActor',ChildActorOnly:'ChildActorOnly',EChildActorComponentTreeViewVisualizationMode_MAX:'EChildActorComponentTreeViewVisualizationMode_MAX', };
+declare class ChildActorComponent extends SceneComponent { 
+	ChildActorClass: UnrealEngineClass;
+	ChildActor: Actor;
+	ChildActorTemplate: Actor;
+	EditorTreeViewVisualizationMode: EChildActorComponentTreeViewVisualizationMode;
+	static Load(ResourceName: string): ChildActorComponent;
+	static Find(Outer: UObject, ResourceName: string): ChildActorComponent;
+	static GetDefaultObject(): ChildActorComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChildActorComponent;
+	SetChildActorClass(InClass: UnrealEngineClass): void;
+	static C(Other: UObject | any): ChildActorComponent;
+}
+
+declare class ActorLayer { 
+	Name: string;
+	clone() : ActorLayer;
+	static C(Other: UObject | any): ActorLayer;
+}
+
+declare class ModelComponent extends PrimitiveComponent { 
+	ModelBodySetup: BodySetup;
+	static Load(ResourceName: string): ModelComponent;
+	static Find(Outer: UObject, ResourceName: string): ModelComponent;
+	static GetDefaultObject(): ModelComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ModelComponent;
+	static C(Other: UObject | any): ModelComponent;
+}
+
+declare class LevelActorContainer extends UObject { 
+	Actors: Actor[];
+	static Load(ResourceName: string): LevelActorContainer;
+	static Find(Outer: UObject, ResourceName: string): LevelActorContainer;
+	static GetDefaultObject(): LevelActorContainer;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LevelActorContainer;
+	static C(Other: UObject | any): LevelActorContainer;
+}
+
+declare class LevelScriptBlueprint extends Blueprint { 
+	FriendlyName: string;
+	static Load(ResourceName: string): LevelScriptBlueprint;
+	static Find(Outer: UObject, ResourceName: string): LevelScriptBlueprint;
+	static GetDefaultObject(): LevelScriptBlueprint;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LevelScriptBlueprint;
+	static C(Other: UObject | any): LevelScriptBlueprint;
+}
+
+declare class LevelScriptActor extends Actor { 
+	bInputEnabled: boolean;
+	static GetDefaultObject(): LevelScriptActor;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LevelScriptActor;
+	WorldOriginLocationChanged(OldOriginLocation: IntVector,NewOriginLocation: IntVector): void;
+	SetCinematicMode(bCinematicMode: boolean,bHidePlayer: boolean,bAffectsHUD: boolean,bAffectsMovement: boolean,bAffectsTurning: boolean): void;
+	RemoteEvent(EventName: string): boolean;
+	LevelReset(): void;
+	static C(Other: UObject | any): LevelScriptActor;
+}
+
+declare class NavigationObjectBase extends Actor { 
+	CapsuleComponent: CapsuleComponent;
+	GoodSprite: BillboardComponent;
+	BadSprite: BillboardComponent;
+	bIsPIEPlayerStart: boolean;
+	static GetDefaultObject(): NavigationObjectBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NavigationObjectBase;
+	static C(Other: UObject | any): NavigationObjectBase;
+}
+
+declare class NavigationDataChunk extends UObject { 
+	NavigationDataName: string;
+	static Load(ResourceName: string): NavigationDataChunk;
+	static Find(Outer: UObject, ResourceName: string): NavigationDataChunk;
+	static GetDefaultObject(): NavigationDataChunk;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NavigationDataChunk;
+	static C(Other: UObject | any): NavigationDataChunk;
+}
+
+declare type ELightingBuildQuality = 'Quality_Preview' | 'Quality_Medium' | 'Quality_High' | 'Quality_Production' | 'Quality_MAX';
+declare var ELightingBuildQuality : { Quality_Preview:'Quality_Preview',Quality_Medium:'Quality_Medium',Quality_High:'Quality_High',Quality_Production:'Quality_Production',Quality_MAX:'Quality_MAX', };
+declare class MapBuildDataRegistry extends UObject { 
+	LevelLightingQuality: ELightingBuildQuality;
+	static Load(ResourceName: string): MapBuildDataRegistry;
+	static Find(Outer: UObject, ResourceName: string): MapBuildDataRegistry;
+	static GetDefaultObject(): MapBuildDataRegistry;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MapBuildDataRegistry;
+	static C(Other: UObject | any): MapBuildDataRegistry;
+}
+
+declare type ETextureSizingType = 'TextureSizingType_UseSingleTextureSize' | 'TextureSizingType_UseAutomaticBiasedSizes' | 'TextureSizingType_UseManualOverrideTextureSize' | 'TextureSizingType_UseSimplygonAutomaticSizing' | 'TextureSizingType_MAX';
+declare var ETextureSizingType : { TextureSizingType_UseSingleTextureSize:'TextureSizingType_UseSingleTextureSize',TextureSizingType_UseAutomaticBiasedSizes:'TextureSizingType_UseAutomaticBiasedSizes',TextureSizingType_UseManualOverrideTextureSize:'TextureSizingType_UseManualOverrideTextureSize',TextureSizingType_UseSimplygonAutomaticSizing:'TextureSizingType_UseSimplygonAutomaticSizing',TextureSizingType_MAX:'TextureSizingType_MAX', };
+declare type EMaterialMergeType = 'MaterialMergeType_Default' | 'MaterialMergeType_Simplygon' | 'MaterialMergeType_MAX';
+declare var EMaterialMergeType : { MaterialMergeType_Default:'MaterialMergeType_Default',MaterialMergeType_Simplygon:'MaterialMergeType_Simplygon',MaterialMergeType_MAX:'MaterialMergeType_MAX', };
+declare class MaterialProxySettings { 
+	TextureSize: IntPoint;
+	GutterSpace: number;
+	MetallicConstant: number;
+	RoughnessConstant: number;
+	AnisotropyConstant: number;
+	SpecularConstant: number;
+	OpacityConstant: number;
+	OpacityMaskConstant: number;
+	AmbientOcclusionConstant: number;
+	TextureSizingType: ETextureSizingType;
+	MaterialMergeType: EMaterialMergeType;
+	BlendMode: EBlendMode;
+	bAllowTwoSidedMaterial: boolean;
+	bNormalMap: boolean;
+	bTangentMap: boolean;
+	bMetallicMap: boolean;
+	bRoughnessMap: boolean;
+	bAnisotropyMap: boolean;
+	bSpecularMap: boolean;
+	bEmissiveMap: boolean;
+	bOpacityMap: boolean;
+	bOpacityMaskMap: boolean;
+	bAmbientOcclusionMap: boolean;
+	DiffuseTextureSize: IntPoint;
+	NormalTextureSize: IntPoint;
+	TangentTextureSize: IntPoint;
+	MetallicTextureSize: IntPoint;
+	RoughnessTextureSize: IntPoint;
+	AnisotropyTextureSize: IntPoint;
+	SpecularTextureSize: IntPoint;
+	EmissiveTextureSize: IntPoint;
+	OpacityTextureSize: IntPoint;
+	OpacityMaskTextureSize: IntPoint;
+	AmbientOcclusionTextureSize: IntPoint;
+	clone() : MaterialProxySettings;
+	static C(Other: UObject | any): MaterialProxySettings;
+}
+
+declare class LevelSimplificationDetails { 
+	bCreatePackagePerAsset: boolean;
+	DetailsPercentage: number;
+	StaticMeshMaterialSettings: MaterialProxySettings;
+	bOverrideLandscapeExportLOD: boolean;
+	LandscapeExportLOD: number;
+	LandscapeMaterialSettings: MaterialProxySettings;
+	bBakeFoliageToLandscape: boolean;
+	bBakeGrassToLandscape: boolean;
+	bGenerateMeshNormalMap: boolean;
+	bGenerateMeshMetallicMap: boolean;
+	bGenerateMeshRoughnessMap: boolean;
+	bGenerateMeshSpecularMap: boolean;
+	bGenerateLandscapeNormalMap: boolean;
+	bGenerateLandscapeMetallicMap: boolean;
+	bGenerateLandscapeRoughnessMap: boolean;
+	bGenerateLandscapeSpecularMap: boolean;
+	clone() : LevelSimplificationDetails;
+	static C(Other: UObject | any): LevelSimplificationDetails;
+}
+
+declare type EVisibilityAggressiveness = 'VIS_LeastAggressive' | 'VIS_ModeratelyAggressive' | 'VIS_MostAggressive' | 'VIS_Max';
+declare var EVisibilityAggressiveness : { VIS_LeastAggressive:'VIS_LeastAggressive',VIS_ModeratelyAggressive:'VIS_ModeratelyAggressive',VIS_MostAggressive:'VIS_MostAggressive',VIS_Max:'VIS_Max', };
 declare class NavAgentSelector { 
 	bSupportsAgent0: boolean;
 	bSupportsAgent1: boolean;
@@ -11769,21 +13388,6 @@ declare class NavigationSystemConfig extends UObject {
 	static GetDefaultObject(): NavigationSystemConfig;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NavigationSystemConfig;
 	static C(Other: UObject | any): NavigationSystemConfig;
-}
-
-declare class DamageType extends UObject { 
-	bCausedByWorld: boolean;
-	bScaleMomentumByMass: boolean;
-	bRadialDamageVelChange: boolean;
-	DamageImpulse: number;
-	DestructibleImpulse: number;
-	DestructibleDamageSpreadScale: number;
-	DamageFalloff: number;
-	static Load(ResourceName: string): DamageType;
-	static Find(Outer: UObject, ResourceName: string): DamageType;
-	static GetDefaultObject(): DamageType;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): DamageType;
-	static C(Other: UObject | any): DamageType;
 }
 
 declare class DefaultPhysicsVolume extends PhysicsVolume { 
@@ -12330,6 +13934,1327 @@ declare class Level extends UObject {
 	static UpdateModelComponents(Level: Level): void;
 }
 
+declare type EMagicLeapPlaneQueryFlags = 'Vertical' | 'Horizontal' | 'Arbitrary' | 'OrientToGravity' | 'PreferInner' | 'Ceiling' | 'Floor' | 'Wall' | 'Polygons' | 'EMagicLeapPlaneQueryFlags_MAX';
+declare var EMagicLeapPlaneQueryFlags : { Vertical:'Vertical',Horizontal:'Horizontal',Arbitrary:'Arbitrary',OrientToGravity:'OrientToGravity',PreferInner:'PreferInner',Ceiling:'Ceiling',Floor:'Floor',Wall:'Wall',Polygons:'Polygons',EMagicLeapPlaneQueryFlags_MAX:'EMagicLeapPlaneQueryFlags_MAX', };
+declare class MagicLeapPlaneResult { 
+	PlanePosition: Vector;
+	PlaneOrientation: Rotator;
+	ContentOrientation: Rotator;
+	PlaneDimensions: Vector2D;
+	PlaneFlags: EMagicLeapPlaneQueryFlags[];
+	ID: Guid;
+	InnerID: Guid;
+	clone() : MagicLeapPlaneResult;
+	static C(Other: UObject | any): MagicLeapPlaneResult;
+}
+
+declare class NavDataConfig extends NavAgentProperties { 
+	Name: string;
+	Color: Color;
+	DefaultQueryExtent: Vector;
+	NavigationDataClass: UnrealEngineClass;
+	NavDataClass: Class;
+	clone() : NavDataConfig;
+	static C(Other: UObject | any): NavDataConfig;
+}
+
+declare type ERuntimeGenerationType = 'Static' | 'DynamicModifiersOnly' | 'Dynamic' | 'LegacyGeneration' | 'ERuntimeGenerationType_MAX';
+declare var ERuntimeGenerationType : { Static:'Static',DynamicModifiersOnly:'DynamicModifiersOnly',Dynamic:'Dynamic',LegacyGeneration:'LegacyGeneration',ERuntimeGenerationType_MAX:'ERuntimeGenerationType_MAX', };
+declare class SupportedAreaData { 
+	AreaClassName: string;
+	AreaID: number;
+	AreaClass: UnrealEngineClass;
+	clone() : SupportedAreaData;
+	static C(Other: UObject | any): SupportedAreaData;
+}
+
+declare class NavigationData extends Actor { 
+	RenderingComp: PrimitiveComponent;
+	NavDataConfig: NavDataConfig;
+	bEnableDrawing: boolean;
+	bForceRebuildOnLoad: boolean;
+	bAutoDestroyWhenNoNavigation: boolean;
+	bCanBeMainNavData: boolean;
+	bCanSpawnOnRebuild: boolean;
+	bRebuildAtRuntime: boolean;
+	RuntimeGeneration: ERuntimeGenerationType;
+	ObservedPathsTickInterval: number;
+	DataVersion: any;
+	SupportedAreas: SupportedAreaData[];
+	static GetDefaultObject(): NavigationData;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NavigationData;
+	static C(Other: UObject | any): NavigationData;
+}
+
+declare type EPathFollowingAction = 'Error' | 'NoMove' | 'DirectMove' | 'PartialPath' | 'PathToGoal' | 'EPathFollowingAction_MAX';
+declare var EPathFollowingAction : { Error:'Error',NoMove:'NoMove',DirectMove:'DirectMove',PartialPath:'PartialPath',PathToGoal:'PathToGoal',EPathFollowingAction_MAX:'EPathFollowingAction_MAX', };
+declare class PathFollowingComponent extends ActorComponent { 
+	MovementComp: NavMovementComponent;
+	MyNavData: NavigationData;
+	static Load(ResourceName: string): PathFollowingComponent;
+	static Find(Outer: UObject, ResourceName: string): PathFollowingComponent;
+	static GetDefaultObject(): PathFollowingComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PathFollowingComponent;
+	OnNavDataRegistered(NavData: NavigationData): void;
+	OnActorBump(SelfActor: Actor,OtherActor: Actor,NormalImpulse: Vector,Hit: HitResult): void;
+	GetPathDestination(): Vector;
+	GetPathActionType(): EPathFollowingAction;
+	static C(Other: UObject | any): PathFollowingComponent;
+}
+
+declare class BlackboardKeyType extends UObject { 
+	static Load(ResourceName: string): BlackboardKeyType;
+	static Find(Outer: UObject, ResourceName: string): BlackboardKeyType;
+	static GetDefaultObject(): BlackboardKeyType;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlackboardKeyType;
+	static C(Other: UObject | any): BlackboardKeyType;
+}
+
+declare class BlackboardEntry { 
+	EntryName: string;
+	EntryDescription: string;
+	EntryCategory: string;
+	KeyType: BlackboardKeyType;
+	bInstanceSynced: boolean;
+	clone() : BlackboardEntry;
+	static C(Other: UObject | any): BlackboardEntry;
+}
+
+declare class BlackboardData extends DataAsset { 
+	Parent: BlackboardData;
+	ParentKeys: BlackboardEntry[];
+	Keys: BlackboardEntry[];
+	bHasSynchronizedKeys: boolean;
+	static Load(ResourceName: string): BlackboardData;
+	static Find(Outer: UObject, ResourceName: string): BlackboardData;
+	static GetDefaultObject(): BlackboardData;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlackboardData;
+	static C(Other: UObject | any): BlackboardData;
+}
+
+declare class BlackboardComponent extends ActorComponent { 
+	BrainComp: BrainComponent;
+	DefaultBlackboardAsset: BlackboardData;
+	BlackboardAsset: BlackboardData;
+	KeyInstances: BlackboardKeyType[];
+	static Load(ResourceName: string): BlackboardComponent;
+	static Find(Outer: UObject, ResourceName: string): BlackboardComponent;
+	static GetDefaultObject(): BlackboardComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlackboardComponent;
+	SetValueAsVector(KeyName: string,VectorValue: Vector): void;
+	SetValueAsString(KeyName: string,StringValue: string): void;
+	SetValueAsRotator(KeyName: string,VectorValue: Rotator): void;
+	SetValueAsObject(KeyName: string,ObjectValue: UObject): void;
+	SetValueAsName(KeyName: string,NameValue: string): void;
+	SetValueAsInt(KeyName: string,IntValue: number): void;
+	SetValueAsFloat(KeyName: string,FloatValue: number): void;
+	SetValueAsEnum(KeyName: string,EnumValue: number): void;
+	SetValueAsClass(KeyName: string,ClassValue: UnrealEngineClass): void;
+	SetValueAsBool(KeyName: string,BoolValue: boolean): void;
+	IsVectorValueSet(KeyName: string): boolean;
+	GetValueAsVector(KeyName: string): Vector;
+	GetValueAsString(KeyName: string): string;
+	GetValueAsRotator(KeyName: string): Rotator;
+	GetValueAsObject(KeyName: string): UObject;
+	GetValueAsName(KeyName: string): string;
+	GetValueAsInt(KeyName: string): number;
+	GetValueAsFloat(KeyName: string): number;
+	GetValueAsEnum(KeyName: string): number;
+	GetValueAsClass(KeyName: string): UnrealEngineClass;
+	GetValueAsBool(KeyName: string): boolean;
+	GetRotationFromEntry(KeyName: string,ResultRotation?: Rotator): {ResultRotation: Rotator, $: boolean};
+	GetLocationFromEntry(KeyName: string,ResultLocation?: Vector): {ResultLocation: Vector, $: boolean};
+	ClearValue(KeyName: string): void;
+	static C(Other: UObject | any): BlackboardComponent;
+}
+
+declare class BrainComponent extends ActorComponent { 
+	BlackboardComp: BlackboardComponent;
+	AIOwner: AIController;
+	static Load(ResourceName: string): BrainComponent;
+	static Find(Outer: UObject, ResourceName: string): BrainComponent;
+	static GetDefaultObject(): BrainComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BrainComponent;
+	StopLogic(reason: string): void;
+	StartLogic(): void;
+	RestartLogic(): void;
+	IsRunning(): boolean;
+	IsPaused(): boolean;
+	static C(Other: UObject | any): BrainComponent;
+}
+
+declare class AISenseConfig extends UObject { 
+	DebugColor: Color;
+	MaxAge: number;
+	bStartsEnabled: boolean;
+	static Load(ResourceName: string): AISenseConfig;
+	static Find(Outer: UObject, ResourceName: string): AISenseConfig;
+	static GetDefaultObject(): AISenseConfig;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AISenseConfig;
+	static C(Other: UObject | any): AISenseConfig;
+}
+
+declare type EAISenseNotifyType = 'OnEveryPerception' | 'OnPerceptionChange' | 'EAISenseNotifyType_MAX';
+declare var EAISenseNotifyType : { OnEveryPerception:'OnEveryPerception',OnPerceptionChange:'OnPerceptionChange',EAISenseNotifyType_MAX:'EAISenseNotifyType_MAX', };
+declare class AISystemBase extends UObject { 
+	AISystemClassName: SoftClassPath;
+	AISystemModuleName: string;
+	bInstantiateAISystemOnClient: boolean;
+	static Load(ResourceName: string): AISystemBase;
+	static Find(Outer: UObject, ResourceName: string): AISystemBase;
+	static GetDefaultObject(): AISystemBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AISystemBase;
+	static C(Other: UObject | any): AISystemBase;
+}
+
+declare class BlackboardKeySelector { 
+	AllowedTypes: BlackboardKeyType[];
+	SelectedKeyName: string;
+	SelectedKeyType: UnrealEngineClass;
+	SelectedKeyID: number;
+	bNoneIsAllowedValue: boolean;
+	clone() : BlackboardKeySelector;
+	static C(Other: UObject | any): BlackboardKeySelector;
+}
+
+declare class GameplayTagQuery { 
+	TokenStreamVersion: number;
+	TagDictionary: GameplayTag[];
+	QueryTokenStream: number[];
+	UserDescription: string;
+	AutoDescription: string;
+	clone() : GameplayTagQuery;
+	static C(Other: UObject | any): GameplayTagQuery;
+	IsTagQueryEmpty(): boolean;
+	MakeGameplayTagQuery(): GameplayTagQuery;
+	static IsTagQueryEmpty(TagQuery: GameplayTagQuery): boolean;
+	static MakeGameplayTagQuery(TagQuery: GameplayTagQuery): GameplayTagQuery;
+}
+
+declare class GameplayTagContainer { 
+	GameplayTags: GameplayTag[];
+	ParentTags: GameplayTag[];
+	clone() : GameplayTagContainer;
+	static C(Other: UObject | any): GameplayTagContainer;
+	AddGameplayTag(Tag?: GameplayTag): {TagContainer: GameplayTagContainer};
+	AppendGameplayTagContainers(InTagContainer?: GameplayTagContainer): {InOutTagContainer: GameplayTagContainer};
+	BreakGameplayTagContainer(GameplayTags?: GameplayTag[]): {GameplayTags: GameplayTag[]};
+	DoesContainerMatchTagQuery(TagQuery: GameplayTagQuery): boolean;
+	EqualEqual_GameplayTagContainer(B: GameplayTagContainer): boolean;
+	GetDebugStringFromGameplayTagContainer(): string;
+	GetNumGameplayTagsInContainer(): number;
+	HasAllTags(OtherContainer: GameplayTagContainer,bExactMatch: boolean): boolean;
+	HasAnyTags(OtherContainer: GameplayTagContainer,bExactMatch: boolean): boolean;
+	HasTag(Tag: GameplayTag,bExactMatch: boolean): boolean;
+	MakeLiteralGameplayTagContainer(): GameplayTagContainer;
+	NotEqual_GameplayTagContainer(B: GameplayTagContainer): boolean;
+	NotEqual_TagContainerTagContainer(B: string): boolean;
+	RemoveGameplayTag(Tag?: GameplayTag): {TagContainer: GameplayTagContainer, $: boolean};
+	static AddGameplayTag(TagContainer?: GameplayTagContainer,Tag?: GameplayTag): {TagContainer: GameplayTagContainer};
+	static AppendGameplayTagContainers(InOutTagContainer?: GameplayTagContainer,InTagContainer?: GameplayTagContainer): {InOutTagContainer: GameplayTagContainer};
+	static BreakGameplayTagContainer(GameplayTagContainer: GameplayTagContainer,GameplayTags?: GameplayTag[]): {GameplayTags: GameplayTag[]};
+	static DoesContainerMatchTagQuery(TagContainer: GameplayTagContainer,TagQuery: GameplayTagQuery): boolean;
+	static EqualEqual_GameplayTagContainer(A: GameplayTagContainer,B: GameplayTagContainer): boolean;
+	static GetDebugStringFromGameplayTagContainer(TagContainer: GameplayTagContainer): string;
+	static GetNumGameplayTagsInContainer(TagContainer: GameplayTagContainer): number;
+	static HasAllTags(TagContainer: GameplayTagContainer,OtherContainer: GameplayTagContainer,bExactMatch: boolean): boolean;
+	static HasAnyTags(TagContainer: GameplayTagContainer,OtherContainer: GameplayTagContainer,bExactMatch: boolean): boolean;
+	static HasTag(TagContainer: GameplayTagContainer,Tag: GameplayTag,bExactMatch: boolean): boolean;
+	static MakeLiteralGameplayTagContainer(Value: GameplayTagContainer): GameplayTagContainer;
+	static NotEqual_GameplayTagContainer(A: GameplayTagContainer,B: GameplayTagContainer): boolean;
+	static NotEqual_TagContainerTagContainer(A: GameplayTagContainer,B: string): boolean;
+	static RemoveGameplayTag(TagContainer?: GameplayTagContainer,Tag?: GameplayTag): {TagContainer: GameplayTagContainer, $: boolean};
+	static MakeGameplayTagContainerFromArray(GameplayTags: GameplayTag[]): GameplayTagContainer;
+}
+
+declare class GameplayTag { 
+	TagName: string;
+	clone() : GameplayTag;
+	static C(Other: UObject | any): GameplayTag;
+	EqualEqual_GameplayTag(B: GameplayTag): boolean;
+	GetDebugStringFromGameplayTag(): string;
+	GetTagName(): string;
+	IsGameplayTagValid(): boolean;
+	MakeGameplayTagContainerFromTag(): GameplayTagContainer;
+	MakeLiteralGameplayTag(): GameplayTag;
+	MatchesAnyTags(OtherContainer: GameplayTagContainer,bExactMatch: boolean): boolean;
+	MatchesTag(TagTwo: GameplayTag,bExactMatch: boolean): boolean;
+	NotEqual_GameplayTag(B: GameplayTag): boolean;
+	NotEqual_TagTag(B: string): boolean;
+	static EqualEqual_GameplayTag(A: GameplayTag,B: GameplayTag): boolean;
+	static GetDebugStringFromGameplayTag(GameplayTag: GameplayTag): string;
+	static GetTagName(GameplayTag: GameplayTag): string;
+	static IsGameplayTagValid(GameplayTag: GameplayTag): boolean;
+	static MakeGameplayTagContainerFromTag(SingleTag: GameplayTag): GameplayTagContainer;
+	static MakeLiteralGameplayTag(Value: GameplayTag): GameplayTag;
+	static MatchesAnyTags(TagOne: GameplayTag,OtherContainer: GameplayTagContainer,bExactMatch: boolean): boolean;
+	static MatchesTag(TagOne: GameplayTag,TagTwo: GameplayTag,bExactMatch: boolean): boolean;
+	static NotEqual_GameplayTag(A: GameplayTag,B: GameplayTag): boolean;
+	static NotEqual_TagTag(A: GameplayTag,B: string): boolean;
+}
+
+declare class BehaviorTreeComponent extends BrainComponent { 
+	NodeInstances: BTNode[];
+	DefaultBehaviorTreeAsset: BehaviorTree;
+	static Load(ResourceName: string): BehaviorTreeComponent;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeComponent;
+	static GetDefaultObject(): BehaviorTreeComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeComponent;
+	SetDynamicSubtree(InjectTag: GameplayTag,BehaviorAsset: BehaviorTree): void;
+	GetTagCooldownEndTime(CooldownTag: GameplayTag): number;
+	AddCooldownTagDuration(CooldownTag: GameplayTag,CooldownDuration: number,bAddToExistingDuration: boolean): void;
+	static C(Other: UObject | any): BehaviorTreeComponent;
+}
+
+declare class BTNode extends UObject { 
+	NodeName: string;
+	TreeAsset: BehaviorTree;
+	ParentNode: BTCompositeNode;
+	static Load(ResourceName: string): BTNode;
+	static Find(Outer: UObject, ResourceName: string): BTNode;
+	static GetDefaultObject(): BTNode;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BTNode;
+	static C(Other: UObject | any): BTNode;
+	ClearBlackboardValue(Key: BlackboardKeySelector): void;
+	ClearBlackboardValueAsVector(Key: BlackboardKeySelector): void;
+	GetBlackboardValueAsActor(Key: BlackboardKeySelector): Actor;
+	GetBlackboardValueAsBool(Key: BlackboardKeySelector): boolean;
+	GetBlackboardValueAsClass(Key: BlackboardKeySelector): UnrealEngineClass;
+	GetBlackboardValueAsEnum(Key: BlackboardKeySelector): number;
+	GetBlackboardValueAsFloat(Key: BlackboardKeySelector): number;
+	GetBlackboardValueAsInt(Key: BlackboardKeySelector): number;
+	GetBlackboardValueAsName(Key: BlackboardKeySelector): string;
+	GetBlackboardValueAsObject(Key: BlackboardKeySelector): UObject;
+	GetBlackboardValueAsRotator(Key: BlackboardKeySelector): Rotator;
+	GetBlackboardValueAsString(Key: BlackboardKeySelector): string;
+	GetBlackboardValueAsVector(Key: BlackboardKeySelector): Vector;
+	GetOwnerComponent(): BehaviorTreeComponent;
+	GetOwnersBlackboard(): BlackboardComponent;
+	SetBlackboardValueAsBool(Key: BlackboardKeySelector,Value: boolean): void;
+	SetBlackboardValueAsClass(Key: BlackboardKeySelector,Value: UnrealEngineClass): void;
+	SetBlackboardValueAsEnum(Key: BlackboardKeySelector,Value: number): void;
+	SetBlackboardValueAsFloat(Key: BlackboardKeySelector,Value: number): void;
+	SetBlackboardValueAsInt(Key: BlackboardKeySelector,Value: number): void;
+	SetBlackboardValueAsName(Key: BlackboardKeySelector,Value: string): void;
+	SetBlackboardValueAsObject(Key: BlackboardKeySelector,Value: UObject): void;
+	SetBlackboardValueAsRotator(Key: BlackboardKeySelector,Value: Rotator): void;
+	SetBlackboardValueAsString(Key: BlackboardKeySelector,Value: string): void;
+	SetBlackboardValueAsVector(Key: BlackboardKeySelector,Value: Vector): void;
+	StartUsingExternalEvent(OwningActor: Actor): void;
+	StopUsingExternalEvent(): void;
+	static ClearBlackboardValue(NodeOwner: BTNode,Key: BlackboardKeySelector): void;
+	static ClearBlackboardValueAsVector(NodeOwner: BTNode,Key: BlackboardKeySelector): void;
+	static GetBlackboardValueAsActor(NodeOwner: BTNode,Key: BlackboardKeySelector): Actor;
+	static GetBlackboardValueAsBool(NodeOwner: BTNode,Key: BlackboardKeySelector): boolean;
+	static GetBlackboardValueAsClass(NodeOwner: BTNode,Key: BlackboardKeySelector): UnrealEngineClass;
+	static GetBlackboardValueAsEnum(NodeOwner: BTNode,Key: BlackboardKeySelector): number;
+	static GetBlackboardValueAsFloat(NodeOwner: BTNode,Key: BlackboardKeySelector): number;
+	static GetBlackboardValueAsInt(NodeOwner: BTNode,Key: BlackboardKeySelector): number;
+	static GetBlackboardValueAsName(NodeOwner: BTNode,Key: BlackboardKeySelector): string;
+	static GetBlackboardValueAsObject(NodeOwner: BTNode,Key: BlackboardKeySelector): UObject;
+	static GetBlackboardValueAsRotator(NodeOwner: BTNode,Key: BlackboardKeySelector): Rotator;
+	static GetBlackboardValueAsString(NodeOwner: BTNode,Key: BlackboardKeySelector): string;
+	static GetBlackboardValueAsVector(NodeOwner: BTNode,Key: BlackboardKeySelector): Vector;
+	static GetOwnerComponent(NodeOwner: BTNode): BehaviorTreeComponent;
+	static GetOwnersBlackboard(NodeOwner: BTNode): BlackboardComponent;
+	static SetBlackboardValueAsBool(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: boolean): void;
+	static SetBlackboardValueAsClass(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: UnrealEngineClass): void;
+	static SetBlackboardValueAsEnum(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: number): void;
+	static SetBlackboardValueAsFloat(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: number): void;
+	static SetBlackboardValueAsInt(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: number): void;
+	static SetBlackboardValueAsName(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: string): void;
+	static SetBlackboardValueAsObject(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: UObject): void;
+	static SetBlackboardValueAsRotator(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: Rotator): void;
+	static SetBlackboardValueAsString(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: string): void;
+	static SetBlackboardValueAsVector(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: Vector): void;
+	static StartUsingExternalEvent(NodeOwner: BTNode,OwningActor: Actor): void;
+	static StopUsingExternalEvent(NodeOwner: BTNode): void;
+}
+
+declare class BTAuxiliaryNode extends BTNode { 
+	static Load(ResourceName: string): BTAuxiliaryNode;
+	static Find(Outer: UObject, ResourceName: string): BTAuxiliaryNode;
+	static GetDefaultObject(): BTAuxiliaryNode;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BTAuxiliaryNode;
+	static C(Other: UObject | any): BTAuxiliaryNode;
+}
+
+declare class BTService extends BTAuxiliaryNode { 
+	Interval: number;
+	RandomDeviation: number;
+	bCallTickOnSearchStart: boolean;
+	bRestartTimerOnEachActivation: boolean;
+	static Load(ResourceName: string): BTService;
+	static Find(Outer: UObject, ResourceName: string): BTService;
+	static GetDefaultObject(): BTService;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BTService;
+	static C(Other: UObject | any): BTService;
+}
+
+declare class BTTaskNode extends BTNode { 
+	Services: BTService[];
+	bIgnoreRestartSelf: boolean;
+	static Load(ResourceName: string): BTTaskNode;
+	static Find(Outer: UObject, ResourceName: string): BTTaskNode;
+	static GetDefaultObject(): BTTaskNode;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BTTaskNode;
+	static C(Other: UObject | any): BTTaskNode;
+}
+
+declare type EBTFlowAbortMode = 'None' | 'LowerPriority' | 'Self' | 'Both' | 'EBTFlowAbortMode_MAX';
+declare var EBTFlowAbortMode : { None:'None',LowerPriority:'LowerPriority',Self:'Self',Both:'Both',EBTFlowAbortMode_MAX:'EBTFlowAbortMode_MAX', };
+declare class BTDecorator extends BTAuxiliaryNode { 
+	bInverseCondition: boolean;
+	FlowAbortMode: EBTFlowAbortMode;
+	static Load(ResourceName: string): BTDecorator;
+	static Find(Outer: UObject, ResourceName: string): BTDecorator;
+	static GetDefaultObject(): BTDecorator;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BTDecorator;
+	static C(Other: UObject | any): BTDecorator;
+}
+
+declare type EBTDecoratorLogic = 'Invalid' | 'Test' | 'And' | 'Or' | 'Not' | 'EBTDecoratorLogic_MAX';
+declare var EBTDecoratorLogic : { Invalid:'Invalid',Test:'Test',And:'And',Or:'Or',Not:'Not',EBTDecoratorLogic_MAX:'EBTDecoratorLogic_MAX', };
+declare class BTDecoratorLogic { 
+	Operation: EBTDecoratorLogic;
+	Number: any;
+	clone() : BTDecoratorLogic;
+	static C(Other: UObject | any): BTDecoratorLogic;
+}
+
+declare class BTCompositeChild { 
+	ChildComposite: BTCompositeNode;
+	ChildTask: BTTaskNode;
+	Decorators: BTDecorator[];
+	DecoratorOps: BTDecoratorLogic[];
+	clone() : BTCompositeChild;
+	static C(Other: UObject | any): BTCompositeChild;
+}
+
+declare class BTCompositeNode extends BTNode { 
+	Children: BTCompositeChild[];
+	Services: BTService[];
+	bApplyDecoratorScope: boolean;
+	static Load(ResourceName: string): BTCompositeNode;
+	static Find(Outer: UObject, ResourceName: string): BTCompositeNode;
+	static GetDefaultObject(): BTCompositeNode;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BTCompositeNode;
+	static C(Other: UObject | any): BTCompositeNode;
+}
+
+declare class BehaviorTree extends UObject { 
+	RootNode: BTCompositeNode;
+	BTGraph: EdGraph;
+	LastEditedDocuments: EditedDocumentInfo[];
+	BlackboardAsset: BlackboardData;
+	RootDecorators: BTDecorator[];
+	RootDecoratorOps: BTDecoratorLogic[];
+	static Load(ResourceName: string): BehaviorTree;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTree;
+	static GetDefaultObject(): BehaviorTree;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTree;
+	static C(Other: UObject | any): BehaviorTree;
+}
+
+declare class BehaviorTreeTemplateInfo { 
+	Asset: BehaviorTree;
+	Template: BTCompositeNode;
+	clone() : BehaviorTreeTemplateInfo;
+	static C(Other: UObject | any): BehaviorTreeTemplateInfo;
+}
+
+declare class BehaviorTreeManager extends UObject { 
+	MaxDebuggerSteps: number;
+	LoadedTemplates: BehaviorTreeTemplateInfo[];
+	ActiveComponents: BehaviorTreeComponent[];
+	static Load(ResourceName: string): BehaviorTreeManager;
+	static Find(Outer: UObject, ResourceName: string): BehaviorTreeManager;
+	static GetDefaultObject(): BehaviorTreeManager;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeManager;
+	static C(Other: UObject | any): BehaviorTreeManager;
+}
+
+declare class EnvQueryNode extends UObject { 
+	VerNum: number;
+	static Load(ResourceName: string): EnvQueryNode;
+	static Find(Outer: UObject, ResourceName: string): EnvQueryNode;
+	static GetDefaultObject(): EnvQueryNode;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQueryNode;
+	static C(Other: UObject | any): EnvQueryNode;
+}
+
+declare class EnvQueryItemType extends UObject { 
+	static Load(ResourceName: string): EnvQueryItemType;
+	static Find(Outer: UObject, ResourceName: string): EnvQueryItemType;
+	static GetDefaultObject(): EnvQueryItemType;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQueryItemType;
+	static C(Other: UObject | any): EnvQueryItemType;
+}
+
+declare class EnvQueryGenerator extends EnvQueryNode { 
+	OptionName: string;
+	ItemType: UnrealEngineClass;
+	bAutoSortTests: boolean;
+	static Load(ResourceName: string): EnvQueryGenerator;
+	static Find(Outer: UObject, ResourceName: string): EnvQueryGenerator;
+	static GetDefaultObject(): EnvQueryGenerator;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQueryGenerator;
+	static C(Other: UObject | any): EnvQueryGenerator;
+}
+
+declare type EEnvTestPurpose = 'Filter' | 'Score' | 'FilterAndScore' | 'EEnvTestPurpose_MAX';
+declare var EEnvTestPurpose : { Filter:'Filter',Score:'Score',FilterAndScore:'FilterAndScore',EEnvTestPurpose_MAX:'EEnvTestPurpose_MAX', };
+declare type EEnvTestFilterOperator = 'AllPass' | 'AnyPass' | 'EEnvTestFilterOperator_MAX';
+declare var EEnvTestFilterOperator : { AllPass:'AllPass',AnyPass:'AnyPass',EEnvTestFilterOperator_MAX:'EEnvTestFilterOperator_MAX', };
+declare type EEnvTestScoreOperator = 'AverageScore' | 'MinScore' | 'MaxScore' | 'Multiply' | 'EEnvTestScoreOperator_MAX';
+declare var EEnvTestScoreOperator : { AverageScore:'AverageScore',MinScore:'MinScore',MaxScore:'MaxScore',Multiply:'Multiply',EEnvTestScoreOperator_MAX:'EEnvTestScoreOperator_MAX', };
+declare type EEnvTestFilterType = 'Minimum' | 'Maximum' | 'Range' | 'Match' | 'EEnvTestFilterType_MAX';
+declare var EEnvTestFilterType : { Minimum:'Minimum',Maximum:'Maximum',Range:'Range',Match:'Match',EEnvTestFilterType_MAX:'EEnvTestFilterType_MAX', };
+declare class AIDataProvider extends UObject { 
+	static Load(ResourceName: string): AIDataProvider;
+	static Find(Outer: UObject, ResourceName: string): AIDataProvider;
+	static GetDefaultObject(): AIDataProvider;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIDataProvider;
+	static C(Other: UObject | any): AIDataProvider;
+}
+
+declare class AIDataProviderValue { 
+	DataBinding: AIDataProvider;
+	DataField: string;
+	clone() : AIDataProviderValue;
+	static C(Other: UObject | any): AIDataProviderValue;
+}
+
+declare class AIDataProviderTypedValue extends AIDataProviderValue { 
+	PropertyType: UnrealEngineClass;
+	clone() : AIDataProviderTypedValue;
+	static C(Other: UObject | any): AIDataProviderTypedValue;
+}
+
+declare class AIDataProviderBoolValue extends AIDataProviderTypedValue { 
+	DefaultValue: boolean;
+	clone() : AIDataProviderBoolValue;
+	static C(Other: UObject | any): AIDataProviderBoolValue;
+}
+
+declare class AIDataProviderFloatValue extends AIDataProviderTypedValue { 
+	DefaultValue: number;
+	clone() : AIDataProviderFloatValue;
+	static C(Other: UObject | any): AIDataProviderFloatValue;
+}
+
+declare type EEnvTestScoreEquation = 'Linear' | 'Square' | 'InverseLinear' | 'SquareRoot' | 'Constant' | 'EEnvTestScoreEquation_MAX';
+declare var EEnvTestScoreEquation : { Linear:'Linear',Square:'Square',InverseLinear:'InverseLinear',SquareRoot:'SquareRoot',Constant:'Constant',EEnvTestScoreEquation_MAX:'EEnvTestScoreEquation_MAX', };
+declare type EEnvQueryTestClamping = 'None' | 'SpecifiedValue' | 'FilterThreshold' | 'EEnvQueryTestClamping_MAX';
+declare var EEnvQueryTestClamping : { None:'None',SpecifiedValue:'SpecifiedValue',FilterThreshold:'FilterThreshold',EEnvQueryTestClamping_MAX:'EEnvQueryTestClamping_MAX', };
+declare type EEQSNormalizationType = 'Absolute' | 'RelativeToScores' | 'EEQSNormalizationType_MAX';
+declare var EEQSNormalizationType : { Absolute:'Absolute',RelativeToScores:'RelativeToScores',EEQSNormalizationType_MAX:'EEQSNormalizationType_MAX', };
+declare class EnvQueryTest extends EnvQueryNode { 
+	TestOrder: number;
+	TestPurpose: EEnvTestPurpose;
+	TestComment: string;
+	MultipleContextFilterOp: EEnvTestFilterOperator;
+	MultipleContextScoreOp: EEnvTestScoreOperator;
+	FilterType: EEnvTestFilterType;
+	BoolValue: AIDataProviderBoolValue;
+	FloatValueMin: AIDataProviderFloatValue;
+	FloatValueMax: AIDataProviderFloatValue;
+	ScoringEquation: EEnvTestScoreEquation;
+	ClampMinType: EEnvQueryTestClamping;
+	ClampMaxType: EEnvQueryTestClamping;
+	NormalizationType: EEQSNormalizationType;
+	ScoreClampMin: AIDataProviderFloatValue;
+	ScoreClampMax: AIDataProviderFloatValue;
+	ScoringFactor: AIDataProviderFloatValue;
+	ReferenceValue: AIDataProviderFloatValue;
+	bDefineReferenceValue: boolean;
+	bWorkOnFloatValues: boolean;
+	static Load(ResourceName: string): EnvQueryTest;
+	static Find(Outer: UObject, ResourceName: string): EnvQueryTest;
+	static GetDefaultObject(): EnvQueryTest;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQueryTest;
+	static C(Other: UObject | any): EnvQueryTest;
+}
+
+declare class EnvQueryOption extends UObject { 
+	Generator: EnvQueryGenerator;
+	Tests: EnvQueryTest[];
+	static Load(ResourceName: string): EnvQueryOption;
+	static Find(Outer: UObject, ResourceName: string): EnvQueryOption;
+	static GetDefaultObject(): EnvQueryOption;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQueryOption;
+	static C(Other: UObject | any): EnvQueryOption;
+}
+
+declare class EnvQuery extends DataAsset { 
+	EdGraph: EdGraph;
+	QueryName: string;
+	Options: EnvQueryOption[];
+	static Load(ResourceName: string): EnvQuery;
+	static Find(Outer: UObject, ResourceName: string): EnvQuery;
+	static GetDefaultObject(): EnvQuery;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQuery;
+	static C(Other: UObject | any): EnvQuery;
+}
+
+declare class EnvQueryInstanceCache { 
+	Template: EnvQuery;
+	clone() : EnvQueryInstanceCache;
+	static C(Other: UObject | any): EnvQueryInstanceCache;
+}
+
+declare class EnvQueryContext extends UObject { 
+	static Load(ResourceName: string): EnvQueryContext;
+	static Find(Outer: UObject, ResourceName: string): EnvQueryContext;
+	static GetDefaultObject(): EnvQueryContext;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQueryContext;
+	static C(Other: UObject | any): EnvQueryContext;
+}
+
+declare type EEnvQueryStatus = 'Processing' | 'Success' | 'Failed' | 'Aborted' | 'OwnerLost' | 'MissingParam' | 'EEnvQueryStatus_MAX';
+declare var EEnvQueryStatus : { Processing:'Processing',Success:'Success',Failed:'Failed',Aborted:'Aborted',OwnerLost:'OwnerLost',MissingParam:'MissingParam',EEnvQueryStatus_MAX:'EEnvQueryStatus_MAX', };
+declare class EnvQueryInstanceBlueprintWrapper extends UObject { 
+	QueryID: number;
+	ItemType: UnrealEngineClass;
+	OptionIndex: number;
+	OnQueryFinishedEvent: UnrealEngineMulticastDelegate<(QueryInstance: EnvQueryInstanceBlueprintWrapper, QueryStatus: EEnvQueryStatus) => void>;
+	static Load(ResourceName: string): EnvQueryInstanceBlueprintWrapper;
+	static Find(Outer: UObject, ResourceName: string): EnvQueryInstanceBlueprintWrapper;
+	static GetDefaultObject(): EnvQueryInstanceBlueprintWrapper;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQueryInstanceBlueprintWrapper;
+	SetNamedParam(ParamName: string,Value: number): void;
+	GetResultsAsLocations(): Vector[];
+	GetResultsAsActors(): Actor[];
+	GetQueryResultsAsLocations(ResultLocations?: Vector[]): {ResultLocations: Vector[], $: boolean};
+	GetQueryResultsAsActors(ResultActors?: Actor[]): {ResultActors: Actor[], $: boolean};
+	GetItemScore(ItemIndex: number): number;
+	static C(Other: UObject | any): EnvQueryInstanceBlueprintWrapper;
+}
+
+declare type EEnvQueryRunMode = 'SingleResult' | 'RandomBest5Pct' | 'RandomBest25Pct' | 'AllMatching' | 'EEnvQueryRunMode_MAX';
+declare var EEnvQueryRunMode : { SingleResult:'SingleResult',RandomBest5Pct:'RandomBest5Pct',RandomBest25Pct:'RandomBest25Pct',AllMatching:'AllMatching',EEnvQueryRunMode_MAX:'EEnvQueryRunMode_MAX', };
+declare class EnvQueryManager extends AISubsystem { 
+	InstanceCache: EnvQueryInstanceCache[];
+	LocalContexts: EnvQueryContext[];
+	GCShieldedWrappers: EnvQueryInstanceBlueprintWrapper[];
+	MaxAllowedTestingTime: number;
+	bTestQueriesUsingBreadth: boolean;
+	QueryCountWarningThreshold: number;
+	QueryCountWarningInterval: any;
+	static Load(ResourceName: string): EnvQueryManager;
+	static Find(Outer: UObject, ResourceName: string): EnvQueryManager;
+	static GetDefaultObject(): EnvQueryManager;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQueryManager;
+	static RunEQSQuery(WorldContextObject: UObject,QueryTemplate: EnvQuery,Querier: UObject,RunMode: EEnvQueryRunMode,WrapperClass: UnrealEngineClass): EnvQueryInstanceBlueprintWrapper;
+	static C(Other: UObject | any): EnvQueryManager;
+}
+
+declare type EPathFollowingResult = 'Success' | 'Blocked' | 'OffPath' | 'Aborted' | 'Skipped_DEPRECATED' | 'Invalid' | 'EPathFollowingResult_MAX';
+declare var EPathFollowingResult : { Success:'Success',Blocked:'Blocked',OffPath:'OffPath',Aborted:'Aborted',Skipped_DEPRECATED:'Skipped_DEPRECATED',Invalid:'Invalid',EPathFollowingResult_MAX:'EPathFollowingResult_MAX', };
+declare class AIRequestID { 
+	RequestID: any;
+	clone() : AIRequestID;
+	static C(Other: UObject | any): AIRequestID;
+}
+
+declare class AIAsyncTaskBlueprintProxy extends UObject { 
+	OnSuccess: UnrealEngineMulticastDelegate<(MovementResult: EPathFollowingResult) => void>;
+	OnFail: UnrealEngineMulticastDelegate<(MovementResult: EPathFollowingResult) => void>;
+	static Load(ResourceName: string): AIAsyncTaskBlueprintProxy;
+	static Find(Outer: UObject, ResourceName: string): AIAsyncTaskBlueprintProxy;
+	static GetDefaultObject(): AIAsyncTaskBlueprintProxy;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIAsyncTaskBlueprintProxy;
+	OnMoveCompleted(RequestID: AIRequestID,MovementResult: EPathFollowingResult): void;
+	static C(Other: UObject | any): AIAsyncTaskBlueprintProxy;
+}
+
+declare class AIHotSpotManager extends UObject { 
+	static Load(ResourceName: string): AIHotSpotManager;
+	static Find(Outer: UObject, ResourceName: string): AIHotSpotManager;
+	static GetDefaultObject(): AIHotSpotManager;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIHotSpotManager;
+	static C(Other: UObject | any): AIHotSpotManager;
+}
+
+declare class NavLocalGridManager extends UObject { 
+	static Load(ResourceName: string): NavLocalGridManager;
+	static Find(Outer: UObject, ResourceName: string): NavLocalGridManager;
+	static GetDefaultObject(): NavLocalGridManager;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NavLocalGridManager;
+	static SetLocalNavigationGridDensity(WorldContextObject: UObject,CellSize: number): boolean;
+	static RemoveLocalNavigationGrid(WorldContextObject: UObject,GridId: number,bRebuildGrids: boolean): void;
+	static FindLocalNavigationGridPath(WorldContextObject: UObject,Start: Vector,End: Vector,PathPoints?: Vector[]): {PathPoints: Vector[], $: boolean};
+	static AddLocalNavigationGridForPoints(WorldContextObject: UObject,Locations: Vector[],Radius2D: number,Height: number,bRebuildGrids: boolean): number;
+	static AddLocalNavigationGridForPoint(WorldContextObject: UObject,Location: Vector,Radius2D: number,Height: number,bRebuildGrids: boolean): number;
+	static AddLocalNavigationGridForCapsule(WorldContextObject: UObject,Location: Vector,CapsuleRadius: number,CapsuleHalfHeight: number,Radius2D: number,Height: number,bRebuildGrids: boolean): number;
+	static AddLocalNavigationGridForBox(WorldContextObject: UObject,Location: Vector,Extent: Vector,Rotation: Rotator,Radius2D: number,Height: number,bRebuildGrids: boolean): number;
+	static C(Other: UObject | any): NavLocalGridManager;
+}
+
+declare class AISystem extends AISystemBase { 
+	PerceptionSystemClassName: SoftClassPath;
+	HotSpotManagerClassName: SoftClassPath;
+	AcceptanceRadius: number;
+	PathfollowingRegularPathPointAcceptanceRadius: number;
+	PathfollowingNavLinkAcceptanceRadius: number;
+	bFinishMoveOnGoalOverlap: boolean;
+	bAcceptPartialPaths: boolean;
+	bAllowStrafing: boolean;
+	bEnableBTAITasks: boolean;
+	bAllowControllersAsEQSQuerier: boolean;
+	bEnableDebuggerPlugin: boolean;
+	bForgetStaleActors: boolean;
+	bAddBlackboardSelfKey: boolean;
+	DefaultSightCollisionChannel: ECollisionChannel;
+	BehaviorTreeManager: BehaviorTreeManager;
+	EnvironmentQueryManager: EnvQueryManager;
+	PerceptionSystem: AIPerceptionSystem;
+	AllProxyObjects: AIAsyncTaskBlueprintProxy[];
+	HotSpotManager: AIHotSpotManager;
+	NavLocalGrids: NavLocalGridManager;
+	static Load(ResourceName: string): AISystem;
+	static Find(Outer: UObject, ResourceName: string): AISystem;
+	static GetDefaultObject(): AISystem;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AISystem;
+	AILoggingVerbose(): void;
+	AIIgnorePlayers(): void;
+	static C(Other: UObject | any): AISystem;
+}
+
+declare class AISubsystem extends UObject { 
+	AISystem: AISystem;
+	static Load(ResourceName: string): AISubsystem;
+	static Find(Outer: UObject, ResourceName: string): AISubsystem;
+	static GetDefaultObject(): AISubsystem;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AISubsystem;
+	static C(Other: UObject | any): AISubsystem;
+}
+
+declare class AISenseEvent extends UObject { 
+	static Load(ResourceName: string): AISenseEvent;
+	static Find(Outer: UObject, ResourceName: string): AISenseEvent;
+	static GetDefaultObject(): AISenseEvent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AISenseEvent;
+	static C(Other: UObject | any): AISenseEvent;
+}
+
+declare class AIStimulus { 
+	Age: number;
+	ExpirationAge: number;
+	Strength: number;
+	StimulusLocation: Vector;
+	ReceiverLocation: Vector;
+	Tag: string;
+	bSuccessfullySensed: boolean;
+	clone() : AIStimulus;
+	static C(Other: UObject | any): AIStimulus;
+}
+
+declare class AIPerceptionSystem extends AISubsystem { 
+	Senses: AISense[];
+	PerceptionAgingRate: number;
+	static Load(ResourceName: string): AIPerceptionSystem;
+	static Find(Outer: UObject, ResourceName: string): AIPerceptionSystem;
+	static GetDefaultObject(): AIPerceptionSystem;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIPerceptionSystem;
+	static ReportPerceptionEvent(WorldContextObject: UObject,PerceptionEvent: AISenseEvent): void;
+	ReportEvent(PerceptionEvent: AISenseEvent): void;
+	static RegisterPerceptionStimuliSource(WorldContextObject: UObject,Sense: UnrealEngineClass,Target: Actor): boolean;
+	OnPerceptionStimuliSourceEndPlay(Actor: Actor,EndPlayReason: EEndPlayReason): void;
+	static GetSenseClassForStimulus(WorldContextObject: UObject,Stimulus: AIStimulus): UnrealEngineClass;
+	static C(Other: UObject | any): AIPerceptionSystem;
+}
+
+declare class AISense extends UObject { 
+	DefaultExpirationAge: number;
+	NotifyType: EAISenseNotifyType;
+	bWantsNewPawnNotification: boolean;
+	bAutoRegisterAllPawnsAsSources: boolean;
+	PerceptionSystemInstance: AIPerceptionSystem;
+	static Load(ResourceName: string): AISense;
+	static Find(Outer: UObject, ResourceName: string): AISense;
+	static GetDefaultObject(): AISense;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AISense;
+	static C(Other: UObject | any): AISense;
+}
+
+declare class ActorPerceptionUpdateInfo { 
+	TargetId: number;
+	Target: any;
+	Stimulus: AIStimulus;
+	clone() : ActorPerceptionUpdateInfo;
+	static C(Other: UObject | any): ActorPerceptionUpdateInfo;
+}
+
+declare class ActorPerceptionBlueprintInfo { 
+	Target: Actor;
+	LastSensedStimuli: AIStimulus[];
+	bIsHostile: boolean;
+	clone() : ActorPerceptionBlueprintInfo;
+	static C(Other: UObject | any): ActorPerceptionBlueprintInfo;
+}
+
+declare class AIPerceptionComponent extends ActorComponent { 
+	SensesConfig: AISenseConfig[];
+	DominantSense: UnrealEngineClass;
+	AIOwner: AIController;
+	OnPerceptionUpdated: UnrealEngineMulticastDelegate<(UpdatedActors: Actor[]) => void>;
+	OnTargetPerceptionUpdated: UnrealEngineMulticastDelegate<(Actor: Actor, Stimulus: AIStimulus) => void>;
+	OnTargetPerceptionInfoUpdated: UnrealEngineMulticastDelegate<(UpdateInfo: ActorPerceptionUpdateInfo) => void>;
+	static Load(ResourceName: string): AIPerceptionComponent;
+	static Find(Outer: UObject, ResourceName: string): AIPerceptionComponent;
+	static GetDefaultObject(): AIPerceptionComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIPerceptionComponent;
+	SetSenseEnabled(SenseClass: UnrealEngineClass,bEnable: boolean): void;
+	RequestStimuliListenerUpdate(): void;
+	OnOwnerEndPlay(Actor: Actor,EndPlayReason: EEndPlayReason): void;
+	GetPerceivedHostileActorsBySense(SenseToUse: UnrealEngineClass,OutActors?: Actor[]): {OutActors: Actor[]};
+	GetPerceivedHostileActors(OutActors?: Actor[]): {OutActors: Actor[]};
+	GetPerceivedActors(SenseToUse: UnrealEngineClass,OutActors?: Actor[]): {OutActors: Actor[]};
+	GetKnownPerceivedActors(SenseToUse: UnrealEngineClass,OutActors?: Actor[]): {OutActors: Actor[]};
+	GetCurrentlyPerceivedActors(SenseToUse: UnrealEngineClass,OutActors?: Actor[]): {OutActors: Actor[]};
+	GetActorsPerception(Actor: Actor,Info?: ActorPerceptionBlueprintInfo): {Info: ActorPerceptionBlueprintInfo, $: boolean};
+	ForgetAll(): void;
+	static C(Other: UObject | any): AIPerceptionComponent;
+}
+
+declare type EAIRequestPriority = 'SoftScript' | 'Logic' | 'HardScript' | 'Reaction' | 'Ultimate' | 'MAX';
+declare var EAIRequestPriority : { SoftScript:'SoftScript',Logic:'Logic',HardScript:'HardScript',Reaction:'Reaction',Ultimate:'Ultimate',MAX:'MAX', };
+declare type EPawnActionResult = 'NotStarted' | 'InProgress' | 'Success' | 'Failed' | 'Aborted' | 'EPawnActionResult_MAX';
+declare var EPawnActionResult : { NotStarted:'NotStarted',InProgress:'InProgress',Success:'Success',Failed:'Failed',Aborted:'Aborted',EPawnActionResult_MAX:'EPawnActionResult_MAX', };
+declare class PawnAction extends UObject { 
+	ChildAction: PawnAction;
+	ParentAction: PawnAction;
+	OwnerComponent: PawnActionsComponent;
+	Instigator: UObject;
+	BrainComp: BrainComponent;
+	bAllowNewSameClassInstance: boolean;
+	bReplaceActiveSameClassInstance: boolean;
+	bShouldPauseMovement: boolean;
+	bAlwaysNotifyOnFinished: boolean;
+	static Load(ResourceName: string): PawnAction;
+	static Find(Outer: UObject, ResourceName: string): PawnAction;
+	static GetDefaultObject(): PawnAction;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PawnAction;
+	GetActionPriority(): EAIRequestPriority;
+	Finish(WithResult: EPawnActionResult): void;
+	static CreateActionInstance(WorldContextObject: UObject,ActionClass: UnrealEngineClass): PawnAction;
+	static C(Other: UObject | any): PawnAction;
+}
+
+declare class PawnActionStack { 
+	TopAction: PawnAction;
+	clone() : PawnActionStack;
+	static C(Other: UObject | any): PawnActionStack;
+}
+
+declare class PawnActionEvent { 
+	Action: PawnAction;
+	clone() : PawnActionEvent;
+	static C(Other: UObject | any): PawnActionEvent;
+}
+
+declare type EPawnActionAbortState = 'NeverStarted' | 'NotBeingAborted' | 'MarkPendingAbort' | 'LatentAbortInProgress' | 'AbortDone' | 'MAX';
+declare var EPawnActionAbortState : { NeverStarted:'NeverStarted',NotBeingAborted:'NotBeingAborted',MarkPendingAbort:'MarkPendingAbort',LatentAbortInProgress:'LatentAbortInProgress',AbortDone:'AbortDone',MAX:'MAX', };
+declare class PawnActionsComponent extends ActorComponent { 
+	ControlledPawn: Pawn;
+	ActionStacks: PawnActionStack[];
+	ActionEvents: PawnActionEvent[];
+	CurrentAction: PawnAction;
+	static Load(ResourceName: string): PawnActionsComponent;
+	static Find(Outer: UObject, ResourceName: string): PawnActionsComponent;
+	static GetDefaultObject(): PawnActionsComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PawnActionsComponent;
+	K2_PushAction(NewAction: PawnAction,Priority: EAIRequestPriority,Instigator: UObject): boolean;
+	static K2_PerformAction(Pawn: Pawn,Action: PawnAction,Priority: EAIRequestPriority): boolean;
+	K2_ForceAbortAction(ActionToAbort: PawnAction): EPawnActionAbortState;
+	K2_AbortAction(ActionToAbort: PawnAction): EPawnActionAbortState;
+	static C(Other: UObject | any): PawnActionsComponent;
+}
+
+declare type ETaskResourceOverlapPolicy = 'StartOnTop' | 'StartAtEnd' | 'ETaskResourceOverlapPolicy_MAX';
+declare var ETaskResourceOverlapPolicy : { StartOnTop:'StartOnTop',StartAtEnd:'StartAtEnd',ETaskResourceOverlapPolicy_MAX:'ETaskResourceOverlapPolicy_MAX', };
+declare class GameplayTask extends UObject { 
+	InstanceName: string;
+	ResourceOverlapPolicy: ETaskResourceOverlapPolicy;
+	ChildTask: GameplayTask;
+	static Load(ResourceName: string): GameplayTask;
+	static Find(Outer: UObject, ResourceName: string): GameplayTask;
+	static GetDefaultObject(): GameplayTask;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GameplayTask;
+	ReadyForActivation(): void;
+	EndTask(): void;
+	static C(Other: UObject | any): GameplayTask;
+}
+
+declare class GameplayResourceSet { 
+	clone() : GameplayResourceSet;
+	static C(Other: UObject | any): GameplayResourceSet;
+}
+
+declare class GameplayTasksComponent extends ActorComponent { 
+	bIsNetDirty: boolean;
+	SimulatedTasks: GameplayTask[];
+	TaskPriorityQueue: GameplayTask[];
+	TickingTasks: GameplayTask[];
+	KnownTasks: GameplayTask[];
+	OnClaimedResourcesChange: UnrealEngineMulticastDelegate<(NewlyClaimed: GameplayResourceSet, FreshlyReleased: GameplayResourceSet) => void>;
+	static Load(ResourceName: string): GameplayTasksComponent;
+	static Find(Outer: UObject, ResourceName: string): GameplayTasksComponent;
+	static GetDefaultObject(): GameplayTasksComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GameplayTasksComponent;
+	OnRep_SimulatedTasks(): void;
+	static C(Other: UObject | any): GameplayTasksComponent;
+}
+
+declare class NavArea extends NavAreaBase { 
+	DefaultCost: number;
+	FixedAreaEnteringCost: number;
+	DrawColor: Color;
+	SupportedAgents: NavAgentSelector;
+	bSupportsAgent0: boolean;
+	bSupportsAgent1: boolean;
+	bSupportsAgent2: boolean;
+	bSupportsAgent3: boolean;
+	bSupportsAgent4: boolean;
+	bSupportsAgent5: boolean;
+	bSupportsAgent6: boolean;
+	bSupportsAgent7: boolean;
+	bSupportsAgent8: boolean;
+	bSupportsAgent9: boolean;
+	bSupportsAgent10: boolean;
+	bSupportsAgent11: boolean;
+	bSupportsAgent12: boolean;
+	bSupportsAgent13: boolean;
+	bSupportsAgent14: boolean;
+	bSupportsAgent15: boolean;
+	static Load(ResourceName: string): NavArea;
+	static Find(Outer: UObject, ResourceName: string): NavArea;
+	static GetDefaultObject(): NavArea;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NavArea;
+	static C(Other: UObject | any): NavArea;
+}
+
+declare class NavigationFilterArea { 
+	AreaClass: UnrealEngineClass;
+	TravelCostOverride: number;
+	EnteringCostOverride: number;
+	bIsExcluded: boolean;
+	bOverrideTravelCost: boolean;
+	bOverrideEnteringCost: boolean;
+	clone() : NavigationFilterArea;
+	static C(Other: UObject | any): NavigationFilterArea;
+}
+
+declare class NavigationFilterFlags { 
+	bNavFlag0: boolean;
+	bNavFlag1: boolean;
+	bNavFlag2: boolean;
+	bNavFlag3: boolean;
+	bNavFlag4: boolean;
+	bNavFlag5: boolean;
+	bNavFlag6: boolean;
+	bNavFlag7: boolean;
+	bNavFlag8: boolean;
+	bNavFlag9: boolean;
+	bNavFlag10: boolean;
+	bNavFlag11: boolean;
+	bNavFlag12: boolean;
+	bNavFlag13: boolean;
+	bNavFlag14: boolean;
+	bNavFlag15: boolean;
+	clone() : NavigationFilterFlags;
+	static C(Other: UObject | any): NavigationFilterFlags;
+}
+
+declare class NavigationQueryFilter extends UObject { 
+	Areas: NavigationFilterArea[];
+	IncludeFlags: NavigationFilterFlags;
+	ExcludeFlags: NavigationFilterFlags;
+	static Load(ResourceName: string): NavigationQueryFilter;
+	static Find(Outer: UObject, ResourceName: string): NavigationQueryFilter;
+	static GetDefaultObject(): NavigationQueryFilter;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NavigationQueryFilter;
+	static C(Other: UObject | any): NavigationQueryFilter;
+}
+
+declare class GameplayTaskResource extends UObject { 
+	ManualResourceID: number;
+	AutoResourceID: any;
+	bManuallySetID: boolean;
+	static Load(ResourceName: string): GameplayTaskResource;
+	static Find(Outer: UObject, ResourceName: string): GameplayTaskResource;
+	static GetDefaultObject(): GameplayTaskResource;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GameplayTaskResource;
+	static C(Other: UObject | any): GameplayTaskResource;
+}
+
+declare type EPathFollowingRequestResult = 'Failed' | 'AlreadyAtGoal' | 'RequestSuccessful' | 'EPathFollowingRequestResult_MAX';
+declare var EPathFollowingRequestResult : { Failed:'Failed',AlreadyAtGoal:'AlreadyAtGoal',RequestSuccessful:'RequestSuccessful',EPathFollowingRequestResult_MAX:'EPathFollowingRequestResult_MAX', };
+declare type EPathFollowingStatus = 'Idle' | 'Waiting' | 'Paused' | 'Moving' | 'EPathFollowingStatus_MAX';
+declare var EPathFollowingStatus : { Idle:'Idle',Waiting:'Waiting',Paused:'Paused',Moving:'Moving',EPathFollowingStatus_MAX:'EPathFollowingStatus_MAX', };
+declare class AIController extends Controller { 
+	bStartAILogicOnPossess: boolean;
+	bStopAILogicOnUnposses: boolean;
+	bLOSflag: boolean;
+	bSkipExtraLOSChecks: boolean;
+	bAllowStrafe: boolean;
+	bWantsPlayerState: boolean;
+	bSetControlRotationFromPawnOrientation: boolean;
+	PathFollowingComponent: PathFollowingComponent;
+	BrainComponent: BrainComponent;
+	PerceptionComponent: AIPerceptionComponent;
+	ActionsComp: PawnActionsComponent;
+	Blackboard: BlackboardComponent;
+	CachedGameplayTasksComponent: GameplayTasksComponent;
+	DefaultNavigationFilterClass: UnrealEngineClass;
+	ReceiveMoveCompleted: UnrealEngineMulticastDelegate<(RequestID: AIRequestID, Result: EPathFollowingResult) => void>;
+	static GetDefaultObject(): AIController;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIController;
+	UseBlackboard(BlackboardAsset: BlackboardData,BlackboardComponent?: BlackboardComponent): {BlackboardComponent: BlackboardComponent, $: boolean};
+	UnclaimTaskResource(ResourceClass: UnrealEngineClass): void;
+	SetPathFollowingComponent(NewPFComponent: PathFollowingComponent): void;
+	SetMoveBlockDetection(bEnable: boolean): void;
+	RunBehaviorTree(BTAsset: BehaviorTree): boolean;
+	OnUsingBlackBoard(BlackboardComp: BlackboardComponent,BlackboardAsset: BlackboardData): void;
+	OnGameplayTaskResourcesClaimed(NewlyClaimed: GameplayResourceSet,FreshlyReleased: GameplayResourceSet): void;
+	MoveToLocation(Dest: Vector,AcceptanceRadius: number,bStopOnOverlap: boolean,bUsePathfinding: boolean,bProjectDestinationToNavigation: boolean,bCanStrafe: boolean,FilterClass: UnrealEngineClass,bAllowPartialPath: boolean): EPathFollowingRequestResult;
+	MoveToActor(Goal: Actor,AcceptanceRadius: number,bStopOnOverlap: boolean,bUsePathfinding: boolean,bCanStrafe: boolean,FilterClass: UnrealEngineClass,bAllowPartialPath: boolean): EPathFollowingRequestResult;
+	K2_SetFocus(NewFocus: Actor): void;
+	K2_SetFocalPoint(FP: Vector): void;
+	K2_ClearFocus(): void;
+	HasPartialPath(): boolean;
+	GetPathFollowingComponent(): PathFollowingComponent;
+	GetMoveStatus(): EPathFollowingStatus;
+	GetImmediateMoveDestination(): Vector;
+	GetFocusActor(): Actor;
+	GetFocalPointOnActor(Actor: Actor): Vector;
+	GetFocalPoint(): Vector;
+	GetAIPerceptionComponent(): AIPerceptionComponent;
+	ClaimTaskResource(ResourceClass: UnrealEngineClass): void;
+	static C(Other: UObject | any): AIController;
+}
+
+declare class XRDeviceId { 
+	SystemName: string;
+	DeviceID: number;
+	clone() : XRDeviceId;
+	static C(Other: UObject | any): XRDeviceId;
+	GetDevicePose(bIsTracked?: boolean,Orientation?: Rotator,bHasPositionalTracking?: boolean,Position?: Vector): {bIsTracked: boolean, Orientation: Rotator, bHasPositionalTracking: boolean, Position: Vector};
+	IsDeviceTracking(): boolean;
+	static GetDevicePose(XRDeviceId: XRDeviceId,bIsTracked?: boolean,Orientation?: Rotator,bHasPositionalTracking?: boolean,Position?: Vector): {bIsTracked: boolean, Orientation: Rotator, bHasPositionalTracking: boolean, Position: Vector};
+	static IsDeviceTracking(XRDeviceId: XRDeviceId): boolean;
+}
+
+declare class Actor extends UObject { 
+	PrimaryActorTick: ActorTickFunction;
+	bNetTemporary: boolean;
+	bNetStartup: boolean;
+	bOnlyRelevantToOwner: boolean;
+	bAlwaysRelevant: boolean;
+	bReplicateMovement: boolean;
+	bHidden: boolean;
+	bTearOff: boolean;
+	bForceNetAddressable: boolean;
+	bExchangedRoles: boolean;
+	bNetLoadOnClient: boolean;
+	bNetUseOwnerRelevancy: boolean;
+	bRelevantForNetworkReplays: boolean;
+	bRelevantForLevelBounds: boolean;
+	bReplayRewindable: boolean;
+	bAllowTickBeforeBeginPlay: boolean;
+	bAutoDestroyWhenFinished: boolean;
+	bCanBeDamaged: boolean;
+	bBlockInput: boolean;
+	bCollideWhenPlacing: boolean;
+	bFindCameraComponentWhenViewTarget: boolean;
+	bGenerateOverlapEventsDuringLevelStreaming: boolean;
+	bIgnoresOriginShifting: boolean;
+	bEnableAutoLODGeneration: boolean;
+	bIsEditorOnlyActor: boolean;
+	bActorSeamlessTraveled: boolean;
+	bReplicates: boolean;
+	bCanBeInCluster: boolean;
+	bAllowReceiveTickEventOnDedicatedServer: boolean;
+	bActorEnableCollision: boolean;
+	bActorIsBeingDestroyed: boolean;
+	UpdateOverlapsMethodDuringLevelStreaming: EActorUpdateOverlapsMethod;
+	DefaultUpdateOverlapsMethodDuringLevelStreaming: EActorUpdateOverlapsMethod;
+	RemoteRole: ENetRole;
+	ReplicatedMovement: RepMovement;
+	InitialLifeSpan: number;
+	CustomTimeDilation: number;
+	AttachmentReplication: RepAttachment;
+	Owner: Actor;
+	NetDriverName: string;
+	Role: ENetRole;
+	NetDormancy: ENetDormancy;
+	SpawnCollisionHandlingMethod: ESpawnActorCollisionHandlingMethod;
+	AutoReceiveInput: EAutoReceiveInput;
+	InputPriority: number;
+	InputComponent: InputComponent;
+	NetCullDistanceSquared: number;
+	NetTag: number;
+	NetUpdateFrequency: number;
+	MinNetUpdateFrequency: number;
+	NetPriority: number;
+	Instigator: Pawn;
+	Children: Actor[];
+	RootComponent: SceneComponent;
+	PivotOffset: Vector;
+	ControllingMatineeActors: MatineeActor[];
+	Layers: string[];
+	ParentComponentActor: any;
+	ParentComponent: any;
+	ActorGuid: Guid;
+	GroupActor: Actor;
+	SpriteScale: number;
+	HiddenEditorViews: any;
+	ActorLabel: string;
+	FolderPath: string;
+	bHiddenEd: boolean;
+	bIsEditorPreviewActor: boolean;
+	bHiddenEdLayer: boolean;
+	bHiddenEdLevel: boolean;
+	bLockLocation: boolean;
+	bActorLabelEditable: boolean;
+	bEditable: boolean;
+	bListedInSceneOutliner: boolean;
+	bOptimizeBPComponentData: boolean;
+	bHiddenEdTemporary: boolean;
+	Tags: string[];
+	OnTakeAnyDamage: UnrealEngineMulticastDelegate<(DamagedActor: Actor, Damage: number, DamageType: DamageType, InstigatedBy: Controller, DamageCauser: Actor) => void>;
+	OnTakePointDamage: UnrealEngineMulticastDelegate<(DamagedActor: Actor, Damage: number, InstigatedBy: Controller, HitLocation: Vector, FHitComponent: PrimitiveComponent, BoneName: string, ShotFromDirection: Vector, DamageType: DamageType, DamageCauser: Actor) => void>;
+	OnTakeRadialDamage: UnrealEngineMulticastDelegate<(DamagedActor: Actor, Damage: number, DamageType: DamageType, Origin: Vector, HitInfo: HitResult, InstigatedBy: Controller, DamageCauser: Actor) => void>;
+	OnActorBeginOverlap: UnrealEngineMulticastDelegate<(OverlappedActor: Actor, OtherActor: Actor) => void>;
+	OnActorEndOverlap: UnrealEngineMulticastDelegate<(OverlappedActor: Actor, OtherActor: Actor) => void>;
+	OnBeginCursorOver: UnrealEngineMulticastDelegate<(TouchedActor: Actor) => void>;
+	OnEndCursorOver: UnrealEngineMulticastDelegate<(TouchedActor: Actor) => void>;
+	OnClicked: UnrealEngineMulticastDelegate<(TouchedActor: Actor, ButtonPressed: Key) => void>;
+	OnReleased: UnrealEngineMulticastDelegate<(TouchedActor: Actor, ButtonReleased: Key) => void>;
+	OnInputTouchBegin: UnrealEngineMulticastDelegate<(FingerIndex: ETouchIndex, TouchedActor: Actor) => void>;
+	OnInputTouchEnd: UnrealEngineMulticastDelegate<(FingerIndex: ETouchIndex, TouchedActor: Actor) => void>;
+	OnInputTouchEnter: UnrealEngineMulticastDelegate<(FingerIndex: ETouchIndex, TouchedActor: Actor) => void>;
+	OnInputTouchLeave: UnrealEngineMulticastDelegate<(FingerIndex: ETouchIndex, TouchedActor: Actor) => void>;
+	OnActorHit: UnrealEngineMulticastDelegate<(SelfActor: Actor, OtherActor: Actor, NormalImpulse: Vector, Hit: HitResult) => void>;
+	OnDestroyed: UnrealEngineMulticastDelegate<(DestroyedActor: Actor) => void>;
+	OnEndPlay: UnrealEngineMulticastDelegate<(Actor: Actor, EndPlayReason: EEndPlayReason) => void>;
+	InstanceComponents: ActorComponent[];
+	BlueprintCreatedComponents: ActorComponent[];
+	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
+	static GetDefaultObject(): Actor;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Actor;
+	WasRecentlyRendered(Tolerance: number): boolean;
+	UserConstructionScript(): void;
+	TearOff(): void;
+	SnapRootComponentTo(InParentActor: Actor,InSocketName: string): void;
+	SetTickGroup(NewTickGroup: ETickingGroup): void;
+	SetTickableWhenPaused(bTickableWhenPaused: boolean): void;
+	SetReplicates(bInReplicates: boolean): void;
+	SetReplicateMovement(bInReplicateMovement: boolean): void;
+	SetOwner(NewOwner: Actor): void;
+	SetNetDormancy(NewDormancy: ENetDormancy): void;
+	SetLifeSpan(InLifespan: number): void;
+	SetIsTemporarilyHiddenInEditor(bIsHidden: boolean): void;
+	SetFolderPath(NewFolderPath: string): void;
+	SetAutoDestroyWhenFinished(bVal: boolean): void;
+	SetActorTickInterval(TickInterval: number): void;
+	SetActorTickEnabled(bEnabled: boolean): void;
+	SetActorScale3D(NewScale3D: Vector): void;
+	SetActorRelativeScale3D(NewRelativeScale: Vector): void;
+	SetActorLabel(NewActorLabel: string,bMarkDirty: boolean): void;
+	SetActorHiddenInGame(bNewHidden: boolean): void;
+	SetActorEnableCollision(bNewActorEnableCollision: boolean): void;
+	RemoveTickPrerequisiteComponent(PrerequisiteComponent: ActorComponent): void;
+	RemoveTickPrerequisiteActor(PrerequisiteActor: Actor): void;
+	ReceiveTick(DeltaSeconds: number): void;
+	ReceiveRadialDamage(DamageReceived: number,DamageType: DamageType,Origin: Vector,HitInfo: HitResult,InstigatedBy: Controller,DamageCauser: Actor): void;
+	ReceivePointDamage(Damage: number,DamageType: DamageType,HitLocation: Vector,HitNormal: Vector,HitComponent: PrimitiveComponent,BoneName: string,ShotFromDirection: Vector,InstigatedBy: Controller,DamageCauser: Actor,HitInfo: HitResult): void;
+	ReceiveHit(MyComp: PrimitiveComponent,Other: Actor,OtherComp: PrimitiveComponent,bSelfMoved: boolean,HitLocation: Vector,HitNormal: Vector,NormalImpulse: Vector,Hit: HitResult): void;
+	ReceiveEndPlay(EndPlayReason: EEndPlayReason): void;
+	ReceiveDestroyed(): void;
+	ReceiveBeginPlay(): void;
+	ReceiveAnyDamage(Damage: number,DamageType: DamageType,InstigatedBy: Controller,DamageCauser: Actor): void;
+	ReceiveActorOnReleased(ButtonReleased: Key): void;
+	ReceiveActorOnInputTouchLeave(FingerIndex: ETouchIndex): void;
+	ReceiveActorOnInputTouchEnter(FingerIndex: ETouchIndex): void;
+	ReceiveActorOnInputTouchEnd(FingerIndex: ETouchIndex): void;
+	ReceiveActorOnInputTouchBegin(FingerIndex: ETouchIndex): void;
+	ReceiveActorOnClicked(ButtonPressed: Key): void;
+	ReceiveActorEndOverlap(OtherActor: Actor): void;
+	ReceiveActorEndCursorOver(): void;
+	ReceiveActorBeginOverlap(OtherActor: Actor): void;
+	ReceiveActorBeginCursorOver(): void;
+	PrestreamTextures(Seconds: number,bEnableStreaming: boolean,CinematicTextureGroups: number): void;
+	OnRep_ReplicateMovement(): void;
+	OnRep_ReplicatedMovement(): void;
+	OnRep_Owner(): void;
+	OnRep_Instigator(): void;
+	OnRep_AttachmentReplication(): void;
+	MakeNoise(Loudness: number,NoiseInstigator: Pawn,NoiseLocation: Vector,MaxRange: number,Tag: string): void;
+	MakeMIDForMaterial(Parent: MaterialInterface): MaterialInstanceDynamic;
+	K2_TeleportTo(DestLocation: Vector,DestRotation: Rotator): boolean;
+	K2_SetActorTransform(NewTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult, $: boolean};
+	K2_SetActorRotation(NewRotation: Rotator,bTeleportPhysics: boolean): boolean;
+	K2_SetActorRelativeTransform(NewRelativeTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_SetActorRelativeRotation(NewRelativeRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_SetActorRelativeLocation(NewRelativeLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_SetActorLocationAndRotation(NewLocation: Vector,NewRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult, $: boolean};
+	K2_SetActorLocation(NewLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult, $: boolean};
+	K2_OnReset(): void;
+	K2_OnEndViewTarget(PC: PlayerController): void;
+	K2_OnBecomeViewTarget(PC: PlayerController): void;
+	K2_GetRootComponent(): SceneComponent;
+	K2_GetComponentsByClass(ComponentClass: UnrealEngineClass): ActorComponent[];
+	K2_GetActorRotation(): Rotator;
+	K2_GetActorLocation(): Vector;
+	K2_DetachFromActor(LocationRule: EDetachmentRule,RotationRule: EDetachmentRule,ScaleRule: EDetachmentRule): void;
+	K2_DestroyComponent(Component: ActorComponent): void;
+	K2_DestroyActor(): void;
+	K2_AttachToComponent(Parent: SceneComponent,SocketName: string,LocationRule: EAttachmentRule,RotationRule: EAttachmentRule,ScaleRule: EAttachmentRule,bWeldSimulatedBodies: boolean): void;
+	K2_AttachToActor(ParentActor: Actor,SocketName: string,LocationRule: EAttachmentRule,RotationRule: EAttachmentRule,ScaleRule: EAttachmentRule,bWeldSimulatedBodies: boolean): void;
+	K2_AttachRootComponentToActor(InParentActor: Actor,InSocketName: string,AttachLocationType: EAttachLocation,bWeldSimulatedBodies: boolean): void;
+	K2_AttachRootComponentTo(InParent: SceneComponent,InSocketName: string,AttachLocationType: EAttachLocation,bWeldSimulatedBodies: boolean): void;
+	K2_AddActorWorldTransformKeepScale(DeltaTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_AddActorWorldTransform(DeltaTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_AddActorWorldRotation(DeltaRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_AddActorWorldOffset(DeltaLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_AddActorLocalTransform(NewTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_AddActorLocalRotation(DeltaRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	K2_AddActorLocalOffset(DeltaLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
+	IsTemporarilyHiddenInEditor(bIncludeParent: boolean): boolean;
+	IsSelectable(): boolean;
+	IsOverlappingActor(Other: Actor): boolean;
+	IsHiddenEdAtStartup(): boolean;
+	IsHiddenEd(): boolean;
+	IsEditable(): boolean;
+	IsChildActor(): boolean;
+	IsActorTickEnabled(): boolean;
+	IsActorBeingDestroyed(): boolean;
+	HasAuthority(): boolean;
+	GetVerticalDistanceTo(OtherActor: Actor): number;
+	GetVelocity(): Vector;
+	GetTransform(): Transform;
+	GetTickableWhenPaused(): boolean;
+	GetSquaredHorizontalDistanceTo(OtherActor: Actor): number;
+	GetSquaredDistanceTo(OtherActor: Actor): number;
+	GetRemoteRole(): ENetRole;
+	GetParentComponent(): ChildActorComponent;
+	GetParentActor(): Actor;
+	GetOwner(): Actor;
+	GetOverlappingComponents(OverlappingComponents?: PrimitiveComponent[]): {OverlappingComponents: PrimitiveComponent[]};
+	GetOverlappingActors(OverlappingActors?: Actor[],ClassFilter?: UnrealEngineClass): {OverlappingActors: Actor[]};
+	GetLocalRole(): ENetRole;
+	GetLifeSpan(): number;
+	GetInstigatorController(): Controller;
+	GetInstigator(): Pawn;
+	GetInputVectorAxisValue(InputAxisKey: Key): Vector;
+	GetInputAxisValue(InputAxisName: string): number;
+	GetInputAxisKeyValue(InputAxisKey: Key): number;
+	GetHorizontalDotProductTo(OtherActor: Actor): number;
+	GetHorizontalDistanceTo(OtherActor: Actor): number;
+	GetGameTimeSinceCreation(): number;
+	GetFolderPath(): string;
+	GetDotProductTo(OtherActor: Actor): number;
+	GetDistanceTo(OtherActor: Actor): number;
+	GetComponentsByTag(ComponentClass: UnrealEngineClass,Tag: string): ActorComponent[];
+	GetComponentsByInterface(Interface: UnrealEngineClass): ActorComponent[];
+	GetComponentByClass(ComponentClass: UnrealEngineClass): ActorComponent;
+	GetAttachParentSocketName(): string;
+	GetAttachParentActor(): Actor;
+	GetAttachedActors(OutActors?: Actor[],bResetArray?: boolean): {OutActors: Actor[]};
+	GetAllChildActors(ChildActors?: Actor[],bIncludeDescendants?: boolean): {ChildActors: Actor[]};
+	GetActorUpVector(): Vector;
+	GetActorTimeDilation(): number;
+	GetActorTickInterval(): number;
+	GetActorScale3D(): Vector;
+	GetActorRightVector(): Vector;
+	GetActorRelativeScale3D(): Vector;
+	GetActorLabel(): string;
+	GetActorForwardVector(): Vector;
+	GetActorEyesViewPoint(OutLocation?: Vector,OutRotation?: Rotator): {OutLocation: Vector, OutRotation: Rotator};
+	GetActorEnableCollision(): boolean;
+	GetActorBounds(bOnlyCollidingComponents: boolean,Origin?: Vector,BoxExtent?: Vector,bIncludeFromChildActors?: boolean): {Origin: Vector, BoxExtent: Vector};
+	ForceNetUpdate(): void;
+	FlushNetDormancy(): void;
+	FinishAddComponent(Component: ActorComponent,bManualAttachment: boolean,RelativeTransform: Transform): void;
+	EnableInput(PlayerController: PlayerController): void;
+	DisableInput(PlayerController: PlayerController): void;
+	DetachRootComponentFromParent(bMaintainWorldPosition: boolean): void;
+	AddTickPrerequisiteComponent(PrerequisiteComponent: ActorComponent): void;
+	AddTickPrerequisiteActor(PrerequisiteActor: Actor): void;
+	AddComponentByClass(Class: UnrealEngineClass,bManualAttachment: boolean,RelativeTransform: Transform,bDeferredFinish: boolean): ActorComponent;
+	AddComponent(TemplateName: string,bManualAttachment: boolean,RelativeTransform: Transform,ComponentTemplateContext: UObject,bDeferredFinish: boolean): ActorComponent;
+	ActorHasTag(Tag: string): boolean;
+	static C(Other: UObject | any): Actor;
+	ClearActorLabel(): void;
+	GetActorLabel(): string;
+	GetActorLocation(): Vector;
+	GetActorRotation(): Rotator;
+	GetFolderPath(): string;
+	IsActorLabelEditable(): boolean;
+	SetActorLabel(NewActorLabel: string,bMarkDirty: boolean): void;
+	SetActorLabelUnique(NewActorLabel: string,InExistingActorLabels: string[]): void;
+	SetActorLocation(NewLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult, $: boolean};
+	SetFolderPath(NewFolderPath: string): void;
+	SetFolderPath_Recursively(NewFolderPath: string): void;
+	SetIsTemporarilyHiddenInEditor(bIsHidden: boolean): void;
+	AddActorToLayer(Layer: ActorLayer): void;
+	RemoveActorFromLayer(Layer: ActorLayer): void;
+	Actor_GetWorld(): World;
+	GetComponentsByClass(ComponentClass: UnrealEngineClass): ActorComponent[];
+	GetLastRenderTime(): number;
+	GetLevel(): Level;
+	IsPendingKill(): boolean;
+	ReregisterAllComponents(): void;
+	SetActorFlags(Flags: number): void;
+	SetRootComponent(Component: SceneComponent): void;
+	GetContentScale(PlaneResult: MagicLeapPlaneResult): Transform;
+	SetFocusActor(bSetStabilizationActor: boolean): void;
+	SetStabilizationDepthActor(bSetFocusActor: boolean): void;
+	GetAIController(): AIController;
+	GetBlackboard(): BlackboardComponent;
+	GetActorBounds(Origin?: Vector,BoxExtent?: Vector): {Origin: Vector, BoxExtent: Vector};
+	ApplyDamage(BaseDamage: number,EventInstigator: Controller,DamageCauser: Actor,DamageTypeClass: UnrealEngineClass): number;
+	ApplyPointDamage(BaseDamage: number,HitFromDirection: Vector,HitInfo: HitResult,EventInstigator: Controller,DamageCauser: Actor,DamageTypeClass: UnrealEngineClass): number;
+	FinishSpawningActor(SpawnTransform: Transform): Actor;
+	AddDeviceVisualizationComponentBlocking(XRDeviceId: XRDeviceId,bManualAttachment: boolean,RelativeTransform: Transform): PrimitiveComponent;
+	AddNamedDeviceVisualizationComponentBlocking(SystemName: string,DeviceName: string,bManualAttachment: boolean,RelativeTransform: Transform,XRDeviceId?: XRDeviceId): {XRDeviceId: XRDeviceId, $: PrimitiveComponent};
+	static ClearActorLabel(Actor: Actor): void;
+	static GetActorLabel(Actor: Actor): string;
+	static GetActorLocation(Actor: Actor): Vector;
+	static GetActorRotation(Actor: Actor): Rotator;
+	static GetFolderPath(Actor: Actor): string;
+	static IsActorLabelEditable(Actor: Actor): boolean;
+	static SetActorLabel(Actor: Actor,NewActorLabel: string,bMarkDirty: boolean): void;
+	static SetActorLabelUnique(Actor: Actor,NewActorLabel: string,InExistingActorLabels: string[]): void;
+	static SetActorLocation(Actor: Actor,NewLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult, $: boolean};
+	static SetFolderPath(Actor: Actor,NewFolderPath: string): void;
+	static SetFolderPath_Recursively(Actor: Actor,NewFolderPath: string): void;
+	static SetIsTemporarilyHiddenInEditor(Actor: Actor,bIsHidden: boolean): void;
+	static AddActorToLayer(InActor: Actor,Layer: ActorLayer): void;
+	static RemoveActorFromLayer(InActor: Actor,Layer: ActorLayer): void;
+	static Actor_GetWorld(Actor: Actor): World;
+	static GetComponentsByClass(Actor: Actor,ComponentClass: UnrealEngineClass): ActorComponent[];
+	static GetLastRenderTime(Actor: Actor): number;
+	static GetLevel(Actor: Actor): Level;
+	static IsPendingKill(InActor: Actor): boolean;
+	static ReregisterAllComponents(Actor: Actor): void;
+	static SetActorFlags(Actor: Actor,Flags: number): void;
+	static SetRootComponent(Actor: Actor,Component: SceneComponent): void;
+	static GetContentScale(ContentActor: Actor,PlaneResult: MagicLeapPlaneResult): Transform;
+	static SetFocusActor(InFocusActor: Actor,bSetStabilizationActor: boolean): void;
+	static SetStabilizationDepthActor(InStabilizationDepthActor: Actor,bSetFocusActor: boolean): void;
+	static GetAIController(ControlledActor: Actor): AIController;
+	static GetBlackboard(Target: Actor): BlackboardComponent;
+	static GetActorBounds(Actor: Actor,Origin?: Vector,BoxExtent?: Vector): {Origin: Vector, BoxExtent: Vector};
+	static ApplyDamage(DamagedActor: Actor,BaseDamage: number,EventInstigator: Controller,DamageCauser: Actor,DamageTypeClass: UnrealEngineClass): number;
+	static ApplyPointDamage(DamagedActor: Actor,BaseDamage: number,HitFromDirection: Vector,HitInfo: HitResult,EventInstigator: Controller,DamageCauser: Actor,DamageTypeClass: UnrealEngineClass): number;
+	static FinishSpawningActor(Actor: Actor,SpawnTransform: Transform): Actor;
+	static AddDeviceVisualizationComponentBlocking(Target: Actor,XRDeviceId: XRDeviceId,bManualAttachment: boolean,RelativeTransform: Transform): PrimitiveComponent;
+	static AddNamedDeviceVisualizationComponentBlocking(Target: Actor,SystemName: string,DeviceName: string,bManualAttachment: boolean,RelativeTransform: Transform,XRDeviceId?: XRDeviceId): {XRDeviceId: XRDeviceId, $: PrimitiveComponent};
+}
+
 declare class LineBatchComponent extends PrimitiveComponent { 
 	static Load(ResourceName: string): LineBatchComponent;
 	static Find(Outer: UObject, ResourceName: string): LineBatchComponent;
@@ -12441,17 +15366,6 @@ declare class NavigationSystemBase extends UObject {
 	static C(Other: UObject | any): NavigationSystemBase;
 }
 
-declare class AISystemBase extends UObject { 
-	AISystemClassName: SoftClassPath;
-	AISystemModuleName: string;
-	bInstantiateAISystemOnClient: boolean;
-	static Load(ResourceName: string): AISystemBase;
-	static Find(Outer: UObject, ResourceName: string): AISystemBase;
-	static GetDefaultObject(): AISystemBase;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AISystemBase;
-	static C(Other: UObject | any): AISystemBase;
-}
-
 declare class AvoidanceManager extends UObject { 
 	DefaultTimeToLive: number;
 	LockTimeAfterAvoid: number;
@@ -12527,32 +15441,605 @@ declare class WorldPSCPool {
 	static C(Other: UObject | any): WorldPSCPool;
 }
 
-declare class ActorLayer { 
-	Name: string;
-	clone() : ActorLayer;
-	static C(Other: UObject | any): ActorLayer;
+declare class VaRestURL { 
+	Protocol: string;
+	Host: string;
+	Port: number;
+	Valid: number;
+	Map: string;
+	RedirectURL: string;
+	Op: string[];
+	Portal: string;
+	clone() : VaRestURL;
+	static C(Other: UObject | any): VaRestURL;
+}
+
+declare class URL { 
+	Protocol: string;
+	Host: string;
+	Port: number;
+	Valid: number;
+	Map: string;
+	RedirectURL: string;
+	Op: string[];
+	Portal: string;
+	clone() : URL;
+	static C(Other: UObject | any): URL;
+}
+
+declare type ERecastPartitioning = 'Monotone' | 'Watershed' | 'ChunkyMonotone' | 'ERecastPartitioning_MAX';
+declare var ERecastPartitioning : { Monotone:'Monotone',Watershed:'Watershed',ChunkyMonotone:'ChunkyMonotone',ERecastPartitioning_MAX:'ERecastPartitioning_MAX', };
+declare class RecastNavMesh extends NavigationData { 
+	bDrawTriangleEdges: boolean;
+	bDrawPolyEdges: boolean;
+	bDrawFilledPolys: boolean;
+	bDrawNavMeshEdges: boolean;
+	bDrawTileBounds: boolean;
+	bDrawPathCollidingGeometry: boolean;
+	bDrawTileLabels: boolean;
+	bDrawPolygonLabels: boolean;
+	bDrawDefaultPolygonCost: boolean;
+	bDrawPolygonFlags: boolean;
+	bDrawLabelsOnPathNodes: boolean;
+	bDrawNavLinks: boolean;
+	bDrawFailedNavLinks: boolean;
+	bDrawClusters: boolean;
+	bDrawOctree: boolean;
+	bDrawOctreeDetails: boolean;
+	bDrawMarkedForbiddenPolys: boolean;
+	bDistinctlyDrawTilesBeingBuilt: boolean;
+	DrawOffset: number;
+	bFixedTilePoolSize: boolean;
+	TilePoolSize: number;
+	TileSizeUU: number;
+	CellSize: number;
+	CellHeight: number;
+	AgentRadius: number;
+	AgentHeight: number;
+	AgentMaxSlope: number;
+	AgentMaxStepHeight: number;
+	MinRegionArea: number;
+	MergeRegionSize: number;
+	MaxSimplificationError: number;
+	MaxSimultaneousTileGenerationJobsCount: number;
+	TileNumberHardLimit: number;
+	PolyRefTileBits: number;
+	PolyRefNavPolyBits: number;
+	PolyRefSaltBits: number;
+	NavMeshOriginOffset: Vector;
+	DefaultDrawDistance: number;
+	DefaultMaxSearchNodes: number;
+	DefaultMaxHierarchicalSearchNodes: number;
+	RegionPartitioning: ERecastPartitioning;
+	LayerPartitioning: ERecastPartitioning;
+	RegionChunkSplits: number;
+	LayerChunkSplits: number;
+	bSortNavigationAreasByCost: boolean;
+	bPerformVoxelFiltering: boolean;
+	bMarkLowHeightAreas: boolean;
+	bUseExtraTopCellWhenMarkingAreas: boolean;
+	bFilterLowSpanSequences: boolean;
+	bFilterLowSpanFromTileCache: boolean;
+	bDoFullyAsyncNavDataGathering: boolean;
+	bUseBetterOffsetsFromCorners: boolean;
+	bStoreEmptyTileLayers: boolean;
+	bUseVirtualFilters: boolean;
+	bAllowNavLinkAsPathEnd: boolean;
+	bUseVoxelCache: boolean;
+	TileSetUpdateInterval: number;
+	HeuristicScale: number;
+	VerticalDeviationFromGroundCompensation: number;
+	static GetDefaultObject(): RecastNavMesh;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): RecastNavMesh;
+	K2_ReplaceAreaInTileBounds(Bounds: Box,OldArea: UnrealEngineClass,NewArea: UnrealEngineClass,ReplaceLinks: boolean): boolean;
+	static C(Other: UObject | any): RecastNavMesh;
+}
+
+declare type EARWorldAlignment = 'Gravity' | 'GravityAndHeading' | 'Camera' | 'EARWorldAlignment_MAX';
+declare var EARWorldAlignment : { Gravity:'Gravity',GravityAndHeading:'GravityAndHeading',Camera:'Camera',EARWorldAlignment_MAX:'EARWorldAlignment_MAX', };
+declare type EARSessionType = 'None' | 'Orientation' | 'World' | 'Face' | 'Image' | 'ObjectScanning' | 'PoseTracking' | 'GeoTracking' | 'EARSessionType_MAX';
+declare var EARSessionType : { None:'None',Orientation:'Orientation',World:'World',Face:'Face',Image:'Image',ObjectScanning:'ObjectScanning',PoseTracking:'PoseTracking',GeoTracking:'GeoTracking',EARSessionType_MAX:'EARSessionType_MAX', };
+declare type EARPlaneDetectionMode = 'None' | 'HorizontalPlaneDetection' | 'VerticalPlaneDetection' | 'EARPlaneDetectionMode_MAX';
+declare var EARPlaneDetectionMode : { None:'None',HorizontalPlaneDetection:'HorizontalPlaneDetection',VerticalPlaneDetection:'VerticalPlaneDetection',EARPlaneDetectionMode_MAX:'EARPlaneDetectionMode_MAX', };
+declare type EARLightEstimationMode = 'None' | 'AmbientLightEstimate' | 'DirectionalLightEstimate' | 'EARLightEstimationMode_MAX';
+declare var EARLightEstimationMode : { None:'None',AmbientLightEstimate:'AmbientLightEstimate',DirectionalLightEstimate:'DirectionalLightEstimate',EARLightEstimationMode_MAX:'EARLightEstimationMode_MAX', };
+declare type EARFrameSyncMode = 'SyncTickWithCameraImage' | 'SyncTickWithoutCameraImage' | 'EARFrameSyncMode_MAX';
+declare var EARFrameSyncMode : { SyncTickWithCameraImage:'SyncTickWithCameraImage',SyncTickWithoutCameraImage:'SyncTickWithoutCameraImage',EARFrameSyncMode_MAX:'EARFrameSyncMode_MAX', };
+declare type EARCandidateImageOrientation = 'Landscape' | 'Portrait' | 'EARCandidateImageOrientation_MAX';
+declare var EARCandidateImageOrientation : { Landscape:'Landscape',Portrait:'Portrait',EARCandidateImageOrientation_MAX:'EARCandidateImageOrientation_MAX', };
+declare class ARCandidateImage extends DataAsset { 
+	CandidateTexture: Texture2D;
+	FriendlyName: string;
+	Width: number;
+	Height: number;
+	Orientation: EARCandidateImageOrientation;
+	static Load(ResourceName: string): ARCandidateImage;
+	static Find(Outer: UObject, ResourceName: string): ARCandidateImage;
+	static GetDefaultObject(): ARCandidateImage;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARCandidateImage;
+	GetPhysicalWidth(): number;
+	GetPhysicalHeight(): number;
+	GetOrientation(): EARCandidateImageOrientation;
+	GetFriendlyName(): string;
+	GetCandidateTexture(): Texture2D;
+	static C(Other: UObject | any): ARCandidateImage;
+}
+
+declare type EAREnvironmentCaptureProbeType = 'None' | 'Manual' | 'Automatic' | 'EAREnvironmentCaptureProbeType_MAX';
+declare var EAREnvironmentCaptureProbeType : { None:'None',Manual:'Manual',Automatic:'Automatic',EAREnvironmentCaptureProbeType_MAX:'EAREnvironmentCaptureProbeType_MAX', };
+declare class ARCandidateObject extends DataAsset { 
+	CandidateObjectData: number[];
+	FriendlyName: string;
+	BoundingBox: Box;
+	static Load(ResourceName: string): ARCandidateObject;
+	static Find(Outer: UObject, ResourceName: string): ARCandidateObject;
+	static GetDefaultObject(): ARCandidateObject;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARCandidateObject;
+	SetFriendlyName(NewName: string): void;
+	SetCandidateObjectData(InCandidateObject: number[]): void;
+	SetBoundingBox(InBoundingBox: Box): void;
+	GetFriendlyName(): string;
+	GetCandidateObjectData(): number[];
+	GetBoundingBox(): Box;
+	static C(Other: UObject | any): ARCandidateObject;
+}
+
+declare class ARVideoFormat { 
+	FPS: number;
+	Width: number;
+	Height: number;
+	clone() : ARVideoFormat;
+	static C(Other: UObject | any): ARVideoFormat;
+}
+
+declare type EARFaceTrackingDirection = 'FaceRelative' | 'FaceMirrored' | 'EARFaceTrackingDirection_MAX';
+declare var EARFaceTrackingDirection : { FaceRelative:'FaceRelative',FaceMirrored:'FaceMirrored',EARFaceTrackingDirection_MAX:'EARFaceTrackingDirection_MAX', };
+declare type EARFaceTrackingUpdate = 'CurvesAndGeo' | 'CurvesOnly' | 'EARFaceTrackingUpdate_MAX';
+declare var EARFaceTrackingUpdate : { CurvesAndGeo:'CurvesAndGeo',CurvesOnly:'CurvesOnly',EARFaceTrackingUpdate_MAX:'EARFaceTrackingUpdate_MAX', };
+declare type EARSessionTrackingFeature = 'None' | 'PoseDetection2D' | 'PersonSegmentation' | 'PersonSegmentationWithDepth' | 'SceneDepth' | 'SmoothedSceneDepth' | 'EARSessionTrackingFeature_MAX';
+declare var EARSessionTrackingFeature : { None:'None',PoseDetection2D:'PoseDetection2D',PersonSegmentation:'PersonSegmentation',PersonSegmentationWithDepth:'PersonSegmentationWithDepth',SceneDepth:'SceneDepth',SmoothedSceneDepth:'SmoothedSceneDepth',EARSessionTrackingFeature_MAX:'EARSessionTrackingFeature_MAX', };
+declare type EARSceneReconstruction = 'None' | 'MeshOnly' | 'MeshWithClassification' | 'EARSceneReconstruction_MAX';
+declare var EARSceneReconstruction : { None:'None',MeshOnly:'MeshOnly',MeshWithClassification:'MeshWithClassification',EARSceneReconstruction_MAX:'EARSceneReconstruction_MAX', };
+declare class ARComponent extends SceneComponent { 
+	NativeID: Guid;
+	bUseDefaultReplication: boolean;
+	DefaultMeshMaterial: MaterialInterface;
+	DefaultWireframeMeshMaterial: MaterialInterface;
+	MRMeshComponent: MRMeshComponent;
+	MyTrackedGeometry: ARTrackedGeometry;
+	static Load(ResourceName: string): ARComponent;
+	static Find(Outer: UObject, ResourceName: string): ARComponent;
+	static GetDefaultObject(): ARComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARComponent;
+	UpdateVisualization(): void;
+	SetNativeID(NativeID: Guid): void;
+	ReceiveRemove(): void;
+	OnRep_Payload(): void;
+	GetMRMesh(): MRMeshComponent;
+	static C(Other: UObject | any): ARComponent;
+}
+
+declare class ARSessionPayload { 
+	ConfigFlags: number;
+	DefaultMeshMaterial: MaterialInterface;
+	DefaultWireframeMeshMaterial: MaterialInterface;
+	clone() : ARSessionPayload;
+	static C(Other: UObject | any): ARSessionPayload;
+}
+
+declare class ARPlaneUpdatePayload { 
+	SessionPayload: ARSessionPayload;
+	WorldTransform: Transform;
+	Center: Vector;
+	Extents: Vector;
+	BoundaryVertices: Vector[];
+	ObjectClassification: EARObjectClassification;
+	clone() : ARPlaneUpdatePayload;
+	static C(Other: UObject | any): ARPlaneUpdatePayload;
+}
+
+declare type EPlaneComponentDebugMode = 'None' | 'ShowNetworkRole' | 'ShowClassification' | 'EPlaneComponentDebugMode_MAX';
+declare var EPlaneComponentDebugMode : { None:'None',ShowNetworkRole:'ShowNetworkRole',ShowClassification:'ShowClassification',EPlaneComponentDebugMode_MAX:'EPlaneComponentDebugMode_MAX', };
+declare class ARPlaneComponent extends ARComponent { 
+	ReplicatedPayload: ARPlaneUpdatePayload;
+	static Load(ResourceName: string): ARPlaneComponent;
+	static Find(Outer: UObject, ResourceName: string): ARPlaneComponent;
+	static GetDefaultObject(): ARPlaneComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARPlaneComponent;
+	static SetPlaneComponentDebugMode(NewDebugMode: EPlaneComponentDebugMode): void;
+	static SetObjectClassificationDebugColors(InColors: any): void;
+	ServerUpdatePayload(NewPayload: ARPlaneUpdatePayload): void;
+	ReceiveUpdate(Payload: ARPlaneUpdatePayload): void;
+	ReceiveAdd(Payload: ARPlaneUpdatePayload): void;
+	static GetObjectClassificationDebugColors(): any;
+	static C(Other: UObject | any): ARPlaneComponent;
+}
+
+declare class ARPointUpdatePayload { 
+	clone() : ARPointUpdatePayload;
+	static C(Other: UObject | any): ARPointUpdatePayload;
+}
+
+declare class ARPointComponent extends ARComponent { 
+	ReplicatedPayload: ARPointUpdatePayload;
+	static Load(ResourceName: string): ARPointComponent;
+	static Find(Outer: UObject, ResourceName: string): ARPointComponent;
+	static GetDefaultObject(): ARPointComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARPointComponent;
+	ServerUpdatePayload(NewPayload: ARPointUpdatePayload): void;
+	ReceiveUpdate(Payload: ARPointUpdatePayload): void;
+	ReceiveAdd(Payload: ARPointUpdatePayload): void;
+	static C(Other: UObject | any): ARPointComponent;
+}
+
+declare type EARFaceTransformMixing = 'ComponentOnly' | 'ComponentLocationTrackedRotation' | 'ComponentWithTracked' | 'TrackingOnly' | 'EARFaceTransformMixing_MAX';
+declare var EARFaceTransformMixing : { ComponentOnly:'ComponentOnly',ComponentLocationTrackedRotation:'ComponentLocationTrackedRotation',ComponentWithTracked:'ComponentWithTracked',TrackingOnly:'TrackingOnly',EARFaceTransformMixing_MAX:'EARFaceTransformMixing_MAX', };
+declare class ARFaceUpdatePayload { 
+	SessionPayload: ARSessionPayload;
+	LeftEyePosition: Vector;
+	RightEyePosition: Vector;
+	LookAtTarget: Vector;
+	clone() : ARFaceUpdatePayload;
+	static C(Other: UObject | any): ARFaceUpdatePayload;
+}
+
+declare type EFaceComponentDebugMode = 'None' | 'ShowEyeVectors' | 'ShowFaceMesh' | 'EFaceComponentDebugMode_MAX';
+declare var EFaceComponentDebugMode : { None:'None',ShowEyeVectors:'ShowEyeVectors',ShowFaceMesh:'ShowFaceMesh',EFaceComponentDebugMode_MAX:'EFaceComponentDebugMode_MAX', };
+declare class ARFaceComponent extends ARComponent { 
+	TransformSetting: EARFaceTransformMixing;
+	bUpdateVertexNormal: boolean;
+	bFaceOutOfScreen: boolean;
+	ReplicatedPayload: ARFaceUpdatePayload;
+	static Load(ResourceName: string): ARFaceComponent;
+	static Find(Outer: UObject, ResourceName: string): ARFaceComponent;
+	static GetDefaultObject(): ARFaceComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARFaceComponent;
+	static SetFaceComponentDebugMode(NewDebugMode: EFaceComponentDebugMode): void;
+	ServerUpdatePayload(NewPayload: ARFaceUpdatePayload): void;
+	ReceiveUpdate(Payload: ARFaceUpdatePayload): void;
+	ReceiveAdd(Payload: ARFaceUpdatePayload): void;
+	static C(Other: UObject | any): ARFaceComponent;
+}
+
+declare class ARImageUpdatePayload { 
+	SessionPayload: ARSessionPayload;
+	WorldTransform: Transform;
+	DetectedImage: ARCandidateImage;
+	EstimatedSize: Vector2D;
+	clone() : ARImageUpdatePayload;
+	static C(Other: UObject | any): ARImageUpdatePayload;
+}
+
+declare type EImageComponentDebugMode = 'None' | 'ShowDetectedImage' | 'EImageComponentDebugMode_MAX';
+declare var EImageComponentDebugMode : { None:'None',ShowDetectedImage:'ShowDetectedImage',EImageComponentDebugMode_MAX:'EImageComponentDebugMode_MAX', };
+declare class ARImageComponent extends ARComponent { 
+	ReplicatedPayload: ARImageUpdatePayload;
+	static Load(ResourceName: string): ARImageComponent;
+	static Find(Outer: UObject, ResourceName: string): ARImageComponent;
+	static GetDefaultObject(): ARImageComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARImageComponent;
+	static SetImageComponentDebugMode(NewDebugMode: EImageComponentDebugMode): void;
+	ServerUpdatePayload(NewPayload: ARImageUpdatePayload): void;
+	ReceiveUpdate(Payload: ARImageUpdatePayload): void;
+	ReceiveAdd(Payload: ARImageUpdatePayload): void;
+	static C(Other: UObject | any): ARImageComponent;
+}
+
+declare class ARQRCodeUpdatePayload { 
+	SessionPayload: ARSessionPayload;
+	WorldTransform: Transform;
+	Extents: Vector;
+	QRCode: string;
+	clone() : ARQRCodeUpdatePayload;
+	static C(Other: UObject | any): ARQRCodeUpdatePayload;
+}
+
+declare type EQRCodeComponentDebugMode = 'None' | 'ShowQRCode' | 'EQRCodeComponentDebugMode_MAX';
+declare var EQRCodeComponentDebugMode : { None:'None',ShowQRCode:'ShowQRCode',EQRCodeComponentDebugMode_MAX:'EQRCodeComponentDebugMode_MAX', };
+declare class ARQRCodeComponent extends ARComponent { 
+	ReplicatedPayload: ARQRCodeUpdatePayload;
+	static Load(ResourceName: string): ARQRCodeComponent;
+	static Find(Outer: UObject, ResourceName: string): ARQRCodeComponent;
+	static GetDefaultObject(): ARQRCodeComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARQRCodeComponent;
+	static SetQRCodeComponentDebugMode(NewDebugMode: EQRCodeComponentDebugMode): void;
+	ServerUpdatePayload(NewPayload: ARQRCodeUpdatePayload): void;
+	ReceiveUpdate(Payload: ARQRCodeUpdatePayload): void;
+	ReceiveAdd(Payload: ARQRCodeUpdatePayload): void;
+	static C(Other: UObject | any): ARQRCodeComponent;
+}
+
+declare class ARPoseUpdatePayload { 
+	WorldTransform: Transform;
+	JointTransforms: Transform[];
+	clone() : ARPoseUpdatePayload;
+	static C(Other: UObject | any): ARPoseUpdatePayload;
+}
+
+declare type EPoseComponentDebugMode = 'None' | 'ShowSkeleton' | 'EPoseComponentDebugMode_MAX';
+declare var EPoseComponentDebugMode : { None:'None',ShowSkeleton:'ShowSkeleton',EPoseComponentDebugMode_MAX:'EPoseComponentDebugMode_MAX', };
+declare class ARPoseComponent extends ARComponent { 
+	ReplicatedPayload: ARPoseUpdatePayload;
+	static Load(ResourceName: string): ARPoseComponent;
+	static Find(Outer: UObject, ResourceName: string): ARPoseComponent;
+	static GetDefaultObject(): ARPoseComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARPoseComponent;
+	static SetPoseComponentDebugMode(NewDebugMode: EPoseComponentDebugMode): void;
+	ServerUpdatePayload(NewPayload: ARPoseUpdatePayload): void;
+	ReceiveUpdate(Payload: ARPoseUpdatePayload): void;
+	ReceiveAdd(Payload: ARPoseUpdatePayload): void;
+	static C(Other: UObject | any): ARPoseComponent;
+}
+
+declare class AREnvironmentProbeUpdatePayload { 
+	WorldTransform: Transform;
+	clone() : AREnvironmentProbeUpdatePayload;
+	static C(Other: UObject | any): AREnvironmentProbeUpdatePayload;
+}
+
+declare class AREnvironmentProbeComponent extends ARComponent { 
+	ReplicatedPayload: AREnvironmentProbeUpdatePayload;
+	static Load(ResourceName: string): AREnvironmentProbeComponent;
+	static Find(Outer: UObject, ResourceName: string): AREnvironmentProbeComponent;
+	static GetDefaultObject(): AREnvironmentProbeComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AREnvironmentProbeComponent;
+	ServerUpdatePayload(NewPayload: AREnvironmentProbeUpdatePayload): void;
+	ReceiveUpdate(Payload: AREnvironmentProbeUpdatePayload): void;
+	ReceiveAdd(Payload: AREnvironmentProbeUpdatePayload): void;
+	static C(Other: UObject | any): AREnvironmentProbeComponent;
+}
+
+declare class ARObjectUpdatePayload { 
+	WorldTransform: Transform;
+	clone() : ARObjectUpdatePayload;
+	static C(Other: UObject | any): ARObjectUpdatePayload;
+}
+
+declare class ARObjectComponent extends ARComponent { 
+	ReplicatedPayload: ARObjectUpdatePayload;
+	static Load(ResourceName: string): ARObjectComponent;
+	static Find(Outer: UObject, ResourceName: string): ARObjectComponent;
+	static GetDefaultObject(): ARObjectComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARObjectComponent;
+	ServerUpdatePayload(NewPayload: ARObjectUpdatePayload): void;
+	ReceiveUpdate(Payload: ARObjectUpdatePayload): void;
+	ReceiveAdd(Payload: ARObjectUpdatePayload): void;
+	static C(Other: UObject | any): ARObjectComponent;
+}
+
+declare class ARMeshUpdatePayload { 
+	SessionPayload: ARSessionPayload;
+	WorldTransform: Transform;
+	ObjectClassification: EARObjectClassification;
+	clone() : ARMeshUpdatePayload;
+	static C(Other: UObject | any): ARMeshUpdatePayload;
+}
+
+declare class ARMeshComponent extends ARComponent { 
+	ReplicatedPayload: ARMeshUpdatePayload;
+	static Load(ResourceName: string): ARMeshComponent;
+	static Find(Outer: UObject, ResourceName: string): ARMeshComponent;
+	static GetDefaultObject(): ARMeshComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARMeshComponent;
+	ServerUpdatePayload(NewPayload: ARMeshUpdatePayload): void;
+	ReceiveUpdate(Payload: ARMeshUpdatePayload): void;
+	ReceiveAdd(Payload: ARMeshUpdatePayload): void;
+	static C(Other: UObject | any): ARMeshComponent;
+}
+
+declare type EARAltitudeSource = 'Precise' | 'Coarse' | 'UserDefined' | 'Unknown' | 'EARAltitudeSource_MAX';
+declare var EARAltitudeSource : { Precise:'Precise',Coarse:'Coarse',UserDefined:'UserDefined',Unknown:'Unknown',EARAltitudeSource_MAX:'EARAltitudeSource_MAX', };
+declare class ARGeoAnchorUpdatePayload { 
+	SessionPayload: ARSessionPayload;
+	WorldTransform: Transform;
+	Longitude: number;
+	Latitude: number;
+	AltitudeMeters: number;
+	AltitudeSource: EARAltitudeSource;
+	AnchorName: string;
+	clone() : ARGeoAnchorUpdatePayload;
+	static C(Other: UObject | any): ARGeoAnchorUpdatePayload;
+}
+
+declare type EGeoAnchorComponentDebugMode = 'None' | 'ShowGeoData' | 'EGeoAnchorComponentDebugMode_MAX';
+declare var EGeoAnchorComponentDebugMode : { None:'None',ShowGeoData:'ShowGeoData',EGeoAnchorComponentDebugMode_MAX:'EGeoAnchorComponentDebugMode_MAX', };
+declare class ARGeoAnchorComponent extends ARComponent { 
+	ReplicatedPayload: ARGeoAnchorUpdatePayload;
+	static Load(ResourceName: string): ARGeoAnchorComponent;
+	static Find(Outer: UObject, ResourceName: string): ARGeoAnchorComponent;
+	static GetDefaultObject(): ARGeoAnchorComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARGeoAnchorComponent;
+	static SetGeoAnchorComponentDebugMode(NewDebugMode: EGeoAnchorComponentDebugMode): void;
+	ServerUpdatePayload(NewPayload: ARGeoAnchorUpdatePayload): void;
+	ReceiveUpdate(Payload: ARGeoAnchorUpdatePayload): void;
+	ReceiveAdd(Payload: ARGeoAnchorUpdatePayload): void;
+	static C(Other: UObject | any): ARGeoAnchorComponent;
+}
+
+declare type EMagicLeapImageTargetOrientation = 'ForwardAxisAsNormal' | 'UpAxisAsNormal' | 'EMagicLeapImageTargetOrientation_MAX';
+declare var EMagicLeapImageTargetOrientation : { ForwardAxisAsNormal:'ForwardAxisAsNormal',UpAxisAsNormal:'UpAxisAsNormal',EMagicLeapImageTargetOrientation_MAX:'EMagicLeapImageTargetOrientation_MAX', };
+declare class LuminARCandidateImage extends ARCandidateImage { 
+	bUseUnreliablePose: boolean;
+	bImageIsStationary: boolean;
+	AxisOrientation: EMagicLeapImageTargetOrientation;
+	static Load(ResourceName: string): LuminARCandidateImage;
+	static Find(Outer: UObject, ResourceName: string): LuminARCandidateImage;
+	static GetDefaultObject(): LuminARCandidateImage;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LuminARCandidateImage;
+	GetUseUnreliablePose(): boolean;
+	GetImageIsStationary(): boolean;
+	GetAxisOrientation(): EMagicLeapImageTargetOrientation;
+	static C(Other: UObject | any): LuminARCandidateImage;
+}
+
+declare class ARSessionConfig extends DataAsset { 
+	bGenerateMeshDataFromTrackedGeometry: boolean;
+	bGenerateCollisionForMeshData: boolean;
+	bGenerateNavMeshForMeshData: boolean;
+	bUseMeshDataForOcclusion: boolean;
+	bRenderMeshDataInWireframe: boolean;
+	bTrackSceneObjects: boolean;
+	bUsePersonSegmentationForOcclusion: boolean;
+	bUseSceneDepthForOcclusion: boolean;
+	bUseAutomaticImageScaleEstimation: boolean;
+	bUseStandardOnboardingUX: boolean;
+	WorldAlignment: EARWorldAlignment;
+	SessionType: EARSessionType;
+	PlaneDetectionMode: EARPlaneDetectionMode;
+	bHorizontalPlaneDetection: boolean;
+	bVerticalPlaneDetection: boolean;
+	bEnableAutoFocus: boolean;
+	LightEstimationMode: EARLightEstimationMode;
+	FrameSyncMode: EARFrameSyncMode;
+	bEnableAutomaticCameraOverlay: boolean;
+	bEnableAutomaticCameraTracking: boolean;
+	bResetCameraTracking: boolean;
+	bResetTrackedObjects: boolean;
+	CandidateImages: ARCandidateImage[];
+	MaxNumSimultaneousImagesTracked: number;
+	EnvironmentCaptureProbeType: EAREnvironmentCaptureProbeType;
+	WorldMapData: number[];
+	CandidateObjects: ARCandidateObject[];
+	DesiredVideoFormat: ARVideoFormat;
+	bUseOptimalVideoFormat: boolean;
+	FaceTrackingDirection: EARFaceTrackingDirection;
+	FaceTrackingUpdate: EARFaceTrackingUpdate;
+	MaxNumberOfTrackedFaces: number;
+	SerializedARCandidateImageDatabase: number[];
+	EnabledSessionTrackingFeature: EARSessionTrackingFeature;
+	SceneReconstructionMethod: EARSceneReconstruction;
+	PlaneComponentClass: UnrealEngineClass;
+	PointComponentClass: UnrealEngineClass;
+	FaceComponentClass: UnrealEngineClass;
+	ImageComponentClass: UnrealEngineClass;
+	QRCodeComponentClass: UnrealEngineClass;
+	PoseComponentClass: UnrealEngineClass;
+	EnvironmentProbeComponentClass: UnrealEngineClass;
+	ObjectComponentClass: UnrealEngineClass;
+	MeshComponentClass: UnrealEngineClass;
+	GeoAnchorComponentClass: UnrealEngineClass;
+	DefaultMeshMaterial: MaterialInterface;
+	DefaultWireframeMeshMaterial: MaterialInterface;
+	static Load(ResourceName: string): ARSessionConfig;
+	static Find(Outer: UObject, ResourceName: string): ARSessionConfig;
+	static GetDefaultObject(): ARSessionConfig;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARSessionConfig;
+	ShouldResetTrackedObjects(): boolean;
+	ShouldResetCameraTracking(): boolean;
+	ShouldRenderCameraOverlay(): boolean;
+	ShouldEnableCameraTracking(): boolean;
+	ShouldEnableAutoFocus(): boolean;
+	SetWorldMapData(WorldMapData: number[]): void;
+	SetSessionTrackingFeatureToEnable(InSessionTrackingFeature: EARSessionTrackingFeature): void;
+	SetSceneReconstructionMethod(InSceneReconstructionMethod: EARSceneReconstruction): void;
+	SetResetTrackedObjects(bNewValue: boolean): void;
+	SetResetCameraTracking(bNewValue: boolean): void;
+	SetFaceTrackingUpdate(InUpdate: EARFaceTrackingUpdate): void;
+	SetFaceTrackingDirection(InDirection: EARFaceTrackingDirection): void;
+	SetEnableAutoFocus(bNewValue: boolean): void;
+	SetDesiredVideoFormat(NewFormat: ARVideoFormat): void;
+	SetCandidateObjectList(InCandidateObjects: ARCandidateObject[]): void;
+	GetWorldMapData(): number[];
+	GetWorldAlignment(): EARWorldAlignment;
+	GetSessionType(): EARSessionType;
+	GetSceneReconstructionMethod(): EARSceneReconstruction;
+	GetPlaneDetectionMode(): EARPlaneDetectionMode;
+	GetMaxNumSimultaneousImagesTracked(): number;
+	GetLightEstimationMode(): EARLightEstimationMode;
+	GetFrameSyncMode(): EARFrameSyncMode;
+	GetFaceTrackingUpdate(): EARFaceTrackingUpdate;
+	GetFaceTrackingDirection(): EARFaceTrackingDirection;
+	GetEnvironmentCaptureProbeType(): EAREnvironmentCaptureProbeType;
+	GetEnabledSessionTrackingFeature(): EARSessionTrackingFeature;
+	GetDesiredVideoFormat(): ARVideoFormat;
+	GetCandidateObjectList(): ARCandidateObject[];
+	GetCandidateImageList(): ARCandidateImage[];
+	AddCandidateObject(CandidateObject: ARCandidateObject): void;
+	AddCandidateImage(NewCandidateImage: ARCandidateImage): void;
+	static C(Other: UObject | any): ARSessionConfig;
+	AddLuminRuntimeCandidateImage(CandidateTexture: Texture2D,FriendlyName: string,PhysicalWidth: number,bUseUnreliablePose: boolean,bImageIsStationary: boolean): LuminARCandidateImage;
+	AddLuminRuntimeCandidateImageEx(CandidateTexture: Texture2D,FriendlyName: string,PhysicalWidth: number,bUseUnreliablePose: boolean,bImageIsStationary: boolean,InAxisOrientation: EMagicLeapImageTargetOrientation): LuminARCandidateImage;
+	AddRuntimeCandidateImage(CandidateTexture: Texture2D,FriendlyName: string,PhysicalWidth: number): ARCandidateImage;
+	StartARSession(): void;
+	static AddLuminRuntimeCandidateImage(SessionConfig: ARSessionConfig,CandidateTexture: Texture2D,FriendlyName: string,PhysicalWidth: number,bUseUnreliablePose: boolean,bImageIsStationary: boolean): LuminARCandidateImage;
+	static AddLuminRuntimeCandidateImageEx(SessionConfig: ARSessionConfig,CandidateTexture: Texture2D,FriendlyName: string,PhysicalWidth: number,bUseUnreliablePose: boolean,bImageIsStationary: boolean,InAxisOrientation: EMagicLeapImageTargetOrientation): LuminARCandidateImage;
+	static AddRuntimeCandidateImage(SessionConfig: ARSessionConfig,CandidateTexture: Texture2D,FriendlyName: string,PhysicalWidth: number): ARCandidateImage;
+	static StartARSession(SessionConfig: ARSessionConfig): void;
+}
+
+declare class BoxComponent extends ShapeComponent { 
+	BoxExtent: Vector;
+	LineThickness: number;
+	static Load(ResourceName: string): BoxComponent;
+	static Find(Outer: UObject, ResourceName: string): BoxComponent;
+	static GetDefaultObject(): BoxComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BoxComponent;
+	SetBoxExtent(InBoxExtent: Vector,bUpdateOverlaps: boolean): void;
+	GetUnscaledBoxExtent(): Vector;
+	GetScaledBoxExtent(): Vector;
+	static C(Other: UObject | any): BoxComponent;
+}
+
+declare class MagicLeapPolygon { 
+	Vertices: Vector[];
+	clone() : MagicLeapPolygon;
+	static C(Other: UObject | any): MagicLeapPolygon;
+}
+
+declare class MagicLeapPlaneBoundary { 
+	Polygon: MagicLeapPolygon;
+	Holes: MagicLeapPolygon[];
+	clone() : MagicLeapPlaneBoundary;
+	static C(Other: UObject | any): MagicLeapPlaneBoundary;
+}
+
+declare class MagicLeapPlaneBoundaries { 
+	ID: Guid;
+	Boundaries: MagicLeapPlaneBoundary[];
+	clone() : MagicLeapPlaneBoundaries;
+	static C(Other: UObject | any): MagicLeapPlaneBoundaries;
+}
+
+declare class MagicLeapPlanesQuery { 
+	Flags: EMagicLeapPlaneQueryFlags[];
+	SearchVolume: BoxComponent;
+	MaxResults: number;
+	MinHoleLength: number;
+	MinPlaneArea: number;
+	SearchVolumePosition: Vector;
+	SearchVolumeOrientation: Quat;
+	SearchVolumeExtents: Vector;
+	SimilarityThreshold: number;
+	bSearchVolumeTrackingSpace: boolean;
+	bResultTrackingSpace: boolean;
+	clone() : MagicLeapPlanesQuery;
+	static C(Other: UObject | any): MagicLeapPlanesQuery;
+	PlanesPersistentQueryBeginAsync(Handle: Guid,ResultDelegate: UnrealEngineDelegate<(bSuccess: boolean, QueryHandle: Guid, QueryType: EMagicLeapPlaneQueryType, NewPlanes: MagicLeapPlaneResult[], RemovedPlaneIDs: Guid[], NewPolygons: MagicLeapPlaneBoundaries[], RemovedPolygonIDs: Guid[]) => void>): boolean;
+	PlanesQueryBeginAsync(ResultDelegate: UnrealEngineDelegate<(bSuccess: boolean, planes: MagicLeapPlaneResult[], Polygons: MagicLeapPlaneBoundaries[]) => void>): boolean;
+	static PlanesPersistentQueryBeginAsync(Query: MagicLeapPlanesQuery,Handle: Guid,ResultDelegate: UnrealEngineDelegate<(bSuccess: boolean, QueryHandle: Guid, QueryType: EMagicLeapPlaneQueryType, NewPlanes: MagicLeapPlaneResult[], RemovedPlaneIDs: Guid[], NewPolygons: MagicLeapPlaneBoundaries[], RemovedPolygonIDs: Guid[]) => void>): boolean;
+	static PlanesQueryBeginAsync(Query: MagicLeapPlanesQuery,ResultDelegate: UnrealEngineDelegate<(bSuccess: boolean, planes: MagicLeapPlaneResult[], Polygons: MagicLeapPlaneBoundaries[]) => void>): boolean;
+}
+
+declare class LuminARSessionConfig extends ARSessionConfig { 
+	PlanesQuery: MagicLeapPlanesQuery;
+	MaxPlaneQueryResults: number;
+	MinPlaneArea: number;
+	bArbitraryOrientationPlaneDetection: boolean;
+	PlaneSearchExtents: Vector;
+	PlaneQueryFlags: EMagicLeapPlaneQueryFlags[];
+	bDiscardZeroExtentPlanes: boolean;
+	bDefaultUseUnreliablePose: boolean;
+	static Load(ResourceName: string): LuminARSessionConfig;
+	static Find(Outer: UObject, ResourceName: string): LuminARSessionConfig;
+	static GetDefaultObject(): LuminARSessionConfig;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LuminARSessionConfig;
+	static C(Other: UObject | any): LuminARSessionConfig;
 }
 
 declare class NiagaraTypeDefinitionHandle { 
 	RegisteredTypeIndex: number;
 	clone() : NiagaraTypeDefinitionHandle;
 	static C(Other: UObject | any): NiagaraTypeDefinitionHandle;
-}
-
-declare class Enum extends Field { 
-	static Load(ResourceName: string): Enum;
-	static Find(Outer: UObject, ResourceName: string): Enum;
-	static GetDefaultObject(): Enum;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Enum;
-	static C(Other: UObject | any): Enum;
-	GetEnumeratorName(EnumeratorValue: number): string;
-	GetEnumeratorUserFriendlyName(EnumeratorValue: number): string;
-	GetEnumeratorValueFromIndex(EnumeratorIndex: number): number;
-	GetValidValue(EnumeratorValue: number): number;
-	static GetEnumeratorName(Enum: Enum,EnumeratorValue: number): string;
-	static GetEnumeratorUserFriendlyName(Enum: Enum,EnumeratorValue: number): string;
-	static GetEnumeratorValueFromIndex(Enum: Enum,EnumeratorIndex: number): number;
-	static GetValidValue(Enum: Enum,EnumeratorValue: number): number;
 }
 
 declare class NiagaraTypeDefinition { 
@@ -13839,683 +17326,6 @@ declare class NiagaraSystem extends FXSystemAsset {
 	static SpawnSystemAttached(SystemTemplate: NiagaraSystem,AttachToComponent: SceneComponent,AttachPointName: string,Location: Vector,Rotation: Rotator,LocationType: EAttachLocation,bAutoDestroy: boolean,bAutoActivate: boolean,PoolingMethod: ENCPoolMethod,bPreCullCheck: boolean): NiagaraComponent;
 }
 
-declare class VaRestURL { 
-	Protocol: string;
-	Host: string;
-	Port: number;
-	Valid: number;
-	Map: string;
-	RedirectURL: string;
-	Op: string[];
-	Portal: string;
-	clone() : VaRestURL;
-	static C(Other: UObject | any): VaRestURL;
-}
-
-declare class URL { 
-	Protocol: string;
-	Host: string;
-	Port: number;
-	Valid: number;
-	Map: string;
-	RedirectURL: string;
-	Op: string[];
-	Portal: string;
-	clone() : URL;
-	static C(Other: UObject | any): URL;
-}
-
-declare class NavDataConfig extends NavAgentProperties { 
-	Name: string;
-	Color: Color;
-	DefaultQueryExtent: Vector;
-	NavigationDataClass: UnrealEngineClass;
-	NavDataClass: Class;
-	clone() : NavDataConfig;
-	static C(Other: UObject | any): NavDataConfig;
-}
-
-declare type ERuntimeGenerationType = 'Static' | 'DynamicModifiersOnly' | 'Dynamic' | 'LegacyGeneration' | 'ERuntimeGenerationType_MAX';
-declare var ERuntimeGenerationType : { Static:'Static',DynamicModifiersOnly:'DynamicModifiersOnly',Dynamic:'Dynamic',LegacyGeneration:'LegacyGeneration',ERuntimeGenerationType_MAX:'ERuntimeGenerationType_MAX', };
-declare class SupportedAreaData { 
-	AreaClassName: string;
-	AreaID: number;
-	AreaClass: UnrealEngineClass;
-	clone() : SupportedAreaData;
-	static C(Other: UObject | any): SupportedAreaData;
-}
-
-declare class NavigationData extends Actor { 
-	RenderingComp: PrimitiveComponent;
-	NavDataConfig: NavDataConfig;
-	bEnableDrawing: boolean;
-	bForceRebuildOnLoad: boolean;
-	bAutoDestroyWhenNoNavigation: boolean;
-	bCanBeMainNavData: boolean;
-	bCanSpawnOnRebuild: boolean;
-	bRebuildAtRuntime: boolean;
-	RuntimeGeneration: ERuntimeGenerationType;
-	ObservedPathsTickInterval: number;
-	DataVersion: any;
-	SupportedAreas: SupportedAreaData[];
-	static GetDefaultObject(): NavigationData;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NavigationData;
-	static C(Other: UObject | any): NavigationData;
-}
-
-declare type ERecastPartitioning = 'Monotone' | 'Watershed' | 'ChunkyMonotone' | 'ERecastPartitioning_MAX';
-declare var ERecastPartitioning : { Monotone:'Monotone',Watershed:'Watershed',ChunkyMonotone:'ChunkyMonotone',ERecastPartitioning_MAX:'ERecastPartitioning_MAX', };
-declare class NavArea extends NavAreaBase { 
-	DefaultCost: number;
-	FixedAreaEnteringCost: number;
-	DrawColor: Color;
-	SupportedAgents: NavAgentSelector;
-	bSupportsAgent0: boolean;
-	bSupportsAgent1: boolean;
-	bSupportsAgent2: boolean;
-	bSupportsAgent3: boolean;
-	bSupportsAgent4: boolean;
-	bSupportsAgent5: boolean;
-	bSupportsAgent6: boolean;
-	bSupportsAgent7: boolean;
-	bSupportsAgent8: boolean;
-	bSupportsAgent9: boolean;
-	bSupportsAgent10: boolean;
-	bSupportsAgent11: boolean;
-	bSupportsAgent12: boolean;
-	bSupportsAgent13: boolean;
-	bSupportsAgent14: boolean;
-	bSupportsAgent15: boolean;
-	static Load(ResourceName: string): NavArea;
-	static Find(Outer: UObject, ResourceName: string): NavArea;
-	static GetDefaultObject(): NavArea;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NavArea;
-	static C(Other: UObject | any): NavArea;
-}
-
-declare class RecastNavMesh extends NavigationData { 
-	bDrawTriangleEdges: boolean;
-	bDrawPolyEdges: boolean;
-	bDrawFilledPolys: boolean;
-	bDrawNavMeshEdges: boolean;
-	bDrawTileBounds: boolean;
-	bDrawPathCollidingGeometry: boolean;
-	bDrawTileLabels: boolean;
-	bDrawPolygonLabels: boolean;
-	bDrawDefaultPolygonCost: boolean;
-	bDrawPolygonFlags: boolean;
-	bDrawLabelsOnPathNodes: boolean;
-	bDrawNavLinks: boolean;
-	bDrawFailedNavLinks: boolean;
-	bDrawClusters: boolean;
-	bDrawOctree: boolean;
-	bDrawOctreeDetails: boolean;
-	bDrawMarkedForbiddenPolys: boolean;
-	bDistinctlyDrawTilesBeingBuilt: boolean;
-	DrawOffset: number;
-	bFixedTilePoolSize: boolean;
-	TilePoolSize: number;
-	TileSizeUU: number;
-	CellSize: number;
-	CellHeight: number;
-	AgentRadius: number;
-	AgentHeight: number;
-	AgentMaxSlope: number;
-	AgentMaxStepHeight: number;
-	MinRegionArea: number;
-	MergeRegionSize: number;
-	MaxSimplificationError: number;
-	MaxSimultaneousTileGenerationJobsCount: number;
-	TileNumberHardLimit: number;
-	PolyRefTileBits: number;
-	PolyRefNavPolyBits: number;
-	PolyRefSaltBits: number;
-	NavMeshOriginOffset: Vector;
-	DefaultDrawDistance: number;
-	DefaultMaxSearchNodes: number;
-	DefaultMaxHierarchicalSearchNodes: number;
-	RegionPartitioning: ERecastPartitioning;
-	LayerPartitioning: ERecastPartitioning;
-	RegionChunkSplits: number;
-	LayerChunkSplits: number;
-	bSortNavigationAreasByCost: boolean;
-	bPerformVoxelFiltering: boolean;
-	bMarkLowHeightAreas: boolean;
-	bUseExtraTopCellWhenMarkingAreas: boolean;
-	bFilterLowSpanSequences: boolean;
-	bFilterLowSpanFromTileCache: boolean;
-	bDoFullyAsyncNavDataGathering: boolean;
-	bUseBetterOffsetsFromCorners: boolean;
-	bStoreEmptyTileLayers: boolean;
-	bUseVirtualFilters: boolean;
-	bAllowNavLinkAsPathEnd: boolean;
-	bUseVoxelCache: boolean;
-	TileSetUpdateInterval: number;
-	HeuristicScale: number;
-	VerticalDeviationFromGroundCompensation: number;
-	static GetDefaultObject(): RecastNavMesh;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): RecastNavMesh;
-	K2_ReplaceAreaInTileBounds(Bounds: Box,OldArea: UnrealEngineClass,NewArea: UnrealEngineClass,ReplaceLinks: boolean): boolean;
-	static C(Other: UObject | any): RecastNavMesh;
-}
-
-declare type EARWorldAlignment = 'Gravity' | 'GravityAndHeading' | 'Camera' | 'EARWorldAlignment_MAX';
-declare var EARWorldAlignment : { Gravity:'Gravity',GravityAndHeading:'GravityAndHeading',Camera:'Camera',EARWorldAlignment_MAX:'EARWorldAlignment_MAX', };
-declare type EARSessionType = 'None' | 'Orientation' | 'World' | 'Face' | 'Image' | 'ObjectScanning' | 'PoseTracking' | 'GeoTracking' | 'EARSessionType_MAX';
-declare var EARSessionType : { None:'None',Orientation:'Orientation',World:'World',Face:'Face',Image:'Image',ObjectScanning:'ObjectScanning',PoseTracking:'PoseTracking',GeoTracking:'GeoTracking',EARSessionType_MAX:'EARSessionType_MAX', };
-declare type EARPlaneDetectionMode = 'None' | 'HorizontalPlaneDetection' | 'VerticalPlaneDetection' | 'EARPlaneDetectionMode_MAX';
-declare var EARPlaneDetectionMode : { None:'None',HorizontalPlaneDetection:'HorizontalPlaneDetection',VerticalPlaneDetection:'VerticalPlaneDetection',EARPlaneDetectionMode_MAX:'EARPlaneDetectionMode_MAX', };
-declare type EARLightEstimationMode = 'None' | 'AmbientLightEstimate' | 'DirectionalLightEstimate' | 'EARLightEstimationMode_MAX';
-declare var EARLightEstimationMode : { None:'None',AmbientLightEstimate:'AmbientLightEstimate',DirectionalLightEstimate:'DirectionalLightEstimate',EARLightEstimationMode_MAX:'EARLightEstimationMode_MAX', };
-declare type EARFrameSyncMode = 'SyncTickWithCameraImage' | 'SyncTickWithoutCameraImage' | 'EARFrameSyncMode_MAX';
-declare var EARFrameSyncMode : { SyncTickWithCameraImage:'SyncTickWithCameraImage',SyncTickWithoutCameraImage:'SyncTickWithoutCameraImage',EARFrameSyncMode_MAX:'EARFrameSyncMode_MAX', };
-declare type EARCandidateImageOrientation = 'Landscape' | 'Portrait' | 'EARCandidateImageOrientation_MAX';
-declare var EARCandidateImageOrientation : { Landscape:'Landscape',Portrait:'Portrait',EARCandidateImageOrientation_MAX:'EARCandidateImageOrientation_MAX', };
-declare class ARCandidateImage extends DataAsset { 
-	CandidateTexture: Texture2D;
-	FriendlyName: string;
-	Width: number;
-	Height: number;
-	Orientation: EARCandidateImageOrientation;
-	static Load(ResourceName: string): ARCandidateImage;
-	static Find(Outer: UObject, ResourceName: string): ARCandidateImage;
-	static GetDefaultObject(): ARCandidateImage;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARCandidateImage;
-	GetPhysicalWidth(): number;
-	GetPhysicalHeight(): number;
-	GetOrientation(): EARCandidateImageOrientation;
-	GetFriendlyName(): string;
-	GetCandidateTexture(): Texture2D;
-	static C(Other: UObject | any): ARCandidateImage;
-}
-
-declare type EAREnvironmentCaptureProbeType = 'None' | 'Manual' | 'Automatic' | 'EAREnvironmentCaptureProbeType_MAX';
-declare var EAREnvironmentCaptureProbeType : { None:'None',Manual:'Manual',Automatic:'Automatic',EAREnvironmentCaptureProbeType_MAX:'EAREnvironmentCaptureProbeType_MAX', };
-declare class ARCandidateObject extends DataAsset { 
-	CandidateObjectData: number[];
-	FriendlyName: string;
-	BoundingBox: Box;
-	static Load(ResourceName: string): ARCandidateObject;
-	static Find(Outer: UObject, ResourceName: string): ARCandidateObject;
-	static GetDefaultObject(): ARCandidateObject;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARCandidateObject;
-	SetFriendlyName(NewName: string): void;
-	SetCandidateObjectData(InCandidateObject: number[]): void;
-	SetBoundingBox(InBoundingBox: Box): void;
-	GetFriendlyName(): string;
-	GetCandidateObjectData(): number[];
-	GetBoundingBox(): Box;
-	static C(Other: UObject | any): ARCandidateObject;
-}
-
-declare class ARVideoFormat { 
-	FPS: number;
-	Width: number;
-	Height: number;
-	clone() : ARVideoFormat;
-	static C(Other: UObject | any): ARVideoFormat;
-}
-
-declare type EARFaceTrackingDirection = 'FaceRelative' | 'FaceMirrored' | 'EARFaceTrackingDirection_MAX';
-declare var EARFaceTrackingDirection : { FaceRelative:'FaceRelative',FaceMirrored:'FaceMirrored',EARFaceTrackingDirection_MAX:'EARFaceTrackingDirection_MAX', };
-declare type EARFaceTrackingUpdate = 'CurvesAndGeo' | 'CurvesOnly' | 'EARFaceTrackingUpdate_MAX';
-declare var EARFaceTrackingUpdate : { CurvesAndGeo:'CurvesAndGeo',CurvesOnly:'CurvesOnly',EARFaceTrackingUpdate_MAX:'EARFaceTrackingUpdate_MAX', };
-declare type EARSessionTrackingFeature = 'None' | 'PoseDetection2D' | 'PersonSegmentation' | 'PersonSegmentationWithDepth' | 'SceneDepth' | 'SmoothedSceneDepth' | 'EARSessionTrackingFeature_MAX';
-declare var EARSessionTrackingFeature : { None:'None',PoseDetection2D:'PoseDetection2D',PersonSegmentation:'PersonSegmentation',PersonSegmentationWithDepth:'PersonSegmentationWithDepth',SceneDepth:'SceneDepth',SmoothedSceneDepth:'SmoothedSceneDepth',EARSessionTrackingFeature_MAX:'EARSessionTrackingFeature_MAX', };
-declare type EARSceneReconstruction = 'None' | 'MeshOnly' | 'MeshWithClassification' | 'EARSceneReconstruction_MAX';
-declare var EARSceneReconstruction : { None:'None',MeshOnly:'MeshOnly',MeshWithClassification:'MeshWithClassification',EARSceneReconstruction_MAX:'EARSceneReconstruction_MAX', };
-declare class ARComponent extends SceneComponent { 
-	NativeID: Guid;
-	bUseDefaultReplication: boolean;
-	DefaultMeshMaterial: MaterialInterface;
-	DefaultWireframeMeshMaterial: MaterialInterface;
-	MRMeshComponent: MRMeshComponent;
-	MyTrackedGeometry: ARTrackedGeometry;
-	static Load(ResourceName: string): ARComponent;
-	static Find(Outer: UObject, ResourceName: string): ARComponent;
-	static GetDefaultObject(): ARComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARComponent;
-	UpdateVisualization(): void;
-	SetNativeID(NativeID: Guid): void;
-	ReceiveRemove(): void;
-	OnRep_Payload(): void;
-	GetMRMesh(): MRMeshComponent;
-	static C(Other: UObject | any): ARComponent;
-}
-
-declare class ARSessionPayload { 
-	ConfigFlags: number;
-	DefaultMeshMaterial: MaterialInterface;
-	DefaultWireframeMeshMaterial: MaterialInterface;
-	clone() : ARSessionPayload;
-	static C(Other: UObject | any): ARSessionPayload;
-}
-
-declare type EARObjectClassification = 'NotApplicable' | 'Unknown' | 'Wall' | 'Ceiling' | 'Floor' | 'Table' | 'Seat' | 'Face' | 'Image' | 'World' | 'SceneObject' | 'HandMesh' | 'Door' | 'Window' | 'EARObjectClassification_MAX';
-declare var EARObjectClassification : { NotApplicable:'NotApplicable',Unknown:'Unknown',Wall:'Wall',Ceiling:'Ceiling',Floor:'Floor',Table:'Table',Seat:'Seat',Face:'Face',Image:'Image',World:'World',SceneObject:'SceneObject',HandMesh:'HandMesh',Door:'Door',Window:'Window',EARObjectClassification_MAX:'EARObjectClassification_MAX', };
-declare class ARPlaneUpdatePayload { 
-	SessionPayload: ARSessionPayload;
-	WorldTransform: Transform;
-	Center: Vector;
-	Extents: Vector;
-	BoundaryVertices: Vector[];
-	ObjectClassification: EARObjectClassification;
-	clone() : ARPlaneUpdatePayload;
-	static C(Other: UObject | any): ARPlaneUpdatePayload;
-}
-
-declare type EPlaneComponentDebugMode = 'None' | 'ShowNetworkRole' | 'ShowClassification' | 'EPlaneComponentDebugMode_MAX';
-declare var EPlaneComponentDebugMode : { None:'None',ShowNetworkRole:'ShowNetworkRole',ShowClassification:'ShowClassification',EPlaneComponentDebugMode_MAX:'EPlaneComponentDebugMode_MAX', };
-declare class ARPlaneComponent extends ARComponent { 
-	ReplicatedPayload: ARPlaneUpdatePayload;
-	static Load(ResourceName: string): ARPlaneComponent;
-	static Find(Outer: UObject, ResourceName: string): ARPlaneComponent;
-	static GetDefaultObject(): ARPlaneComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARPlaneComponent;
-	static SetPlaneComponentDebugMode(NewDebugMode: EPlaneComponentDebugMode): void;
-	static SetObjectClassificationDebugColors(InColors: any): void;
-	ServerUpdatePayload(NewPayload: ARPlaneUpdatePayload): void;
-	ReceiveUpdate(Payload: ARPlaneUpdatePayload): void;
-	ReceiveAdd(Payload: ARPlaneUpdatePayload): void;
-	static GetObjectClassificationDebugColors(): any;
-	static C(Other: UObject | any): ARPlaneComponent;
-}
-
-declare class ARPointUpdatePayload { 
-	clone() : ARPointUpdatePayload;
-	static C(Other: UObject | any): ARPointUpdatePayload;
-}
-
-declare class ARPointComponent extends ARComponent { 
-	ReplicatedPayload: ARPointUpdatePayload;
-	static Load(ResourceName: string): ARPointComponent;
-	static Find(Outer: UObject, ResourceName: string): ARPointComponent;
-	static GetDefaultObject(): ARPointComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARPointComponent;
-	ServerUpdatePayload(NewPayload: ARPointUpdatePayload): void;
-	ReceiveUpdate(Payload: ARPointUpdatePayload): void;
-	ReceiveAdd(Payload: ARPointUpdatePayload): void;
-	static C(Other: UObject | any): ARPointComponent;
-}
-
-declare type EARFaceTransformMixing = 'ComponentOnly' | 'ComponentLocationTrackedRotation' | 'ComponentWithTracked' | 'TrackingOnly' | 'EARFaceTransformMixing_MAX';
-declare var EARFaceTransformMixing : { ComponentOnly:'ComponentOnly',ComponentLocationTrackedRotation:'ComponentLocationTrackedRotation',ComponentWithTracked:'ComponentWithTracked',TrackingOnly:'TrackingOnly',EARFaceTransformMixing_MAX:'EARFaceTransformMixing_MAX', };
-declare class ARFaceUpdatePayload { 
-	SessionPayload: ARSessionPayload;
-	LeftEyePosition: Vector;
-	RightEyePosition: Vector;
-	LookAtTarget: Vector;
-	clone() : ARFaceUpdatePayload;
-	static C(Other: UObject | any): ARFaceUpdatePayload;
-}
-
-declare type EFaceComponentDebugMode = 'None' | 'ShowEyeVectors' | 'ShowFaceMesh' | 'EFaceComponentDebugMode_MAX';
-declare var EFaceComponentDebugMode : { None:'None',ShowEyeVectors:'ShowEyeVectors',ShowFaceMesh:'ShowFaceMesh',EFaceComponentDebugMode_MAX:'EFaceComponentDebugMode_MAX', };
-declare class ARFaceComponent extends ARComponent { 
-	TransformSetting: EARFaceTransformMixing;
-	bUpdateVertexNormal: boolean;
-	bFaceOutOfScreen: boolean;
-	ReplicatedPayload: ARFaceUpdatePayload;
-	static Load(ResourceName: string): ARFaceComponent;
-	static Find(Outer: UObject, ResourceName: string): ARFaceComponent;
-	static GetDefaultObject(): ARFaceComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARFaceComponent;
-	static SetFaceComponentDebugMode(NewDebugMode: EFaceComponentDebugMode): void;
-	ServerUpdatePayload(NewPayload: ARFaceUpdatePayload): void;
-	ReceiveUpdate(Payload: ARFaceUpdatePayload): void;
-	ReceiveAdd(Payload: ARFaceUpdatePayload): void;
-	static C(Other: UObject | any): ARFaceComponent;
-}
-
-declare class ARImageUpdatePayload { 
-	SessionPayload: ARSessionPayload;
-	WorldTransform: Transform;
-	DetectedImage: ARCandidateImage;
-	EstimatedSize: Vector2D;
-	clone() : ARImageUpdatePayload;
-	static C(Other: UObject | any): ARImageUpdatePayload;
-}
-
-declare type EImageComponentDebugMode = 'None' | 'ShowDetectedImage' | 'EImageComponentDebugMode_MAX';
-declare var EImageComponentDebugMode : { None:'None',ShowDetectedImage:'ShowDetectedImage',EImageComponentDebugMode_MAX:'EImageComponentDebugMode_MAX', };
-declare class ARImageComponent extends ARComponent { 
-	ReplicatedPayload: ARImageUpdatePayload;
-	static Load(ResourceName: string): ARImageComponent;
-	static Find(Outer: UObject, ResourceName: string): ARImageComponent;
-	static GetDefaultObject(): ARImageComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARImageComponent;
-	static SetImageComponentDebugMode(NewDebugMode: EImageComponentDebugMode): void;
-	ServerUpdatePayload(NewPayload: ARImageUpdatePayload): void;
-	ReceiveUpdate(Payload: ARImageUpdatePayload): void;
-	ReceiveAdd(Payload: ARImageUpdatePayload): void;
-	static C(Other: UObject | any): ARImageComponent;
-}
-
-declare class ARQRCodeUpdatePayload { 
-	SessionPayload: ARSessionPayload;
-	WorldTransform: Transform;
-	Extents: Vector;
-	QRCode: string;
-	clone() : ARQRCodeUpdatePayload;
-	static C(Other: UObject | any): ARQRCodeUpdatePayload;
-}
-
-declare type EQRCodeComponentDebugMode = 'None' | 'ShowQRCode' | 'EQRCodeComponentDebugMode_MAX';
-declare var EQRCodeComponentDebugMode : { None:'None',ShowQRCode:'ShowQRCode',EQRCodeComponentDebugMode_MAX:'EQRCodeComponentDebugMode_MAX', };
-declare class ARQRCodeComponent extends ARComponent { 
-	ReplicatedPayload: ARQRCodeUpdatePayload;
-	static Load(ResourceName: string): ARQRCodeComponent;
-	static Find(Outer: UObject, ResourceName: string): ARQRCodeComponent;
-	static GetDefaultObject(): ARQRCodeComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARQRCodeComponent;
-	static SetQRCodeComponentDebugMode(NewDebugMode: EQRCodeComponentDebugMode): void;
-	ServerUpdatePayload(NewPayload: ARQRCodeUpdatePayload): void;
-	ReceiveUpdate(Payload: ARQRCodeUpdatePayload): void;
-	ReceiveAdd(Payload: ARQRCodeUpdatePayload): void;
-	static C(Other: UObject | any): ARQRCodeComponent;
-}
-
-declare class ARPoseUpdatePayload { 
-	WorldTransform: Transform;
-	JointTransforms: Transform[];
-	clone() : ARPoseUpdatePayload;
-	static C(Other: UObject | any): ARPoseUpdatePayload;
-}
-
-declare type EPoseComponentDebugMode = 'None' | 'ShowSkeleton' | 'EPoseComponentDebugMode_MAX';
-declare var EPoseComponentDebugMode : { None:'None',ShowSkeleton:'ShowSkeleton',EPoseComponentDebugMode_MAX:'EPoseComponentDebugMode_MAX', };
-declare class ARPoseComponent extends ARComponent { 
-	ReplicatedPayload: ARPoseUpdatePayload;
-	static Load(ResourceName: string): ARPoseComponent;
-	static Find(Outer: UObject, ResourceName: string): ARPoseComponent;
-	static GetDefaultObject(): ARPoseComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARPoseComponent;
-	static SetPoseComponentDebugMode(NewDebugMode: EPoseComponentDebugMode): void;
-	ServerUpdatePayload(NewPayload: ARPoseUpdatePayload): void;
-	ReceiveUpdate(Payload: ARPoseUpdatePayload): void;
-	ReceiveAdd(Payload: ARPoseUpdatePayload): void;
-	static C(Other: UObject | any): ARPoseComponent;
-}
-
-declare class AREnvironmentProbeUpdatePayload { 
-	WorldTransform: Transform;
-	clone() : AREnvironmentProbeUpdatePayload;
-	static C(Other: UObject | any): AREnvironmentProbeUpdatePayload;
-}
-
-declare class AREnvironmentProbeComponent extends ARComponent { 
-	ReplicatedPayload: AREnvironmentProbeUpdatePayload;
-	static Load(ResourceName: string): AREnvironmentProbeComponent;
-	static Find(Outer: UObject, ResourceName: string): AREnvironmentProbeComponent;
-	static GetDefaultObject(): AREnvironmentProbeComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AREnvironmentProbeComponent;
-	ServerUpdatePayload(NewPayload: AREnvironmentProbeUpdatePayload): void;
-	ReceiveUpdate(Payload: AREnvironmentProbeUpdatePayload): void;
-	ReceiveAdd(Payload: AREnvironmentProbeUpdatePayload): void;
-	static C(Other: UObject | any): AREnvironmentProbeComponent;
-}
-
-declare class ARObjectUpdatePayload { 
-	WorldTransform: Transform;
-	clone() : ARObjectUpdatePayload;
-	static C(Other: UObject | any): ARObjectUpdatePayload;
-}
-
-declare class ARObjectComponent extends ARComponent { 
-	ReplicatedPayload: ARObjectUpdatePayload;
-	static Load(ResourceName: string): ARObjectComponent;
-	static Find(Outer: UObject, ResourceName: string): ARObjectComponent;
-	static GetDefaultObject(): ARObjectComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARObjectComponent;
-	ServerUpdatePayload(NewPayload: ARObjectUpdatePayload): void;
-	ReceiveUpdate(Payload: ARObjectUpdatePayload): void;
-	ReceiveAdd(Payload: ARObjectUpdatePayload): void;
-	static C(Other: UObject | any): ARObjectComponent;
-}
-
-declare class ARMeshUpdatePayload { 
-	SessionPayload: ARSessionPayload;
-	WorldTransform: Transform;
-	ObjectClassification: EARObjectClassification;
-	clone() : ARMeshUpdatePayload;
-	static C(Other: UObject | any): ARMeshUpdatePayload;
-}
-
-declare class ARMeshComponent extends ARComponent { 
-	ReplicatedPayload: ARMeshUpdatePayload;
-	static Load(ResourceName: string): ARMeshComponent;
-	static Find(Outer: UObject, ResourceName: string): ARMeshComponent;
-	static GetDefaultObject(): ARMeshComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARMeshComponent;
-	ServerUpdatePayload(NewPayload: ARMeshUpdatePayload): void;
-	ReceiveUpdate(Payload: ARMeshUpdatePayload): void;
-	ReceiveAdd(Payload: ARMeshUpdatePayload): void;
-	static C(Other: UObject | any): ARMeshComponent;
-}
-
-declare type EARAltitudeSource = 'Precise' | 'Coarse' | 'UserDefined' | 'Unknown' | 'EARAltitudeSource_MAX';
-declare var EARAltitudeSource : { Precise:'Precise',Coarse:'Coarse',UserDefined:'UserDefined',Unknown:'Unknown',EARAltitudeSource_MAX:'EARAltitudeSource_MAX', };
-declare class ARGeoAnchorUpdatePayload { 
-	SessionPayload: ARSessionPayload;
-	WorldTransform: Transform;
-	Longitude: number;
-	Latitude: number;
-	AltitudeMeters: number;
-	AltitudeSource: EARAltitudeSource;
-	AnchorName: string;
-	clone() : ARGeoAnchorUpdatePayload;
-	static C(Other: UObject | any): ARGeoAnchorUpdatePayload;
-}
-
-declare type EGeoAnchorComponentDebugMode = 'None' | 'ShowGeoData' | 'EGeoAnchorComponentDebugMode_MAX';
-declare var EGeoAnchorComponentDebugMode : { None:'None',ShowGeoData:'ShowGeoData',EGeoAnchorComponentDebugMode_MAX:'EGeoAnchorComponentDebugMode_MAX', };
-declare class ARGeoAnchorComponent extends ARComponent { 
-	ReplicatedPayload: ARGeoAnchorUpdatePayload;
-	static Load(ResourceName: string): ARGeoAnchorComponent;
-	static Find(Outer: UObject, ResourceName: string): ARGeoAnchorComponent;
-	static GetDefaultObject(): ARGeoAnchorComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARGeoAnchorComponent;
-	static SetGeoAnchorComponentDebugMode(NewDebugMode: EGeoAnchorComponentDebugMode): void;
-	ServerUpdatePayload(NewPayload: ARGeoAnchorUpdatePayload): void;
-	ReceiveUpdate(Payload: ARGeoAnchorUpdatePayload): void;
-	ReceiveAdd(Payload: ARGeoAnchorUpdatePayload): void;
-	static C(Other: UObject | any): ARGeoAnchorComponent;
-}
-
-declare type EMagicLeapImageTargetOrientation = 'ForwardAxisAsNormal' | 'UpAxisAsNormal' | 'EMagicLeapImageTargetOrientation_MAX';
-declare var EMagicLeapImageTargetOrientation : { ForwardAxisAsNormal:'ForwardAxisAsNormal',UpAxisAsNormal:'UpAxisAsNormal',EMagicLeapImageTargetOrientation_MAX:'EMagicLeapImageTargetOrientation_MAX', };
-declare class LuminARCandidateImage extends ARCandidateImage { 
-	bUseUnreliablePose: boolean;
-	bImageIsStationary: boolean;
-	AxisOrientation: EMagicLeapImageTargetOrientation;
-	static Load(ResourceName: string): LuminARCandidateImage;
-	static Find(Outer: UObject, ResourceName: string): LuminARCandidateImage;
-	static GetDefaultObject(): LuminARCandidateImage;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LuminARCandidateImage;
-	GetUseUnreliablePose(): boolean;
-	GetImageIsStationary(): boolean;
-	GetAxisOrientation(): EMagicLeapImageTargetOrientation;
-	static C(Other: UObject | any): LuminARCandidateImage;
-}
-
-declare class ARSessionConfig extends DataAsset { 
-	bGenerateMeshDataFromTrackedGeometry: boolean;
-	bGenerateCollisionForMeshData: boolean;
-	bGenerateNavMeshForMeshData: boolean;
-	bUseMeshDataForOcclusion: boolean;
-	bRenderMeshDataInWireframe: boolean;
-	bTrackSceneObjects: boolean;
-	bUsePersonSegmentationForOcclusion: boolean;
-	bUseSceneDepthForOcclusion: boolean;
-	bUseAutomaticImageScaleEstimation: boolean;
-	bUseStandardOnboardingUX: boolean;
-	WorldAlignment: EARWorldAlignment;
-	SessionType: EARSessionType;
-	PlaneDetectionMode: EARPlaneDetectionMode;
-	bHorizontalPlaneDetection: boolean;
-	bVerticalPlaneDetection: boolean;
-	bEnableAutoFocus: boolean;
-	LightEstimationMode: EARLightEstimationMode;
-	FrameSyncMode: EARFrameSyncMode;
-	bEnableAutomaticCameraOverlay: boolean;
-	bEnableAutomaticCameraTracking: boolean;
-	bResetCameraTracking: boolean;
-	bResetTrackedObjects: boolean;
-	CandidateImages: ARCandidateImage[];
-	MaxNumSimultaneousImagesTracked: number;
-	EnvironmentCaptureProbeType: EAREnvironmentCaptureProbeType;
-	WorldMapData: number[];
-	CandidateObjects: ARCandidateObject[];
-	DesiredVideoFormat: ARVideoFormat;
-	bUseOptimalVideoFormat: boolean;
-	FaceTrackingDirection: EARFaceTrackingDirection;
-	FaceTrackingUpdate: EARFaceTrackingUpdate;
-	MaxNumberOfTrackedFaces: number;
-	SerializedARCandidateImageDatabase: number[];
-	EnabledSessionTrackingFeature: EARSessionTrackingFeature;
-	SceneReconstructionMethod: EARSceneReconstruction;
-	PlaneComponentClass: UnrealEngineClass;
-	PointComponentClass: UnrealEngineClass;
-	FaceComponentClass: UnrealEngineClass;
-	ImageComponentClass: UnrealEngineClass;
-	QRCodeComponentClass: UnrealEngineClass;
-	PoseComponentClass: UnrealEngineClass;
-	EnvironmentProbeComponentClass: UnrealEngineClass;
-	ObjectComponentClass: UnrealEngineClass;
-	MeshComponentClass: UnrealEngineClass;
-	GeoAnchorComponentClass: UnrealEngineClass;
-	DefaultMeshMaterial: MaterialInterface;
-	DefaultWireframeMeshMaterial: MaterialInterface;
-	static Load(ResourceName: string): ARSessionConfig;
-	static Find(Outer: UObject, ResourceName: string): ARSessionConfig;
-	static GetDefaultObject(): ARSessionConfig;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARSessionConfig;
-	ShouldResetTrackedObjects(): boolean;
-	ShouldResetCameraTracking(): boolean;
-	ShouldRenderCameraOverlay(): boolean;
-	ShouldEnableCameraTracking(): boolean;
-	ShouldEnableAutoFocus(): boolean;
-	SetWorldMapData(WorldMapData: number[]): void;
-	SetSessionTrackingFeatureToEnable(InSessionTrackingFeature: EARSessionTrackingFeature): void;
-	SetSceneReconstructionMethod(InSceneReconstructionMethod: EARSceneReconstruction): void;
-	SetResetTrackedObjects(bNewValue: boolean): void;
-	SetResetCameraTracking(bNewValue: boolean): void;
-	SetFaceTrackingUpdate(InUpdate: EARFaceTrackingUpdate): void;
-	SetFaceTrackingDirection(InDirection: EARFaceTrackingDirection): void;
-	SetEnableAutoFocus(bNewValue: boolean): void;
-	SetDesiredVideoFormat(NewFormat: ARVideoFormat): void;
-	SetCandidateObjectList(InCandidateObjects: ARCandidateObject[]): void;
-	GetWorldMapData(): number[];
-	GetWorldAlignment(): EARWorldAlignment;
-	GetSessionType(): EARSessionType;
-	GetSceneReconstructionMethod(): EARSceneReconstruction;
-	GetPlaneDetectionMode(): EARPlaneDetectionMode;
-	GetMaxNumSimultaneousImagesTracked(): number;
-	GetLightEstimationMode(): EARLightEstimationMode;
-	GetFrameSyncMode(): EARFrameSyncMode;
-	GetFaceTrackingUpdate(): EARFaceTrackingUpdate;
-	GetFaceTrackingDirection(): EARFaceTrackingDirection;
-	GetEnvironmentCaptureProbeType(): EAREnvironmentCaptureProbeType;
-	GetEnabledSessionTrackingFeature(): EARSessionTrackingFeature;
-	GetDesiredVideoFormat(): ARVideoFormat;
-	GetCandidateObjectList(): ARCandidateObject[];
-	GetCandidateImageList(): ARCandidateImage[];
-	AddCandidateObject(CandidateObject: ARCandidateObject): void;
-	AddCandidateImage(NewCandidateImage: ARCandidateImage): void;
-	static C(Other: UObject | any): ARSessionConfig;
-	AddLuminRuntimeCandidateImage(CandidateTexture: Texture2D,FriendlyName: string,PhysicalWidth: number,bUseUnreliablePose: boolean,bImageIsStationary: boolean): LuminARCandidateImage;
-	AddLuminRuntimeCandidateImageEx(CandidateTexture: Texture2D,FriendlyName: string,PhysicalWidth: number,bUseUnreliablePose: boolean,bImageIsStationary: boolean,InAxisOrientation: EMagicLeapImageTargetOrientation): LuminARCandidateImage;
-	AddRuntimeCandidateImage(CandidateTexture: Texture2D,FriendlyName: string,PhysicalWidth: number): ARCandidateImage;
-	StartARSession(): void;
-	static AddLuminRuntimeCandidateImage(SessionConfig: ARSessionConfig,CandidateTexture: Texture2D,FriendlyName: string,PhysicalWidth: number,bUseUnreliablePose: boolean,bImageIsStationary: boolean): LuminARCandidateImage;
-	static AddLuminRuntimeCandidateImageEx(SessionConfig: ARSessionConfig,CandidateTexture: Texture2D,FriendlyName: string,PhysicalWidth: number,bUseUnreliablePose: boolean,bImageIsStationary: boolean,InAxisOrientation: EMagicLeapImageTargetOrientation): LuminARCandidateImage;
-	static AddRuntimeCandidateImage(SessionConfig: ARSessionConfig,CandidateTexture: Texture2D,FriendlyName: string,PhysicalWidth: number): ARCandidateImage;
-	static StartARSession(SessionConfig: ARSessionConfig): void;
-}
-
-declare type EMagicLeapPlaneQueryFlags = 'Vertical' | 'Horizontal' | 'Arbitrary' | 'OrientToGravity' | 'PreferInner' | 'Ceiling' | 'Floor' | 'Wall' | 'Polygons' | 'EMagicLeapPlaneQueryFlags_MAX';
-declare var EMagicLeapPlaneQueryFlags : { Vertical:'Vertical',Horizontal:'Horizontal',Arbitrary:'Arbitrary',OrientToGravity:'OrientToGravity',PreferInner:'PreferInner',Ceiling:'Ceiling',Floor:'Floor',Wall:'Wall',Polygons:'Polygons',EMagicLeapPlaneQueryFlags_MAX:'EMagicLeapPlaneQueryFlags_MAX', };
-declare class BoxComponent extends ShapeComponent { 
-	BoxExtent: Vector;
-	LineThickness: number;
-	static Load(ResourceName: string): BoxComponent;
-	static Find(Outer: UObject, ResourceName: string): BoxComponent;
-	static GetDefaultObject(): BoxComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BoxComponent;
-	SetBoxExtent(InBoxExtent: Vector,bUpdateOverlaps: boolean): void;
-	GetUnscaledBoxExtent(): Vector;
-	GetScaledBoxExtent(): Vector;
-	static C(Other: UObject | any): BoxComponent;
-}
-
-declare class MagicLeapPlaneResult { 
-	PlanePosition: Vector;
-	PlaneOrientation: Rotator;
-	ContentOrientation: Rotator;
-	PlaneDimensions: Vector2D;
-	PlaneFlags: EMagicLeapPlaneQueryFlags[];
-	ID: Guid;
-	InnerID: Guid;
-	clone() : MagicLeapPlaneResult;
-	static C(Other: UObject | any): MagicLeapPlaneResult;
-}
-
-declare class MagicLeapPolygon { 
-	Vertices: Vector[];
-	clone() : MagicLeapPolygon;
-	static C(Other: UObject | any): MagicLeapPolygon;
-}
-
-declare class MagicLeapPlaneBoundary { 
-	Polygon: MagicLeapPolygon;
-	Holes: MagicLeapPolygon[];
-	clone() : MagicLeapPlaneBoundary;
-	static C(Other: UObject | any): MagicLeapPlaneBoundary;
-}
-
-declare class MagicLeapPlaneBoundaries { 
-	ID: Guid;
-	Boundaries: MagicLeapPlaneBoundary[];
-	clone() : MagicLeapPlaneBoundaries;
-	static C(Other: UObject | any): MagicLeapPlaneBoundaries;
-}
-
-declare class MagicLeapPlanesQuery { 
-	Flags: EMagicLeapPlaneQueryFlags[];
-	SearchVolume: BoxComponent;
-	MaxResults: number;
-	MinHoleLength: number;
-	MinPlaneArea: number;
-	SearchVolumePosition: Vector;
-	SearchVolumeOrientation: Quat;
-	SearchVolumeExtents: Vector;
-	SimilarityThreshold: number;
-	bSearchVolumeTrackingSpace: boolean;
-	bResultTrackingSpace: boolean;
-	clone() : MagicLeapPlanesQuery;
-	static C(Other: UObject | any): MagicLeapPlanesQuery;
-	PlanesPersistentQueryBeginAsync(Handle: Guid,ResultDelegate: UnrealEngineDelegate<(bSuccess: boolean, QueryHandle: Guid, QueryType: EMagicLeapPlaneQueryType, NewPlanes: MagicLeapPlaneResult[], RemovedPlaneIDs: Guid[], NewPolygons: MagicLeapPlaneBoundaries[], RemovedPolygonIDs: Guid[]) => void>): boolean;
-	PlanesQueryBeginAsync(ResultDelegate: UnrealEngineDelegate<(bSuccess: boolean, planes: MagicLeapPlaneResult[], Polygons: MagicLeapPlaneBoundaries[]) => void>): boolean;
-	static PlanesPersistentQueryBeginAsync(Query: MagicLeapPlanesQuery,Handle: Guid,ResultDelegate: UnrealEngineDelegate<(bSuccess: boolean, QueryHandle: Guid, QueryType: EMagicLeapPlaneQueryType, NewPlanes: MagicLeapPlaneResult[], RemovedPlaneIDs: Guid[], NewPolygons: MagicLeapPlaneBoundaries[], RemovedPolygonIDs: Guid[]) => void>): boolean;
-	static PlanesQueryBeginAsync(Query: MagicLeapPlanesQuery,ResultDelegate: UnrealEngineDelegate<(bSuccess: boolean, planes: MagicLeapPlaneResult[], Polygons: MagicLeapPlaneBoundaries[]) => void>): boolean;
-}
-
-declare class LuminARSessionConfig extends ARSessionConfig { 
-	PlanesQuery: MagicLeapPlanesQuery;
-	MaxPlaneQueryResults: number;
-	MinPlaneArea: number;
-	bArbitraryOrientationPlaneDetection: boolean;
-	PlaneSearchExtents: Vector;
-	PlaneQueryFlags: EMagicLeapPlaneQueryFlags[];
-	bDiscardZeroExtentPlanes: boolean;
-	bDefaultUseUnreliablePose: boolean;
-	static Load(ResourceName: string): LuminARSessionConfig;
-	static Find(Outer: UObject, ResourceName: string): LuminARSessionConfig;
-	static GetDefaultObject(): LuminARSessionConfig;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LuminARSessionConfig;
-	static C(Other: UObject | any): LuminARSessionConfig;
-}
-
 declare class TraceChannelTestBatchOptions { 
 	bLineTrace: boolean;
 	bSphereTrace: boolean;
@@ -14626,918 +17436,6 @@ declare class AutomationScreenshotOptions {
 	static C(Other: UObject | any): AutomationScreenshotOptions;
 	static GetDefaultScreenshotOptionsForGameplay(Tolerance: EComparisonTolerance,Delay: number): AutomationScreenshotOptions;
 	static GetDefaultScreenshotOptionsForRendering(Tolerance: EComparisonTolerance,Delay: number): AutomationScreenshotOptions;
-}
-
-declare type EPathFollowingResult = 'Success' | 'Blocked' | 'OffPath' | 'Aborted' | 'Skipped_DEPRECATED' | 'Invalid' | 'EPathFollowingResult_MAX';
-declare var EPathFollowingResult : { Success:'Success',Blocked:'Blocked',OffPath:'OffPath',Aborted:'Aborted',Skipped_DEPRECATED:'Skipped_DEPRECATED',Invalid:'Invalid',EPathFollowingResult_MAX:'EPathFollowingResult_MAX', };
-declare class AIRequestID { 
-	RequestID: any;
-	clone() : AIRequestID;
-	static C(Other: UObject | any): AIRequestID;
-}
-
-declare class AIAsyncTaskBlueprintProxy extends UObject { 
-	OnSuccess: UnrealEngineMulticastDelegate<(MovementResult: EPathFollowingResult) => void>;
-	OnFail: UnrealEngineMulticastDelegate<(MovementResult: EPathFollowingResult) => void>;
-	static Load(ResourceName: string): AIAsyncTaskBlueprintProxy;
-	static Find(Outer: UObject, ResourceName: string): AIAsyncTaskBlueprintProxy;
-	static GetDefaultObject(): AIAsyncTaskBlueprintProxy;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIAsyncTaskBlueprintProxy;
-	OnMoveCompleted(RequestID: AIRequestID,MovementResult: EPathFollowingResult): void;
-	static C(Other: UObject | any): AIAsyncTaskBlueprintProxy;
-}
-
-declare class BlackboardKeyType extends UObject { 
-	static Load(ResourceName: string): BlackboardKeyType;
-	static Find(Outer: UObject, ResourceName: string): BlackboardKeyType;
-	static GetDefaultObject(): BlackboardKeyType;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlackboardKeyType;
-	static C(Other: UObject | any): BlackboardKeyType;
-}
-
-declare class BlackboardKeySelector { 
-	AllowedTypes: BlackboardKeyType[];
-	SelectedKeyName: string;
-	SelectedKeyType: UnrealEngineClass;
-	SelectedKeyID: number;
-	bNoneIsAllowedValue: boolean;
-	clone() : BlackboardKeySelector;
-	static C(Other: UObject | any): BlackboardKeySelector;
-}
-
-declare class BlackboardEntry { 
-	EntryName: string;
-	EntryDescription: string;
-	EntryCategory: string;
-	KeyType: BlackboardKeyType;
-	bInstanceSynced: boolean;
-	clone() : BlackboardEntry;
-	static C(Other: UObject | any): BlackboardEntry;
-}
-
-declare class BlackboardData extends DataAsset { 
-	Parent: BlackboardData;
-	ParentKeys: BlackboardEntry[];
-	Keys: BlackboardEntry[];
-	bHasSynchronizedKeys: boolean;
-	static Load(ResourceName: string): BlackboardData;
-	static Find(Outer: UObject, ResourceName: string): BlackboardData;
-	static GetDefaultObject(): BlackboardData;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlackboardData;
-	static C(Other: UObject | any): BlackboardData;
-}
-
-declare class BlackboardComponent extends ActorComponent { 
-	BrainComp: BrainComponent;
-	DefaultBlackboardAsset: BlackboardData;
-	BlackboardAsset: BlackboardData;
-	KeyInstances: BlackboardKeyType[];
-	static Load(ResourceName: string): BlackboardComponent;
-	static Find(Outer: UObject, ResourceName: string): BlackboardComponent;
-	static GetDefaultObject(): BlackboardComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlackboardComponent;
-	SetValueAsVector(KeyName: string,VectorValue: Vector): void;
-	SetValueAsString(KeyName: string,StringValue: string): void;
-	SetValueAsRotator(KeyName: string,VectorValue: Rotator): void;
-	SetValueAsObject(KeyName: string,ObjectValue: UObject): void;
-	SetValueAsName(KeyName: string,NameValue: string): void;
-	SetValueAsInt(KeyName: string,IntValue: number): void;
-	SetValueAsFloat(KeyName: string,FloatValue: number): void;
-	SetValueAsEnum(KeyName: string,EnumValue: number): void;
-	SetValueAsClass(KeyName: string,ClassValue: UnrealEngineClass): void;
-	SetValueAsBool(KeyName: string,BoolValue: boolean): void;
-	IsVectorValueSet(KeyName: string): boolean;
-	GetValueAsVector(KeyName: string): Vector;
-	GetValueAsString(KeyName: string): string;
-	GetValueAsRotator(KeyName: string): Rotator;
-	GetValueAsObject(KeyName: string): UObject;
-	GetValueAsName(KeyName: string): string;
-	GetValueAsInt(KeyName: string): number;
-	GetValueAsFloat(KeyName: string): number;
-	GetValueAsEnum(KeyName: string): number;
-	GetValueAsClass(KeyName: string): UnrealEngineClass;
-	GetValueAsBool(KeyName: string): boolean;
-	GetRotationFromEntry(KeyName: string,ResultRotation?: Rotator): {ResultRotation: Rotator, $: boolean};
-	GetLocationFromEntry(KeyName: string,ResultLocation?: Vector): {ResultLocation: Vector, $: boolean};
-	ClearValue(KeyName: string): void;
-	static C(Other: UObject | any): BlackboardComponent;
-}
-
-declare type EPathFollowingAction = 'Error' | 'NoMove' | 'DirectMove' | 'PartialPath' | 'PathToGoal' | 'EPathFollowingAction_MAX';
-declare var EPathFollowingAction : { Error:'Error',NoMove:'NoMove',DirectMove:'DirectMove',PartialPath:'PartialPath',PathToGoal:'PathToGoal',EPathFollowingAction_MAX:'EPathFollowingAction_MAX', };
-declare class PathFollowingComponent extends ActorComponent { 
-	MovementComp: NavMovementComponent;
-	MyNavData: NavigationData;
-	static Load(ResourceName: string): PathFollowingComponent;
-	static Find(Outer: UObject, ResourceName: string): PathFollowingComponent;
-	static GetDefaultObject(): PathFollowingComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PathFollowingComponent;
-	OnNavDataRegistered(NavData: NavigationData): void;
-	OnActorBump(SelfActor: Actor,OtherActor: Actor,NormalImpulse: Vector,Hit: HitResult): void;
-	GetPathDestination(): Vector;
-	GetPathActionType(): EPathFollowingAction;
-	static C(Other: UObject | any): PathFollowingComponent;
-}
-
-declare class AISenseConfig extends UObject { 
-	DebugColor: Color;
-	MaxAge: number;
-	bStartsEnabled: boolean;
-	static Load(ResourceName: string): AISenseConfig;
-	static Find(Outer: UObject, ResourceName: string): AISenseConfig;
-	static GetDefaultObject(): AISenseConfig;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AISenseConfig;
-	static C(Other: UObject | any): AISenseConfig;
-}
-
-declare type EAISenseNotifyType = 'OnEveryPerception' | 'OnPerceptionChange' | 'EAISenseNotifyType_MAX';
-declare var EAISenseNotifyType : { OnEveryPerception:'OnEveryPerception',OnPerceptionChange:'OnPerceptionChange',EAISenseNotifyType_MAX:'EAISenseNotifyType_MAX', };
-declare class BehaviorTreeTemplateInfo { 
-	Asset: BehaviorTree;
-	Template: BTCompositeNode;
-	clone() : BehaviorTreeTemplateInfo;
-	static C(Other: UObject | any): BehaviorTreeTemplateInfo;
-}
-
-declare class BehaviorTreeManager extends UObject { 
-	MaxDebuggerSteps: number;
-	LoadedTemplates: BehaviorTreeTemplateInfo[];
-	ActiveComponents: BehaviorTreeComponent[];
-	static Load(ResourceName: string): BehaviorTreeManager;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeManager;
-	static GetDefaultObject(): BehaviorTreeManager;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeManager;
-	static C(Other: UObject | any): BehaviorTreeManager;
-}
-
-declare class EnvQueryNode extends UObject { 
-	VerNum: number;
-	static Load(ResourceName: string): EnvQueryNode;
-	static Find(Outer: UObject, ResourceName: string): EnvQueryNode;
-	static GetDefaultObject(): EnvQueryNode;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQueryNode;
-	static C(Other: UObject | any): EnvQueryNode;
-}
-
-declare class EnvQueryItemType extends UObject { 
-	static Load(ResourceName: string): EnvQueryItemType;
-	static Find(Outer: UObject, ResourceName: string): EnvQueryItemType;
-	static GetDefaultObject(): EnvQueryItemType;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQueryItemType;
-	static C(Other: UObject | any): EnvQueryItemType;
-}
-
-declare class EnvQueryGenerator extends EnvQueryNode { 
-	OptionName: string;
-	ItemType: UnrealEngineClass;
-	bAutoSortTests: boolean;
-	static Load(ResourceName: string): EnvQueryGenerator;
-	static Find(Outer: UObject, ResourceName: string): EnvQueryGenerator;
-	static GetDefaultObject(): EnvQueryGenerator;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQueryGenerator;
-	static C(Other: UObject | any): EnvQueryGenerator;
-}
-
-declare type EEnvTestPurpose = 'Filter' | 'Score' | 'FilterAndScore' | 'EEnvTestPurpose_MAX';
-declare var EEnvTestPurpose : { Filter:'Filter',Score:'Score',FilterAndScore:'FilterAndScore',EEnvTestPurpose_MAX:'EEnvTestPurpose_MAX', };
-declare type EEnvTestFilterOperator = 'AllPass' | 'AnyPass' | 'EEnvTestFilterOperator_MAX';
-declare var EEnvTestFilterOperator : { AllPass:'AllPass',AnyPass:'AnyPass',EEnvTestFilterOperator_MAX:'EEnvTestFilterOperator_MAX', };
-declare type EEnvTestScoreOperator = 'AverageScore' | 'MinScore' | 'MaxScore' | 'Multiply' | 'EEnvTestScoreOperator_MAX';
-declare var EEnvTestScoreOperator : { AverageScore:'AverageScore',MinScore:'MinScore',MaxScore:'MaxScore',Multiply:'Multiply',EEnvTestScoreOperator_MAX:'EEnvTestScoreOperator_MAX', };
-declare type EEnvTestFilterType = 'Minimum' | 'Maximum' | 'Range' | 'Match' | 'EEnvTestFilterType_MAX';
-declare var EEnvTestFilterType : { Minimum:'Minimum',Maximum:'Maximum',Range:'Range',Match:'Match',EEnvTestFilterType_MAX:'EEnvTestFilterType_MAX', };
-declare class AIDataProvider extends UObject { 
-	static Load(ResourceName: string): AIDataProvider;
-	static Find(Outer: UObject, ResourceName: string): AIDataProvider;
-	static GetDefaultObject(): AIDataProvider;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIDataProvider;
-	static C(Other: UObject | any): AIDataProvider;
-}
-
-declare class AIDataProviderValue { 
-	DataBinding: AIDataProvider;
-	DataField: string;
-	clone() : AIDataProviderValue;
-	static C(Other: UObject | any): AIDataProviderValue;
-}
-
-declare class AIDataProviderTypedValue extends AIDataProviderValue { 
-	PropertyType: UnrealEngineClass;
-	clone() : AIDataProviderTypedValue;
-	static C(Other: UObject | any): AIDataProviderTypedValue;
-}
-
-declare class AIDataProviderBoolValue extends AIDataProviderTypedValue { 
-	DefaultValue: boolean;
-	clone() : AIDataProviderBoolValue;
-	static C(Other: UObject | any): AIDataProviderBoolValue;
-}
-
-declare class AIDataProviderFloatValue extends AIDataProviderTypedValue { 
-	DefaultValue: number;
-	clone() : AIDataProviderFloatValue;
-	static C(Other: UObject | any): AIDataProviderFloatValue;
-}
-
-declare type EEnvTestScoreEquation = 'Linear' | 'Square' | 'InverseLinear' | 'SquareRoot' | 'Constant' | 'EEnvTestScoreEquation_MAX';
-declare var EEnvTestScoreEquation : { Linear:'Linear',Square:'Square',InverseLinear:'InverseLinear',SquareRoot:'SquareRoot',Constant:'Constant',EEnvTestScoreEquation_MAX:'EEnvTestScoreEquation_MAX', };
-declare type EEnvQueryTestClamping = 'None' | 'SpecifiedValue' | 'FilterThreshold' | 'EEnvQueryTestClamping_MAX';
-declare var EEnvQueryTestClamping : { None:'None',SpecifiedValue:'SpecifiedValue',FilterThreshold:'FilterThreshold',EEnvQueryTestClamping_MAX:'EEnvQueryTestClamping_MAX', };
-declare type EEQSNormalizationType = 'Absolute' | 'RelativeToScores' | 'EEQSNormalizationType_MAX';
-declare var EEQSNormalizationType : { Absolute:'Absolute',RelativeToScores:'RelativeToScores',EEQSNormalizationType_MAX:'EEQSNormalizationType_MAX', };
-declare class EnvQueryTest extends EnvQueryNode { 
-	TestOrder: number;
-	TestPurpose: EEnvTestPurpose;
-	TestComment: string;
-	MultipleContextFilterOp: EEnvTestFilterOperator;
-	MultipleContextScoreOp: EEnvTestScoreOperator;
-	FilterType: EEnvTestFilterType;
-	BoolValue: AIDataProviderBoolValue;
-	FloatValueMin: AIDataProviderFloatValue;
-	FloatValueMax: AIDataProviderFloatValue;
-	ScoringEquation: EEnvTestScoreEquation;
-	ClampMinType: EEnvQueryTestClamping;
-	ClampMaxType: EEnvQueryTestClamping;
-	NormalizationType: EEQSNormalizationType;
-	ScoreClampMin: AIDataProviderFloatValue;
-	ScoreClampMax: AIDataProviderFloatValue;
-	ScoringFactor: AIDataProviderFloatValue;
-	ReferenceValue: AIDataProviderFloatValue;
-	bDefineReferenceValue: boolean;
-	bWorkOnFloatValues: boolean;
-	static Load(ResourceName: string): EnvQueryTest;
-	static Find(Outer: UObject, ResourceName: string): EnvQueryTest;
-	static GetDefaultObject(): EnvQueryTest;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQueryTest;
-	static C(Other: UObject | any): EnvQueryTest;
-}
-
-declare class EnvQueryOption extends UObject { 
-	Generator: EnvQueryGenerator;
-	Tests: EnvQueryTest[];
-	static Load(ResourceName: string): EnvQueryOption;
-	static Find(Outer: UObject, ResourceName: string): EnvQueryOption;
-	static GetDefaultObject(): EnvQueryOption;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQueryOption;
-	static C(Other: UObject | any): EnvQueryOption;
-}
-
-declare class EnvQuery extends DataAsset { 
-	EdGraph: EdGraph;
-	QueryName: string;
-	Options: EnvQueryOption[];
-	static Load(ResourceName: string): EnvQuery;
-	static Find(Outer: UObject, ResourceName: string): EnvQuery;
-	static GetDefaultObject(): EnvQuery;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQuery;
-	static C(Other: UObject | any): EnvQuery;
-}
-
-declare class EnvQueryInstanceCache { 
-	Template: EnvQuery;
-	clone() : EnvQueryInstanceCache;
-	static C(Other: UObject | any): EnvQueryInstanceCache;
-}
-
-declare class EnvQueryContext extends UObject { 
-	static Load(ResourceName: string): EnvQueryContext;
-	static Find(Outer: UObject, ResourceName: string): EnvQueryContext;
-	static GetDefaultObject(): EnvQueryContext;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQueryContext;
-	static C(Other: UObject | any): EnvQueryContext;
-}
-
-declare type EEnvQueryStatus = 'Processing' | 'Success' | 'Failed' | 'Aborted' | 'OwnerLost' | 'MissingParam' | 'EEnvQueryStatus_MAX';
-declare var EEnvQueryStatus : { Processing:'Processing',Success:'Success',Failed:'Failed',Aborted:'Aborted',OwnerLost:'OwnerLost',MissingParam:'MissingParam',EEnvQueryStatus_MAX:'EEnvQueryStatus_MAX', };
-declare class EnvQueryInstanceBlueprintWrapper extends UObject { 
-	QueryID: number;
-	ItemType: UnrealEngineClass;
-	OptionIndex: number;
-	OnQueryFinishedEvent: UnrealEngineMulticastDelegate<(QueryInstance: EnvQueryInstanceBlueprintWrapper, QueryStatus: EEnvQueryStatus) => void>;
-	static Load(ResourceName: string): EnvQueryInstanceBlueprintWrapper;
-	static Find(Outer: UObject, ResourceName: string): EnvQueryInstanceBlueprintWrapper;
-	static GetDefaultObject(): EnvQueryInstanceBlueprintWrapper;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQueryInstanceBlueprintWrapper;
-	SetNamedParam(ParamName: string,Value: number): void;
-	GetResultsAsLocations(): Vector[];
-	GetResultsAsActors(): Actor[];
-	GetQueryResultsAsLocations(ResultLocations?: Vector[]): {ResultLocations: Vector[], $: boolean};
-	GetQueryResultsAsActors(ResultActors?: Actor[]): {ResultActors: Actor[], $: boolean};
-	GetItemScore(ItemIndex: number): number;
-	static C(Other: UObject | any): EnvQueryInstanceBlueprintWrapper;
-}
-
-declare type EEnvQueryRunMode = 'SingleResult' | 'RandomBest5Pct' | 'RandomBest25Pct' | 'AllMatching' | 'EEnvQueryRunMode_MAX';
-declare var EEnvQueryRunMode : { SingleResult:'SingleResult',RandomBest5Pct:'RandomBest5Pct',RandomBest25Pct:'RandomBest25Pct',AllMatching:'AllMatching',EEnvQueryRunMode_MAX:'EEnvQueryRunMode_MAX', };
-declare class EnvQueryManager extends AISubsystem { 
-	InstanceCache: EnvQueryInstanceCache[];
-	LocalContexts: EnvQueryContext[];
-	GCShieldedWrappers: EnvQueryInstanceBlueprintWrapper[];
-	MaxAllowedTestingTime: number;
-	bTestQueriesUsingBreadth: boolean;
-	QueryCountWarningThreshold: number;
-	QueryCountWarningInterval: any;
-	static Load(ResourceName: string): EnvQueryManager;
-	static Find(Outer: UObject, ResourceName: string): EnvQueryManager;
-	static GetDefaultObject(): EnvQueryManager;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EnvQueryManager;
-	static RunEQSQuery(WorldContextObject: UObject,QueryTemplate: EnvQuery,Querier: UObject,RunMode: EEnvQueryRunMode,WrapperClass: UnrealEngineClass): EnvQueryInstanceBlueprintWrapper;
-	static C(Other: UObject | any): EnvQueryManager;
-}
-
-declare class AIHotSpotManager extends UObject { 
-	static Load(ResourceName: string): AIHotSpotManager;
-	static Find(Outer: UObject, ResourceName: string): AIHotSpotManager;
-	static GetDefaultObject(): AIHotSpotManager;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIHotSpotManager;
-	static C(Other: UObject | any): AIHotSpotManager;
-}
-
-declare class NavLocalGridManager extends UObject { 
-	static Load(ResourceName: string): NavLocalGridManager;
-	static Find(Outer: UObject, ResourceName: string): NavLocalGridManager;
-	static GetDefaultObject(): NavLocalGridManager;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NavLocalGridManager;
-	static SetLocalNavigationGridDensity(WorldContextObject: UObject,CellSize: number): boolean;
-	static RemoveLocalNavigationGrid(WorldContextObject: UObject,GridId: number,bRebuildGrids: boolean): void;
-	static FindLocalNavigationGridPath(WorldContextObject: UObject,Start: Vector,End: Vector,PathPoints?: Vector[]): {PathPoints: Vector[], $: boolean};
-	static AddLocalNavigationGridForPoints(WorldContextObject: UObject,Locations: Vector[],Radius2D: number,Height: number,bRebuildGrids: boolean): number;
-	static AddLocalNavigationGridForPoint(WorldContextObject: UObject,Location: Vector,Radius2D: number,Height: number,bRebuildGrids: boolean): number;
-	static AddLocalNavigationGridForCapsule(WorldContextObject: UObject,Location: Vector,CapsuleRadius: number,CapsuleHalfHeight: number,Radius2D: number,Height: number,bRebuildGrids: boolean): number;
-	static AddLocalNavigationGridForBox(WorldContextObject: UObject,Location: Vector,Extent: Vector,Rotation: Rotator,Radius2D: number,Height: number,bRebuildGrids: boolean): number;
-	static C(Other: UObject | any): NavLocalGridManager;
-}
-
-declare class AISystem extends AISystemBase { 
-	PerceptionSystemClassName: SoftClassPath;
-	HotSpotManagerClassName: SoftClassPath;
-	AcceptanceRadius: number;
-	PathfollowingRegularPathPointAcceptanceRadius: number;
-	PathfollowingNavLinkAcceptanceRadius: number;
-	bFinishMoveOnGoalOverlap: boolean;
-	bAcceptPartialPaths: boolean;
-	bAllowStrafing: boolean;
-	bEnableBTAITasks: boolean;
-	bAllowControllersAsEQSQuerier: boolean;
-	bEnableDebuggerPlugin: boolean;
-	bForgetStaleActors: boolean;
-	bAddBlackboardSelfKey: boolean;
-	DefaultSightCollisionChannel: ECollisionChannel;
-	BehaviorTreeManager: BehaviorTreeManager;
-	EnvironmentQueryManager: EnvQueryManager;
-	PerceptionSystem: AIPerceptionSystem;
-	AllProxyObjects: AIAsyncTaskBlueprintProxy[];
-	HotSpotManager: AIHotSpotManager;
-	NavLocalGrids: NavLocalGridManager;
-	static Load(ResourceName: string): AISystem;
-	static Find(Outer: UObject, ResourceName: string): AISystem;
-	static GetDefaultObject(): AISystem;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AISystem;
-	AILoggingVerbose(): void;
-	AIIgnorePlayers(): void;
-	static C(Other: UObject | any): AISystem;
-}
-
-declare class AISubsystem extends UObject { 
-	AISystem: AISystem;
-	static Load(ResourceName: string): AISubsystem;
-	static Find(Outer: UObject, ResourceName: string): AISubsystem;
-	static GetDefaultObject(): AISubsystem;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AISubsystem;
-	static C(Other: UObject | any): AISubsystem;
-}
-
-declare class AISenseEvent extends UObject { 
-	static Load(ResourceName: string): AISenseEvent;
-	static Find(Outer: UObject, ResourceName: string): AISenseEvent;
-	static GetDefaultObject(): AISenseEvent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AISenseEvent;
-	static C(Other: UObject | any): AISenseEvent;
-}
-
-declare type EEndPlayReason = 'Destroyed' | 'LevelTransition' | 'EndPlayInEditor' | 'RemovedFromWorld' | 'Quit' | 'EEndPlayReason_MAX';
-declare var EEndPlayReason : { Destroyed:'Destroyed',LevelTransition:'LevelTransition',EndPlayInEditor:'EndPlayInEditor',RemovedFromWorld:'RemovedFromWorld',Quit:'Quit',EEndPlayReason_MAX:'EEndPlayReason_MAX', };
-declare class AIStimulus { 
-	Age: number;
-	ExpirationAge: number;
-	Strength: number;
-	StimulusLocation: Vector;
-	ReceiverLocation: Vector;
-	Tag: string;
-	bSuccessfullySensed: boolean;
-	clone() : AIStimulus;
-	static C(Other: UObject | any): AIStimulus;
-}
-
-declare class AIPerceptionSystem extends AISubsystem { 
-	Senses: AISense[];
-	PerceptionAgingRate: number;
-	static Load(ResourceName: string): AIPerceptionSystem;
-	static Find(Outer: UObject, ResourceName: string): AIPerceptionSystem;
-	static GetDefaultObject(): AIPerceptionSystem;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIPerceptionSystem;
-	static ReportPerceptionEvent(WorldContextObject: UObject,PerceptionEvent: AISenseEvent): void;
-	ReportEvent(PerceptionEvent: AISenseEvent): void;
-	static RegisterPerceptionStimuliSource(WorldContextObject: UObject,Sense: UnrealEngineClass,Target: Actor): boolean;
-	OnPerceptionStimuliSourceEndPlay(Actor: Actor,EndPlayReason: EEndPlayReason): void;
-	static GetSenseClassForStimulus(WorldContextObject: UObject,Stimulus: AIStimulus): UnrealEngineClass;
-	static C(Other: UObject | any): AIPerceptionSystem;
-}
-
-declare class AISense extends UObject { 
-	DefaultExpirationAge: number;
-	NotifyType: EAISenseNotifyType;
-	bWantsNewPawnNotification: boolean;
-	bAutoRegisterAllPawnsAsSources: boolean;
-	PerceptionSystemInstance: AIPerceptionSystem;
-	static Load(ResourceName: string): AISense;
-	static Find(Outer: UObject, ResourceName: string): AISense;
-	static GetDefaultObject(): AISense;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AISense;
-	static C(Other: UObject | any): AISense;
-}
-
-declare class ActorPerceptionUpdateInfo { 
-	TargetId: number;
-	Target: any;
-	Stimulus: AIStimulus;
-	clone() : ActorPerceptionUpdateInfo;
-	static C(Other: UObject | any): ActorPerceptionUpdateInfo;
-}
-
-declare class ActorPerceptionBlueprintInfo { 
-	Target: Actor;
-	LastSensedStimuli: AIStimulus[];
-	bIsHostile: boolean;
-	clone() : ActorPerceptionBlueprintInfo;
-	static C(Other: UObject | any): ActorPerceptionBlueprintInfo;
-}
-
-declare class AIPerceptionComponent extends ActorComponent { 
-	SensesConfig: AISenseConfig[];
-	DominantSense: UnrealEngineClass;
-	AIOwner: AIController;
-	OnPerceptionUpdated: UnrealEngineMulticastDelegate<(UpdatedActors: Actor[]) => void>;
-	OnTargetPerceptionUpdated: UnrealEngineMulticastDelegate<(Actor: Actor, Stimulus: AIStimulus) => void>;
-	OnTargetPerceptionInfoUpdated: UnrealEngineMulticastDelegate<(UpdateInfo: ActorPerceptionUpdateInfo) => void>;
-	static Load(ResourceName: string): AIPerceptionComponent;
-	static Find(Outer: UObject, ResourceName: string): AIPerceptionComponent;
-	static GetDefaultObject(): AIPerceptionComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIPerceptionComponent;
-	SetSenseEnabled(SenseClass: UnrealEngineClass,bEnable: boolean): void;
-	RequestStimuliListenerUpdate(): void;
-	OnOwnerEndPlay(Actor: Actor,EndPlayReason: EEndPlayReason): void;
-	GetPerceivedHostileActorsBySense(SenseToUse: UnrealEngineClass,OutActors?: Actor[]): {OutActors: Actor[]};
-	GetPerceivedHostileActors(OutActors?: Actor[]): {OutActors: Actor[]};
-	GetPerceivedActors(SenseToUse: UnrealEngineClass,OutActors?: Actor[]): {OutActors: Actor[]};
-	GetKnownPerceivedActors(SenseToUse: UnrealEngineClass,OutActors?: Actor[]): {OutActors: Actor[]};
-	GetCurrentlyPerceivedActors(SenseToUse: UnrealEngineClass,OutActors?: Actor[]): {OutActors: Actor[]};
-	GetActorsPerception(Actor: Actor,Info?: ActorPerceptionBlueprintInfo): {Info: ActorPerceptionBlueprintInfo, $: boolean};
-	ForgetAll(): void;
-	static C(Other: UObject | any): AIPerceptionComponent;
-}
-
-declare type EAIRequestPriority = 'SoftScript' | 'Logic' | 'HardScript' | 'Reaction' | 'Ultimate' | 'MAX';
-declare var EAIRequestPriority : { SoftScript:'SoftScript',Logic:'Logic',HardScript:'HardScript',Reaction:'Reaction',Ultimate:'Ultimate',MAX:'MAX', };
-declare type EPawnActionResult = 'NotStarted' | 'InProgress' | 'Success' | 'Failed' | 'Aborted' | 'EPawnActionResult_MAX';
-declare var EPawnActionResult : { NotStarted:'NotStarted',InProgress:'InProgress',Success:'Success',Failed:'Failed',Aborted:'Aborted',EPawnActionResult_MAX:'EPawnActionResult_MAX', };
-declare class PawnAction extends UObject { 
-	ChildAction: PawnAction;
-	ParentAction: PawnAction;
-	OwnerComponent: PawnActionsComponent;
-	Instigator: UObject;
-	BrainComp: BrainComponent;
-	bAllowNewSameClassInstance: boolean;
-	bReplaceActiveSameClassInstance: boolean;
-	bShouldPauseMovement: boolean;
-	bAlwaysNotifyOnFinished: boolean;
-	static Load(ResourceName: string): PawnAction;
-	static Find(Outer: UObject, ResourceName: string): PawnAction;
-	static GetDefaultObject(): PawnAction;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PawnAction;
-	GetActionPriority(): EAIRequestPriority;
-	Finish(WithResult: EPawnActionResult): void;
-	static CreateActionInstance(WorldContextObject: UObject,ActionClass: UnrealEngineClass): PawnAction;
-	static C(Other: UObject | any): PawnAction;
-}
-
-declare class PawnActionStack { 
-	TopAction: PawnAction;
-	clone() : PawnActionStack;
-	static C(Other: UObject | any): PawnActionStack;
-}
-
-declare class PawnActionEvent { 
-	Action: PawnAction;
-	clone() : PawnActionEvent;
-	static C(Other: UObject | any): PawnActionEvent;
-}
-
-declare type EPawnActionAbortState = 'NeverStarted' | 'NotBeingAborted' | 'MarkPendingAbort' | 'LatentAbortInProgress' | 'AbortDone' | 'MAX';
-declare var EPawnActionAbortState : { NeverStarted:'NeverStarted',NotBeingAborted:'NotBeingAborted',MarkPendingAbort:'MarkPendingAbort',LatentAbortInProgress:'LatentAbortInProgress',AbortDone:'AbortDone',MAX:'MAX', };
-declare class PawnActionsComponent extends ActorComponent { 
-	ControlledPawn: Pawn;
-	ActionStacks: PawnActionStack[];
-	ActionEvents: PawnActionEvent[];
-	CurrentAction: PawnAction;
-	static Load(ResourceName: string): PawnActionsComponent;
-	static Find(Outer: UObject, ResourceName: string): PawnActionsComponent;
-	static GetDefaultObject(): PawnActionsComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PawnActionsComponent;
-	K2_PushAction(NewAction: PawnAction,Priority: EAIRequestPriority,Instigator: UObject): boolean;
-	static K2_PerformAction(Pawn: Pawn,Action: PawnAction,Priority: EAIRequestPriority): boolean;
-	K2_ForceAbortAction(ActionToAbort: PawnAction): EPawnActionAbortState;
-	K2_AbortAction(ActionToAbort: PawnAction): EPawnActionAbortState;
-	static C(Other: UObject | any): PawnActionsComponent;
-}
-
-declare type ETaskResourceOverlapPolicy = 'StartOnTop' | 'StartAtEnd' | 'ETaskResourceOverlapPolicy_MAX';
-declare var ETaskResourceOverlapPolicy : { StartOnTop:'StartOnTop',StartAtEnd:'StartAtEnd',ETaskResourceOverlapPolicy_MAX:'ETaskResourceOverlapPolicy_MAX', };
-declare class GameplayTask extends UObject { 
-	InstanceName: string;
-	ResourceOverlapPolicy: ETaskResourceOverlapPolicy;
-	ChildTask: GameplayTask;
-	static Load(ResourceName: string): GameplayTask;
-	static Find(Outer: UObject, ResourceName: string): GameplayTask;
-	static GetDefaultObject(): GameplayTask;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GameplayTask;
-	ReadyForActivation(): void;
-	EndTask(): void;
-	static C(Other: UObject | any): GameplayTask;
-}
-
-declare class GameplayResourceSet { 
-	clone() : GameplayResourceSet;
-	static C(Other: UObject | any): GameplayResourceSet;
-}
-
-declare class GameplayTasksComponent extends ActorComponent { 
-	bIsNetDirty: boolean;
-	SimulatedTasks: GameplayTask[];
-	TaskPriorityQueue: GameplayTask[];
-	TickingTasks: GameplayTask[];
-	KnownTasks: GameplayTask[];
-	OnClaimedResourcesChange: UnrealEngineMulticastDelegate<(NewlyClaimed: GameplayResourceSet, FreshlyReleased: GameplayResourceSet) => void>;
-	static Load(ResourceName: string): GameplayTasksComponent;
-	static Find(Outer: UObject, ResourceName: string): GameplayTasksComponent;
-	static GetDefaultObject(): GameplayTasksComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GameplayTasksComponent;
-	OnRep_SimulatedTasks(): void;
-	static C(Other: UObject | any): GameplayTasksComponent;
-}
-
-declare class NavigationFilterArea { 
-	AreaClass: UnrealEngineClass;
-	TravelCostOverride: number;
-	EnteringCostOverride: number;
-	bIsExcluded: boolean;
-	bOverrideTravelCost: boolean;
-	bOverrideEnteringCost: boolean;
-	clone() : NavigationFilterArea;
-	static C(Other: UObject | any): NavigationFilterArea;
-}
-
-declare class NavigationFilterFlags { 
-	bNavFlag0: boolean;
-	bNavFlag1: boolean;
-	bNavFlag2: boolean;
-	bNavFlag3: boolean;
-	bNavFlag4: boolean;
-	bNavFlag5: boolean;
-	bNavFlag6: boolean;
-	bNavFlag7: boolean;
-	bNavFlag8: boolean;
-	bNavFlag9: boolean;
-	bNavFlag10: boolean;
-	bNavFlag11: boolean;
-	bNavFlag12: boolean;
-	bNavFlag13: boolean;
-	bNavFlag14: boolean;
-	bNavFlag15: boolean;
-	clone() : NavigationFilterFlags;
-	static C(Other: UObject | any): NavigationFilterFlags;
-}
-
-declare class NavigationQueryFilter extends UObject { 
-	Areas: NavigationFilterArea[];
-	IncludeFlags: NavigationFilterFlags;
-	ExcludeFlags: NavigationFilterFlags;
-	static Load(ResourceName: string): NavigationQueryFilter;
-	static Find(Outer: UObject, ResourceName: string): NavigationQueryFilter;
-	static GetDefaultObject(): NavigationQueryFilter;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NavigationQueryFilter;
-	static C(Other: UObject | any): NavigationQueryFilter;
-}
-
-declare class GameplayTaskResource extends UObject { 
-	ManualResourceID: number;
-	AutoResourceID: any;
-	bManuallySetID: boolean;
-	static Load(ResourceName: string): GameplayTaskResource;
-	static Find(Outer: UObject, ResourceName: string): GameplayTaskResource;
-	static GetDefaultObject(): GameplayTaskResource;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GameplayTaskResource;
-	static C(Other: UObject | any): GameplayTaskResource;
-}
-
-declare type EPathFollowingRequestResult = 'Failed' | 'AlreadyAtGoal' | 'RequestSuccessful' | 'EPathFollowingRequestResult_MAX';
-declare var EPathFollowingRequestResult : { Failed:'Failed',AlreadyAtGoal:'AlreadyAtGoal',RequestSuccessful:'RequestSuccessful',EPathFollowingRequestResult_MAX:'EPathFollowingRequestResult_MAX', };
-declare type EPathFollowingStatus = 'Idle' | 'Waiting' | 'Paused' | 'Moving' | 'EPathFollowingStatus_MAX';
-declare var EPathFollowingStatus : { Idle:'Idle',Waiting:'Waiting',Paused:'Paused',Moving:'Moving',EPathFollowingStatus_MAX:'EPathFollowingStatus_MAX', };
-declare class AIController extends Controller { 
-	bStartAILogicOnPossess: boolean;
-	bStopAILogicOnUnposses: boolean;
-	bLOSflag: boolean;
-	bSkipExtraLOSChecks: boolean;
-	bAllowStrafe: boolean;
-	bWantsPlayerState: boolean;
-	bSetControlRotationFromPawnOrientation: boolean;
-	PathFollowingComponent: PathFollowingComponent;
-	BrainComponent: BrainComponent;
-	PerceptionComponent: AIPerceptionComponent;
-	ActionsComp: PawnActionsComponent;
-	Blackboard: BlackboardComponent;
-	CachedGameplayTasksComponent: GameplayTasksComponent;
-	DefaultNavigationFilterClass: UnrealEngineClass;
-	ReceiveMoveCompleted: UnrealEngineMulticastDelegate<(RequestID: AIRequestID, Result: EPathFollowingResult) => void>;
-	static GetDefaultObject(): AIController;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIController;
-	UseBlackboard(BlackboardAsset: BlackboardData,BlackboardComponent?: BlackboardComponent): {BlackboardComponent: BlackboardComponent, $: boolean};
-	UnclaimTaskResource(ResourceClass: UnrealEngineClass): void;
-	SetPathFollowingComponent(NewPFComponent: PathFollowingComponent): void;
-	SetMoveBlockDetection(bEnable: boolean): void;
-	RunBehaviorTree(BTAsset: BehaviorTree): boolean;
-	OnUsingBlackBoard(BlackboardComp: BlackboardComponent,BlackboardAsset: BlackboardData): void;
-	OnGameplayTaskResourcesClaimed(NewlyClaimed: GameplayResourceSet,FreshlyReleased: GameplayResourceSet): void;
-	MoveToLocation(Dest: Vector,AcceptanceRadius: number,bStopOnOverlap: boolean,bUsePathfinding: boolean,bProjectDestinationToNavigation: boolean,bCanStrafe: boolean,FilterClass: UnrealEngineClass,bAllowPartialPath: boolean): EPathFollowingRequestResult;
-	MoveToActor(Goal: Actor,AcceptanceRadius: number,bStopOnOverlap: boolean,bUsePathfinding: boolean,bCanStrafe: boolean,FilterClass: UnrealEngineClass,bAllowPartialPath: boolean): EPathFollowingRequestResult;
-	K2_SetFocus(NewFocus: Actor): void;
-	K2_SetFocalPoint(FP: Vector): void;
-	K2_ClearFocus(): void;
-	HasPartialPath(): boolean;
-	GetPathFollowingComponent(): PathFollowingComponent;
-	GetMoveStatus(): EPathFollowingStatus;
-	GetImmediateMoveDestination(): Vector;
-	GetFocusActor(): Actor;
-	GetFocalPointOnActor(Actor: Actor): Vector;
-	GetFocalPoint(): Vector;
-	GetAIPerceptionComponent(): AIPerceptionComponent;
-	ClaimTaskResource(ResourceClass: UnrealEngineClass): void;
-	static C(Other: UObject | any): AIController;
-}
-
-declare class BrainComponent extends ActorComponent { 
-	BlackboardComp: BlackboardComponent;
-	AIOwner: AIController;
-	static Load(ResourceName: string): BrainComponent;
-	static Find(Outer: UObject, ResourceName: string): BrainComponent;
-	static GetDefaultObject(): BrainComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BrainComponent;
-	StopLogic(reason: string): void;
-	StartLogic(): void;
-	RestartLogic(): void;
-	IsRunning(): boolean;
-	IsPaused(): boolean;
-	static C(Other: UObject | any): BrainComponent;
-}
-
-declare class GameplayTagQuery { 
-	TokenStreamVersion: number;
-	TagDictionary: GameplayTag[];
-	QueryTokenStream: number[];
-	UserDescription: string;
-	AutoDescription: string;
-	clone() : GameplayTagQuery;
-	static C(Other: UObject | any): GameplayTagQuery;
-	IsTagQueryEmpty(): boolean;
-	MakeGameplayTagQuery(): GameplayTagQuery;
-	static IsTagQueryEmpty(TagQuery: GameplayTagQuery): boolean;
-	static MakeGameplayTagQuery(TagQuery: GameplayTagQuery): GameplayTagQuery;
-}
-
-declare class GameplayTagContainer { 
-	GameplayTags: GameplayTag[];
-	ParentTags: GameplayTag[];
-	clone() : GameplayTagContainer;
-	static C(Other: UObject | any): GameplayTagContainer;
-	AddGameplayTag(Tag?: GameplayTag): {TagContainer: GameplayTagContainer};
-	AppendGameplayTagContainers(InTagContainer?: GameplayTagContainer): {InOutTagContainer: GameplayTagContainer};
-	BreakGameplayTagContainer(GameplayTags?: GameplayTag[]): {GameplayTags: GameplayTag[]};
-	DoesContainerMatchTagQuery(TagQuery: GameplayTagQuery): boolean;
-	EqualEqual_GameplayTagContainer(B: GameplayTagContainer): boolean;
-	GetDebugStringFromGameplayTagContainer(): string;
-	GetNumGameplayTagsInContainer(): number;
-	HasAllTags(OtherContainer: GameplayTagContainer,bExactMatch: boolean): boolean;
-	HasAnyTags(OtherContainer: GameplayTagContainer,bExactMatch: boolean): boolean;
-	HasTag(Tag: GameplayTag,bExactMatch: boolean): boolean;
-	MakeLiteralGameplayTagContainer(): GameplayTagContainer;
-	NotEqual_GameplayTagContainer(B: GameplayTagContainer): boolean;
-	NotEqual_TagContainerTagContainer(B: string): boolean;
-	RemoveGameplayTag(Tag?: GameplayTag): {TagContainer: GameplayTagContainer, $: boolean};
-	static AddGameplayTag(TagContainer?: GameplayTagContainer,Tag?: GameplayTag): {TagContainer: GameplayTagContainer};
-	static AppendGameplayTagContainers(InOutTagContainer?: GameplayTagContainer,InTagContainer?: GameplayTagContainer): {InOutTagContainer: GameplayTagContainer};
-	static BreakGameplayTagContainer(GameplayTagContainer: GameplayTagContainer,GameplayTags?: GameplayTag[]): {GameplayTags: GameplayTag[]};
-	static DoesContainerMatchTagQuery(TagContainer: GameplayTagContainer,TagQuery: GameplayTagQuery): boolean;
-	static EqualEqual_GameplayTagContainer(A: GameplayTagContainer,B: GameplayTagContainer): boolean;
-	static GetDebugStringFromGameplayTagContainer(TagContainer: GameplayTagContainer): string;
-	static GetNumGameplayTagsInContainer(TagContainer: GameplayTagContainer): number;
-	static HasAllTags(TagContainer: GameplayTagContainer,OtherContainer: GameplayTagContainer,bExactMatch: boolean): boolean;
-	static HasAnyTags(TagContainer: GameplayTagContainer,OtherContainer: GameplayTagContainer,bExactMatch: boolean): boolean;
-	static HasTag(TagContainer: GameplayTagContainer,Tag: GameplayTag,bExactMatch: boolean): boolean;
-	static MakeLiteralGameplayTagContainer(Value: GameplayTagContainer): GameplayTagContainer;
-	static NotEqual_GameplayTagContainer(A: GameplayTagContainer,B: GameplayTagContainer): boolean;
-	static NotEqual_TagContainerTagContainer(A: GameplayTagContainer,B: string): boolean;
-	static RemoveGameplayTag(TagContainer?: GameplayTagContainer,Tag?: GameplayTag): {TagContainer: GameplayTagContainer, $: boolean};
-	static MakeGameplayTagContainerFromArray(GameplayTags: GameplayTag[]): GameplayTagContainer;
-}
-
-declare class GameplayTag { 
-	TagName: string;
-	clone() : GameplayTag;
-	static C(Other: UObject | any): GameplayTag;
-	EqualEqual_GameplayTag(B: GameplayTag): boolean;
-	GetDebugStringFromGameplayTag(): string;
-	GetTagName(): string;
-	IsGameplayTagValid(): boolean;
-	MakeGameplayTagContainerFromTag(): GameplayTagContainer;
-	MakeLiteralGameplayTag(): GameplayTag;
-	MatchesAnyTags(OtherContainer: GameplayTagContainer,bExactMatch: boolean): boolean;
-	MatchesTag(TagTwo: GameplayTag,bExactMatch: boolean): boolean;
-	NotEqual_GameplayTag(B: GameplayTag): boolean;
-	NotEqual_TagTag(B: string): boolean;
-	static EqualEqual_GameplayTag(A: GameplayTag,B: GameplayTag): boolean;
-	static GetDebugStringFromGameplayTag(GameplayTag: GameplayTag): string;
-	static GetTagName(GameplayTag: GameplayTag): string;
-	static IsGameplayTagValid(GameplayTag: GameplayTag): boolean;
-	static MakeGameplayTagContainerFromTag(SingleTag: GameplayTag): GameplayTagContainer;
-	static MakeLiteralGameplayTag(Value: GameplayTag): GameplayTag;
-	static MatchesAnyTags(TagOne: GameplayTag,OtherContainer: GameplayTagContainer,bExactMatch: boolean): boolean;
-	static MatchesTag(TagOne: GameplayTag,TagTwo: GameplayTag,bExactMatch: boolean): boolean;
-	static NotEqual_GameplayTag(A: GameplayTag,B: GameplayTag): boolean;
-	static NotEqual_TagTag(A: GameplayTag,B: string): boolean;
-}
-
-declare class BehaviorTreeComponent extends BrainComponent { 
-	NodeInstances: BTNode[];
-	DefaultBehaviorTreeAsset: BehaviorTree;
-	static Load(ResourceName: string): BehaviorTreeComponent;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeComponent;
-	static GetDefaultObject(): BehaviorTreeComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeComponent;
-	SetDynamicSubtree(InjectTag: GameplayTag,BehaviorAsset: BehaviorTree): void;
-	GetTagCooldownEndTime(CooldownTag: GameplayTag): number;
-	AddCooldownTagDuration(CooldownTag: GameplayTag,CooldownDuration: number,bAddToExistingDuration: boolean): void;
-	static C(Other: UObject | any): BehaviorTreeComponent;
-}
-
-declare class BTNode extends UObject { 
-	NodeName: string;
-	TreeAsset: BehaviorTree;
-	ParentNode: BTCompositeNode;
-	static Load(ResourceName: string): BTNode;
-	static Find(Outer: UObject, ResourceName: string): BTNode;
-	static GetDefaultObject(): BTNode;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BTNode;
-	static C(Other: UObject | any): BTNode;
-	ClearBlackboardValue(Key: BlackboardKeySelector): void;
-	ClearBlackboardValueAsVector(Key: BlackboardKeySelector): void;
-	GetBlackboardValueAsActor(Key: BlackboardKeySelector): Actor;
-	GetBlackboardValueAsBool(Key: BlackboardKeySelector): boolean;
-	GetBlackboardValueAsClass(Key: BlackboardKeySelector): UnrealEngineClass;
-	GetBlackboardValueAsEnum(Key: BlackboardKeySelector): number;
-	GetBlackboardValueAsFloat(Key: BlackboardKeySelector): number;
-	GetBlackboardValueAsInt(Key: BlackboardKeySelector): number;
-	GetBlackboardValueAsName(Key: BlackboardKeySelector): string;
-	GetBlackboardValueAsObject(Key: BlackboardKeySelector): UObject;
-	GetBlackboardValueAsRotator(Key: BlackboardKeySelector): Rotator;
-	GetBlackboardValueAsString(Key: BlackboardKeySelector): string;
-	GetBlackboardValueAsVector(Key: BlackboardKeySelector): Vector;
-	GetOwnerComponent(): BehaviorTreeComponent;
-	GetOwnersBlackboard(): BlackboardComponent;
-	SetBlackboardValueAsBool(Key: BlackboardKeySelector,Value: boolean): void;
-	SetBlackboardValueAsClass(Key: BlackboardKeySelector,Value: UnrealEngineClass): void;
-	SetBlackboardValueAsEnum(Key: BlackboardKeySelector,Value: number): void;
-	SetBlackboardValueAsFloat(Key: BlackboardKeySelector,Value: number): void;
-	SetBlackboardValueAsInt(Key: BlackboardKeySelector,Value: number): void;
-	SetBlackboardValueAsName(Key: BlackboardKeySelector,Value: string): void;
-	SetBlackboardValueAsObject(Key: BlackboardKeySelector,Value: UObject): void;
-	SetBlackboardValueAsRotator(Key: BlackboardKeySelector,Value: Rotator): void;
-	SetBlackboardValueAsString(Key: BlackboardKeySelector,Value: string): void;
-	SetBlackboardValueAsVector(Key: BlackboardKeySelector,Value: Vector): void;
-	StartUsingExternalEvent(OwningActor: Actor): void;
-	StopUsingExternalEvent(): void;
-	static ClearBlackboardValue(NodeOwner: BTNode,Key: BlackboardKeySelector): void;
-	static ClearBlackboardValueAsVector(NodeOwner: BTNode,Key: BlackboardKeySelector): void;
-	static GetBlackboardValueAsActor(NodeOwner: BTNode,Key: BlackboardKeySelector): Actor;
-	static GetBlackboardValueAsBool(NodeOwner: BTNode,Key: BlackboardKeySelector): boolean;
-	static GetBlackboardValueAsClass(NodeOwner: BTNode,Key: BlackboardKeySelector): UnrealEngineClass;
-	static GetBlackboardValueAsEnum(NodeOwner: BTNode,Key: BlackboardKeySelector): number;
-	static GetBlackboardValueAsFloat(NodeOwner: BTNode,Key: BlackboardKeySelector): number;
-	static GetBlackboardValueAsInt(NodeOwner: BTNode,Key: BlackboardKeySelector): number;
-	static GetBlackboardValueAsName(NodeOwner: BTNode,Key: BlackboardKeySelector): string;
-	static GetBlackboardValueAsObject(NodeOwner: BTNode,Key: BlackboardKeySelector): UObject;
-	static GetBlackboardValueAsRotator(NodeOwner: BTNode,Key: BlackboardKeySelector): Rotator;
-	static GetBlackboardValueAsString(NodeOwner: BTNode,Key: BlackboardKeySelector): string;
-	static GetBlackboardValueAsVector(NodeOwner: BTNode,Key: BlackboardKeySelector): Vector;
-	static GetOwnerComponent(NodeOwner: BTNode): BehaviorTreeComponent;
-	static GetOwnersBlackboard(NodeOwner: BTNode): BlackboardComponent;
-	static SetBlackboardValueAsBool(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: boolean): void;
-	static SetBlackboardValueAsClass(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: UnrealEngineClass): void;
-	static SetBlackboardValueAsEnum(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: number): void;
-	static SetBlackboardValueAsFloat(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: number): void;
-	static SetBlackboardValueAsInt(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: number): void;
-	static SetBlackboardValueAsName(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: string): void;
-	static SetBlackboardValueAsObject(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: UObject): void;
-	static SetBlackboardValueAsRotator(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: Rotator): void;
-	static SetBlackboardValueAsString(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: string): void;
-	static SetBlackboardValueAsVector(NodeOwner: BTNode,Key: BlackboardKeySelector,Value: Vector): void;
-	static StartUsingExternalEvent(NodeOwner: BTNode,OwningActor: Actor): void;
-	static StopUsingExternalEvent(NodeOwner: BTNode): void;
-}
-
-declare class BTAuxiliaryNode extends BTNode { 
-	static Load(ResourceName: string): BTAuxiliaryNode;
-	static Find(Outer: UObject, ResourceName: string): BTAuxiliaryNode;
-	static GetDefaultObject(): BTAuxiliaryNode;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BTAuxiliaryNode;
-	static C(Other: UObject | any): BTAuxiliaryNode;
-}
-
-declare class BTService extends BTAuxiliaryNode { 
-	Interval: number;
-	RandomDeviation: number;
-	bCallTickOnSearchStart: boolean;
-	bRestartTimerOnEachActivation: boolean;
-	static Load(ResourceName: string): BTService;
-	static Find(Outer: UObject, ResourceName: string): BTService;
-	static GetDefaultObject(): BTService;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BTService;
-	static C(Other: UObject | any): BTService;
-}
-
-declare class BTTaskNode extends BTNode { 
-	Services: BTService[];
-	bIgnoreRestartSelf: boolean;
-	static Load(ResourceName: string): BTTaskNode;
-	static Find(Outer: UObject, ResourceName: string): BTTaskNode;
-	static GetDefaultObject(): BTTaskNode;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BTTaskNode;
-	static C(Other: UObject | any): BTTaskNode;
-}
-
-declare type EBTFlowAbortMode = 'None' | 'LowerPriority' | 'Self' | 'Both' | 'EBTFlowAbortMode_MAX';
-declare var EBTFlowAbortMode : { None:'None',LowerPriority:'LowerPriority',Self:'Self',Both:'Both',EBTFlowAbortMode_MAX:'EBTFlowAbortMode_MAX', };
-declare class BTDecorator extends BTAuxiliaryNode { 
-	bInverseCondition: boolean;
-	FlowAbortMode: EBTFlowAbortMode;
-	static Load(ResourceName: string): BTDecorator;
-	static Find(Outer: UObject, ResourceName: string): BTDecorator;
-	static GetDefaultObject(): BTDecorator;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BTDecorator;
-	static C(Other: UObject | any): BTDecorator;
-}
-
-declare type EBTDecoratorLogic = 'Invalid' | 'Test' | 'And' | 'Or' | 'Not' | 'EBTDecoratorLogic_MAX';
-declare var EBTDecoratorLogic : { Invalid:'Invalid',Test:'Test',And:'And',Or:'Or',Not:'Not',EBTDecoratorLogic_MAX:'EBTDecoratorLogic_MAX', };
-declare class BTDecoratorLogic { 
-	Operation: EBTDecoratorLogic;
-	Number: any;
-	clone() : BTDecoratorLogic;
-	static C(Other: UObject | any): BTDecoratorLogic;
-}
-
-declare class BTCompositeChild { 
-	ChildComposite: BTCompositeNode;
-	ChildTask: BTTaskNode;
-	Decorators: BTDecorator[];
-	DecoratorOps: BTDecoratorLogic[];
-	clone() : BTCompositeChild;
-	static C(Other: UObject | any): BTCompositeChild;
-}
-
-declare class BTCompositeNode extends BTNode { 
-	Children: BTCompositeChild[];
-	Services: BTService[];
-	bApplyDecoratorScope: boolean;
-	static Load(ResourceName: string): BTCompositeNode;
-	static Find(Outer: UObject, ResourceName: string): BTCompositeNode;
-	static GetDefaultObject(): BTCompositeNode;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BTCompositeNode;
-	static C(Other: UObject | any): BTCompositeNode;
-}
-
-declare class BehaviorTree extends UObject { 
-	RootNode: BTCompositeNode;
-	BTGraph: EdGraph;
-	LastEditedDocuments: EditedDocumentInfo[];
-	BlackboardAsset: BlackboardData;
-	RootDecorators: BTDecorator[];
-	RootDecoratorOps: BTDecoratorLogic[];
-	static Load(ResourceName: string): BehaviorTree;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTree;
-	static GetDefaultObject(): BehaviorTree;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTree;
-	static C(Other: UObject | any): BehaviorTree;
 }
 
 declare class DebugFloatHistory { 
@@ -15669,438 +17567,6 @@ declare class PredictProjectilePathResult {
 
 declare type ESuggestProjVelocityTraceOption = 'DoNotTrace' | 'TraceFullPath' | 'OnlyTraceWhileAscending' | 'ESuggestProjVelocityTraceOption_MAX';
 declare var ESuggestProjVelocityTraceOption : { DoNotTrace:'DoNotTrace',TraceFullPath:'TraceFullPath',OnlyTraceWhileAscending:'OnlyTraceWhileAscending',ESuggestProjVelocityTraceOption_MAX:'ESuggestProjVelocityTraceOption_MAX', };
-declare type EMovementMode = 'MOVE_None' | 'MOVE_Walking' | 'MOVE_NavWalking' | 'MOVE_Falling' | 'MOVE_Swimming' | 'MOVE_Flying' | 'MOVE_Custom' | 'MOVE_MAX';
-declare var EMovementMode : { MOVE_None:'MOVE_None',MOVE_Walking:'MOVE_Walking',MOVE_NavWalking:'MOVE_NavWalking',MOVE_Falling:'MOVE_Falling',MOVE_Swimming:'MOVE_Swimming',MOVE_Flying:'MOVE_Flying',MOVE_Custom:'MOVE_Custom',MOVE_MAX:'MOVE_MAX', };
-declare type ENetworkSmoothingMode = 'Disabled' | 'Linear' | 'Exponential' | 'Replay' | 'ENetworkSmoothingMode_MAX';
-declare var ENetworkSmoothingMode : { Disabled:'Disabled',Linear:'Linear',Exponential:'Exponential',Replay:'Replay',ENetworkSmoothingMode_MAX:'ENetworkSmoothingMode_MAX', };
-declare class FindFloorResult { 
-	bBlockingHit: boolean;
-	bWalkableFloor: boolean;
-	bLineTrace: boolean;
-	FloorDist: number;
-	LineDist: number;
-	HitResult: HitResult;
-	clone() : FindFloorResult;
-	static C(Other: UObject | any): FindFloorResult;
-}
-
-declare class NavAvoidanceMask { 
-	bGroup0: boolean;
-	bGroup1: boolean;
-	bGroup2: boolean;
-	bGroup3: boolean;
-	bGroup4: boolean;
-	bGroup5: boolean;
-	bGroup6: boolean;
-	bGroup7: boolean;
-	bGroup8: boolean;
-	bGroup9: boolean;
-	bGroup10: boolean;
-	bGroup11: boolean;
-	bGroup12: boolean;
-	bGroup13: boolean;
-	bGroup14: boolean;
-	bGroup15: boolean;
-	bGroup16: boolean;
-	bGroup17: boolean;
-	bGroup18: boolean;
-	bGroup19: boolean;
-	bGroup20: boolean;
-	bGroup21: boolean;
-	bGroup22: boolean;
-	bGroup23: boolean;
-	bGroup24: boolean;
-	bGroup25: boolean;
-	bGroup26: boolean;
-	bGroup27: boolean;
-	bGroup28: boolean;
-	bGroup29: boolean;
-	bGroup30: boolean;
-	bGroup31: boolean;
-	clone() : NavAvoidanceMask;
-	static C(Other: UObject | any): NavAvoidanceMask;
-}
-
-declare class CharacterMovementComponentPostPhysicsTickFunction extends TickFunction { 
-	clone() : CharacterMovementComponentPostPhysicsTickFunction;
-	static C(Other: UObject | any): CharacterMovementComponentPostPhysicsTickFunction;
-}
-
-declare class RootMotionSourceSettings { 
-	Flags: number;
-	clone() : RootMotionSourceSettings;
-	static C(Other: UObject | any): RootMotionSourceSettings;
-}
-
-declare class Vector_NetQuantize10 extends Vector { 
-	clone() : Vector_NetQuantize10;
-	static C(Other: UObject | any): Vector_NetQuantize10;
-}
-
-declare class RootMotionSourceGroup { 
-	bHasAdditiveSources: boolean;
-	bHasOverrideSources: boolean;
-	bHasOverrideSourcesWithIgnoreZAccumulate: boolean;
-	bIsAdditiveVelocityApplied: boolean;
-	LastAccumulatedSettings: RootMotionSourceSettings;
-	LastPreAdditiveVelocity: Vector_NetQuantize10;
-	clone() : RootMotionSourceGroup;
-	static C(Other: UObject | any): RootMotionSourceGroup;
-}
-
-declare class RootMotionMovementParams { 
-	bHasRootMotion: boolean;
-	BlendWeight: number;
-	RootMotionTransform: Transform;
-	clone() : RootMotionMovementParams;
-	static C(Other: UObject | any): RootMotionMovementParams;
-}
-
-declare class CharacterMovementComponent extends PawnMovementComponent { 
-	CharacterOwner: Character;
-	GravityScale: number;
-	MaxStepHeight: number;
-	JumpZVelocity: number;
-	JumpOffJumpZFactor: number;
-	WalkableFloorAngle: number;
-	WalkableFloorZ: number;
-	MovementMode: EMovementMode;
-	CustomMovementMode: number;
-	NetworkSmoothingMode: ENetworkSmoothingMode;
-	GroundFriction: number;
-	MaxWalkSpeed: number;
-	MaxWalkSpeedCrouched: number;
-	MaxSwimSpeed: number;
-	MaxFlySpeed: number;
-	MaxCustomMovementSpeed: number;
-	MaxAcceleration: number;
-	MinAnalogWalkSpeed: number;
-	BrakingFrictionFactor: number;
-	BrakingFriction: number;
-	BrakingSubStepTime: number;
-	BrakingDecelerationWalking: number;
-	BrakingDecelerationFalling: number;
-	BrakingDecelerationSwimming: number;
-	BrakingDecelerationFlying: number;
-	AirControl: number;
-	AirControlBoostMultiplier: number;
-	AirControlBoostVelocityThreshold: number;
-	FallingLateralFriction: number;
-	CrouchedHalfHeight: number;
-	Buoyancy: number;
-	PerchRadiusThreshold: number;
-	PerchAdditionalHeight: number;
-	RotationRate: Rotator;
-	bUseSeparateBrakingFriction: boolean;
-	bApplyGravityWhileJumping: boolean;
-	bUseControllerDesiredRotation: boolean;
-	bOrientRotationToMovement: boolean;
-	bSweepWhileNavWalking: boolean;
-	bMovementInProgress: boolean;
-	bEnableScopedMovementUpdates: boolean;
-	bEnableServerDualMoveScopedMovementUpdates: boolean;
-	bForceMaxAccel: boolean;
-	bRunPhysicsWithNoController: boolean;
-	bForceNextFloorCheck: boolean;
-	bShrinkProxyCapsule: boolean;
-	bCanWalkOffLedges: boolean;
-	bCanWalkOffLedgesWhenCrouching: boolean;
-	bNetworkSkipProxyPredictionOnNetUpdate: boolean;
-	bNetworkAlwaysReplicateTransformUpdateTimestamp: boolean;
-	bDeferUpdateMoveComponent: boolean;
-	bEnablePhysicsInteraction: boolean;
-	bTouchForceScaledToMass: boolean;
-	bPushForceScaledToMass: boolean;
-	bPushForceUsingZOffset: boolean;
-	bScalePushForceToVelocity: boolean;
-	DeferredUpdatedMoveComponent: SceneComponent;
-	MaxOutOfWaterStepHeight: number;
-	OutofWaterZ: number;
-	Mass: number;
-	StandingDownwardForceScale: number;
-	InitialPushForceFactor: number;
-	PushForceFactor: number;
-	PushForcePointZOffsetFactor: number;
-	TouchForceFactor: number;
-	MinTouchForce: number;
-	MaxTouchForce: number;
-	RepulsionForce: number;
-	bForceBraking: boolean;
-	CrouchedSpeedMultiplier: number;
-	UpperImpactNormalScale: number;
-	Acceleration: Vector;
-	LastUpdateRotation: Quat;
-	LastUpdateLocation: Vector;
-	LastUpdateVelocity: Vector;
-	ServerLastTransformUpdateTimeStamp: number;
-	ServerLastClientGoodMoveAckTime: number;
-	ServerLastClientAdjustmentTime: number;
-	PendingImpulseToApply: Vector;
-	PendingForceToApply: Vector;
-	AnalogInputModifier: number;
-	MaxSimulationTimeStep: number;
-	MaxSimulationIterations: number;
-	MaxJumpApexAttemptsPerSimulation: number;
-	MaxDepenetrationWithGeometry: number;
-	MaxDepenetrationWithGeometryAsProxy: number;
-	MaxDepenetrationWithPawn: number;
-	MaxDepenetrationWithPawnAsProxy: number;
-	NetworkSimulatedSmoothLocationTime: number;
-	NetworkSimulatedSmoothRotationTime: number;
-	ListenServerNetworkSimulatedSmoothLocationTime: number;
-	ListenServerNetworkSimulatedSmoothRotationTime: number;
-	NetProxyShrinkRadius: number;
-	NetProxyShrinkHalfHeight: number;
-	NetworkMaxSmoothUpdateDistance: number;
-	NetworkNoSmoothUpdateDistance: number;
-	NetworkMinTimeBetweenClientAckGoodMoves: number;
-	NetworkMinTimeBetweenClientAdjustments: number;
-	NetworkMinTimeBetweenClientAdjustmentsLargeCorrection: number;
-	NetworkLargeClientCorrectionDistance: number;
-	LedgeCheckThreshold: number;
-	JumpOutOfWaterPitch: number;
-	CurrentFloor: FindFloorResult;
-	DefaultLandMovementMode: EMovementMode;
-	DefaultWaterMovementMode: EMovementMode;
-	GroundMovementMode: EMovementMode;
-	bMaintainHorizontalGroundVelocity: boolean;
-	bImpartBaseVelocityX: boolean;
-	bImpartBaseVelocityY: boolean;
-	bImpartBaseVelocityZ: boolean;
-	bImpartBaseAngularVelocity: boolean;
-	bJustTeleported: boolean;
-	bNetworkUpdateReceived: boolean;
-	bNetworkMovementModeChanged: boolean;
-	bIgnoreClientMovementErrorChecksAndCorrection: boolean;
-	bServerAcceptClientAuthoritativePosition: boolean;
-	bNotifyApex: boolean;
-	bCheatFlying: boolean;
-	bWantsToCrouch: boolean;
-	bCrouchMaintainsBaseLocation: boolean;
-	bIgnoreBaseRotation: boolean;
-	bFastAttachedMove: boolean;
-	bAlwaysCheckFloor: boolean;
-	bUseFlatBaseForFloorChecks: boolean;
-	bPerformingJumpOff: boolean;
-	bWantsToLeaveNavWalking: boolean;
-	bUseRVOAvoidance: boolean;
-	bRequestedMoveUseAcceleration: boolean;
-	bWasSimulatingRootMotion: boolean;
-	bAllowPhysicsRotationDuringAnimRootMotion: boolean;
-	bHasRequestedVelocity: boolean;
-	bRequestedMoveWithMaxSpeed: boolean;
-	bWasAvoidanceUpdated: boolean;
-	bProjectNavMeshWalking: boolean;
-	bProjectNavMeshOnBothWorldChannels: boolean;
-	AvoidanceConsiderationRadius: number;
-	RequestedVelocity: Vector;
-	AvoidanceUID: number;
-	AvoidanceGroup: NavAvoidanceMask;
-	GroupsToAvoid: NavAvoidanceMask;
-	GroupsToIgnore: NavAvoidanceMask;
-	AvoidanceWeight: number;
-	PendingLaunchVelocity: Vector;
-	NavMeshProjectionInterval: number;
-	NavMeshProjectionTimer: number;
-	NavMeshProjectionInterpSpeed: number;
-	NavMeshProjectionHeightScaleUp: number;
-	NavMeshProjectionHeightScaleDown: number;
-	NavWalkingFloorDistTolerance: number;
-	PostPhysicsTickFunction: CharacterMovementComponentPostPhysicsTickFunction;
-	MinTimeBetweenTimeStampResets: number;
-	CurrentRootMotion: RootMotionSourceGroup;
-	ServerCorrectionRootMotion: RootMotionSourceGroup;
-	RootMotionParams: RootMotionMovementParams;
-	AnimRootMotionVelocity: Vector;
-	static Load(ResourceName: string): CharacterMovementComponent;
-	static Find(Outer: UObject, ResourceName: string): CharacterMovementComponent;
-	static GetDefaultObject(): CharacterMovementComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): CharacterMovementComponent;
-	SetWalkableFloorZ(InWalkableFloorZ: number): void;
-	SetWalkableFloorAngle(InWalkableFloorAngle: number): void;
-	SetMovementMode(NewMovementMode: EMovementMode,NewCustomMode: number): void;
-	SetGroupsToIgnoreMask(GroupMask: NavAvoidanceMask): void;
-	SetGroupsToIgnore(GroupFlags: number): void;
-	SetGroupsToAvoidMask(GroupMask: NavAvoidanceMask): void;
-	SetGroupsToAvoid(GroupFlags: number): void;
-	SetAvoidanceGroupMask(GroupMask: NavAvoidanceMask): void;
-	SetAvoidanceGroup(GroupFlags: number): void;
-	SetAvoidanceEnabled(bEnable: boolean): void;
-	K2_GetWalkableFloorZ(): number;
-	K2_GetWalkableFloorAngle(): number;
-	K2_GetModifiedMaxAcceleration(): number;
-	K2_FindFloor(CapsuleLocation: Vector,FloorResult?: FindFloorResult): {FloorResult: FindFloorResult};
-	K2_ComputeFloorDist(CapsuleLocation: Vector,LineDistance: number,SweepDistance: number,SweepRadius: number,FloorResult?: FindFloorResult): {FloorResult: FindFloorResult};
-	IsWalking(): boolean;
-	IsWalkable(Hit: HitResult): boolean;
-	GetValidPerchRadius(): number;
-	GetPerchRadiusThreshold(): number;
-	GetMovementBase(): PrimitiveComponent;
-	GetMinAnalogSpeed(): number;
-	GetMaxJumpHeightWithJumpTime(): number;
-	GetMaxJumpHeight(): number;
-	GetMaxBrakingDeceleration(): number;
-	GetMaxAcceleration(): number;
-	GetLastUpdateVelocity(): Vector;
-	GetLastUpdateRotation(): Rotator;
-	GetLastUpdateLocation(): Vector;
-	GetImpartedMovementBaseVelocity(): Vector;
-	GetCurrentAcceleration(): Vector;
-	GetCharacterOwner(): Character;
-	GetAnalogInputModifier(): number;
-	DisableMovement(): void;
-	ClearAccumulatedForces(): void;
-	CapsuleTouched(OverlappedComp: PrimitiveComponent,Other: Actor,OtherComp: PrimitiveComponent,OtherBodyIndex: number,bFromSweep: boolean,SweepResult: HitResult): void;
-	CalcVelocity(DeltaTime: number,Friction: number,bFluid: boolean,BrakingDeceleration: number): void;
-	AddImpulse(Impulse: Vector,bVelocityChange: boolean): void;
-	AddForce(Force: Vector): void;
-	static C(Other: UObject | any): CharacterMovementComponent;
-}
-
-declare class BasedMovementInfo { 
-	MovementBase: PrimitiveComponent;
-	BoneName: string;
-	Location: Vector_NetQuantize100;
-	Rotation: Rotator;
-	bServerHasBaseComponent: boolean;
-	bRelativeRotation: boolean;
-	bServerHasVelocity: boolean;
-	clone() : BasedMovementInfo;
-	static C(Other: UObject | any): BasedMovementInfo;
-}
-
-declare class RepRootMotionMontage { 
-	bIsActive: boolean;
-	AnimMontage: AnimMontage;
-	Position: number;
-	Location: Vector_NetQuantize100;
-	Rotation: Rotator;
-	MovementBase: PrimitiveComponent;
-	MovementBaseBoneName: string;
-	bRelativePosition: boolean;
-	bRelativeRotation: boolean;
-	AuthoritativeRootMotion: RootMotionSourceGroup;
-	Acceleration: Vector_NetQuantize10;
-	LinearVelocity: Vector_NetQuantize10;
-	clone() : RepRootMotionMontage;
-	static C(Other: UObject | any): RepRootMotionMontage;
-}
-
-declare class SimulatedRootMotionReplicatedMove { 
-	Time: number;
-	RootMotion: RepRootMotionMontage;
-	clone() : SimulatedRootMotionReplicatedMove;
-	static C(Other: UObject | any): SimulatedRootMotionReplicatedMove;
-}
-
-declare class CharacterNetworkSerializationPackedBits { 
-	clone() : CharacterNetworkSerializationPackedBits;
-	static C(Other: UObject | any): CharacterNetworkSerializationPackedBits;
-}
-
-declare class CharacterServerMovePackedBits extends CharacterNetworkSerializationPackedBits { 
-	clone() : CharacterServerMovePackedBits;
-	static C(Other: UObject | any): CharacterServerMovePackedBits;
-}
-
-declare class CharacterMoveResponsePackedBits extends CharacterNetworkSerializationPackedBits { 
-	clone() : CharacterMoveResponsePackedBits;
-	static C(Other: UObject | any): CharacterMoveResponsePackedBits;
-}
-
-declare class Character extends Pawn { 
-	Mesh: SkeletalMeshComponent;
-	CharacterMovement: CharacterMovementComponent;
-	CapsuleComponent: CapsuleComponent;
-	ArrowComponent: ArrowComponent;
-	BasedMovement: BasedMovementInfo;
-	ReplicatedBasedMovement: BasedMovementInfo;
-	AnimRootMotionTranslationScale: number;
-	BaseTranslationOffset: Vector;
-	BaseRotationOffset: Quat;
-	ReplicatedServerLastTransformUpdateTimeStamp: number;
-	ReplayLastTransformUpdateTimeStamp: number;
-	ReplicatedMovementMode: number;
-	bInBaseReplication: boolean;
-	CrouchedEyeHeight: number;
-	bIsCrouched: boolean;
-	bProxyIsJumpForceApplied: boolean;
-	bPressedJump: boolean;
-	bClientUpdating: boolean;
-	bClientWasFalling: boolean;
-	bClientResimulateRootMotion: boolean;
-	bClientResimulateRootMotionSources: boolean;
-	bSimGravityDisabled: boolean;
-	bClientCheckEncroachmentOnNetUpdate: boolean;
-	bServerMoveIgnoreRootMotion: boolean;
-	bWasJumping: boolean;
-	JumpKeyHoldTime: number;
-	JumpForceTimeRemaining: number;
-	ProxyJumpForceStartedTime: number;
-	JumpMaxHoldTime: number;
-	JumpMaxCount: number;
-	JumpCurrentCount: number;
-	JumpCurrentCountPreJump: number;
-	OnReachedJumpApex: UnrealEngineMulticastDelegate<() => void>;
-	MovementModeChangedDelegate: UnrealEngineMulticastDelegate<(Character: Character, PrevMovementMode: EMovementMode, PreviousCustomMode: number) => void>;
-	OnCharacterMovementUpdated: UnrealEngineMulticastDelegate<(DeltaSeconds: number, OldLocation: Vector, OldVelocity: Vector) => void>;
-	SavedRootMotion: RootMotionSourceGroup;
-	ClientRootMotionParams: RootMotionMovementParams;
-	RootMotionRepMoves: SimulatedRootMotionReplicatedMove[];
-	RepRootMotion: RepRootMotionMontage;
-	static GetDefaultObject(): Character;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Character;
-	UnCrouch(bClientSimulation: boolean): void;
-	StopJumping(): void;
-	StopAnimMontage(AnimMontage: AnimMontage): void;
-	ServerMovePacked(PackedBits: CharacterServerMovePackedBits): void;
-	ServerMoveOld(OldTimeStamp: number,OldAccel: Vector_NetQuantize10,OldMoveFlags: number): void;
-	ServerMoveNoBase(Timestamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,CompressedMoveFlags: number,ClientRoll: number,View: any,ClientMovementMode: number): void;
-	ServerMoveDualNoBase(TimeStamp0: number,InAccel0: Vector_NetQuantize10,PendingFlags: number,View0: any,Timestamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,NewFlags: number,ClientRoll: number,View: any,ClientMovementMode: number): void;
-	ServerMoveDualHybridRootMotion(TimeStamp0: number,InAccel0: Vector_NetQuantize10,PendingFlags: number,View0: any,Timestamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,NewFlags: number,ClientRoll: number,View: any,ClientMovementBase: PrimitiveComponent,ClientBaseBoneName: string,ClientMovementMode: number): void;
-	ServerMoveDual(TimeStamp0: number,InAccel0: Vector_NetQuantize10,PendingFlags: number,View0: any,Timestamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,NewFlags: number,ClientRoll: number,View: any,ClientMovementBase: PrimitiveComponent,ClientBaseBoneName: string,ClientMovementMode: number): void;
-	ServerMove(Timestamp: number,InAccel: Vector_NetQuantize10,ClientLoc: Vector_NetQuantize100,CompressedMoveFlags: number,ClientRoll: number,View: any,ClientMovementBase: PrimitiveComponent,ClientBaseBoneName: string,ClientMovementMode: number): void;
-	RootMotionDebugClientPrintOnScreen(inString: string): void;
-	PlayAnimMontage(AnimMontage: AnimMontage,InPlayRate: number,StartSectionName: string): number;
-	OnWalkingOffLedge(PreviousFloorImpactNormal: Vector,PreviousFloorContactNormal: Vector,PreviousLocation: Vector,TimeDelta: number): void;
-	OnRep_RootMotion(): void;
-	OnRep_ReplicatedBasedMovement(): void;
-	OnRep_ReplayLastTransformUpdateTimeStamp(): void;
-	OnRep_IsCrouched(): void;
-	OnLaunched(LaunchVelocity: Vector,bXYOverride: boolean,bZOverride: boolean): void;
-	OnLanded(Hit: HitResult): void;
-	OnJumped(): void;
-	LaunchCharacter(LaunchVelocity: Vector,bXYOverride: boolean,bZOverride: boolean): void;
-	K2_UpdateCustomMovement(DeltaTime: number): void;
-	K2_OnStartCrouch(HalfHeightAdjust: number,ScaledHalfHeightAdjust: number): void;
-	K2_OnMovementModeChanged(PrevMovementMode: EMovementMode,NewMovementMode: EMovementMode,PrevCustomMode: number,NewCustomMode: number): void;
-	K2_OnEndCrouch(HalfHeightAdjust: number,ScaledHalfHeightAdjust: number): void;
-	Jump(): void;
-	IsPlayingRootMotion(): boolean;
-	IsPlayingNetworkedRootMotionMontage(): boolean;
-	IsJumpProvidingForce(): boolean;
-	HasAnyRootMotion(): boolean;
-	GetCurrentMontage(): AnimMontage;
-	GetBaseTranslationOffset(): Vector;
-	GetBaseRotationOffsetRotator(): Rotator;
-	GetAnimRootMotionTranslationScale(): number;
-	Crouch(bClientSimulation: boolean): void;
-	ClientVeryShortAdjustPosition(Timestamp: number,NewLoc: Vector,NewBase: PrimitiveComponent,NewBaseBoneName: string,bHasBase: boolean,bBaseRelativePosition: boolean,ServerMovementMode: number): void;
-	ClientMoveResponsePacked(PackedBits: CharacterMoveResponsePackedBits): void;
-	ClientCheatWalk(): void;
-	ClientCheatGhost(): void;
-	ClientCheatFly(): void;
-	ClientAdjustRootMotionSourcePosition(Timestamp: number,ServerRootMotion: RootMotionSourceGroup,bHasAnimRootMotion: boolean,ServerMontageTrackPosition: number,ServerLoc: Vector,ServerRotation: Vector_NetQuantizeNormal,ServerVelZ: number,ServerBase: PrimitiveComponent,ServerBoneName: string,bHasBase: boolean,bBaseRelativePosition: boolean,ServerMovementMode: number): void;
-	ClientAdjustRootMotionPosition(Timestamp: number,ServerMontageTrackPosition: number,ServerLoc: Vector,ServerRotation: Vector_NetQuantizeNormal,ServerVelZ: number,ServerBase: PrimitiveComponent,ServerBoneName: string,bHasBase: boolean,bBaseRelativePosition: boolean,ServerMovementMode: number): void;
-	ClientAdjustPosition(Timestamp: number,NewLoc: Vector,NewVel: Vector,NewBase: PrimitiveComponent,NewBaseBoneName: string,bHasBase: boolean,bBaseRelativePosition: boolean,ServerMovementMode: number): void;
-	ClientAckGoodMove(Timestamp: number): void;
-	CanJumpInternal(): boolean;
-	CanJump(): boolean;
-	CanCrouch(): boolean;
-	CacheInitialMeshOffset(MeshRelativeLocation: Vector,MeshRelativeRotation: Rotator): void;
-	static C(Other: UObject | any): Character;
-}
-
 declare type EMouseCaptureMode = 'NoCapture' | 'CapturePermanently' | 'CapturePermanently_IncludingInitialMouseDown' | 'CaptureDuringMouseDown' | 'CaptureDuringRightMouseDown' | 'EMouseCaptureMode_MAX';
 declare var EMouseCaptureMode : { NoCapture:'NoCapture',CapturePermanently:'CapturePermanently',CapturePermanently_IncludingInitialMouseDown:'CapturePermanently_IncludingInitialMouseDown',CaptureDuringMouseDown:'CaptureDuringMouseDown',CaptureDuringRightMouseDown:'CaptureDuringRightMouseDown',EMouseCaptureMode_MAX:'EMouseCaptureMode_MAX', };
 declare type EGrammaticalGender = 'Neuter' | 'Masculine' | 'Feminine' | 'Mixed' | 'EGrammaticalGender_MAX';
@@ -16224,17 +17690,6 @@ declare class Timespan {
 	static TimespanZeroValue(): Timespan;
 }
 
-declare class XRDeviceId { 
-	SystemName: string;
-	DeviceID: number;
-	clone() : XRDeviceId;
-	static C(Other: UObject | any): XRDeviceId;
-	GetDevicePose(bIsTracked?: boolean,Orientation?: Rotator,bHasPositionalTracking?: boolean,Position?: Vector): {bIsTracked: boolean, Orientation: Rotator, bHasPositionalTracking: boolean, Position: Vector};
-	IsDeviceTracking(): boolean;
-	static GetDevicePose(XRDeviceId: XRDeviceId,bIsTracked?: boolean,Orientation?: Rotator,bHasPositionalTracking?: boolean,Position?: Vector): {bIsTracked: boolean, Orientation: Rotator, bHasPositionalTracking: boolean, Position: Vector};
-	static IsDeviceTracking(XRDeviceId: XRDeviceId): boolean;
-}
-
 declare type ETrackingStatus = 'NotTracked' | 'InertialOnly' | 'Tracked' | 'ETrackingStatus_MAX';
 declare var ETrackingStatus : { NotTracked:'NotTracked',InertialOnly:'InertialOnly',Tracked:'Tracked',ETrackingStatus_MAX:'ETrackingStatus_MAX', };
 declare class XRHMDData { 
@@ -16336,8 +17791,6 @@ declare class World extends UObject {
 	UpdatePieData(Value: number,Name: string): void;
 	UpdateScatterData(Name: string,Data: Vector2D): void;
 	ZeroBarChartData(): void;
-	GetNiagaraParameterCollection(Collection: NiagaraParameterCollection): NiagaraParameterCollectionInstance;
-	SpawnSystemAtLocation(SystemTemplate: NiagaraSystem,Location: Vector,Rotation: Rotator,Scale: Vector,bAutoDestroy: boolean,bAutoActivate: boolean,PoolingMethod: ENCPoolMethod,bPreCullCheck: boolean): NiagaraComponent;
 	GetWorldURL(): VaRestURL;
 	BeginPlay(): void;
 	DestroyWorld(): void;
@@ -16353,6 +17806,8 @@ declare class World extends UObject {
 	IsPlayInPreview(): boolean;
 	LuminARLineTrace(ScreenPosition: Vector2D,TraceChannels: any,OutHitResults?: ARTraceResult[]): {OutHitResults: ARTraceResult[], $: boolean};
 	StartLuminARSession(LatentInfo: LatentActionInfo,Configuration: LuminARSessionConfig): void;
+	GetNiagaraParameterCollection(Collection: NiagaraParameterCollection): NiagaraParameterCollectionInstance;
+	SpawnSystemAtLocation(SystemTemplate: NiagaraSystem,Location: Vector,Rotation: Rotator,Scale: Vector,bAutoDestroy: boolean,bAutoActivate: boolean,PoolingMethod: ENCPoolMethod,bPreCullCheck: boolean): NiagaraComponent;
 	TraceChannelTestUtil(BatchOptions: TraceChannelTestBatchOptions,Start: Vector,End: Vector,SphereCapsuleRadius: number,CapsuleHalfHeight: number,BoxHalfSize: Vector,Orientation: Rotator,TraceChannel: ETraceTypeQuery,ObjectTypes: EObjectTypeQuery[],ProfileName: string,bTraceComplex: boolean,ActorsToIgnore: Actor[],bIgnoreSelf: boolean,DrawDebugType: EDrawDebugTrace,TraceColor: LinearColor,TraceHitColor: LinearColor,DrawTime: number): TraceQueryTestResults;
 	RunAllFunctionalTests(bNewLog: boolean,bRunLooped: boolean,FailedTestsReproString: string): boolean;
 	AutomationWaitForLoading(LatentInfo: LatentActionInfo,Options: AutomationWaitForLoadingOptions): void;
@@ -16599,7 +18054,7 @@ declare class World extends UObject {
 	GetControllerTransformForTime(ControllerIndex: number,MotionSource: string,Time: Timespan,bTimeWasUsed?: boolean,Orientation?: Rotator,Position?: Vector,bProvidedLinearVelocity?: boolean,LinearVelocity?: Vector,bProvidedAngularVelocity?: boolean,AngularVelocityRadPerSec?: Vector): {bTimeWasUsed: boolean, Orientation: Rotator, Position: Vector, bProvidedLinearVelocity: boolean, LinearVelocity: Vector, bProvidedAngularVelocity: boolean, AngularVelocityRadPerSec: Vector, $: boolean};
 	GetDeviceWorldPose(XRDeviceId: XRDeviceId,bIsTracked?: boolean,Orientation?: Rotator,bHasPositionalTracking?: boolean,Position?: Vector): {bIsTracked: boolean, Orientation: Rotator, bHasPositionalTracking: boolean, Position: Vector};
 	GetHMDData(HMDData?: XRHMDData): {HMDData: XRHMDData};
-	GetMotionControllerData(hand: EControllerHand,MotionControllerData?: XRMotionControllerData): {MotionControllerData: XRMotionControllerData};
+	GetMotionControllerData(Hand: EControllerHand,MotionControllerData?: XRMotionControllerData): {MotionControllerData: XRMotionControllerData};
 	GetTrackingToWorldTransform(): Transform;
 	GetWorldToMetersScale(): number;
 	SetWorldToMetersScale(NewScale: number): void;
@@ -16622,8 +18077,6 @@ declare class World extends UObject {
 	static UpdatePieData(WorldContextObject: UObject,Value: number,Name: string): void;
 	static UpdateScatterData(WorldContextObject: UObject,Name: string,Data: Vector2D): void;
 	static ZeroBarChartData(WorldContextObject: UObject): void;
-	static GetNiagaraParameterCollection(WorldContextObject: UObject,Collection: NiagaraParameterCollection): NiagaraParameterCollectionInstance;
-	static SpawnSystemAtLocation(WorldContextObject: UObject,SystemTemplate: NiagaraSystem,Location: Vector,Rotation: Rotator,Scale: Vector,bAutoDestroy: boolean,bAutoActivate: boolean,PoolingMethod: ENCPoolMethod,bPreCullCheck: boolean): NiagaraComponent;
 	static GetWorldURL(WorldContextObject: UObject): VaRestURL;
 	static BeginPlay(World: World): void;
 	static DestroyWorld(World: World): void;
@@ -16639,6 +18092,8 @@ declare class World extends UObject {
 	static IsPlayInPreview(World: World): boolean;
 	static LuminARLineTrace(WorldContextObject: UObject,ScreenPosition: Vector2D,TraceChannels: any,OutHitResults?: ARTraceResult[]): {OutHitResults: ARTraceResult[], $: boolean};
 	static StartLuminARSession(WorldContextObject: UObject,LatentInfo: LatentActionInfo,Configuration: LuminARSessionConfig): void;
+	static GetNiagaraParameterCollection(WorldContextObject: UObject,Collection: NiagaraParameterCollection): NiagaraParameterCollectionInstance;
+	static SpawnSystemAtLocation(WorldContextObject: UObject,SystemTemplate: NiagaraSystem,Location: Vector,Rotation: Rotator,Scale: Vector,bAutoDestroy: boolean,bAutoActivate: boolean,PoolingMethod: ENCPoolMethod,bPreCullCheck: boolean): NiagaraComponent;
 	static TraceChannelTestUtil(WorldContextObject: UObject,BatchOptions: TraceChannelTestBatchOptions,Start: Vector,End: Vector,SphereCapsuleRadius: number,CapsuleHalfHeight: number,BoxHalfSize: Vector,Orientation: Rotator,TraceChannel: ETraceTypeQuery,ObjectTypes: EObjectTypeQuery[],ProfileName: string,bTraceComplex: boolean,ActorsToIgnore: Actor[],bIgnoreSelf: boolean,DrawDebugType: EDrawDebugTrace,TraceColor: LinearColor,TraceHitColor: LinearColor,DrawTime: number): TraceQueryTestResults;
 	static RunAllFunctionalTests(WorldContextObject: UObject,bNewLog: boolean,bRunLooped: boolean,FailedTestsReproString: string): boolean;
 	static AutomationWaitForLoading(WorldContextObject: UObject,LatentInfo: LatentActionInfo,Options: AutomationWaitForLoadingOptions): void;
@@ -16885,1627 +18340,31 @@ declare class World extends UObject {
 	static GetControllerTransformForTime(WorldContext: UObject,ControllerIndex: number,MotionSource: string,Time: Timespan,bTimeWasUsed?: boolean,Orientation?: Rotator,Position?: Vector,bProvidedLinearVelocity?: boolean,LinearVelocity?: Vector,bProvidedAngularVelocity?: boolean,AngularVelocityRadPerSec?: Vector): {bTimeWasUsed: boolean, Orientation: Rotator, Position: Vector, bProvidedLinearVelocity: boolean, LinearVelocity: Vector, bProvidedAngularVelocity: boolean, AngularVelocityRadPerSec: Vector, $: boolean};
 	static GetDeviceWorldPose(WorldContext: UObject,XRDeviceId: XRDeviceId,bIsTracked?: boolean,Orientation?: Rotator,bHasPositionalTracking?: boolean,Position?: Vector): {bIsTracked: boolean, Orientation: Rotator, bHasPositionalTracking: boolean, Position: Vector};
 	static GetHMDData(WorldContext: UObject,HMDData?: XRHMDData): {HMDData: XRHMDData};
-	static GetMotionControllerData(WorldContext: UObject,hand: EControllerHand,MotionControllerData?: XRMotionControllerData): {MotionControllerData: XRMotionControllerData};
+	static GetMotionControllerData(WorldContext: UObject,Hand: EControllerHand,MotionControllerData?: XRMotionControllerData): {MotionControllerData: XRMotionControllerData};
 	static GetTrackingToWorldTransform(WorldContext: UObject): Transform;
 	static GetWorldToMetersScale(WorldContext: UObject): number;
 	static SetWorldToMetersScale(WorldContext: UObject,NewScale: number): void;
 	static GetAllActorsOfClassMatchingTagQuery(WorldContextObject: UObject,ActorClass: UnrealEngineClass,GameplayTagQuery: GameplayTagQuery,OutActors?: Actor[]): {OutActors: Actor[]};
 }
 
-declare class Info extends Actor { 
-	SpriteComponent: BillboardComponent;
-	static GetDefaultObject(): Info;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Info;
-	static C(Other: UObject | any): Info;
-}
-
-declare class PlayerState extends Info { 
-	Score: number;
-	PlayerId: number;
-	Ping: number;
-	bShouldUpdateReplicatedPing: boolean;
-	bIsSpectator: boolean;
-	bOnlySpectator: boolean;
-	bIsABot: boolean;
-	bIsInactive: boolean;
-	bFromPreviousLevel: boolean;
-	StartTime: number;
-	EngineMessageClass: UnrealEngineClass;
-	SavedNetworkAddress: string;
-	UniqueId: UniqueNetIdRepl;
-	PawnPrivate: Pawn;
-	PlayerNamePrivate: string;
-	static GetDefaultObject(): PlayerState;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PlayerState;
-	ReceiveOverrideWith(OldPlayerState: PlayerState): void;
-	ReceiveCopyProperties(NewPlayerState: PlayerState): void;
-	OnRep_UniqueId(): void;
-	OnRep_Score(): void;
-	OnRep_PlayerName(): void;
-	OnRep_PlayerId(): void;
-	OnRep_bIsInactive(): void;
-	IsOnlyASpectator(): boolean;
-	GetPlayerName(): string;
-	static C(Other: UObject | any): PlayerState;
-}
-
-declare type ENavPathEvent = 'Cleared' | 'NewPath' | 'UpdatedDueToGoalMoved' | 'UpdatedDueToNavigationChanged' | 'Invalidated' | 'RePathFailed' | 'MetaPathUpdate' | 'Custom' | 'ENavPathEvent_MAX';
-declare var ENavPathEvent : { Cleared:'Cleared',NewPath:'NewPath',UpdatedDueToGoalMoved:'UpdatedDueToGoalMoved',UpdatedDueToNavigationChanged:'UpdatedDueToNavigationChanged',Invalidated:'Invalidated',RePathFailed:'RePathFailed',MetaPathUpdate:'MetaPathUpdate',Custom:'Custom',ENavPathEvent_MAX:'ENavPathEvent_MAX', };
-declare type ENavigationOptionFlag = 'Default' | 'Enable' | 'Disable' | 'MAX';
-declare var ENavigationOptionFlag : { Default:'Default',Enable:'Enable',Disable:'Disable',MAX:'MAX', };
-declare class NavigationPath extends UObject { 
-	PathUpdatedNotifier: UnrealEngineMulticastDelegate<(AffectedPath: NavigationPath, PathEvent: ENavPathEvent) => void>;
-	PathPoints: Vector[];
-	RecalculateOnInvalidation: ENavigationOptionFlag;
-	static Load(ResourceName: string): NavigationPath;
-	static Find(Outer: UObject, ResourceName: string): NavigationPath;
-	static GetDefaultObject(): NavigationPath;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NavigationPath;
-	IsValid(): boolean;
-	IsStringPulled(): boolean;
-	IsPartial(): boolean;
-	GetPathLength(): number;
-	GetPathCost(): number;
-	GetDebugString(): string;
-	EnableRecalculationOnInvalidation(DoRecalculation: ENavigationOptionFlag): void;
-	EnableDebugDrawing(bShouldDrawDebugData: boolean,PathColor: LinearColor): void;
-	static C(Other: UObject | any): NavigationPath;
-}
-
-declare class Controller extends Actor { 
-	PlayerState: PlayerState;
-	OnInstigatedAnyDamage: UnrealEngineMulticastDelegate<(Damage: number, DamageType: DamageType, DamagedActor: Actor, DamageCauser: Actor) => void>;
-	StateName: string;
-	Pawn: Pawn;
-	Character: Character;
-	TransformComponent: SceneComponent;
-	ControlRotation: Rotator;
-	bAttachToPawn: boolean;
-	static GetDefaultObject(): Controller;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Controller;
-	UnPossess(): void;
-	StopMovement(): void;
-	SetInitialLocationAndRotation(NewLocation: Vector,NewRotation: Rotator): void;
-	SetIgnoreMoveInput(bNewMoveInput: boolean): void;
-	SetIgnoreLookInput(bNewLookInput: boolean): void;
-	SetControlRotation(NewRotation: Rotator): void;
-	ResetIgnoreMoveInput(): void;
-	ResetIgnoreLookInput(): void;
-	ResetIgnoreInputFlags(): void;
-	ReceiveUnPossess(UnpossessedPawn: Pawn): void;
-	ReceivePossess(PossessedPawn: Pawn): void;
-	ReceiveInstigatedAnyDamage(Damage: number,DamageType: DamageType,DamagedActor: Actor,DamageCauser: Actor): void;
-	Possess(InPawn: Pawn): void;
-	OnRep_PlayerState(): void;
-	OnRep_Pawn(): void;
-	LineOfSightTo(Other: Actor,ViewPoint: Vector,bAlternateChecks: boolean): boolean;
-	K2_GetPawn(): Pawn;
-	IsPlayerController(): boolean;
-	IsMoveInputIgnored(): boolean;
-	IsLookInputIgnored(): boolean;
-	IsLocalPlayerController(): boolean;
-	IsLocalController(): boolean;
-	GetViewTarget(): Actor;
-	GetDesiredRotation(): Rotator;
-	GetControlRotation(): Rotator;
-	ClientSetRotation(NewRotation: Rotator,bResetCamera: boolean): void;
-	ClientSetLocation(NewLocation: Vector,NewRotation: Rotator): void;
-	CastToPlayerController(): PlayerController;
-	static C(Other: UObject | any): Controller;
-	GetCurrentPath(): NavigationPath;
-	GetCurrentPathIndex(): number;
-	GetCurrentPathPoints(): Vector[];
-	GetNextNavLinkIndex(): number;
-	SimpleMoveToActor(Goal: Actor): void;
-	SimpleMoveToLocation(Goal: Vector): void;
-	static GetCurrentPath(Controller: Controller): NavigationPath;
-	static GetCurrentPathIndex(Controller: Controller): number;
-	static GetCurrentPathPoints(Controller: Controller): Vector[];
-	static GetNextNavLinkIndex(Controller: Controller): number;
-	static SimpleMoveToActor(Controller: Controller,Goal: Actor): void;
-	static SimpleMoveToLocation(Controller: Controller,Goal: Vector): void;
-}
-
-declare class Pawn extends Actor { 
-	bUseControllerRotationPitch: boolean;
-	bUseControllerRotationYaw: boolean;
-	bUseControllerRotationRoll: boolean;
-	bCanAffectNavigationGeneration: boolean;
-	BaseEyeHeight: number;
-	AutoPossessPlayer: EAutoReceiveInput;
-	AutoPossessAI: EAutoPossessAI;
-	RemoteViewPitch: number;
-	AIControllerClass: UnrealEngineClass;
-	PlayerState: PlayerState;
-	LastHitBy: Controller;
-	Controller: Controller;
-	ControlInputVector: Vector;
-	LastControlInputVector: Vector;
-	static GetDefaultObject(): Pawn;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Pawn;
-	SpawnDefaultController(): void;
-	SetCanAffectNavigationGeneration(bNewValue: boolean,bForceUpdate: boolean): void;
-	ReceiveUnpossessed(OldController: Controller): void;
-	ReceivePossessed(NewController: Controller): void;
-	PawnMakeNoise(Loudness: number,NoiseLocation: Vector,bUseNoiseMakerLocation: boolean,NoiseMaker: Actor): void;
-	OnRep_PlayerState(): void;
-	OnRep_Controller(): void;
-	LaunchPawn(LaunchVelocity: Vector,bXYOverride: boolean,bZOverride: boolean): void;
-	K2_GetMovementInputVector(): Vector;
-	IsPlayerControlled(): boolean;
-	IsPawnControlled(): boolean;
-	IsMoveInputIgnored(): boolean;
-	IsLocallyControlled(): boolean;
-	IsControlled(): boolean;
-	IsBotControlled(): boolean;
-	GetPendingMovementInputVector(): Vector;
-	GetNavAgentLocation(): Vector;
-	GetMovementComponent(): PawnMovementComponent;
-	static GetMovementBaseActor(Pawn: Pawn): Actor;
-	GetLastMovementInputVector(): Vector;
-	GetControlRotation(): Rotator;
-	GetController(): Controller;
-	GetBaseAimRotation(): Rotator;
-	DetachFromControllerPendingDestroy(): void;
-	ConsumeMovementInputVector(): Vector;
-	AddMovementInput(WorldDirection: Vector,ScaleValue: number,bForce: boolean): void;
-	AddControllerYawInput(Val: number): void;
-	AddControllerRollInput(Val: number): void;
-	AddControllerPitchInput(Val: number): void;
-	static C(Other: UObject | any): Pawn;
-	SendAIMessage(Message: string,MessageSource: UObject,bSuccess: boolean): void;
-	static SendAIMessage(Target: Pawn,Message: string,MessageSource: UObject,bSuccess: boolean): void;
-}
-
-declare class InterpFilter extends UObject { 
-	Caption: string;
-	static Load(ResourceName: string): InterpFilter;
-	static Find(Outer: UObject, ResourceName: string): InterpFilter;
-	static GetDefaultObject(): InterpFilter;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InterpFilter;
-	static C(Other: UObject | any): InterpFilter;
-}
-
-declare class InterpGroupDirector extends InterpGroup { 
-	static Load(ResourceName: string): InterpGroupDirector;
-	static Find(Outer: UObject, ResourceName: string): InterpGroupDirector;
-	static GetDefaultObject(): InterpGroupDirector;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InterpGroupDirector;
-	static C(Other: UObject | any): InterpGroupDirector;
-}
-
-declare class InterpData extends UObject { 
-	InterpLength: number;
-	PathBuildTime: number;
-	InterpGroups: InterpGroup[];
-	CurveEdSetup: InterpCurveEdSetup;
-	InterpFilters: InterpFilter[];
-	SelectedFilter: InterpFilter;
-	DefaultFilters: InterpFilter[];
-	EdSectionStart: number;
-	EdSectionEnd: number;
-	bShouldBakeAndPrune: boolean;
-	CachedDirectorGroup: InterpGroupDirector;
-	AllEventNames: string[];
-	static Load(ResourceName: string): InterpData;
-	static Find(Outer: UObject, ResourceName: string): InterpData;
-	static GetDefaultObject(): InterpData;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): InterpData;
-	static C(Other: UObject | any): InterpData;
-}
-
-declare class InterpGroupActorInfo { 
-	ObjectName: string;
-	Actors: Actor[];
-	clone() : InterpGroupActorInfo;
-	static C(Other: UObject | any): InterpGroupActorInfo;
-}
-
-declare class CameraCutInfo { 
-	Location: Vector;
-	Timestamp: number;
-	clone() : CameraCutInfo;
-	static C(Other: UObject | any): CameraCutInfo;
-}
-
-declare class MatineeActor extends Actor { 
-	MatineeData: InterpData;
-	MatineeControllerName: string;
-	PlayRate: number;
-	bPlayOnLevelLoad: boolean;
-	bForceStartPos: boolean;
-	ForceStartPosition: number;
-	bLooping: boolean;
-	bRewindOnPlay: boolean;
-	bNoResetOnRewind: boolean;
-	bRewindIfAlreadyPlaying: boolean;
-	bDisableRadioFilter: boolean;
-	bClientSideOnly: boolean;
-	bSkipUpdateIfNotVisible: boolean;
-	bIsSkippable: boolean;
-	PreferredSplitScreenNum: number;
-	bDisableMovementInput: boolean;
-	bDisableLookAtInput: boolean;
-	bHidePlayer: boolean;
-	bHideHud: boolean;
-	GroupActorInfos: InterpGroupActorInfo[];
-	bShouldShowGore: boolean;
-	GroupInst: InterpGroupInst[];
-	CameraCuts: CameraCutInfo[];
-	SpriteComponent: BillboardComponent;
-	bIsBeingEdited: boolean;
-	bIsScrubbing: boolean;
-	bIsPlaying: boolean;
-	bReversePlayback: boolean;
-	bPaused: boolean;
-	bPendingStop: boolean;
-	InterpPosition: number;
-	ReplicationForceIsPlaying: number;
-	OnPlay: UnrealEngineMulticastDelegate<() => void>;
-	OnStop: UnrealEngineMulticastDelegate<() => void>;
-	OnPause: UnrealEngineMulticastDelegate<() => void>;
-	static GetDefaultObject(): MatineeActor;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MatineeActor;
-	Stop(): void;
-	SetPosition(NewPosition: number,bJump: boolean): void;
-	SetLoopingState(bNewLooping: boolean): void;
-	Reverse(): void;
-	Play(): void;
-	Pause(): void;
-	EnableGroupByName(GroupName: string,bEnable: boolean): void;
-	ChangePlaybackDirection(): void;
-	static C(Other: UObject | any): MatineeActor;
-}
-
-declare type EDetachmentRule = 'KeepRelative' | 'KeepWorld' | 'EDetachmentRule_MAX';
-declare var EDetachmentRule : { KeepRelative:'KeepRelative',KeepWorld:'KeepWorld',EDetachmentRule_MAX:'EDetachmentRule_MAX', };
-declare type EChildActorComponentTreeViewVisualizationMode = 'UseDefault' | 'ComponentOnly' | 'ComponentWithChildActor' | 'ChildActorOnly' | 'EChildActorComponentTreeViewVisualizationMode_MAX';
-declare var EChildActorComponentTreeViewVisualizationMode : { UseDefault:'UseDefault',ComponentOnly:'ComponentOnly',ComponentWithChildActor:'ComponentWithChildActor',ChildActorOnly:'ChildActorOnly',EChildActorComponentTreeViewVisualizationMode_MAX:'EChildActorComponentTreeViewVisualizationMode_MAX', };
-declare class ChildActorComponent extends SceneComponent { 
-	ChildActorClass: UnrealEngineClass;
-	ChildActor: Actor;
-	ChildActorTemplate: Actor;
-	EditorTreeViewVisualizationMode: EChildActorComponentTreeViewVisualizationMode;
-	static Load(ResourceName: string): ChildActorComponent;
-	static Find(Outer: UObject, ResourceName: string): ChildActorComponent;
-	static GetDefaultObject(): ChildActorComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChildActorComponent;
-	SetChildActorClass(InClass: UnrealEngineClass): void;
-	static C(Other: UObject | any): ChildActorComponent;
-}
-
-declare class Actor extends UObject { 
-	PrimaryActorTick: ActorTickFunction;
-	bNetTemporary: boolean;
-	bNetStartup: boolean;
-	bOnlyRelevantToOwner: boolean;
-	bAlwaysRelevant: boolean;
-	bReplicateMovement: boolean;
-	bHidden: boolean;
-	bTearOff: boolean;
-	bForceNetAddressable: boolean;
-	bExchangedRoles: boolean;
-	bNetLoadOnClient: boolean;
-	bNetUseOwnerRelevancy: boolean;
-	bRelevantForNetworkReplays: boolean;
-	bRelevantForLevelBounds: boolean;
-	bReplayRewindable: boolean;
-	bAllowTickBeforeBeginPlay: boolean;
-	bAutoDestroyWhenFinished: boolean;
-	bCanBeDamaged: boolean;
-	bBlockInput: boolean;
-	bCollideWhenPlacing: boolean;
-	bFindCameraComponentWhenViewTarget: boolean;
-	bGenerateOverlapEventsDuringLevelStreaming: boolean;
-	bIgnoresOriginShifting: boolean;
-	bEnableAutoLODGeneration: boolean;
-	bIsEditorOnlyActor: boolean;
-	bActorSeamlessTraveled: boolean;
-	bReplicates: boolean;
-	bCanBeInCluster: boolean;
-	bAllowReceiveTickEventOnDedicatedServer: boolean;
-	bActorEnableCollision: boolean;
-	bActorIsBeingDestroyed: boolean;
-	UpdateOverlapsMethodDuringLevelStreaming: EActorUpdateOverlapsMethod;
-	DefaultUpdateOverlapsMethodDuringLevelStreaming: EActorUpdateOverlapsMethod;
-	RemoteRole: ENetRole;
-	ReplicatedMovement: RepMovement;
-	InitialLifeSpan: number;
-	CustomTimeDilation: number;
-	AttachmentReplication: RepAttachment;
-	Owner: Actor;
-	NetDriverName: string;
-	Role: ENetRole;
-	NetDormancy: ENetDormancy;
-	SpawnCollisionHandlingMethod: ESpawnActorCollisionHandlingMethod;
-	AutoReceiveInput: EAutoReceiveInput;
-	InputPriority: number;
-	InputComponent: InputComponent;
-	NetCullDistanceSquared: number;
-	NetTag: number;
-	NetUpdateFrequency: number;
-	MinNetUpdateFrequency: number;
-	NetPriority: number;
-	Instigator: Pawn;
-	Children: Actor[];
-	RootComponent: SceneComponent;
-	PivotOffset: Vector;
-	ControllingMatineeActors: MatineeActor[];
-	Layers: string[];
-	ParentComponentActor: any;
-	ParentComponent: any;
-	ActorGuid: Guid;
-	GroupActor: Actor;
-	SpriteScale: number;
-	HiddenEditorViews: any;
-	ActorLabel: string;
-	FolderPath: string;
-	bHiddenEd: boolean;
-	bIsEditorPreviewActor: boolean;
-	bHiddenEdLayer: boolean;
-	bHiddenEdLevel: boolean;
-	bLockLocation: boolean;
-	bActorLabelEditable: boolean;
-	bEditable: boolean;
-	bListedInSceneOutliner: boolean;
-	bOptimizeBPComponentData: boolean;
-	bHiddenEdTemporary: boolean;
-	Tags: string[];
-	OnTakeAnyDamage: UnrealEngineMulticastDelegate<(DamagedActor: Actor, Damage: number, DamageType: DamageType, InstigatedBy: Controller, DamageCauser: Actor) => void>;
-	OnTakePointDamage: UnrealEngineMulticastDelegate<(DamagedActor: Actor, Damage: number, InstigatedBy: Controller, HitLocation: Vector, FHitComponent: PrimitiveComponent, BoneName: string, ShotFromDirection: Vector, DamageType: DamageType, DamageCauser: Actor) => void>;
-	OnTakeRadialDamage: UnrealEngineMulticastDelegate<(DamagedActor: Actor, Damage: number, DamageType: DamageType, Origin: Vector, HitInfo: HitResult, InstigatedBy: Controller, DamageCauser: Actor) => void>;
-	OnActorBeginOverlap: UnrealEngineMulticastDelegate<(OverlappedActor: Actor, OtherActor: Actor) => void>;
-	OnActorEndOverlap: UnrealEngineMulticastDelegate<(OverlappedActor: Actor, OtherActor: Actor) => void>;
-	OnBeginCursorOver: UnrealEngineMulticastDelegate<(TouchedActor: Actor) => void>;
-	OnEndCursorOver: UnrealEngineMulticastDelegate<(TouchedActor: Actor) => void>;
-	OnClicked: UnrealEngineMulticastDelegate<(TouchedActor: Actor, ButtonPressed: Key) => void>;
-	OnReleased: UnrealEngineMulticastDelegate<(TouchedActor: Actor, ButtonReleased: Key) => void>;
-	OnInputTouchBegin: UnrealEngineMulticastDelegate<(FingerIndex: ETouchIndex, TouchedActor: Actor) => void>;
-	OnInputTouchEnd: UnrealEngineMulticastDelegate<(FingerIndex: ETouchIndex, TouchedActor: Actor) => void>;
-	OnInputTouchEnter: UnrealEngineMulticastDelegate<(FingerIndex: ETouchIndex, TouchedActor: Actor) => void>;
-	OnInputTouchLeave: UnrealEngineMulticastDelegate<(FingerIndex: ETouchIndex, TouchedActor: Actor) => void>;
-	OnActorHit: UnrealEngineMulticastDelegate<(SelfActor: Actor, OtherActor: Actor, NormalImpulse: Vector, Hit: HitResult) => void>;
-	OnDestroyed: UnrealEngineMulticastDelegate<(DestroyedActor: Actor) => void>;
-	OnEndPlay: UnrealEngineMulticastDelegate<(Actor: Actor, EndPlayReason: EEndPlayReason) => void>;
-	InstanceComponents: ActorComponent[];
-	BlueprintCreatedComponents: ActorComponent[];
-	constructor(InWorld: World, Location?: Vector, Rotation?: Rotator);
-	static GetDefaultObject(): Actor;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Actor;
-	WasRecentlyRendered(Tolerance: number): boolean;
-	UserConstructionScript(): void;
-	TearOff(): void;
-	SnapRootComponentTo(InParentActor: Actor,InSocketName: string): void;
-	SetTickGroup(NewTickGroup: ETickingGroup): void;
-	SetTickableWhenPaused(bTickableWhenPaused: boolean): void;
-	SetReplicates(bInReplicates: boolean): void;
-	SetReplicateMovement(bInReplicateMovement: boolean): void;
-	SetOwner(NewOwner: Actor): void;
-	SetNetDormancy(NewDormancy: ENetDormancy): void;
-	SetLifeSpan(InLifespan: number): void;
-	SetIsTemporarilyHiddenInEditor(bIsHidden: boolean): void;
-	SetFolderPath(NewFolderPath: string): void;
-	SetAutoDestroyWhenFinished(bVal: boolean): void;
-	SetActorTickInterval(TickInterval: number): void;
-	SetActorTickEnabled(bEnabled: boolean): void;
-	SetActorScale3D(NewScale3D: Vector): void;
-	SetActorRelativeScale3D(NewRelativeScale: Vector): void;
-	SetActorLabel(NewActorLabel: string,bMarkDirty: boolean): void;
-	SetActorHiddenInGame(bNewHidden: boolean): void;
-	SetActorEnableCollision(bNewActorEnableCollision: boolean): void;
-	RemoveTickPrerequisiteComponent(PrerequisiteComponent: ActorComponent): void;
-	RemoveTickPrerequisiteActor(PrerequisiteActor: Actor): void;
-	ReceiveTick(DeltaSeconds: number): void;
-	ReceiveRadialDamage(DamageReceived: number,DamageType: DamageType,Origin: Vector,HitInfo: HitResult,InstigatedBy: Controller,DamageCauser: Actor): void;
-	ReceivePointDamage(Damage: number,DamageType: DamageType,HitLocation: Vector,HitNormal: Vector,HitComponent: PrimitiveComponent,BoneName: string,ShotFromDirection: Vector,InstigatedBy: Controller,DamageCauser: Actor,HitInfo: HitResult): void;
-	ReceiveHit(MyComp: PrimitiveComponent,Other: Actor,OtherComp: PrimitiveComponent,bSelfMoved: boolean,HitLocation: Vector,HitNormal: Vector,NormalImpulse: Vector,Hit: HitResult): void;
-	ReceiveEndPlay(EndPlayReason: EEndPlayReason): void;
-	ReceiveDestroyed(): void;
-	ReceiveBeginPlay(): void;
-	ReceiveAnyDamage(Damage: number,DamageType: DamageType,InstigatedBy: Controller,DamageCauser: Actor): void;
-	ReceiveActorOnReleased(ButtonReleased: Key): void;
-	ReceiveActorOnInputTouchLeave(FingerIndex: ETouchIndex): void;
-	ReceiveActorOnInputTouchEnter(FingerIndex: ETouchIndex): void;
-	ReceiveActorOnInputTouchEnd(FingerIndex: ETouchIndex): void;
-	ReceiveActorOnInputTouchBegin(FingerIndex: ETouchIndex): void;
-	ReceiveActorOnClicked(ButtonPressed: Key): void;
-	ReceiveActorEndOverlap(OtherActor: Actor): void;
-	ReceiveActorEndCursorOver(): void;
-	ReceiveActorBeginOverlap(OtherActor: Actor): void;
-	ReceiveActorBeginCursorOver(): void;
-	PrestreamTextures(Seconds: number,bEnableStreaming: boolean,CinematicTextureGroups: number): void;
-	OnRep_ReplicateMovement(): void;
-	OnRep_ReplicatedMovement(): void;
-	OnRep_Owner(): void;
-	OnRep_Instigator(): void;
-	OnRep_AttachmentReplication(): void;
-	MakeNoise(Loudness: number,NoiseInstigator: Pawn,NoiseLocation: Vector,MaxRange: number,Tag: string): void;
-	MakeMIDForMaterial(Parent: MaterialInterface): MaterialInstanceDynamic;
-	K2_TeleportTo(DestLocation: Vector,DestRotation: Rotator): boolean;
-	K2_SetActorTransform(NewTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult, $: boolean};
-	K2_SetActorRotation(NewRotation: Rotator,bTeleportPhysics: boolean): boolean;
-	K2_SetActorRelativeTransform(NewRelativeTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_SetActorRelativeRotation(NewRelativeRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_SetActorRelativeLocation(NewRelativeLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_SetActorLocationAndRotation(NewLocation: Vector,NewRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult, $: boolean};
-	K2_SetActorLocation(NewLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult, $: boolean};
-	K2_OnReset(): void;
-	K2_OnEndViewTarget(PC: PlayerController): void;
-	K2_OnBecomeViewTarget(PC: PlayerController): void;
-	K2_GetRootComponent(): SceneComponent;
-	K2_GetComponentsByClass(ComponentClass: UnrealEngineClass): ActorComponent[];
-	K2_GetActorRotation(): Rotator;
-	K2_GetActorLocation(): Vector;
-	K2_DetachFromActor(LocationRule: EDetachmentRule,RotationRule: EDetachmentRule,ScaleRule: EDetachmentRule): void;
-	K2_DestroyComponent(Component: ActorComponent): void;
-	K2_DestroyActor(): void;
-	K2_AttachToComponent(Parent: SceneComponent,SocketName: string,LocationRule: EAttachmentRule,RotationRule: EAttachmentRule,ScaleRule: EAttachmentRule,bWeldSimulatedBodies: boolean): void;
-	K2_AttachToActor(ParentActor: Actor,SocketName: string,LocationRule: EAttachmentRule,RotationRule: EAttachmentRule,ScaleRule: EAttachmentRule,bWeldSimulatedBodies: boolean): void;
-	K2_AttachRootComponentToActor(InParentActor: Actor,InSocketName: string,AttachLocationType: EAttachLocation,bWeldSimulatedBodies: boolean): void;
-	K2_AttachRootComponentTo(InParent: SceneComponent,InSocketName: string,AttachLocationType: EAttachLocation,bWeldSimulatedBodies: boolean): void;
-	K2_AddActorWorldTransformKeepScale(DeltaTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_AddActorWorldTransform(DeltaTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_AddActorWorldRotation(DeltaRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_AddActorWorldOffset(DeltaLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_AddActorLocalTransform(NewTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_AddActorLocalRotation(DeltaRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_AddActorLocalOffset(DeltaLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	IsTemporarilyHiddenInEditor(bIncludeParent: boolean): boolean;
-	IsSelectable(): boolean;
-	IsOverlappingActor(Other: Actor): boolean;
-	IsHiddenEdAtStartup(): boolean;
-	IsHiddenEd(): boolean;
-	IsEditable(): boolean;
-	IsChildActor(): boolean;
-	IsActorTickEnabled(): boolean;
-	IsActorBeingDestroyed(): boolean;
-	HasAuthority(): boolean;
-	GetVerticalDistanceTo(OtherActor: Actor): number;
-	GetVelocity(): Vector;
-	GetTransform(): Transform;
-	GetTickableWhenPaused(): boolean;
-	GetSquaredHorizontalDistanceTo(OtherActor: Actor): number;
-	GetSquaredDistanceTo(OtherActor: Actor): number;
-	GetRemoteRole(): ENetRole;
-	GetParentComponent(): ChildActorComponent;
-	GetParentActor(): Actor;
-	GetOwner(): Actor;
-	GetOverlappingComponents(OverlappingComponents?: PrimitiveComponent[]): {OverlappingComponents: PrimitiveComponent[]};
-	GetOverlappingActors(OverlappingActors?: Actor[],ClassFilter?: UnrealEngineClass): {OverlappingActors: Actor[]};
-	GetLocalRole(): ENetRole;
-	GetLifeSpan(): number;
-	GetInstigatorController(): Controller;
-	GetInstigator(): Pawn;
-	GetInputVectorAxisValue(InputAxisKey: Key): Vector;
-	GetInputAxisValue(InputAxisName: string): number;
-	GetInputAxisKeyValue(InputAxisKey: Key): number;
-	GetHorizontalDotProductTo(OtherActor: Actor): number;
-	GetHorizontalDistanceTo(OtherActor: Actor): number;
-	GetGameTimeSinceCreation(): number;
-	GetFolderPath(): string;
-	GetDotProductTo(OtherActor: Actor): number;
-	GetDistanceTo(OtherActor: Actor): number;
-	GetComponentsByTag(ComponentClass: UnrealEngineClass,Tag: string): ActorComponent[];
-	GetComponentsByInterface(Interface: UnrealEngineClass): ActorComponent[];
-	GetComponentByClass(ComponentClass: UnrealEngineClass): ActorComponent;
-	GetAttachParentSocketName(): string;
-	GetAttachParentActor(): Actor;
-	GetAttachedActors(OutActors?: Actor[],bResetArray?: boolean): {OutActors: Actor[]};
-	GetAllChildActors(ChildActors?: Actor[],bIncludeDescendants?: boolean): {ChildActors: Actor[]};
-	GetActorUpVector(): Vector;
-	GetActorTimeDilation(): number;
-	GetActorTickInterval(): number;
-	GetActorScale3D(): Vector;
-	GetActorRightVector(): Vector;
-	GetActorRelativeScale3D(): Vector;
-	GetActorLabel(): string;
-	GetActorForwardVector(): Vector;
-	GetActorEyesViewPoint(OutLocation?: Vector,OutRotation?: Rotator): {OutLocation: Vector, OutRotation: Rotator};
-	GetActorEnableCollision(): boolean;
-	GetActorBounds(bOnlyCollidingComponents: boolean,Origin?: Vector,BoxExtent?: Vector,bIncludeFromChildActors?: boolean): {Origin: Vector, BoxExtent: Vector};
-	ForceNetUpdate(): void;
-	FlushNetDormancy(): void;
-	FinishAddComponent(Component: ActorComponent,bManualAttachment: boolean,RelativeTransform: Transform): void;
-	EnableInput(PlayerController: PlayerController): void;
-	DisableInput(PlayerController: PlayerController): void;
-	DetachRootComponentFromParent(bMaintainWorldPosition: boolean): void;
-	AddTickPrerequisiteComponent(PrerequisiteComponent: ActorComponent): void;
-	AddTickPrerequisiteActor(PrerequisiteActor: Actor): void;
-	AddComponentByClass(Class: UnrealEngineClass,bManualAttachment: boolean,RelativeTransform: Transform,bDeferredFinish: boolean): ActorComponent;
-	AddComponent(TemplateName: string,bManualAttachment: boolean,RelativeTransform: Transform,ComponentTemplateContext: UObject,bDeferredFinish: boolean): ActorComponent;
-	ActorHasTag(Tag: string): boolean;
-	static C(Other: UObject | any): Actor;
-	ClearActorLabel(): void;
-	GetActorLabel(): string;
-	GetActorLocation(): Vector;
-	GetActorRotation(): Rotator;
-	GetFolderPath(): string;
-	IsActorLabelEditable(): boolean;
-	SetActorLabel(NewActorLabel: string,bMarkDirty: boolean): void;
-	SetActorLabelUnique(NewActorLabel: string,InExistingActorLabels: string[]): void;
-	SetActorLocation(NewLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult, $: boolean};
-	SetFolderPath(NewFolderPath: string): void;
-	SetFolderPath_Recursively(NewFolderPath: string): void;
-	SetIsTemporarilyHiddenInEditor(bIsHidden: boolean): void;
-	AddActorToLayer(Layer: ActorLayer): void;
-	RemoveActorFromLayer(Layer: ActorLayer): void;
-	DestroyActor(): boolean;
-	PilotLevelActor(): void;
-	SetActorSelectionState(bShouldBeSelected: boolean): void;
-	Actor_GetWorld(): World;
-	GetComponentsByClass(ComponentClass: UnrealEngineClass): ActorComponent[];
-	GetLastRenderTime(): number;
-	GetLevel(): Level;
-	IsPendingKill(): boolean;
-	ReregisterAllComponents(): void;
-	SetActorFlags(Flags: number): void;
-	SetRootComponent(Component: SceneComponent): void;
-	GetContentScale(PlaneResult: MagicLeapPlaneResult): Transform;
-	SetFocusActor(bSetStabilizationActor: boolean): void;
-	SetStabilizationDepthActor(bSetFocusActor: boolean): void;
-	GetAIController(): AIController;
-	GetBlackboard(): BlackboardComponent;
-	GetActorBounds(Origin?: Vector,BoxExtent?: Vector): {Origin: Vector, BoxExtent: Vector};
-	ApplyDamage(BaseDamage: number,EventInstigator: Controller,DamageCauser: Actor,DamageTypeClass: UnrealEngineClass): number;
-	ApplyPointDamage(BaseDamage: number,HitFromDirection: Vector,HitInfo: HitResult,EventInstigator: Controller,DamageCauser: Actor,DamageTypeClass: UnrealEngineClass): number;
-	FinishSpawningActor(SpawnTransform: Transform): Actor;
-	AddDeviceVisualizationComponentBlocking(XRDeviceId: XRDeviceId,bManualAttachment: boolean,RelativeTransform: Transform): PrimitiveComponent;
-	AddNamedDeviceVisualizationComponentBlocking(SystemName: string,DeviceName: string,bManualAttachment: boolean,RelativeTransform: Transform,XRDeviceId?: XRDeviceId): {XRDeviceId: XRDeviceId, $: PrimitiveComponent};
-	static ClearActorLabel(Actor: Actor): void;
-	static GetActorLabel(Actor: Actor): string;
-	static GetActorLocation(Actor: Actor): Vector;
-	static GetActorRotation(Actor: Actor): Rotator;
-	static GetFolderPath(Actor: Actor): string;
-	static IsActorLabelEditable(Actor: Actor): boolean;
-	static SetActorLabel(Actor: Actor,NewActorLabel: string,bMarkDirty: boolean): void;
-	static SetActorLabelUnique(Actor: Actor,NewActorLabel: string,InExistingActorLabels: string[]): void;
-	static SetActorLocation(Actor: Actor,NewLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult, $: boolean};
-	static SetFolderPath(Actor: Actor,NewFolderPath: string): void;
-	static SetFolderPath_Recursively(Actor: Actor,NewFolderPath: string): void;
-	static SetIsTemporarilyHiddenInEditor(Actor: Actor,bIsHidden: boolean): void;
-	static AddActorToLayer(InActor: Actor,Layer: ActorLayer): void;
-	static RemoveActorFromLayer(InActor: Actor,Layer: ActorLayer): void;
-	static DestroyActor(ActorToDestroy: Actor): boolean;
-	static PilotLevelActor(ActorToPilot: Actor): void;
-	static SetActorSelectionState(Actor: Actor,bShouldBeSelected: boolean): void;
-	static Actor_GetWorld(Actor: Actor): World;
-	static GetComponentsByClass(Actor: Actor,ComponentClass: UnrealEngineClass): ActorComponent[];
-	static GetLastRenderTime(Actor: Actor): number;
-	static GetLevel(Actor: Actor): Level;
-	static IsPendingKill(InActor: Actor): boolean;
-	static ReregisterAllComponents(Actor: Actor): void;
-	static SetActorFlags(Actor: Actor,Flags: number): void;
-	static SetRootComponent(Actor: Actor,Component: SceneComponent): void;
-	static GetContentScale(ContentActor: Actor,PlaneResult: MagicLeapPlaneResult): Transform;
-	static SetFocusActor(InFocusActor: Actor,bSetStabilizationActor: boolean): void;
-	static SetStabilizationDepthActor(InStabilizationDepthActor: Actor,bSetFocusActor: boolean): void;
-	static GetAIController(ControlledActor: Actor): AIController;
-	static GetBlackboard(Target: Actor): BlackboardComponent;
-	static GetActorBounds(Actor: Actor,Origin?: Vector,BoxExtent?: Vector): {Origin: Vector, BoxExtent: Vector};
-	static ApplyDamage(DamagedActor: Actor,BaseDamage: number,EventInstigator: Controller,DamageCauser: Actor,DamageTypeClass: UnrealEngineClass): number;
-	static ApplyPointDamage(DamagedActor: Actor,BaseDamage: number,HitFromDirection: Vector,HitInfo: HitResult,EventInstigator: Controller,DamageCauser: Actor,DamageTypeClass: UnrealEngineClass): number;
-	static FinishSpawningActor(Actor: Actor,SpawnTransform: Transform): Actor;
-	static AddDeviceVisualizationComponentBlocking(Target: Actor,XRDeviceId: XRDeviceId,bManualAttachment: boolean,RelativeTransform: Transform): PrimitiveComponent;
-	static AddNamedDeviceVisualizationComponentBlocking(Target: Actor,SystemName: string,DeviceName: string,bManualAttachment: boolean,RelativeTransform: Transform,XRDeviceId?: XRDeviceId): {XRDeviceId: XRDeviceId, $: PrimitiveComponent};
-}
-
-declare class ActorComponent extends UObject { 
-	PrimaryComponentTick: ActorComponentTickFunction;
-	ComponentTags: string[];
-	AssetUserData: AssetUserData[];
-	UCSSerializationIndex: number;
-	bNetAddressable: boolean;
-	bReplicates: boolean;
-	bCreatedByConstructionScript: boolean;
-	bInstanceComponent: boolean;
-	bAutoActivate: boolean;
-	bIsActive: boolean;
-	bEditableWhenInherited: boolean;
-	bCanEverAffectNavigation: boolean;
-	bIsEditorOnly: boolean;
-	bIsVisualizationComponent: boolean;
-	bNeedsUCSSerializationIndexEvaluted: boolean;
-	CreationMethod: EComponentCreationMethod;
-	OnComponentActivated: UnrealEngineMulticastDelegate<(Component: ActorComponent, bReset: boolean) => void>;
-	OnComponentDeactivated: UnrealEngineMulticastDelegate<(Component: ActorComponent) => void>;
-	UCSModifiedProperties: SimpleMemberReference[];
-	static Load(ResourceName: string): ActorComponent;
-	static Find(Outer: UObject, ResourceName: string): ActorComponent;
-	static GetDefaultObject(): ActorComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ActorComponent;
-	ToggleActive(): void;
-	SetTickGroup(NewTickGroup: ETickingGroup): void;
-	SetTickableWhenPaused(bTickableWhenPaused: boolean): void;
-	SetIsReplicated(ShouldReplicate: boolean): void;
-	SetComponentTickIntervalAndCooldown(TickInterval: number): void;
-	SetComponentTickInterval(TickInterval: number): void;
-	SetComponentTickEnabled(bEnabled: boolean): void;
-	SetAutoActivate(bNewAutoActivate: boolean): void;
-	SetActive(bNewActive: boolean,bReset: boolean): void;
-	RemoveTickPrerequisiteComponent(PrerequisiteComponent: ActorComponent): void;
-	RemoveTickPrerequisiteActor(PrerequisiteActor: Actor): void;
-	ReceiveTick(DeltaSeconds: number): void;
-	ReceiveEndPlay(EndPlayReason: EEndPlayReason): void;
-	ReceiveBeginPlay(): void;
-	OnRep_IsActive(): void;
-	K2_DestroyComponent(UObject: UObject): void;
-	IsComponentTickEnabled(): boolean;
-	IsBeingDestroyed(): boolean;
-	IsActive(): boolean;
-	GetOwner(): Actor;
-	GetComponentTickInterval(): number;
-	Deactivate(): void;
-	ComponentHasTag(Tag: string): boolean;
-	AddTickPrerequisiteComponent(PrerequisiteComponent: ActorComponent): void;
-	AddTickPrerequisiteActor(PrerequisiteActor: Actor): void;
-	Activate(bReset: boolean): void;
-	static C(Other: UObject | any): ActorComponent;
-	IsRegistered(): boolean;
-	MarkRenderStateDirty(): void;
-	RegisterComponent(): void;
-	ReregisterComponent(): void;
-	UnregisterComponent(): void;
-	static IsRegistered(ActorComponent: ActorComponent): boolean;
-	static MarkRenderStateDirty(Component: ActorComponent): void;
-	static RegisterComponent(ActorComponent: ActorComponent): void;
-	static ReregisterComponent(ActorComponent: ActorComponent): void;
-	static UnregisterComponent(ActorComponent: ActorComponent): void;
-}
-
-declare type EComponentMobility = 'Static' | 'Stationary' | 'Movable' | 'EComponentMobility_MAX';
-declare var EComponentMobility : { Static:'Static',Stationary:'Stationary',Movable:'Movable',EComponentMobility_MAX:'EComponentMobility_MAX', };
-declare type EMoveComponentAction = 'Move' | 'Stop' | 'Return' | 'EMoveComponentAction_MAX';
-declare var EMoveComponentAction : { Move:'Move',Stop:'Stop',Return:'Return',EMoveComponentAction_MAX:'EMoveComponentAction_MAX', };
-declare class ARPin extends UObject { 
-	TrackedGeometry: ARTrackedGeometry;
-	PinnedComponent: SceneComponent;
-	LocalToTrackingTransform: Transform;
-	LocalToAlignedTrackingTransform: Transform;
-	TrackingState: EARTrackingState;
-	OnARTrackingStateChanged: UnrealEngineMulticastDelegate<(NewTrackingState: EARTrackingState) => void>;
-	OnARTransformUpdated: UnrealEngineMulticastDelegate<(OldToNewTransform: Transform) => void>;
-	static Load(ResourceName: string): ARPin;
-	static Find(Outer: UObject, ResourceName: string): ARPin;
-	static GetDefaultObject(): ARPin;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARPin;
-	GetTrackingState(): EARTrackingState;
-	GetTrackedGeometry(): ARTrackedGeometry;
-	GetPinnedComponent(): SceneComponent;
-	GetLocalToWorldTransform(): Transform;
-	GetLocalToTrackingTransform(): Transform;
-	GetDebugName(): string;
-	DebugDraw(World: World,Color: LinearColor,Scale: number,PersistForSeconds: number): void;
-	static C(Other: UObject | any): ARPin;
-	DebugDrawPin(WorldContextObject: UObject,Color: LinearColor,Scale: number,PersistForSeconds: number): void;
-	RemovePin(): void;
-	static DebugDrawPin(ARPin: ARPin,WorldContextObject: UObject,Color: LinearColor,Scale: number,PersistForSeconds: number): void;
-	static RemovePin(PinToRemove: ARPin): void;
-}
-
-declare class SceneComponent extends ActorComponent { 
-	PhysicsVolume: any;
-	AttachParent: SceneComponent;
-	AttachSocketName: string;
-	AttachChildren: SceneComponent[];
-	ClientAttachedChildren: SceneComponent[];
-	RelativeLocation: Vector;
-	RelativeRotation: Rotator;
-	RelativeScale3D: Vector;
-	ComponentVelocity: Vector;
-	bComponentToWorldUpdated: boolean;
-	bAbsoluteLocation: boolean;
-	bAbsoluteRotation: boolean;
-	bAbsoluteScale: boolean;
-	bVisible: boolean;
-	bShouldBeAttached: boolean;
-	bShouldSnapLocationWhenAttached: boolean;
-	bShouldSnapRotationWhenAttached: boolean;
-	bShouldUpdatePhysicsVolume: boolean;
-	bHiddenInGame: boolean;
-	bBoundsChangeTriggersStreamingDataRebuild: boolean;
-	bUseAttachParentBound: boolean;
-	bVisualizeComponent: boolean;
-	Mobility: EComponentMobility;
-	DetailMode: EDetailMode;
-	PhysicsVolumeChangedDelegate: UnrealEngineMulticastDelegate<(NewVolume: PhysicsVolume) => void>;
-	static Load(ResourceName: string): SceneComponent;
-	static Find(Outer: UObject, ResourceName: string): SceneComponent;
-	static GetDefaultObject(): SceneComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SceneComponent;
-	ToggleVisibility(bPropagateToChildren: boolean): void;
-	SnapTo(InParent: SceneComponent,InSocketName: string): boolean;
-	SetWorldScale3D(NewScale: Vector): void;
-	SetVisibility(bNewVisibility: boolean,bPropagateToChildren: boolean): void;
-	SetShouldUpdatePhysicsVolume(bInShouldUpdatePhysicsVolume: boolean): void;
-	SetRelativeScale3D(NewScale3D: Vector): void;
-	SetMobility(NewMobility: EComponentMobility): void;
-	SetHiddenInGame(NewHidden: boolean,bPropagateToChildren: boolean): void;
-	SetAbsolute(bNewAbsoluteLocation: boolean,bNewAbsoluteRotation: boolean,bNewAbsoluteScale: boolean): void;
-	ResetRelativeTransform(): void;
-	OnRep_Visibility(OldValue: boolean): void;
-	OnRep_Transform(): void;
-	OnRep_AttachSocketName(): void;
-	OnRep_AttachParent(): void;
-	OnRep_AttachChildren(): void;
-	K2_SetWorldTransform(NewTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_SetWorldRotation(NewRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_SetWorldLocationAndRotation(NewLocation: Vector,NewRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_SetWorldLocation(NewLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_SetRelativeTransform(NewTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_SetRelativeRotation(NewRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_SetRelativeLocationAndRotation(NewLocation: Vector,NewRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_SetRelativeLocation(NewLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_GetComponentToWorld(): Transform;
-	K2_GetComponentScale(): Vector;
-	K2_GetComponentRotation(): Rotator;
-	K2_GetComponentLocation(): Vector;
-	K2_DetachFromComponent(LocationRule: EDetachmentRule,RotationRule: EDetachmentRule,ScaleRule: EDetachmentRule,bCallModify: boolean): void;
-	K2_AttachToComponent(Parent: SceneComponent,SocketName: string,LocationRule: EAttachmentRule,RotationRule: EAttachmentRule,ScaleRule: EAttachmentRule,bWeldSimulatedBodies: boolean): boolean;
-	K2_AttachTo(InParent: SceneComponent,InSocketName: string,AttachType: EAttachLocation,bWeldSimulatedBodies: boolean): boolean;
-	K2_AddWorldTransformKeepScale(DeltaTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_AddWorldTransform(DeltaTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_AddWorldRotation(DeltaRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_AddWorldOffset(DeltaLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_AddRelativeRotation(DeltaRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_AddRelativeLocation(DeltaLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_AddLocalTransform(DeltaTransform: Transform,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_AddLocalRotation(DeltaRotation: Rotator,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	K2_AddLocalOffset(DeltaLocation: Vector,bSweep: boolean,SweepHitResult?: HitResult,bTeleport?: boolean): {SweepHitResult: HitResult};
-	IsVisible(): boolean;
-	IsSimulatingPhysics(BoneName: string): boolean;
-	IsAnySimulatingPhysics(): boolean;
-	GetUpVector(): Vector;
-	GetSocketTransform(InSocketName: string,TransformSpace: ERelativeTransformSpace): Transform;
-	GetSocketRotation(InSocketName: string): Rotator;
-	GetSocketQuaternion(InSocketName: string): Quat;
-	GetSocketLocation(InSocketName: string): Vector;
-	GetShouldUpdatePhysicsVolume(): boolean;
-	GetRightVector(): Vector;
-	GetRelativeTransform(): Transform;
-	GetPhysicsVolume(): PhysicsVolume;
-	GetParentComponents(Parents?: SceneComponent[]): {Parents: SceneComponent[]};
-	GetNumChildrenComponents(): number;
-	GetForwardVector(): Vector;
-	GetComponentVelocity(): Vector;
-	GetChildrenComponents(bIncludeAllDescendants: boolean,Children?: SceneComponent[]): {Children: SceneComponent[]};
-	GetChildComponent(ChildIndex: number): SceneComponent;
-	GetAttachSocketName(): string;
-	GetAttachParent(): SceneComponent;
-	GetAllSocketNames(): string[];
-	DoesSocketExist(InSocketName: string): boolean;
-	DetachFromParent(bMaintainWorldPosition: boolean,bCallModify: boolean): void;
-	static C(Other: UObject | any): SceneComponent;
-	SetTrackingReferenceComponent(): boolean;
-	SetMobile(): void;
-	SetMobility(Type: EComponentMobility): void;
-	GetComponentBounds(Origin?: Vector,BoxExtent?: Vector,SphereRadius?: number): {Origin: Vector, BoxExtent: Vector, SphereRadius: number};
-	MoveComponentTo(TargetRelativeLocation: Vector,TargetRelativeRotation: Rotator,bEaseOut: boolean,bEaseIn: boolean,OverTime: number,bForceShortestRotationPath: boolean,MoveAction: EMoveComponentAction,LatentInfo: LatentActionInfo): void;
-	PinComponent(PinToWorldTransform: Transform,TrackedGeometry: ARTrackedGeometry,DebugName: string): ARPin;
-	PinComponentToARPin(Pin: ARPin): boolean;
-	PinComponentToTraceResult(TraceResult: ARTraceResult,DebugName: string): ARPin;
-	UnpinComponent(): void;
-	static SetTrackingReferenceComponent(Component: SceneComponent): boolean;
-	static SetMobile(SceneComponent: SceneComponent): void;
-	static SetMobility(SceneComponent: SceneComponent,Type: EComponentMobility): void;
-	static GetComponentBounds(Component: SceneComponent,Origin?: Vector,BoxExtent?: Vector,SphereRadius?: number): {Origin: Vector, BoxExtent: Vector, SphereRadius: number};
-	static MoveComponentTo(Component: SceneComponent,TargetRelativeLocation: Vector,TargetRelativeRotation: Rotator,bEaseOut: boolean,bEaseIn: boolean,OverTime: number,bForceShortestRotationPath: boolean,MoveAction: EMoveComponentAction,LatentInfo: LatentActionInfo): void;
-	static PinComponent(ComponentToPin: SceneComponent,PinToWorldTransform: Transform,TrackedGeometry: ARTrackedGeometry,DebugName: string): ARPin;
-	static PinComponentToARPin(ComponentToPin: SceneComponent,Pin: ARPin): boolean;
-	static PinComponentToTraceResult(ComponentToPin: SceneComponent,TraceResult: ARTraceResult,DebugName: string): ARPin;
-	static UnpinComponent(ComponentToUnpin: SceneComponent): void;
-}
-
-declare type ESceneDepthPriorityGroup = 'SDPG_World' | 'SDPG_Foreground' | 'SDPG_MAX';
-declare var ESceneDepthPriorityGroup : { SDPG_World:'SDPG_World',SDPG_Foreground:'SDPG_Foreground',SDPG_MAX:'SDPG_MAX', };
-declare type EIndirectLightingCacheQuality = 'ILCQ_Off' | 'ILCQ_Point' | 'ILCQ_Volume' | 'ILCQ_MAX';
-declare var EIndirectLightingCacheQuality : { ILCQ_Off:'ILCQ_Off',ILCQ_Point:'ILCQ_Point',ILCQ_Volume:'ILCQ_Volume',ILCQ_MAX:'ILCQ_MAX', };
-declare type ELightmapType = 'Default' | 'ForceSurface' | 'ForceVolumetric' | 'ELightmapType_MAX';
-declare var ELightmapType : { Default:'Default',ForceSurface:'ForceSurface',ForceVolumetric:'ForceVolumetric',ELightmapType_MAX:'ELightmapType_MAX', };
-declare type EHasCustomNavigableGeometry = 'No' | 'Yes' | 'EvenIfNotCollidable' | 'DontExport' | 'EHasCustomNavigableGeometry_MAX';
-declare var EHasCustomNavigableGeometry : { No:'No',Yes:'Yes',EvenIfNotCollidable:'EvenIfNotCollidable',DontExport:'DontExport',EHasCustomNavigableGeometry_MAX:'EHasCustomNavigableGeometry_MAX', };
-declare type EHitProxyPriority = 'HPP_World' | 'HPP_Wireframe' | 'HPP_Foreground' | 'HPP_UI' | 'HPP_MAX';
-declare var EHitProxyPriority : { HPP_World:'HPP_World',HPP_Wireframe:'HPP_Wireframe',HPP_Foreground:'HPP_Foreground',HPP_UI:'HPP_UI',HPP_MAX:'HPP_MAX', };
-declare type ECanBeCharacterBase = 'ECB_No' | 'ECB_Yes' | 'ECB_Owner' | 'ECB_MAX';
-declare var ECanBeCharacterBase : { ECB_No:'ECB_No',ECB_Yes:'ECB_Yes',ECB_Owner:'ECB_Owner',ECB_MAX:'ECB_MAX', };
-declare type ERendererStencilMask = 'ERSM_Default' | 'ERSM_255' | 'ERSM_1' | 'ERSM_2' | 'ERSM_4' | 'ERSM_8' | 'ERSM_16' | 'ERSM_32' | 'ERSM_64' | 'ERSM_128' | 'ERSM_MAX';
-declare var ERendererStencilMask : { ERSM_Default:'ERSM_Default',ERSM_255:'ERSM_255',ERSM_1:'ERSM_1',ERSM_2:'ERSM_2',ERSM_4:'ERSM_4',ERSM_8:'ERSM_8',ERSM_16:'ERSM_16',ERSM_32:'ERSM_32',ERSM_64:'ERSM_64',ERSM_128:'ERSM_128',ERSM_MAX:'ERSM_MAX', };
-declare class CustomPrimitiveData { 
-	Data: number[];
-	clone() : CustomPrimitiveData;
-	static C(Other: UObject | any): CustomPrimitiveData;
-}
-
-declare type ERuntimeVirtualTextureMainPassType = 'Never' | 'Exclusive' | 'Always' | 'ERuntimeVirtualTextureMainPassType_MAX';
-declare var ERuntimeVirtualTextureMainPassType : { Never:'Never',Exclusive:'Exclusive',Always:'Always',ERuntimeVirtualTextureMainPassType_MAX:'ERuntimeVirtualTextureMainPassType_MAX', };
-declare type ERadialImpulseFalloff = 'RIF_Constant' | 'RIF_Linear' | 'RIF_MAX';
-declare var ERadialImpulseFalloff : { RIF_Constant:'RIF_Constant',RIF_Linear:'RIF_Linear',RIF_MAX:'RIF_MAX', };
-declare class PrimitiveComponent extends SceneComponent { 
-	MinDrawDistance: number;
-	LDMaxDrawDistance: number;
-	CachedMaxDrawDistance: number;
-	DepthPriorityGroup: ESceneDepthPriorityGroup;
-	ViewOwnerDepthPriorityGroup: ESceneDepthPriorityGroup;
-	IndirectLightingCacheQuality: EIndirectLightingCacheQuality;
-	LightmapType: ELightmapType;
-	ExcludeForSpecificHLODLevels: number[];
-	bEnableAutoLODGeneration: boolean;
-	bUseMaxLODAsImposter: boolean;
-	bBatchImpostersAsInstances: boolean;
-	bNeverDistanceCull: boolean;
-	bAlwaysCreatePhysicsState: boolean;
-	bGenerateOverlapEvents: boolean;
-	bMultiBodyOverlap: boolean;
-	bTraceComplexOnMove: boolean;
-	bReturnMaterialOnMove: boolean;
-	bUseViewOwnerDepthPriorityGroup: boolean;
-	bAllowCullDistanceVolume: boolean;
-	bHasMotionBlurVelocityMeshes: boolean;
-	bVisibleInReflectionCaptures: boolean;
-	bVisibleInRealTimeSkyCaptures: boolean;
-	bVisibleInRayTracing: boolean;
-	bRenderInMainPass: boolean;
-	bRenderInDepthPass: boolean;
-	bReceivesDecals: boolean;
-	bOwnerNoSee: boolean;
-	bOnlyOwnerSee: boolean;
-	bTreatAsBackgroundForOcclusion: boolean;
-	bUseAsOccluder: boolean;
-	bSelectable: boolean;
-	bForceMipStreaming: boolean;
-	bHasPerInstanceHitProxies: boolean;
-	CastShadow: boolean;
-	bAffectDynamicIndirectLighting: boolean;
-	bAffectDistanceFieldLighting: boolean;
-	bCastDynamicShadow: boolean;
-	bCastStaticShadow: boolean;
-	bCastVolumetricTranslucentShadow: boolean;
-	bCastContactShadow: boolean;
-	bSelfShadowOnly: boolean;
-	bCastFarShadow: boolean;
-	bCastInsetShadow: boolean;
-	bCastCinematicShadow: boolean;
-	bCastHiddenShadow: boolean;
-	bCastShadowAsTwoSided: boolean;
-	bLightAsIfStatic: boolean;
-	bLightAttachmentsAsGroup: boolean;
-	bExcludeFromLightAttachmentGroup: boolean;
-	bReceiveMobileCSMShadows: boolean;
-	bSingleSampleShadowFromStationaryLights: boolean;
-	bIgnoreRadialImpulse: boolean;
-	bIgnoreRadialForce: boolean;
-	bApplyImpulseOnDamage: boolean;
-	bReplicatePhysicsToAutonomousProxy: boolean;
-	bFillCollisionUnderneathForNavmesh: boolean;
-	AlwaysLoadOnClient: boolean;
-	AlwaysLoadOnServer: boolean;
-	bUseEditorCompositing: boolean;
-	bRenderCustomDepth: boolean;
-	bVisibleInSceneCaptureOnly: boolean;
-	bHiddenInSceneCapture: boolean;
-	bHasCustomNavigableGeometry: EHasCustomNavigableGeometry;
-	HitProxyPriority: EHitProxyPriority;
-	CanBeCharacterBase: ECanBeCharacterBase;
-	CanCharacterStepUpOn: ECanBeCharacterBase;
-	LightingChannels: LightingChannels;
-	CustomDepthStencilWriteMask: ERendererStencilMask;
-	CustomDepthStencilValue: number;
-	CustomPrimitiveData: CustomPrimitiveData;
-	CustomPrimitiveDataInternal: CustomPrimitiveData;
-	TranslucencySortPriority: number;
-	TranslucencySortDistanceOffset: number;
-	VisibilityId: number;
-	RuntimeVirtualTextures: RuntimeVirtualTexture[];
-	VirtualTextureLodBias: any;
-	VirtualTextureCullMips: any;
-	VirtualTextureMinCoverage: any;
-	VirtualTextureRenderPassType: ERuntimeVirtualTextureMainPassType;
-	LpvBiasMultiplier: number;
-	BoundsScale: number;
-	MoveIgnoreActors: Actor[];
-	MoveIgnoreComponents: PrimitiveComponent[];
-	BodyInstance: BodyInstance;
-	OnComponentHit: UnrealEngineMulticastDelegate<(HitComponent: PrimitiveComponent, OtherActor: Actor, OtherComp: PrimitiveComponent, NormalImpulse: Vector, Hit: HitResult) => void>;
-	OnComponentBeginOverlap: UnrealEngineMulticastDelegate<(OverlappedComponent: PrimitiveComponent, OtherActor: Actor, OtherComp: PrimitiveComponent, OtherBodyIndex: number, bFromSweep: boolean, SweepResult: HitResult) => void>;
-	OnComponentEndOverlap: UnrealEngineMulticastDelegate<(OverlappedComponent: PrimitiveComponent, OtherActor: Actor, OtherComp: PrimitiveComponent, OtherBodyIndex: number) => void>;
-	OnComponentWake: UnrealEngineMulticastDelegate<(WakingComponent: PrimitiveComponent, BoneName: string) => void>;
-	OnComponentSleep: UnrealEngineMulticastDelegate<(SleepingComponent: PrimitiveComponent, BoneName: string) => void>;
-	OnBeginCursorOver: UnrealEngineMulticastDelegate<(TouchedComponent: PrimitiveComponent) => void>;
-	OnEndCursorOver: UnrealEngineMulticastDelegate<(TouchedComponent: PrimitiveComponent) => void>;
-	OnClicked: UnrealEngineMulticastDelegate<(TouchedComponent: PrimitiveComponent, ButtonPressed: Key) => void>;
-	OnReleased: UnrealEngineMulticastDelegate<(TouchedComponent: PrimitiveComponent, ButtonReleased: Key) => void>;
-	OnInputTouchBegin: UnrealEngineMulticastDelegate<(FingerIndex: ETouchIndex, TouchedComponent: PrimitiveComponent) => void>;
-	OnInputTouchEnd: UnrealEngineMulticastDelegate<(FingerIndex: ETouchIndex, TouchedComponent: PrimitiveComponent) => void>;
-	OnInputTouchEnter: UnrealEngineMulticastDelegate<(FingerIndex: ETouchIndex, TouchedComponent: PrimitiveComponent) => void>;
-	OnInputTouchLeave: UnrealEngineMulticastDelegate<(FingerIndex: ETouchIndex, TouchedComponent: PrimitiveComponent) => void>;
-	LODParentPrimitive: PrimitiveComponent;
-	static Load(ResourceName: string): PrimitiveComponent;
-	static Find(Outer: UObject, ResourceName: string): PrimitiveComponent;
-	static GetDefaultObject(): PrimitiveComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PrimitiveComponent;
-	WasRecentlyRendered(Tolerance: number): boolean;
-	WakeRigidBody(BoneName: string): void;
-	WakeAllRigidBodies(): void;
-	SetWalkableSlopeOverride(NewOverride: WalkableSlopeOverride): void;
-	SetVisibleInSceneCaptureOnly(bValue: boolean): void;
-	SetUseCCD(InUseCCD: boolean,BoneName: string): void;
-	SetTranslucentSortPriority(NewTranslucentSortPriority: number): void;
-	SetTranslucencySortDistanceOffset(NewTranslucencySortDistanceOffset: number): void;
-	SetSingleSampleShadowFromStationaryLights(bNewSingleSampleShadowFromStationaryLights: boolean): void;
-	SetSimulatePhysics(bSimulate: boolean): void;
-	SetRenderInMainPass(bValue: boolean): void;
-	SetRenderCustomDepth(bValue: boolean): void;
-	SetReceivesDecals(bNewReceivesDecals: boolean): void;
-	SetPhysMaterialOverride(NewPhysMaterial: PhysicalMaterial): void;
-	SetPhysicsMaxAngularVelocityInRadians(NewMaxAngVel: number,bAddToCurrent: boolean,BoneName: string): void;
-	SetPhysicsMaxAngularVelocityInDegrees(NewMaxAngVel: number,bAddToCurrent: boolean,BoneName: string): void;
-	SetPhysicsMaxAngularVelocity(NewMaxAngVel: number,bAddToCurrent: boolean,BoneName: string): void;
-	SetPhysicsLinearVelocity(NewVel: Vector,bAddToCurrent: boolean,BoneName: string): void;
-	SetPhysicsAngularVelocityInRadians(NewAngVel: Vector,bAddToCurrent: boolean,BoneName: string): void;
-	SetPhysicsAngularVelocityInDegrees(NewAngVel: Vector,bAddToCurrent: boolean,BoneName: string): void;
-	SetPhysicsAngularVelocity(NewAngVel: Vector,bAddToCurrent: boolean,BoneName: string): void;
-	SetOwnerNoSee(bNewOwnerNoSee: boolean): void;
-	SetOnlyOwnerSee(bNewOnlyOwnerSee: boolean): void;
-	SetNotifyRigidBodyCollision(bNewNotifyRigidBodyCollision: boolean): void;
-	SetMaterialByName(MaterialSlotName: string,Material: MaterialInterface): void;
-	SetMaterial(ElementIndex: number,Material: MaterialInterface): void;
-	SetMassScale(BoneName: string,InMassScale: number): void;
-	SetMassOverrideInKg(BoneName: string,MassInKg: number,bOverrideMass: boolean): void;
-	SetLinearDamping(InDamping: number): void;
-	SetLightingChannels(bChannel0: boolean,bChannel1: boolean,bChannel2: boolean): void;
-	SetLightAttachmentsAsGroup(bInLightAttachmentsAsGroup: boolean): void;
-	SetHiddenInSceneCapture(bValue: boolean): void;
-	SetGenerateOverlapEvents(bInGenerateOverlapEvents: boolean): void;
-	SetExcludeFromLightAttachmentGroup(bInExcludeFromLightAttachmentGroup: boolean): void;
-	SetEnableGravity(bGravityEnabled: boolean): void;
-	SetDefaultCustomPrimitiveDataVector4(DataIndex: number,Value: Vector4): void;
-	SetDefaultCustomPrimitiveDataVector3(DataIndex: number,Value: Vector): void;
-	SetDefaultCustomPrimitiveDataVector2(DataIndex: number,Value: Vector2D): void;
-	SetDefaultCustomPrimitiveDataFloat(DataIndex: number,Value: number): void;
-	SetCustomPrimitiveDataVector4(DataIndex: number,Value: Vector4): void;
-	SetCustomPrimitiveDataVector3(DataIndex: number,Value: Vector): void;
-	SetCustomPrimitiveDataVector2(DataIndex: number,Value: Vector2D): void;
-	SetCustomPrimitiveDataFloat(DataIndex: number,Value: number): void;
-	SetCustomDepthStencilWriteMask(WriteMaskBit: ERendererStencilMask): void;
-	SetCustomDepthStencilValue(Value: number): void;
-	SetCullDistance(NewCullDistance: number): void;
-	SetConstraintMode(ConstraintMode: EDOFMode): void;
-	SetCollisionResponseToChannel(Channel: ECollisionChannel,NewResponse: ECollisionResponse): void;
-	SetCollisionResponseToAllChannels(NewResponse: ECollisionResponse): void;
-	SetCollisionProfileName(InCollisionProfileName: string,bUpdateOverlaps: boolean): void;
-	SetCollisionObjectType(Channel: ECollisionChannel): void;
-	SetCollisionEnabled(NewType: ECollisionEnabled): void;
-	SetCenterOfMass(CenterOfMassOffset: Vector,BoneName: string): void;
-	SetCastShadow(NewCastShadow: boolean): void;
-	SetCastInsetShadow(bInCastInsetShadow: boolean): void;
-	SetCastHiddenShadow(NewCastHiddenShadow: boolean): void;
-	SetBoundsScale(NewBoundsScale: number): void;
-	SetAngularDamping(InDamping: number): void;
-	SetAllUseCCD(InUseCCD: boolean): void;
-	SetAllPhysicsLinearVelocity(NewVel: Vector,bAddToCurrent: boolean): void;
-	SetAllPhysicsAngularVelocityInRadians(NewAngVel: Vector,bAddToCurrent: boolean): void;
-	SetAllPhysicsAngularVelocityInDegrees(NewAngVel: Vector,bAddToCurrent: boolean): void;
-	SetAllMassScale(InMassScale: number): void;
-	ScaleByMomentOfInertia(InputVector: Vector,BoneName: string): Vector;
-	PutRigidBodyToSleep(BoneName: string): void;
-	K2_SphereTraceComponent(TraceStart: Vector,TraceEnd: Vector,SphereRadius: number,bTraceComplex: boolean,bShowTrace: boolean,bPersistentShowTrace: boolean,HitLocation?: Vector,HitNormal?: Vector,BoneName?: string,OutHit?: HitResult): {HitLocation: Vector, HitNormal: Vector, BoneName: string, OutHit: HitResult, $: boolean};
-	K2_SphereOverlapComponent(InSphereCentre: Vector,InSphereRadius: number,bTraceComplex: boolean,bShowTrace: boolean,bPersistentShowTrace: boolean,HitLocation?: Vector,HitNormal?: Vector,BoneName?: string,OutHit?: HitResult): {HitLocation: Vector, HitNormal: Vector, BoneName: string, OutHit: HitResult, $: boolean};
-	K2_LineTraceComponent(TraceStart: Vector,TraceEnd: Vector,bTraceComplex: boolean,bShowTrace: boolean,bPersistentShowTrace: boolean,HitLocation?: Vector,HitNormal?: Vector,BoneName?: string,OutHit?: HitResult): {HitLocation: Vector, HitNormal: Vector, BoneName: string, OutHit: HitResult, $: boolean};
-	K2_IsQueryCollisionEnabled(): boolean;
-	K2_IsPhysicsCollisionEnabled(): boolean;
-	K2_IsCollisionEnabled(): boolean;
-	K2_BoxOverlapComponent(InBoxCentre: Vector,InBox: Box,bTraceComplex: boolean,bShowTrace: boolean,bPersistentShowTrace: boolean,HitLocation?: Vector,HitNormal?: Vector,BoneName?: string,OutHit?: HitResult): {HitLocation: Vector, HitNormal: Vector, BoneName: string, OutHit: HitResult, $: boolean};
-	IsOverlappingComponent(OtherComp: PrimitiveComponent): boolean;
-	IsOverlappingActor(Other: Actor): boolean;
-	IsGravityEnabled(): boolean;
-	IsAnyRigidBodyAwake(): boolean;
-	IgnoreComponentWhenMoving(Component: PrimitiveComponent,bShouldIgnore: boolean): void;
-	IgnoreActorWhenMoving(Actor: Actor,bShouldIgnore: boolean): void;
-	GetWalkableSlopeOverride(): WalkableSlopeOverride;
-	GetPhysicsLinearVelocityAtPoint(Point: Vector,BoneName: string): Vector;
-	GetPhysicsLinearVelocity(BoneName: string): Vector;
-	GetPhysicsAngularVelocityInRadians(BoneName: string): Vector;
-	GetPhysicsAngularVelocityInDegrees(BoneName: string): Vector;
-	GetPhysicsAngularVelocity(BoneName: string): Vector;
-	GetOverlappingComponents(OutOverlappingComponents?: PrimitiveComponent[]): {OutOverlappingComponents: PrimitiveComponent[]};
-	GetOverlappingActors(OverlappingActors?: Actor[],ClassFilter?: UnrealEngineClass): {OverlappingActors: Actor[]};
-	GetNumMaterials(): number;
-	GetMaterialFromCollisionFaceIndex(FaceIndex: number,SectionIndex?: number): {SectionIndex: number, $: MaterialInterface};
-	GetMaterial(ElementIndex: number): MaterialInterface;
-	GetMassScale(BoneName: string): number;
-	GetMass(): number;
-	GetLinearDamping(): number;
-	GetInertiaTensor(BoneName: string): Vector;
-	GetGenerateOverlapEvents(): boolean;
-	GetCollisionResponseToChannel(Channel: ECollisionChannel): ECollisionResponse;
-	GetCollisionProfileName(): string;
-	GetCollisionObjectType(): ECollisionChannel;
-	GetCollisionEnabled(): ECollisionEnabled;
-	GetClosestPointOnCollision(Point: Vector,OutPointOnBody?: Vector,BoneName?: string): {OutPointOnBody: Vector, $: number};
-	GetCenterOfMass(BoneName: string): Vector;
-	GetAngularDamping(): number;
-	CreateDynamicMaterialInstance(ElementIndex: number,SourceMaterial: MaterialInterface,OptionalName: string): MaterialInstanceDynamic;
-	CreateAndSetMaterialInstanceDynamicFromMaterial(ElementIndex: number,Parent: MaterialInterface): MaterialInstanceDynamic;
-	CreateAndSetMaterialInstanceDynamic(ElementIndex: number): MaterialInstanceDynamic;
-	CopyArrayOfMoveIgnoreComponents(): PrimitiveComponent[];
-	CopyArrayOfMoveIgnoreActors(): Actor[];
-	ClearMoveIgnoreComponents(): void;
-	ClearMoveIgnoreActors(): void;
-	CanCharacterStepUp(Pawn: Pawn): boolean;
-	AddTorqueInRadians(Torque: Vector,BoneName: string,bAccelChange: boolean): void;
-	AddTorqueInDegrees(Torque: Vector,BoneName: string,bAccelChange: boolean): void;
-	AddTorque(Torque: Vector,BoneName: string,bAccelChange: boolean): void;
-	AddRadialImpulse(Origin: Vector,Radius: number,Strength: number,Falloff: ERadialImpulseFalloff,bVelChange: boolean): void;
-	AddRadialForce(Origin: Vector,Radius: number,Strength: number,Falloff: ERadialImpulseFalloff,bAccelChange: boolean): void;
-	AddImpulseAtLocation(Impulse: Vector,Location: Vector,BoneName: string): void;
-	AddImpulse(Impulse: Vector,BoneName: string,bVelChange: boolean): void;
-	AddForceAtLocationLocal(Force: Vector,Location: Vector,BoneName: string): void;
-	AddForceAtLocation(Force: Vector,Location: Vector,BoneName: string): void;
-	AddForce(Force: Vector,BoneName: string,bAccelChange: boolean): void;
-	AddAngularImpulseInRadians(Impulse: Vector,BoneName: string,bVelChange: boolean): void;
-	AddAngularImpulseInDegrees(Impulse: Vector,BoneName: string,bVelChange: boolean): void;
-	AddAngularImpulse(Impulse: Vector,BoneName: string,bVelChange: boolean): void;
-	static C(Other: UObject | any): PrimitiveComponent;
-	ComponentOverlapActors(ComponentTransform: Transform,ObjectTypes: EObjectTypeQuery[],ActorClassFilter: UnrealEngineClass,ActorsToIgnore: Actor[],OutActors?: Actor[]): {OutActors: Actor[], $: boolean};
-	ComponentOverlapComponents(ComponentTransform: Transform,ObjectTypes: EObjectTypeQuery[],ComponentClassFilter: UnrealEngineClass,ActorsToIgnore: Actor[],OutComponents?: PrimitiveComponent[]): {OutComponents: PrimitiveComponent[], $: boolean};
-	SetCastInsetShadowForAllAttachments(bCastInsetShadow: boolean,bLightAttachmentsAsGroup: boolean): void;
-	static ComponentOverlapActors(Component: PrimitiveComponent,ComponentTransform: Transform,ObjectTypes: EObjectTypeQuery[],ActorClassFilter: UnrealEngineClass,ActorsToIgnore: Actor[],OutActors?: Actor[]): {OutActors: Actor[], $: boolean};
-	static ComponentOverlapComponents(Component: PrimitiveComponent,ComponentTransform: Transform,ObjectTypes: EObjectTypeQuery[],ComponentClassFilter: UnrealEngineClass,ActorsToIgnore: Actor[],OutComponents?: PrimitiveComponent[]): {OutComponents: PrimitiveComponent[], $: boolean};
-	static SetCastInsetShadowForAllAttachments(PrimitiveComponent: PrimitiveComponent,bCastInsetShadow: boolean,bLightAttachmentsAsGroup: boolean): void;
-}
-
-declare class MRMeshComponent extends PrimitiveComponent { 
-	Material: MaterialInterface;
-	WireframeMaterial: MaterialInterface;
-	bCreateMeshProxySections: boolean;
-	bUpdateNavMeshOnMeshUpdate: boolean;
-	bNeverCreateCollisionMesh: boolean;
-	CachedBodySetup: BodySetup;
-	BodySetups: BodySetup[];
-	static Load(ResourceName: string): MRMeshComponent;
-	static Find(Outer: UObject, ResourceName: string): MRMeshComponent;
-	static GetDefaultObject(): MRMeshComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MRMeshComponent;
-	SetWireframeMaterial(InMaterial: MaterialInterface): void;
-	SetWireframeColor(InColor: LinearColor): void;
-	SetUseWireframe(bUseWireframe: boolean): void;
-	SetEnableMeshOcclusion(bEnable: boolean): void;
-	IsConnected(): boolean;
-	GetWireframeColor(): LinearColor;
-	GetUseWireframe(): boolean;
-	GetEnableMeshOcclusion(): boolean;
-	ForceNavMeshUpdate(): void;
-	Clear(): void;
-	static C(Other: UObject | any): MRMeshComponent;
-	ConnectMRMesh(): boolean;
-	DisconnectMRMesh(): boolean;
-	static ConnectMRMesh(InMRMeshPtr: MRMeshComponent): boolean;
-	static DisconnectMRMesh(InMRMeshPtr: MRMeshComponent): boolean;
-}
-
-declare type EARSpatialMeshUsageFlags = 'NotApplicable' | 'Visible' | 'Collision' | 'EARSpatialMeshUsageFlags_MAX';
-declare var EARSpatialMeshUsageFlags : { NotApplicable:'NotApplicable',Visible:'Visible',Collision:'Collision',EARSpatialMeshUsageFlags_MAX:'EARSpatialMeshUsageFlags_MAX', };
-declare class ARTrackedGeometry extends UObject { 
-	UniqueId: Guid;
-	LocalToTrackingTransform: Transform;
-	LocalToAlignedTrackingTransform: Transform;
-	TrackingState: EARTrackingState;
-	UnderlyingMesh: MRMeshComponent;
-	ObjectClassification: EARObjectClassification;
-	SpatialMeshUsageFlags: EARSpatialMeshUsageFlags;
-	LastUpdateFrameNumber: number;
-	DebugName: string;
-	static Load(ResourceName: string): ARTrackedGeometry;
-	static Find(Outer: UObject, ResourceName: string): ARTrackedGeometry;
-	static GetDefaultObject(): ARTrackedGeometry;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ARTrackedGeometry;
-	IsTracked(): boolean;
-	HasSpatialMeshUsageFlag(InFlag: EARSpatialMeshUsageFlags): boolean;
-	GetUnderlyingMesh(): MRMeshComponent;
-	GetTrackingState(): EARTrackingState;
-	GetObjectClassification(): EARObjectClassification;
-	GetName(): string;
-	GetLocalToWorldTransform(): Transform;
-	GetLocalToTrackingTransform(): Transform;
-	GetLastUpdateTimestamp(): number;
-	GetLastUpdateFrameNumber(): number;
-	GetDebugName(): string;
-	static C(Other: UObject | any): ARTrackedGeometry;
-	DebugDrawTrackedGeometry(WorldContextObject: UObject,Color: LinearColor,OutlineThickness: number,PersistForSeconds: number): void;
-	static DebugDrawTrackedGeometry(TrackedGeometry: ARTrackedGeometry,WorldContextObject: UObject,Color: LinearColor,OutlineThickness: number,PersistForSeconds: number): void;
-}
-
-declare class ARTraceResult { 
-	DistanceFromCamera: number;
-	TraceChannel: EARLineTraceChannels;
-	LocalTransform: Transform;
-	TrackedGeometry: ARTrackedGeometry;
-	clone() : ARTraceResult;
-	static C(Other: UObject | any): ARTraceResult;
-	GetDistanceFromCamera(): number;
-	GetLocalToTrackingTransform(): Transform;
-	GetLocalToWorldTransform(): Transform;
-	GetLocalTransform(): Transform;
-	GetTraceChannel(): EARLineTraceChannels;
-	GetTrackedGeometry(): ARTrackedGeometry;
-	static GetDistanceFromCamera(TraceResult: ARTraceResult): number;
-	static GetLocalToTrackingTransform(TraceResult: ARTraceResult): Transform;
-	static GetLocalToWorldTransform(TraceResult: ARTraceResult): Transform;
-	static GetLocalTransform(TraceResult: ARTraceResult): Transform;
-	static GetTraceChannel(TraceResult: ARTraceResult): EARLineTraceChannels;
-	static GetTrackedGeometry(TraceResult: ARTraceResult): ARTrackedGeometry;
-}
-
-declare type EHMDTrackingOrigin = 'Floor' | 'Eye' | 'Stage' | 'EHMDTrackingOrigin_MAX';
-declare var EHMDTrackingOrigin : { Floor:'Floor',Eye:'Eye',Stage:'Stage',EHMDTrackingOrigin_MAX:'EHMDTrackingOrigin_MAX', };
-declare class Vector2D { 
-	X: number;
-	Y: number;
-	clone() : Vector2D;
-	static C(Other: UObject | any): Vector2D;
-	Conv_Vector2dToText(): string;
-	Conv_Vector2dToString(): string;
-	Add_Vector2DFloat(B: number): Vector2D;
-	Add_Vector2DVector2D(B: Vector2D): Vector2D;
-	BreakVector2D(X?: number,Y?: number): {X: number, Y: number};
-	ClampAxes2D(MinAxisVal: number,MaxAxisVal: number): Vector2D;
-	Conv_Vector2DToIntPoint(): IntPoint;
-	Conv_Vector2DToVector(Z: number): Vector;
-	CrossProduct2D(B: Vector2D): number;
-	Distance2D(v2: Vector2D): number;
-	DistanceSquared2D(v2: Vector2D): number;
-	Divide_Vector2DFloat(B: number): Vector2D;
-	Divide_Vector2DVector2D(B: Vector2D): Vector2D;
-	DotProduct2D(B: Vector2D): number;
-	EqualEqual_Vector2DVector2D(B: Vector2D,ErrorTolerance: number): boolean;
-	EqualExactly_Vector2DVector2D(B: Vector2D): boolean;
-	GetAbs2D(): Vector2D;
-	GetAbsMax2D(): number;
-	GetMax2D(): number;
-	GetMin2D(): number;
-	GetRotated2D(AngleDeg: number): Vector2D;
-	IsNearlyZero2D(Tolerance: number): boolean;
-	IsZero2D(): boolean;
-	MakeBox2D(Max: Vector2D): Box2D;
-	Multiply_Vector2DFloat(B: number): Vector2D;
-	Multiply_Vector2DVector2D(B: Vector2D): Vector2D;
-	Negated2D(): Vector2D;
-	Normal2D(): Vector2D;
-	Normalize2D(Tolerance?: number): {A: Vector2D};
-	NormalSafe2D(Tolerance: number): Vector2D;
-	NotEqual_Vector2DVector2D(B: Vector2D,ErrorTolerance: number): boolean;
-	NotEqualExactly_Vector2DVector2D(B: Vector2D): boolean;
-	Set2D(X?: number,Y?: number): {A: Vector2D};
-	Spherical2DToUnitCartesian(): Vector;
-	Subtract_Vector2DFloat(B: number): Vector2D;
-	Subtract_Vector2DVector2D(B: Vector2D): Vector2D;
-	ToDirectionAndLength2D(OutDir?: Vector2D,OutLength?: number): {OutDir: Vector2D, OutLength: number};
-	ToRounded2D(): Vector2D;
-	ToSign2D(): Vector2D;
-	Vector2DInterpTo(Target: Vector2D,DeltaTime: number,InterpSpeed: number): Vector2D;
-	Vector2DInterpTo_Constant(Target: Vector2D,DeltaTime: number,InterpSpeed: number): Vector2D;
-	VSize2D(): number;
-	VSize2DSquared(): number;
-	SetSpectatorScreenModeTexturePlusEyeLayout(EyeRectMax: Vector2D,TextureRectMin: Vector2D,TextureRectMax: Vector2D,bDrawEyeFirst: boolean,bClearBlack: boolean,bUseAlpha: boolean): void;
-	LineTraceTrackedObjects(bTestFeaturePoints: boolean,bTestGroundPlane: boolean,bTestPlaneExtents: boolean,bTestPlaneBoundaryPolygon: boolean): ARTraceResult[];
-	static Conv_Vector2dToText(InVec: Vector2D): string;
-	static Conv_Vector2dToString(InVec: Vector2D): string;
-	static Add_Vector2DFloat(A: Vector2D,B: number): Vector2D;
-	static Add_Vector2DVector2D(A: Vector2D,B: Vector2D): Vector2D;
-	static BreakVector2D(InVec: Vector2D,X?: number,Y?: number): {X: number, Y: number};
-	static ClampAxes2D(A: Vector2D,MinAxisVal: number,MaxAxisVal: number): Vector2D;
-	static Conv_Vector2DToIntPoint(InVector2D: Vector2D): IntPoint;
-	static Conv_Vector2DToVector(InVector2D: Vector2D,Z: number): Vector;
-	static CrossProduct2D(A: Vector2D,B: Vector2D): number;
-	static Distance2D(v1: Vector2D,v2: Vector2D): number;
-	static DistanceSquared2D(v1: Vector2D,v2: Vector2D): number;
-	static Divide_Vector2DFloat(A: Vector2D,B: number): Vector2D;
-	static Divide_Vector2DVector2D(A: Vector2D,B: Vector2D): Vector2D;
-	static DotProduct2D(A: Vector2D,B: Vector2D): number;
-	static EqualEqual_Vector2DVector2D(A: Vector2D,B: Vector2D,ErrorTolerance: number): boolean;
-	static EqualExactly_Vector2DVector2D(A: Vector2D,B: Vector2D): boolean;
-	static GetAbs2D(A: Vector2D): Vector2D;
-	static GetAbsMax2D(A: Vector2D): number;
-	static GetMax2D(A: Vector2D): number;
-	static GetMin2D(A: Vector2D): number;
-	static GetRotated2D(A: Vector2D,AngleDeg: number): Vector2D;
-	static IsNearlyZero2D(A: Vector2D,Tolerance: number): boolean;
-	static IsZero2D(A: Vector2D): boolean;
-	static MakeBox2D(Min: Vector2D,Max: Vector2D): Box2D;
-	static Multiply_Vector2DFloat(A: Vector2D,B: number): Vector2D;
-	static Multiply_Vector2DVector2D(A: Vector2D,B: Vector2D): Vector2D;
-	static Negated2D(A: Vector2D): Vector2D;
-	static Normal2D(A: Vector2D): Vector2D;
-	static Normalize2D(A?: Vector2D,Tolerance?: number): {A: Vector2D};
-	static NormalSafe2D(A: Vector2D,Tolerance: number): Vector2D;
-	static NotEqual_Vector2DVector2D(A: Vector2D,B: Vector2D,ErrorTolerance: number): boolean;
-	static NotEqualExactly_Vector2DVector2D(A: Vector2D,B: Vector2D): boolean;
-	static Set2D(A?: Vector2D,X?: number,Y?: number): {A: Vector2D};
-	static Spherical2DToUnitCartesian(A: Vector2D): Vector;
-	static Subtract_Vector2DFloat(A: Vector2D,B: number): Vector2D;
-	static Subtract_Vector2DVector2D(A: Vector2D,B: Vector2D): Vector2D;
-	static ToDirectionAndLength2D(A: Vector2D,OutDir?: Vector2D,OutLength?: number): {OutDir: Vector2D, OutLength: number};
-	static ToRounded2D(A: Vector2D): Vector2D;
-	static ToSign2D(A: Vector2D): Vector2D;
-	static Vector2DInterpTo(Current: Vector2D,Target: Vector2D,DeltaTime: number,InterpSpeed: number): Vector2D;
-	static Vector2DInterpTo_Constant(Current: Vector2D,Target: Vector2D,DeltaTime: number,InterpSpeed: number): Vector2D;
-	static VSize2D(A: Vector2D): number;
-	static VSize2DSquared(A: Vector2D): number;
-	static SetSpectatorScreenModeTexturePlusEyeLayout(EyeRectMin: Vector2D,EyeRectMax: Vector2D,TextureRectMin: Vector2D,TextureRectMax: Vector2D,bDrawEyeFirst: boolean,bClearBlack: boolean,bUseAlpha: boolean): void;
-	static LineTraceTrackedObjects(ScreenCoord: Vector2D,bTestFeaturePoints: boolean,bTestGroundPlane: boolean,bTestPlaneExtents: boolean,bTestPlaneBoundaryPolygon: boolean): ARTraceResult[];
-	static GenerateDynamicImageResource(InDynamicBrushName: string): Vector2D;
-	static MakeVector2D(X: number,Y: number): Vector2D;
-	static Vector2D_One(): Vector2D;
-	static Vector2D_Unit45Deg(): Vector2D;
-	static Vector2D_Zero(): Vector2D;
-	static NextSobolCell2D(index: number,NumCells: number,PreviousValue: Vector2D): Vector2D;
-	static RandomSobolCell2D(index: number,NumCells: number,Cell: Vector2D,Seed: Vector2D): Vector2D;
-	static GetMousePositionOnPlatform(): Vector2D;
-	static GetPlayAreaBounds(Origin: EHMDTrackingOrigin): Vector2D;
-}
-
-declare type EBoundaryType = 'Boundary_Outer' | 'Boundary_PlayArea' | 'Boundary_MAX';
-declare var EBoundaryType : { Boundary_Outer:'Boundary_Outer',Boundary_PlayArea:'Boundary_PlayArea',Boundary_MAX:'Boundary_MAX', };
-declare type ETrackedDeviceType = 'None' | 'HMD' | 'LTouch' | 'RTouch' | 'Touch' | 'DeviceObjectZero' | 'All' | 'ETrackedDeviceType_MAX';
-declare var ETrackedDeviceType : { None:'None',HMD:'HMD',LTouch:'LTouch',RTouch:'RTouch',Touch:'Touch',DeviceObjectZero:'DeviceObjectZero',All:'All',ETrackedDeviceType_MAX:'ETrackedDeviceType_MAX', };
-declare class GuardianTestResult { 
-	IsTriggering: boolean;
-	DeviceType: ETrackedDeviceType;
-	ClosestDistance: number;
-	ClosestPoint: Vector;
-	ClosestPointNormal: Vector;
-	clone() : GuardianTestResult;
-	static C(Other: UObject | any): GuardianTestResult;
-	static GetNodeGuardianIntersection(DeviceType: ETrackedDeviceType,BoundaryType: EBoundaryType): GuardianTestResult;
-}
-
-declare class MagicLeapRaycastQueryParams { 
-	Position: Vector;
-	Direction: Vector;
-	UpVector: Vector;
-	Width: number;
-	Height: number;
-	HorizontalFovDegrees: number;
-	CollideWithUnobserved: boolean;
-	UserData: number;
-	clone() : MagicLeapRaycastQueryParams;
-	static C(Other: UObject | any): MagicLeapRaycastQueryParams;
-}
-
-declare class VectorSpringState { 
-	clone() : VectorSpringState;
-	static C(Other: UObject | any): VectorSpringState;
-	ResetVectorSpringState(): {SpringState: VectorSpringState};
-	static ResetVectorSpringState(SpringState?: VectorSpringState): {SpringState: VectorSpringState};
-}
-
-declare class Vector { 
-	X: number;
-	Y: number;
-	Z: number;
-	clone() : Vector;
-	static C(Other: UObject | any): Vector;
-	GetLevelViewportCameraInfo(CameraRotation?: Rotator): {CameraLocation: Vector, CameraRotation: Rotator, $: boolean};
-	SetLevelViewportCameraInfo(CameraRotation: Rotator): void;
-	SegmentIntersection2D(SegmentEndA: Vector,SegmentStartB: Vector,SegmentEndB: Vector,IntersectionPoint?: Vector): {IntersectionPoint: Vector, $: boolean};
-	GetClosestARPin(PinId?: Guid): {PinId: Guid, $: EMagicLeapPassableWorldError};
-	GetSelectionBounds(BoxExtent?: Vector,SphereRadius?: number): {Origin: Vector, BoxExtent: Vector, SphereRadius: number};
-	GetLeftHandPoseData(Orientation?: Rotator,AngularVelocity?: Vector,Velocity?: Vector): {Position: Vector, Orientation: Rotator, AngularVelocity: Vector, Velocity: Vector};
-	GetRightHandPoseData(Orientation?: Rotator,AngularVelocity?: Vector,Velocity?: Vector): {Position: Vector, Orientation: Rotator, AngularVelocity: Vector, Velocity: Vector};
-	GetSteamVR_HandPoseRelativeToNow(Orientation?: Rotator,hand?: ESteamVRHand,PredictedSecondsFromNow?: number): {Position: Vector, Orientation: Rotator, $: boolean};
-	GenerateBoxMesh(Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
-	GetPointGuardianIntersection(BoundaryType: EBoundaryType): GuardianTestResult;
-	GetRawSensorData(LinearAcceleration?: Vector,AngularVelocity?: Vector,LinearVelocity?: Vector,TimeInSeconds?: number,DeviceType?: ETrackedDeviceType): {AngularAcceleration: Vector, LinearAcceleration: Vector, AngularVelocity: Vector, LinearVelocity: Vector, TimeInSeconds: number};
-	SetPositionScale3D(): void;
-	MakeRaycastQueryParams(Direction: Vector,UpVector: Vector,Width: number,Height: number,HorizontalFovDegrees: number,CollideWithUnobserved: boolean,UserData: number): MagicLeapRaycastQueryParams;
-	SetBasePosition(): void;
-	IsValidAIDirection(): boolean;
-	IsValidAILocation(): boolean;
-	Conv_VectorToText(): string;
-	Conv_VectorToString(): string;
-	Add_VectorFloat(B: number): Vector;
-	Add_VectorInt(B: number): Vector;
-	Add_VectorVector(B: Vector): Vector;
-	BreakVector(X?: number,Y?: number,Z?: number): {X: number, Y: number, Z: number};
-	ClampVectorSize(Min: number,Max: number): Vector;
-	Conv_VectorToLinearColor(): LinearColor;
-	Conv_VectorToQuaternion(): Quat;
-	Conv_VectorToRotator(): Rotator;
-	Conv_VectorToTransform(): Transform;
-	Conv_VectorToVector2D(): Vector2D;
-	Cross_VectorVector(B: Vector): Vector;
-	Divide_VectorFloat(B: number): Vector;
-	Divide_VectorInt(B: number): Vector;
-	Divide_VectorVector(B: Vector): Vector;
-	Dot_VectorVector(B: Vector): number;
-	DynamicWeightedMovingAverage_FVector(PreviousSample: Vector,MaxDistance: number,MinWeight: number,MaxWeight: number): Vector;
-	EqualEqual_VectorVector(B: Vector,ErrorTolerance: number): boolean;
-	EqualExactly_VectorVector(B: Vector): boolean;
-	FindClosestPointOnLine(LineOrigin: Vector,LineDirection: Vector): Vector;
-	FindClosestPointOnSegment(SegmentStart: Vector,SegmentEnd: Vector): Vector;
-	FindLookAtRotation(Target: Vector): Rotator;
-	FindNearestPointsOnLineSegments(Segment1End: Vector,Segment2Start: Vector,Segment2End: Vector,Segment1Point?: Vector,Segment2Point?: Vector): {Segment1Point: Vector, Segment2Point: Vector};
-	FTruncVector(): IntVector;
-	GetAzimuthAndElevation(ReferenceFrame: Transform,Azimuth?: number,Elevation?: number): {Azimuth: number, Elevation: number};
-	GetDirectionUnitVector(To: Vector): Vector;
-	GetMaxElement(): number;
-	GetMinElement(): number;
-	GetPointDistanceToLine(LineOrigin: Vector,LineDirection: Vector): number;
-	GetPointDistanceToSegment(SegmentStart: Vector,SegmentEnd: Vector): number;
-	GetReflectionVector(SurfaceNormal: Vector): Vector;
-	GetSlopeDegreeAngles(FloorNormal: Vector,UpVector: Vector,OutSlopePitchDegreeAngle?: number,OutSlopeRollDegreeAngle?: number): {OutSlopePitchDegreeAngle: number, OutSlopeRollDegreeAngle: number};
-	GetYawPitchFromVector(Yaw?: number,Pitch?: number): {Yaw: number, Pitch: number};
-	GreaterGreater_VectorRotator(B: Rotator): Vector;
-	IsPointInBox(BoxOrigin: Vector,BoxExtent: Vector): boolean;
-	IsPointInBoxWithTransform(BoxWorldTransform: Transform,BoxExtent: Vector): boolean;
-	LessLess_VectorRotator(B: Rotator): Vector;
-	LinePlaneIntersection(LineEnd: Vector,APlane: Plane,T?: number,Intersection?: Vector): {T: number, Intersection: Vector, $: boolean};
-	LinePlaneIntersection_OriginNormal(LineEnd: Vector,PlaneOrigin: Vector,PlaneNormal: Vector,T?: number,Intersection?: Vector): {T: number, Intersection: Vector, $: boolean};
-	MakeBox(Max: Vector): Box;
-	MakePlaneFromPointAndNormal(Normal: Vector): Plane;
-	MakeRotationFromAxes(Right: Vector,Up: Vector): Rotator;
-	MakeRotFromX(): Rotator;
-	MakeRotFromXY(Y: Vector): Rotator;
-	MakeRotFromXZ(Z: Vector): Rotator;
-	MakeRotFromY(): Rotator;
-	MakeRotFromYX(X: Vector): Rotator;
-	MakeRotFromYZ(Z: Vector): Rotator;
-	MakeRotFromZ(): Rotator;
-	MakeRotFromZX(X: Vector): Rotator;
-	MakeRotFromZY(Y: Vector): Rotator;
-	MakeTransform(Rotation: Rotator,Scale: Vector): Transform;
-	MirrorVectorByNormal(InNormal: Vector): Vector;
-	Multiply_VectorFloat(B: number): Vector;
-	Multiply_VectorInt(B: number): Vector;
-	Multiply_VectorVector(B: Vector): Vector;
-	NegateVector(): Vector;
-	Normal(Tolerance: number): Vector;
-	NotEqual_VectorVector(B: Vector,ErrorTolerance: number): boolean;
-	NotEqualExactly_VectorVector(B: Vector): boolean;
-	ProjectPointOnToPlane(PlaneBase: Vector,PlaneNormal: Vector): Vector;
-	ProjectVectorOnToPlane(PlaneNormal: Vector): Vector;
-	ProjectVectorOnToVector(Target: Vector): Vector;
-	Quat_MakeFromEuler(): Quat;
-	RandomPointInBoundingBox(BoxExtent: Vector): Vector;
-	RandomUnitVectorInConeInDegrees(ConeHalfAngleInDegrees: number): Vector;
-	RandomUnitVectorInConeInDegreesFromStream(ConeHalfAngleInDegrees: number,Stream: RandomStream): Vector;
-	RandomUnitVectorInConeInRadians(ConeHalfAngleInRadians: number): Vector;
-	RandomUnitVectorInConeInRadiansFromStream(ConeHalfAngleInRadians: number,Stream: RandomStream): Vector;
-	RandomUnitVectorInEllipticalConeInDegrees(MaxYawInDegrees: number,MaxPitchInDegrees: number): Vector;
-	RandomUnitVectorInEllipticalConeInDegreesFromStream(MaxYawInDegrees: number,MaxPitchInDegrees: number,Stream: RandomStream): Vector;
-	RandomUnitVectorInEllipticalConeInRadians(MaxYawInRadians: number,MaxPitchInRadians: number): Vector;
-	RandomUnitVectorInEllipticalConeInRadiansFromStream(MaxYawInRadians: number,MaxPitchInRadians: number,Stream: RandomStream): Vector;
-	RotateAngleAxis(AngleDeg: number,Axis: Vector): Vector;
-	RotatorFromAxisAndAngle(Angle: number): Rotator;
-	SelectVector(B: Vector,bPickA: boolean): Vector;
-	Subtract_VectorFloat(B: number): Vector;
-	Subtract_VectorInt(B: number): Vector;
-	Subtract_VectorVector(B: Vector): Vector;
-	VEase(B: Vector,Alpha: number,EasingFunc: EEasingFunc,BlendExp: number,Steps: number): Vector;
-	Vector_AddBounded(InAddVect?: Vector,InRadius?: number): {A: Vector};
-	Vector_Assign(InVector?: Vector): {A: Vector};
-	Vector_BoundedToBox(InBoxMin: Vector,InBoxMax: Vector): Vector;
-	Vector_BoundedToCube(InRadius: number): Vector;
-	Vector_ClampSize2D(Min: number,Max: number): Vector;
-	Vector_ClampSizeMax(Max: number): Vector;
-	Vector_ClampSizeMax2D(Max: number): Vector;
-	Vector_ComponentMax(B: Vector): Vector;
-	Vector_ComponentMin(B: Vector): Vector;
-	Vector_CosineAngle2D(B: Vector): number;
-	Vector_Distance(v2: Vector): number;
-	Vector_Distance2D(v2: Vector): number;
-	Vector_Distance2DSquared(v2: Vector): number;
-	Vector_DistanceSquared(v2: Vector): number;
-	Vector_GetAbs(): Vector;
-	Vector_GetAbsMax(): number;
-	Vector_GetAbsMin(): number;
-	Vector_GetProjection(): Vector;
-	Vector_GetSignVector(): Vector;
-	Vector_HeadingAngle(): number;
-	Vector_IsNAN(): boolean;
-	Vector_IsNearlyZero(Tolerance: number): boolean;
-	Vector_IsNormal(): boolean;
-	Vector_IsUniform(Tolerance: number): boolean;
-	Vector_IsUnit(SquaredLenthTolerance: number): boolean;
-	Vector_IsZero(): boolean;
-	Vector_MirrorByPlane(InPlane: Plane): Vector;
-	Vector_Normal2D(Tolerance: number): Vector;
-	Vector_Normalize(Tolerance?: number): {A: Vector};
-	Vector_NormalUnsafe(): Vector;
-	Vector_ProjectOnToNormal(InNormal: Vector): Vector;
-	Vector_Reciprocal(): Vector;
-	Vector_Set(X?: number,Y?: number,Z?: number): {A: Vector};
-	Vector_SnappedToGrid(InGridSize: number): Vector;
-	Vector_ToDegrees(): Vector;
-	Vector_ToRadians(): Vector;
-	Vector_UnitCartesianToSpherical(): Vector2D;
-	Vector_UnwindEuler(): {A: Vector};
-	VectorSpringInterp(Target: Vector,SpringState?: VectorSpringState,Stiffness?: number,CriticalDampingFactor?: number,DeltaTime?: number,Mass?: number): {SpringState: VectorSpringState, $: Vector};
-	VInterpTo(Target: Vector,DeltaTime: number,InterpSpeed: number): Vector;
-	VInterpTo_Constant(Target: Vector,DeltaTime: number,InterpSpeed: number): Vector;
-	VLerp(B: Vector,Alpha: number): Vector;
-	VSize(): number;
-	VSizeSquared(): number;
-	VSizeXY(): number;
-	VSizeXYSquared(): number;
-	WeightedMovingAverage_FVector(PreviousSample: Vector,Weight: number): Vector;
-	FindNearestActor(ActorsToCheck: Actor[],Distance?: number): {Distance: number, $: Actor};
-	K2_TwoBoneIK(JointPos: Vector,EndPos: Vector,JointTarget: Vector,Effector: Vector,OutJointPos?: Vector,OutEndPos?: Vector,bAllowStretching?: boolean,StartStretchRatio?: number,MaxStretchScale?: number): {OutJointPos: Vector, OutEndPos: Vector};
-	GetPositionalTrackingCameraParameters(CameraRotation?: Rotator,HFOV?: number,VFOV?: number,CameraDistance?: number,NearPlane?: number,FarPlane?: number): {CameraOrigin: Vector, CameraRotation: Rotator, HFOV: number, VFOV: number, CameraDistance: number, NearPlane: number, FarPlane: number};
-	GetTrackingSensorParameters(Rotation?: Rotator,LeftFOV?: number,RightFOV?: number,TopFOV?: number,BottomFOV?: number,Distance?: number,NearPlane?: number,FarPlane?: number,IsActive?: boolean,index?: number): {Origin: Vector, Rotation: Rotator, LeftFOV: number, RightFOV: number, TopFOV: number, BottomFOV: number, Distance: number, NearPlane: number, FarPlane: number, IsActive: boolean};
-	AddManualEnvironmentCaptureProbe(Extent: Vector): boolean;
-	GetObjectClassificationAtLocation(OutClassification?: EARObjectClassification,OutClassificationLocation?: Vector,MaxLocationDiff?: number): {OutClassification: EARObjectClassification, OutClassificationLocation: Vector, $: boolean};
-	LineTraceTrackedObjects3D(End: Vector,bTestFeaturePoints: boolean,bTestGroundPlane: boolean,bTestPlaneExtents: boolean,bTestPlaneBoundaryPolygon: boolean): ARTraceResult[];
-	SetARWorldOriginLocationAndRotation(OriginRotation: Rotator,bIsTransformInWorldSpace: boolean,bMaintainUpDirection: boolean): void;
-	static GetLevelViewportCameraInfo(CameraLocation?: Vector,CameraRotation?: Rotator): {CameraLocation: Vector, CameraRotation: Rotator, $: boolean};
-	static SetLevelViewportCameraInfo(CameraLocation: Vector,CameraRotation: Rotator): void;
-	static SegmentIntersection2D(SegmentStartA: Vector,SegmentEndA: Vector,SegmentStartB: Vector,SegmentEndB: Vector,IntersectionPoint?: Vector): {IntersectionPoint: Vector, $: boolean};
-	static GetClosestARPin(SearchPoint: Vector,PinId?: Guid): {PinId: Guid, $: EMagicLeapPassableWorldError};
-	static GetSelectionBounds(Origin?: Vector,BoxExtent?: Vector,SphereRadius?: number): {Origin: Vector, BoxExtent: Vector, SphereRadius: number};
-	static GetLeftHandPoseData(Position?: Vector,Orientation?: Rotator,AngularVelocity?: Vector,Velocity?: Vector): {Position: Vector, Orientation: Rotator, AngularVelocity: Vector, Velocity: Vector};
-	static GetRightHandPoseData(Position?: Vector,Orientation?: Rotator,AngularVelocity?: Vector,Velocity?: Vector): {Position: Vector, Orientation: Rotator, AngularVelocity: Vector, Velocity: Vector};
-	static GetSteamVR_HandPoseRelativeToNow(Position?: Vector,Orientation?: Rotator,hand?: ESteamVRHand,PredictedSecondsFromNow?: number): {Position: Vector, Orientation: Rotator, $: boolean};
-	static GenerateBoxMesh(BoxRadius: Vector,Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
-	static GetPointGuardianIntersection(Point: Vector,BoundaryType: EBoundaryType): GuardianTestResult;
-	static GetRawSensorData(AngularAcceleration?: Vector,LinearAcceleration?: Vector,AngularVelocity?: Vector,LinearVelocity?: Vector,TimeInSeconds?: number,DeviceType?: ETrackedDeviceType): {AngularAcceleration: Vector, LinearAcceleration: Vector, AngularVelocity: Vector, LinearVelocity: Vector, TimeInSeconds: number};
-	static SetPositionScale3D(PosScale3D: Vector): void;
-	static MakeRaycastQueryParams(Position: Vector,Direction: Vector,UpVector: Vector,Width: number,Height: number,HorizontalFovDegrees: number,CollideWithUnobserved: boolean,UserData: number): MagicLeapRaycastQueryParams;
-	static SetBasePosition(InBasePosition: Vector): void;
-	static IsValidAIDirection(DirectionVector: Vector): boolean;
-	static IsValidAILocation(Location: Vector): boolean;
-	static Conv_VectorToText(InVec: Vector): string;
-	static Conv_VectorToString(InVec: Vector): string;
-	static Add_VectorFloat(A: Vector,B: number): Vector;
-	static Add_VectorInt(A: Vector,B: number): Vector;
-	static Add_VectorVector(A: Vector,B: Vector): Vector;
-	static BreakVector(InVec: Vector,X?: number,Y?: number,Z?: number): {X: number, Y: number, Z: number};
-	static ClampVectorSize(A: Vector,Min: number,Max: number): Vector;
-	static Conv_VectorToLinearColor(InVec: Vector): LinearColor;
-	static Conv_VectorToQuaternion(InVec: Vector): Quat;
-	static Conv_VectorToRotator(InVec: Vector): Rotator;
-	static Conv_VectorToTransform(InLocation: Vector): Transform;
-	static Conv_VectorToVector2D(InVector: Vector): Vector2D;
-	static Cross_VectorVector(A: Vector,B: Vector): Vector;
-	static Divide_VectorFloat(A: Vector,B: number): Vector;
-	static Divide_VectorInt(A: Vector,B: number): Vector;
-	static Divide_VectorVector(A: Vector,B: Vector): Vector;
-	static Dot_VectorVector(A: Vector,B: Vector): number;
-	static DynamicWeightedMovingAverage_FVector(CurrentSample: Vector,PreviousSample: Vector,MaxDistance: number,MinWeight: number,MaxWeight: number): Vector;
-	static EqualEqual_VectorVector(A: Vector,B: Vector,ErrorTolerance: number): boolean;
-	static EqualExactly_VectorVector(A: Vector,B: Vector): boolean;
-	static FindClosestPointOnLine(Point: Vector,LineOrigin: Vector,LineDirection: Vector): Vector;
-	static FindClosestPointOnSegment(Point: Vector,SegmentStart: Vector,SegmentEnd: Vector): Vector;
-	static FindLookAtRotation(Start: Vector,Target: Vector): Rotator;
-	static FindNearestPointsOnLineSegments(Segment1Start: Vector,Segment1End: Vector,Segment2Start: Vector,Segment2End: Vector,Segment1Point?: Vector,Segment2Point?: Vector): {Segment1Point: Vector, Segment2Point: Vector};
-	static FTruncVector(InVector: Vector): IntVector;
-	static GetAzimuthAndElevation(InDirection: Vector,ReferenceFrame: Transform,Azimuth?: number,Elevation?: number): {Azimuth: number, Elevation: number};
-	static GetDirectionUnitVector(From: Vector,To: Vector): Vector;
-	static GetMaxElement(A: Vector): number;
-	static GetMinElement(A: Vector): number;
-	static GetPointDistanceToLine(Point: Vector,LineOrigin: Vector,LineDirection: Vector): number;
-	static GetPointDistanceToSegment(Point: Vector,SegmentStart: Vector,SegmentEnd: Vector): number;
-	static GetReflectionVector(Direction: Vector,SurfaceNormal: Vector): Vector;
-	static GetSlopeDegreeAngles(MyRightYAxis: Vector,FloorNormal: Vector,UpVector: Vector,OutSlopePitchDegreeAngle?: number,OutSlopeRollDegreeAngle?: number): {OutSlopePitchDegreeAngle: number, OutSlopeRollDegreeAngle: number};
-	static GetYawPitchFromVector(InVec: Vector,Yaw?: number,Pitch?: number): {Yaw: number, Pitch: number};
-	static GreaterGreater_VectorRotator(A: Vector,B: Rotator): Vector;
-	static IsPointInBox(Point: Vector,BoxOrigin: Vector,BoxExtent: Vector): boolean;
-	static IsPointInBoxWithTransform(Point: Vector,BoxWorldTransform: Transform,BoxExtent: Vector): boolean;
-	static LessLess_VectorRotator(A: Vector,B: Rotator): Vector;
-	static LinePlaneIntersection(LineStart: Vector,LineEnd: Vector,APlane: Plane,T?: number,Intersection?: Vector): {T: number, Intersection: Vector, $: boolean};
-	static LinePlaneIntersection_OriginNormal(LineStart: Vector,LineEnd: Vector,PlaneOrigin: Vector,PlaneNormal: Vector,T?: number,Intersection?: Vector): {T: number, Intersection: Vector, $: boolean};
-	static MakeBox(Min: Vector,Max: Vector): Box;
-	static MakePlaneFromPointAndNormal(Point: Vector,Normal: Vector): Plane;
-	static MakeRotationFromAxes(Forward: Vector,Right: Vector,Up: Vector): Rotator;
-	static MakeRotFromX(X: Vector): Rotator;
-	static MakeRotFromXY(X: Vector,Y: Vector): Rotator;
-	static MakeRotFromXZ(X: Vector,Z: Vector): Rotator;
-	static MakeRotFromY(Y: Vector): Rotator;
-	static MakeRotFromYX(Y: Vector,X: Vector): Rotator;
-	static MakeRotFromYZ(Y: Vector,Z: Vector): Rotator;
-	static MakeRotFromZ(Z: Vector): Rotator;
-	static MakeRotFromZX(Z: Vector,X: Vector): Rotator;
-	static MakeRotFromZY(Z: Vector,Y: Vector): Rotator;
-	static MakeTransform(Location: Vector,Rotation: Rotator,Scale: Vector): Transform;
-	static MirrorVectorByNormal(InVect: Vector,InNormal: Vector): Vector;
-	static Multiply_VectorFloat(A: Vector,B: number): Vector;
-	static Multiply_VectorInt(A: Vector,B: number): Vector;
-	static Multiply_VectorVector(A: Vector,B: Vector): Vector;
-	static NegateVector(A: Vector): Vector;
-	static Normal(A: Vector,Tolerance: number): Vector;
-	static NotEqual_VectorVector(A: Vector,B: Vector,ErrorTolerance: number): boolean;
-	static NotEqualExactly_VectorVector(A: Vector,B: Vector): boolean;
-	static ProjectPointOnToPlane(Point: Vector,PlaneBase: Vector,PlaneNormal: Vector): Vector;
-	static ProjectVectorOnToPlane(V: Vector,PlaneNormal: Vector): Vector;
-	static ProjectVectorOnToVector(V: Vector,Target: Vector): Vector;
-	static Quat_MakeFromEuler(Euler: Vector): Quat;
-	static RandomPointInBoundingBox(Origin: Vector,BoxExtent: Vector): Vector;
-	static RandomUnitVectorInConeInDegrees(ConeDir: Vector,ConeHalfAngleInDegrees: number): Vector;
-	static RandomUnitVectorInConeInDegreesFromStream(ConeDir: Vector,ConeHalfAngleInDegrees: number,Stream: RandomStream): Vector;
-	static RandomUnitVectorInConeInRadians(ConeDir: Vector,ConeHalfAngleInRadians: number): Vector;
-	static RandomUnitVectorInConeInRadiansFromStream(ConeDir: Vector,ConeHalfAngleInRadians: number,Stream: RandomStream): Vector;
-	static RandomUnitVectorInEllipticalConeInDegrees(ConeDir: Vector,MaxYawInDegrees: number,MaxPitchInDegrees: number): Vector;
-	static RandomUnitVectorInEllipticalConeInDegreesFromStream(ConeDir: Vector,MaxYawInDegrees: number,MaxPitchInDegrees: number,Stream: RandomStream): Vector;
-	static RandomUnitVectorInEllipticalConeInRadians(ConeDir: Vector,MaxYawInRadians: number,MaxPitchInRadians: number): Vector;
-	static RandomUnitVectorInEllipticalConeInRadiansFromStream(ConeDir: Vector,MaxYawInRadians: number,MaxPitchInRadians: number,Stream: RandomStream): Vector;
-	static RotateAngleAxis(InVect: Vector,AngleDeg: number,Axis: Vector): Vector;
-	static RotatorFromAxisAndAngle(Axis: Vector,Angle: number): Rotator;
-	static SelectVector(A: Vector,B: Vector,bPickA: boolean): Vector;
-	static Subtract_VectorFloat(A: Vector,B: number): Vector;
-	static Subtract_VectorInt(A: Vector,B: number): Vector;
-	static Subtract_VectorVector(A: Vector,B: Vector): Vector;
-	static VEase(A: Vector,B: Vector,Alpha: number,EasingFunc: EEasingFunc,BlendExp: number,Steps: number): Vector;
-	static Vector_AddBounded(A?: Vector,InAddVect?: Vector,InRadius?: number): {A: Vector};
-	static Vector_Assign(A?: Vector,InVector?: Vector): {A: Vector};
-	static Vector_BoundedToBox(InVect: Vector,InBoxMin: Vector,InBoxMax: Vector): Vector;
-	static Vector_BoundedToCube(InVect: Vector,InRadius: number): Vector;
-	static Vector_ClampSize2D(A: Vector,Min: number,Max: number): Vector;
-	static Vector_ClampSizeMax(A: Vector,Max: number): Vector;
-	static Vector_ClampSizeMax2D(A: Vector,Max: number): Vector;
-	static Vector_ComponentMax(A: Vector,B: Vector): Vector;
-	static Vector_ComponentMin(A: Vector,B: Vector): Vector;
-	static Vector_CosineAngle2D(A: Vector,B: Vector): number;
-	static Vector_Distance(v1: Vector,v2: Vector): number;
-	static Vector_Distance2D(v1: Vector,v2: Vector): number;
-	static Vector_Distance2DSquared(v1: Vector,v2: Vector): number;
-	static Vector_DistanceSquared(v1: Vector,v2: Vector): number;
-	static Vector_GetAbs(A: Vector): Vector;
-	static Vector_GetAbsMax(A: Vector): number;
-	static Vector_GetAbsMin(A: Vector): number;
-	static Vector_GetProjection(A: Vector): Vector;
-	static Vector_GetSignVector(A: Vector): Vector;
-	static Vector_HeadingAngle(A: Vector): number;
-	static Vector_IsNAN(A: Vector): boolean;
-	static Vector_IsNearlyZero(A: Vector,Tolerance: number): boolean;
-	static Vector_IsNormal(A: Vector): boolean;
-	static Vector_IsUniform(A: Vector,Tolerance: number): boolean;
-	static Vector_IsUnit(A: Vector,SquaredLenthTolerance: number): boolean;
-	static Vector_IsZero(A: Vector): boolean;
-	static Vector_MirrorByPlane(A: Vector,InPlane: Plane): Vector;
-	static Vector_Normal2D(A: Vector,Tolerance: number): Vector;
-	static Vector_Normalize(A?: Vector,Tolerance?: number): {A: Vector};
-	static Vector_NormalUnsafe(A: Vector): Vector;
-	static Vector_ProjectOnToNormal(V: Vector,InNormal: Vector): Vector;
-	static Vector_Reciprocal(A: Vector): Vector;
-	static Vector_Set(A?: Vector,X?: number,Y?: number,Z?: number): {A: Vector};
-	static Vector_SnappedToGrid(InVect: Vector,InGridSize: number): Vector;
-	static Vector_ToDegrees(A: Vector): Vector;
-	static Vector_ToRadians(A: Vector): Vector;
-	static Vector_UnitCartesianToSpherical(A: Vector): Vector2D;
-	static Vector_UnwindEuler(A?: Vector): {A: Vector};
-	static VectorSpringInterp(Current: Vector,Target: Vector,SpringState?: VectorSpringState,Stiffness?: number,CriticalDampingFactor?: number,DeltaTime?: number,Mass?: number): {SpringState: VectorSpringState, $: Vector};
-	static VInterpTo(Current: Vector,Target: Vector,DeltaTime: number,InterpSpeed: number): Vector;
-	static VInterpTo_Constant(Current: Vector,Target: Vector,DeltaTime: number,InterpSpeed: number): Vector;
-	static VLerp(A: Vector,B: Vector,Alpha: number): Vector;
-	static VSize(A: Vector): number;
-	static VSizeSquared(A: Vector): number;
-	static VSizeXY(A: Vector): number;
-	static VSizeXYSquared(A: Vector): number;
-	static WeightedMovingAverage_FVector(CurrentSample: Vector,PreviousSample: Vector,Weight: number): Vector;
-	static FindNearestActor(Origin: Vector,ActorsToCheck: Actor[],Distance?: number): {Distance: number, $: Actor};
-	static K2_TwoBoneIK(RootPos: Vector,JointPos: Vector,EndPos: Vector,JointTarget: Vector,Effector: Vector,OutJointPos?: Vector,OutEndPos?: Vector,bAllowStretching?: boolean,StartStretchRatio?: number,MaxStretchScale?: number): {OutJointPos: Vector, OutEndPos: Vector};
-	static GetPositionalTrackingCameraParameters(CameraOrigin?: Vector,CameraRotation?: Rotator,HFOV?: number,VFOV?: number,CameraDistance?: number,NearPlane?: number,FarPlane?: number): {CameraOrigin: Vector, CameraRotation: Rotator, HFOV: number, VFOV: number, CameraDistance: number, NearPlane: number, FarPlane: number};
-	static GetTrackingSensorParameters(Origin?: Vector,Rotation?: Rotator,LeftFOV?: number,RightFOV?: number,TopFOV?: number,BottomFOV?: number,Distance?: number,NearPlane?: number,FarPlane?: number,IsActive?: boolean,index?: number): {Origin: Vector, Rotation: Rotator, LeftFOV: number, RightFOV: number, TopFOV: number, BottomFOV: number, Distance: number, NearPlane: number, FarPlane: number, IsActive: boolean};
-	static AddManualEnvironmentCaptureProbe(Location: Vector,Extent: Vector): boolean;
-	static GetObjectClassificationAtLocation(InWorldLocation: Vector,OutClassification?: EARObjectClassification,OutClassificationLocation?: Vector,MaxLocationDiff?: number): {OutClassification: EARObjectClassification, OutClassificationLocation: Vector, $: boolean};
-	static LineTraceTrackedObjects3D(Start: Vector,End: Vector,bTestFeaturePoints: boolean,bTestGroundPlane: boolean,bTestPlaneExtents: boolean,bTestPlaneBoundaryPolygon: boolean): ARTraceResult[];
-	static SetARWorldOriginLocationAndRotation(OriginLocation: Vector,OriginRotation: Rotator,bIsTransformInWorldSpace: boolean,bMaintainUpDirection: boolean): void;
-	static GetGuardianDimensions(BoundaryType: EBoundaryType): Vector;
-	static Conv_FloatToVector(InFloat: number): Vector;
-	static CreateVectorFromYawPitch(Yaw: number,Pitch: number,Length: number): Vector;
-	static GetVectorArrayAverage(Vectors: Vector[]): Vector;
-	static MakeVector(X: number,Y: number,Z: number): Vector;
-	static RandomUnitVector(): Vector;
-	static Vector_Backward(): Vector;
-	static Vector_Down(): Vector;
-	static Vector_Forward(): Vector;
-	static Vector_Left(): Vector;
-	static Vector_One(): Vector;
-	static Vector_Right(): Vector;
-	static Vector_Up(): Vector;
-	static Vector_Zero(): Vector;
-	static NextSobolCell3D(index: number,NumCells: number,PreviousValue: Vector): Vector;
-	static RandomSobolCell3D(index: number,NumCells: number,Cell: Vector,Seed: Vector): Vector;
-	static GetActorArrayAverageLocation(Actors: Actor[]): Vector;
-	static K2_MakePerlinNoiseVectorAndRemap(X: number,Y: number,Z: number,RangeOutMinX: number,RangeOutMaxX: number,RangeOutMinY: number,RangeOutMaxY: number,RangeOutMinZ: number,RangeOutMaxZ: number): Vector;
+declare class Package extends UObject { 
+	static Load(ResourceName: string): Package;
+	static Find(Outer: UObject, ResourceName: string): Package;
+	static GetDefaultObject(): Package;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): Package;
+	static C(Other: UObject | any): Package;
+	DeletePackage(): boolean;
+	FindWorldInPackage(): World;
+	SavePackage(Filename: string): boolean;
+	GetLongPackagePath(): string;
+	HasAnyPackageFlags(Flags: number): boolean;
+	LoadPackage(PackageName: string): Package;
+	static DeletePackage(Package: Package): boolean;
+	static FindWorldInPackage(Package: Package): World;
+	static SavePackage(Package: Package,Filename: string): boolean;
+	static GetLongPackagePath(InPackage: Package): string;
+	static HasAnyPackageFlags(Package: Package,Flags: number): boolean;
+	static LoadPackage(InOuter: Package,PackageName: string): Package;
 }
 
 declare class DirectoryItem { 
@@ -18575,18 +18434,6 @@ declare class UObject {
 	ModifyObject(bAlwaysMarkDirty: boolean): void;
 	OpenEditorForAsset(): boolean;
 	PostEditChange(): void;
-	SpawnActorFromObject(Location: Vector,Rotation: Rotator,bTransient: boolean): Actor;
-	CheckoutLoadedAsset(): boolean;
-	ConsolidateAssets(AssetsToConsolidate: UObject[]): boolean;
-	DeleteLoadedAsset(): boolean;
-	DuplicateLoadedAsset(DestinationAssetPath: string): UObject;
-	GetMetadataTag(Tag: string): string;
-	GetMetadataTagValues(): any;
-	GetPathNameForLoadedAsset(): string;
-	RemoveMetadataTag(Tag: string): void;
-	RenameLoadedAsset(DestinationAssetPath: string): boolean;
-	SaveLoadedAsset(bOnlyIfIsDirty: boolean): boolean;
-	SetMetadataTag(Tag: string,Value: string): void;
 	DestroyUObject(): void;
 	ConvertRelativePathToFull(RelativePath: string): string;
 	CreateEnum(Name: string,DisplayNames: string[],Flags: string[]): Enum;
@@ -18688,18 +18535,6 @@ declare class UObject {
 	static ModifyObject(UObject: UObject,bAlwaysMarkDirty: boolean): void;
 	static OpenEditorForAsset(Asset: UObject): boolean;
 	static PostEditChange(InObject: UObject): void;
-	static SpawnActorFromObject(ObjectToUse: UObject,Location: Vector,Rotation: Rotator,bTransient: boolean): Actor;
-	static CheckoutLoadedAsset(AssetToCheckout: UObject): boolean;
-	static ConsolidateAssets(AssetToConsolidateTo: UObject,AssetsToConsolidate: UObject[]): boolean;
-	static DeleteLoadedAsset(AssetToDelete: UObject): boolean;
-	static DuplicateLoadedAsset(SourceAsset: UObject,DestinationAssetPath: string): UObject;
-	static GetMetadataTag(UObject: UObject,Tag: string): string;
-	static GetMetadataTagValues(UObject: UObject): any;
-	static GetPathNameForLoadedAsset(LoadedAsset: UObject): string;
-	static RemoveMetadataTag(UObject: UObject,Tag: string): void;
-	static RenameLoadedAsset(SourceAsset: UObject,DestinationAssetPath: string): boolean;
-	static SaveLoadedAsset(AssetToSave: UObject,bOnlyIfIsDirty: boolean): boolean;
-	static SetMetadataTag(UObject: UObject,Tag: string,Value: string): void;
 	static DestroyUObject(UObject: UObject): void;
 	static ConvertRelativePathToFull(UObject: UObject,RelativePath: string): string;
 	static CreateEnum(Outer: UObject,Name: string,DisplayNames: string[],Flags: string[]): Enum;
@@ -19526,3 +19361,284 @@ declare class ToolMenuBase extends UObject {
 
 declare type EColorVisionDeficiency = 'NormalVision' | 'Deuteranope' | 'Protanope' | 'Tritanope' | 'EColorVisionDeficiency_MAX';
 declare var EColorVisionDeficiency : { NormalVision:'NormalVision',Deuteranope:'Deuteranope',Protanope:'Protanope',Tritanope:'Tritanope',EColorVisionDeficiency_MAX:'EColorVisionDeficiency_MAX', };
+declare type ELogTimes = 'None' | 'UTC' | 'SinceGStartTime' | 'Local' | 'ELogTimes_MAX';
+declare var ELogTimes : { None:'None',UTC:'UTC',SinceGStartTime:'SinceGStartTime',Local:'Local',ELogTimes_MAX:'ELogTimes_MAX', };
+declare type EAssetEditorOpenLocation = 'Default' | 'NewWindow' | 'MainWindow' | 'ContentBrowser' | 'LastDockedWindowOrNewWindow' | 'LastDockedWindowOrMainWindow' | 'LastDockedWindowOrContentBrowser' | 'EAssetEditorOpenLocation_MAX';
+declare var EAssetEditorOpenLocation : { Default:'Default',NewWindow:'NewWindow',MainWindow:'MainWindow',ContentBrowser:'ContentBrowser',LastDockedWindowOrNewWindow:'LastDockedWindowOrNewWindow',LastDockedWindowOrMainWindow:'LastDockedWindowOrMainWindow',LastDockedWindowOrContentBrowser:'LastDockedWindowOrContentBrowser',EAssetEditorOpenLocation_MAX:'EAssetEditorOpenLocation_MAX', };
+declare class EditorStyleSettings extends UObject { 
+	bEnableHighDPIAwareness: boolean;
+	bEnableUserEditorLayoutManagement: boolean;
+	ColorVisionDeficiencyPreviewType: EColorVisionDeficiency;
+	ColorVisionDeficiencySeverity: number;
+	bColorVisionDeficiencyCorrection: boolean;
+	bColorVisionDeficiencyCorrectionPreviewWithDeficiency: boolean;
+	SelectionColor: LinearColor;
+	PressedSelectionColor: LinearColor;
+	InactiveSelectionColor: LinearColor;
+	KeyboardFocusColor: LinearColor;
+	EditorWindowBackgroundColor: LinearColor;
+	EditorMainWindowBackgroundOverride: SlateBrush;
+	EditorChildWindowBackgroundOverride: SlateBrush;
+	bResetEditorWindowBackgroundSettings: boolean;
+	bUseSmallToolBarIcons: boolean;
+	bUseGrid: boolean;
+	RegularColor: LinearColor;
+	RuleColor: LinearColor;
+	CenterColor: LinearColor;
+	GridSnapSize: any;
+	GraphBackgroundBrush: SlateBrush;
+	bEnableWindowAnimations: boolean;
+	bShowFriendlyNames: boolean;
+	bShowNativeComponentNames: boolean;
+	bExpandConfigurationMenus: boolean;
+	bShowProjectMenus: boolean;
+	bShowLaunchMenus: boolean;
+	LogBackgroundColor: LinearColor;
+	LogSelectionBackgroundColor: LinearColor;
+	LogNormalColor: LinearColor;
+	LogCommandColor: LinearColor;
+	LogWarningColor: LinearColor;
+	LogErrorColor: LinearColor;
+	bShowAllAdvancedDetails: boolean;
+	bShowHiddenPropertiesWhilePlaying: boolean;
+	LogFontSize: number;
+	LogTimestampMode: ELogTimes;
+	bPromoteOutputLogWarningsDuringPIE: boolean;
+	AssetEditorOpenLocation: EAssetEditorOpenLocation;
+	bEnableColorizedEditorTabs: boolean;
+	bEnableLegacyEditorModeUI: boolean;
+	static Load(ResourceName: string): EditorStyleSettings;
+	static Find(Outer: UObject, ResourceName: string): EditorStyleSettings;
+	static GetDefaultObject(): EditorStyleSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EditorStyleSettings;
+	static C(Other: UObject | any): EditorStyleSettings;
+}
+
+declare class MaterialShaderQualitySettings extends UObject { 
+	ForwardSettingMap: any;
+	static Load(ResourceName: string): MaterialShaderQualitySettings;
+	static Find(Outer: UObject, ResourceName: string): MaterialShaderQualitySettings;
+	static GetDefaultObject(): MaterialShaderQualitySettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MaterialShaderQualitySettings;
+	static C(Other: UObject | any): MaterialShaderQualitySettings;
+}
+
+declare type EMobileShadowQuality = 'NoFiltering' | 'PCF_1x1' | 'PCF_2x2' | 'PCF_3x3' | 'EMobileShadowQuality_MAX';
+declare var EMobileShadowQuality : { NoFiltering:'NoFiltering',PCF_1x1:'PCF_1x1',PCF_2x2:'PCF_2x2',PCF_3x3:'PCF_3x3',EMobileShadowQuality_MAX:'EMobileShadowQuality_MAX', };
+declare class MaterialQualityOverrides { 
+	bDiscardQualityDuringCook: boolean;
+	bEnableOverride: boolean;
+	bForceFullyRough: boolean;
+	bForceNonMetal: boolean;
+	bForceDisableLMDirectionality: boolean;
+	bForceLQReflections: boolean;
+	bForceDisablePreintegratedGF: boolean;
+	bDisableMaterialNormalCalculation: boolean;
+	MobileShadowQuality: EMobileShadowQuality;
+	clone() : MaterialQualityOverrides;
+	static C(Other: UObject | any): MaterialQualityOverrides;
+}
+
+declare class ShaderPlatformQualitySettings extends UObject { 
+	QualityOverrides: MaterialQualityOverrides;
+	static Load(ResourceName: string): ShaderPlatformQualitySettings;
+	static Find(Outer: UObject, ResourceName: string): ShaderPlatformQualitySettings;
+	static GetDefaultObject(): ShaderPlatformQualitySettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ShaderPlatformQualitySettings;
+	static C(Other: UObject | any): ShaderPlatformQualitySettings;
+}
+
+declare class ClothingAssetFactoryBase extends UObject { 
+	static Load(ResourceName: string): ClothingAssetFactoryBase;
+	static Find(Outer: UObject, ResourceName: string): ClothingAssetFactoryBase;
+	static GetDefaultObject(): ClothingAssetFactoryBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ClothingAssetFactoryBase;
+	static C(Other: UObject | any): ClothingAssetFactoryBase;
+}
+
+declare class NetAnalyticsDataConfig { 
+	DataName: string;
+	bEnabled: boolean;
+	clone() : NetAnalyticsDataConfig;
+	static C(Other: UObject | any): NetAnalyticsDataConfig;
+}
+
+declare class NetAnalyticsAggregatorConfig extends UObject { 
+	NetAnalyticsData: NetAnalyticsDataConfig[];
+	static Load(ResourceName: string): NetAnalyticsAggregatorConfig;
+	static Find(Outer: UObject, ResourceName: string): NetAnalyticsAggregatorConfig;
+	static GetDefaultObject(): NetAnalyticsAggregatorConfig;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): NetAnalyticsAggregatorConfig;
+	static C(Other: UObject | any): NetAnalyticsAggregatorConfig;
+}
+
+declare class AssetRegistryImpl extends UObject { 
+	static Load(ResourceName: string): AssetRegistryImpl;
+	static Find(Outer: UObject, ResourceName: string): AssetRegistryImpl;
+	static GetDefaultObject(): AssetRegistryImpl;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AssetRegistryImpl;
+	static C(Other: UObject | any): AssetRegistryImpl;
+}
+
+declare class ARFilter { 
+	PackageNames: string[];
+	PackagePaths: string[];
+	ObjectPaths: string[];
+	ClassNames: string[];
+	RecursiveClassesExclusionSet: any;
+	bRecursivePaths: boolean;
+	bRecursiveClasses: boolean;
+	bIncludeOnlyOnDiskAssets: boolean;
+	clone() : ARFilter;
+	static C(Other: UObject | any): ARFilter;
+}
+
+declare class TagAndValue { 
+	Tag: string;
+	Value: string;
+	clone() : TagAndValue;
+	static C(Other: UObject | any): TagAndValue;
+}
+
+declare class AssetRegistryHelpers extends UObject { 
+	static Load(ResourceName: string): AssetRegistryHelpers;
+	static Find(Outer: UObject, ResourceName: string): AssetRegistryHelpers;
+	static GetDefaultObject(): AssetRegistryHelpers;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AssetRegistryHelpers;
+	static ToSoftObjectPath(InAssetData: AssetData): SoftObjectPath;
+	static SetFilterTagsAndValues(InFilter: ARFilter,InTagsAndValues: TagAndValue[]): ARFilter;
+	static IsValid(InAssetData: AssetData): boolean;
+	static IsUAsset(InAssetData: AssetData): boolean;
+	static IsRedirector(InAssetData: AssetData): boolean;
+	static IsAssetLoaded(InAssetData: AssetData): boolean;
+	static GetTagValue(InAssetData: AssetData,InTagName: string,OutTagValue?: string): {OutTagValue: string, $: boolean};
+	static GetFullName(InAssetData: AssetData): string;
+	static GetExportTextName(InAssetData: AssetData): string;
+	static GetClass(InAssetData: AssetData): UnrealEngineClass;
+	static GetAsset(InAssetData: AssetData): UObject;
+	static CreateAssetData(InAsset: UObject,bAllowBlueprintClass: boolean): AssetData;
+	static C(Other: UObject | any): AssetRegistryHelpers;
+}
+
+declare class AssetRegistryDependencyOptions { 
+	bIncludeSoftPackageReferences: boolean;
+	bIncludeHardPackageReferences: boolean;
+	bIncludeSearchableNames: boolean;
+	bIncludeSoftManagementReferences: boolean;
+	bIncludeHardManagementReferences: boolean;
+	clone() : AssetRegistryDependencyOptions;
+	static C(Other: UObject | any): AssetRegistryDependencyOptions;
+}
+
+declare class AssetRegistry extends Interface { 
+	static Load(ResourceName: string): AssetRegistry;
+	static Find(Outer: UObject, ResourceName: string): AssetRegistry;
+	static GetDefaultObject(): AssetRegistry;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AssetRegistry;
+	WaitForCompletion(): void;
+	UseFilterToExcludeAssets(AssetDataList?: AssetData[],Filter?: ARFilter): {AssetDataList: AssetData[]};
+	SearchAllAssets(bSynchronousSearch: boolean): void;
+	ScanPathsSynchronous(InPaths: string[],bForceRescan: boolean): void;
+	ScanModifiedAssetFiles(InFilePaths: string[]): void;
+	ScanFilesSynchronous(InFilePaths: string[],bForceRescan: boolean): void;
+	RunAssetsThroughFilter(AssetDataList?: AssetData[],Filter?: ARFilter): {AssetDataList: AssetData[]};
+	PrioritizeSearchPath(PathToPrioritize: string): void;
+	K2_GetReferencers(PackageName: string,ReferenceOptions: AssetRegistryDependencyOptions,OutReferencers?: string[]): {OutReferencers: string[], $: boolean};
+	K2_GetDependencies(PackageName: string,DependencyOptions: AssetRegistryDependencyOptions,OutDependencies?: string[]): {OutDependencies: string[], $: boolean};
+	IsLoadingAssets(): boolean;
+	HasAssets(PackagePath: string,bRecursive: boolean): boolean;
+	GetSubPaths(InBasePath: string,OutPathList?: string[],bInRecurse?: boolean): {OutPathList: string[]};
+	GetAssetsByPath(PackagePath: string,OutAssetData?: AssetData[],bRecursive?: boolean,bIncludeOnlyOnDiskAssets?: boolean): {OutAssetData: AssetData[], $: boolean};
+	GetAssetsByPackageName(PackageName: string,OutAssetData?: AssetData[],bIncludeOnlyOnDiskAssets?: boolean): {OutAssetData: AssetData[], $: boolean};
+	GetAssetsByClass(ClassName: string,OutAssetData?: AssetData[],bSearchSubClasses?: boolean): {OutAssetData: AssetData[], $: boolean};
+	GetAssets(Filter: ARFilter,OutAssetData?: AssetData[]): {OutAssetData: AssetData[], $: boolean};
+	GetAssetByObjectPath(ObjectPath: string,bIncludeOnlyOnDiskAssets: boolean): AssetData;
+	GetAllCachedPaths(OutPathList?: string[]): {OutPathList: string[]};
+	GetAllAssets(OutAssetData?: AssetData[],bIncludeOnlyOnDiskAssets?: boolean): {OutAssetData: AssetData[], $: boolean};
+	static C(Other: UObject | any): AssetRegistry;
+}
+
+declare class AutoCompleteCommand { 
+	Command: string;
+	Desc: string;
+	clone() : AutoCompleteCommand;
+	static C(Other: UObject | any): AutoCompleteCommand;
+}
+
+declare class ConsoleSettings extends UObject { 
+	MaxScrollbackSize: number;
+	ManualAutoCompleteList: AutoCompleteCommand[];
+	AutoCompleteMapPaths: string[];
+	BackgroundOpacityPercentage: number;
+	bOrderTopToBottom: boolean;
+	bDisplayHelpInAutoComplete: boolean;
+	InputColor: Color;
+	HistoryColor: Color;
+	AutoCompleteCommandColor: Color;
+	AutoCompleteCVarColor: Color;
+	AutoCompleteFadedColor: Color;
+	static Load(ResourceName: string): ConsoleSettings;
+	static Find(Outer: UObject, ResourceName: string): ConsoleSettings;
+	static GetDefaultObject(): ConsoleSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ConsoleSettings;
+	static C(Other: UObject | any): ConsoleSettings;
+}
+
+declare type ETwoPlayerSplitScreenType = 'Horizontal' | 'Vertical' | 'ETwoPlayerSplitScreenType_MAX';
+declare var ETwoPlayerSplitScreenType : { Horizontal:'Horizontal',Vertical:'Vertical',ETwoPlayerSplitScreenType_MAX:'ETwoPlayerSplitScreenType_MAX', };
+declare type EThreePlayerSplitScreenType = 'FavorTop' | 'FavorBottom' | 'Vertical' | 'Horizontal' | 'EThreePlayerSplitScreenType_MAX';
+declare var EThreePlayerSplitScreenType : { FavorTop:'FavorTop',FavorBottom:'FavorBottom',Vertical:'Vertical',Horizontal:'Horizontal',EThreePlayerSplitScreenType_MAX:'EThreePlayerSplitScreenType_MAX', };
+declare type EFourPlayerSplitScreenType = 'Grid' | 'Vertical' | 'Horizontal' | 'EFourPlayerSplitScreenType_MAX';
+declare var EFourPlayerSplitScreenType : { Grid:'Grid',Vertical:'Vertical',Horizontal:'Horizontal',EFourPlayerSplitScreenType_MAX:'EFourPlayerSplitScreenType_MAX', };
+declare class GameModeName { 
+	Name: string;
+	GameMode: SoftClassPath;
+	clone() : GameModeName;
+	static C(Other: UObject | any): GameModeName;
+}
+
+declare class GameMapsSettings extends UObject { 
+	EditorStartupMap: SoftObjectPath;
+	LocalMapOptions: string;
+	TransitionMap: SoftObjectPath;
+	bUseSplitscreen: boolean;
+	TwoPlayerSplitscreenLayout: ETwoPlayerSplitScreenType;
+	ThreePlayerSplitscreenLayout: EThreePlayerSplitScreenType;
+	FourPlayerSplitscreenLayout: EFourPlayerSplitScreenType;
+	bOffsetPlayerGamepadIds: boolean;
+	GameInstanceClass: SoftClassPath;
+	GameDefaultMap: SoftObjectPath;
+	ServerDefaultMap: SoftObjectPath;
+	GlobalDefaultGameMode: SoftClassPath;
+	GlobalDefaultServerGameMode: SoftClassPath;
+	GameModeMapPrefixes: GameModeName[];
+	GameModeClassAliases: GameModeName[];
+	static Load(ResourceName: string): GameMapsSettings;
+	static Find(Outer: UObject, ResourceName: string): GameMapsSettings;
+	static GetDefaultObject(): GameMapsSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GameMapsSettings;
+	SetSkipAssigningGamepadToPlayer1(bSkipFirstPlayer: boolean): void;
+	GetSkipAssigningGamepadToPlayer1(): boolean;
+	static GetGameMapsSettings(): GameMapsSettings;
+	static C(Other: UObject | any): GameMapsSettings;
+}
+
+declare class GameNetworkManagerSettings extends UObject { 
+	MinDynamicBandwidth: number;
+	MaxDynamicBandwidth: number;
+	TotalNetBandwidth: number;
+	BadPingThreshold: number;
+	bIsStandbyCheckingEnabled: boolean;
+	StandbyRxCheatTime: number;
+	StandbyTxCheatTime: number;
+	PercentMissingForRxStandby: number;
+	PercentMissingForTxStandby: number;
+	PercentForBadPing: number;
+	JoinInProgressStandbyWaitTime: number;
+	static Load(ResourceName: string): GameNetworkManagerSettings;
+	static Find(Outer: UObject, ResourceName: string): GameNetworkManagerSettings;
+	static GetDefaultObject(): GameNetworkManagerSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GameNetworkManagerSettings;
+	static C(Other: UObject | any): GameNetworkManagerSettings;
+}
+
