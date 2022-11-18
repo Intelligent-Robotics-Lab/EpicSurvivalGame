@@ -1,3 +1,244 @@
+declare class BlueprintPropertyTestObject extends UObject { 
+	ShouldBeHidden: number;
+	ShouldBeVisible: number;
+	static Load(ResourceName: string): BlueprintPropertyTestObject;
+	static Find(Outer: UObject, ResourceName: string): BlueprintPropertyTestObject;
+	static GetDefaultObject(): BlueprintPropertyTestObject;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlueprintPropertyTestObject;
+	static C(Other: UObject | any): BlueprintPropertyTestObject;
+}
+
+declare class BlueprintPropertyContainerTestObject extends UObject { 
+	Array: BlueprintPropertyTestObject[];
+	static Load(ResourceName: string): BlueprintPropertyContainerTestObject;
+	static Find(Outer: UObject, ResourceName: string): BlueprintPropertyContainerTestObject;
+	static GetDefaultObject(): BlueprintPropertyContainerTestObject;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlueprintPropertyContainerTestObject;
+	static C(Other: UObject | any): BlueprintPropertyContainerTestObject;
+}
+
+declare class TestSparseClassDataBase extends UObject { 
+	static Load(ResourceName: string): TestSparseClassDataBase;
+	static Find(Outer: UObject, ResourceName: string): TestSparseClassDataBase;
+	static GetDefaultObject(): TestSparseClassDataBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TestSparseClassDataBase;
+	static C(Other: UObject | any): TestSparseClassDataBase;
+}
+
+declare class TestSparseClassData extends TestSparseClassDataBase { 
+	static Load(ResourceName: string): TestSparseClassData;
+	static Find(Outer: UObject, ResourceName: string): TestSparseClassData;
+	static GetDefaultObject(): TestSparseClassData;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TestSparseClassData;
+	static C(Other: UObject | any): TestSparseClassData;
+}
+
+declare class ReimportCurveFactory extends CSVImportFactory { 
+	static Load(ResourceName: string): ReimportCurveFactory;
+	static Find(Outer: UObject, ResourceName: string): ReimportCurveFactory;
+	static GetDefaultObject(): ReimportCurveFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ReimportCurveFactory;
+	static C(Other: UObject | any): ReimportCurveFactory;
+}
+
+declare class ReimportCurveTableFactory extends CSVImportFactory { 
+	static Load(ResourceName: string): ReimportCurveTableFactory;
+	static Find(Outer: UObject, ResourceName: string): ReimportCurveTableFactory;
+	static GetDefaultObject(): ReimportCurveTableFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ReimportCurveTableFactory;
+	static C(Other: UObject | any): ReimportCurveTableFactory;
+}
+
+declare class ReimportDataTableFactory extends CSVImportFactory { 
+	static Load(ResourceName: string): ReimportDataTableFactory;
+	static Find(Outer: UObject, ResourceName: string): ReimportDataTableFactory;
+	static GetDefaultObject(): ReimportDataTableFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ReimportDataTableFactory;
+	static C(Other: UObject | any): ReimportDataTableFactory;
+}
+
+declare class ReimportFbxAnimSequenceFactory extends FbxFactory { 
+	static Load(ResourceName: string): ReimportFbxAnimSequenceFactory;
+	static Find(Outer: UObject, ResourceName: string): ReimportFbxAnimSequenceFactory;
+	static GetDefaultObject(): ReimportFbxAnimSequenceFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ReimportFbxAnimSequenceFactory;
+	static C(Other: UObject | any): ReimportFbxAnimSequenceFactory;
+}
+
+declare class ReimportFbxSceneFactory extends FbxSceneImportFactory { 
+	static Load(ResourceName: string): ReimportFbxSceneFactory;
+	static Find(Outer: UObject, ResourceName: string): ReimportFbxSceneFactory;
+	static GetDefaultObject(): ReimportFbxSceneFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ReimportFbxSceneFactory;
+	ScriptReimportHelper(Obj: UObject): void;
+	static C(Other: UObject | any): ReimportFbxSceneFactory;
+}
+
+declare class ReimportFbxSkeletalMeshFactory extends FbxFactory { 
+	static Load(ResourceName: string): ReimportFbxSkeletalMeshFactory;
+	static Find(Outer: UObject, ResourceName: string): ReimportFbxSkeletalMeshFactory;
+	static GetDefaultObject(): ReimportFbxSkeletalMeshFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ReimportFbxSkeletalMeshFactory;
+	static C(Other: UObject | any): ReimportFbxSkeletalMeshFactory;
+}
+
+declare class ReimportFbxStaticMeshFactory extends FbxFactory { 
+	static Load(ResourceName: string): ReimportFbxStaticMeshFactory;
+	static Find(Outer: UObject, ResourceName: string): ReimportFbxStaticMeshFactory;
+	static GetDefaultObject(): ReimportFbxStaticMeshFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ReimportFbxStaticMeshFactory;
+	static C(Other: UObject | any): ReimportFbxStaticMeshFactory;
+}
+
+declare type ETextureSourceColorSpace = 'Auto' | 'Linear' | 'SRGB' | 'ETextureSourceColorSpace_MAX';
+declare var ETextureSourceColorSpace : { Auto:'Auto',Linear:'Linear',SRGB:'SRGB',ETextureSourceColorSpace_MAX:'ETextureSourceColorSpace_MAX', };
+declare class TextureFactory extends Factory { 
+	NoCompression: boolean;
+	NoAlpha: boolean;
+	bDeferCompression: boolean;
+	CompressionSettings: TextureCompressionSettings;
+	bCreateMaterial: boolean;
+	bRGBToBaseColor: boolean;
+	bRGBToEmissive: boolean;
+	bAlphaToRoughness: boolean;
+	bAlphaToEmissive: boolean;
+	bAlphaToOpacity: boolean;
+	bAlphaToOpacityMask: boolean;
+	bTwoSided: boolean;
+	Blending: EBlendMode;
+	ShadingModel: EMaterialShadingModel;
+	MipGenSettings: TextureMipGenSettings;
+	LODGroup: TextureGroup;
+	bDitherMipMapAlpha: boolean;
+	AlphaCoverageThresholds: Vector4;
+	bPreserveBorder: boolean;
+	bFlipNormalMapGreenChannel: boolean;
+	bUsingExistingSettings: boolean;
+	bUseHashAsGuid: boolean;
+	UdimRegexPattern: string;
+	ColorSpaceMode: ETextureSourceColorSpace;
+	static Load(ResourceName: string): TextureFactory;
+	static Find(Outer: UObject, ResourceName: string): TextureFactory;
+	static GetDefaultObject(): TextureFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TextureFactory;
+	static C(Other: UObject | any): TextureFactory;
+}
+
+declare class ReimportTextureFactory extends TextureFactory { 
+	pOriginalTex: Texture;
+	static Load(ResourceName: string): ReimportTextureFactory;
+	static Find(Outer: UObject, ResourceName: string): ReimportTextureFactory;
+	static GetDefaultObject(): ReimportTextureFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ReimportTextureFactory;
+	static C(Other: UObject | any): ReimportTextureFactory;
+}
+
+declare class VectorFieldStaticFactory extends Factory { 
+	static Load(ResourceName: string): VectorFieldStaticFactory;
+	static Find(Outer: UObject, ResourceName: string): VectorFieldStaticFactory;
+	static GetDefaultObject(): VectorFieldStaticFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VectorFieldStaticFactory;
+	static C(Other: UObject | any): VectorFieldStaticFactory;
+}
+
+declare class ReimportVectorFieldStaticFactory extends VectorFieldStaticFactory { 
+	static Load(ResourceName: string): ReimportVectorFieldStaticFactory;
+	static Find(Outer: UObject, ResourceName: string): ReimportVectorFieldStaticFactory;
+	static GetDefaultObject(): ReimportVectorFieldStaticFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ReimportVectorFieldStaticFactory;
+	static C(Other: UObject | any): ReimportVectorFieldStaticFactory;
+}
+
+declare class RenderTargetExporterHDR extends Exporter { 
+	static Load(ResourceName: string): RenderTargetExporterHDR;
+	static Find(Outer: UObject, ResourceName: string): RenderTargetExporterHDR;
+	static GetDefaultObject(): RenderTargetExporterHDR;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): RenderTargetExporterHDR;
+	static C(Other: UObject | any): RenderTargetExporterHDR;
+}
+
+declare class ReplaceActorCommandlet extends Commandlet { 
+	static Load(ResourceName: string): ReplaceActorCommandlet;
+	static Find(Outer: UObject, ResourceName: string): ReplaceActorCommandlet;
+	static GetDefaultObject(): ReplaceActorCommandlet;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ReplaceActorCommandlet;
+	static C(Other: UObject | any): ReplaceActorCommandlet;
+}
+
+declare class ReplaceAssetsCommandlet extends Commandlet { 
+	static Load(ResourceName: string): ReplaceAssetsCommandlet;
+	static Find(Outer: UObject, ResourceName: string): ReplaceAssetsCommandlet;
+	static GetDefaultObject(): ReplaceAssetsCommandlet;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ReplaceAssetsCommandlet;
+	static C(Other: UObject | any): ReplaceAssetsCommandlet;
+}
+
+declare class SavePackageUtilitiesCommandlet extends Commandlet { 
+	static Load(ResourceName: string): SavePackageUtilitiesCommandlet;
+	static Find(Outer: UObject, ResourceName: string): SavePackageUtilitiesCommandlet;
+	static GetDefaultObject(): SavePackageUtilitiesCommandlet;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SavePackageUtilitiesCommandlet;
+	static C(Other: UObject | any): SavePackageUtilitiesCommandlet;
+}
+
+declare class SceneThumbnailInfo extends ThumbnailInfo { 
+	OrbitPitch: number;
+	OrbitYaw: number;
+	OrbitZoom: number;
+	static Load(ResourceName: string): SceneThumbnailInfo;
+	static Find(Outer: UObject, ResourceName: string): SceneThumbnailInfo;
+	static GetDefaultObject(): SceneThumbnailInfo;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SceneThumbnailInfo;
+	static C(Other: UObject | any): SceneThumbnailInfo;
+}
+
+declare type EThumbnailPrimType = 'TPT_None' | 'TPT_Sphere' | 'TPT_Cube' | 'TPT_Plane' | 'TPT_Cylinder' | 'TPT_MAX';
+declare var EThumbnailPrimType : { TPT_None:'TPT_None',TPT_Sphere:'TPT_Sphere',TPT_Cube:'TPT_Cube',TPT_Plane:'TPT_Plane',TPT_Cylinder:'TPT_Cylinder',TPT_MAX:'TPT_MAX', };
+declare class SceneThumbnailInfoWithPrimitive extends SceneThumbnailInfo { 
+	PrimitiveType: EThumbnailPrimType;
+	PreviewMesh: SoftObjectPath;
+	bUserModifiedShape: boolean;
+	static Load(ResourceName: string): SceneThumbnailInfoWithPrimitive;
+	static Find(Outer: UObject, ResourceName: string): SceneThumbnailInfoWithPrimitive;
+	static GetDefaultObject(): SceneThumbnailInfoWithPrimitive;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SceneThumbnailInfoWithPrimitive;
+	static C(Other: UObject | any): SceneThumbnailInfoWithPrimitive;
+}
+
+declare class EditorViewportViewMenuContext extends UObject { 
+	static Load(ResourceName: string): EditorViewportViewMenuContext;
+	static Find(Outer: UObject, ResourceName: string): EditorViewportViewMenuContext;
+	static GetDefaultObject(): EditorViewportViewMenuContext;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EditorViewportViewMenuContext;
+	static C(Other: UObject | any): EditorViewportViewMenuContext;
+}
+
+declare class SequenceExporterT3D extends Exporter { 
+	static Load(ResourceName: string): SequenceExporterT3D;
+	static Find(Outer: UObject, ResourceName: string): SequenceExporterT3D;
+	static GetDefaultObject(): SequenceExporterT3D;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SequenceExporterT3D;
+	static C(Other: UObject | any): SequenceExporterT3D;
+}
+
+declare class ShaderCodeLibraryToolsCommandlet extends Commandlet { 
+	static Load(ResourceName: string): ShaderCodeLibraryToolsCommandlet;
+	static Find(Outer: UObject, ResourceName: string): ShaderCodeLibraryToolsCommandlet;
+	static GetDefaultObject(): ShaderCodeLibraryToolsCommandlet;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ShaderCodeLibraryToolsCommandlet;
+	static C(Other: UObject | any): ShaderCodeLibraryToolsCommandlet;
+}
+
+declare class ShaderPipelineCacheToolsCommandlet extends Commandlet { 
+	static Load(ResourceName: string): ShaderPipelineCacheToolsCommandlet;
+	static Find(Outer: UObject, ResourceName: string): ShaderPipelineCacheToolsCommandlet;
+	static GetDefaultObject(): ShaderPipelineCacheToolsCommandlet;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ShaderPipelineCacheToolsCommandlet;
+	static C(Other: UObject | any): ShaderPipelineCacheToolsCommandlet;
+}
+
+declare type ESheetAxis = 'AX_Horizontal' | 'AX_XAxis' | 'AX_YAxis' | 'AX_MAX';
+declare var ESheetAxis : { AX_Horizontal:'AX_Horizontal',AX_XAxis:'AX_XAxis',AX_YAxis:'AX_YAxis',AX_MAX:'AX_MAX', };
 declare class SheetBuilder extends EditorBrushBuilder { 
 	X: number;
 	Y: number;
@@ -16273,117 +16514,6 @@ declare class DatasmithStaticMeshTemplate extends DatasmithObjectTemplate {
 	static C(Other: UObject | any): DatasmithStaticMeshTemplate;
 }
 
-declare type EClothMassMode = 'UniformMass' | 'TotalMass' | 'Density' | 'MaxClothMassMode' | 'EClothMassMode_MAX';
-declare var EClothMassMode : { UniformMass:'UniformMass',TotalMass:'TotalMass',Density:'Density',MaxClothMassMode:'MaxClothMassMode',EClothMassMode_MAX:'EClothMassMode_MAX', };
-declare class ChaosClothWeightedValue { 
-	Low: number;
-	High: number;
-	clone() : ChaosClothWeightedValue;
-	static C(Other: UObject | any): ChaosClothWeightedValue;
-}
-
-declare type EChaosClothTetherMode = 'FastTetherFastLength' | 'AccurateTetherFastLength' | 'AccurateTetherAccurateLength' | 'MaxChaosClothTetherMode' | 'EChaosClothTetherMode_MAX';
-declare var EChaosClothTetherMode : { FastTetherFastLength:'FastTetherFastLength',AccurateTetherFastLength:'AccurateTetherFastLength',AccurateTetherAccurateLength:'AccurateTetherAccurateLength',MaxChaosClothTetherMode:'MaxChaosClothTetherMode',EChaosClothTetherMode_MAX:'EChaosClothTetherMode_MAX', };
-declare class ChaosClothConfig extends ClothConfigCommon { 
-	MassMode: EClothMassMode;
-	UniformMass: number;
-	TotalMass: number;
-	Density: number;
-	MinPerParticleMass: number;
-	EdgeStiffness: number;
-	BendingStiffness: number;
-	bUseBendingElements: boolean;
-	AreaStiffness: number;
-	VolumeStiffness: number;
-	TetherStiffness: ChaosClothWeightedValue;
-	LimitScale: number;
-	bUseGeodesicDistance: boolean;
-	ShapeTargetStiffness: number;
-	CollisionThickness: number;
-	FrictionCoefficient: number;
-	bUseCCD: boolean;
-	bUseSelfCollisions: boolean;
-	SelfCollisionThickness: number;
-	bUseLegacyBackstop: boolean;
-	DampingCoefficient: number;
-	bUsePointBasedWindModel: boolean;
-	DragCoefficient: number;
-	LiftCoefficient: number;
-	bUseGravityOverride: boolean;
-	GravityScale: number;
-	Gravity: Vector;
-	AnimDriveStiffness: ChaosClothWeightedValue;
-	AnimDriveDamping: ChaosClothWeightedValue;
-	LinearVelocityScale: Vector;
-	AngularVelocityScale: number;
-	FictitiousAngularScale: number;
-	bUseTetrahedralConstraints: boolean;
-	bUseThinShellVolumeConstraints: boolean;
-	bUseContinuousCollisionDetection: boolean;
-	TetherMode: EChaosClothTetherMode;
-	AnimDriveSpringStiffness: number;
-	StrainLimitingStiffness: number;
-	static Load(ResourceName: string): ChaosClothConfig;
-	static Find(Outer: UObject, ResourceName: string): ChaosClothConfig;
-	static GetDefaultObject(): ChaosClothConfig;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothConfig;
-	static C(Other: UObject | any): ChaosClothConfig;
-}
-
-declare class ChaosClothSharedSimConfig extends ClothSharedConfigCommon { 
-	IterationCount: number;
-	SubdivisionCount: number;
-	SelfCollisionThickness: number;
-	CollisionThickness: number;
-	bUseDampingOverride: boolean;
-	Damping: number;
-	bUseGravityOverride: boolean;
-	GravityScale: number;
-	Gravity: Vector;
-	bUseLocalSpaceSimulation: boolean;
-	bUseXPBDConstraints: boolean;
-	static Load(ResourceName: string): ChaosClothSharedSimConfig;
-	static Find(Outer: UObject, ResourceName: string): ChaosClothSharedSimConfig;
-	static GetDefaultObject(): ChaosClothSharedSimConfig;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothSharedSimConfig;
-	static C(Other: UObject | any): ChaosClothSharedSimConfig;
-}
-
-declare class ChaosClothingSimulationFactory extends ClothingSimulationFactory { 
-	static Load(ResourceName: string): ChaosClothingSimulationFactory;
-	static Find(Outer: UObject, ResourceName: string): ChaosClothingSimulationFactory;
-	static GetDefaultObject(): ChaosClothingSimulationFactory;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothingSimulationFactory;
-	static C(Other: UObject | any): ChaosClothingSimulationFactory;
-}
-
-declare class ChaosClothingInteractor extends ClothingInteractor { 
-	static Load(ResourceName: string): ChaosClothingInteractor;
-	static Find(Outer: UObject, ResourceName: string): ChaosClothingInteractor;
-	static GetDefaultObject(): ChaosClothingInteractor;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothingInteractor;
-	SetVelocityScale(LinearVelocityScale: Vector,AngularVelocityScale: number,FictitiousAngularScale: number): void;
-	SetMaterialLinear(EdgeStiffness: number,BendingStiffness: number,AreaStiffness: number): void;
-	SetLongRangeAttachmentLinear(TetherStiffness: number): void;
-	SetLongRangeAttachment(TetherStiffness: Vector2D): void;
-	SetGravity(GravityScale: number,bIsGravityOverridden: boolean,GravityOverride: Vector): void;
-	SetDamping(DampingCoefficient: number): void;
-	SetCollision(CollisionThickness: number,FrictionCoefficient: number,bUseCCD: boolean,SelfCollisionThickness: number): void;
-	SetAnimDriveLinear(AnimDriveStiffness: number): void;
-	SetAnimDrive(AnimDriveStiffness: Vector2D,AnimDriveDamping: Vector2D): void;
-	SetAerodynamics(DragCoefficient: number,LiftCoefficient: number,WindVelocity: Vector): void;
-	ResetAndTeleport(bReset: boolean,bTeleport: boolean): void;
-	static C(Other: UObject | any): ChaosClothingInteractor;
-}
-
-declare class ChaosClothingSimulationInteractor extends ClothingSimulationInteractor { 
-	static Load(ResourceName: string): ChaosClothingSimulationInteractor;
-	static Find(Outer: UObject, ResourceName: string): ChaosClothingSimulationInteractor;
-	static GetDefaultObject(): ChaosClothingSimulationInteractor;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothingSimulationInteractor;
-	static C(Other: UObject | any): ChaosClothingSimulationInteractor;
-}
-
 declare type EMagicLeapPrivilege = 'Invalid' | 'BatteryInfo' | 'CameraCapture' | 'ComputerVision' | 'WorldReconstruction' | 'InAppPurchase' | 'AudioCaptureMic' | 'DrmCertificates' | 'Occlusion' | 'LowLatencyLightwear' | 'Internet' | 'IdentityRead' | 'BackgroundDownload' | 'BackgroundUpload' | 'MediaDrm' | 'Media' | 'MediaMetadata' | 'PowerInfo' | 'LocalAreaNetwork' | 'VoiceInput' | 'Documents' | 'ConnectBackgroundMusicService' | 'RegisterBackgroundMusicService' | 'PcfRead' | 'PwFoundObjRead' | 'NormalNotificationsUsage' | 'MusicService' | 'ControllerPose' | 'GesturesSubscribe' | 'GesturesConfig' | 'AddressBookRead' | 'AddressBookWrite' | 'AddressBookBasicAccess' | 'CoarseLocation' | 'FineLocation' | 'HandMesh' | 'WifiStatusRead' | 'SocialConnectionsInvitesAccess' | 'SecureBrowserWindow' | 'EMagicLeapPrivilege_MAX';
 declare var EMagicLeapPrivilege : { Invalid:'Invalid',BatteryInfo:'BatteryInfo',CameraCapture:'CameraCapture',ComputerVision:'ComputerVision',WorldReconstruction:'WorldReconstruction',InAppPurchase:'InAppPurchase',AudioCaptureMic:'AudioCaptureMic',DrmCertificates:'DrmCertificates',Occlusion:'Occlusion',LowLatencyLightwear:'LowLatencyLightwear',Internet:'Internet',IdentityRead:'IdentityRead',BackgroundDownload:'BackgroundDownload',BackgroundUpload:'BackgroundUpload',MediaDrm:'MediaDrm',Media:'Media',MediaMetadata:'MediaMetadata',PowerInfo:'PowerInfo',LocalAreaNetwork:'LocalAreaNetwork',VoiceInput:'VoiceInput',Documents:'Documents',ConnectBackgroundMusicService:'ConnectBackgroundMusicService',RegisterBackgroundMusicService:'RegisterBackgroundMusicService',PcfRead:'PcfRead',PwFoundObjRead:'PwFoundObjRead',NormalNotificationsUsage:'NormalNotificationsUsage',MusicService:'MusicService',ControllerPose:'ControllerPose',GesturesSubscribe:'GesturesSubscribe',GesturesConfig:'GesturesConfig',AddressBookRead:'AddressBookRead',AddressBookWrite:'AddressBookWrite',AddressBookBasicAccess:'AddressBookBasicAccess',CoarseLocation:'CoarseLocation',FineLocation:'FineLocation',HandMesh:'HandMesh',WifiStatusRead:'WifiStatusRead',SocialConnectionsInvitesAccess:'SocialConnectionsInvitesAccess',SecureBrowserWindow:'SecureBrowserWindow',EMagicLeapPrivilege_MAX:'EMagicLeapPrivilege_MAX', };
 declare class MagicLeapPrivilegesFunctionLibrary extends BlueprintFunctionLibrary { 
@@ -16620,6 +16750,626 @@ declare class WmfMediaSettings extends UObject {
 	static GetDefaultObject(): WmfMediaSettings;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WmfMediaSettings;
 	static C(Other: UObject | any): WmfMediaSettings;
+}
+
+declare class EyeTrackerStereoGazeData { 
+	LeftEyeOrigin: Vector;
+	LeftEyeDirection: Vector;
+	RightEyeOrigin: Vector;
+	RightEyeDirection: Vector;
+	FixationPoint: Vector;
+	ConfidenceValue: number;
+	clone() : EyeTrackerStereoGazeData;
+	static C(Other: UObject | any): EyeTrackerStereoGazeData;
+	GetStereoGazeData(): {OutGazeData: EyeTrackerStereoGazeData, $: boolean};
+	static GetStereoGazeData(OutGazeData?: EyeTrackerStereoGazeData): {OutGazeData: EyeTrackerStereoGazeData, $: boolean};
+}
+
+declare class EyeTrackerGazeData { 
+	GazeOrigin: Vector;
+	GazeDirection: Vector;
+	FixationPoint: Vector;
+	ConfidenceValue: number;
+	clone() : EyeTrackerGazeData;
+	static C(Other: UObject | any): EyeTrackerGazeData;
+	GetGazeData(): {OutGazeData: EyeTrackerGazeData, $: boolean};
+	static GetGazeData(OutGazeData?: EyeTrackerGazeData): {OutGazeData: EyeTrackerGazeData, $: boolean};
+}
+
+declare class EyeTrackerFunctionLibrary extends BlueprintFunctionLibrary { 
+	static Load(ResourceName: string): EyeTrackerFunctionLibrary;
+	static Find(Outer: UObject, ResourceName: string): EyeTrackerFunctionLibrary;
+	static GetDefaultObject(): EyeTrackerFunctionLibrary;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EyeTrackerFunctionLibrary;
+	static SetEyeTrackedPlayer(PlayerController: PlayerController): void;
+	static IsStereoGazeDataAvailable(): boolean;
+	static IsEyeTrackerConnected(): boolean;
+	static GetStereoGazeData(OutGazeData?: EyeTrackerStereoGazeData): {OutGazeData: EyeTrackerStereoGazeData, $: boolean};
+	static GetGazeData(OutGazeData?: EyeTrackerGazeData): {OutGazeData: EyeTrackerGazeData, $: boolean};
+	static C(Other: UObject | any): EyeTrackerFunctionLibrary;
+}
+
+declare class LiveLinkBasicFrameInterpolationProcessor extends LiveLinkFrameInterpolationProcessor { 
+	bInterpolatePropertyValues: boolean;
+	static Load(ResourceName: string): LiveLinkBasicFrameInterpolationProcessor;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkBasicFrameInterpolationProcessor;
+	static GetDefaultObject(): LiveLinkBasicFrameInterpolationProcessor;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkBasicFrameInterpolationProcessor;
+	static C(Other: UObject | any): LiveLinkBasicFrameInterpolationProcessor;
+}
+
+declare class LiveLinkAnimationFrameInterpolationProcessor extends LiveLinkBasicFrameInterpolationProcessor { 
+	static Load(ResourceName: string): LiveLinkAnimationFrameInterpolationProcessor;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkAnimationFrameInterpolationProcessor;
+	static GetDefaultObject(): LiveLinkAnimationFrameInterpolationProcessor;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkAnimationFrameInterpolationProcessor;
+	static C(Other: UObject | any): LiveLinkAnimationFrameInterpolationProcessor;
+}
+
+declare class LiveLinkAnimationRoleToTransform extends LiveLinkFrameTranslator { 
+	BoneName: string;
+	static Load(ResourceName: string): LiveLinkAnimationRoleToTransform;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkAnimationRoleToTransform;
+	static GetDefaultObject(): LiveLinkAnimationRoleToTransform;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkAnimationRoleToTransform;
+	static C(Other: UObject | any): LiveLinkAnimationRoleToTransform;
+}
+
+declare class LiveLinkAnimationVirtualSubject extends LiveLinkVirtualSubject { 
+	bAppendSubjectNameToBones: boolean;
+	static Load(ResourceName: string): LiveLinkAnimationVirtualSubject;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkAnimationVirtualSubject;
+	static GetDefaultObject(): LiveLinkAnimationVirtualSubject;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkAnimationVirtualSubject;
+	static C(Other: UObject | any): LiveLinkAnimationVirtualSubject;
+}
+
+declare type ELiveLinkAxis = 'X' | 'Y' | 'Z' | 'XNeg' | 'YNeg' | 'ZNeg' | 'ELiveLinkAxis_MAX';
+declare var ELiveLinkAxis : { X:'X',Y:'Y',Z:'Z',XNeg:'XNeg',YNeg:'YNeg',ZNeg:'ZNeg',ELiveLinkAxis_MAX:'ELiveLinkAxis_MAX', };
+declare class LiveLinkTransformAxisSwitchPreProcessor extends LiveLinkFramePreProcessor { 
+	OrientationAxisX: ELiveLinkAxis;
+	OrientationAxisY: ELiveLinkAxis;
+	OrientationAxisZ: ELiveLinkAxis;
+	TranslationAxisX: ELiveLinkAxis;
+	TranslationAxisY: ELiveLinkAxis;
+	TranslationAxisZ: ELiveLinkAxis;
+	FrontAxis: ELiveLinkAxis;
+	RightAxis: ELiveLinkAxis;
+	UpAxis: ELiveLinkAxis;
+	bUseOffsetPosition: boolean;
+	bUseOffsetOrientation: boolean;
+	OffsetPosition: Vector;
+	OffsetOrientation: Rotator;
+	static Load(ResourceName: string): LiveLinkTransformAxisSwitchPreProcessor;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkTransformAxisSwitchPreProcessor;
+	static GetDefaultObject(): LiveLinkTransformAxisSwitchPreProcessor;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkTransformAxisSwitchPreProcessor;
+	static C(Other: UObject | any): LiveLinkTransformAxisSwitchPreProcessor;
+}
+
+declare class LiveLinkAnimationAxisSwitchPreProcessor extends LiveLinkTransformAxisSwitchPreProcessor { 
+	static Load(ResourceName: string): LiveLinkAnimationAxisSwitchPreProcessor;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkAnimationAxisSwitchPreProcessor;
+	static GetDefaultObject(): LiveLinkAnimationAxisSwitchPreProcessor;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkAnimationAxisSwitchPreProcessor;
+	static C(Other: UObject | any): LiveLinkAnimationAxisSwitchPreProcessor;
+}
+
+declare class LiveLinkWorldTime { 
+	Time: any;
+	Offset: any;
+	clone() : LiveLinkWorldTime;
+	static C(Other: UObject | any): LiveLinkWorldTime;
+}
+
+declare class LiveLinkMetaData { 
+	StringMetadata: any;
+	SceneTime: QualifiedFrameTime;
+	clone() : LiveLinkMetaData;
+	static C(Other: UObject | any): LiveLinkMetaData;
+}
+
+declare class LiveLinkBaseFrameData { 
+	WorldTime: LiveLinkWorldTime;
+	MetaData: LiveLinkMetaData;
+	PropertyValues: number[];
+	clone() : LiveLinkBaseFrameData;
+	static C(Other: UObject | any): LiveLinkBaseFrameData;
+}
+
+declare class LiveLinkAnimationFrameData extends LiveLinkBaseFrameData { 
+	Transforms: Transform[];
+	clone() : LiveLinkAnimationFrameData;
+	static C(Other: UObject | any): LiveLinkAnimationFrameData;
+}
+
+declare class LiveLinkBaseStaticData { 
+	PropertyNames: string[];
+	clone() : LiveLinkBaseStaticData;
+	static C(Other: UObject | any): LiveLinkBaseStaticData;
+}
+
+declare class LiveLinkSkeletonStaticData extends LiveLinkBaseStaticData { 
+	BoneNames: string[];
+	BoneParents: number[];
+	clone() : LiveLinkSkeletonStaticData;
+	static C(Other: UObject | any): LiveLinkSkeletonStaticData;
+}
+
+declare class LiveLinkBasicBlueprintData extends LiveLinkBaseBlueprintData { 
+	StaticData: LiveLinkBaseStaticData;
+	FrameData: LiveLinkBaseFrameData;
+	clone() : LiveLinkBasicBlueprintData;
+	static C(Other: UObject | any): LiveLinkBasicBlueprintData;
+	GetPropertyValue(PropertyName?: string,Value?: number): {BasicData: LiveLinkBasicBlueprintData, Value: number, $: boolean};
+	static GetPropertyValue(BasicData?: LiveLinkBasicBlueprintData,PropertyName?: string,Value?: number): {BasicData: LiveLinkBasicBlueprintData, Value: number, $: boolean};
+}
+
+declare class SubjectMetadata { 
+	StringMetadata: any;
+	SceneTimecode: Timecode;
+	SceneFramerate: FrameRate;
+	clone() : SubjectMetadata;
+	static C(Other: UObject | any): SubjectMetadata;
+}
+
+declare class LiveLinkTransform { 
+	clone() : LiveLinkTransform;
+	static C(Other: UObject | any): LiveLinkTransform;
+	ChildCount(): {LiveLinkTransform: LiveLinkTransform, $: number};
+	ComponentSpaceTransform(Transform?: Transform): {LiveLinkTransform: LiveLinkTransform, Transform: Transform};
+	GetChildren(Children?: LiveLinkTransform[]): {LiveLinkTransform: LiveLinkTransform, Children: LiveLinkTransform[]};
+	GetParent(Parent?: LiveLinkTransform): {LiveLinkTransform: LiveLinkTransform, Parent: LiveLinkTransform};
+	HasParent(): {LiveLinkTransform: LiveLinkTransform, $: boolean};
+	ParentBoneSpaceTransform(Transform?: Transform): {LiveLinkTransform: LiveLinkTransform, Transform: Transform};
+	TransformName(Name?: string): {LiveLinkTransform: LiveLinkTransform, Name: string};
+	static ChildCount(LiveLinkTransform?: LiveLinkTransform): {LiveLinkTransform: LiveLinkTransform, $: number};
+	static ComponentSpaceTransform(LiveLinkTransform?: LiveLinkTransform,Transform?: Transform): {LiveLinkTransform: LiveLinkTransform, Transform: Transform};
+	static GetChildren(LiveLinkTransform?: LiveLinkTransform,Children?: LiveLinkTransform[]): {LiveLinkTransform: LiveLinkTransform, Children: LiveLinkTransform[]};
+	static GetParent(LiveLinkTransform?: LiveLinkTransform,Parent?: LiveLinkTransform): {LiveLinkTransform: LiveLinkTransform, Parent: LiveLinkTransform};
+	static HasParent(LiveLinkTransform?: LiveLinkTransform): {LiveLinkTransform: LiveLinkTransform, $: boolean};
+	static ParentBoneSpaceTransform(LiveLinkTransform?: LiveLinkTransform,Transform?: Transform): {LiveLinkTransform: LiveLinkTransform, Transform: Transform};
+	static TransformName(LiveLinkTransform?: LiveLinkTransform,Name?: string): {LiveLinkTransform: LiveLinkTransform, Name: string};
+}
+
+declare class SubjectFrameHandle extends LiveLinkBaseBlueprintData { 
+	clone() : SubjectFrameHandle;
+	static C(Other: UObject | any): SubjectFrameHandle;
+	GetAnimationFrameData(AnimationFrameData?: LiveLinkAnimationFrameData): {SubjectFrameHandle: SubjectFrameHandle, AnimationFrameData: LiveLinkAnimationFrameData, $: boolean};
+	GetAnimationStaticData(AnimationStaticData?: LiveLinkSkeletonStaticData): {SubjectFrameHandle: SubjectFrameHandle, AnimationStaticData: LiveLinkSkeletonStaticData, $: boolean};
+	GetBasicData(BasicBlueprintData?: LiveLinkBasicBlueprintData): {SubjectFrameHandle: SubjectFrameHandle, BasicBlueprintData: LiveLinkBasicBlueprintData};
+	GetCurves(Curves?: any): {SubjectFrameHandle: SubjectFrameHandle, Curves: any};
+	GetMetadata(MetaData?: SubjectMetadata): {SubjectFrameHandle: SubjectFrameHandle, MetaData: SubjectMetadata};
+	GetRootTransform(LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
+	GetTransformByIndex(TransformIndex?: number,LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
+	GetTransformByName(TransformName?: string,LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
+	NumberOfTransforms(): {SubjectFrameHandle: SubjectFrameHandle, $: number};
+	TransformNames(TransformNames?: string[]): {SubjectFrameHandle: SubjectFrameHandle, TransformNames: string[]};
+	static GetAnimationFrameData(SubjectFrameHandle?: SubjectFrameHandle,AnimationFrameData?: LiveLinkAnimationFrameData): {SubjectFrameHandle: SubjectFrameHandle, AnimationFrameData: LiveLinkAnimationFrameData, $: boolean};
+	static GetAnimationStaticData(SubjectFrameHandle?: SubjectFrameHandle,AnimationStaticData?: LiveLinkSkeletonStaticData): {SubjectFrameHandle: SubjectFrameHandle, AnimationStaticData: LiveLinkSkeletonStaticData, $: boolean};
+	static GetBasicData(SubjectFrameHandle?: SubjectFrameHandle,BasicBlueprintData?: LiveLinkBasicBlueprintData): {SubjectFrameHandle: SubjectFrameHandle, BasicBlueprintData: LiveLinkBasicBlueprintData};
+	static GetCurves(SubjectFrameHandle?: SubjectFrameHandle,Curves?: any): {SubjectFrameHandle: SubjectFrameHandle, Curves: any};
+	static GetMetadata(SubjectFrameHandle?: SubjectFrameHandle,MetaData?: SubjectMetadata): {SubjectFrameHandle: SubjectFrameHandle, MetaData: SubjectMetadata};
+	static GetRootTransform(SubjectFrameHandle?: SubjectFrameHandle,LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
+	static GetTransformByIndex(SubjectFrameHandle?: SubjectFrameHandle,TransformIndex?: number,LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
+	static GetTransformByName(SubjectFrameHandle?: SubjectFrameHandle,TransformName?: string,LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
+	static NumberOfTransforms(SubjectFrameHandle?: SubjectFrameHandle): {SubjectFrameHandle: SubjectFrameHandle, $: number};
+	static TransformNames(SubjectFrameHandle?: SubjectFrameHandle,TransformNames?: string[]): {SubjectFrameHandle: SubjectFrameHandle, TransformNames: string[]};
+}
+
+declare class LiveLinkSubjectKey { 
+	Source: Guid;
+	SubjectName: LiveLinkSubjectName;
+	clone() : LiveLinkSubjectKey;
+	static C(Other: UObject | any): LiveLinkSubjectKey;
+	GetSpecificLiveLinkSubjectRole(): UnrealEngineClass;
+	IsSpecificLiveLinkSubjectEnabled(bForThisFrame: boolean): boolean;
+	SetLiveLinkSubjectEnabled(bEnabled: boolean): void;
+	static GetSpecificLiveLinkSubjectRole(SubjectKey: LiveLinkSubjectKey): UnrealEngineClass;
+	static IsSpecificLiveLinkSubjectEnabled(SubjectKey: LiveLinkSubjectKey,bForThisFrame: boolean): boolean;
+	static SetLiveLinkSubjectEnabled(SubjectKey: LiveLinkSubjectKey,bEnabled: boolean): void;
+}
+
+declare class LiveLinkSourceHandle { 
+	clone() : LiveLinkSourceHandle;
+	static C(Other: UObject | any): LiveLinkSourceHandle;
+	GetMagicLeapHandTrackingLiveLinkSource(): {SourceHandle: LiveLinkSourceHandle, $: boolean};
+	GetSourceMachineName(): {SourceHandle: LiveLinkSourceHandle, $: string};
+	GetSourceStatus(): {SourceHandle: LiveLinkSourceHandle, $: string};
+	GetSourceType(): {SourceHandle: LiveLinkSourceHandle, $: string};
+	IsSourceStillValid(): {SourceHandle: LiveLinkSourceHandle, $: boolean};
+	RemoveSource(): {SourceHandle: LiveLinkSourceHandle, $: boolean};
+	static GetMagicLeapHandTrackingLiveLinkSource(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: boolean};
+	static GetSourceMachineName(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: string};
+	static GetSourceStatus(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: string};
+	static GetSourceType(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: string};
+	static IsSourceStillValid(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: boolean};
+	static RemoveSource(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: boolean};
+}
+
+declare class LiveLinkSubjectRepresentation { 
+	Subject: LiveLinkSubjectName;
+	Role: UnrealEngineClass;
+	clone() : LiveLinkSubjectRepresentation;
+	static C(Other: UObject | any): LiveLinkSubjectRepresentation;
+	EvaluateLiveLinkFrame(OutBlueprintData?: LiveLinkBaseBlueprintData): {OutBlueprintData: LiveLinkBaseBlueprintData, $: boolean};
+	static EvaluateLiveLinkFrame(SubjectRepresentation: LiveLinkSubjectRepresentation,OutBlueprintData?: LiveLinkBaseBlueprintData): {OutBlueprintData: LiveLinkBaseBlueprintData, $: boolean};
+}
+
+declare class LiveLinkBlueprintLibrary extends BlueprintFunctionLibrary { 
+	static Load(ResourceName: string): LiveLinkBlueprintLibrary;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkBlueprintLibrary;
+	static GetDefaultObject(): LiveLinkBlueprintLibrary;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkBlueprintLibrary;
+	static TransformNames(SubjectFrameHandle?: SubjectFrameHandle,TransformNames?: string[]): {SubjectFrameHandle: SubjectFrameHandle, TransformNames: string[]};
+	static TransformName(LiveLinkTransform?: LiveLinkTransform,Name?: string): {LiveLinkTransform: LiveLinkTransform, Name: string};
+	static SetLiveLinkSubjectEnabled(SubjectKey: LiveLinkSubjectKey,bEnabled: boolean): void;
+	static RemoveSource(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: boolean};
+	static ParentBoneSpaceTransform(LiveLinkTransform?: LiveLinkTransform,Transform?: Transform): {LiveLinkTransform: LiveLinkTransform, Transform: Transform};
+	static NumberOfTransforms(SubjectFrameHandle?: SubjectFrameHandle): {SubjectFrameHandle: SubjectFrameHandle, $: number};
+	static IsSpecificLiveLinkSubjectEnabled(SubjectKey: LiveLinkSubjectKey,bForThisFrame: boolean): boolean;
+	static IsSourceStillValid(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: boolean};
+	static IsLiveLinkSubjectEnabled(SubjectName: LiveLinkSubjectName): boolean;
+	static HasParent(LiveLinkTransform?: LiveLinkTransform): {LiveLinkTransform: LiveLinkTransform, $: boolean};
+	static GetTransformByName(SubjectFrameHandle?: SubjectFrameHandle,TransformName?: string,LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
+	static GetTransformByIndex(SubjectFrameHandle?: SubjectFrameHandle,TransformIndex?: number,LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
+	static GetSpecificLiveLinkSubjectRole(SubjectKey: LiveLinkSubjectKey): UnrealEngineClass;
+	static GetSourceType(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: string};
+	static GetSourceStatus(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: string};
+	static GetSourceMachineName(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: string};
+	static GetRootTransform(SubjectFrameHandle?: SubjectFrameHandle,LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
+	static GetPropertyValue(BasicData?: LiveLinkBasicBlueprintData,PropertyName?: string,Value?: number): {BasicData: LiveLinkBasicBlueprintData, Value: number, $: boolean};
+	static GetParent(LiveLinkTransform?: LiveLinkTransform,Parent?: LiveLinkTransform): {LiveLinkTransform: LiveLinkTransform, Parent: LiveLinkTransform};
+	static GetMetadata(SubjectFrameHandle?: SubjectFrameHandle,MetaData?: SubjectMetadata): {SubjectFrameHandle: SubjectFrameHandle, MetaData: SubjectMetadata};
+	static GetLiveLinkSubjects(bIncludeDisabledSubject: boolean,bIncludeVirtualSubject: boolean): LiveLinkSubjectKey[];
+	static GetLiveLinkSubjectRole(SubjectName: LiveLinkSubjectName): UnrealEngineClass;
+	static GetLiveLinkEnabledSubjectNames(bIncludeVirtualSubject: boolean): LiveLinkSubjectName[];
+	static GetCurves(SubjectFrameHandle?: SubjectFrameHandle,Curves?: any): {SubjectFrameHandle: SubjectFrameHandle, Curves: any};
+	static GetChildren(LiveLinkTransform?: LiveLinkTransform,Children?: LiveLinkTransform[]): {LiveLinkTransform: LiveLinkTransform, Children: LiveLinkTransform[]};
+	static GetBasicData(SubjectFrameHandle?: SubjectFrameHandle,BasicBlueprintData?: LiveLinkBasicBlueprintData): {SubjectFrameHandle: SubjectFrameHandle, BasicBlueprintData: LiveLinkBasicBlueprintData};
+	static GetAnimationStaticData(SubjectFrameHandle?: SubjectFrameHandle,AnimationStaticData?: LiveLinkSkeletonStaticData): {SubjectFrameHandle: SubjectFrameHandle, AnimationStaticData: LiveLinkSkeletonStaticData, $: boolean};
+	static GetAnimationFrameData(SubjectFrameHandle?: SubjectFrameHandle,AnimationFrameData?: LiveLinkAnimationFrameData): {SubjectFrameHandle: SubjectFrameHandle, AnimationFrameData: LiveLinkAnimationFrameData, $: boolean};
+	static EvaluateLiveLinkFrameWithSpecificRole(SubjectName: LiveLinkSubjectName,Role: UnrealEngineClass,OutBlueprintData?: LiveLinkBaseBlueprintData): {OutBlueprintData: LiveLinkBaseBlueprintData, $: boolean};
+	static EvaluateLiveLinkFrameAtWorldTimeOffset(SubjectName: LiveLinkSubjectName,Role: UnrealEngineClass,WorldTimeOffset: number,OutBlueprintData?: LiveLinkBaseBlueprintData): {OutBlueprintData: LiveLinkBaseBlueprintData, $: boolean};
+	static EvaluateLiveLinkFrameAtSceneTime(SubjectName: LiveLinkSubjectName,Role: UnrealEngineClass,SceneTime: Timecode,OutBlueprintData?: LiveLinkBaseBlueprintData): {OutBlueprintData: LiveLinkBaseBlueprintData, $: boolean};
+	static EvaluateLiveLinkFrame(SubjectRepresentation: LiveLinkSubjectRepresentation,OutBlueprintData?: LiveLinkBaseBlueprintData): {OutBlueprintData: LiveLinkBaseBlueprintData, $: boolean};
+	static ComponentSpaceTransform(LiveLinkTransform?: LiveLinkTransform,Transform?: Transform): {LiveLinkTransform: LiveLinkTransform, Transform: Transform};
+	static ChildCount(LiveLinkTransform?: LiveLinkTransform): {LiveLinkTransform: LiveLinkTransform, $: number};
+	static C(Other: UObject | any): LiveLinkBlueprintLibrary;
+}
+
+declare class LiveLinkBlueprintVirtualSubject extends LiveLinkVirtualSubject { 
+	static Load(ResourceName: string): LiveLinkBlueprintVirtualSubject;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkBlueprintVirtualSubject;
+	static GetDefaultObject(): LiveLinkBlueprintVirtualSubject;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkBlueprintVirtualSubject;
+	UpdateVirtualSubjectStaticData_Internal(InStruct: LiveLinkBaseStaticData): boolean;
+	UpdateVirtualSubjectFrameData_Internal(InStruct: LiveLinkBaseFrameData,bInShouldStampCurrentTime: boolean): boolean;
+	OnUpdate(): void;
+	OnInitialize(): void;
+	static C(Other: UObject | any): LiveLinkBlueprintVirtualSubject;
+}
+
+declare class LiveLinkComponent extends ActorComponent { 
+	OnLiveLinkUpdated: UnrealEngineMulticastDelegate<(DeltaTime: number) => void>;
+	static Load(ResourceName: string): LiveLinkComponent;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkComponent;
+	static GetDefaultObject(): LiveLinkComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkComponent;
+	GetSubjectDataAtWorldTime(SubjectName: string,WorldTime: number,bSuccess?: boolean,SubjectFrameHandle?: SubjectFrameHandle): {bSuccess: boolean, SubjectFrameHandle: SubjectFrameHandle};
+	GetSubjectDataAtSceneTime(SubjectName: string,SceneTime: Timecode,bSuccess?: boolean,SubjectFrameHandle?: SubjectFrameHandle): {bSuccess: boolean, SubjectFrameHandle: SubjectFrameHandle};
+	GetSubjectData(SubjectName: string,bSuccess?: boolean,SubjectFrameHandle?: SubjectFrameHandle): {bSuccess: boolean, SubjectFrameHandle: SubjectFrameHandle};
+	GetAvailableSubjectNames(SubjectNames?: string[]): {SubjectNames: string[]};
+	static C(Other: UObject | any): LiveLinkComponent;
+}
+
+declare class LiveLinkDrivenComponent extends ActorComponent { 
+	SubjectName: LiveLinkSubjectName;
+	ActorTransformBone: string;
+	bModifyActorTransform: boolean;
+	bSetRelativeLocation: boolean;
+	static Load(ResourceName: string): LiveLinkDrivenComponent;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkDrivenComponent;
+	static GetDefaultObject(): LiveLinkDrivenComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkDrivenComponent;
+	static C(Other: UObject | any): LiveLinkDrivenComponent;
+}
+
+declare class LiveLinkRetargetAsset extends UObject { 
+	static Load(ResourceName: string): LiveLinkRetargetAsset;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkRetargetAsset;
+	static GetDefaultObject(): LiveLinkRetargetAsset;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkRetargetAsset;
+	static C(Other: UObject | any): LiveLinkRetargetAsset;
+}
+
+declare class LiveLinkInstance extends AnimInstance { 
+	CurrentRetargetAsset: LiveLinkRetargetAsset;
+	static Load(ResourceName: string): LiveLinkInstance;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkInstance;
+	static GetDefaultObject(): LiveLinkInstance;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkInstance;
+	SetSubject(SubjectName: LiveLinkSubjectName): void;
+	SetRetargetAsset(RetargetAsset: UnrealEngineClass): void;
+	static C(Other: UObject | any): LiveLinkInstance;
+}
+
+declare class ProviderPollResult { 
+	Name: string;
+	MachineName: string;
+	MachineTimeOffset: any;
+	clone() : ProviderPollResult;
+	static C(Other: UObject | any): ProviderPollResult;
+}
+
+declare class LiveLinkMessageBusFinder extends UObject { 
+	static Load(ResourceName: string): LiveLinkMessageBusFinder;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkMessageBusFinder;
+	static GetDefaultObject(): LiveLinkMessageBusFinder;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkMessageBusFinder;
+	GetAvailableProviders(WorldContextObject: UObject,LatentInfo: LatentActionInfo,Duration: number,AvailableProviders?: ProviderPollResult[]): {AvailableProviders: ProviderPollResult[]};
+	static ConstructMessageBusFinder(): LiveLinkMessageBusFinder;
+	static ConnectToProvider(Provider?: ProviderPollResult,SourceHandle?: LiveLinkSourceHandle): {Provider: ProviderPollResult, SourceHandle: LiveLinkSourceHandle};
+	static C(Other: UObject | any): LiveLinkMessageBusFinder;
+}
+
+declare class LiveLinkMessageBusSourceFactory extends LiveLinkSourceFactory { 
+	static Load(ResourceName: string): LiveLinkMessageBusSourceFactory;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkMessageBusSourceFactory;
+	static GetDefaultObject(): LiveLinkMessageBusSourceFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkMessageBusSourceFactory;
+	static C(Other: UObject | any): LiveLinkMessageBusSourceFactory;
+}
+
+declare class LiveLinkMessageBusSourceSettings extends LiveLinkSourceSettings { 
+	static Load(ResourceName: string): LiveLinkMessageBusSourceSettings;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkMessageBusSourceSettings;
+	static GetDefaultObject(): LiveLinkMessageBusSourceSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkMessageBusSourceSettings;
+	static C(Other: UObject | any): LiveLinkMessageBusSourceSettings;
+}
+
+declare class LiveLinkSourcePreset { 
+	Guid: Guid;
+	Settings: LiveLinkSourceSettings;
+	SourceType: string;
+	clone() : LiveLinkSourcePreset;
+	static C(Other: UObject | any): LiveLinkSourcePreset;
+}
+
+declare class LiveLinkSubjectPreset { 
+	Key: LiveLinkSubjectKey;
+	Role: UnrealEngineClass;
+	Settings: LiveLinkSubjectSettings;
+	VirtualSubject: LiveLinkVirtualSubject;
+	bEnabled: boolean;
+	clone() : LiveLinkSubjectPreset;
+	static C(Other: UObject | any): LiveLinkSubjectPreset;
+}
+
+declare class LiveLinkPreset extends UObject { 
+	Sources: LiveLinkSourcePreset[];
+	Subjects: LiveLinkSubjectPreset[];
+	static Load(ResourceName: string): LiveLinkPreset;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkPreset;
+	static GetDefaultObject(): LiveLinkPreset;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkPreset;
+	BuildFromClient(): void;
+	ApplyToClient(): boolean;
+	AddToClient(bRecreatePresets: boolean): boolean;
+	static C(Other: UObject | any): LiveLinkPreset;
+}
+
+declare class LiveLinkRemapAsset extends LiveLinkRetargetAsset { 
+	static Load(ResourceName: string): LiveLinkRemapAsset;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkRemapAsset;
+	static GetDefaultObject(): LiveLinkRemapAsset;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkRemapAsset;
+	RemapCurveElements(CurveItems?: any): {CurveItems: any};
+	GetRemappedCurveName(CurveName: string): string;
+	GetRemappedBoneName(BoneName: string): string;
+	static C(Other: UObject | any): LiveLinkRemapAsset;
+}
+
+declare class LiveLinkRoleProjectSetting { 
+	Role: UnrealEngineClass;
+	SettingClass: UnrealEngineClass;
+	FrameInterpolationProcessor: UnrealEngineClass;
+	FramePreProcessors: UnrealEngineClass[];
+	clone() : LiveLinkRoleProjectSetting;
+	static C(Other: UObject | any): LiveLinkRoleProjectSetting;
+}
+
+declare class LiveLinkSettings extends UObject { 
+	DefaultRoleSettings: LiveLinkRoleProjectSetting[];
+	FrameInterpolationProcessor: UnrealEngineClass;
+	DefaultLiveLinkPreset: LiveLinkPreset;
+	PresetSaveDir: DirectoryPath;
+	ClockOffsetCorrectionStep: number;
+	DefaultMessageBusSourceMode: ELiveLinkSourceMode;
+	MessageBusPingRequestFrequency: any;
+	MessageBusHeartbeatFrequency: any;
+	MessageBusHeartbeatTimeout: any;
+	MessageBusTimeBeforeRemovingInactiveSource: any;
+	TimeWithoutFrameToBeConsiderAsInvalid: any;
+	ValidColor: LinearColor;
+	InvalidColor: LinearColor;
+	TextSizeSource: number;
+	TextSizeSubject: number;
+	static Load(ResourceName: string): LiveLinkSettings;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkSettings;
+	static GetDefaultObject(): LiveLinkSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkSettings;
+	static C(Other: UObject | any): LiveLinkSettings;
+}
+
+declare type ELiveLinkTimecodeProviderEvaluationType = 'Lerp' | 'Nearest' | 'Latest' | 'ELiveLinkTimecodeProviderEvaluationType_MAX';
+declare var ELiveLinkTimecodeProviderEvaluationType : { Lerp:'Lerp',Nearest:'Nearest',Latest:'Latest',ELiveLinkTimecodeProviderEvaluationType_MAX:'ELiveLinkTimecodeProviderEvaluationType_MAX', };
+declare class LiveLinkTimecodeProvider extends TimecodeProvider { 
+	SubjectKey: LiveLinkSubjectKey;
+	Evaluation: ELiveLinkTimecodeProviderEvaluationType;
+	bOverrideFrameRate: boolean;
+	OverrideFrameRate: FrameRate;
+	BufferSize: number;
+	static Load(ResourceName: string): LiveLinkTimecodeProvider;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkTimecodeProvider;
+	static GetDefaultObject(): LiveLinkTimecodeProvider;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkTimecodeProvider;
+	static C(Other: UObject | any): LiveLinkTimecodeProvider;
+}
+
+declare class LiveLinkTimeSynchronizationSource extends TimeSynchronizationSource { 
+	SubjectName: LiveLinkSubjectName;
+	static Load(ResourceName: string): LiveLinkTimeSynchronizationSource;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkTimeSynchronizationSource;
+	static GetDefaultObject(): LiveLinkTimeSynchronizationSource;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkTimeSynchronizationSource;
+	static C(Other: UObject | any): LiveLinkTimeSynchronizationSource;
+}
+
+declare class LiveLinkVirtualSubjectSourceSettings extends LiveLinkSourceSettings { 
+	SourceName: string;
+	static Load(ResourceName: string): LiveLinkVirtualSubjectSourceSettings;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkVirtualSubjectSourceSettings;
+	static GetDefaultObject(): LiveLinkVirtualSubjectSourceSettings;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkVirtualSubjectSourceSettings;
+	static C(Other: UObject | any): LiveLinkVirtualSubjectSourceSettings;
+}
+
+declare class LiveLinkOpenXRHandTrackingSourceFactory extends LiveLinkSourceFactory { 
+	static Load(ResourceName: string): LiveLinkOpenXRHandTrackingSourceFactory;
+	static Find(Outer: UObject, ResourceName: string): LiveLinkOpenXRHandTrackingSourceFactory;
+	static GetDefaultObject(): LiveLinkOpenXRHandTrackingSourceFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkOpenXRHandTrackingSourceFactory;
+	static C(Other: UObject | any): LiveLinkOpenXRHandTrackingSourceFactory;
+}
+
+declare type EQuatSwizzleAxisB = 'X' | 'Y' | 'Z' | 'W' | 'MinusX' | 'MinusY' | 'MinusZ' | 'MinusW' | 'EQuatSwizzleAxisB_MAX';
+declare var EQuatSwizzleAxisB : { X:'X',Y:'Y',Z:'Z',W:'W',MinusX:'MinusX',MinusY:'MinusY',MinusZ:'MinusZ',MinusW:'MinusW',EQuatSwizzleAxisB_MAX:'EQuatSwizzleAxisB_MAX', };
+declare class OpenXRHandTrackingLiveLinkRemapAsset extends LiveLinkRetargetAsset { 
+	bHasMetacarpals: boolean;
+	bRetargetRotationOnly: boolean;
+	SwizzleX: EQuatSwizzleAxisB;
+	SwizzleY: EQuatSwizzleAxisB;
+	SwizzleZ: EQuatSwizzleAxisB;
+	SwizzleW: EQuatSwizzleAxisB;
+	HandTrackingBoneNameMap: any;
+	static Load(ResourceName: string): OpenXRHandTrackingLiveLinkRemapAsset;
+	static Find(Outer: UObject, ResourceName: string): OpenXRHandTrackingLiveLinkRemapAsset;
+	static GetDefaultObject(): OpenXRHandTrackingLiveLinkRemapAsset;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): OpenXRHandTrackingLiveLinkRemapAsset;
+	static C(Other: UObject | any): OpenXRHandTrackingLiveLinkRemapAsset;
+}
+
+declare type EClothMassMode = 'UniformMass' | 'TotalMass' | 'Density' | 'MaxClothMassMode' | 'EClothMassMode_MAX';
+declare var EClothMassMode : { UniformMass:'UniformMass',TotalMass:'TotalMass',Density:'Density',MaxClothMassMode:'MaxClothMassMode',EClothMassMode_MAX:'EClothMassMode_MAX', };
+declare class ChaosClothWeightedValue { 
+	Low: number;
+	High: number;
+	clone() : ChaosClothWeightedValue;
+	static C(Other: UObject | any): ChaosClothWeightedValue;
+}
+
+declare type EChaosClothTetherMode = 'FastTetherFastLength' | 'AccurateTetherFastLength' | 'AccurateTetherAccurateLength' | 'MaxChaosClothTetherMode' | 'EChaosClothTetherMode_MAX';
+declare var EChaosClothTetherMode : { FastTetherFastLength:'FastTetherFastLength',AccurateTetherFastLength:'AccurateTetherFastLength',AccurateTetherAccurateLength:'AccurateTetherAccurateLength',MaxChaosClothTetherMode:'MaxChaosClothTetherMode',EChaosClothTetherMode_MAX:'EChaosClothTetherMode_MAX', };
+declare class ChaosClothConfig extends ClothConfigCommon { 
+	MassMode: EClothMassMode;
+	UniformMass: number;
+	TotalMass: number;
+	Density: number;
+	MinPerParticleMass: number;
+	EdgeStiffness: number;
+	BendingStiffness: number;
+	bUseBendingElements: boolean;
+	AreaStiffness: number;
+	VolumeStiffness: number;
+	TetherStiffness: ChaosClothWeightedValue;
+	LimitScale: number;
+	bUseGeodesicDistance: boolean;
+	ShapeTargetStiffness: number;
+	CollisionThickness: number;
+	FrictionCoefficient: number;
+	bUseCCD: boolean;
+	bUseSelfCollisions: boolean;
+	SelfCollisionThickness: number;
+	bUseLegacyBackstop: boolean;
+	DampingCoefficient: number;
+	bUsePointBasedWindModel: boolean;
+	DragCoefficient: number;
+	LiftCoefficient: number;
+	bUseGravityOverride: boolean;
+	GravityScale: number;
+	Gravity: Vector;
+	AnimDriveStiffness: ChaosClothWeightedValue;
+	AnimDriveDamping: ChaosClothWeightedValue;
+	LinearVelocityScale: Vector;
+	AngularVelocityScale: number;
+	FictitiousAngularScale: number;
+	bUseTetrahedralConstraints: boolean;
+	bUseThinShellVolumeConstraints: boolean;
+	bUseContinuousCollisionDetection: boolean;
+	TetherMode: EChaosClothTetherMode;
+	AnimDriveSpringStiffness: number;
+	StrainLimitingStiffness: number;
+	static Load(ResourceName: string): ChaosClothConfig;
+	static Find(Outer: UObject, ResourceName: string): ChaosClothConfig;
+	static GetDefaultObject(): ChaosClothConfig;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothConfig;
+	static C(Other: UObject | any): ChaosClothConfig;
+}
+
+declare class ChaosClothSharedSimConfig extends ClothSharedConfigCommon { 
+	IterationCount: number;
+	SubdivisionCount: number;
+	SelfCollisionThickness: number;
+	CollisionThickness: number;
+	bUseDampingOverride: boolean;
+	Damping: number;
+	bUseGravityOverride: boolean;
+	GravityScale: number;
+	Gravity: Vector;
+	bUseLocalSpaceSimulation: boolean;
+	bUseXPBDConstraints: boolean;
+	static Load(ResourceName: string): ChaosClothSharedSimConfig;
+	static Find(Outer: UObject, ResourceName: string): ChaosClothSharedSimConfig;
+	static GetDefaultObject(): ChaosClothSharedSimConfig;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothSharedSimConfig;
+	static C(Other: UObject | any): ChaosClothSharedSimConfig;
+}
+
+declare class ChaosClothingSimulationFactory extends ClothingSimulationFactory { 
+	static Load(ResourceName: string): ChaosClothingSimulationFactory;
+	static Find(Outer: UObject, ResourceName: string): ChaosClothingSimulationFactory;
+	static GetDefaultObject(): ChaosClothingSimulationFactory;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothingSimulationFactory;
+	static C(Other: UObject | any): ChaosClothingSimulationFactory;
+}
+
+declare class ChaosClothingInteractor extends ClothingInteractor { 
+	static Load(ResourceName: string): ChaosClothingInteractor;
+	static Find(Outer: UObject, ResourceName: string): ChaosClothingInteractor;
+	static GetDefaultObject(): ChaosClothingInteractor;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothingInteractor;
+	SetVelocityScale(LinearVelocityScale: Vector,AngularVelocityScale: number,FictitiousAngularScale: number): void;
+	SetMaterialLinear(EdgeStiffness: number,BendingStiffness: number,AreaStiffness: number): void;
+	SetLongRangeAttachmentLinear(TetherStiffness: number): void;
+	SetLongRangeAttachment(TetherStiffness: Vector2D): void;
+	SetGravity(GravityScale: number,bIsGravityOverridden: boolean,GravityOverride: Vector): void;
+	SetDamping(DampingCoefficient: number): void;
+	SetCollision(CollisionThickness: number,FrictionCoefficient: number,bUseCCD: boolean,SelfCollisionThickness: number): void;
+	SetAnimDriveLinear(AnimDriveStiffness: number): void;
+	SetAnimDrive(AnimDriveStiffness: Vector2D,AnimDriveDamping: Vector2D): void;
+	SetAerodynamics(DragCoefficient: number,LiftCoefficient: number,WindVelocity: Vector): void;
+	ResetAndTeleport(bReset: boolean,bTeleport: boolean): void;
+	static C(Other: UObject | any): ChaosClothingInteractor;
+}
+
+declare class ChaosClothingSimulationInteractor extends ClothingSimulationInteractor { 
+	static Load(ResourceName: string): ChaosClothingSimulationInteractor;
+	static Find(Outer: UObject, ResourceName: string): ChaosClothingSimulationInteractor;
+	static GetDefaultObject(): ChaosClothingSimulationInteractor;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ChaosClothingSimulationInteractor;
+	static C(Other: UObject | any): ChaosClothingSimulationInteractor;
 }
 
 declare class NamedInterface { 
@@ -17372,515 +18122,6 @@ declare class K2Node_LeaderboardQuery extends K2Node_BaseAsyncTask {
 	static C(Other: UObject | any): K2Node_LeaderboardQuery;
 }
 
-declare class EyeTrackerStereoGazeData { 
-	LeftEyeOrigin: Vector;
-	LeftEyeDirection: Vector;
-	RightEyeOrigin: Vector;
-	RightEyeDirection: Vector;
-	FixationPoint: Vector;
-	ConfidenceValue: number;
-	clone() : EyeTrackerStereoGazeData;
-	static C(Other: UObject | any): EyeTrackerStereoGazeData;
-	GetStereoGazeData(): {OutGazeData: EyeTrackerStereoGazeData, $: boolean};
-	static GetStereoGazeData(OutGazeData?: EyeTrackerStereoGazeData): {OutGazeData: EyeTrackerStereoGazeData, $: boolean};
-}
-
-declare class EyeTrackerGazeData { 
-	GazeOrigin: Vector;
-	GazeDirection: Vector;
-	FixationPoint: Vector;
-	ConfidenceValue: number;
-	clone() : EyeTrackerGazeData;
-	static C(Other: UObject | any): EyeTrackerGazeData;
-	GetGazeData(): {OutGazeData: EyeTrackerGazeData, $: boolean};
-	static GetGazeData(OutGazeData?: EyeTrackerGazeData): {OutGazeData: EyeTrackerGazeData, $: boolean};
-}
-
-declare class EyeTrackerFunctionLibrary extends BlueprintFunctionLibrary { 
-	static Load(ResourceName: string): EyeTrackerFunctionLibrary;
-	static Find(Outer: UObject, ResourceName: string): EyeTrackerFunctionLibrary;
-	static GetDefaultObject(): EyeTrackerFunctionLibrary;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): EyeTrackerFunctionLibrary;
-	static SetEyeTrackedPlayer(PlayerController: PlayerController): void;
-	static IsStereoGazeDataAvailable(): boolean;
-	static IsEyeTrackerConnected(): boolean;
-	static GetStereoGazeData(OutGazeData?: EyeTrackerStereoGazeData): {OutGazeData: EyeTrackerStereoGazeData, $: boolean};
-	static GetGazeData(OutGazeData?: EyeTrackerGazeData): {OutGazeData: EyeTrackerGazeData, $: boolean};
-	static C(Other: UObject | any): EyeTrackerFunctionLibrary;
-}
-
-declare class LiveLinkBasicFrameInterpolationProcessor extends LiveLinkFrameInterpolationProcessor { 
-	bInterpolatePropertyValues: boolean;
-	static Load(ResourceName: string): LiveLinkBasicFrameInterpolationProcessor;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkBasicFrameInterpolationProcessor;
-	static GetDefaultObject(): LiveLinkBasicFrameInterpolationProcessor;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkBasicFrameInterpolationProcessor;
-	static C(Other: UObject | any): LiveLinkBasicFrameInterpolationProcessor;
-}
-
-declare class LiveLinkAnimationFrameInterpolationProcessor extends LiveLinkBasicFrameInterpolationProcessor { 
-	static Load(ResourceName: string): LiveLinkAnimationFrameInterpolationProcessor;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkAnimationFrameInterpolationProcessor;
-	static GetDefaultObject(): LiveLinkAnimationFrameInterpolationProcessor;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkAnimationFrameInterpolationProcessor;
-	static C(Other: UObject | any): LiveLinkAnimationFrameInterpolationProcessor;
-}
-
-declare class LiveLinkAnimationRoleToTransform extends LiveLinkFrameTranslator { 
-	BoneName: string;
-	static Load(ResourceName: string): LiveLinkAnimationRoleToTransform;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkAnimationRoleToTransform;
-	static GetDefaultObject(): LiveLinkAnimationRoleToTransform;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkAnimationRoleToTransform;
-	static C(Other: UObject | any): LiveLinkAnimationRoleToTransform;
-}
-
-declare class LiveLinkAnimationVirtualSubject extends LiveLinkVirtualSubject { 
-	bAppendSubjectNameToBones: boolean;
-	static Load(ResourceName: string): LiveLinkAnimationVirtualSubject;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkAnimationVirtualSubject;
-	static GetDefaultObject(): LiveLinkAnimationVirtualSubject;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkAnimationVirtualSubject;
-	static C(Other: UObject | any): LiveLinkAnimationVirtualSubject;
-}
-
-declare type ELiveLinkAxis = 'X' | 'Y' | 'Z' | 'XNeg' | 'YNeg' | 'ZNeg' | 'ELiveLinkAxis_MAX';
-declare var ELiveLinkAxis : { X:'X',Y:'Y',Z:'Z',XNeg:'XNeg',YNeg:'YNeg',ZNeg:'ZNeg',ELiveLinkAxis_MAX:'ELiveLinkAxis_MAX', };
-declare class LiveLinkTransformAxisSwitchPreProcessor extends LiveLinkFramePreProcessor { 
-	OrientationAxisX: ELiveLinkAxis;
-	OrientationAxisY: ELiveLinkAxis;
-	OrientationAxisZ: ELiveLinkAxis;
-	TranslationAxisX: ELiveLinkAxis;
-	TranslationAxisY: ELiveLinkAxis;
-	TranslationAxisZ: ELiveLinkAxis;
-	FrontAxis: ELiveLinkAxis;
-	RightAxis: ELiveLinkAxis;
-	UpAxis: ELiveLinkAxis;
-	bUseOffsetPosition: boolean;
-	bUseOffsetOrientation: boolean;
-	OffsetPosition: Vector;
-	OffsetOrientation: Rotator;
-	static Load(ResourceName: string): LiveLinkTransformAxisSwitchPreProcessor;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkTransformAxisSwitchPreProcessor;
-	static GetDefaultObject(): LiveLinkTransformAxisSwitchPreProcessor;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkTransformAxisSwitchPreProcessor;
-	static C(Other: UObject | any): LiveLinkTransformAxisSwitchPreProcessor;
-}
-
-declare class LiveLinkAnimationAxisSwitchPreProcessor extends LiveLinkTransformAxisSwitchPreProcessor { 
-	static Load(ResourceName: string): LiveLinkAnimationAxisSwitchPreProcessor;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkAnimationAxisSwitchPreProcessor;
-	static GetDefaultObject(): LiveLinkAnimationAxisSwitchPreProcessor;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkAnimationAxisSwitchPreProcessor;
-	static C(Other: UObject | any): LiveLinkAnimationAxisSwitchPreProcessor;
-}
-
-declare class LiveLinkWorldTime { 
-	Time: any;
-	Offset: any;
-	clone() : LiveLinkWorldTime;
-	static C(Other: UObject | any): LiveLinkWorldTime;
-}
-
-declare class LiveLinkMetaData { 
-	StringMetadata: any;
-	SceneTime: QualifiedFrameTime;
-	clone() : LiveLinkMetaData;
-	static C(Other: UObject | any): LiveLinkMetaData;
-}
-
-declare class LiveLinkBaseFrameData { 
-	WorldTime: LiveLinkWorldTime;
-	MetaData: LiveLinkMetaData;
-	PropertyValues: number[];
-	clone() : LiveLinkBaseFrameData;
-	static C(Other: UObject | any): LiveLinkBaseFrameData;
-}
-
-declare class LiveLinkAnimationFrameData extends LiveLinkBaseFrameData { 
-	Transforms: Transform[];
-	clone() : LiveLinkAnimationFrameData;
-	static C(Other: UObject | any): LiveLinkAnimationFrameData;
-}
-
-declare class LiveLinkBaseStaticData { 
-	PropertyNames: string[];
-	clone() : LiveLinkBaseStaticData;
-	static C(Other: UObject | any): LiveLinkBaseStaticData;
-}
-
-declare class LiveLinkSkeletonStaticData extends LiveLinkBaseStaticData { 
-	BoneNames: string[];
-	BoneParents: number[];
-	clone() : LiveLinkSkeletonStaticData;
-	static C(Other: UObject | any): LiveLinkSkeletonStaticData;
-}
-
-declare class LiveLinkBasicBlueprintData extends LiveLinkBaseBlueprintData { 
-	StaticData: LiveLinkBaseStaticData;
-	FrameData: LiveLinkBaseFrameData;
-	clone() : LiveLinkBasicBlueprintData;
-	static C(Other: UObject | any): LiveLinkBasicBlueprintData;
-	GetPropertyValue(PropertyName?: string,Value?: number): {BasicData: LiveLinkBasicBlueprintData, Value: number, $: boolean};
-	static GetPropertyValue(BasicData?: LiveLinkBasicBlueprintData,PropertyName?: string,Value?: number): {BasicData: LiveLinkBasicBlueprintData, Value: number, $: boolean};
-}
-
-declare class SubjectMetadata { 
-	StringMetadata: any;
-	SceneTimecode: Timecode;
-	SceneFramerate: FrameRate;
-	clone() : SubjectMetadata;
-	static C(Other: UObject | any): SubjectMetadata;
-}
-
-declare class LiveLinkTransform { 
-	clone() : LiveLinkTransform;
-	static C(Other: UObject | any): LiveLinkTransform;
-	ChildCount(): {LiveLinkTransform: LiveLinkTransform, $: number};
-	ComponentSpaceTransform(Transform?: Transform): {LiveLinkTransform: LiveLinkTransform, Transform: Transform};
-	GetChildren(Children?: LiveLinkTransform[]): {LiveLinkTransform: LiveLinkTransform, Children: LiveLinkTransform[]};
-	GetParent(Parent?: LiveLinkTransform): {LiveLinkTransform: LiveLinkTransform, Parent: LiveLinkTransform};
-	HasParent(): {LiveLinkTransform: LiveLinkTransform, $: boolean};
-	ParentBoneSpaceTransform(Transform?: Transform): {LiveLinkTransform: LiveLinkTransform, Transform: Transform};
-	TransformName(Name?: string): {LiveLinkTransform: LiveLinkTransform, Name: string};
-	static ChildCount(LiveLinkTransform?: LiveLinkTransform): {LiveLinkTransform: LiveLinkTransform, $: number};
-	static ComponentSpaceTransform(LiveLinkTransform?: LiveLinkTransform,Transform?: Transform): {LiveLinkTransform: LiveLinkTransform, Transform: Transform};
-	static GetChildren(LiveLinkTransform?: LiveLinkTransform,Children?: LiveLinkTransform[]): {LiveLinkTransform: LiveLinkTransform, Children: LiveLinkTransform[]};
-	static GetParent(LiveLinkTransform?: LiveLinkTransform,Parent?: LiveLinkTransform): {LiveLinkTransform: LiveLinkTransform, Parent: LiveLinkTransform};
-	static HasParent(LiveLinkTransform?: LiveLinkTransform): {LiveLinkTransform: LiveLinkTransform, $: boolean};
-	static ParentBoneSpaceTransform(LiveLinkTransform?: LiveLinkTransform,Transform?: Transform): {LiveLinkTransform: LiveLinkTransform, Transform: Transform};
-	static TransformName(LiveLinkTransform?: LiveLinkTransform,Name?: string): {LiveLinkTransform: LiveLinkTransform, Name: string};
-}
-
-declare class SubjectFrameHandle extends LiveLinkBaseBlueprintData { 
-	clone() : SubjectFrameHandle;
-	static C(Other: UObject | any): SubjectFrameHandle;
-	GetAnimationFrameData(AnimationFrameData?: LiveLinkAnimationFrameData): {SubjectFrameHandle: SubjectFrameHandle, AnimationFrameData: LiveLinkAnimationFrameData, $: boolean};
-	GetAnimationStaticData(AnimationStaticData?: LiveLinkSkeletonStaticData): {SubjectFrameHandle: SubjectFrameHandle, AnimationStaticData: LiveLinkSkeletonStaticData, $: boolean};
-	GetBasicData(BasicBlueprintData?: LiveLinkBasicBlueprintData): {SubjectFrameHandle: SubjectFrameHandle, BasicBlueprintData: LiveLinkBasicBlueprintData};
-	GetCurves(Curves?: any): {SubjectFrameHandle: SubjectFrameHandle, Curves: any};
-	GetMetadata(MetaData?: SubjectMetadata): {SubjectFrameHandle: SubjectFrameHandle, MetaData: SubjectMetadata};
-	GetRootTransform(LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
-	GetTransformByIndex(TransformIndex?: number,LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
-	GetTransformByName(TransformName?: string,LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
-	NumberOfTransforms(): {SubjectFrameHandle: SubjectFrameHandle, $: number};
-	TransformNames(TransformNames?: string[]): {SubjectFrameHandle: SubjectFrameHandle, TransformNames: string[]};
-	static GetAnimationFrameData(SubjectFrameHandle?: SubjectFrameHandle,AnimationFrameData?: LiveLinkAnimationFrameData): {SubjectFrameHandle: SubjectFrameHandle, AnimationFrameData: LiveLinkAnimationFrameData, $: boolean};
-	static GetAnimationStaticData(SubjectFrameHandle?: SubjectFrameHandle,AnimationStaticData?: LiveLinkSkeletonStaticData): {SubjectFrameHandle: SubjectFrameHandle, AnimationStaticData: LiveLinkSkeletonStaticData, $: boolean};
-	static GetBasicData(SubjectFrameHandle?: SubjectFrameHandle,BasicBlueprintData?: LiveLinkBasicBlueprintData): {SubjectFrameHandle: SubjectFrameHandle, BasicBlueprintData: LiveLinkBasicBlueprintData};
-	static GetCurves(SubjectFrameHandle?: SubjectFrameHandle,Curves?: any): {SubjectFrameHandle: SubjectFrameHandle, Curves: any};
-	static GetMetadata(SubjectFrameHandle?: SubjectFrameHandle,MetaData?: SubjectMetadata): {SubjectFrameHandle: SubjectFrameHandle, MetaData: SubjectMetadata};
-	static GetRootTransform(SubjectFrameHandle?: SubjectFrameHandle,LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
-	static GetTransformByIndex(SubjectFrameHandle?: SubjectFrameHandle,TransformIndex?: number,LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
-	static GetTransformByName(SubjectFrameHandle?: SubjectFrameHandle,TransformName?: string,LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
-	static NumberOfTransforms(SubjectFrameHandle?: SubjectFrameHandle): {SubjectFrameHandle: SubjectFrameHandle, $: number};
-	static TransformNames(SubjectFrameHandle?: SubjectFrameHandle,TransformNames?: string[]): {SubjectFrameHandle: SubjectFrameHandle, TransformNames: string[]};
-}
-
-declare class LiveLinkSubjectKey { 
-	Source: Guid;
-	SubjectName: LiveLinkSubjectName;
-	clone() : LiveLinkSubjectKey;
-	static C(Other: UObject | any): LiveLinkSubjectKey;
-	GetSpecificLiveLinkSubjectRole(): UnrealEngineClass;
-	IsSpecificLiveLinkSubjectEnabled(bForThisFrame: boolean): boolean;
-	SetLiveLinkSubjectEnabled(bEnabled: boolean): void;
-	static GetSpecificLiveLinkSubjectRole(SubjectKey: LiveLinkSubjectKey): UnrealEngineClass;
-	static IsSpecificLiveLinkSubjectEnabled(SubjectKey: LiveLinkSubjectKey,bForThisFrame: boolean): boolean;
-	static SetLiveLinkSubjectEnabled(SubjectKey: LiveLinkSubjectKey,bEnabled: boolean): void;
-}
-
-declare class LiveLinkSourceHandle { 
-	clone() : LiveLinkSourceHandle;
-	static C(Other: UObject | any): LiveLinkSourceHandle;
-	GetMagicLeapHandTrackingLiveLinkSource(): {SourceHandle: LiveLinkSourceHandle, $: boolean};
-	GetSourceMachineName(): {SourceHandle: LiveLinkSourceHandle, $: string};
-	GetSourceStatus(): {SourceHandle: LiveLinkSourceHandle, $: string};
-	GetSourceType(): {SourceHandle: LiveLinkSourceHandle, $: string};
-	IsSourceStillValid(): {SourceHandle: LiveLinkSourceHandle, $: boolean};
-	RemoveSource(): {SourceHandle: LiveLinkSourceHandle, $: boolean};
-	static GetMagicLeapHandTrackingLiveLinkSource(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: boolean};
-	static GetSourceMachineName(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: string};
-	static GetSourceStatus(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: string};
-	static GetSourceType(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: string};
-	static IsSourceStillValid(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: boolean};
-	static RemoveSource(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: boolean};
-}
-
-declare class LiveLinkSubjectRepresentation { 
-	Subject: LiveLinkSubjectName;
-	Role: UnrealEngineClass;
-	clone() : LiveLinkSubjectRepresentation;
-	static C(Other: UObject | any): LiveLinkSubjectRepresentation;
-	EvaluateLiveLinkFrame(OutBlueprintData?: LiveLinkBaseBlueprintData): {OutBlueprintData: LiveLinkBaseBlueprintData, $: boolean};
-	static EvaluateLiveLinkFrame(SubjectRepresentation: LiveLinkSubjectRepresentation,OutBlueprintData?: LiveLinkBaseBlueprintData): {OutBlueprintData: LiveLinkBaseBlueprintData, $: boolean};
-}
-
-declare class LiveLinkBlueprintLibrary extends BlueprintFunctionLibrary { 
-	static Load(ResourceName: string): LiveLinkBlueprintLibrary;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkBlueprintLibrary;
-	static GetDefaultObject(): LiveLinkBlueprintLibrary;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkBlueprintLibrary;
-	static TransformNames(SubjectFrameHandle?: SubjectFrameHandle,TransformNames?: string[]): {SubjectFrameHandle: SubjectFrameHandle, TransformNames: string[]};
-	static TransformName(LiveLinkTransform?: LiveLinkTransform,Name?: string): {LiveLinkTransform: LiveLinkTransform, Name: string};
-	static SetLiveLinkSubjectEnabled(SubjectKey: LiveLinkSubjectKey,bEnabled: boolean): void;
-	static RemoveSource(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: boolean};
-	static ParentBoneSpaceTransform(LiveLinkTransform?: LiveLinkTransform,Transform?: Transform): {LiveLinkTransform: LiveLinkTransform, Transform: Transform};
-	static NumberOfTransforms(SubjectFrameHandle?: SubjectFrameHandle): {SubjectFrameHandle: SubjectFrameHandle, $: number};
-	static IsSpecificLiveLinkSubjectEnabled(SubjectKey: LiveLinkSubjectKey,bForThisFrame: boolean): boolean;
-	static IsSourceStillValid(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: boolean};
-	static IsLiveLinkSubjectEnabled(SubjectName: LiveLinkSubjectName): boolean;
-	static HasParent(LiveLinkTransform?: LiveLinkTransform): {LiveLinkTransform: LiveLinkTransform, $: boolean};
-	static GetTransformByName(SubjectFrameHandle?: SubjectFrameHandle,TransformName?: string,LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
-	static GetTransformByIndex(SubjectFrameHandle?: SubjectFrameHandle,TransformIndex?: number,LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
-	static GetSpecificLiveLinkSubjectRole(SubjectKey: LiveLinkSubjectKey): UnrealEngineClass;
-	static GetSourceType(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: string};
-	static GetSourceStatus(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: string};
-	static GetSourceMachineName(SourceHandle?: LiveLinkSourceHandle): {SourceHandle: LiveLinkSourceHandle, $: string};
-	static GetRootTransform(SubjectFrameHandle?: SubjectFrameHandle,LiveLinkTransform?: LiveLinkTransform): {SubjectFrameHandle: SubjectFrameHandle, LiveLinkTransform: LiveLinkTransform};
-	static GetPropertyValue(BasicData?: LiveLinkBasicBlueprintData,PropertyName?: string,Value?: number): {BasicData: LiveLinkBasicBlueprintData, Value: number, $: boolean};
-	static GetParent(LiveLinkTransform?: LiveLinkTransform,Parent?: LiveLinkTransform): {LiveLinkTransform: LiveLinkTransform, Parent: LiveLinkTransform};
-	static GetMetadata(SubjectFrameHandle?: SubjectFrameHandle,MetaData?: SubjectMetadata): {SubjectFrameHandle: SubjectFrameHandle, MetaData: SubjectMetadata};
-	static GetLiveLinkSubjects(bIncludeDisabledSubject: boolean,bIncludeVirtualSubject: boolean): LiveLinkSubjectKey[];
-	static GetLiveLinkSubjectRole(SubjectName: LiveLinkSubjectName): UnrealEngineClass;
-	static GetLiveLinkEnabledSubjectNames(bIncludeVirtualSubject: boolean): LiveLinkSubjectName[];
-	static GetCurves(SubjectFrameHandle?: SubjectFrameHandle,Curves?: any): {SubjectFrameHandle: SubjectFrameHandle, Curves: any};
-	static GetChildren(LiveLinkTransform?: LiveLinkTransform,Children?: LiveLinkTransform[]): {LiveLinkTransform: LiveLinkTransform, Children: LiveLinkTransform[]};
-	static GetBasicData(SubjectFrameHandle?: SubjectFrameHandle,BasicBlueprintData?: LiveLinkBasicBlueprintData): {SubjectFrameHandle: SubjectFrameHandle, BasicBlueprintData: LiveLinkBasicBlueprintData};
-	static GetAnimationStaticData(SubjectFrameHandle?: SubjectFrameHandle,AnimationStaticData?: LiveLinkSkeletonStaticData): {SubjectFrameHandle: SubjectFrameHandle, AnimationStaticData: LiveLinkSkeletonStaticData, $: boolean};
-	static GetAnimationFrameData(SubjectFrameHandle?: SubjectFrameHandle,AnimationFrameData?: LiveLinkAnimationFrameData): {SubjectFrameHandle: SubjectFrameHandle, AnimationFrameData: LiveLinkAnimationFrameData, $: boolean};
-	static EvaluateLiveLinkFrameWithSpecificRole(SubjectName: LiveLinkSubjectName,Role: UnrealEngineClass,OutBlueprintData?: LiveLinkBaseBlueprintData): {OutBlueprintData: LiveLinkBaseBlueprintData, $: boolean};
-	static EvaluateLiveLinkFrameAtWorldTimeOffset(SubjectName: LiveLinkSubjectName,Role: UnrealEngineClass,WorldTimeOffset: number,OutBlueprintData?: LiveLinkBaseBlueprintData): {OutBlueprintData: LiveLinkBaseBlueprintData, $: boolean};
-	static EvaluateLiveLinkFrameAtSceneTime(SubjectName: LiveLinkSubjectName,Role: UnrealEngineClass,SceneTime: Timecode,OutBlueprintData?: LiveLinkBaseBlueprintData): {OutBlueprintData: LiveLinkBaseBlueprintData, $: boolean};
-	static EvaluateLiveLinkFrame(SubjectRepresentation: LiveLinkSubjectRepresentation,OutBlueprintData?: LiveLinkBaseBlueprintData): {OutBlueprintData: LiveLinkBaseBlueprintData, $: boolean};
-	static ComponentSpaceTransform(LiveLinkTransform?: LiveLinkTransform,Transform?: Transform): {LiveLinkTransform: LiveLinkTransform, Transform: Transform};
-	static ChildCount(LiveLinkTransform?: LiveLinkTransform): {LiveLinkTransform: LiveLinkTransform, $: number};
-	static C(Other: UObject | any): LiveLinkBlueprintLibrary;
-}
-
-declare class LiveLinkBlueprintVirtualSubject extends LiveLinkVirtualSubject { 
-	static Load(ResourceName: string): LiveLinkBlueprintVirtualSubject;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkBlueprintVirtualSubject;
-	static GetDefaultObject(): LiveLinkBlueprintVirtualSubject;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkBlueprintVirtualSubject;
-	UpdateVirtualSubjectStaticData_Internal(InStruct: LiveLinkBaseStaticData): boolean;
-	UpdateVirtualSubjectFrameData_Internal(InStruct: LiveLinkBaseFrameData,bInShouldStampCurrentTime: boolean): boolean;
-	OnUpdate(): void;
-	OnInitialize(): void;
-	static C(Other: UObject | any): LiveLinkBlueprintVirtualSubject;
-}
-
-declare class LiveLinkComponent extends ActorComponent { 
-	OnLiveLinkUpdated: UnrealEngineMulticastDelegate<(DeltaTime: number) => void>;
-	static Load(ResourceName: string): LiveLinkComponent;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkComponent;
-	static GetDefaultObject(): LiveLinkComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkComponent;
-	GetSubjectDataAtWorldTime(SubjectName: string,WorldTime: number,bSuccess?: boolean,SubjectFrameHandle?: SubjectFrameHandle): {bSuccess: boolean, SubjectFrameHandle: SubjectFrameHandle};
-	GetSubjectDataAtSceneTime(SubjectName: string,SceneTime: Timecode,bSuccess?: boolean,SubjectFrameHandle?: SubjectFrameHandle): {bSuccess: boolean, SubjectFrameHandle: SubjectFrameHandle};
-	GetSubjectData(SubjectName: string,bSuccess?: boolean,SubjectFrameHandle?: SubjectFrameHandle): {bSuccess: boolean, SubjectFrameHandle: SubjectFrameHandle};
-	GetAvailableSubjectNames(SubjectNames?: string[]): {SubjectNames: string[]};
-	static C(Other: UObject | any): LiveLinkComponent;
-}
-
-declare class LiveLinkDrivenComponent extends ActorComponent { 
-	SubjectName: LiveLinkSubjectName;
-	ActorTransformBone: string;
-	bModifyActorTransform: boolean;
-	bSetRelativeLocation: boolean;
-	static Load(ResourceName: string): LiveLinkDrivenComponent;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkDrivenComponent;
-	static GetDefaultObject(): LiveLinkDrivenComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkDrivenComponent;
-	static C(Other: UObject | any): LiveLinkDrivenComponent;
-}
-
-declare class LiveLinkRetargetAsset extends UObject { 
-	static Load(ResourceName: string): LiveLinkRetargetAsset;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkRetargetAsset;
-	static GetDefaultObject(): LiveLinkRetargetAsset;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkRetargetAsset;
-	static C(Other: UObject | any): LiveLinkRetargetAsset;
-}
-
-declare class LiveLinkInstance extends AnimInstance { 
-	CurrentRetargetAsset: LiveLinkRetargetAsset;
-	static Load(ResourceName: string): LiveLinkInstance;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkInstance;
-	static GetDefaultObject(): LiveLinkInstance;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkInstance;
-	SetSubject(SubjectName: LiveLinkSubjectName): void;
-	SetRetargetAsset(RetargetAsset: UnrealEngineClass): void;
-	static C(Other: UObject | any): LiveLinkInstance;
-}
-
-declare class ProviderPollResult { 
-	Name: string;
-	MachineName: string;
-	MachineTimeOffset: any;
-	clone() : ProviderPollResult;
-	static C(Other: UObject | any): ProviderPollResult;
-}
-
-declare class LiveLinkMessageBusFinder extends UObject { 
-	static Load(ResourceName: string): LiveLinkMessageBusFinder;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkMessageBusFinder;
-	static GetDefaultObject(): LiveLinkMessageBusFinder;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkMessageBusFinder;
-	GetAvailableProviders(WorldContextObject: UObject,LatentInfo: LatentActionInfo,Duration: number,AvailableProviders?: ProviderPollResult[]): {AvailableProviders: ProviderPollResult[]};
-	static ConstructMessageBusFinder(): LiveLinkMessageBusFinder;
-	static ConnectToProvider(Provider?: ProviderPollResult,SourceHandle?: LiveLinkSourceHandle): {Provider: ProviderPollResult, SourceHandle: LiveLinkSourceHandle};
-	static C(Other: UObject | any): LiveLinkMessageBusFinder;
-}
-
-declare class LiveLinkMessageBusSourceFactory extends LiveLinkSourceFactory { 
-	static Load(ResourceName: string): LiveLinkMessageBusSourceFactory;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkMessageBusSourceFactory;
-	static GetDefaultObject(): LiveLinkMessageBusSourceFactory;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkMessageBusSourceFactory;
-	static C(Other: UObject | any): LiveLinkMessageBusSourceFactory;
-}
-
-declare class LiveLinkMessageBusSourceSettings extends LiveLinkSourceSettings { 
-	static Load(ResourceName: string): LiveLinkMessageBusSourceSettings;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkMessageBusSourceSettings;
-	static GetDefaultObject(): LiveLinkMessageBusSourceSettings;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkMessageBusSourceSettings;
-	static C(Other: UObject | any): LiveLinkMessageBusSourceSettings;
-}
-
-declare class LiveLinkSourcePreset { 
-	Guid: Guid;
-	Settings: LiveLinkSourceSettings;
-	SourceType: string;
-	clone() : LiveLinkSourcePreset;
-	static C(Other: UObject | any): LiveLinkSourcePreset;
-}
-
-declare class LiveLinkSubjectPreset { 
-	Key: LiveLinkSubjectKey;
-	Role: UnrealEngineClass;
-	Settings: LiveLinkSubjectSettings;
-	VirtualSubject: LiveLinkVirtualSubject;
-	bEnabled: boolean;
-	clone() : LiveLinkSubjectPreset;
-	static C(Other: UObject | any): LiveLinkSubjectPreset;
-}
-
-declare class LiveLinkPreset extends UObject { 
-	Sources: LiveLinkSourcePreset[];
-	Subjects: LiveLinkSubjectPreset[];
-	static Load(ResourceName: string): LiveLinkPreset;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkPreset;
-	static GetDefaultObject(): LiveLinkPreset;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkPreset;
-	BuildFromClient(): void;
-	ApplyToClient(): boolean;
-	AddToClient(bRecreatePresets: boolean): boolean;
-	static C(Other: UObject | any): LiveLinkPreset;
-}
-
-declare class LiveLinkRemapAsset extends LiveLinkRetargetAsset { 
-	static Load(ResourceName: string): LiveLinkRemapAsset;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkRemapAsset;
-	static GetDefaultObject(): LiveLinkRemapAsset;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkRemapAsset;
-	RemapCurveElements(CurveItems?: any): {CurveItems: any};
-	GetRemappedCurveName(CurveName: string): string;
-	GetRemappedBoneName(BoneName: string): string;
-	static C(Other: UObject | any): LiveLinkRemapAsset;
-}
-
-declare class LiveLinkRoleProjectSetting { 
-	Role: UnrealEngineClass;
-	SettingClass: UnrealEngineClass;
-	FrameInterpolationProcessor: UnrealEngineClass;
-	FramePreProcessors: UnrealEngineClass[];
-	clone() : LiveLinkRoleProjectSetting;
-	static C(Other: UObject | any): LiveLinkRoleProjectSetting;
-}
-
-declare class LiveLinkSettings extends UObject { 
-	DefaultRoleSettings: LiveLinkRoleProjectSetting[];
-	FrameInterpolationProcessor: UnrealEngineClass;
-	DefaultLiveLinkPreset: LiveLinkPreset;
-	PresetSaveDir: DirectoryPath;
-	ClockOffsetCorrectionStep: number;
-	DefaultMessageBusSourceMode: ELiveLinkSourceMode;
-	MessageBusPingRequestFrequency: any;
-	MessageBusHeartbeatFrequency: any;
-	MessageBusHeartbeatTimeout: any;
-	MessageBusTimeBeforeRemovingInactiveSource: any;
-	TimeWithoutFrameToBeConsiderAsInvalid: any;
-	ValidColor: LinearColor;
-	InvalidColor: LinearColor;
-	TextSizeSource: number;
-	TextSizeSubject: number;
-	static Load(ResourceName: string): LiveLinkSettings;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkSettings;
-	static GetDefaultObject(): LiveLinkSettings;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkSettings;
-	static C(Other: UObject | any): LiveLinkSettings;
-}
-
-declare type ELiveLinkTimecodeProviderEvaluationType = 'Lerp' | 'Nearest' | 'Latest' | 'ELiveLinkTimecodeProviderEvaluationType_MAX';
-declare var ELiveLinkTimecodeProviderEvaluationType : { Lerp:'Lerp',Nearest:'Nearest',Latest:'Latest',ELiveLinkTimecodeProviderEvaluationType_MAX:'ELiveLinkTimecodeProviderEvaluationType_MAX', };
-declare class LiveLinkTimecodeProvider extends TimecodeProvider { 
-	SubjectKey: LiveLinkSubjectKey;
-	Evaluation: ELiveLinkTimecodeProviderEvaluationType;
-	bOverrideFrameRate: boolean;
-	OverrideFrameRate: FrameRate;
-	BufferSize: number;
-	static Load(ResourceName: string): LiveLinkTimecodeProvider;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkTimecodeProvider;
-	static GetDefaultObject(): LiveLinkTimecodeProvider;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkTimecodeProvider;
-	static C(Other: UObject | any): LiveLinkTimecodeProvider;
-}
-
-declare class LiveLinkTimeSynchronizationSource extends TimeSynchronizationSource { 
-	SubjectName: LiveLinkSubjectName;
-	static Load(ResourceName: string): LiveLinkTimeSynchronizationSource;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkTimeSynchronizationSource;
-	static GetDefaultObject(): LiveLinkTimeSynchronizationSource;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkTimeSynchronizationSource;
-	static C(Other: UObject | any): LiveLinkTimeSynchronizationSource;
-}
-
-declare class LiveLinkVirtualSubjectSourceSettings extends LiveLinkSourceSettings { 
-	SourceName: string;
-	static Load(ResourceName: string): LiveLinkVirtualSubjectSourceSettings;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkVirtualSubjectSourceSettings;
-	static GetDefaultObject(): LiveLinkVirtualSubjectSourceSettings;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkVirtualSubjectSourceSettings;
-	static C(Other: UObject | any): LiveLinkVirtualSubjectSourceSettings;
-}
-
-declare class LiveLinkOpenXRHandTrackingSourceFactory extends LiveLinkSourceFactory { 
-	static Load(ResourceName: string): LiveLinkOpenXRHandTrackingSourceFactory;
-	static Find(Outer: UObject, ResourceName: string): LiveLinkOpenXRHandTrackingSourceFactory;
-	static GetDefaultObject(): LiveLinkOpenXRHandTrackingSourceFactory;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): LiveLinkOpenXRHandTrackingSourceFactory;
-	static C(Other: UObject | any): LiveLinkOpenXRHandTrackingSourceFactory;
-}
-
-declare type EQuatSwizzleAxisB = 'X' | 'Y' | 'Z' | 'W' | 'MinusX' | 'MinusY' | 'MinusZ' | 'MinusW' | 'EQuatSwizzleAxisB_MAX';
-declare var EQuatSwizzleAxisB : { X:'X',Y:'Y',Z:'Z',W:'W',MinusX:'MinusX',MinusY:'MinusY',MinusZ:'MinusZ',MinusW:'MinusW',EQuatSwizzleAxisB_MAX:'EQuatSwizzleAxisB_MAX', };
-declare class OpenXRHandTrackingLiveLinkRemapAsset extends LiveLinkRetargetAsset { 
-	bHasMetacarpals: boolean;
-	bRetargetRotationOnly: boolean;
-	SwizzleX: EQuatSwizzleAxisB;
-	SwizzleY: EQuatSwizzleAxisB;
-	SwizzleZ: EQuatSwizzleAxisB;
-	SwizzleW: EQuatSwizzleAxisB;
-	HandTrackingBoneNameMap: any;
-	static Load(ResourceName: string): OpenXRHandTrackingLiveLinkRemapAsset;
-	static Find(Outer: UObject, ResourceName: string): OpenXRHandTrackingLiveLinkRemapAsset;
-	static GetDefaultObject(): OpenXRHandTrackingLiveLinkRemapAsset;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): OpenXRHandTrackingLiveLinkRemapAsset;
-	static C(Other: UObject | any): OpenXRHandTrackingLiveLinkRemapAsset;
-}
-
 declare type EFixedFoveatedRenderingLevel = 'FFR_Off' | 'FFR_Low' | 'FFR_Medium' | 'FFR_High' | 'FFR_HighTop' | 'FFR_MAX';
 declare var EFixedFoveatedRenderingLevel : { FFR_Off:'FFR_Off',FFR_Low:'FFR_Low',FFR_Medium:'FFR_Medium',FFR_High:'FFR_High',FFR_HighTop:'FFR_HighTop',FFR_MAX:'FFR_MAX', };
 declare type EColorSpace = 'Unknown' | 'Unmanaged' | 'Rec_2020' | 'Rec_709' | 'Rift_CV1' | 'Rift_S' | 'Quest' | 'P3' | 'Adobe_RGB' | 'EColorSpace_MAX';
@@ -18012,6 +18253,217 @@ declare class OculusSceneCaptureCubemap extends UObject {
 	static GetDefaultObject(): OculusSceneCaptureCubemap;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): OculusSceneCaptureCubemap;
 	static C(Other: UObject | any): OculusSceneCaptureCubemap;
+}
+
+declare class KismetProceduralMeshLibrary extends BlueprintFunctionLibrary { 
+	static Load(ResourceName: string): KismetProceduralMeshLibrary;
+	static Find(Outer: UObject, ResourceName: string): KismetProceduralMeshLibrary;
+	static GetDefaultObject(): KismetProceduralMeshLibrary;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): KismetProceduralMeshLibrary;
+	static SliceProceduralMesh(InProcMesh: ProceduralMeshComponent,PlanePosition: Vector,PlaneNormal: Vector,bCreateOtherHalf: boolean,OutOtherHalfProcMesh?: ProceduralMeshComponent,CapOption?: EProcMeshSliceCapOption,CapMaterial?: MaterialInterface): {OutOtherHalfProcMesh: ProceduralMeshComponent};
+	static GetSectionFromStaticMesh(InMesh: StaticMesh,LODIndex: number,SectionIndex: number,Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
+	static GetSectionFromProceduralMesh(InProcMesh: ProceduralMeshComponent,SectionIndex: number,Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
+	static GenerateBoxMesh(BoxRadius: Vector,Vertices?: Vector[],Triangles?: number[],Normals?: Vector[],UVs?: Vector2D[],Tangents?: ProcMeshTangent[]): {Vertices: Vector[], Triangles: number[], Normals: Vector[], UVs: Vector2D[], Tangents: ProcMeshTangent[]};
+	static CreateGridMeshWelded(NumX: number,NumY: number,Triangles?: number[],Vertices?: Vector[],UVs?: Vector2D[],GridSpacing?: number): {Triangles: number[], Vertices: Vector[], UVs: Vector2D[]};
+	static CreateGridMeshTriangles(NumX: number,NumY: number,bWinding: boolean,Triangles?: number[]): {Triangles: number[]};
+	static CreateGridMeshSplit(NumX: number,NumY: number,Triangles?: number[],Vertices?: Vector[],UVs?: Vector2D[],UV1s?: Vector2D[],GridSpacing?: number): {Triangles: number[], Vertices: Vector[], UVs: Vector2D[], UV1s: Vector2D[]};
+	static CopyProceduralMeshFromStaticMeshComponent(StaticMeshComponent: StaticMeshComponent,LODIndex: number,ProcMeshComponent: ProceduralMeshComponent,bCreateCollision: boolean): void;
+	static ConvertQuadToTriangles(Triangles?: number[],Vert0?: number,Vert1?: number,Vert2?: number,Vert3?: number): {Triangles: number[]};
+	static CalculateTangentsForMesh(Vertices: Vector[],Triangles: number[],UVs: Vector2D[],Normals?: Vector[],Tangents?: ProcMeshTangent[]): {Normals: Vector[], Tangents: ProcMeshTangent[]};
+	static C(Other: UObject | any): KismetProceduralMeshLibrary;
+}
+
+declare class SteamVRChaperoneComponent extends ActorComponent { 
+	OnLeaveBounds: UnrealEngineMulticastDelegate<() => void>;
+	OnReturnToBounds: UnrealEngineMulticastDelegate<() => void>;
+	static Load(ResourceName: string): SteamVRChaperoneComponent;
+	static Find(Outer: UObject, ResourceName: string): SteamVRChaperoneComponent;
+	static GetDefaultObject(): SteamVRChaperoneComponent;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SteamVRChaperoneComponent;
+	GetBounds(): Vector[];
+	static C(Other: UObject | any): SteamVRChaperoneComponent;
+}
+
+declare type ESteamVRTrackedDeviceType = 'Controller' | 'TrackingReference' | 'Other' | 'Invalid' | 'ESteamVRTrackedDeviceType_MAX';
+declare var ESteamVRTrackedDeviceType : { Controller:'Controller',TrackingReference:'TrackingReference',Other:'Other',Invalid:'Invalid',ESteamVRTrackedDeviceType_MAX:'ESteamVRTrackedDeviceType_MAX', };
+declare class SteamVRFunctionLibrary extends BlueprintFunctionLibrary { 
+	static Load(ResourceName: string): SteamVRFunctionLibrary;
+	static Find(Outer: UObject, ResourceName: string): SteamVRFunctionLibrary;
+	static GetDefaultObject(): SteamVRFunctionLibrary;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SteamVRFunctionLibrary;
+	static GetValidTrackedDeviceIds(DeviceType: ESteamVRTrackedDeviceType,OutTrackedDeviceIds?: number[]): {OutTrackedDeviceIds: number[]};
+	static GetTrackedDevicePositionAndOrientation(DeviceID: number,OutPosition?: Vector,OutOrientation?: Rotator): {OutPosition: Vector, OutOrientation: Rotator, $: boolean};
+	static GetHandPositionAndOrientation(ControllerIndex: number,hand: EControllerHand,OutPosition?: Vector,OutOrientation?: Rotator): {OutPosition: Vector, OutOrientation: Rotator, $: boolean};
+	static C(Other: UObject | any): SteamVRFunctionLibrary;
+}
+
+declare class SteamVRHQStereoLayerShape extends StereoLayerShapeQuad { 
+	bCurved: boolean;
+	bAntiAlias: boolean;
+	AutoCurveMinDistance: number;
+	AutoCurveMaxDistance: number;
+	static Load(ResourceName: string): SteamVRHQStereoLayerShape;
+	static Find(Outer: UObject, ResourceName: string): SteamVRHQStereoLayerShape;
+	static GetDefaultObject(): SteamVRHQStereoLayerShape;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SteamVRHQStereoLayerShape;
+	SetCurved(InCurved: boolean): void;
+	SetAutoCurveMinDistance(InDistance: number): void;
+	SetAutoCurveMaxDistance(InDistance: number): void;
+	SetAntiAlias(InAntiAlias: boolean): void;
+	static C(Other: UObject | any): SteamVRHQStereoLayerShape;
+}
+
+declare class SteamVRInputBindingInfo { 
+	DevicePathName: string;
+	InputPathName: string;
+	ModeName: string;
+	SlotName: string;
+	clone() : SteamVRInputBindingInfo;
+	static C(Other: UObject | any): SteamVRInputBindingInfo;
+}
+
+declare type ESteamVRInputStringBits = 'VR_InputString_Hand' | 'VR_InputString_ControllerType' | 'VR_InputString_InputSource' | 'VR_InputString_All' | 'VR_InputString_MAX';
+declare var ESteamVRInputStringBits : { VR_InputString_Hand:'VR_InputString_Hand',VR_InputString_ControllerType:'VR_InputString_ControllerType',VR_InputString_InputSource:'VR_InputString_InputSource',VR_InputString_All:'VR_InputString_All',VR_InputString_MAX:'VR_InputString_MAX', };
+declare class SteamVRInputOriginInfo { 
+	TrackedDeviceIndex: number;
+	RenderModelComponentName: string;
+	TrackedDeviceModel: string;
+	clone() : SteamVRInputOriginInfo;
+	static C(Other: UObject | any): SteamVRInputOriginInfo;
+}
+
+declare class SteamVRActionSet { 
+	Path: string;
+	clone() : SteamVRActionSet;
+	static C(Other: UObject | any): SteamVRActionSet;
+}
+
+declare class SteamVRAction { 
+	Name: string;
+	Path: string;
+	clone() : SteamVRAction;
+	static C(Other: UObject | any): SteamVRAction;
+	GetSteamVR_InputBindingInfo(): SteamVRInputBindingInfo[];
+	GetSteamVR_OriginLocalizedName(LocalizedParts: ESteamVRInputStringBits[],OriginLocalizedName?: string): {OriginLocalizedName: string};
+	GetSteamVR_OriginTrackedDeviceInfo(InputOriginInfo?: SteamVRInputOriginInfo): {InputOriginInfo: SteamVRInputOriginInfo, $: boolean};
+	ShowSteamVR_ActionOrigin(SteamVRActionSet: SteamVRActionSet): void;
+	static GetSteamVR_InputBindingInfo(SteamVRActionHandle: SteamVRAction): SteamVRInputBindingInfo[];
+	static GetSteamVR_OriginLocalizedName(SteamVRAction: SteamVRAction,LocalizedParts: ESteamVRInputStringBits[],OriginLocalizedName?: string): {OriginLocalizedName: string};
+	static GetSteamVR_OriginTrackedDeviceInfo(SteamVRAction: SteamVRAction,InputOriginInfo?: SteamVRInputOriginInfo): {InputOriginInfo: SteamVRInputOriginInfo, $: boolean};
+	static ShowSteamVR_ActionOrigin(SteamVRAction: SteamVRAction,SteamVRActionSet: SteamVRActionSet): void;
+}
+
+declare class SteamVRSkeletonTransform { 
+	Root: Transform;
+	wrist: Transform;
+	Thumb_0: Transform;
+	Thumb_1: Transform;
+	Thumb_2: Transform;
+	Thumb_3: Transform;
+	index_0: Transform;
+	index_1: Transform;
+	index_2: Transform;
+	index_3: Transform;
+	index_4: Transform;
+	Middle_0: Transform;
+	Middle_1: Transform;
+	Middle_2: Transform;
+	Middle_3: Transform;
+	Middle_4: Transform;
+	Ring_0: Transform;
+	Ring_1: Transform;
+	Ring_2: Transform;
+	Ring_3: Transform;
+	Ring_4: Transform;
+	Pinky_0: Transform;
+	Pinky_1: Transform;
+	Pinky_2: Transform;
+	Pinky_3: Transform;
+	Pinky_4: Transform;
+	Aux_Thumb: Transform;
+	Aux_Index: Transform;
+	Aux_Middle: Transform;
+	Aux_Ring: Transform;
+	Aux_Pinky: Transform;
+	clone() : SteamVRSkeletonTransform;
+	static C(Other: UObject | any): SteamVRSkeletonTransform;
+	GetSkeletalTransform(RightHand?: SteamVRSkeletonTransform,bWithController?: boolean): {LeftHand: SteamVRSkeletonTransform, RightHand: SteamVRSkeletonTransform};
+	static GetSkeletalTransform(LeftHand?: SteamVRSkeletonTransform,RightHand?: SteamVRSkeletonTransform,bWithController?: boolean): {LeftHand: SteamVRSkeletonTransform, RightHand: SteamVRSkeletonTransform};
+}
+
+declare type EHand = 'VR_LeftHand' | 'VR_RightHand' | 'VR_MAX';
+declare var EHand : { VR_LeftHand:'VR_LeftHand',VR_RightHand:'VR_RightHand',VR_MAX:'VR_MAX', };
+declare class SteamVRFingerCurls { 
+	Thumb: number;
+	index: number;
+	Middle: number;
+	Ring: number;
+	Pinky: number;
+	clone() : SteamVRFingerCurls;
+	static C(Other: UObject | any): SteamVRFingerCurls;
+}
+
+declare class SteamVRFingerSplays { 
+	Thumb_Index: number;
+	Index_Middle: number;
+	Middle_Ring: number;
+	Ring_Pinky: number;
+	clone() : SteamVRFingerSplays;
+	static C(Other: UObject | any): SteamVRFingerSplays;
+}
+
+declare type ESkeletalSummaryDataType = 'VR_SummaryType_FromAnimation' | 'VR_SummaryType_FromDevice' | 'VR_SummaryType_MAX';
+declare var ESkeletalSummaryDataType : { VR_SummaryType_FromAnimation:'VR_SummaryType_FromAnimation',VR_SummaryType_FromDevice:'VR_SummaryType_FromDevice',VR_SummaryType_MAX:'VR_SummaryType_MAX', };
+declare type EControllerFidelity = 'VR_ControllerFidelity_Estimated' | 'VR_ControllerFidelity_Full' | 'VR_ControllerFidelity_Partial' | 'VR_ControllerFidelity_MAX';
+declare var EControllerFidelity : { VR_ControllerFidelity_Estimated:'VR_ControllerFidelity_Estimated',VR_ControllerFidelity_Full:'VR_ControllerFidelity_Full',VR_ControllerFidelity_Partial:'VR_ControllerFidelity_Partial',VR_ControllerFidelity_MAX:'VR_ControllerFidelity_MAX', };
+declare class SteamVRInputDeviceFunctionLibrary extends BlueprintFunctionLibrary { 
+	static Load(ResourceName: string): SteamVRInputDeviceFunctionLibrary;
+	static Find(Outer: UObject, ResourceName: string): SteamVRInputDeviceFunctionLibrary;
+	static GetDefaultObject(): SteamVRInputDeviceFunctionLibrary;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SteamVRInputDeviceFunctionLibrary;
+	static ShowSteamVR_ActionOrigin(SteamVRAction: SteamVRAction,SteamVRActionSet: SteamVRActionSet): void;
+	static ShowAllSteamVR_ActionOrigins(): void;
+	static SetSteamVR_GlobalPredictedSecondsFromNow(NewValue: number): number;
+	static SetPoseSource(bUseSkeletonPose: boolean): void;
+	static SetCurlsAndSplaysState(NewLeftHandState: boolean,NewRightHandState: boolean): void;
+	static ResetSeatedPosition(): boolean;
+	static PlaySteamVR_HapticFeedback(hand: ESteamVRHand,StartSecondsFromNow: number,DurationSeconds: number,Frequency: number,Amplitude: number): void;
+	static GetUserIPD(): number;
+	static GetSteamVR_OriginTrackedDeviceInfo(SteamVRAction: SteamVRAction,InputOriginInfo?: SteamVRInputOriginInfo): {InputOriginInfo: SteamVRInputOriginInfo, $: boolean};
+	static GetSteamVR_OriginLocalizedName(SteamVRAction: SteamVRAction,LocalizedParts: ESteamVRInputStringBits[],OriginLocalizedName?: string): {OriginLocalizedName: string};
+	static GetSteamVR_InputBindingInfo(SteamVRActionHandle: SteamVRAction): SteamVRInputBindingInfo[];
+	static GetSteamVR_HandPoseRelativeToNow(Position?: Vector,Orientation?: Rotator,hand?: ESteamVRHand,PredictedSecondsFromNow?: number): {Position: Vector, Orientation: Rotator, $: boolean};
+	static GetSteamVR_GlobalPredictedSecondsFromNow(): number;
+	static GetSteamVR_ActionSetArray(SteamVRActionSets?: SteamVRActionSet[]): {SteamVRActionSets: SteamVRActionSet[]};
+	static GetSteamVR_ActionArray(SteamVRActions?: SteamVRAction[]): {SteamVRActions: SteamVRAction[]};
+	static GetSkeletalTransform(LeftHand?: SteamVRSkeletonTransform,RightHand?: SteamVRSkeletonTransform,bWithController?: boolean): {LeftHand: SteamVRSkeletonTransform, RightHand: SteamVRSkeletonTransform};
+	static GetSkeletalState(LeftHandState?: boolean,RightHandState?: boolean): {LeftHandState: boolean, RightHandState: boolean};
+	static GetRightHandPoseData(Position?: Vector,Orientation?: Rotator,AngularVelocity?: Vector,Velocity?: Vector): {Position: Vector, Orientation: Rotator, AngularVelocity: Vector, Velocity: Vector};
+	static GetPoseSource(bUsingSkeletonPose?: boolean): {bUsingSkeletonPose: boolean};
+	static GetLeftHandPoseData(Position?: Vector,Orientation?: Rotator,AngularVelocity?: Vector,Velocity?: Vector): {Position: Vector, Orientation: Rotator, AngularVelocity: Vector, Velocity: Vector};
+	static GetFingerCurlsAndSplays(hand: EHand,FingerCurls?: SteamVRFingerCurls,FingerSplays?: SteamVRFingerSplays,SummaryDataType?: ESkeletalSummaryDataType): {FingerCurls: SteamVRFingerCurls, FingerSplays: SteamVRFingerSplays};
+	static GetCurlsAndSplaysState(LeftHandState?: boolean,RightHandState?: boolean): {LeftHandState: boolean, RightHandState: boolean};
+	static GetControllerFidelity(LeftControllerFidelity?: EControllerFidelity,RightControllerFidelity?: EControllerFidelity): {LeftControllerFidelity: EControllerFidelity, RightControllerFidelity: EControllerFidelity};
+	static FindSteamVR_OriginTrackedDeviceInfo(ActionName: string,bResult?: boolean,InputOriginInfo?: SteamVRInputOriginInfo,ActionSet?: string): {bResult: boolean, InputOriginInfo: SteamVRInputOriginInfo};
+	static FindSteamVR_InputBindingInfo(ActionName: string,ActionSet: string): SteamVRInputBindingInfo[];
+	static FindSteamVR_ActionOrigin(ActionName: string,ActionSet: string): boolean;
+	static FindSteamVR_Action(ActionName: string,bResult?: boolean,FoundAction?: SteamVRAction,FoundActionSet?: SteamVRActionSet,ActionSet?: string): {bResult: boolean, FoundAction: SteamVRAction, FoundActionSet: SteamVRActionSet};
+	static C(Other: UObject | any): SteamVRInputDeviceFunctionLibrary;
+}
+
+declare class SteamVRTrackingReferences extends ActorComponent { 
+	OnTrackedDeviceActivated: UnrealEngineMulticastDelegate<(DeviceID: number, DeviceClass: string, DeviceModel: string) => void>;
+	OnTrackedDeviceDeactivated: UnrealEngineMulticastDelegate<(DeviceID: number, DeviceClass: string, DeviceModel: string) => void>;
+	ActiveDevicePollFrequency: number;
+	TrackingReferenceScale: Vector;
+	TrackingReferences: StaticMeshComponent[];
+	static Load(ResourceName: string): SteamVRTrackingReferences;
+	static Find(Outer: UObject, ResourceName: string): SteamVRTrackingReferences;
+	static GetDefaultObject(): SteamVRTrackingReferences;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SteamVRTrackingReferences;
+	ShowTrackingReferences(TrackingReferenceMesh: StaticMesh): boolean;
+	HideTrackingReferences(): void;
+	static C(Other: UObject | any): SteamVRTrackingReferences;
 }
 
 declare type ECompilerVersion = 'Default' | 'VisualStudio2015' | 'VisualStudio2017' | 'VisualStudio2019' | 'VisualStudio2022' | 'ECompilerVersion_MAX';
@@ -18528,508 +18980,5 @@ declare class AutomationControllerSettings extends UObject {
 	static GetDefaultObject(): AutomationControllerSettings;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AutomationControllerSettings;
 	static C(Other: UObject | any): AutomationControllerSettings;
-}
-
-declare class AutomationEditorTask extends UObject { 
-	static Load(ResourceName: string): AutomationEditorTask;
-	static Find(Outer: UObject, ResourceName: string): AutomationEditorTask;
-	static GetDefaultObject(): AutomationEditorTask;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AutomationEditorTask;
-	IsValidTask(): boolean;
-	IsTaskDone(): boolean;
-	static C(Other: UObject | any): AutomationEditorTask;
-}
-
-declare class AutomationBlueprintFunctionLibrary extends BlueprintFunctionLibrary { 
-	static Load(ResourceName: string): AutomationBlueprintFunctionLibrary;
-	static Find(Outer: UObject, ResourceName: string): AutomationBlueprintFunctionLibrary;
-	static GetDefaultObject(): AutomationBlueprintFunctionLibrary;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AutomationBlueprintFunctionLibrary;
-	static TakeHighResScreenshot(ResX: number,ResY: number,Filename: string,Camera: CameraActor,bMaskEnabled: boolean,bCaptureHDR: boolean,ComparisonTolerance: EComparisonTolerance,ComparisonNotes: string,Delay: number): AutomationEditorTask;
-	static TakeAutomationScreenshotOfUI(WorldContextObject: UObject,LatentInfo: LatentActionInfo,Name: string,Options: AutomationScreenshotOptions): void;
-	static TakeAutomationScreenshotAtCamera(WorldContextObject: UObject,LatentInfo: LatentActionInfo,Camera: CameraActor,NameOverride: string,Notes: string,Options: AutomationScreenshotOptions): void;
-	static TakeAutomationScreenshot(WorldContextObject: UObject,LatentInfo: LatentActionInfo,Name: string,Notes: string,Options: AutomationScreenshotOptions): void;
-	static SetScalabilityQualityToLow(WorldContextObject: UObject): void;
-	static SetScalabilityQualityToEpic(WorldContextObject: UObject): void;
-	static SetScalabilityQualityLevelRelativeToMax(WorldContextObject: UObject,Value: number): void;
-	static GetStatIncMax(StatName: string): number;
-	static GetStatIncAverage(StatName: string): number;
-	static GetStatExcMax(StatName: string): number;
-	static GetStatExcAverage(StatName: string): number;
-	static GetStatCallCount(StatName: string): number;
-	static GetDefaultScreenshotOptionsForRendering(Tolerance: EComparisonTolerance,Delay: number): AutomationScreenshotOptions;
-	static GetDefaultScreenshotOptionsForGameplay(Tolerance: EComparisonTolerance,Delay: number): AutomationScreenshotOptions;
-	static EnableStatGroup(WorldContextObject: UObject,GroupName: string): void;
-	static DisableStatGroup(WorldContextObject: UObject,GroupName: string): void;
-	static AutomationWaitForLoading(WorldContextObject: UObject,LatentInfo: LatentActionInfo,Options: AutomationWaitForLoadingOptions): void;
-	static AreAutomatedTestsRunning(): boolean;
-	static AddExpectedLogError(ExpectedPatternString: string,Occurrences: number,ExactMatch: boolean): void;
-	static C(Other: UObject | any): AutomationBlueprintFunctionLibrary;
-}
-
-declare class FuncTestRenderingComponent extends PrimitiveComponent { 
-	static Load(ResourceName: string): FuncTestRenderingComponent;
-	static Find(Outer: UObject, ResourceName: string): FuncTestRenderingComponent;
-	static GetDefaultObject(): FuncTestRenderingComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FuncTestRenderingComponent;
-	static C(Other: UObject | any): FuncTestRenderingComponent;
-}
-
-declare type EFunctionalTestLogHandling = 'ProjectDefault' | 'OutputIsError' | 'OutputIgnored' | 'EFunctionalTestLogHandling_MAX';
-declare var EFunctionalTestLogHandling : { ProjectDefault:'ProjectDefault',OutputIsError:'OutputIsError',OutputIgnored:'OutputIgnored',EFunctionalTestLogHandling_MAX:'EFunctionalTestLogHandling_MAX', };
-declare type EFunctionalTestResult = 'Default' | 'Invalid' | 'Error' | 'Running' | 'Failed' | 'Succeeded' | 'EFunctionalTestResult_MAX';
-declare var EFunctionalTestResult : { Default:'Default',Invalid:'Invalid',Error:'Error',Running:'Running',Failed:'Failed',Succeeded:'Succeeded',EFunctionalTestResult_MAX:'EFunctionalTestResult_MAX', };
-declare type EComparisonMethod = 'Equal_To' | 'Not_Equal_To' | 'Greater_Than_Or_Equal_To' | 'Less_Than_Or_Equal_To' | 'Greater_Than' | 'Less_Than' | 'EComparisonMethod_MAX';
-declare var EComparisonMethod : { Equal_To:'Equal_To',Not_Equal_To:'Not_Equal_To',Greater_Than_Or_Equal_To:'Greater_Than_Or_Equal_To',Less_Than_Or_Equal_To:'Less_Than_Or_Equal_To',Greater_Than:'Greater_Than',Less_Than:'Less_Than',EComparisonMethod_MAX:'EComparisonMethod_MAX', };
-declare class FunctionalTest extends Actor { 
-	SpriteComponent: BillboardComponent;
-	bIsEnabled: boolean;
-	LogErrorHandling: EFunctionalTestLogHandling;
-	LogWarningHandling: EFunctionalTestLogHandling;
-	Author: string;
-	Description: string;
-	ObservationPoint: Actor;
-	RandomNumbersStream: RandomStream;
-	Result: EFunctionalTestResult;
-	PreparationTimeLimit: number;
-	TimeLimit: number;
-	TimesUpMessage: string;
-	TimesUpResult: EFunctionalTestResult;
-	OnTestPrepare: UnrealEngineMulticastDelegate<() => void>;
-	OnTestStart: UnrealEngineMulticastDelegate<() => void>;
-	OnTestFinished: UnrealEngineMulticastDelegate<() => void>;
-	AutoDestroyActors: Actor[];
-	RenderComp: FuncTestRenderingComponent;
-	TestName: TextRenderComponent;
-	bIsRunning: boolean;
-	TotalTime: number;
-	static GetDefaultObject(): FunctionalTest;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FunctionalTest;
-	SetTimeLimit(NewTimeLimit: number,ResultWhenTimeRunsOut: EFunctionalTestResult): void;
-	RegisterAutoDestroyActor(ActorToAutoDestroy: Actor): void;
-	ReceiveStartTest(): void;
-	ReceivePrepareTest(): void;
-	OnWantsReRunCheck(): boolean;
-	OnAdditionalTestFinishedMessageRequest(TestResult: EFunctionalTestResult): string;
-	LogMessage(Message: string): void;
-	IsRunning(): boolean;
-	IsReady(): boolean;
-	IsEnabled(): boolean;
-	GetCurrentRerunReason(): string;
-	FinishTest(TestResult: EFunctionalTestResult,Message: string): void;
-	DebugGatherRelevantActors(): Actor[];
-	AssertValue_Int(Actual: number,ShouldBe: EComparisonMethod,Expected: number,What: string,ContextObject: UObject): boolean;
-	AssertValue_Float(Actual: number,ShouldBe: EComparisonMethod,Expected: number,What: string,ContextObject: UObject): boolean;
-	AssertValue_DateTime(Actual: DateTime,ShouldBe: EComparisonMethod,Expected: DateTime,What: string,ContextObject: UObject): boolean;
-	AssertTrue(Condition: boolean,Message: string,ContextObject: UObject): boolean;
-	AssertNotEqual_Vector(Actual: Vector,NotExpected: Vector,What: string,ContextObject: UObject): boolean;
-	AssertNotEqual_Transform(Actual: Transform,NotExpected: Transform,What: string,ContextObject: UObject): boolean;
-	AssertNotEqual_String(Actual: string,NotExpected: string,What: string,ContextObject: UObject): boolean;
-	AssertNotEqual_Rotator(Actual: Rotator,NotExpected: Rotator,What: string,ContextObject: UObject): boolean;
-	AssertIsValid(UObject: UObject,Message: string,ContextObject: UObject): boolean;
-	AssertFalse(Condition: boolean,Message: string,ContextObject: UObject): boolean;
-	AssertEqual_Vector(Actual: Vector,Expected: Vector,What: string,Tolerance: number,ContextObject: UObject): boolean;
-	AssertEqual_Transform(Actual: Transform,Expected: Transform,What: string,Tolerance: number,ContextObject: UObject): boolean;
-	AssertEqual_TraceQueryResults(Actual: TraceQueryTestResults,Expected: TraceQueryTestResults,What: string,ContextObject: UObject): boolean;
-	AssertEqual_String(Actual: string,Expected: string,What: string,ContextObject: UObject): boolean;
-	AssertEqual_Rotator(Actual: Rotator,Expected: Rotator,What: string,Tolerance: number,ContextObject: UObject): boolean;
-	AssertEqual_Object(Actual: UObject,Expected: UObject,What: string,ContextObject: UObject): boolean;
-	AssertEqual_Name(Actual: string,Expected: string,What: string,ContextObject: UObject): boolean;
-	AssertEqual_Int(Actual: number,Expected: number,What: string,ContextObject: UObject): boolean;
-	AssertEqual_Float(Actual: number,Expected: number,What: string,Tolerance: number,ContextObject: UObject): boolean;
-	AssertEqual_Bool(Actual: boolean,Expected: boolean,What: string,ContextObject: UObject): boolean;
-	AddWarning(Message: string): void;
-	AddRerun(reason: string): void;
-	AddError(Message: string): void;
-	static C(Other: UObject | any): FunctionalTest;
-}
-
-declare class PendingDelayedSpawn { 
-	clone() : PendingDelayedSpawn;
-	static C(Other: UObject | any): PendingDelayedSpawn;
-}
-
-declare class FunctionalAITestBase extends FunctionalTest { 
-	SpawnLocationRandomizationRange: number;
-	SpawnedPawns: Pawn[];
-	PendingDelayedSpawns: PendingDelayedSpawn[];
-	CurrentSpawnSetIndex: number;
-	CurrentSpawnSetName: string;
-	OnAISpawned: UnrealEngineMulticastDelegate<(Controller: AIController, Pawn: Pawn) => void>;
-	OnAllAISPawned: UnrealEngineMulticastDelegate<() => void>;
-	NavMeshDebugOrigin: Vector;
-	NavMeshDebugExtent: Vector;
-	bWaitForNavMesh: boolean;
-	bDebugNavMeshOnTimeout: boolean;
-	static GetDefaultObject(): FunctionalAITestBase;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FunctionalAITestBase;
-	IsOneOfSpawnedPawns(Actor: Actor): boolean;
-	static C(Other: UObject | any): FunctionalAITestBase;
-}
-
-declare class AITestSpawnSetBase { 
-	Name: string;
-	bEnabled: boolean;
-	FallbackSpawnLocation: Actor;
-	clone() : AITestSpawnSetBase;
-	static C(Other: UObject | any): AITestSpawnSetBase;
-}
-
-declare class AITestSpawnInfoBase { 
-	SpawnLocation: Actor;
-	NumberToSpawn: number;
-	SpawnDelay: number;
-	PreSpawnDelay: number;
-	clone() : AITestSpawnInfoBase;
-	static C(Other: UObject | any): AITestSpawnInfoBase;
-}
-
-declare class GenericTeamId { 
-	TeamID: number;
-	clone() : GenericTeamId;
-	static C(Other: UObject | any): GenericTeamId;
-}
-
-declare class AITestSpawnInfo extends AITestSpawnInfoBase { 
-	PawnClass: UnrealEngineClass;
-	ControllerClass: UnrealEngineClass;
-	TeamID: GenericTeamId;
-	BehaviorTree: BehaviorTree;
-	clone() : AITestSpawnInfo;
-	static C(Other: UObject | any): AITestSpawnInfo;
-}
-
-declare class AITestSpawnSet extends AITestSpawnSetBase { 
-	SpawnInfoContainer: AITestSpawnInfo[];
-	clone() : AITestSpawnSet;
-	static C(Other: UObject | any): AITestSpawnSet;
-}
-
-declare class FunctionalAITest extends FunctionalAITestBase { 
-	SpawnSets: AITestSpawnSet[];
-	static GetDefaultObject(): FunctionalAITest;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FunctionalAITest;
-	static C(Other: UObject | any): FunctionalAITest;
-}
-
-declare class AutomationPerformaceHelper extends UObject { 
-	static Load(ResourceName: string): AutomationPerformaceHelper;
-	static Find(Outer: UObject, ResourceName: string): AutomationPerformaceHelper;
-	static GetDefaultObject(): AutomationPerformaceHelper;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AutomationPerformaceHelper;
-	WriteLogFile(CaptureDir: string,CaptureExtension: string): void;
-	TriggerGPUTraceIfRecordFallsBelowBudget(): void;
-	Tick(DeltaSeconds: number): void;
-	StopCPUProfiling(): void;
-	StartCPUProfiling(): void;
-	Sample(DeltaSeconds: number): void;
-	OnBeginTests(): void;
-	OnAllTestsComplete(): void;
-	IsRecording(): boolean;
-	IsCurrentRecordWithinRenderThreadBudget(): boolean;
-	IsCurrentRecordWithinGPUBudget(): boolean;
-	IsCurrentRecordWithinGameThreadBudget(): boolean;
-	EndStatsFile(): void;
-	EndRecordingBaseline(): void;
-	EndRecording(): void;
-	BeginStatsFile(RecordName: string): void;
-	BeginRecordingBaseline(RecordName: string): void;
-	BeginRecording(RecordName: string,InGPUBudget: number,InRenderThreadBudget: number,InGameThreadBudget: number): void;
-	static C(Other: UObject | any): AutomationPerformaceHelper;
-}
-
-declare class FunctionalTestGameMode extends GameModeBase { 
-	static GetDefaultObject(): FunctionalTestGameMode;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FunctionalTestGameMode;
-	static C(Other: UObject | any): FunctionalTestGameMode;
-}
-
-declare class FunctionalTestingManager extends BlueprintFunctionLibrary { 
-	TestsLeft: FunctionalTest[];
-	AllTests: FunctionalTest[];
-	OnSetupTests: UnrealEngineMulticastDelegate<() => void>;
-	OnTestsComplete: UnrealEngineMulticastDelegate<() => void>;
-	OnTestsBegin: UnrealEngineMulticastDelegate<() => void>;
-	static Load(ResourceName: string): FunctionalTestingManager;
-	static Find(Outer: UObject, ResourceName: string): FunctionalTestingManager;
-	static GetDefaultObject(): FunctionalTestingManager;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FunctionalTestingManager;
-	static RunAllFunctionalTests(WorldContextObject: UObject,bNewLog: boolean,bRunLooped: boolean,FailedTestsReproString: string): boolean;
-	static C(Other: UObject | any): FunctionalTestingManager;
-}
-
-declare class PhasedAutomationActorBase extends Actor { 
-	static GetDefaultObject(): PhasedAutomationActorBase;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PhasedAutomationActorBase;
-	OnFunctionalTestingComplete(): void;
-	OnFunctionalTestingBegin(): void;
-	static C(Other: UObject | any): PhasedAutomationActorBase;
-}
-
-declare class FunctionalTestLevelScript extends LevelScriptActor { 
-	static GetDefaultObject(): FunctionalTestLevelScript;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FunctionalTestLevelScript;
-	static C(Other: UObject | any): FunctionalTestLevelScript;
-}
-
-declare class FunctionalTestUtilityLibrary extends BlueprintFunctionLibrary { 
-	static Load(ResourceName: string): FunctionalTestUtilityLibrary;
-	static Find(Outer: UObject, ResourceName: string): FunctionalTestUtilityLibrary;
-	static GetDefaultObject(): FunctionalTestUtilityLibrary;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FunctionalTestUtilityLibrary;
-	static TraceChannelTestUtil(WorldContextObject: UObject,BatchOptions: TraceChannelTestBatchOptions,Start: Vector,End: Vector,SphereCapsuleRadius: number,CapsuleHalfHeight: number,BoxHalfSize: Vector,Orientation: Rotator,TraceChannel: ETraceTypeQuery,ObjectTypes: EObjectTypeQuery[],ProfileName: string,bTraceComplex: boolean,ActorsToIgnore: Actor[],bIgnoreSelf: boolean,DrawDebugType: EDrawDebugTrace,TraceColor: LinearColor,TraceHitColor: LinearColor,DrawTime: number): TraceQueryTestResults;
-	static C(Other: UObject | any): FunctionalTestUtilityLibrary;
-}
-
-declare class ScreenshotFunctionalTestBase extends FunctionalTest { 
-	Notes: string;
-	ScreenshotCamera: CameraComponent;
-	ScreenshotOptions: AutomationScreenshotOptions;
-	static GetDefaultObject(): ScreenshotFunctionalTestBase;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ScreenshotFunctionalTestBase;
-	static C(Other: UObject | any): ScreenshotFunctionalTestBase;
-}
-
-declare type EWidgetTestAppearLocation = 'Viewport' | 'PlayerScreen' | 'EWidgetTestAppearLocation_MAX';
-declare var EWidgetTestAppearLocation : { Viewport:'Viewport',PlayerScreen:'PlayerScreen',EWidgetTestAppearLocation_MAX:'EWidgetTestAppearLocation_MAX', };
-declare class FunctionalUIScreenshotTest extends ScreenshotFunctionalTestBase { 
-	WidgetClass: UnrealEngineClass;
-	SpawnedWidget: UserWidget;
-	WidgetLocation: EWidgetTestAppearLocation;
-	ScreenshotRT: TextureRenderTarget2D;
-	static GetDefaultObject(): FunctionalUIScreenshotTest;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): FunctionalUIScreenshotTest;
-	static C(Other: UObject | any): FunctionalUIScreenshotTest;
-}
-
-declare class GroundTruthData extends UObject { 
-	bResetGroundTruth: boolean;
-	ObjectData: UObject;
-	static Load(ResourceName: string): GroundTruthData;
-	static Find(Outer: UObject, ResourceName: string): GroundTruthData;
-	static GetDefaultObject(): GroundTruthData;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): GroundTruthData;
-	SaveObject(GroundTruth: UObject): void;
-	LoadObject(): UObject;
-	CanModify(): boolean;
-	static C(Other: UObject | any): GroundTruthData;
-}
-
-declare class ScreenshotFunctionalTest extends ScreenshotFunctionalTestBase { 
-	bCameraCutOnScreenshotPrep: boolean;
-	static GetDefaultObject(): ScreenshotFunctionalTest;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ScreenshotFunctionalTest;
-	static C(Other: UObject | any): ScreenshotFunctionalTest;
-}
-
-declare class TestPhaseComponent extends SceneComponent { 
-	static Load(ResourceName: string): TestPhaseComponent;
-	static Find(Outer: UObject, ResourceName: string): TestPhaseComponent;
-	static GetDefaultObject(): TestPhaseComponent;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TestPhaseComponent;
-	static C(Other: UObject | any): TestPhaseComponent;
-}
-
-declare class AIGraph extends EdGraph { 
-	GraphVersion: number;
-	static Load(ResourceName: string): AIGraph;
-	static Find(Outer: UObject, ResourceName: string): AIGraph;
-	static GetDefaultObject(): AIGraph;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIGraph;
-	static C(Other: UObject | any): AIGraph;
-}
-
-declare class GraphNodeClassData { 
-	AssetName: string;
-	GeneratedClassPackage: string;
-	ClassName: string;
-	Category: string;
-	clone() : GraphNodeClassData;
-	static C(Other: UObject | any): GraphNodeClassData;
-}
-
-declare class AIGraphNode extends EdGraphNode { 
-	ClassData: GraphNodeClassData;
-	NodeInstance: UObject;
-	ParentNode: AIGraphNode;
-	SubNodes: AIGraphNode[];
-	CopySubNodeIndex: number;
-	bIsReadOnly: boolean;
-	bIsSubNode: boolean;
-	ErrorMessage: string;
-	static Load(ResourceName: string): AIGraphNode;
-	static Find(Outer: UObject, ResourceName: string): AIGraphNode;
-	static GetDefaultObject(): AIGraphNode;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIGraphNode;
-	static C(Other: UObject | any): AIGraphNode;
-}
-
-declare class AIGraphSchema extends EdGraphSchema { 
-	static Load(ResourceName: string): AIGraphSchema;
-	static Find(Outer: UObject, ResourceName: string): AIGraphSchema;
-	static GetDefaultObject(): AIGraphSchema;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): AIGraphSchema;
-	static C(Other: UObject | any): AIGraphSchema;
-}
-
-declare class K2Node_AIMoveTo extends K2Node_BaseAsyncTask { 
-	static Load(ResourceName: string): K2Node_AIMoveTo;
-	static Find(Outer: UObject, ResourceName: string): K2Node_AIMoveTo;
-	static GetDefaultObject(): K2Node_AIMoveTo;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): K2Node_AIMoveTo;
-	static C(Other: UObject | any): K2Node_AIMoveTo;
-}
-
-declare class BehaviorTreeDecoratorGraph extends EdGraph { 
-	static Load(ResourceName: string): BehaviorTreeDecoratorGraph;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeDecoratorGraph;
-	static GetDefaultObject(): BehaviorTreeDecoratorGraph;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeDecoratorGraph;
-	static C(Other: UObject | any): BehaviorTreeDecoratorGraph;
-}
-
-declare class BehaviorTreeDecoratorGraphNode extends EdGraphNode { 
-	static Load(ResourceName: string): BehaviorTreeDecoratorGraphNode;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeDecoratorGraphNode;
-	static GetDefaultObject(): BehaviorTreeDecoratorGraphNode;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeDecoratorGraphNode;
-	static C(Other: UObject | any): BehaviorTreeDecoratorGraphNode;
-}
-
-declare class BehaviorTreeDecoratorGraphNode_Decorator extends BehaviorTreeDecoratorGraphNode { 
-	NodeInstance: UObject;
-	ClassData: GraphNodeClassData;
-	static Load(ResourceName: string): BehaviorTreeDecoratorGraphNode_Decorator;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeDecoratorGraphNode_Decorator;
-	static GetDefaultObject(): BehaviorTreeDecoratorGraphNode_Decorator;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeDecoratorGraphNode_Decorator;
-	static C(Other: UObject | any): BehaviorTreeDecoratorGraphNode_Decorator;
-}
-
-declare type EDecoratorLogicMode = 'Sink' | 'And' | 'Or' | 'Not' | 'EDecoratorLogicMode_MAX';
-declare var EDecoratorLogicMode : { Sink:'Sink',And:'And',Or:'Or',Not:'Not',EDecoratorLogicMode_MAX:'EDecoratorLogicMode_MAX', };
-declare class BehaviorTreeDecoratorGraphNode_Logic extends BehaviorTreeDecoratorGraphNode { 
-	LogicMode: EDecoratorLogicMode;
-	static Load(ResourceName: string): BehaviorTreeDecoratorGraphNode_Logic;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeDecoratorGraphNode_Logic;
-	static GetDefaultObject(): BehaviorTreeDecoratorGraphNode_Logic;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeDecoratorGraphNode_Logic;
-	static C(Other: UObject | any): BehaviorTreeDecoratorGraphNode_Logic;
-}
-
-declare class BehaviorTreeEditorTypes extends UObject { 
-	static Load(ResourceName: string): BehaviorTreeEditorTypes;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeEditorTypes;
-	static GetDefaultObject(): BehaviorTreeEditorTypes;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeEditorTypes;
-	static C(Other: UObject | any): BehaviorTreeEditorTypes;
-}
-
-declare class BehaviorTreeFactory extends Factory { 
-	static Load(ResourceName: string): BehaviorTreeFactory;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeFactory;
-	static GetDefaultObject(): BehaviorTreeFactory;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeFactory;
-	static C(Other: UObject | any): BehaviorTreeFactory;
-}
-
-declare class BehaviorTreeGraph extends AIGraph { 
-	ModCounter: number;
-	bIsUsingModCounter: boolean;
-	static Load(ResourceName: string): BehaviorTreeGraph;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraph;
-	static GetDefaultObject(): BehaviorTreeGraph;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraph;
-	static C(Other: UObject | any): BehaviorTreeGraph;
-}
-
-declare class BehaviorTreeGraphNode extends AIGraphNode { 
-	Decorators: BehaviorTreeGraphNode[];
-	Services: BehaviorTreeGraphNode[];
-	bInjectedNode: boolean;
-	static Load(ResourceName: string): BehaviorTreeGraphNode;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode;
-	static GetDefaultObject(): BehaviorTreeGraphNode;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode;
-	static C(Other: UObject | any): BehaviorTreeGraphNode;
-}
-
-declare class BehaviorTreeGraphNode_Composite extends BehaviorTreeGraphNode { 
-	static Load(ResourceName: string): BehaviorTreeGraphNode_Composite;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode_Composite;
-	static GetDefaultObject(): BehaviorTreeGraphNode_Composite;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode_Composite;
-	static C(Other: UObject | any): BehaviorTreeGraphNode_Composite;
-}
-
-declare class BehaviorTreeGraphNode_CompositeDecorator extends BehaviorTreeGraphNode { 
-	BoundGraph: EdGraph;
-	CompositeName: string;
-	bShowOperations: boolean;
-	bCanAbortFlow: boolean;
-	ParentNodeInstance: BTCompositeNode;
-	CachedDescription: string;
-	static Load(ResourceName: string): BehaviorTreeGraphNode_CompositeDecorator;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode_CompositeDecorator;
-	static GetDefaultObject(): BehaviorTreeGraphNode_CompositeDecorator;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode_CompositeDecorator;
-	static C(Other: UObject | any): BehaviorTreeGraphNode_CompositeDecorator;
-}
-
-declare class BehaviorTreeGraphNode_Decorator extends BehaviorTreeGraphNode { 
-	static Load(ResourceName: string): BehaviorTreeGraphNode_Decorator;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode_Decorator;
-	static GetDefaultObject(): BehaviorTreeGraphNode_Decorator;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode_Decorator;
-	static C(Other: UObject | any): BehaviorTreeGraphNode_Decorator;
-}
-
-declare class BehaviorTreeGraphNode_Root extends BehaviorTreeGraphNode { 
-	BlackboardAsset: BlackboardData;
-	static Load(ResourceName: string): BehaviorTreeGraphNode_Root;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode_Root;
-	static GetDefaultObject(): BehaviorTreeGraphNode_Root;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode_Root;
-	static C(Other: UObject | any): BehaviorTreeGraphNode_Root;
-}
-
-declare class BehaviorTreeGraphNode_Service extends BehaviorTreeGraphNode { 
-	static Load(ResourceName: string): BehaviorTreeGraphNode_Service;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode_Service;
-	static GetDefaultObject(): BehaviorTreeGraphNode_Service;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode_Service;
-	static C(Other: UObject | any): BehaviorTreeGraphNode_Service;
-}
-
-declare class BehaviorTreeGraphNode_SimpleParallel extends BehaviorTreeGraphNode_Composite { 
-	static Load(ResourceName: string): BehaviorTreeGraphNode_SimpleParallel;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode_SimpleParallel;
-	static GetDefaultObject(): BehaviorTreeGraphNode_SimpleParallel;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode_SimpleParallel;
-	static C(Other: UObject | any): BehaviorTreeGraphNode_SimpleParallel;
-}
-
-declare class BehaviorTreeGraphNode_Task extends BehaviorTreeGraphNode { 
-	static Load(ResourceName: string): BehaviorTreeGraphNode_Task;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode_Task;
-	static GetDefaultObject(): BehaviorTreeGraphNode_Task;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode_Task;
-	static C(Other: UObject | any): BehaviorTreeGraphNode_Task;
-}
-
-declare class BehaviorTreeGraphNode_SubtreeTask extends BehaviorTreeGraphNode_Task { 
-	static Load(ResourceName: string): BehaviorTreeGraphNode_SubtreeTask;
-	static Find(Outer: UObject, ResourceName: string): BehaviorTreeGraphNode_SubtreeTask;
-	static GetDefaultObject(): BehaviorTreeGraphNode_SubtreeTask;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BehaviorTreeGraphNode_SubtreeTask;
-	static C(Other: UObject | any): BehaviorTreeGraphNode_SubtreeTask;
-}
-
-declare class BlackboardDataFactory extends Factory { 
-	static Load(ResourceName: string): BlackboardDataFactory;
-	static Find(Outer: UObject, ResourceName: string): BlackboardDataFactory;
-	static GetDefaultObject(): BlackboardDataFactory;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BlackboardDataFactory;
-	static C(Other: UObject | any): BlackboardDataFactory;
 }
 

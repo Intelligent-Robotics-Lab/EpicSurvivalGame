@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%; margin: 0; padding: 0;">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body style="height: 100%; margin: 0; padding: 0;overflow-x: hidden;overflow-y: hidden;">
+    <div id="container" style="height: 100%; margin: 0; padding: 0; overflow-x: hidden; overflow-y: hidden;"></div>
+
+    
+    <script type="text/javascript" src=".\node_modules\echarts\dist\echarts.js"></script>
+    <script type="text/javascript" src=".\node_modules\echarts\dist\extension\dataTool.js"></script>
+    <script type="text/javascript" src=".\node_modules\echarts-gl\dist\echarts-gl.js"></script>
+    <script type="text/javascript" src=".\node_modules\echarts-stat\dist\ecStat.js"></script>
+    <script type="text/javascript" src=".\node_modules\papaparse\papaparse.js"></script>
+    <script type="text/javascript" src=".\aliases.js"></script>
+
+    <script type="text/javascript">
+      var dom = document.getElementById('container');
+      var myChart = echarts.init(dom, null, {
+        renderer: 'canvas',
+        height: 'auto',
+        width: 'auto',
+        useDirtyRect: false,
+      });
+      let option;
+      var app = {};
+      let resolution1 = 112;
+      let resolution2 = 63;
+      let data = [];
+      let xData = [];
+      let yData = [];
+      for (let i = 0; i <= resolution1; i++) {
+        for (let j = 0; j <= resolution2; j++) {
+          data.push([i, j, 1]);
+        }
+        xData.push(i);
+      }
+      for (let j = 0; j < resolution2; j++) {
+        yData.push(j);
+      }
+
+      option = {
+        backgroundColor: 'rgba(255,255,255,0)',
+        tooltip: {
+          show: true
+        },
+        grid: {
+          bottom: 0,
+          right: 0,
+          top: 0,
+          left: 0
+        },
+        xAxis: {
+          show: false,
+          type: 'category',
+          title: 'test',
+          data: xData,
+          axisLine: {
+            show: true
+          },
+          axisTick: {
+            show: true,
+            inside: true,
+            alignWithLabel: true,
+            interval: 0,
+          },
+          minorTick: {
+            show: false,
+            splitNumber: 1
+          }
+        },
+        yAxis: {
+          show: false,
+          type: 'category',
+          title:'test2',
+          position: 'right',
+          data: yData,
+          axisLine: {
+            show: true
+          },
+          axisTick: {
+            show: true,
+            inside: true,
+            alignWithLabel: true,
+            interval: 0,
+          },
+          minorTick: {
+            show: false,
+            splitNumber: 1
+          }
+        },
+        visualMap: {
+          show: true,
+          min: 0,
+          max: 1,
+          itemWidth: 120,
+          itemHeight: 700,
+          text: ['High', 'Low'],
+          textGap: 5,
+          textStyle: {
+            lineHeight: 80,
+            fontSize: 60,
+            color: '#ffffff'
+          },
+          left: 20,
+          bottom: 20,
+          backgroundColor: 'rgba(0,0,0,0.8)',
+          borderColor: '#000000',
+          calculable: false,
+          realtime: true,
+          hoverLink: true,
+          inRange: {
+            color: [
+            '#31369500',
+            '#4575b4',
+            '#74add1',
+            '#abd9e9',
+            '#e0f3f8',
+            '#ffffbf',
+            '#fee090',
+            '#fdae61',
+            '#f46d43',
+            '#d73027',
+            '#a50026'
+            ]
+          }
+        },
+        series: [
+          {
+            name: 'Gaussian',
+            type: 'heatmap',
+            data: data,
+            itemStyle: {
+              opacity: 0.75
+            },
+            emphasis: {
+              disabled: false,
+              itemStyle: {
+                borderColor: '#333',
+                borderWidth: 0
+              }
+            },
+            progressive: 0,
+            animation: true
+          }
+        ]
+      };
+
+      if (option && typeof option === 'object') {
+        myChart.setOption(option);
+      }
+      window.onresize = function() {
+        myChart.resize();
+      };
+    </script>
+
+    <script type="text/javascript">
+      const webSocket = new WebSocket('ws://localhost:8080');
+      webSocket.onmessage = function (event) {
+        let JData = JSON.parse(event.data)
+        console.log(JData)
+        if(JData.resolution) {
+          resolution = JData.resolution;
+        }
+        if(JData.data) {
+          let newData = [];
+          // let newxData = [];
+          // let newyData = [];
+          for (let i = 0; i <= resolution1; i++) {
+            for (let j = 0; j <= resolution2; j++) {
+              newData.push([i, j, JData.data[(resolution1*j)+i]]);
+            }
+            // newxData.push(i);
+          }
+          // for (let j = 0; j < resolution; j++) {
+          //   newyData.push(j);
+          // }
+          data = newData;
+          // xData = newxData;
+          // yData = newyData;
+        }
+        option.series[0].data = data;
+        // option.xAxis.xData = xData;
+        // option.yAxis.yData = yData;
+
+        if (option && typeof option === 'object') {
+          myChart.setOption(option);
+        }
+      }
+    </script>
+
+  </body>
+</html>
